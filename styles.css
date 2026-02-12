@@ -1,0 +1,12 @@
+/* JetSet Landing v2 - minimal CSS only. */
+
+:root { color-scheme: light; }
+.dark { color-scheme: dark; }
+
+* { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+
+img, svg { max-width: 100%; height: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
