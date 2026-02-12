@@ -11,27 +11,29 @@
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#050505" />
 
-  <!-- If your primary domain is www.jetset-travel.com, keep this canonical. If Neocities is the primary, replace accordingly. -->
-  <link rel="canonical" href="https://www.jetset-travel.com/" />
+  <!-- Keep canonical aligned to your primary domain (recommended: https://jetset-travel.com/). -->
+  <link rel="canonical" href="https://jetset-travel.com/" />
 
   <!-- Favicons (these filenames match what you showed on your hosting) -->
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+  <link rel="shortcut icon" href="./favicon-32x32.png">
   <link rel="manifest" href="./site.webmanifest">
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="JetSet Travel Cyprus | Corporate & Luxury Travel" />
   <meta property="og:description" content="Fast quotes, smarter routing, compliant invoicing, and 24/7 disruption support — flights, hotels, cruises, transfers, visas, and insurance." />
-  <meta property="og:url" content="https://www.jetset-travel.com/" />
-  <meta property="og:image" content="https://jetsetcyprus.neocities.org/jetset-og-image.jpg" />
+  <meta property="og:url" content="https://jetset-travel.com/" />
+  <meta property="og:image" content="https://jetset-travel.com/jetset-og-image.jpg" />
   <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="JetSet Travel Cyprus" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="JetSet Travel Cyprus | Corporate & Luxury Travel" />
   <meta name="twitter:description" content="Corporate precision meets luxury detail — based in Paphos, Cyprus." />
-  <meta name="twitter:image" content="https://jetsetcyprus.neocities.org/jetset-og-image.jpg" />
+  <meta name="twitter:image" content="https://jetset-travel.com/jetset-og-image.jpg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,26 +75,49 @@
   <!-- Structured data -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"TravelAgency",
-    "name":"JetSet Travel Cyprus",
-    "url":"https://www.jetset-travel.com/",
-    "email":"info@jetset.com.cy",
-    "telephone":["+35799478073","+35799310993"],
-    "address":{
-      "@type":"PostalAddress",
-      "streetAddress":"26A Agapinoros Street",
-      "addressLocality":"Paphos",
-      "postalCode":"8049",
-      "addressCountry":"CY"
+  "@context": "https://schema.org",
+  "@type": "TravelAgency",
+  "name": "JetSet Travel Cyprus",
+  "url": "https://jetset-travel.com/",
+  "email": "info@jetset.com.cy",
+  "telephone": [
+    "+35799478073",
+    "+35799310993"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "26A Agapinoros Street",
+    "addressLocality": "Paphos",
+    "postalCode": "8049",
+    "addressCountry": "CY"
+  },
+  "areaServed": "Worldwide",
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "name": "IATA License Number",
+      "value": "14200130"
     },
-    "areaServed":"Worldwide",
-    "identifier":[
-      {"@type":"PropertyValue","name":"IATA License Number","value":"14200130"},
-      {"@type":"PropertyValue","name":"Company Registration Number","value":"HE 181550"},
-      {"@type":"PropertyValue","name":"Cyprus Deputy Ministry of Tourism License","value":"7775"}
-    ]
-  }
+    {
+      "@type": "PropertyValue",
+      "name": "Company Registration Number",
+      "value": "HE 181550"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "Cyprus Deputy Ministry of Tourism License",
+      "value": "7775"
+    }
+  ],
+  "@id": "https://jetset-travel.com/#travelagency",
+  "logo": "https://jetset-travel.com/jetset-logo.jpg",
+  "image": "https://jetset-travel.com/jetset-og-image.jpg",
+  "hasMap": "https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos",
+  "sameAs": [
+    "https://share.google/vNNSfTxJe2ldsNVlu",
+    "https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos"
+  ]
+}
   </script>
 
   <!-- OPTIONAL: Google Analytics 4 (paste your measurement ID) -->
@@ -262,32 +287,21 @@
                     View public fares quickly. For corporate routing, changes, and complex trips — request a quote.
                   </p>
                 </div>
-                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700 dark:bg-slate-900 dark:text-slate-200" data-i18n="tool.badge">Opens Google Flights</span>
+                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700 dark:bg-slate-900 dark:text-slate-200" data-i18n="tool.badge">Trip.com widget</span>
               </div>
 
-              <div class="mt-5 grid gap-3">
-                <div>
-                  <label class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" for="origin" data-i18n="tool.from">From</label>
-                  <input id="origin" type="text" placeholder="Paphos (PFO)" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white" autocomplete="off" />
-                </div>
-
-                <div>
-                  <label class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" for="destination" data-i18n="tool.to">To</label>
-                  <input id="destination" type="text" placeholder="London (LHR)" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white" autocomplete="off" />
-                </div>
-
-                <div class="grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
-                  <div>
-                    <label class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" for="date" data-i18n="tool.date">Departure</label>
-                    <input id="date" type="date" class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
+              <div class="mt-5">
+                <div class="flex justify-center">
+                  <div class="w-full max-w-[320px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
+                    <iframe border="0"
+                      src="https://www.trip.com/partners/ad/S11839970?Allianceid=7803818&SID=294254164&trip_sub1="
+                      frameborder="0" scrolling="no" id="S11839970"
+                      style="width:100%;max-width:320px;height:320px;border:none;display:block;"></iframe>
                   </div>
-                  <button id="searchBtn" type="button" class="inline-flex w-full sm:w-auto items-center justify-center rounded-full bg-jetteal px-5 py-3 text-sm font-extrabold tracking-wide text-white shadow-soft hover:bg-jetcoral" data-i18n="tool.search">
-                    Search
-                  </button>
                 </div>
 
-                <p class="text-xs text-slate-500 dark:text-slate-300" data-i18n="tool.note">
-                  Convenience tool: redirects to Google Flights. For negotiated rates and complex itineraries, request a quote.
+                <p class="mt-3 text-xs text-slate-500 dark:text-slate-300" data-i18n="tool.note">
+                  Partner widget powered by Trip.com. For negotiated corporate rates and complex itineraries, request a quote.
                 </p>
               </div>
             </div>

@@ -55,36 +55,7 @@
   // =========================
   // Date min
   // =========================
-  const dateInput = $("#date");
-  if (dateInput) {
-    const now = new Date();
-    const yyyy = now.getFullYear();
-    const mm = String(now.getMonth() + 1).padStart(2, "0");
-    const dd = String(now.getDate()).padStart(2, "0");
-    dateInput.min = `${yyyy}-${mm}-${dd}`;
-  }
-
-  // =========================
-  // Google Flights quick search
-  // =========================
-  $("#searchBtn")?.addEventListener("click", () => {
-    const origin = ($("#origin")?.value || "").trim();
-    const dest = ($("#destination")?.value || "").trim();
-    const date = ($("#date")?.value || "").trim();
-
-    if (!origin || !dest) {
-      alert("Please enter origin and destination.");
-      return;
-    }
-
-    const url = `https://www.google.com/travel/flights?q=Flights+from+${encodeURIComponent(
-      origin
-    )}+to+${encodeURIComponent(dest)}${date ? encodeURIComponent(" on " + date) : ""}`;
-
-    window.open(url, "_blank", "noopener,noreferrer");
-  });
-
-  // =========================
+// =========================
   // i18n (EN/RU)
   // =========================
   const T = {
@@ -111,14 +82,14 @@
       "hero.micro": "Licensed Cyprus travel agency · IATA Accredited · Tourism License 7775 · Reg. HE 181550",
 
       "tool.kicker": "Quick tool",
-      "tool.title": "Quick price check",
-      "tool.sub": "View public fares quickly. For corporate routing, changes, and complex trips — request a quote.",
-      "tool.badge": "Opens Google Flights",
+      "tool.title": "Trip.com deals",
+      "tool.sub": "Book via our Trip.com partner widget. For corporate routing, changes, and complex trips — request a quote.",
+      "tool.badge": "Trip.com widget",
       "tool.from": "From",
       "tool.to": "To",
       "tool.date": "Departure",
       "tool.search": "Search",
-      "tool.note": "Convenience tool: redirects to Google Flights. For negotiated rates and complex itineraries, request a quote.",
+      "tool.note": "Partner widget powered by Trip.com. For negotiated corporate rates and complex itineraries, request a quote.",
 
       "trusted.kicker": "Trusted by",
       "trusted.title": "Busy teams who can’t afford travel mistakes.",
@@ -238,14 +209,14 @@
       "hero.micro": "Лицензия Кипра · IATA · Лицензия 7775 · Рег. HE 181550",
 
       "tool.kicker": "Быстрый инструмент",
-      "tool.title": "Проверка цены",
-      "tool.sub": "Посмотреть публичные тарифы. Для сложных маршрутов и корпоративных требований — запросите предложение.",
-      "tool.badge": "Откроет Google Flights",
+      "tool.title": "Предложения Trip.com",
+      "tool.sub": "Бронируйте через партнёрский виджет Trip.com. Для корпоративных маршрутов, изменений и сложных задач — запросите расчёт.",
+      "tool.badge": "Виджет Trip.com",
       "tool.from": "Откуда",
       "tool.to": "Куда",
       "tool.date": "Дата вылета",
       "tool.search": "Найти",
-      "tool.note": "Инструмент для удобства: перенаправляет в Google Flights. Для лучших решений и сложных поездок — запросите расчёт.",
+      "tool.note": "Партнёрский виджет Trip.com. Для лучших решений и сложных поездок — запросите расчёт.",
 
       "trusted.kicker": "Нам доверяют",
       "trusted.title": "Команды, которые не могут позволить себе ошибки в поездках.",

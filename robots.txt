@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jetset-travel.com/sitemap.xml
