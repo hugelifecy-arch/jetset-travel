@@ -613,6 +613,22 @@
     if (y) y.textContent = String(new Date().getFullYear());
   }
 
+  async function setBuildStamp() {
+    const stamp = $("#buildStamp");
+    if (!stamp) return;
+
+    try {
+      const res = await fetch("./version.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const version = data.version || "unknown";
+      const deployedAt = data.deployedAt ? new Date(data.deployedAt).toISOString().slice(0, 16).replace("T", " ") + " UTC" : "unknown";
+      stamp.textContent = `${version} · ${deployedAt}`;
+    } catch (_err) {
+      stamp.textContent = "local";
+    }
+  }
+
   // =========================
   // Track clicks (optional)
   // =========================
@@ -638,6 +654,7 @@
     initLanguage();
     initSegmentTabs();
     setYear();
+    setBuildStamp();
 
     $("#darkToggle")?.addEventListener("click", () => setDark(!document.documentElement.classList.contains("dark")));
     $("#darkToggleMobile")?.addEventListener("click", () => setDark(!document.documentElement.classList.contains("dark")));
