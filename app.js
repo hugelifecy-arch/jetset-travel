@@ -95,6 +95,8 @@
       "form.fallback": "⚠️ Could not send via form. Opening email instead...",
       "form.opening": "Opening email...",
       "form.error": "⚠️ Error. Opening email instead...",
+      "form.manual": "If your email app did not open, use this link:",
+      "form.mailLink": "Open email app",
 
       "trusted.kicker": "Trusted by",
       "trusted.title": "Busy teams who can’t afford travel mistakes.",
@@ -357,6 +359,8 @@
       "form.fallback": "⚠️ Не удалось отправить форму. Открываем email...",
       "form.opening": "Открываем email...",
       "form.error": "⚠️ Ошибка. Открываем email...",
+      "form.manual": "Если почтовое приложение не открылось, используйте ссылку:",
+      "form.mailLink": "Открыть почтовое приложение",
 
       "footer.line": "Корпоративные и luxury поездки из Пафоса.",
       "footer.services": "Услуги",
@@ -426,7 +430,7 @@
     return res.ok;
   }
 
-  function mailtoFallback(payload) {
+  function getMailtoHref(payload) {
     const subject = `WEBSITE ENQUIRY: ${payload.type || "Travel"} — ${payload.name || ""}`.trim();
     const body = [
       `Name: ${payload.name || ""}`,
@@ -440,7 +444,37 @@
       payload.message || "",
     ].join("\n");
 
-    window.location.href = `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    return `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
+  function setFieldError(field, hasError) {
+    if (!field) return;
+    field.setAttribute("aria-invalid", hasError ? "true" : "false");
+    field.classList.toggle("border-jetcoral", hasError);
+    field.classList.toggle("ring-2", hasError);
+    field.classList.toggle("ring-jetcoral/30", hasError);
+  }
+
+  function setFormStatus(statusEl, type, text, mailtoHref = "") {
+    if (!statusEl) return;
+    statusEl.classList.remove("text-emerald-700", "dark:text-emerald-300", "text-amber-700", "dark:text-amber-300", "text-slate-700", "dark:text-slate-200");
+
+    if (type === "success") {
+      statusEl.classList.add("text-emerald-700", "dark:text-emerald-300");
+      statusEl.textContent = text;
+      return;
+    }
+
+    if (type === "warn") {
+      statusEl.classList.add("text-amber-700", "dark:text-amber-300");
+      if (mailtoHref) {
+        statusEl.innerHTML = `${text} ${tr("form.manual", "If your email app did not open, use this link:")} <a class="underline font-bold" href="${mailtoHref}">${tr("form.mailLink", "Open email app")}</a>`;
+        return;
+      }
+    }
+
+    statusEl.classList.add("text-slate-700", "dark:text-slate-200");
+    statusEl.textContent = text;
   }
 
   $("#leadForm")?.addEventListener("submit", async (e) => {
@@ -460,32 +494,35 @@
 
     const status = $("#formStatus");
     const btn = $("#submitBtn");
+    const mailtoHref = getMailtoHref(payload);
+    const fieldRefs = [$("#name"), $("#phone"), $("#email"), $("#message")];
+    fieldRefs.forEach((field) => setFieldError(field, false));
     if (status) status.textContent = "";
     if (btn) btn.disabled = true;
 
-    if (!payload.name) { if (status) status.textContent = tr("form.errName", "Please enter your name."); if (btn) btn.disabled = false; return; }
-    if (!payload.phone && !payload.email) { if (status) status.textContent = tr("form.errContact", "Please add at least a phone or email."); if (btn) btn.disabled = false; return; }
-    if (payload.email && !isValidEmail(payload.email)) { if (status) status.textContent = tr("form.errEmail", "Please enter a valid email."); if (btn) btn.disabled = false; return; }
-    if (!payload.message) { if (status) status.textContent = tr("form.errMessage", "Please write a short message."); if (btn) btn.disabled = false; return; }
+    if (!payload.name) { setFieldError($("#name"), true); setFormStatus(status, "warn", tr("form.errName", "Please enter your name.")); if (btn) btn.disabled = false; return; }
+    if (!payload.phone && !payload.email) { setFieldError($("#phone"), true); setFieldError($("#email"), true); setFormStatus(status, "warn", tr("form.errContact", "Please add at least a phone or email.")); if (btn) btn.disabled = false; return; }
+    if (payload.email && !isValidEmail(payload.email)) { setFieldError($("#email"), true); setFormStatus(status, "warn", tr("form.errEmail", "Please enter a valid email.")); if (btn) btn.disabled = false; return; }
+    if (!payload.message) { setFieldError($("#message"), true); setFormStatus(status, "warn", tr("form.errMessage", "Please write a short message.")); if (btn) btn.disabled = false; return; }
 
     try {
       if (FORMSPREE_ENDPOINT) {
-        if (status) status.textContent = tr("form.sending", "Sending...");
+        setFormStatus(status, "default", tr("form.sending", "Sending..."));
         const ok = await postFormspree(payload);
         if (ok) {
-          if (status) status.textContent = tr("form.sent", "✅ Sent! We will contact you shortly.");
+          setFormStatus(status, "success", tr("form.sent", "✅ Sent! We will contact you shortly."));
           $("#leadForm")?.reset();
         } else {
-          if (status) status.textContent = tr("form.fallback", "⚠️ Could not send via form. Opening email instead...");
-          setTimeout(() => mailtoFallback(payload), 400);
+          setFormStatus(status, "warn", tr("form.fallback", "⚠️ Could not send via form. Opening email instead..."), mailtoHref);
+          setTimeout(() => { window.location.href = mailtoHref; }, 400);
         }
       } else {
-        if (status) status.textContent = tr("form.opening", "Opening email...");
-        mailtoFallback(payload);
+        setFormStatus(status, "warn", tr("form.opening", "Opening email..."), mailtoHref);
+        window.location.href = mailtoHref;
       }
     } catch (err) {
-      if (status) status.textContent = tr("form.error", "⚠️ Error. Opening email instead...");
-      setTimeout(() => mailtoFallback(payload), 400);
+      setFormStatus(status, "warn", tr("form.error", "⚠️ Error. Opening email instead..."), mailtoHref);
+      setTimeout(() => { window.location.href = mailtoHref; }, 400);
     } finally {
       if (btn) btn.disabled = false;
     }
