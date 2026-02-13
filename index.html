@@ -16,7 +16,7 @@
 
   <!-- Favicons -->
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="./favicon.ico" sizes="any">
+  <link rel="alternate icon" href="./favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="./apple-touch-icon.png">
   <link rel="manifest" href="./site.webmanifest">
   <link rel="alternate" hreflang="en" href="https://jetset-travel.com/?lang=en">
@@ -388,11 +388,11 @@
           <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-950">
             <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-jetteal">Corporate vs Luxury</p>
             <div class="mt-4 inline-flex rounded-full border border-slate-200 bg-slate-50 p-1 dark:border-slate-700 dark:bg-slate-900" role="tablist" aria-label="Travel segment tabs">
-              <button type="button" class="segment-tab rounded-full px-4 py-2 text-xs font-extrabold tracking-wide" data-segment-tab="corporate" role="tab" aria-selected="true" aria-controls="segmentCorporate">Corporate</button>
-              <button type="button" class="segment-tab rounded-full px-4 py-2 text-xs font-extrabold tracking-wide text-slate-500 dark:text-slate-300" data-segment-tab="luxury" role="tab" aria-selected="false" aria-controls="segmentLuxury">Luxury</button>
+              <button id="segmentTabCorporate" type="button" class="segment-tab rounded-full px-4 py-2 text-xs font-extrabold tracking-wide" data-segment-tab="corporate" role="tab" aria-selected="true" aria-controls="segmentCorporate" tabindex="0">Corporate</button>
+              <button id="segmentTabLuxury" type="button" class="segment-tab rounded-full px-4 py-2 text-xs font-extrabold tracking-wide text-slate-500 dark:text-slate-300" data-segment-tab="luxury" role="tab" aria-selected="false" aria-controls="segmentLuxury" tabindex="-1">Luxury</button>
             </div>
 
-            <div id="segmentCorporate" data-segment-panel="corporate" class="mt-4" role="tabpanel">
+            <div id="segmentCorporate" data-segment-panel="corporate" class="mt-4" role="tabpanel" aria-labelledby="segmentTabCorporate">
               <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-200">
                 <li>• Policy-friendly itineraries and invoicing.</li>
                 <li>• Fast rebooking support during disruptions.</li>
@@ -401,7 +401,7 @@
               <p class="mt-3 text-xs font-semibold text-slate-500 dark:text-slate-300">Use cases: executive meetings, conference travel, recurring team routes.</p>
             </div>
 
-            <div id="segmentLuxury" data-segment-panel="luxury" class="mt-4 hidden" role="tabpanel" aria-hidden="true">
+            <div id="segmentLuxury" data-segment-panel="luxury" class="mt-4 hidden" role="tabpanel" aria-labelledby="segmentTabLuxury" aria-hidden="true">
               <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-200">
                 <li>• Premium hotels and suite-level recommendations.</li>
                 <li>• Chauffeurs, private transfers, and concierge details.</li>
