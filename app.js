@@ -1,7 +1,6 @@
 /* JetSet Landing v2
    - Dark mode toggle (localStorage)
    - EN/RU language switch
-   - Google Flights quick search
    - Lead form: Formspree (optional) or mailto fallback
 */
 
@@ -53,9 +52,6 @@
   $$("#mobileMenu a").forEach((a) => a.addEventListener("click", closeMenu));
 
   // =========================
-  // Date min
-  // =========================
-// =========================
   // i18n (EN/RU)
   // =========================
   const T = {
@@ -71,7 +67,7 @@
       "nav.cta": "Get a Quote",
 
       "hero.kicker": "Corporate & luxury travel · Paphos, Cyprus",
-      "hero.title": "Corporate travel <span class='text-jetgoldSoft'>without friction</span>.<br class='hidden sm:block'>Luxury holidays <span class='text-jetgoldSoft'>perfected</span>.",
+      "hero.title": "Corporate Travel Agency in Paphos, Cyprus.<br class='hidden sm:block'><span class='text-jetgoldSoft'>Luxury Travel Concierge Cyprus</span>.",
       "hero.sub": "Fast quotes, smarter routing, clean documentation, and real support when plans change — flights, hotels, cruises, transfers, visas, and insurance handled by one accountable team.",
       "hero.b1": "<strong>Save hours</strong> on planning + back‑and‑forth.",
       "hero.b2": "<strong>Corporate‑ready</strong> invoices & documentation.",
@@ -81,15 +77,24 @@
       "hero.cta2": "WhatsApp (Fastest)",
       "hero.micro": "Licensed Cyprus travel agency · IATA Accredited · Tourism License 7775 · Reg. HE 181550",
 
-      "tool.kicker": "Quick tool",
-      "tool.title": "Trip.com deals",
+      "tool.kicker": "Quick booking",
+      "tool.title": "Quick booking",
       "tool.sub": "Book via our Trip.com partner widget. For corporate routing, changes, and complex trips — request a quote.",
-      "tool.badge": "Trip.com widget",
-      "tool.from": "From",
-      "tool.to": "To",
-      "tool.date": "Departure",
-      "tool.search": "Search",
+      "tool.badge": "Partner offer",
+      "tool.partnerLabel": "Partner offer",
+      "tool.load": "Load quick booking",
       "tool.note": "Partner widget powered by Trip.com. For negotiated corporate rates and complex itineraries, request a quote.",
+      "service.areaTitle": "Service Area:",
+      "service.areaBody": "Paphos • Cyprus (Nationwide support)",
+      "form.errName": "Please enter your name.",
+      "form.errContact": "Please add at least a phone or email.",
+      "form.errEmail": "Please enter a valid email.",
+      "form.errMessage": "Please write a short message.",
+      "form.sending": "Sending...",
+      "form.sent": "✅ Sent! We will contact you shortly.",
+      "form.fallback": "⚠️ Could not send via form. Opening email instead...",
+      "form.opening": "Opening email...",
+      "form.error": "⚠️ Error. Opening email instead...",
 
       "trusted.kicker": "Trusted by",
       "trusted.title": "Busy teams who can’t afford travel mistakes.",
@@ -183,7 +188,8 @@
       "footer.line": "Corporate & Luxury Travel from Paphos.",
       "footer.services": "Services",
       "footer.trust": "Trust",
-      "footer.contact": "Contact"
+      "footer.contact": "Contact",
+      "footer.nap": "26A Agapinoros Street, Paphos 8049, Cyprus · +357 99 478073 · +357 99 310993 · info@jetset.com.cy"
     },
 
     ru: {
@@ -198,7 +204,7 @@
       "nav.cta": "Получить предложение",
 
       "hero.kicker": "Корпоративные и luxury поездки · Пафос, Кипр",
-      "hero.title": "Корпоративные поездки <span class='text-jetgoldSoft'>без стресса</span>.<br class='hidden sm:block'>Luxury отдых <span class='text-jetgoldSoft'>до деталей</span>.",
+      "hero.title": "Корпоративное турагентство в Пафосе, Кипр.<br class='hidden sm:block'><span class='text-jetgoldSoft'>Luxury Travel Concierge Cyprus</span>.",
       "hero.sub": "Быстрые предложения, умные маршруты, корректные документы и реальная помощь при изменениях — авиабилеты, отели, круизы, трансферы, визы и страховки в одном месте.",
       "hero.b1": "<strong>Экономим часы</strong> на планировании и переписке.",
       "hero.b2": "<strong>Документы для компании</strong>: инвойсы, подтверждения, отчётность.",
@@ -208,14 +214,10 @@
       "hero.cta2": "WhatsApp (самый быстрый)",
       "hero.micro": "Лицензия Кипра · IATA · Лицензия 7775 · Рег. HE 181550",
 
-      "tool.kicker": "Быстрый инструмент",
-      "tool.title": "Предложения Trip.com",
+      "tool.kicker": "Быстрое бронирование",
+      "tool.title": "Быстрое бронирование",
       "tool.sub": "Бронируйте через партнёрский виджет Trip.com. Для корпоративных маршрутов, изменений и сложных задач — запросите расчёт.",
-      "tool.badge": "Виджет Trip.com",
-      "tool.from": "Откуда",
-      "tool.to": "Куда",
-      "tool.date": "Дата вылета",
-      "tool.search": "Найти",
+      "tool.badge": "Партнёрское предложение",
       "tool.note": "Партнёрский виджет Trip.com. Для лучших решений и сложных поездок — запросите расчёт.",
 
       "trusted.kicker": "Нам доверяют",
@@ -306,18 +308,41 @@
 
       "m.quote": "Запросить расчёт",
       "m.wa": "WhatsApp",
+      "service.areaTitle": "Зона обслуживания:",
+      "service.areaBody": "Пафос • Кипр (поддержка по всей стране)",
+      "tool.partnerLabel": "Партнёрское предложение",
+      "tool.load": "Загрузить быстрый модуль бронирования",
+      "form.errName": "Пожалуйста, укажите имя.",
+      "form.errContact": "Укажите хотя бы телефон или email.",
+      "form.errEmail": "Пожалуйста, укажите корректный email.",
+      "form.errMessage": "Пожалуйста, добавьте короткое сообщение.",
+      "form.sending": "Отправляем...",
+      "form.sent": "✅ Отправлено! Мы скоро с вами свяжемся.",
+      "form.fallback": "⚠️ Не удалось отправить форму. Открываем email...",
+      "form.opening": "Открываем email...",
+      "form.error": "⚠️ Ошибка. Открываем email...",
 
       "footer.line": "Корпоративные и luxury поездки из Пафоса.",
       "footer.services": "Услуги",
       "footer.trust": "Доверие",
-      "footer.contact": "Контакты"
+      "footer.contact": "Контакты",
+      "footer.nap": "ул. Агапинорос 26A, Пафос 8049, Кипр · +357 99 478073 · +357 99 310993 · info@jetset.com.cy"
     }
   };
+
+
+  function tr(key, fallback = "") {
+    const lang = document.documentElement.lang === "ru" ? "ru" : "en";
+    return T[lang]?.[key] || fallback;
+  }
 
   function setLanguage(lang) {
     const safe = T[lang] ? lang : "en";
     document.documentElement.lang = safe === "ru" ? "ru" : "en";
     localStorage.setItem("jetset_lang", safe);
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", safe);
+    window.history.replaceState({}, "", url);
 
     $$(".lang-btn").forEach((b) => {
       const isActive = b.getAttribute("data-lang") === safe;
@@ -325,6 +350,7 @@
       b.classList.toggle("text-slate-900", isActive);
       if (isActive) b.classList.add("shadow-soft");
       else b.classList.remove("shadow-soft");
+      b.setAttribute("aria-pressed", isActive ? "true" : "false");
     });
 
     $$("[data-i18n]").forEach((el) => {
@@ -340,6 +366,8 @@
   });
 
   function initLanguage() {
+    const param = new URLSearchParams(window.location.search).get("lang");
+    if (param && T[param]) return setLanguage(param);
     const saved = localStorage.getItem("jetset_lang");
     if (saved) return setLanguage(saved);
     const nav = (navigator.language || "").toLowerCase();
@@ -399,33 +427,62 @@
     if (status) status.textContent = "";
     if (btn) btn.disabled = true;
 
-    if (!payload.name) { alert("Please enter your name."); if (btn) btn.disabled = false; return; }
-    if (!payload.phone) { alert("Please enter your phone/WhatsApp."); if (btn) btn.disabled = false; return; }
-    if (!isValidEmail(payload.email)) { alert("Please enter a valid email."); if (btn) btn.disabled = false; return; }
-    if (!payload.message) { alert("Please write a short message."); if (btn) btn.disabled = false; return; }
+    if (!payload.name) { if (status) status.textContent = tr("form.errName", "Please enter your name."); if (btn) btn.disabled = false; return; }
+    if (!payload.phone && !payload.email) { if (status) status.textContent = tr("form.errContact", "Please add at least a phone or email."); if (btn) btn.disabled = false; return; }
+    if (payload.email && !isValidEmail(payload.email)) { if (status) status.textContent = tr("form.errEmail", "Please enter a valid email."); if (btn) btn.disabled = false; return; }
+    if (!payload.message) { if (status) status.textContent = tr("form.errMessage", "Please write a short message."); if (btn) btn.disabled = false; return; }
 
     try {
       if (FORMSPREE_ENDPOINT) {
-        if (status) status.textContent = "Sending...";
+        if (status) status.textContent = tr("form.sending", "Sending...");
         const ok = await postFormspree(payload);
         if (ok) {
-          if (status) status.textContent = "✅ Sent! We will contact you shortly.";
+          if (status) status.textContent = tr("form.sent", "✅ Sent! We will contact you shortly.");
           $("#leadForm")?.reset();
         } else {
-          if (status) status.textContent = "⚠️ Could not send via form. Opening email instead...";
+          if (status) status.textContent = tr("form.fallback", "⚠️ Could not send via form. Opening email instead...");
           setTimeout(() => mailtoFallback(payload), 400);
         }
       } else {
-        if (status) status.textContent = "Opening email...";
+        if (status) status.textContent = tr("form.opening", "Opening email...");
         mailtoFallback(payload);
       }
     } catch (err) {
-      if (status) status.textContent = "⚠️ Error. Opening email instead...";
+      if (status) status.textContent = tr("form.error", "⚠️ Error. Opening email instead...");
       setTimeout(() => mailtoFallback(payload), 400);
     } finally {
       if (btn) btn.disabled = false;
     }
   });
+
+
+  function loadTripWidget() {
+    const holder = $("#tripWidget");
+    if (!holder || holder.getAttribute("data-loaded") === "1") return;
+    const src = holder.getAttribute("data-trip-src");
+    if (!src) return;
+    const desktop = holder.querySelector("[data-trip-desktop]");
+    const mobile = holder.querySelector("[data-trip-mobile]");
+    const makeFrame = (width, height) => {
+      const iframe = document.createElement("iframe");
+      iframe.src = src;
+      iframe.width = String(width);
+      iframe.height = String(height);
+      iframe.loading = "lazy";
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      iframe.style.border = "none";
+      iframe.style.display = "block";
+      iframe.style.width = "100%";
+      iframe.title = "Trip.com partner booking";
+      iframe.allow = "clipboard-write";
+      return iframe;
+    };
+    if (desktop) desktop.appendChild(makeFrame(900, 200));
+    if (mobile) mobile.appendChild(makeFrame(320, 320));
+    holder.setAttribute("data-loaded", "1");
+    const loadBtn = $("#loadTripWidget");
+    if (loadBtn) loadBtn.classList.add("hidden");
+  }
 
   // =========================
   // Image fallbacks
@@ -476,5 +533,19 @@
 
     $("#darkToggle")?.addEventListener("click", () => setDark(!document.documentElement.classList.contains("dark")));
     $("#darkToggleMobile")?.addEventListener("click", () => setDark(!document.documentElement.classList.contains("dark")));
+
+    $("#loadTripWidget")?.addEventListener("click", loadTripWidget);
+    const widget = $("#tripWidget");
+    if (widget && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            loadTripWidget();
+            observer.disconnect();
+          }
+        });
+      }, { rootMargin: "200px 0px" });
+      observer.observe(widget);
+    }
   });
 })();

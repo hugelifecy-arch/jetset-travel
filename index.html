@@ -19,7 +19,11 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
   <link rel="shortcut icon" href="./favicon-32x32.png">
-  <link rel="manifest" href="./site.webmanifest">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="alternate" hreflang="en" href="https://jetset-travel.com/?lang=en">
+  <link rel="alternate" hreflang="ru" href="https://jetset-travel.com/?lang=ru">
+  <link rel="alternate" hreflang="x-default" href="https://jetset-travel.com/">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80" fetchpriority="high">
 
   <!-- Open Graph / Social -->
   <meta property="og:type" content="website" />
@@ -75,49 +79,47 @@
   <!-- Structured data -->
   <script type="application/ld+json">
   {
-  "@context": "https://schema.org",
-  "@type": "TravelAgency",
-  "name": "JetSet Travel Cyprus",
-  "url": "https://jetset-travel.com/",
-  "email": "info@jetset.com.cy",
-  "telephone": [
-    "+35799478073",
-    "+35799310993"
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "26A Agapinoros Street",
-    "addressLocality": "Paphos",
-    "postalCode": "8049",
-    "addressCountry": "CY"
-  },
-  "areaServed": "Worldwide",
-  "identifier": [
-    {
-      "@type": "PropertyValue",
-      "name": "IATA License Number",
-      "value": "14200130"
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Company Registration Number",
-      "value": "HE 181550"
-    },
-    {
-      "@type": "PropertyValue",
-      "name": "Cyprus Deputy Ministry of Tourism License",
-      "value": "7775"
-    }
-  ],
-  "@id": "https://jetset-travel.com/#travelagency",
-  "logo": "https://jetset-travel.com/jetset-logo.jpg",
-  "image": "https://jetset-travel.com/jetset-og-image.jpg",
-  "hasMap": "https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos",
-  "sameAs": [
-    "https://share.google/vNNSfTxJe2ldsNVlu",
-    "https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos"
-  ]
-}
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://jetset-travel.com/#organization",
+        "name": "JetSet Travel Cyprus",
+        "url": "https://jetset-travel.com/",
+        "logo": "https://jetset-travel.com/jetset-logo.jpg",
+        "description": "Corporate and luxury travel services from Paphos, Cyprus. Tourism License 7775, IATA 14200130, Reg HE 181550.",
+        "telephone": ["+35799478073", "+35799310993"],
+        "email": "info@jetset.com.cy",
+        "sameAs": [
+          "https://share.google/vNNSfTxJe2ldsNVlu",
+          "https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos"
+        ]
+      },
+      {
+        "@type": "TravelAgency",
+        "@id": "https://jetset-travel.com/#travelagency",
+        "name": "JetSet Travel Cyprus",
+        "url": "https://jetset-travel.com/",
+        "logo": "https://jetset-travel.com/jetset-logo.jpg",
+        "image": "https://jetset-travel.com/jetset-og-image.jpg",
+        "description": "Corporate and luxury travel services from Paphos, Cyprus. Tourism License 7775, IATA 14200130, Reg HE 181550.",
+        "email": "info@jetset.com.cy",
+        "telephone": ["+35799478073", "+35799310993"],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "26A Agapinoros Street",
+          "addressLocality": "Paphos",
+          "postalCode": "8049",
+          "addressCountry": "CY"
+        },
+        "areaServed": ["Paphos", "Cyprus"],
+        "sameAs": [
+          "https://share.google/vNNSfTxJe2ldsNVlu",
+          "https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos"
+        ]
+      }
+    ]
+  }
   </script>
 
   <!-- OPTIONAL: Google Analytics 4 (paste your measurement ID) -->
@@ -136,6 +138,10 @@
   <a href="#content" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-xl focus:bg-white focus:px-4 focus:py-3 focus:text-slate-900 focus:shadow-soft">
     Skip to content
   </a>
+  <nav aria-label="Language versions" class="sr-only">
+    <a href="/?lang=en">English version</a>
+    <a href="/?lang=ru">Русская версия</a>
+  </nav>
 
   <!-- Top trust strip -->
   <div class="border-b border-slate-200/70 bg-white/80 backdrop-blur dark:border-slate-800 dark:bg-slate-950/70">
@@ -166,8 +172,8 @@
       <div class="flex items-center gap-2">
         <!-- Language -->
         <div class="hidden md:flex items-center rounded-full border border-slate-200 bg-white px-1 py-1 dark:border-slate-800 dark:bg-slate-950" aria-label="Language">
-          <button class="lang-btn rounded-full px-3 py-1 text-xs font-extrabold tracking-wide text-slate-900 dark:text-white" data-lang="en">EN</button>
-          <button class="lang-btn rounded-full px-3 py-1 text-xs font-extrabold tracking-wide text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white" data-lang="ru">RU</button>
+          <button class="lang-btn rounded-full px-3 py-1 text-xs font-extrabold tracking-wide text-slate-900 dark:text-white" data-lang="en" aria-pressed="false">EN</button>
+          <button class="lang-btn rounded-full px-3 py-1 text-xs font-extrabold tracking-wide text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white" data-lang="ru" aria-pressed="false">RU</button>
         </div>
 
         <!-- Dark mode -->
@@ -199,8 +205,8 @@
 
         <div class="mt-2 flex items-center justify-between gap-3">
           <div class="flex items-center rounded-full border border-slate-200 bg-white p-1 dark:border-slate-800 dark:bg-slate-950" aria-label="Language">
-            <button class="lang-btn rounded-full px-3 py-2 text-xs font-extrabold tracking-wide text-slate-900 dark:text-white" data-lang="en">EN</button>
-            <button class="lang-btn rounded-full px-3 py-2 text-xs font-extrabold tracking-wide text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white" data-lang="ru">RU</button>
+            <button class="lang-btn rounded-full px-3 py-2 text-xs font-extrabold tracking-wide text-slate-900 dark:text-white" data-lang="en" aria-pressed="false">EN</button>
+            <button class="lang-btn rounded-full px-3 py-2 text-xs font-extrabold tracking-wide text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white" data-lang="ru" aria-pressed="false">RU</button>
           </div>
           <button id="darkToggleMobile" class="h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-200 dark:hover:bg-slate-900" type="button" aria-label="Toggle dark mode">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -218,7 +224,7 @@
     <!-- HERO -->
     <section id="home" class="relative isolate overflow-hidden">
       <div class="absolute inset-0 -z-10">
-        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80" alt="" class="h-full w-full object-cover" loading="eager">
+        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80" alt="" class="h-full w-full object-cover" loading="eager" fetchpriority="high" width="1920" height="1080">
         <div class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/30"></div>
       </div>
 
@@ -231,8 +237,8 @@
             </p>
 
             <h1 class="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white" data-i18n="hero.title">
-              Corporate travel <span class="text-jetgoldSoft">without friction</span>.<br class="hidden sm:block">
-              Luxury holidays <span class="text-jetgoldSoft">perfected</span>.
+              Corporate Travel Agency in Paphos, Cyprus.<br class="hidden sm:block">
+              <span class="text-jetgoldSoft">Luxury Travel Concierge Cyprus</span>.
             </h1>
 
             <p class="mt-5 max-w-2xl text-base sm:text-lg leading-relaxed text-slate-100" data-i18n="hero.sub">
@@ -277,29 +283,36 @@
           </div>
 
           <!-- Quick tools card -->
-          <aside class="lg:col-span-5">
+          <aside id="quick-booking" class="lg:col-span-5">
             <div class="rounded-3xl border border-white/10 bg-white/95 p-5 shadow-strong backdrop-blur dark:bg-slate-950/90 dark:text-white">
               <div class="flex items-start justify-between gap-3">
                 <div>
-                  <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-300" data-i18n="tool.kicker">Quick tool</p>
-                  <h2 class="mt-1 font-display text-2xl font-black tracking-tight text-slate-900 dark:text-white" data-i18n="tool.title">Quick price check</h2>
+                  <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-300" data-i18n="tool.kicker">Quick booking</p>
+                  <h2 class="mt-1 font-display text-2xl font-black tracking-tight text-slate-900 dark:text-white" data-i18n="tool.title">Quick booking</h2>
                   <p class="mt-1 text-sm text-slate-600 dark:text-slate-300" data-i18n="tool.sub">
-                    View public fares quickly. For corporate routing, changes, and complex trips — request a quote.
+                    Book quickly via our affiliate partner. For corporate routing, changes, and complex trips — request a quote.
                   </p>
                 </div>
-                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700 dark:bg-slate-900 dark:text-slate-200" data-i18n="tool.badge">Trip.com widget</span>
+                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700 dark:bg-slate-900 dark:text-slate-200" data-i18n="tool.badge">Partner offer</span>
               </div>
 
-              <div class="mt-5">
+              <div class="mt-5 space-y-3">
+                <p class="text-center text-xs font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" data-i18n="tool.partnerLabel">Partner offer</p>
+                <div id="tripWidget" class="flex justify-center" data-trip-src="https://www.trip.com/partners/ad/S11839970?Allianceid=7803818&SID=294254164&trip_sub1=" role="region" aria-label="Trip.com quick booking widget">
+                  <div class="hidden w-full max-w-[900px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm md:block dark:border-slate-800 dark:bg-slate-950" data-trip-desktop></div>
+                  <div class="w-full max-w-[320px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm md:hidden dark:border-slate-800 dark:bg-slate-950" data-trip-mobile></div>
+                </div>
                 <div class="flex justify-center">
-                  <div class="w-full max-w-[320px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950">
-                    <iframe border="0"
-                      src="https://www.trip.com/partners/ad/S11839970?Allianceid=7803818&SID=294254164&trip_sub1="
-                      frameborder="0" scrolling="no" id="S11839970"
-                      style="width:100%;max-width:320px;height:320px;border:none;display:block;"></iframe>
+                  <button id="loadTripWidget" type="button" class="rounded-full border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-100 dark:border-slate-800 dark:text-slate-200 dark:hover:bg-slate-900" data-i18n="tool.load">Load quick booking</button>
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <div class="rounded-2xl border border-jetteal/30 bg-jetteal/5 p-3 text-sm text-slate-700 dark:border-jetteal/40 dark:bg-jetteal/10 dark:text-slate-200">
+                  <strong data-i18n="service.areaTitle">Service Area:</strong>
+                  <span data-i18n="service.areaBody">Paphos • Cyprus (Nationwide support)</span>
                   </div>
                 </div>
-
                 <p class="mt-3 text-xs text-slate-500 dark:text-slate-300" data-i18n="tool.note">
                   Partner widget powered by Trip.com. For negotiated corporate rates and complex itineraries, request a quote.
                 </p>
@@ -576,7 +589,7 @@
                   </div>
                   <div>
                     <label for="phone" class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" data-i18n="form.phone">Phone / WhatsApp</label>
-                    <input id="phone" name="phone" type="tel" required placeholder="+357..."
+                    <input id="phone" name="phone" type="tel" placeholder="+357..."
                       class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
                   </div>
                 </div>
@@ -584,7 +597,7 @@
                 <div class="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label for="email" class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" data-i18n="form.email">Email</label>
-                    <input id="email" name="email" type="email" required placeholder="you@company.com"
+                    <input id="email" name="email" type="email" placeholder="you@company.com"
                       class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
                   </div>
                   <div>
@@ -621,7 +634,7 @@
                   Send Request
                 </button>
 
-                <p id="formStatus" class="text-xs text-slate-600 dark:text-slate-300"></p>
+                <p id="formStatus" role="status" aria-live="polite" class="text-xs text-slate-600 dark:text-slate-300"></p>
 
                 <p class="text-xs text-slate-500 dark:text-slate-400" data-i18n="form.hint">
                   Tip: for urgent changes during travel, WhatsApp us — we respond faster during disruptions.
@@ -653,9 +666,9 @@
   <!-- Mobile sticky CTA bar -->
   <div class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 sm:hidden">
     <div class="mx-auto max-w-7xl px-1 flex gap-2">
-      <a id="mQuote" href="#contact" class="flex-1 rounded-full bg-jetgold px-4 py-3 text-center text-sm font-extrabold text-slate-900 shadow-soft" data-i18n="m.quote">Get a Quote</a>
       <a id="mWA" href="https://wa.me/35799478073" target="_blank" rel="noopener noreferrer"
          class="flex-1 rounded-full border border-slate-200 bg-white px-4 py-3 text-center text-sm font-bold text-slate-900 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-white" data-i18n="m.wa">WhatsApp</a>
+      <a id="mQuote" href="#contact" class="flex-1 rounded-full bg-jetgold px-4 py-3 text-center text-sm font-extrabold text-slate-900 shadow-soft" data-i18n="m.quote">Get a Quote</a>
     </div>
   </div>
 
@@ -679,6 +692,7 @@
       <p class="mt-2 text-xs text-slate-300">
         IATA: <strong class="text-white">14200130</strong> · Reg.: <strong class="text-white">HE 181550</strong> · Tourism: <strong class="text-white">7775</strong>
       </p>
+      <p class="mt-2 text-xs text-slate-300" data-i18n="footer.nap">26A Agapinoros Street, Paphos 8049, Cyprus · +357 99 478073 · +357 99 310993 · info@jetset.com.cy</p>
 
       <div class="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm">
         <a class="underline decoration-slate-600 underline-offset-4 hover:decoration-slate-300" href="#services" data-i18n="footer.services">Services</a>
