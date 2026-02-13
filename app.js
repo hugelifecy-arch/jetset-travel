@@ -82,8 +82,8 @@
       "tool.sub": "Book via our Trip.com partner widget. For corporate routing, changes, and complex trips — request a quote.",
       "tool.badge": "Partner offer",
       "tool.partnerLabel": "Partner offer",
-      "tool.load": "Load quick booking",
-      "tool.note": "Partner widget powered by Trip.com. For negotiated corporate rates and complex itineraries, request a quote.",
+      "tool.load": "Load offers",
+      "tool.note": "Partner offer powered by Trip.com (affiliate). Availability and pricing are managed on Trip.com.",
       "service.areaTitle": "Service Area:",
       "service.areaBody": "Paphos • Cyprus (Nationwide support)",
       "form.errName": "Please enter your name.",
@@ -218,7 +218,7 @@
       "tool.title": "Быстрое бронирование",
       "tool.sub": "Бронируйте через партнёрский виджет Trip.com. Для корпоративных маршрутов, изменений и сложных задач — запросите расчёт.",
       "tool.badge": "Партнёрское предложение",
-      "tool.note": "Партнёрский виджет Trip.com. Для лучших решений и сложных поездок — запросите расчёт.",
+      "tool.note": "Партнёрское предложение Trip.com (affiliate). Наличие и цены управляются на стороне Trip.com.",
 
       "trusted.kicker": "Нам доверяют",
       "trusted.title": "Команды, которые не могут позволить себе ошибки в поездках.",
@@ -311,7 +311,7 @@
       "service.areaTitle": "Зона обслуживания:",
       "service.areaBody": "Пафос • Кипр (поддержка по всей стране)",
       "tool.partnerLabel": "Партнёрское предложение",
-      "tool.load": "Загрузить быстрый модуль бронирования",
+      "tool.load": "Загрузить предложения",
       "form.errName": "Пожалуйста, укажите имя.",
       "form.errContact": "Укажите хотя бы телефон или email.",
       "form.errEmail": "Пожалуйста, укажите корректный email.",
@@ -463,22 +463,26 @@
     if (!src) return;
     const desktop = holder.querySelector("[data-trip-desktop]");
     const mobile = holder.querySelector("[data-trip-mobile]");
-    const makeFrame = (width, height) => {
+    const makeFrame = (width, height, id) => {
       const iframe = document.createElement("iframe");
+      iframe.setAttribute("border", "0");
       iframe.src = src;
+      iframe.id = id;
       iframe.width = String(width);
       iframe.height = String(height);
+      iframe.setAttribute("frameborder", "0");
+      iframe.setAttribute("scrolling", "no");
       iframe.loading = "lazy";
       iframe.referrerPolicy = "strict-origin-when-cross-origin";
       iframe.style.border = "none";
       iframe.style.display = "block";
       iframe.style.width = "100%";
       iframe.title = "Trip.com partner booking";
-      iframe.allow = "clipboard-write";
+      iframe.allow = "clipboard-write; geolocation *";
       return iframe;
     };
-    if (desktop) desktop.appendChild(makeFrame(900, 200));
-    if (mobile) mobile.appendChild(makeFrame(320, 320));
+    if (desktop) desktop.appendChild(makeFrame(900, 200, "S11839970"));
+    if (mobile) mobile.appendChild(makeFrame(320, 320, "S11839970m"));
     holder.setAttribute("data-loaded", "1");
     const loadBtn = $("#loadTripWidget");
     if (loadBtn) loadBtn.classList.add("hidden");
@@ -566,17 +570,5 @@
     $("#darkToggleMobile")?.addEventListener("click", () => setDark(!document.documentElement.classList.contains("dark")));
 
     $("#loadTripWidget")?.addEventListener("click", loadTripWidget);
-    const widget = $("#tripWidget");
-    if (widget && "IntersectionObserver" in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            loadTripWidget();
-            observer.disconnect();
-          }
-        });
-      }, { rootMargin: "200px 0px" });
-      observer.observe(widget);
-    }
   });
 })();
