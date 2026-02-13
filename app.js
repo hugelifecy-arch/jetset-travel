@@ -73,8 +73,8 @@
       "hero.b2": "<strong>Corporate‑ready</strong> invoices & documentation.",
       "hero.b3": "<strong>Disruption rescue</strong> when flights change.",
       "hero.b4": "<strong>One point of contact</strong> end‑to‑end.",
-      "hero.cta1": "Get My Quote (Fast)",
-      "hero.cta2": "WhatsApp (Fastest)",
+      "hero.cta1": "Get a Quote",
+      "hero.cta2": "WhatsApp",
       "hero.micro": "Licensed Cyprus travel agency · IATA Accredited · Tourism License 7775 · Reg. HE 181550",
 
       "tool.kicker": "Quick booking",
@@ -210,8 +210,8 @@
       "hero.b2": "<strong>Документы для компании</strong>: инвойсы, подтверждения, отчётность.",
       "hero.b3": "<strong>Срочные решения</strong> при отменах и переносах.",
       "hero.b4": "<strong>Один менеджер</strong> на весь процесс.",
-      "hero.cta1": "Получить расчёт (быстро)",
-      "hero.cta2": "WhatsApp (самый быстрый)",
+      "hero.cta1": "Получить расчёт",
+      "hero.cta2": "WhatsApp",
       "hero.micro": "Лицензия Кипра · IATA · Лицензия 7775 · Рег. HE 181550",
 
       "tool.kicker": "Быстрое бронирование",
@@ -484,6 +484,36 @@
     if (loadBtn) loadBtn.classList.add("hidden");
   }
 
+  function initSegmentTabs() {
+    const tabs = $$('[data-segment-tab]');
+    const panels = $$('[data-segment-panel]');
+    if (!tabs.length || !panels.length) return;
+
+    const setActive = (segment) => {
+      tabs.forEach((tab) => {
+        const isActive = tab.getAttribute('data-segment-tab') === segment;
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        tab.classList.toggle('bg-jetgold', isActive);
+        tab.classList.toggle('text-slate-900', isActive);
+        tab.classList.toggle('shadow-soft', isActive);
+        tab.classList.toggle('text-slate-500', !isActive);
+        tab.classList.toggle('dark:text-slate-300', !isActive);
+      });
+
+      panels.forEach((panel) => {
+        const isActive = panel.getAttribute('data-segment-panel') === segment;
+        panel.classList.toggle('hidden', !isActive);
+        panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => setActive(tab.getAttribute('data-segment-tab')));
+    });
+
+    setActive('corporate');
+  }
+
   // =========================
   // Image fallbacks
   // =========================
@@ -529,6 +559,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     initDark();
     initLanguage();
+    initSegmentTabs();
     setYear();
 
     $("#darkToggle")?.addEventListener("click", () => setDark(!document.documentElement.classList.contains("dark")));
