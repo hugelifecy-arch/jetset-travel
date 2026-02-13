@@ -10,3 +10,13 @@ img, svg { max-width: 100%; height: auto; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+@media (max-width: 639px) {
+  main {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .mobile-sticky-bar {
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+}

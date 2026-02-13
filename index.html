@@ -268,13 +268,19 @@
               <a id="ctaQuoteTop" href="#contact"
                  class="inline-flex items-center justify-center rounded-full bg-jetgold px-6 py-4 text-sm font-extrabold tracking-wide text-slate-900 shadow-strong hover:opacity-95"
                  data-i18n="hero.cta1">
-                Get My Quote (Fast)
+                Get a Quote
               </a>
               <a id="ctaWhatsAppTop" href="https://wa.me/35799478073" target="_blank" rel="noopener noreferrer"
                  class="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-6 py-4 text-sm font-bold tracking-wide text-white hover:bg-white/15"
                  data-i18n="hero.cta2">
-                WhatsApp (Fastest)
+                WhatsApp
               </a>
+            </div>
+
+            <div class="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-slate-200">
+              <span class="rounded-full border border-white/20 bg-white/10 px-3 py-1">IATA Accredited</span>
+              <span class="rounded-full border border-white/20 bg-white/10 px-3 py-1">Tourism License 7775</span>
+              <span class="rounded-full border border-white/20 bg-white/10 px-3 py-1">24/7 Support</span>
             </div>
 
             <p class="mt-4 text-xs text-slate-200/90" data-i18n="hero.micro">
@@ -319,6 +325,61 @@
               </div>
             </div>
           </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS + QUICK SEGMENT TABS -->
+    <section class="border-y border-slate-200 bg-white py-14 dark:border-slate-800 dark:bg-slate-950">
+      <div class="mx-auto max-w-7xl px-4 grid gap-8 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-jetteal">How it works</p>
+          <h2 class="mt-2 font-display text-3xl font-black tracking-tight text-slate-900 dark:text-white">Simple process. Fast decisions.</h2>
+          <div class="mt-6 grid gap-3 sm:grid-cols-3">
+            <article class="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/50">
+              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-jetteal">Step 1</p>
+              <p class="mt-2 text-sm font-bold text-slate-900 dark:text-white">Send your request</p>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Share route, dates, traveller count, and preferences.</p>
+            </article>
+            <article class="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/50">
+              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-jetteal">Step 2</p>
+              <p class="mt-2 text-sm font-bold text-slate-900 dark:text-white">Receive 2–3 options</p>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">We return clear options with pricing and fare rules.</p>
+            </article>
+            <article class="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/50">
+              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-jetteal">Step 3</p>
+              <p class="mt-2 text-sm font-bold text-slate-900 dark:text-white">Confirm + documentation</p>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Approve your choice and receive booking details and paperwork.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-950">
+            <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-jetteal">Corporate vs Luxury</p>
+            <div class="mt-4 inline-flex rounded-full border border-slate-200 bg-slate-50 p-1 dark:border-slate-700 dark:bg-slate-900" role="tablist" aria-label="Travel segment tabs">
+              <button type="button" class="segment-tab rounded-full px-4 py-2 text-xs font-extrabold tracking-wide" data-segment-tab="corporate" role="tab" aria-selected="true" aria-controls="segmentCorporate">Corporate</button>
+              <button type="button" class="segment-tab rounded-full px-4 py-2 text-xs font-extrabold tracking-wide text-slate-500 dark:text-slate-300" data-segment-tab="luxury" role="tab" aria-selected="false" aria-controls="segmentLuxury">Luxury</button>
+            </div>
+
+            <div id="segmentCorporate" data-segment-panel="corporate" class="mt-4" role="tabpanel">
+              <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <li>• Policy-friendly itineraries and invoicing.</li>
+                <li>• Fast rebooking support during disruptions.</li>
+                <li>• Practical flight and hotel options by priority.</li>
+              </ul>
+              <p class="mt-3 text-xs font-semibold text-slate-500 dark:text-slate-300">Use cases: executive meetings, conference travel, recurring team routes.</p>
+            </div>
+
+            <div id="segmentLuxury" data-segment-panel="luxury" class="mt-4 hidden" role="tabpanel" aria-hidden="true">
+              <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                <li>• Premium hotels and suite-level recommendations.</li>
+                <li>• Chauffeurs, private transfers, and concierge details.</li>
+                <li>• Curated experiences matched to your style.</li>
+              </ul>
+              <p class="mt-3 text-xs font-semibold text-slate-500 dark:text-slate-300">Use cases: milestone trips, family luxury holidays, bespoke multi-city journeys.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -664,7 +725,7 @@
   </div>
 
   <!-- Mobile sticky CTA bar -->
-  <div class="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 sm:hidden">
+  <div class="mobile-sticky-bar fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 sm:hidden">
     <div class="mx-auto max-w-7xl px-1 flex gap-2">
       <a id="mWA" href="https://wa.me/35799478073" target="_blank" rel="noopener noreferrer"
          class="flex-1 rounded-full border border-slate-200 bg-white px-4 py-3 text-center text-sm font-bold text-slate-900 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-white" data-i18n="m.wa">WhatsApp</a>
