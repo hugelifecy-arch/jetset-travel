@@ -566,10 +566,13 @@
     const panels = $$('[data-segment-panel]');
     if (!tabs.length || !panels.length) return;
 
+    const getIndexBySegment = (segment) => tabs.findIndex((tab) => tab.getAttribute('data-segment-tab') === segment);
+
     const setActive = (segment) => {
       tabs.forEach((tab) => {
         const isActive = tab.getAttribute('data-segment-tab') === segment;
         tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        tab.setAttribute('tabindex', isActive ? '0' : '-1');
         tab.classList.toggle('bg-jetgold', isActive);
         tab.classList.toggle('text-slate-900', isActive);
         tab.classList.toggle('shadow-soft', isActive);
@@ -586,6 +589,24 @@
 
     tabs.forEach((tab) => {
       tab.addEventListener('click', () => setActive(tab.getAttribute('data-segment-tab')));
+      tab.addEventListener('keydown', (event) => {
+        const currentSegment = tab.getAttribute('data-segment-tab');
+        const currentIndex = getIndexBySegment(currentSegment);
+        if (currentIndex < 0) return;
+
+        let nextIndex = currentIndex;
+        if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
+        if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+        if (nextIndex === currentIndex) return;
+
+        event.preventDefault();
+        const nextTab = tabs[nextIndex];
+        const segment = nextTab.getAttribute('data-segment-tab');
+        setActive(segment);
+        nextTab.focus();
+      });
     });
 
     setActive('corporate');
