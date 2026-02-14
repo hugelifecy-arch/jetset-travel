@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="format-detection" content="telephone=no" />
 
-  <title>JetSet Travel Cyprus | Corporate & Luxury Travel (Paphos)</title>
-  <meta name="description" content="Corporate travel without friction + luxury holidays perfected. Fast quotes, smarter routing, clean documentation, and real 24/7 support from Paphos, Cyprus." />
+  <title id="pageTitle">Corporate Travel Management in Cyprus — Fast Quotes, Clean Invoices, 24/7 Support</title>
+  <meta id="pageDescription" name="description" content="Corporate travel management in Cyprus with fast quotes, clean invoices, and 24/7 support for urgent changes." />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#0b1220" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -275,8 +275,8 @@
               Corporate & luxury travel · Paphos, Cyprus
             </p>
 
-            <h1 class="mt-4 font-display text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white" data-i18n="hero.title">
-              Executive Travel Without the Friction
+            <h1 class="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-white" data-i18n="hero.title">
+              Corporate Travel Management in Cyprus — Fast Quotes, Clean Invoices, 24/7 Support
             </h1>
 
             <p class="mt-5 max-w-2xl text-base sm:text-lg font-medium leading-relaxed text-slate-100/95" data-i18n="hero.sub">
@@ -311,8 +311,36 @@
               <a id="ctaWhatsAppTop" href="https://wa.me/35799478073" target="_blank" rel="noopener noreferrer"
                  class="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-6 py-4 text-sm font-bold tracking-wide text-white hover:bg-white/15"
                  data-i18n="hero.cta2">
-                WhatsApp
+                WhatsApp (Fast)
               </a>
+            </div>
+
+            <div class="mt-8 max-w-2xl rounded-3xl border border-white/20 bg-white/10 p-4 backdrop-blur sm:p-5">
+              <h2 class="text-base font-extrabold text-white" data-i18n="quick.title">Quick Quote</h2>
+              <form id="heroQuickForm" class="mt-3 grid gap-3" novalidate>
+                <div class="grid gap-3 sm:grid-cols-3">
+                  <div>
+                    <label for="quickName" class="text-xs font-bold text-slate-100" data-i18n="quick.name">Name</label>
+                    <input id="quickName" name="quickName" type="text" autocomplete="name" placeholder="Your name" data-i18n-placeholder="quick.namePlaceholder"
+                      class="mt-1 min-h-[44px] w-full rounded-xl border border-white/30 bg-white/95 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/40" />
+                  </div>
+                  <div>
+                    <label for="quickPhone" class="text-xs font-bold text-slate-100" data-i18n="quick.phone">Phone / WhatsApp</label>
+                    <input id="quickPhone" name="quickPhone" type="tel" autocomplete="tel" placeholder="+357..." data-i18n-placeholder="quick.phonePlaceholder"
+                      class="mt-1 min-h-[44px] w-full rounded-xl border border-white/30 bg-white/95 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/40" />
+                  </div>
+                  <div>
+                    <label for="quickRoute" class="text-xs font-bold text-slate-100" data-i18n="quick.route">Route + Dates</label>
+                    <input id="quickRoute" name="quickRoute" type="text" placeholder="LCA-LON · 12-15 Mar" data-i18n-placeholder="quick.routePlaceholder"
+                      class="mt-1 min-h-[44px] w-full rounded-xl border border-white/30 bg-white/95 px-3 py-2 text-sm text-slate-900 placeholder:text-slate-500 focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/40" />
+                  </div>
+                </div>
+                <p id="heroQuickError" class="text-xs font-semibold text-jetgoldSoft" role="status" aria-live="polite"></p>
+                <div class="grid gap-2 sm:grid-cols-2">
+                  <button type="submit" class="inline-flex min-h-[44px] items-center justify-center rounded-full bg-jetgold px-5 py-3 text-sm font-extrabold text-slate-900 shadow-strong hover:opacity-95" data-i18n="hero.cta1">Get a Quote</button>
+                  <a id="quickWhatsApp" href="https://wa.me/35799478073" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center justify-center rounded-full border border-white/35 bg-transparent px-5 py-3 text-sm font-bold text-white hover:bg-white/15" data-i18n="hero.cta2">WhatsApp (Fast)</a>
+                </div>
+              </form>
             </div>
 
             <div class="mt-5 grid gap-2 sm:grid-cols-3" aria-label="Trust signals">
@@ -343,23 +371,23 @@
     <section class="border-y border-slate-200 bg-white py-14 dark:border-slate-800 dark:bg-slate-950">
       <div class="mx-auto max-w-7xl px-4 grid gap-8 lg:grid-cols-12">
         <div class="lg:col-span-7">
-          <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-jetteal">How it works</p>
-          <h2 class="mt-2 font-display text-3xl font-black tracking-tight text-slate-900 dark:text-white">Simple process. Fast decisions.</h2>
+          <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-jetteal" data-i18n="how.kicker">How it works</p>
+          <h2 class="mt-2 font-display text-3xl font-black tracking-tight text-slate-900 dark:text-white" data-i18n="how.title">Simple process. Fast decisions.</h2>
           <div class="mt-6 grid gap-3 sm:grid-cols-3">
             <article class="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/50">
-              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-jetteal">Step 1</p>
-              <p class="mt-2 text-sm font-bold text-slate-900 dark:text-white">Send your request</p>
-              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Share route, dates, traveller count, and preferences.</p>
+              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-jetteal" data-i18n="how.s1">Step 1</p>
+              <p class="mt-2 text-sm font-bold text-slate-900 dark:text-white" data-i18n="how.s1t">Send your request</p>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300" data-i18n="how.s1b">Share route, dates, traveller count, and preferences.</p>
             </article>
             <article class="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/50">
-              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-jetteal">Step 2</p>
-              <p class="mt-2 text-sm font-bold text-slate-900 dark:text-white">Receive 2–3 options</p>
-              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">We return clear options with pricing and fare rules.</p>
+              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-jetteal" data-i18n="how.s2">Step 2</p>
+              <p class="mt-2 text-sm font-bold text-slate-900 dark:text-white" data-i18n="how.s2t">Receive 2–3 options</p>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300" data-i18n="how.s2b">We return clear options with pricing and fare rules.</p>
             </article>
             <article class="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-900/50">
-              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-jetteal">Step 3</p>
-              <p class="mt-2 text-sm font-bold text-slate-900 dark:text-white">Confirm + documentation</p>
-              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300">Approve your choice and receive booking details and paperwork.</p>
+              <p class="text-xs font-extrabold uppercase tracking-[0.16em] text-jetteal" data-i18n="how.s3">Step 3</p>
+              <p class="mt-2 text-sm font-bold text-slate-900 dark:text-white" data-i18n="how.s3t">Confirm + documentation</p>
+              <p class="mt-1 text-sm text-slate-600 dark:text-slate-300" data-i18n="how.s3b">Approve your choice and receive booking details and paperwork.</p>
             </article>
           </div>
         </div>
@@ -659,7 +687,7 @@
 
             <div class="mt-6 flex flex-wrap gap-2">
               <a id="ctaWhatsAppSide" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-900 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
-                 href="https://wa.me/35799478073" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                 href="https://wa.me/35799478073" target="_blank" rel="noopener noreferrer" data-i18n="hero.cta2">WhatsApp (Fast)</a>
               <a id="ctaViberSide" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-900 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
                  href="viber://chat/?number=%2B35799478073" rel="noopener noreferrer">Viber</a>
               <a id="ctaTelegramSide" class="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold text-slate-900 hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
@@ -682,12 +710,12 @@
                 <div class="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label for="name" class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" data-i18n="form.name">Name</label>
-                    <input id="name" name="name" type="text" required autocomplete="name" placeholder="Your name"
+                    <input id="name" name="name" type="text" required autocomplete="name" placeholder="Your name" data-i18n-placeholder="form.namePlaceholder"
                       class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
                   </div>
                   <div>
                     <label for="phone" class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" data-i18n="form.phone">Phone / WhatsApp</label>
-                    <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+357..."
+                    <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+357..." data-i18n-placeholder="form.phonePlaceholder"
                       class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
                   </div>
                 </div>
@@ -695,7 +723,7 @@
                 <div class="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label for="email" class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" data-i18n="form.email">Email</label>
-                    <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com"
+                    <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" data-i18n-placeholder="form.emailPlaceholder"
                       class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
                   </div>
                   <div>
@@ -712,19 +740,19 @@
                 <div class="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label for="route" class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" data-i18n="form.route">Route</label>
-                    <input id="route" name="route" type="text" placeholder="e.g., LCA–LON–NYC"
+                    <input id="route" name="route" type="text" placeholder="e.g., LCA–LON–NYC" data-i18n-placeholder="form.routePlaceholder"
                       class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
                   </div>
                   <div>
                     <label for="dates" class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" data-i18n="form.dates">Dates</label>
-                    <input id="dates" name="dates" type="text" placeholder="e.g., 12–15 Mar"
+                    <input id="dates" name="dates" type="text" placeholder="e.g., 12–15 Mar" data-i18n-placeholder="form.datesPlaceholder"
                       class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white" />
                   </div>
                 </div>
 
                 <div>
                   <label for="message" class="text-xs font-extrabold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" data-i18n="form.msg">Message</label>
-                  <textarea id="message" name="message" required minlength="10" rows="6" placeholder="Passengers, baggage, budget, flexibility, hotel preferences, invoicing requirements..."
+                  <textarea id="message" name="message" required minlength="10" rows="6" placeholder="Passengers, baggage, budget, flexibility, hotel preferences, invoicing requirements..." data-i18n-placeholder="form.msgPlaceholder"
                     class="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-jetgold focus:outline-none focus:ring-2 focus:ring-jetgold/30 dark:border-slate-800 dark:bg-slate-950 dark:text-white"></textarea>
                 </div>
 
@@ -765,7 +793,7 @@
   <div class="mobile-sticky-bar fixed bottom-0 left-0 z-[9999] w-full border-t border-slate-200 bg-white/95 p-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 md:hidden">
     <div class="mx-auto max-w-7xl px-1 flex gap-2">
       <a id="mWA" href="https://wa.me/35799478073" target="_blank" rel="noopener noreferrer"
-         class="flex-1 rounded-full bg-[#25D366] px-4 py-3 text-center text-sm font-bold text-white shadow-sm" data-i18n="m.wa">WhatsApp</a>
+         class="flex-1 rounded-full bg-[#25D366] px-4 py-3 text-center text-sm font-bold text-white shadow-sm" data-i18n="m.wa">WhatsApp (Fast)</a>
       <a id="mQuote" href="#contact" class="flex-1 rounded-full bg-jetgold px-4 py-3 text-center text-sm font-extrabold text-white shadow-soft" data-i18n="m.quote">Get a Quote</a>
     </div>
   </div>
@@ -791,8 +819,6 @@
         IATA: <strong class="text-white">14200130</strong> · Reg.: <strong class="text-white">HE 181550</strong> · Tourism: <strong class="text-white">7775</strong>
       </p>
       <p class="mt-2 text-xs text-slate-300" data-i18n="footer.nap">26A Agapinoros Street, Paphos 8049, Cyprus · +357 99 478073 · +357 99 310993 · info@jetset.com.cy</p>
-      <p class="mt-2 text-[11px] text-slate-400">Build: <span id="buildStamp">pending</span></p>
-
       <div class="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm">
         <a class="underline decoration-slate-600 underline-offset-4 hover:decoration-slate-300" href="#services" data-i18n="footer.services">Services</a>
         <a class="underline decoration-slate-600 underline-offset-4 hover:decoration-slate-300" href="#proof" data-i18n="footer.trust">Trust</a>
