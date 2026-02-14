@@ -72,8 +72,8 @@
       "nav.cta": "Get a Quote",
 
       "hero.kicker": "Corporate & luxury travel · Paphos, Cyprus",
-      "hero.title": "Corporate Travel Agency in Paphos, Cyprus.<br class='hidden sm:block'><span class='text-jetgoldSoft'>Luxury Travel Concierge Cyprus</span>.",
-      "hero.sub": "Executive itineraries, corporate invoices, and clear fare rules from one senior team. When disruption hits, we rebook fast and keep your plans moving.",
+      "hero.title": "Executive Travel Without the Friction",
+      "hero.sub": "We handle complex itineraries, strict corporate policies, and 24/7 disruption rebooking—so your team just has to show up.",
       "hero.b1": "<strong>Executive speed</strong> from brief to confirmed itinerary.",
       "hero.b2": "<strong>Finance‑ready</strong> invoices and supporting documents.",
       "hero.b3": "<strong>Fare-rule clarity</strong> before ticketing and during changes.",
@@ -82,13 +82,6 @@
       "hero.cta2": "WhatsApp",
       "hero.micro": "Licensed Cyprus travel agency · IATA Accredited · Tourism License 7775 · Reg. HE 181550",
 
-      "tool.kicker": "Quick booking",
-      "tool.title": "Quick booking",
-      "tool.sub": "Book via our Trip.com partner widget. For corporate routing, changes, and complex trips — request a quote.",
-      "tool.badge": "Partner offer",
-      "tool.partnerLabel": "Partner offer",
-      "tool.load": "Load offers",
-      "tool.note": "Partner offer powered by Trip.com (affiliate). Availability and pricing are managed on Trip.com.",
       "service.areaTitle": "Service Area:",
       "service.areaBody": "Paphos • Cyprus (Nationwide support)",
       "form.errName": "Please enter your name.",
@@ -158,11 +151,7 @@
       "proof.tourB": "Deputy Ministry of Tourism: <strong>7775</strong>",
       "proof.supportT": "Real support",
       "proof.supportB": "24/7 help for time‑critical travel and disruptions.",
-      "proof.badgesK": "Accreditations",
-      "proof.googleT": "Google reviews",
-      "proof.googleB": "Open verified reviews and directions on Google.",
-      "proof.googleBtn1": "Read Reviews",
-      "proof.googleBtn2": "Open Maps",
+      "proof.badgesK": "What this means for your team",
       "proof.note": "Tip: for urgent changes during travel, WhatsApp is the fastest channel.",
 
       "rev.kicker": "Testimonials",
@@ -229,8 +218,8 @@
       "nav.cta": "Получить предложение",
 
       "hero.kicker": "Корпоративные и luxury поездки · Пафос, Кипр",
-      "hero.title": "Корпоративное турагентство в Пафосе, Кипр.<br class='hidden sm:block'><span class='text-jetgoldSoft'>Luxury Travel Concierge Cyprus</span>.",
-      "hero.sub": "Маршруты для руководителей, корпоративные инвойсы и понятные правила тарифов — всё у одной сильной команды. Если в пути сбой, быстро перестраиваем поездку и держим вас в графике.",
+      "hero.title": "Премиальные деловые поездки без лишних сложностей",
+      "hero.sub": "Мы берём на себя сложные маршруты, строгие корпоративные правила и круглосуточное перебронирование при сбоях — вашей команде остаётся только приехать.",
       "hero.b1": "<strong>Максимальная скорость</strong> от брифа до подтверждённого маршрута.",
       "hero.b2": "<strong>Документы для финансов</strong>: инвойсы и полный пакет подтверждений.",
       "hero.b3": "<strong>Прозрачные правила тарифов</strong> до выписки и при изменениях.",
@@ -239,11 +228,6 @@
       "hero.cta2": "WhatsApp",
       "hero.micro": "Лицензия Кипра · IATA · Лицензия 7775 · Рег. HE 181550",
 
-      "tool.kicker": "Быстрое бронирование",
-      "tool.title": "Быстрое бронирование",
-      "tool.sub": "Бронируйте через партнёрский виджет Trip.com. Для корпоративных маршрутов, изменений и сложных задач — запросите расчёт.",
-      "tool.badge": "Партнёрское предложение",
-      "tool.note": "Партнёрское предложение Trip.com (affiliate). Наличие и цены управляются на стороне Trip.com.",
 
       "trusted.kicker": "Нам доверяют",
       "trusted.title": "Команды, которые не могут позволить себе ошибки в поездках.",
@@ -300,11 +284,7 @@
       "proof.tourB": "Лицензия: <strong>7775</strong>",
       "proof.supportT": "Поддержка",
       "proof.supportB": "Помощь 24/7 при срочных ситуациях и сбоях.",
-      "proof.badgesK": "Аккредитации",
-      "proof.googleT": "Отзывы Google",
-      "proof.googleB": "Откройте проверенные отзывы и маршрут на Google.",
-      "proof.googleBtn1": "Читать отзывы",
-      "proof.googleBtn2": "Открыть карты",
+      "proof.badgesK": "Что это даёт вашей команде",
       "proof.note": "Если нужно срочно — WhatsApp самый быстрый канал.",
 
       "rev.kicker": "Отзывы",
@@ -353,8 +333,6 @@
       "m.wa": "WhatsApp",
       "service.areaTitle": "Зона обслуживания:",
       "service.areaBody": "Пафос • Кипр (поддержка по всей стране)",
-      "tool.partnerLabel": "Партнёрское предложение",
-      "tool.load": "Загрузить предложения",
       "form.errName": "Пожалуйста, укажите имя.",
       "form.errContact": "Укажите хотя бы телефон или email.",
       "form.errEmail": "Пожалуйста, укажите корректный email.",
@@ -542,89 +520,6 @@
   });
 
 
-  function loadTripWidget() {
-    const holder = $("#tripWidget");
-    if (!holder || holder.getAttribute("data-loaded") === "1") return;
-    const src = holder.getAttribute("data-trip-src");
-    if (!src) return;
-    const desktop = holder.querySelector("[data-trip-desktop]");
-    const mobile = holder.querySelector("[data-trip-mobile]");
-    const makeFrame = (width, height, id) => {
-      const iframe = document.createElement("iframe");
-      iframe.setAttribute("border", "0");
-      iframe.src = src;
-      iframe.id = id;
-      iframe.width = String(width);
-      iframe.height = String(height);
-      iframe.setAttribute("frameborder", "0");
-      iframe.setAttribute("scrolling", "no");
-      iframe.loading = "lazy";
-      iframe.referrerPolicy = "strict-origin-when-cross-origin";
-      iframe.style.border = "none";
-      iframe.style.display = "block";
-      iframe.style.width = "100%";
-      iframe.title = "Trip.com partner booking";
-      iframe.allow = "clipboard-write; geolocation *";
-      return iframe;
-    };
-    if (desktop) desktop.appendChild(makeFrame(900, 200, "S11839970"));
-    if (mobile) mobile.appendChild(makeFrame(320, 320, "S11839970m"));
-    holder.setAttribute("data-loaded", "1");
-    const loadBtn = $("#loadTripWidget");
-    if (loadBtn) loadBtn.classList.add("hidden");
-  }
-
-  function initSegmentTabs() {
-    const tabs = $$('[data-segment-tab]');
-    const panels = $$('[data-segment-panel]');
-    if (!tabs.length || !panels.length) return;
-
-    const getIndexBySegment = (segment) => tabs.findIndex((tab) => tab.getAttribute('data-segment-tab') === segment);
-
-    const setActive = (segment) => {
-      tabs.forEach((tab) => {
-        const isActive = tab.getAttribute('data-segment-tab') === segment;
-        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        tab.setAttribute('tabindex', isActive ? '0' : '-1');
-        tab.classList.toggle('bg-jetgold', isActive);
-        tab.classList.toggle('text-slate-900', isActive);
-        tab.classList.toggle('shadow-soft', isActive);
-        tab.classList.toggle('text-slate-500', !isActive);
-        tab.classList.toggle('dark:text-slate-300', !isActive);
-      });
-
-      panels.forEach((panel) => {
-        const isActive = panel.getAttribute('data-segment-panel') === segment;
-        panel.classList.toggle('hidden', !isActive);
-        panel.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-      });
-    };
-
-    tabs.forEach((tab) => {
-      tab.addEventListener('click', () => setActive(tab.getAttribute('data-segment-tab')));
-      tab.addEventListener('keydown', (event) => {
-        const currentSegment = tab.getAttribute('data-segment-tab');
-        const currentIndex = getIndexBySegment(currentSegment);
-        if (currentIndex < 0) return;
-
-        let nextIndex = currentIndex;
-        if (event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % tabs.length;
-        if (event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
-        if (event.key === 'Home') nextIndex = 0;
-        if (event.key === 'End') nextIndex = tabs.length - 1;
-        if (nextIndex === currentIndex) return;
-
-        event.preventDefault();
-        const nextTab = tabs[nextIndex];
-        const segment = nextTab.getAttribute('data-segment-tab');
-        setActive(segment);
-        nextTab.focus();
-      });
-    });
-
-    setActive('corporate');
-  }
-
   // =========================
   // Image fallbacks
   // =========================
@@ -636,8 +531,8 @@
   }
 
   setImgFallback($("#brandLogo"), ["./jetset-logo.svg", "./jetset-logo.jpg", "./logo.png", "./logo.jpg"]);
-  setImgFallback($("#iataBadge"), ["./iata-logo.jpg", "./iata.jpg", "./iata.png"]);
-  setImgFallback($("#tourismBadge"), ["./tourism-logo.jpg", "./tourism.jpg", "./tourism.png"]);
+  setImgFallback($("#iataBadgeHero"), ["./iata-logo.jpg", "./iata.jpg", "./iata.png"]);
+  setImgFallback($("#tourismBadgeHero"), ["./tourism-logo.jpg", "./tourism.jpg", "./tourism.png"]);
 
   // =========================
   // Footer year
@@ -686,13 +581,10 @@
   document.addEventListener("DOMContentLoaded", () => {
     initDark();
     initLanguage();
-    initSegmentTabs();
     setYear();
     setBuildStamp();
 
     $("#darkToggle")?.addEventListener("click", () => setDark(!document.documentElement.classList.contains("dark")));
     $("#darkToggleMobile")?.addEventListener("click", () => setDark(!document.documentElement.classList.contains("dark")));
-
-    $("#loadTripWidget")?.addEventListener("click", loadTripWidget);
   });
 })();

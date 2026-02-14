@@ -268,20 +268,19 @@
       </div>
 
       <div class="mx-auto max-w-7xl px-4 pt-14 pb-20 sm:pt-20 lg:pb-24">
-        <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div class="grid gap-10 lg:items-center">
           <!-- Copy -->
-          <div class="lg:col-span-7">
+          <div class="max-w-4xl">
             <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-jetteal" data-i18n="hero.kicker">
               Corporate & luxury travel · Paphos, Cyprus
             </p>
 
-            <h1 class="mt-4 font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white" data-i18n="hero.title">
-              Corporate Travel Agency in Paphos, Cyprus.<br class="hidden sm:block">
-              <span class="text-jetgoldSoft">Luxury Travel Concierge Cyprus</span>.
+            <h1 class="mt-4 font-display text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white" data-i18n="hero.title">
+              Executive Travel Without the Friction
             </h1>
 
-            <p class="mt-5 max-w-2xl text-base sm:text-lg leading-relaxed text-slate-100" data-i18n="hero.sub">
-              Executive itineraries, corporate invoices, and clear fare rules from one senior team. When disruption hits, we rebook fast and keep your plans moving.
+            <p class="mt-5 max-w-2xl text-base sm:text-lg font-medium leading-relaxed text-slate-100/95" data-i18n="hero.sub">
+              We handle complex itineraries, strict corporate policies, and 24/7 disruption rebooking—so your team just has to show up.
             </p>
 
             <ul class="mt-6 grid max-w-2xl gap-3 text-sm text-slate-100 sm:grid-cols-2" aria-label="Benefits">
@@ -316,10 +315,19 @@
               </a>
             </div>
 
-            <div class="mt-4 flex flex-wrap gap-2 text-xs font-semibold text-slate-200">
-              <span class="rounded-full border border-white/20 bg-white/10 px-3 py-1">IATA Accredited</span>
-              <span class="rounded-full border border-white/20 bg-white/10 px-3 py-1">Tourism License 7775</span>
-              <span class="rounded-full border border-white/20 bg-white/10 px-3 py-1">24/7 Support</span>
+            <div class="mt-5 grid gap-2 sm:grid-cols-3" aria-label="Trust signals">
+              <div class="flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-3 py-2 text-xs font-semibold text-slate-100/90 saturate-0">
+                <img id="iataBadgeHero" src="./iata-logo.jpg" alt="IATA accreditation logo" class="h-6 w-auto opacity-80" loading="lazy" width="80" height="32">
+                <span>IATA</span>
+              </div>
+              <div class="flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-3 py-2 text-xs font-semibold text-slate-100/90 saturate-0">
+                <img id="tourismBadgeHero" src="./tourism-logo.jpg" alt="Cyprus tourism license logo" class="h-6 w-auto opacity-80" loading="lazy" width="80" height="32">
+                <span>Tourism 7775</span>
+              </div>
+              <a href="https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos&hl=en" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-3 py-2 text-xs font-semibold text-slate-100/90 transition hover:bg-white/20 saturate-0">
+                <span aria-hidden="true">★</span>
+                <span>Google Reviews</span>
+              </a>
             </div>
 
             <p class="mt-4 text-xs text-slate-200/90" data-i18n="hero.micro">
@@ -327,43 +335,6 @@
             </p>
           </div>
 
-          <!-- Quick tools card -->
-          <aside id="quick-booking" class="lg:col-span-5">
-            <div class="rounded-3xl border border-white/10 bg-white/95 p-5 shadow-strong backdrop-blur dark:bg-slate-950/90 dark:text-white">
-              <div class="flex items-start justify-between gap-3">
-                <div>
-                  <p class="text-xs font-extrabold uppercase tracking-[0.2em] text-slate-500 dark:text-slate-300" data-i18n="tool.kicker">Quick booking</p>
-                  <h2 class="mt-1 font-display text-2xl font-black tracking-tight text-slate-900 dark:text-white" data-i18n="tool.title">Quick booking</h2>
-                  <p class="mt-1 text-sm text-slate-600 dark:text-slate-300" data-i18n="tool.sub">
-                    Book quickly via our affiliate partner. For corporate routing, changes, and complex trips — request a quote.
-                  </p>
-                </div>
-                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700 dark:bg-slate-900 dark:text-slate-200" data-i18n="tool.badge">Partner offer</span>
-              </div>
-
-              <div class="mt-5 space-y-3">
-                <p class="text-center text-xs font-bold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-300" data-i18n="tool.partnerLabel">Partner offer</p>
-                <div id="tripWidget" class="flex justify-center" data-trip-src="https://www.trip.com/partners/ad/S11839970?Allianceid=7803818&SID=294254164&trip_sub1=" role="region" aria-label="Trip.com quick booking widget">
-                  <div class="hidden w-full max-w-[900px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm md:block dark:border-slate-800 dark:bg-slate-950" data-trip-desktop></div>
-                  <div class="w-full max-w-[320px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm md:hidden dark:border-slate-800 dark:bg-slate-950" data-trip-mobile></div>
-                </div>
-                <div class="flex justify-center">
-                  <button id="loadTripWidget" type="button" class="rounded-full border border-slate-200 px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-100 dark:border-slate-800 dark:text-slate-200 dark:hover:bg-slate-900" data-i18n="tool.load">Load offers</button>
-                </div>
-              </div>
-
-              <div class="mt-4">
-                <div class="rounded-2xl border border-jetteal/30 bg-jetteal/5 p-3 text-sm text-slate-700 dark:border-jetteal/40 dark:bg-jetteal/10 dark:text-slate-200">
-                  <strong data-i18n="service.areaTitle">Service Area:</strong>
-                  <span data-i18n="service.areaBody">Paphos • Cyprus (Nationwide support)</span>
-                  </div>
-                </div>
-                <p class="mt-3 text-xs text-slate-500 dark:text-slate-300" data-i18n="tool.note">
-                  Partner offer powered by Trip.com (affiliate). Availability and pricing are managed on Trip.com.
-                </p>
-              </div>
-            </div>
-          </aside>
         </div>
       </div>
     </section>
@@ -396,27 +367,26 @@
         <div class="lg:col-span-5">
           <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-950">
             <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-jetteal">Corporate vs Luxury</p>
-            <div class="mt-4 inline-flex rounded-full border border-slate-200 bg-slate-50 p-1 dark:border-slate-700 dark:bg-slate-900" role="tablist" aria-label="Travel segment tabs">
-              <button id="segmentTabCorporate" type="button" class="segment-tab rounded-full px-4 py-2 text-xs font-extrabold tracking-wide" data-segment-tab="corporate" role="tab" aria-selected="true" aria-controls="segmentCorporate" tabindex="0">Corporate</button>
-              <button id="segmentTabLuxury" type="button" class="segment-tab rounded-full px-4 py-2 text-xs font-extrabold tracking-wide text-slate-500 dark:text-slate-300" data-segment-tab="luxury" role="tab" aria-selected="false" aria-controls="segmentLuxury" tabindex="-1">Luxury</button>
-            </div>
+            <div class="mt-4 grid gap-4 md:grid-cols-2">
+              <article class="rounded-2xl border border-slate-300 bg-slate-100 p-4 dark:border-slate-700 dark:bg-slate-900/70">
+                <h3 class="text-sm font-black uppercase tracking-[0.16em] text-slate-800 dark:text-slate-100">Corporate</h3>
+                <ul class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                  <li>• Policy-friendly itineraries and invoicing.</li>
+                  <li>• Fast rebooking support during disruptions.</li>
+                  <li>• Practical flight and hotel options by priority.</li>
+                </ul>
+                <p class="mt-3 text-xs font-semibold text-slate-500 dark:text-slate-300">Use cases: executive meetings, conference travel, recurring team routes.</p>
+              </article>
 
-            <div id="segmentCorporate" data-segment-panel="corporate" class="mt-4" role="tabpanel" aria-labelledby="segmentTabCorporate">
-              <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-200">
-                <li>• Policy-friendly itineraries and invoicing.</li>
-                <li>• Fast rebooking support during disruptions.</li>
-                <li>• Practical flight and hotel options by priority.</li>
-              </ul>
-              <p class="mt-3 text-xs font-semibold text-slate-500 dark:text-slate-300">Use cases: executive meetings, conference travel, recurring team routes.</p>
-            </div>
-
-            <div id="segmentLuxury" data-segment-panel="luxury" class="mt-4 hidden" role="tabpanel" aria-labelledby="segmentTabLuxury" aria-hidden="true">
-              <ul class="space-y-2 text-sm text-slate-700 dark:text-slate-200">
-                <li>• Premium hotels and suite-level recommendations.</li>
-                <li>• Chauffeurs, private transfers, and concierge details.</li>
-                <li>• Curated experiences matched to your style.</li>
-              </ul>
-              <p class="mt-3 text-xs font-semibold text-slate-500 dark:text-slate-300">Use cases: milestone trips, family luxury holidays, bespoke multi-city journeys.</p>
+              <article class="rounded-2xl border border-amber-200 bg-amber-50 p-4 dark:border-amber-400/40 dark:bg-amber-100/10">
+                <h3 class="text-sm font-black uppercase tracking-[0.16em] text-slate-800 dark:text-slate-100">Luxury</h3>
+                <ul class="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
+                  <li>• Premium hotels and suite-level recommendations.</li>
+                  <li>• Chauffeurs, private transfers, and concierge details.</li>
+                  <li>• Curated experiences matched to your style.</li>
+                </ul>
+                <p class="mt-3 text-xs font-semibold text-slate-500 dark:text-slate-300">Use cases: milestone trips, family luxury holidays, bespoke multi-city journeys.</p>
+              </article>
             </div>
           </div>
         </div>
@@ -580,27 +550,12 @@
 
           <div class="lg:col-span-5">
             <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-soft dark:border-slate-800 dark:bg-slate-950">
-              <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-jetteal" data-i18n="proof.badgesK">Accreditations</p>
-
-              <div class="mt-4 flex flex-wrap items-center gap-3">
-                <div class="rounded-2xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-950">
-                  <img id="iataBadge" src="./iata-logo.jpg" alt="IATA accreditation logo" class="h-12 w-auto" loading="lazy" width="120" height="48">
-                </div>
-                <div class="rounded-2xl border border-slate-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-950">
-                  <img id="tourismBadge" src="./tourism-logo.jpg" alt="Cyprus tourism license logo" class="h-12 w-auto" loading="lazy" width="120" height="48">
-                </div>
-              </div>
-
-              <div class="mt-6 rounded-2xl bg-slate-50 p-4 dark:bg-slate-900">
-                <p class="text-sm font-extrabold text-slate-900 dark:text-white" data-i18n="proof.googleT">Google reviews</p>
-                <p class="mt-1 text-sm text-slate-600 dark:text-slate-300" data-i18n="proof.googleB">Open verified reviews and directions on Google.</p>
-                <div class="mt-3 flex flex-wrap gap-2">
-                  <a class="inline-flex items-center justify-center rounded-full bg-jetgold px-4 py-2 text-sm font-extrabold text-slate-900 shadow-soft hover:opacity-95"
-                     href="https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos&hl=en" target="_blank" rel="noopener noreferrer" data-i18n="proof.googleBtn1">Read Reviews</a>
-                  <a class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-950 dark:text-white dark:hover:bg-slate-900"
-                     href="https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos" target="_blank" rel="noopener noreferrer" data-i18n="proof.googleBtn2">Open Maps</a>
-                </div>
-              </div>
+              <p class="text-xs font-extrabold uppercase tracking-[0.22em] text-jetteal" data-i18n="proof.badgesK">What this means for your team</p>
+              <ul class="mt-4 space-y-3 text-sm text-slate-700 dark:text-slate-200">
+                <li class="rounded-2xl bg-slate-50 p-4 dark:bg-slate-900">Clear supplier documentation aligned to finance requirements.</li>
+                <li class="rounded-2xl bg-slate-50 p-4 dark:bg-slate-900">Escalation-ready support if flights are delayed, cancelled, or rerouted.</li>
+                <li class="rounded-2xl bg-slate-50 p-4 dark:bg-slate-900">Transparent fare rules and change conditions before approval.</li>
+              </ul>
 
               <p class="mt-4 text-xs text-slate-500 dark:text-slate-400" data-i18n="proof.note">
                 Tip: for urgent changes during travel, WhatsApp is the fastest channel.
@@ -807,11 +762,11 @@
   </div>
 
   <!-- Mobile sticky CTA bar -->
-  <div class="mobile-sticky-bar fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 sm:hidden">
+  <div class="mobile-sticky-bar fixed bottom-0 left-0 z-[9999] w-full border-t border-slate-200 bg-white/95 p-3 backdrop-blur dark:border-slate-800 dark:bg-slate-950/90 md:hidden">
     <div class="mx-auto max-w-7xl px-1 flex gap-2">
       <a id="mWA" href="https://wa.me/35799478073" target="_blank" rel="noopener noreferrer"
-         class="flex-1 rounded-full border border-slate-200 bg-white px-4 py-3 text-center text-sm font-bold text-slate-900 shadow-sm dark:border-slate-800 dark:bg-slate-950 dark:text-white" data-i18n="m.wa">WhatsApp</a>
-      <a id="mQuote" href="#contact" class="flex-1 rounded-full bg-jetgold px-4 py-3 text-center text-sm font-extrabold text-slate-900 shadow-soft" data-i18n="m.quote">Get a Quote</a>
+         class="flex-1 rounded-full bg-[#25D366] px-4 py-3 text-center text-sm font-bold text-white shadow-sm" data-i18n="m.wa">WhatsApp</a>
+      <a id="mQuote" href="#contact" class="flex-1 rounded-full bg-jetgold px-4 py-3 text-center text-sm font-extrabold text-white shadow-soft" data-i18n="m.quote">Get a Quote</a>
     </div>
   </div>
 
