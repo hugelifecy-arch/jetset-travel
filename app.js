@@ -622,7 +622,7 @@
     img.addEventListener("error", () => tryNext());
   }
 
-  setImgFallback($("#brandLogo"), ["./jetset-logo.jpg", "./logo.jpg", "./logo.png"]);
+  setImgFallback($("#brandLogo"), ["./jetset-logo-clean.svg", "./jetset-logo.jpg", "./logo.png", "./logo.jpg"]);
   setImgFallback($("#iataBadge"), ["./iata-logo.jpg", "./iata.jpg", "./iata.png"]);
   setImgFallback($("#tourismBadge"), ["./tourism-logo.jpg", "./tourism.jpg", "./tourism.png"]);
 

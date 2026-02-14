@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="JetSet Travel Cyprus logo">
+  <defs>
+    <filter id="black-to-transparent" color-interpolation-filters="sRGB">
+      <feColorMatrix in="SourceGraphic" type="luminanceToAlpha" result="alphaMask" />
+      <feComponentTransfer in="alphaMask" result="boostedMask">
+        <feFuncA type="gamma" amplitude="2.8" exponent="0.32" offset="0" />
+      </feComponentTransfer>
+      <feComposite in="SourceGraphic" in2="boostedMask" operator="in" />
+    </filter>
+  </defs>
+  <image href="./jetset-logo.jpg" width="1200" height="360" filter="url(#black-to-transparent)" preserveAspectRatio="xMidYMid meet" />
+</svg>
