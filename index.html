@@ -10,6 +10,8 @@
   <meta name="description" content="Corporate travel without friction + luxury holidays perfected. Fast quotes, smarter routing, clean documentation, and real 24/7 support from Paphos, Cyprus." />
   <meta name="robots" content="index,follow" />
   <meta name="theme-color" content="#0b1220" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://formspree.io; frame-src https://www.trip.com; base-uri 'self'; form-action 'self' https://formspree.io mailto:;" />
 
   <!-- Keep canonical aligned to your primary domain (recommended: https://jetset-travel.com/). -->
   <link rel="canonical" href="https://jetset-travel.com/" />
@@ -208,7 +210,7 @@
 
       <div class="flex items-center gap-2">
         <!-- Language -->
-        <div class="hidden md:flex items-center rounded-full border border-slate-200 bg-white px-1 py-1 dark:border-slate-800 dark:bg-slate-950" aria-label="Language">
+        <div class="hidden md:flex items-center rounded-full border border-slate-200 bg-white px-1 py-1 dark:border-slate-800 dark:bg-slate-950" role="group" aria-label="Language">
           <button class="lang-btn rounded-full px-3 py-1 text-xs font-extrabold tracking-wide text-slate-900 dark:text-white" data-lang="en" aria-pressed="false">EN</button>
           <button class="lang-btn rounded-full px-3 py-1 text-xs font-extrabold tracking-wide text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white" data-lang="ru" aria-pressed="false">RU</button>
         </div>
@@ -241,7 +243,7 @@
         <a class="rounded-xl px-3 py-3 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-900" href="#contact" data-i18n="nav.contact">Contact</a>
 
         <div class="mt-2 flex items-center justify-between gap-3">
-          <div class="flex items-center rounded-full border border-slate-200 bg-white p-1 dark:border-slate-800 dark:bg-slate-950" aria-label="Language">
+          <div class="flex items-center rounded-full border border-slate-200 bg-white p-1 dark:border-slate-800 dark:bg-slate-950" role="group" aria-label="Language">
             <button class="lang-btn rounded-full px-3 py-2 text-xs font-extrabold tracking-wide text-slate-900 dark:text-white" data-lang="en" aria-pressed="false">EN</button>
             <button class="lang-btn rounded-full px-3 py-2 text-xs font-extrabold tracking-wide text-slate-500 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white" data-lang="ru" aria-pressed="false">RU</button>
           </div>
@@ -844,7 +846,8 @@
     </div>
   </footer>
 
-  <script src="./app.js"></script>
+  <script src="./jetset-utils.js" defer></script>
+  <script src="./app.js" defer></script>
 
   <!-- OPTIONAL: Travelpayouts affiliate (keep only if you use it) -->
   <!--

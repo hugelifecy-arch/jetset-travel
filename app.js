@@ -7,6 +7,11 @@
 (function () {
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const {
+    buildMailtoHref,
+    sanitizeRichText,
+    validateLeadPayload,
+  } = window.JetsetUtils || {};
 
   // =========================
   // Config (EDIT THESE)
@@ -397,7 +402,7 @@
       const key = el.getAttribute("data-i18n");
       const val = T[safe][key];
       if (val == null) return;
-      el.innerHTML = val;
+      el.innerHTML = typeof sanitizeRichText === "function" ? sanitizeRichText(val) : val;
     });
   }
 
@@ -417,10 +422,6 @@
   // =========================
   // Lead form (Formspree or mailto)
   // =========================
-  function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
   async function postFormspree(payload) {
     const res = await fetch(FORMSPREE_ENDPOINT, {
       method: "POST",
@@ -431,20 +432,9 @@
   }
 
   function getMailtoHref(payload) {
-    const subject = `WEBSITE ENQUIRY: ${payload.type || "Travel"} — ${payload.name || ""}`.trim();
-    const body = [
-      `Name: ${payload.name || ""}`,
-      `Phone/WhatsApp: ${payload.phone || ""}`,
-      `Email: ${payload.email || ""}`,
-      `Type: ${payload.type || ""}`,
-      `Route: ${payload.route || ""}`,
-      `Dates: ${payload.dates || ""}`,
-      "",
-      "Message:",
-      payload.message || "",
-    ].join("\n");
-
-    return `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    return typeof buildMailtoHref === "function"
+      ? buildMailtoHref(EMAIL_TO, payload)
+      : `mailto:${encodeURIComponent(EMAIL_TO)}`;
   }
 
   function setFieldError(field, hasError) {
@@ -468,7 +458,12 @@
     if (type === "warn") {
       statusEl.classList.add("text-amber-700", "dark:text-amber-300");
       if (mailtoHref) {
-        statusEl.innerHTML = `${text} ${tr("form.manual", "If your email app did not open, use this link:")} <a class="underline font-bold" href="${mailtoHref}">${tr("form.mailLink", "Open email app")}</a>`;
+        statusEl.textContent = `${text} ${tr("form.manual", "If your email app did not open, use this link:")} `;
+        const link = document.createElement("a");
+        link.className = "underline font-bold";
+        link.href = mailtoHref;
+        link.textContent = tr("form.mailLink", "Open email app");
+        statusEl.appendChild(link);
         return;
       }
     }
@@ -477,10 +472,8 @@
     statusEl.textContent = text;
   }
 
-  $("#leadForm")?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const payload = {
+  function getLeadPayload() {
+    return {
       name: ($("#name")?.value || "").trim(),
       phone: ($("#phone")?.value || "").trim(),
       email: ($("#email")?.value || "").trim(),
@@ -491,6 +484,25 @@
       page: location.href,
       timestamp: new Date().toISOString(),
     };
+  }
+
+  function applyValidationErrors(errorKey, status, btn) {
+    const fieldMap = {
+      "form.errName": ["#name"],
+      "form.errContact": ["#phone", "#email"],
+      "form.errEmail": ["#email"],
+      "form.errMessage": ["#message"],
+    };
+
+    (fieldMap[errorKey] || []).forEach((selector) => setFieldError($(selector), true));
+    setFormStatus(status, "warn", tr(errorKey));
+    if (btn) btn.disabled = false;
+  }
+
+  $("#leadForm")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const payload = getLeadPayload();
 
     const status = $("#formStatus");
     const btn = $("#submitBtn");
@@ -500,10 +512,11 @@
     if (status) status.textContent = "";
     if (btn) btn.disabled = true;
 
-    if (!payload.name) { setFieldError($("#name"), true); setFormStatus(status, "warn", tr("form.errName", "Please enter your name.")); if (btn) btn.disabled = false; return; }
-    if (!payload.phone && !payload.email) { setFieldError($("#phone"), true); setFieldError($("#email"), true); setFormStatus(status, "warn", tr("form.errContact", "Please add at least a phone or email.")); if (btn) btn.disabled = false; return; }
-    if (payload.email && !isValidEmail(payload.email)) { setFieldError($("#email"), true); setFormStatus(status, "warn", tr("form.errEmail", "Please enter a valid email.")); if (btn) btn.disabled = false; return; }
-    if (!payload.message) { setFieldError($("#message"), true); setFormStatus(status, "warn", tr("form.errMessage", "Please write a short message.")); if (btn) btn.disabled = false; return; }
+    const errorKey = typeof validateLeadPayload === "function" ? validateLeadPayload(payload) : "";
+    if (errorKey) {
+      applyValidationErrors(errorKey, status, btn);
+      return;
+    }
 
     try {
       if (FORMSPREE_ENDPOINT) {
