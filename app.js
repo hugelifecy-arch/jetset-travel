@@ -61,9 +61,9 @@
   // =========================
   const T = {
     en: {
-      "top.licensed": "Licensed Cyprus travel agency · Tourism License <strong>7775</strong>",
-      "top.iata": "IATA Accredited <strong>14200130</strong>",
-      "top.support": "24/7 disruption support for time‑critical trips",
+      "top.licensed": "Licensed Cyprus travel agency · License 7775",
+      "top.iata": "IATA Accreditation 14200130",
+      "top.support": "24/7 support for urgent travel changes and disruptions",
 
       "nav.services": "Services",
       "nav.trust": "Trust",
@@ -71,15 +71,15 @@
       "nav.contact": "Contact",
       "nav.cta": "Get a Quote",
 
-      "hero.kicker": "Corporate & luxury travel · Paphos, Cyprus",
-      "hero.title": "Executive Travel Without the Friction",
-      "hero.sub": "We handle complex itineraries, strict corporate policies, and 24/7 disruption rebooking—so your team just has to show up.",
-      "hero.b1": "<strong>Executive speed</strong> from brief to confirmed itinerary.",
-      "hero.b2": "<strong>Finance‑ready</strong> invoices and supporting documents.",
-      "hero.b3": "<strong>Fare-rule clarity</strong> before ticketing and during changes.",
-      "hero.b4": "<strong>24/7 disruption handling</strong> for delays, cancellations, missed links.",
+      "hero.kicker": "Corporate and premium travel · Paphos, Cyprus",
+      "hero.title": "Corporate Travel Management in Cyprus — Fast Quotes, Clean Invoices, 24/7 Support",
+      "hero.sub": "From executive trips to urgent changes, we deliver fast quotes, compliant paperwork, and always-on support.",
+      "hero.b1": "Fast quotes for executive and team trips.",
+      "hero.b2": "Clean invoices ready for finance processing.",
+      "hero.b3": "Transparent fare rules before approval.",
+      "hero.b4": "24/7 support during delays and cancellations.",
       "hero.cta1": "Get a Quote",
-      "hero.cta2": "WhatsApp",
+      "hero.cta2": "WhatsApp (Fast)",
       "hero.micro": "Licensed Cyprus travel agency · IATA Accredited · Tourism License 7775 · Reg. HE 181550",
 
       "service.areaTitle": "Service Area:",
@@ -168,7 +168,7 @@
 
       "cta.title": "Ready for a trip that runs smoothly?",
       "cta.sub": "Send route + dates + budget. We’ll reply with the best options and clear rules — no confusion.",
-      "cta.btn1": "Request a Quote",
+      "cta.btn1": "Get a Quote",
       "cta.btn2": "WhatsApp (Fast)",
       "cta.note": "For urgent changes during travel, WhatsApp is the fastest channel.",
 
@@ -179,10 +179,10 @@
       "contact.maps": "Open in Google Maps",
       "contact.call": "Call",
       "contact.email": "Email",
-      "contact.disclaimer": "Visa assistance is informational/coordination only — final decisions remain with consulates/authorities.",
+      "contact.disclaimer": "Visa support is informational/coordination only — final decisions are made by consulates/authorities.",
 
       "form.title": "Request a quote",
-      "form.sub": "Fill this in — we’ll reply fast with 2–3 best options and next steps.",
+      "form.sub": "Fill this in — we’ll reply quickly with 2–3 best options and terms.",
       "form.name": "Name",
       "form.phone": "Phone / WhatsApp",
       "form.email": "Email",
@@ -193,12 +193,39 @@
       "form.route": "Route",
       "form.dates": "Dates",
       "form.msg": "Message",
-      "form.submit": "Send Request",
-      "form.hint": "Tip: for urgent changes during travel, WhatsApp us — we respond faster during disruptions.",
+      "form.submit": "Get a Quote",
+      "form.hint": "For urgent travel changes, WhatsApp is the fastest channel.",
 
       "m.quote": "Get a Quote",
-      "m.wa": "WhatsApp",
+      "m.wa": "WhatsApp (Fast)",
 
+      "quick.title": "Quick Quote",
+      "quick.name": "Name",
+      "quick.phone": "Phone / WhatsApp",
+      "quick.route": "Route + Dates",
+      "quick.namePlaceholder": "Your name",
+      "quick.phonePlaceholder": "+357...",
+      "quick.routePlaceholder": "LCA-LON · 12-15 Mar",
+      "quick.errorPhone": "Please enter phone or WhatsApp.",
+      "how.kicker": "How it works",
+      "how.title": "Simple process. Fast decisions.",
+      "how.s1": "Step 1",
+      "how.s1t": "Send your request",
+      "how.s1b": "Share route, dates, traveller count, and preferences.",
+      "how.s2": "Step 2",
+      "how.s2t": "Receive 2–3 options",
+      "how.s2b": "We return clear options with pricing and fare rules.",
+      "how.s3": "Step 3",
+      "how.s3t": "Confirm + documentation",
+      "how.s3b": "Approve your choice and receive booking details and paperwork.",
+      "form.namePlaceholder": "Your name",
+      "form.phonePlaceholder": "+357...",
+      "form.emailPlaceholder": "you@company.com",
+      "form.routePlaceholder": "e.g., LCA-LON-NYC",
+      "form.datesPlaceholder": "e.g., 12-15 Mar",
+      "form.msgPlaceholder": "Passengers, baggage, budget, flexibility, hotel preferences, invoicing requirements...",
+      "meta.title": "Corporate Travel Management in Cyprus — Fast Quotes, Clean Invoices, 24/7 Support",
+      "meta.description": "Corporate travel management in Cyprus with fast quotes, clean invoices, and 24/7 support for urgent changes.",
       "footer.line": "Corporate & Luxury Travel from Paphos.",
       "footer.services": "Services",
       "footer.trust": "Trust",
@@ -207,25 +234,25 @@
     },
 
     ru: {
-      "top.licensed": "Лицензированное турагентство Кипра · Лицензия Туризма <strong>7775</strong>",
-      "top.iata": "Аккредитация IATA <strong>14200130</strong>",
-      "top.support": "Поддержка 24/7 при срочных изменениях и сбоях",
+      "top.licensed": "Лицензированное туристическое агентство Кипра · Лицензия 7775",
+      "top.iata": "Аккредитация IATA 14200130",
+      "top.support": "Поддержка 24/7 при срочных поездках и сбоях",
 
       "nav.services": "Услуги",
       "nav.trust": "Доверие",
       "nav.reviews": "Отзывы",
       "nav.contact": "Контакты",
-      "nav.cta": "Получить предложение",
+      "nav.cta": "Получить расчёт",
 
-      "hero.kicker": "Корпоративные и luxury поездки · Пафос, Кипр",
-      "hero.title": "Премиальные деловые поездки без лишних сложностей",
-      "hero.sub": "Мы берём на себя сложные маршруты, строгие корпоративные правила и круглосуточное перебронирование при сбоях — вашей команде остаётся только приехать.",
-      "hero.b1": "<strong>Максимальная скорость</strong> от брифа до подтверждённого маршрута.",
-      "hero.b2": "<strong>Документы для финансов</strong>: инвойсы и полный пакет подтверждений.",
-      "hero.b3": "<strong>Прозрачные правила тарифов</strong> до выписки и при изменениях.",
-      "hero.b4": "<strong>24/7 при сбоях</strong>: задержки, отмены, сорванные стыковки.",
+      "hero.kicker": "Корпоративные и премиальные поездки · Пафос, Кипр",
+      "hero.title": "Корпоративные поездки на Кипре — быстрые расчёты, корректные счета, поддержка 24/7",
+      "hero.sub": "Мы ведём маршруты, документы и срочные изменения, чтобы ваша команда путешествовала без сбоев.",
+      "hero.b1": "Быстрые расчёты для команд и руководителей.",
+      "hero.b2": "Корректные счета для бухгалтерии.",
+      "hero.b3": "Прозрачные тарифные правила до подтверждения.",
+      "hero.b4": "Поддержка 24/7 при задержках и отменах.",
       "hero.cta1": "Получить расчёт",
-      "hero.cta2": "WhatsApp",
+      "hero.cta2": "WhatsApp (быстро)",
       "hero.micro": "Лицензия Кипра · IATA · Лицензия 7775 · Рег. HE 181550",
 
 
@@ -273,7 +300,7 @@
       "faq.q7": "Работаете по нашей корпоративной travel policy?",
       "faq.a7": "Да. Передайте правила политики и схему согласования, и мы предложим варианты в рамках ваших требований.",
 
-      "proof.kicker": "Доверие",
+      "proof.kicker": "Надёжность",
       "proof.title": "Лицензия, ответственность и документы — всё официально.",
       "proof.sub": "Для корпоративных клиентов: инвойсы, подтверждения, правила тарифа и понятный маршрут.",
       "proof.iataT": "Аккредитация IATA",
@@ -301,7 +328,7 @@
 
       "cta.title": "Готовы к поездке без стресса?",
       "cta.sub": "Отправьте маршрут + даты + бюджет. Мы быстро вернём 2–3 лучших варианта и правила тарифа.",
-      "cta.btn1": "Запросить расчёт",
+      "cta.btn1": "Получить расчёт",
       "cta.btn2": "WhatsApp (быстро)",
       "cta.note": "Если срочно — WhatsApp самый быстрый канал.",
 
@@ -312,10 +339,10 @@
       "contact.maps": "Открыть в Google Maps",
       "contact.call": "Телефон",
       "contact.email": "Email",
-      "contact.disclaimer": "Помощь по визам — консультация/координация. Решение принимает консульство/власти.",
+      "contact.disclaimer": "Визовая поддержка носит информационный/координационный характер — окончательные решения принимают консульства/органы.",
 
       "form.title": "Запросить расчёт",
-      "form.sub": "Заполните форму — быстро отправим 2–3 лучших варианта и шаги.",
+      "form.sub": "Заполните — ответим быстро с 2–3 лучшими вариантами и условиями.",
       "form.name": "Имя",
       "form.phone": "Телефон / WhatsApp",
       "form.email": "Email",
@@ -326,11 +353,11 @@
       "form.route": "Маршрут",
       "form.dates": "Даты",
       "form.msg": "Сообщение",
-      "form.submit": "Отправить",
-      "form.hint": "Если срочно во время поездки — пишите в WhatsApp, отвечаем быстрее.",
+      "form.submit": "Получить расчёт",
+      "form.hint": "Для срочных изменений в поездке быстрее всего писать в WhatsApp.",
 
-      "m.quote": "Запросить расчёт",
-      "m.wa": "WhatsApp",
+      "m.quote": "Получить расчёт",
+      "m.wa": "WhatsApp (быстро)",
       "service.areaTitle": "Зона обслуживания:",
       "service.areaBody": "Пафос • Кипр (поддержка по всей стране)",
       "form.errName": "Пожалуйста, укажите имя.",
@@ -345,6 +372,33 @@
       "form.manual": "Если почтовое приложение не открылось, используйте ссылку:",
       "form.mailLink": "Открыть почтовое приложение",
 
+      "quick.title": "Быстрый расчёт",
+      "quick.name": "Имя",
+      "quick.phone": "Телефон / WhatsApp",
+      "quick.route": "Маршрут + даты",
+      "quick.namePlaceholder": "Ваше имя",
+      "quick.phonePlaceholder": "+357...",
+      "quick.routePlaceholder": "LCA-LON · 12-15 Мар",
+      "quick.errorPhone": "Укажите телефон или WhatsApp.",
+      "how.kicker": "Как это работает",
+      "how.title": "Простой процесс. Быстрые решения.",
+      "how.s1": "Шаг 1",
+      "how.s1t": "Отправьте запрос",
+      "how.s1b": "Укажите маршрут, даты, число пассажиров и пожелания.",
+      "how.s2": "Шаг 2",
+      "how.s2t": "Получите 2–3 варианта",
+      "how.s2b": "Мы вернём понятные варианты с ценами и правилами тарифа.",
+      "how.s3": "Шаг 3",
+      "how.s3t": "Подтверждение + документы",
+      "how.s3b": "Утверждаете вариант и получаете бронирования и документы.",
+      "form.namePlaceholder": "Ваше имя",
+      "form.phonePlaceholder": "+357...",
+      "form.emailPlaceholder": "you@company.com",
+      "form.routePlaceholder": "например, LCA-LON-NYC",
+      "form.datesPlaceholder": "например, 12-15 Мар",
+      "form.msgPlaceholder": "Пассажиры, багаж, бюджет, гибкость, пожелания по отелю, требования к инвойсам...",
+      "meta.title": "Корпоративные поездки на Кипре — быстрые расчёты, корректные счета, поддержка 24/7",
+      "meta.description": "Корпоративные и премиальные поездки на Кипре: быстрые расчёты, корректные счета и поддержка 24/7.",
       "footer.line": "Корпоративные и luxury поездки из Пафоса.",
       "footer.services": "Услуги",
       "footer.trust": "Доверие",
@@ -359,13 +413,26 @@
     return T[lang]?.[key] || fallback;
   }
 
+  function updateLanguageLinks(lang) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", lang);
+    window.history.replaceState({}, "", url);
+
+    const enUrl = new URL(window.location.href);
+    enUrl.searchParams.set("lang", "en");
+    const ruUrl = new URL(window.location.href);
+    ruUrl.searchParams.set("lang", "ru");
+
+    const links = document.querySelectorAll('nav[aria-label="Language versions"] a');
+    if (links[0]) links[0].setAttribute("href", `${enUrl.pathname}${enUrl.search}${enUrl.hash}`);
+    if (links[1]) links[1].setAttribute("href", `${ruUrl.pathname}${ruUrl.search}${ruUrl.hash}`);
+  }
+
   function setLanguage(lang) {
     const safe = T[lang] ? lang : "en";
-    document.documentElement.lang = safe === "ru" ? "ru" : "en";
+    document.documentElement.lang = safe;
     localStorage.setItem("jetset_lang", safe);
-    const url = new URL(window.location.href);
-    url.searchParams.set("lang", safe);
-    window.history.replaceState({}, "", url);
+    updateLanguageLinks(safe);
 
     $$(".lang-btn").forEach((b) => {
       const isActive = b.getAttribute("data-lang") === safe;
@@ -382,6 +449,16 @@
       if (val == null) return;
       el.innerHTML = typeof sanitizeRichText === "function" ? sanitizeRichText(val) : val;
     });
+
+    $$("[data-i18n-placeholder]").forEach((el) => {
+      const key = el.getAttribute("data-i18n-placeholder");
+      const val = T[safe][key];
+      if (val != null) el.setAttribute("placeholder", val);
+    });
+
+    document.title = tr("meta.title", document.title);
+    const descEl = document.getElementById("pageDescription") || document.querySelector('meta[name="description"]');
+    if (descEl) descEl.setAttribute("content", tr("meta.description", descEl.getAttribute("content") || ""));
   }
 
   $$(".lang-btn").forEach((btn) => {
@@ -391,10 +468,7 @@
   function initLanguage() {
     const param = new URLSearchParams(window.location.search).get("lang");
     if (param && T[param]) return setLanguage(param);
-    const saved = localStorage.getItem("jetset_lang");
-    if (saved) return setLanguage(saved);
-    const nav = (navigator.language || "").toLowerCase();
-    setLanguage(nav.startsWith("ru") ? "ru" : "en");
+    setLanguage("en");
   }
 
   // =========================
@@ -477,6 +551,46 @@
     if (btn) btn.disabled = false;
   }
 
+  function initHeroQuickForm() {
+    const form = $("#heroQuickForm");
+    if (!form) return;
+
+    const quickName = $("#quickName");
+    const quickPhone = $("#quickPhone");
+    const quickRoute = $("#quickRoute");
+    const errorEl = $("#heroQuickError");
+    const waBtn = $("#quickWhatsApp");
+
+    const updateWhatsAppLink = () => {
+      const message = [
+        "Hello JetSet, I need a quote.",
+        `Name: ${(quickName?.value || "").trim() || "-"}`,
+        `Phone/WhatsApp: ${(quickPhone?.value || "").trim() || "-"}`,
+        `Route + Dates: ${(quickRoute?.value || "").trim() || "-"}`,
+      ].join("\n");
+      if (waBtn) waBtn.href = `https://wa.me/35799478073?text=${encodeURIComponent(message)}`;
+    };
+
+    [quickName, quickPhone, quickRoute].forEach((input) => input?.addEventListener("input", updateWhatsAppLink));
+    updateWhatsAppLink();
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!quickPhone?.value.trim()) {
+        if (errorEl) errorEl.textContent = tr("quick.errorPhone", "Please enter phone or WhatsApp.");
+        quickPhone?.focus();
+        return;
+      }
+
+      if (errorEl) errorEl.textContent = "";
+      if ($("#name") && quickName?.value.trim()) $("#name").value = quickName.value.trim();
+      if ($("#phone")) $("#phone").value = quickPhone.value.trim();
+      if ($("#route") && quickRoute?.value.trim()) $("#route").value = quickRoute.value.trim();
+
+      document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+
   $("#leadForm")?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -542,21 +656,6 @@
     if (y) y.textContent = String(new Date().getFullYear());
   }
 
-  async function setBuildStamp() {
-    const stamp = $("#buildStamp");
-    if (!stamp) return;
-
-    try {
-      const res = await fetch("./version.json", { cache: "no-store" });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      const version = data.version || "unknown";
-      const deployedAt = data.deployedAt ? new Date(data.deployedAt).toISOString().slice(0, 16).replace("T", " ") + " UTC" : "unknown";
-      stamp.textContent = `${version} · ${deployedAt}`;
-    } catch (_err) {
-      stamp.textContent = "local";
-    }
-  }
 
   // =========================
   // Track clicks (optional)
@@ -582,7 +681,7 @@
     initDark();
     initLanguage();
     setYear();
-    setBuildStamp();
+    initHeroQuickForm();
 
     $("#darkToggle")?.addEventListener("click", () => setDark(!document.documentElement.classList.contains("dark")));
     $("#darkToggleMobile")?.addEventListener("click", () => setDark(!document.documentElement.classList.contains("dark")));
