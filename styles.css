@@ -27,7 +27,7 @@ img, svg { max-width: 100%; height: auto; }
   html { scroll-behavior: auto; }
 }
 
-@media (max-width: 639px) {
+@media (max-width: 768px) {
   .brand-logo-link {
     min-height: 48px;
     margin-right: 0.25rem;
@@ -37,7 +37,7 @@ img, svg { max-width: 100%; height: auto; }
     max-height: 46px;
   }
 
-  main {
+  body {
     padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
   }
 
