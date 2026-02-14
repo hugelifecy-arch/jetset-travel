@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="479" height="137" viewBox="0 0 479 137" role="img" aria-label="JetSet Travel logo">
+  <rect width="479" height="137" fill="none"/>
+  <g fill="none" stroke="#123E78" stroke-width="8" stroke-linecap="round">
+    <path d="M16 88h304"/>
+    <path d="M16 104h447"/>
+  </g>
+  <g font-family="Lato, Arial, sans-serif" font-weight="900" letter-spacing="1" fill="#123E78">
+    <text x="72" y="78" font-size="92">JetSet</text>
+  </g>
+  <g font-family="Lato, Arial, sans-serif" font-weight="700" letter-spacing="6" fill="#D5A13A">
+    <text x="338" y="76" font-size="39">TRAVEL</text>
+  </g>
+</svg>
