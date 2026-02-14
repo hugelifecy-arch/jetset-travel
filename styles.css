@@ -7,11 +7,36 @@
 
 img, svg { max-width: 100%; height: auto; }
 
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  padding: 0.25rem 0;
+  margin-right: 0.5rem;
+}
+
+.brand-logo-image {
+  display: block;
+  width: auto;
+  max-height: 60px;
+  object-fit: contain;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
 
 @media (max-width: 639px) {
+  .brand-logo-link {
+    min-height: 48px;
+    margin-right: 0.25rem;
+  }
+
+  .brand-logo-image {
+    max-height: 46px;
+  }
+
   main {
     padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
   }
