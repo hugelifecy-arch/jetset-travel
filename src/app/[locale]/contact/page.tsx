@@ -85,19 +85,25 @@ export default function ContactPage() {
                     <div>
                       <p className="font-semibold mb-1">Office Address</p>
                       <p className="text-white/70 text-sm leading-relaxed">
-                        Paphos, Cyprus
+                        26A Agapinoros, 8049 Paphos, Cyprus
                       </p>
                     </div>
                   </li>
                   <li className="flex items-start gap-4">
                     <Phone className="h-5 w-5 text-brand-gold flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold mb-1">WhatsApp</p>
+                      <p className="font-semibold mb-1">Telephone</p>
                       <a
-                        href="https://wa.me/35799478073"
-                        className="text-white/70 text-sm hover:text-brand-gold transition-colors"
+                        href="tel:+35799478073"
+                        className="block text-white/70 text-sm hover:text-brand-gold transition-colors"
                       >
                         +357 99 478 073
+                      </a>
+                      <a
+                        href="tel:+35799310993"
+                        className="block text-white/70 text-sm hover:text-brand-gold transition-colors"
+                      >
+                        +357 99 310 993
                       </a>
                     </div>
                   </li>
@@ -106,10 +112,10 @@ export default function ContactPage() {
                     <div>
                       <p className="font-semibold mb-1">Email</p>
                       <a
-                        href="mailto:info@jetset-travel.com"
+                        href="mailto:INFO@JETSET.COM.CY"
                         className="text-white/70 text-sm hover:text-brand-gold transition-colors"
                       >
-                        info@jetset-travel.com
+                        INFO@JETSET.COM.CY
                       </a>
                     </div>
                   </li>
@@ -278,7 +284,7 @@ export default function ContactPage() {
               Find Us
             </h2>
             <p className="text-brand-navy/60">
-              Visit our office in Paphos, Cyprus.
+              Visit our office at 26A Agapinoros, 8049 Paphos, Cyprus.
             </p>
           </div>
           <div className="aspect-[16/7] rounded-2xl bg-gradient-to-br from-brand-navy/10 to-brand-navy/5 border border-brand-navy/10 flex items-center justify-center">
@@ -288,7 +294,7 @@ export default function ContactPage() {
                 Google Maps Embed
               </p>
               <p className="text-brand-navy/30 text-xs mt-1">
-                Paphos, Cyprus
+                26A Agapinoros, 8049 Paphos, Cyprus
               </p>
             </div>
           </div>

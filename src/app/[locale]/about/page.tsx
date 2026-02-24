@@ -11,7 +11,7 @@ import {
 export const metadata = {
   title: "About Us | JetSet Travel Cyprus",
   description:
-    "Learn about JetSet Travel Cyprus — our story, accreditations, values, and the team behind your travel experiences since 2007.",
+    "Learn about JetSet Travel Cyprus — our story, accreditations, values, and the team behind your travel experiences since 2006.",
 };
 
 const values = [
@@ -72,7 +72,7 @@ export default function AboutPage() {
             Your Trusted Travel Partner in Cyprus
           </h1>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            Since 2007, we&apos;ve been helping individuals and businesses
+            Since 2006, we&apos;ve been helping individuals and businesses
             travel smarter, safer, and with confidence.
           </p>
         </div>
@@ -91,7 +91,7 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-brand-navy/70 leading-relaxed">
                 <p>
-                  JetSet Travel was founded in 2007 with a simple belief: travel
+                  JetSet Travel was founded in 2006 with a simple belief: travel
                   should be personal, transparent, and handled by people who
                   genuinely care about getting it right.
                 </p>
@@ -99,7 +99,7 @@ export default function AboutPage() {
                   What started as a two-person office in Paphos has grown into
                   one of Cyprus&apos;s most trusted travel agencies — serving
                   corporate clients, luxury travellers, and families across the
-                  island. Over 15 years later, that founding principle hasn&apos;t
+                  island. Over 20 years later, that founding principle hasn&apos;t
                   changed.
                 </p>
                 <p>
@@ -183,7 +183,7 @@ export default function AboutPage() {
                 Years of Service
               </h3>
               <p className="text-brand-navy/60 text-sm leading-relaxed">
-                Trusted by thousands of clients across Cyprus since 2007.
+                Trusted by thousands of clients across Cyprus since 2006.
               </p>
             </div>
           </div>
