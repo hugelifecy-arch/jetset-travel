@@ -1,0 +1,128 @@
+{
+  "nav": {
+    "services": "Services",
+    "corporate": "Corporate",
+    "luxury": "Luxury",
+    "visas": "Visas",
+    "about": "About",
+    "contact": "Contact",
+    "getQuote": "Get a Quote"
+  },
+  "hero": {
+    "title": "Travel Managed.",
+    "titleHighlight": "Luxury Delivered.",
+    "subtitle": "IATA-accredited corporate and luxury travel management based in Paphos, Cyprus. Fast quotes, compliant invoicing, and 24/7 disruption support — so your team just has to show up.",
+    "ctaCorporate": "Get a Corporate Quote",
+    "ctaLuxury": "Plan a Luxury Trip",
+    "badgeIATA": "IATA Accredited",
+    "badgeWhatsApp": "24/7 WhatsApp",
+    "badgeLicense": "Tourism License 7775"
+  },
+  "trust": {
+    "title": "Why Corporates Choose Us",
+    "subtitle": "Licensed, accountable, and documentation-ready — for teams that can't afford travel mistakes.",
+    "bullet1": "Finance-ready invoices and documentation aligned to corporate compliance requirements.",
+    "bullet2": "Dedicated account management with single-point accountability for every trip.",
+    "bullet3": "24/7 disruption handling — rebooking, rerouting, and real-time updates on WhatsApp.",
+    "statClientsValue": "500+",
+    "statClients": "Corporate Clients",
+    "statExperienceValue": "15+",
+    "statExperience": "Years Experience",
+    "statSupportValue": "24/7",
+    "statSupport": "Support Available",
+    "statSatisfactionValue": "98%",
+    "statSatisfaction": "Client Satisfaction"
+  },
+  "services": {
+    "title": "What We Do",
+    "subtitle": "Everything you need — handled by one accountable team.",
+    "corporate": {
+      "title": "Corporate Travel",
+      "description": "Policy-compliant itineraries, clean invoicing, and 24/7 disruption rebooking for executive and team travel."
+    },
+    "luxury": {
+      "title": "Luxury Leisure",
+      "description": "Curated premium holidays, private transfers, suite-level hotels, and bespoke multi-city journeys."
+    },
+    "visa": {
+      "title": "Visa Services",
+      "description": "Document checklists, application guidance, and coordination support for business and tourist visas."
+    },
+    "hotels": {
+      "title": "Hotels",
+      "description": "Negotiated rates at quality hotels worldwide — matched to your location, standards, and budget priorities."
+    },
+    "learnMore": "Learn more"
+  },
+  "reviews": {
+    "title": "What Our Clients Say",
+    "subtitle": "Real feedback from corporate and leisure travellers.",
+    "review1": {
+      "name": "Operations Manager",
+      "role": "Corporate client",
+      "text": "We had a cancellation on a meeting week. JetSet rerouted the team the same day and kept finance happy with clean documentation."
+    },
+    "review2": {
+      "name": "Private Client",
+      "role": "Luxury leisure",
+      "text": "They understood our preferences instantly — hotel, transfers, and details. We arrived relaxed, everything was handled."
+    },
+    "review3": {
+      "name": "Founder",
+      "role": "SME client",
+      "text": "Fast response on WhatsApp, clear options, no confusion. When plans changed, the solution was already in motion."
+    }
+  },
+  "clients": {
+    "trustedBy": "Trusted by teams across industries",
+    "law": "Law",
+    "finance": "Finance",
+    "healthcare": "Healthcare",
+    "technology": "Technology",
+    "realEstate": "Real Estate"
+  },
+  "cta": {
+    "title": "Ready to simplify your corporate travel?",
+    "subtitle": "Send us your route, dates, and budget — we'll reply with the best options and clear rules.",
+    "requestQuote": "Request a Quote",
+    "contactUs": "Contact Us"
+  },
+  "footer": {
+    "tagline": "Your trusted travel partner in Cyprus. Premium travel services for corporate and leisure clients since 2007.",
+    "iataAccredited": "IATA Accredited Agent",
+    "cyprusTourism": "Cyprus Tourism Organisation Licensed",
+    "quickLinks": "Quick Links",
+    "aboutUs": "About Us",
+    "ourServices": "Our Services",
+    "corporateTravel": "Corporate Travel",
+    "contact": "Contact",
+    "services": "Services",
+    "flightBooking": "Flight Booking",
+    "hotelReservations": "Hotel Reservations",
+    "visaAssistance": "Visa Assistance",
+    "luxuryTravel": "Luxury Travel",
+    "contactUs": "Contact Us",
+    "location": "Limassol, Cyprus",
+    "copyright": "JetSet Travel Cyprus. All rights reserved."
+  },
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "submit": "Submit",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Something went wrong. Please try again.",
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "readMore": "Read more",
+    "back": "Back",
+    "next": "Next",
+    "close": "Close",
+    "loading": "Loading..."
+  }
+}
