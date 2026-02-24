@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { enforceRateLimit } from "@/lib/rate-limit";
 
 const QuoteSchema = z.object({
   name: z.string().min(2).max(80),
@@ -21,7 +22,19 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid input" }, { status: 400 });
   }
 
-  // TODO: add rate limiting here (see Fix #3)
+  const forwardedFor = req.headers.get("x-forwarded-for");
+  const ip = forwardedFor?.split(",")[0]?.trim() || "unknown";
+
+  try {
+    await enforceRateLimit(ip);
+  } catch (error) {
+    if (error instanceof Error && error.message === "RATE_LIMIT") {
+      return NextResponse.json({ ok: false, error: "Too many requests" }, { status: 429 });
+    }
+
+    throw error;
+  }
+
   // TODO: send email / CRM (server-side only)
 
   return NextResponse.json({ ok: true });
