@@ -6,7 +6,7 @@ import TrustSection from "@/components/sections/TrustSection";
 import GoogleReviews from "@/components/sections/GoogleReviews";
 import ClientLogos from "@/components/sections/ClientLogos";
 import CTABanner from "@/components/sections/CTABanner";
-import LocalBusinessSchema from "@/components/Schema";
+import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 
 export async function generateMetadata({
   params,
