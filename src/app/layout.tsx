@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const dmSans = localFont({
@@ -75,7 +74,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
         {children}
-        <Analytics />
       </body>
     </html>
   );

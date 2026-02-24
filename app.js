@@ -625,7 +625,7 @@
         setFormStatus(status, "warn", tr("form.opening", "Opening email..."), mailtoHref);
         window.location.href = mailtoHref;
       }
-    } catch (err) {
+    } catch {
       setFormStatus(status, "warn", tr("form.error", "⚠️ Error. Opening email instead..."), mailtoHref);
       setTimeout(() => { window.location.href = mailtoHref; }, 400);
     } finally {
@@ -661,7 +661,7 @@
   // Track clicks (optional)
   // =========================
   function track(eventName, params) {
-    try { if (typeof gtag === "function") gtag("event", eventName, params || {}); } catch (_) {}
+    try { if (typeof gtag === "function") gtag("event", eventName, params || {}); } catch {}
   }
 
   [
