@@ -28,6 +28,7 @@ export default function Footer() {
               width={140}
               height={40}
               className="h-10 w-auto brightness-0 invert"
+              loading="lazy"
             />
             <p className="text-sm text-white/70 leading-relaxed">
               Your trusted travel partner in Cyprus. Premium travel services for
@@ -125,6 +126,7 @@ export default function Footer() {
                 width={20}
                 height={20}
                 className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
+                loading="lazy"
               />
             </a>
             <a
@@ -139,6 +141,7 @@ export default function Footer() {
                 width={20}
                 height={20}
                 className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
+                loading="lazy"
               />
             </a>
             <a
@@ -153,6 +156,7 @@ export default function Footer() {
                 width={20}
                 height={20}
                 className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
+                loading="lazy"
               />
             </a>
           </div>

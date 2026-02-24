@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Hotel,
@@ -10,6 +11,12 @@ import {
   ArrowRight,
   MapPin,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Hotel Reservations — Negotiated Rates Worldwide from Cyprus",
+  description:
+    "Book hotels worldwide with negotiated rates through JetSet Travel Cyprus. Leisure resorts, business accommodation, extended stays, and group bookings.",
+};
 
 const serviceTypes = [
   {

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   FileCheck,
@@ -8,6 +9,12 @@ import {
   ArrowRight,
   ShieldAlert,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Visa Services — Application Assistance for Cyprus Travellers",
+  description:
+    "Expert visa assistance from Cyprus — document preparation, embassy submissions, and appointment scheduling for UK, US, Canada, UAE, and more.",
+};
 
 const visaCards = [
   {

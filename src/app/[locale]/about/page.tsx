@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -8,10 +9,10 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-export const metadata = {
-  title: "About Us | JetSet Travel Cyprus",
+export const metadata: Metadata = {
+  title: "About Us — IATA-Accredited Travel Agency in Cyprus",
   description:
-    "Learn about JetSet Travel Cyprus — our story, accreditations, values, and the team behind your travel experiences since 2006.",
+    "Learn about JetSet Travel Cyprus — our story, IATA accreditation, CTO licence, core values, and the team behind premium travel services in Paphos since 2006.",
 };
 
 const values = [
@@ -142,6 +143,7 @@ export default function AboutPage() {
                   alt="IATA Accredited Agent"
                   fill
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
               <h3 className="text-lg font-bold text-brand-navy mb-2">
@@ -161,6 +163,7 @@ export default function AboutPage() {
                   alt="Cyprus Tourism Organisation Licensed"
                   fill
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
               <h3 className="text-lg font-bold text-brand-navy mb-2">
