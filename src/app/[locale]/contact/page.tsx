@@ -287,6 +287,7 @@ export default function ContactPage() {
               Visit our office at 26A Agapinoros, 8049 Paphos, Cyprus.
             </p>
           </div>
+codex/update-contact-details-and-address-53r6h7
           <div className="overflow-hidden rounded-2xl border border-brand-navy/10 bg-white shadow-sm">
             <iframe
               title="JetSet Travel Cyprus office location"
@@ -305,6 +306,18 @@ export default function ContactPage() {
             >
               Open in Google Maps
             </a>
+
+          <div className="aspect-[16/7] rounded-2xl bg-gradient-to-br from-brand-navy/10 to-brand-navy/5 border border-brand-navy/10 flex items-center justify-center">
+            <div className="text-center">
+              <MapPin className="h-12 w-12 text-brand-navy/20 mx-auto mb-3" />
+              <p className="text-brand-navy/40 text-sm font-semibold">
+                Google Maps Embed
+              </p>
+              <p className="text-brand-navy/30 text-xs mt-1">
+                26A Agapinoros, 8049 Paphos, Cyprus
+              </p>
+            </div>
+ main
           </div>
         </div>
       </section>
