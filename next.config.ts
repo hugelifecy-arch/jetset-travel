@@ -24,7 +24,13 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async redirects() {
-    return [{ source: "/", destination: "/en", permanent: false }];
+    return [
+      { source: "/", destination: "/en", permanent: false },
+      { source: "/en/en", destination: "/en", permanent: true },
+      { source: "/en/en/:path*", destination: "/en/:path*", permanent: true },
+      { source: "/ru/ru", destination: "/ru", permanent: true },
+      { source: "/ru/ru/:path*", destination: "/ru/:path*", permanent: true },
+    ];
   },
   async headers() {
     return [
