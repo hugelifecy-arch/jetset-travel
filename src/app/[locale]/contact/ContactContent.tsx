@@ -279,7 +279,7 @@ export default function ContactContent() {
         </div>
       </section>
 
-      {/* Google Maps Embed Placeholder */}
+      {/* Google Maps */}
       <section className="bg-brand-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-10">
@@ -290,16 +290,25 @@ export default function ContactContent() {
               Visit our office at 26A Agapinoros, 8049 Paphos, Cyprus.
             </p>
           </div>
-          <div className="aspect-[16/7] rounded-2xl bg-gradient-to-br from-brand-navy/10 to-brand-navy/5 border border-brand-navy/10 flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="h-12 w-12 text-brand-navy/20 mx-auto mb-3" />
-              <p className="text-brand-navy/40 text-sm font-semibold">
-                Google Maps Embed
-              </p>
-              <p className="text-brand-navy/30 text-xs mt-1">
-                26A Agapinoros, 8049 Paphos, Cyprus
-              </p>
-            </div>
+          <div className="overflow-hidden rounded-2xl border border-brand-navy/10 shadow-sm">
+            <iframe
+              title="Jetset Travel office location"
+              src="https://www.google.com/maps?q=26A+Agapinoros%2C+8049+Paphos%2C+Cyprus&output=embed"
+              className="h-[420px] w-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+          <div className="mt-4 text-center">
+            <a
+              href="https://maps.app.goo.gl/iXHtVt8w6mXcPSN58"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-navy underline decoration-brand-gold underline-offset-4 hover:text-brand-navy/70 transition-colors"
+            >
+              <MapPin className="h-4 w-4" />
+              Open in Google Maps
+            </a>
           </div>
         </div>
       </section>
