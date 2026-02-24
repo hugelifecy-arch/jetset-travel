@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { CANONICAL_ORIGIN } from "@/lib/seo";
 
 const dmSans = localFont({
   src: [
@@ -33,6 +34,7 @@ const playfair = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(CANONICAL_ORIGIN),
   title: {
     template: "%s | JetSet Travel Cyprus",
     default: "JetSet Travel Cyprus — Premium Travel Services",

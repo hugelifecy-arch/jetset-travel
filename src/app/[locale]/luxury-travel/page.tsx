@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import Link from "next/link";
 import {
   Palmtree,
@@ -9,11 +10,20 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Luxury Travel — Bespoke Holidays & Premium Experiences from Cyprus",
-  description:
-    "Curated luxury holidays from Cyprus — private islands, alpine retreats, honeymoons, and five-star city breaks. Bespoke itineraries designed by JetSet Travel.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    title: "Luxury Travel — Bespoke Holidays & Premium Experiences from Cyprus",
+    description:
+      "Curated luxury holidays from Cyprus — private islands, alpine retreats, honeymoons, and five-star city breaks. Bespoke itineraries designed by JetSet Travel.",
+    alternates: localizedAlternates(locale, "/luxury-travel"),
+  };
+}
 
 const categories = [
   {
