@@ -6,6 +6,7 @@ import TrustSection from "@/components/sections/TrustSection";
 import GoogleReviews from "@/components/sections/GoogleReviews";
 import ClientLogos from "@/components/sections/ClientLogos";
 import CTABanner from "@/components/sections/CTABanner";
+import LocalBusinessSchema from "@/components/Schema";
 
 export async function generateMetadata({
   params,
@@ -31,54 +32,7 @@ export default function HomePage() {
       <GoogleReviews />
       <ClientLogos />
       <CTABanner />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "TravelAgency",
-            name: "JetSet Travel Cyprus",
-            url: "https://www.jetset-travel.com",
-            telephone: "+357-99-478-073",
-            address: {
-              "@type": "PostalAddress",
-              streetAddress: "26A Agapinoros",
-              addressLocality: "Paphos",
-              postalCode: "8049",
-              addressCountry: "CY",
-            },
-            openingHoursSpecification: [
-              {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: ["Monday", "Tuesday", "Thursday", "Friday"],
-                opens: "09:00",
-                closes: "13:00",
-              },
-              {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: ["Monday", "Tuesday", "Thursday", "Friday"],
-                opens: "15:00",
-                closes: "18:30",
-              },
-              {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: ["Wednesday", "Saturday"],
-                opens: "09:00",
-                closes: "13:00",
-              },
-            ],
-            hasCredential: {
-              "@type": "EducationalOccupationalCredential",
-              credentialCategory: "IATA Accreditation",
-              name: "IATA Accredited Agent",
-            },
-            sameAs: [
-              "https://wa.me/35799478073",
-              "https://t.me/jetsetnotis",
-            ],
-          }),
-        }}
-      />
+      <LocalBusinessSchema />
     </>
   );
 }
