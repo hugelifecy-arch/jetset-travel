@@ -1,14 +1,10 @@
-import createMiddleware from "next-intl/middleware";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 const CANONICAL_HOST = "www.jetset-travel.com";
 const APEX_HOST = "jetset-travel.com";
-
-const intlMiddleware = createMiddleware({
-  locales: ["en", "ru"],
-  defaultLocale: "en",
-});
+const locales = ["en", "ru"] as const;
+const PUBLIC_FILE = /\.(.*)$/;
 
 function getHostname(req: NextRequest) {
   const urlHost = req.nextUrl?.hostname;
@@ -23,6 +19,7 @@ function getHostname(req: NextRequest) {
 export default function proxy(req: NextRequest) {
   const url = req.nextUrl;
   const hostname = getHostname(req);
+  const { pathname } = url;
   const lang = url.searchParams.get("lang");
 
   // Do not interfere with local dev or Vercel preview/default domains
@@ -41,24 +38,36 @@ export default function proxy(req: NextRequest) {
     return NextResponse.redirect(redirectUrl, 308);
   }
 
+  // ignore Next.js internals / APIs / static files
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    PUBLIC_FILE.test(pathname)
+  ) {
+    return NextResponse.next();
+  }
+
   // Canonicalize query-param language into path-based locale
-  if (lang === "ru") {
+  if (lang === "ru" || lang === "en") {
     url.searchParams.delete("lang");
-    url.pathname = "/ru" + (url.pathname === "/" ? "" : url.pathname);
+    url.pathname = `/${lang}${pathname === "/" ? "" : pathname}`;
     return NextResponse.redirect(url, 308);
   }
 
-  if (lang === "en") {
-    url.searchParams.delete("lang");
-    url.pathname = "/en" + (url.pathname === "/" ? "" : url.pathname);
-    return NextResponse.redirect(url, 308);
+  // already locale-prefixed: /en OR /en/...
+  const localePrefix = new RegExp(`^/(${locales.join("|")})(/|$)`);
+  if (localePrefix.test(pathname)) {
+    return NextResponse.next();
   }
 
-  return intlMiddleware(req);
+  // choose locale (default en)
+  const locale = req.cookies.get("NEXT_LOCALE")?.value || "en";
+
+  const redirectUrl = url.clone();
+  redirectUrl.pathname = `/${locale}${pathname}`;
+  return NextResponse.redirect(redirectUrl, 307);
 }
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|.*\\..*).*)",
-  ],
+  matcher: ["/((?!_next|api).*)"],
 };
