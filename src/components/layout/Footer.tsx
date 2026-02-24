@@ -31,7 +31,7 @@ export default function Footer() {
             />
             <p className="text-sm text-white/70 leading-relaxed">
               Your trusted travel partner in Cyprus. Premium travel services for
-              corporate and leisure clients since 2007.
+              corporate and leisure clients since 2006.
             </p>
             <div className="text-xs text-white/50 space-y-1">
               <p>IATA Accredited Agent</p>
@@ -85,21 +85,21 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm text-white/70">
               <li>
                 <a
-                  href="tel:+35725123456"
+                  href="tel:+35799478073"
                   className="hover:text-brand-gold transition-colors"
                 >
-                  +357 25 123 456
+                  +357 99 478 073 / +357 99 310 993
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@jetsettravel.cy"
+                  href="mailto:INFO@JETSET.COM.CY"
                   className="hover:text-brand-gold transition-colors"
                 >
-                  info@jetsettravel.cy
+                  INFO@JETSET.COM.CY
                 </a>
               </li>
-              <li className="leading-relaxed">Limassol, Cyprus</li>
+              <li className="leading-relaxed">26A Agapinoros, 8049 Paphos, Cyprus</li>
             </ul>
           </div>
         </div>
@@ -128,7 +128,7 @@ export default function Footer() {
               />
             </a>
             <a
-              href="https://t.me/jetsettravelcy"
+              href="https://t.me/jetsetnotis"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Telegram"
