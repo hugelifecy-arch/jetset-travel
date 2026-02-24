@@ -3,15 +3,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-
-const schema = z.object({
-  name: z.string().min(2, "Name is required"),
-  phone: z.string().min(8, "Valid phone/WhatsApp is required"),
-  route: z.string().min(5, "Please provide route details"),
-});
-
-type LeadFormValues = z.infer<typeof schema>;
+import { Button } from "@/components/ui/Button";
+import { Input, Textarea } from "@/components/ui/Input";
+import { leadFormSchema, type LeadFormValues } from "@/components/forms/schemas";
 
 export default function LeadForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -23,7 +17,7 @@ export default function LeadForm() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<LeadFormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(leadFormSchema),
   });
 
   const onSubmit = async (data: LeadFormValues) => {
@@ -56,10 +50,10 @@ export default function LeadForm() {
       className="space-y-4"
     >
       <div className="space-y-1">
-        <input
+        <Input
           {...register("name")}
           placeholder="Name"
-          className="input w-full"
+          className="input"
           aria-invalid={Boolean(errors.name)}
         />
         {errors.name && (
@@ -68,10 +62,10 @@ export default function LeadForm() {
       </div>
 
       <div className="space-y-1">
-        <input
+        <Input
           {...register("phone")}
           placeholder="Phone / WhatsApp"
-          className="input w-full"
+          className="input"
           aria-invalid={Boolean(errors.phone)}
         />
         {errors.phone && (
@@ -80,10 +74,10 @@ export default function LeadForm() {
       </div>
 
       <div className="space-y-1">
-        <textarea
+        <Textarea
           {...register("route")}
           placeholder="Route details (from/to, dates, travelers, cabin class)"
-          className="input min-h-28 w-full"
+          className="input min-h-28"
           aria-invalid={Boolean(errors.route)}
         />
         {errors.route && (
@@ -98,13 +92,12 @@ export default function LeadForm() {
         </p>
       )}
 
-      <button
+      <Button
         type="submit"
         disabled={isSubmitting}
-        className="rounded-full bg-brand-gold px-5 py-3 font-semibold text-brand-navy disabled:cursor-not-allowed disabled:opacity-60"
       >
         {isSubmitting ? "Sending..." : "Get a Quote"}
-      </button>
+      </Button>
     </form>
   );
 }
