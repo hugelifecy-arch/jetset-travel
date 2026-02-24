@@ -3,27 +3,38 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import { Menu, X, Globe } from "lucide-react";
 
-const navLinks = [
-  { href: "/services", label: "Services" },
-  { href: "/corporate", label: "Corporate" },
-  { href: "/luxury", label: "Luxury" },
-  { href: "/visas", label: "Visas" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
+const navKeys = [
+  { href: "/services", key: "services" },
+  { href: "/corporate", key: "corporate" },
+  { href: "/luxury", key: "luxury" },
+  { href: "/visas", key: "visas" },
+  { href: "/about", key: "about" },
+  { href: "/contact", key: "contact" },
+] as const;
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [lang, setLang] = useState<"EN" | "RU">("EN");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+  const t = useTranslations("nav");
+
+  const switchLocale = (newLocale: string) => {
+    // Replace the current locale prefix in the path
+    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
+    router.push(newPath);
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-brand-navy border-b-2 border-brand-gold">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
+          <Link href={`/${locale}`} className="flex-shrink-0">
             <Image
               src="/images/jetset-logo.svg"
               alt="JetSet Travel Cyprus"
@@ -36,13 +47,13 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {navKeys.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={`/${locale}${link.href}`}
                 className="px-3 py-2 text-sm font-medium text-white/80 hover:text-brand-gold transition-colors"
               >
-                {link.label}
+                {t(link.key)}
               </Link>
             ))}
           </nav>
@@ -52,22 +63,22 @@ export default function Header() {
             <div className="flex items-center gap-1 text-sm">
               <Globe className="h-4 w-4 text-white/60" />
               <button
-                onClick={() => setLang("EN")}
-                className={`px-1.5 py-0.5 rounded text-xs font-medium transition-colors ${
-                  lang === "EN"
-                    ? "text-brand-gold"
-                    : "text-white/60 hover:text-white"
+                onClick={() => switchLocale("en")}
+                className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
+                  locale === "en"
+                    ? "font-bold text-brand-gold"
+                    : "font-medium text-white/60 hover:text-white"
                 }`}
               >
                 EN
               </button>
               <span className="text-white/30">|</span>
               <button
-                onClick={() => setLang("RU")}
-                className={`px-1.5 py-0.5 rounded text-xs font-medium transition-colors ${
-                  lang === "RU"
-                    ? "text-brand-gold"
-                    : "text-white/60 hover:text-white"
+                onClick={() => switchLocale("ru")}
+                className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
+                  locale === "ru"
+                    ? "font-bold text-brand-gold"
+                    : "font-medium text-white/60 hover:text-white"
                 }`}
               >
                 RU
@@ -75,10 +86,10 @@ export default function Header() {
             </div>
 
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="rounded-full bg-brand-gold px-5 py-2 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
-              Get a Quote
+              {t("getQuote")}
             </Link>
           </div>
 
@@ -101,14 +112,14 @@ export default function Header() {
       {mobileOpen && (
         <div className="md:hidden border-t border-white/10 bg-brand-navy">
           <nav className="px-4 py-4 space-y-1">
-            {navLinks.map((link) => (
+            {navKeys.map((link) => (
               <Link
                 key={link.href}
-                href={link.href}
+                href={`/${locale}${link.href}`}
                 className="block px-3 py-2.5 text-base font-medium text-white/80 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                {link.label}
+                {t(link.key)}
               </Link>
             ))}
 
@@ -116,17 +127,21 @@ export default function Header() {
               <div className="flex items-center gap-2 text-sm">
                 <Globe className="h-4 w-4 text-white/60" />
                 <button
-                  onClick={() => setLang("EN")}
-                  className={`px-2 py-1 rounded text-sm font-medium ${
-                    lang === "EN" ? "text-brand-gold" : "text-white/60"
+                  onClick={() => switchLocale("en")}
+                  className={`px-2 py-1 rounded text-sm ${
+                    locale === "en"
+                      ? "font-bold text-brand-gold"
+                      : "font-medium text-white/60"
                   }`}
                 >
                   EN
                 </button>
                 <button
-                  onClick={() => setLang("RU")}
-                  className={`px-2 py-1 rounded text-sm font-medium ${
-                    lang === "RU" ? "text-brand-gold" : "text-white/60"
+                  onClick={() => switchLocale("ru")}
+                  className={`px-2 py-1 rounded text-sm ${
+                    locale === "ru"
+                      ? "font-bold text-brand-gold"
+                      : "font-medium text-white/60"
                   }`}
                 >
                   RU
@@ -134,11 +149,11 @@ export default function Header() {
               </div>
 
               <Link
-                href="/contact"
+                href={`/${locale}/contact`}
                 className="rounded-full bg-brand-gold px-5 py-2.5 text-sm font-semibold text-brand-navy"
                 onClick={() => setMobileOpen(false)}
               >
-                Get a Quote
+                {t("getQuote")}
               </Link>
             </div>
           </nav>
