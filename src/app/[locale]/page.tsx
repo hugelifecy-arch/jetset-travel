@@ -40,21 +40,21 @@ export default function HomePage() {
             openingHoursSpecification: [
               {
                 "@type": "OpeningHoursSpecification",
-                dayOfWeek: [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                ],
+                dayOfWeek: ["Monday", "Tuesday", "Thursday", "Friday"],
                 opens: "09:00",
-                closes: "18:00",
+                closes: "13:00",
               },
               {
                 "@type": "OpeningHoursSpecification",
-                dayOfWeek: "Saturday",
-                opens: "10:00",
-                closes: "14:00",
+                dayOfWeek: ["Monday", "Tuesday", "Thursday", "Friday"],
+                opens: "15:00",
+                closes: "18:30",
+              },
+              {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Wednesday", "Saturday"],
+                opens: "09:00",
+                closes: "13:00",
               },
             ],
             hasCredential: {

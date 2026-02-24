@@ -124,9 +124,12 @@ export default function ContactContent() {
                     <div>
                       <p className="font-semibold mb-1">Office Hours</p>
                       <p className="text-white/70 text-sm leading-relaxed">
-                        Monday – Friday: 09:00 – 18:00
+                        Monday, Tuesday, Thursday, Friday: 09:00 – 13:00 &amp;
+                        15:00 – 18:30
                         <br />
-                        Saturday: 10:00 – 14:00
+                        Wednesday: 09:00 – 13:00
+                        <br />
+                        Saturday: 09:00 – 13:00
                         <br />
                         Sunday: Closed
                       </p>
