@@ -4,6 +4,7 @@ import { getMessages } from "next-intl/server";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
+import { CANONICAL_ORIGIN, localizedAlternates } from "@/lib/seo";
 import { HtmlLangSetter } from "./HtmlLangSetter";
 
 export async function generateMetadata({
@@ -29,7 +30,7 @@ export async function generateMetadata({
       type: "website",
       locale: isRussian ? "ru_RU" : "en_GB",
       siteName: "JetSet Travel Cyprus",
-      url: `https://www.jetset-travel.com/${locale}`,
+      url: `${CANONICAL_ORIGIN}/${locale}`,
       title: isRussian
         ? "JetSet Travel Cyprus — Премиум Туристические Услуги"
         : "JetSet Travel Cyprus — Premium Travel Services",
@@ -55,13 +56,7 @@ export async function generateMetadata({
         : "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
       images: ["https://www.jetset-travel.com/images/jetset-og-image.jpg"],
     },
-    alternates: {
-      canonical: `https://www.jetset-travel.com/${locale}`,
-      languages: {
-        en: "https://www.jetset-travel.com/en",
-        ru: "https://www.jetset-travel.com/ru",
-      },
-    },
+    alternates: localizedAlternates(locale),
   };
 }
 

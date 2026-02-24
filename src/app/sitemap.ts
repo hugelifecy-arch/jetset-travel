@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const BASE_URL = "https://www.jetset-travel.com";
+import { CANONICAL_ORIGIN } from "@/lib/seo";
 
 const locales = ["en", "ru"] as const;
 
@@ -16,18 +15,19 @@ const pages = [
 ] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const entries: MetadataRoute.Sitemap = [];
-
-  for (const locale of locales) {
-    for (const page of pages) {
-      entries.push({
-        url: `${BASE_URL}/${locale}${page.path}`,
-        lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: page.priority,
-      });
-    }
-  }
-
-  return entries;
+  return locales.flatMap((locale) =>
+    pages.map((page) => ({
+      url: `${CANONICAL_ORIGIN}/${locale}${page.path}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly" as const,
+      priority: page.priority,
+      alternates: {
+        languages: {
+          en: `${CANONICAL_ORIGIN}/en${page.path}`,
+          ru: `${CANONICAL_ORIGIN}/ru${page.path}`,
+          "x-default": `${CANONICAL_ORIGIN}/en${page.path}`,
+        },
+      },
+    })),
+  );
 }

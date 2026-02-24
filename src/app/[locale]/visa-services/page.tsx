@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import Link from "next/link";
 import {
   FileCheck,
@@ -9,11 +10,20 @@ import {
   ShieldAlert,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Visa Services — Application Assistance for Cyprus Travellers",
-  description:
-    "Expert visa assistance from Cyprus — document preparation, embassy submissions, and appointment scheduling for UK, US, Canada, UAE, and more.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    title: "Visa Services — Application Assistance for Cyprus Travellers",
+    description:
+      "Expert visa assistance from Cyprus — document preparation, embassy submissions, and appointment scheduling for UK, US, Canada, UAE, and more.",
+    alternates: localizedAlternates(locale, "/visa-services"),
+  };
+}
 
 const visaCards = [
   {

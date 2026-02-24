@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -9,11 +10,20 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "About Us — IATA-Accredited Travel Agency in Cyprus",
-  description:
-    "Learn about JetSet Travel Cyprus — our story, IATA accreditation, CTO licence, core values, and the team behind premium travel services in Paphos since 2006.",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    title: "About Us — IATA-Accredited Travel Agency in Cyprus",
+    description:
+      "Learn about JetSet Travel Cyprus — our story, IATA accreditation, CTO licence, core values, and the team behind premium travel services in Paphos since 2006.",
+    alternates: localizedAlternates(locale, "/about"),
+  };
+}
 
 const values = [
   {

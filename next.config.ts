@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n.ts");
 
+const VERCEL_HOST = "jetset-travel.vercel.app";
+
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
@@ -25,7 +27,14 @@ const nextConfig: NextConfig = {
     return [{ source: "/", destination: "/en", permanent: false }];
   },
   async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
+    return [
+      { source: "/(.*)", headers: securityHeaders },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: VERCEL_HOST }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+      },
+    ];
   },
 };
 
