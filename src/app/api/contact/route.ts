@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { Resend } from "resend";
 
 /* ------------------------------------------------------------------ */
 /*  Schema                                                             */
@@ -19,6 +18,22 @@ const contactSchema = z.object({
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "35799000000";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jetset-travel.com";
+
+async function sendEmail(apiKey: string, payload: Record<string, unknown>) {
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Resend API error (${response.status}): ${errorText}`);
+  }
+}
 
 function notificationHtml(data: z.infer<typeof contactSchema>): string {
   return `
@@ -79,18 +94,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   }
 
-  const resend = new Resend(apiKey);
-
   try {
-    await resend.emails.send({
+    await sendEmail(apiKey, {
       from: "JetSet Travel <noreply@jetset-travel.com>",
       to: "info@jetset-travel.com",
-      replyTo: data.email,
+      reply_to: data.email,
       subject: `New Contact Message — ${data.name}`,
       html: notificationHtml(data),
     });
 
-    await resend.emails.send({
+    await sendEmail(apiKey, {
       from: "JetSet Travel <noreply@jetset-travel.com>",
       to: data.email,
       subject: "JetSet Travel — Your message is received",
