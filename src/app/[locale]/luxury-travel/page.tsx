@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Palmtree,
@@ -7,6 +8,12 @@ import {
   Quote,
   ArrowRight,
 } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Luxury Travel — Bespoke Holidays & Premium Experiences from Cyprus",
+  description:
+    "Curated luxury holidays from Cyprus — private islands, alpine retreats, honeymoons, and five-star city breaks. Bespoke itineraries designed by JetSet Travel.",
+};
 
 const categories = [
   {

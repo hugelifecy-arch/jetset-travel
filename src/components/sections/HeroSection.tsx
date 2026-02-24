@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Shield, MessageCircle, Award } from "lucide-react";
@@ -24,11 +25,12 @@ export default function HeroSection() {
     <section className="relative isolate flex min-h-screen items-center overflow-hidden">
       {/* Background image */}
       <div className="absolute inset-0 -z-20">
-        <img
+        <Image
           src="/images/hero-bg.jpg"
-          alt=""
-          className="h-full w-full object-cover"
-          loading="eager"
+          alt="JetSet Travel Cyprus hero background"
+          fill
+          className="object-cover"
+          priority={true}
         />
       </div>
 

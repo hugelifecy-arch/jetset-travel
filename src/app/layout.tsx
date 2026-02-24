@@ -34,9 +34,36 @@ const playfair = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "JetSet Travel Cyprus — Premium Travel Services",
+  title: {
+    template: "%s | JetSet Travel Cyprus",
+    default: "JetSet Travel Cyprus — Premium Travel Services",
+  },
   description:
-    "Your trusted travel partner in Cyprus. Premium corporate and leisure travel, visa assistance, and luxury concierge services.",
+    "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: "JetSet Travel Cyprus",
+    url: "https://www.jetset-travel.com",
+    title: "JetSet Travel Cyprus — Premium Travel Services",
+    description:
+      "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
+    images: [
+      {
+        url: "https://www.jetset-travel.com/images/jetset-og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "JetSet Travel Cyprus",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "JetSet Travel Cyprus — Premium Travel Services",
+    description:
+      "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
+    images: ["https://www.jetset-travel.com/images/jetset-og-image.jpg"],
+  },
 };
 
 export default function RootLayout({

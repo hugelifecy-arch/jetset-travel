@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://jetset-travel.com/sitemap.xml
+Disallow: /api/
+
+Sitemap: https://www.jetset-travel.com/sitemap.xml
