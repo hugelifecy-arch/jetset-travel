@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import { CANONICAL_ORIGIN, localizedAlternates } from "@/lib/seo";
+import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { HtmlLangSetter } from "./HtmlLangSetter";
 
 export async function generateMetadata({
@@ -78,6 +79,7 @@ export default async function LocaleLayout({
       <main className="min-h-screen">{children}</main>
       <Footer />
       <WhatsAppButton />
+      <BreadcrumbSchema />
       <CookieConsentBanner />
     </NextIntlClientProvider>
   );
