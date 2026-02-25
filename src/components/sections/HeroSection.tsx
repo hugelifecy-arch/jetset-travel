@@ -86,7 +86,7 @@ export default function HeroSection() {
             custom={2}
           >
             <Link
-              href={`/${locale}/quote`}
+              href={`/${locale}/contact?type=corporate`}
               className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-4 text-base font-semibold text-brand-navy shadow-luxury transition-opacity hover:opacity-90"
             >
               Get a Corporate Quote
