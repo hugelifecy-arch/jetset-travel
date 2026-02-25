@@ -6,6 +6,15 @@ const APEX_HOST = "jetset-travel.com";
 const locales = ["en", "ru"] as const;
 const PUBLIC_FILE = /\.(.*)$/;
 
+// Special-case bare-path redirects that don't map 1:1 to /en/<path>
+const BARE_PATH_SPECIALS: Record<
+  string,
+  { pathname: string; extraSearch?: Record<string, string> }
+> = {
+  "/luxury-travel": { pathname: "/en/luxury" },
+  "/quote": { pathname: "/en/contact", extraSearch: { type: "quote" } },
+};
+
 function getHostname(req: NextRequest) {
   const urlHost = req.nextUrl?.hostname;
   if (urlHost) {
@@ -54,18 +63,29 @@ export default function proxy(req: NextRequest) {
     return NextResponse.redirect(url, 308);
   }
 
-  // already locale-prefixed: /en OR /en/...
+  // already locale-prefixed: /en OR /en/... OR /ru OR /ru/...  → pass through
   const localePrefix = new RegExp(`^/(${locales.join("|")})(/|$)`);
   if (localePrefix.test(pathname)) {
     return NextResponse.next();
   }
 
-  // choose locale (default en)
-  const locale = req.cookies.get("NEXT_LOCALE")?.value || "en";
+  // Special-case bare paths that need a non-trivial destination
+  const special = BARE_PATH_SPECIALS[pathname];
+  if (special) {
+    const redirectUrl = url.clone();
+    redirectUrl.pathname = special.pathname;
+    if (special.extraSearch) {
+      for (const [key, value] of Object.entries(special.extraSearch)) {
+        redirectUrl.searchParams.set(key, value);
+      }
+    }
+    return NextResponse.redirect(redirectUrl, 301);
+  }
 
+  // All remaining bare paths → /en/<path> (301 permanent, query string preserved)
   const redirectUrl = url.clone();
-  redirectUrl.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(redirectUrl, 307);
+  redirectUrl.pathname = `/en${pathname === "/" ? "" : pathname}`;
+  return NextResponse.redirect(redirectUrl, 301);
 }
 
 export const config = {
