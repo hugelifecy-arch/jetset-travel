@@ -113,10 +113,19 @@ export default function Footer() {
       {/* Bottom bar: copyright + social icons */}
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/50">
-            &copy; {new Date().getFullYear()} JetSet Travel Cyprus. All rights
-            reserved.
-          </p>
+          <div className="flex items-center gap-3 text-xs text-white/50">
+            <p>
+              &copy; {new Date().getFullYear()} JetSet Travel Cyprus. All rights
+              reserved.
+            </p>
+            <span className="hidden sm:inline" aria-hidden="true">|</span>
+            <Link
+              href={`/${locale}/privacy`}
+              className="hover:text-brand-gold transition-colors"
+            >
+              {locale === "ru" ? "Политика конфиденциальности" : "Privacy Policy"}
+            </Link>
+          </div>
           <div className="flex items-center gap-4">
             <a
               href="https://wa.me/35799478073"

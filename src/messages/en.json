@@ -103,7 +103,8 @@
     "luxuryTravel": "Luxury Travel",
     "contactUs": "Contact Us",
     "location": "26A Agapinoros, 8049 Paphos, Cyprus",
-    "copyright": "JetSet Travel Cyprus. All rights reserved."
+    "copyright": "JetSet Travel Cyprus. All rights reserved.",
+    "privacyPolicy": "Privacy Policy"
   },
   "forms": {
     "name": "Name",
@@ -116,6 +117,13 @@
     "error": "Something went wrong. Please try again.",
     "required": "This field is required",
     "invalidEmail": "Please enter a valid email address"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: February 2026",
+    "translationPending": "",
+    "translationContact": "",
+    "viewEnglish": ""
   },
   "common": {
     "learnMore": "Learn more",
