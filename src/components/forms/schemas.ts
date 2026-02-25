@@ -7,3 +7,15 @@ export const leadFormSchema = z.object({
 });
 
 export type LeadFormValues = z.infer<typeof leadFormSchema>;
+
+export const ctaLeadFormSchema = z.object({
+  name: z.string().min(2, "Name is required"),
+  email: z.string().email("Please enter a valid email address"),
+  phone: z.string().optional(),
+  travelType: z.string().optional(),
+  dates: z.string().optional(),
+  message: z.string().optional(),
+  website: z.string().optional(),
+});
+
+export type CTALeadFormValues = z.infer<typeof ctaLeadFormSchema>;
