@@ -57,19 +57,17 @@
   "reviews": {
     "title": "What Our Clients Say",
     "subtitle": "Real feedback from corporate and leisure travellers.",
+    "readMoreOnGoogle": "Read more reviews on Google",
     "review1": {
-      "name": "Operations Manager",
-      "role": "Corporate client",
+      "role": "Operations Manager",
       "text": "We had a cancellation on a meeting week. JetSet rerouted the team the same day and kept finance happy with clean documentation."
     },
     "review2": {
-      "name": "Private Client",
-      "role": "Luxury leisure",
+      "role": "Private Client",
       "text": "They understood our preferences instantly — hotel, transfers, and details. We arrived relaxed, everything was handled."
     },
     "review3": {
-      "name": "Founder",
-      "role": "SME client",
+      "role": "Founder & CEO",
       "text": "Fast response on WhatsApp, clear options, no confusion. When plans changed, the solution was already in motion."
     }
   },
