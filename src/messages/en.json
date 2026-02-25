@@ -83,7 +83,25 @@
     "title": "Ready to simplify your corporate travel?",
     "subtitle": "Send us your route, dates, and budget — we'll reply with the best options and clear rules.",
     "requestQuote": "Request a Quote",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phonePlaceholder": "+357...",
+    "selectTravelType": "Select travel type",
+    "travelTypeOptions": {
+      "corporate": "Corporate Travel",
+      "luxury": "Luxury Leisure",
+      "visa": "Visa Services",
+      "hotel": "Hotel Booking",
+      "other": "Other"
+    },
+    "datesPlaceholder": "e.g., March 15–22, 2026",
+    "messagePlaceholder": "Tell us about your trip needs...",
+    "submit": "Get a Free Quote",
+    "submitting": "Sending...",
+    "success": "Thank you! We'll get back to you within 24 hours.",
+    "error": "Something went wrong. Please try WhatsApp or call us directly.",
+    "orContactDirectly": "Or contact us directly"
   },
   "footer": {
     "tagline": "Your trusted travel partner in Cyprus. Premium travel services for corporate and leisure clients since 2006.",

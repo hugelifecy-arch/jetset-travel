@@ -10,25 +10,57 @@ const contactSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   phone: z.string().optional(),
-  message: z.string().min(10),
+  message: z.string().optional(),
+  travelType: z.string().optional(),
+  dates: z.string().optional(),
+  website: z.string().optional(), // honeypot — must remain empty
 });
+
+/* ------------------------------------------------------------------ */
+/*  Rate limiting (in-memory, 5 requests per IP per hour)              */
+/* ------------------------------------------------------------------ */
+
+const rateLimitMap = new Map<string, number[]>();
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const RATE_LIMIT_MAX = 5;
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const windowStart = now - RATE_LIMIT_WINDOW_MS;
+  const timestamps = (rateLimitMap.get(ip) || []).filter(
+    (t) => t > windowStart
+  );
+
+  if (timestamps.length >= RATE_LIMIT_MAX) {
+    rateLimitMap.set(ip, timestamps);
+    return false;
+  }
+
+  timestamps.push(now);
+  rateLimitMap.set(ip, timestamps);
+  return true;
+}
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
-const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "35799000000";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jetset-travel.com";
+const WHATSAPP_NUMBER =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "35799000000";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jetset-travel.com";
 
 function notificationHtml(data: z.infer<typeof contactSchema>): string {
   return `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-      <h2 style="color:#0b1d3a">New Contact Message</h2>
+      <h2 style="color:#0b1d3a">${data.travelType ? "New Quote Request" : "New Contact Message"}</h2>
       <table style="border-collapse:collapse;width:100%;font-size:14px">
         <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Name</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.name}</td></tr>
         <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Email</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.email}</td></tr>
         ${data.phone ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Phone</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.phone}</td></tr>` : ""}
-        <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Message</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.message}</td></tr>
+        ${data.travelType ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Travel Type</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.travelType}</td></tr>` : ""}
+        ${data.dates ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Dates</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.dates}</td></tr>` : ""}
+        ${data.message ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Message</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.message}</td></tr>` : ""}
       </table>
     </div>`;
 }
@@ -50,6 +82,17 @@ function autoReplyHtml(name: string): string {
 /* ------------------------------------------------------------------ */
 
 export async function POST(request: Request) {
+  /* Rate limiting */
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+
+  if (!checkRateLimit(ip)) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      { status: 429 }
+    );
+  }
+
   let body: unknown;
   try {
     body = await request.json();
@@ -70,12 +113,21 @@ export async function POST(request: Request) {
   }
 
   const data = result.data;
+
+  /* Honeypot — silently accept to avoid tipping off bots */
+  if (data.website) {
+    return NextResponse.json({ success: true });
+  }
+
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey || apiKey === "re_your_key_here") {
     console.log("[contact] Resend not configured – logging submission");
     console.log("[contact] From:", data.name, data.email);
-    console.log("[contact] Message:", data.message);
+    if (data.travelType) console.log("[contact] Travel Type:", data.travelType);
+    if (data.dates) console.log("[contact] Dates:", data.dates);
+    if (data.message) console.log("[contact] Message:", data.message);
+    // TODO: Connect to email service (Resend, SendGrid, or Nodemailer) to send to info@jetset.com.cy
     return NextResponse.json({ success: true });
   }
 
@@ -84,7 +136,9 @@ export async function POST(request: Request) {
       from: "JetSet Travel <noreply@jetset-travel.com>",
       to: "info@jetset-travel.com",
       reply_to: data.email,
-      subject: `New Contact Message — ${data.name}`,
+      subject: data.travelType
+        ? `New Quote Request — ${data.name} (${data.travelType})`
+        : `New Contact Message — ${data.name}`,
       html: notificationHtml(data),
     });
 
