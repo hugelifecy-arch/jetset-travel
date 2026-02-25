@@ -125,6 +125,13 @@ export default function Footer() {
             >
               {locale === "ru" ? "Политика конфиденциальности" : "Privacy Policy"}
             </Link>
+            <span className="hidden sm:inline" aria-hidden="true">|</span>
+            <Link
+              href={`/${locale}/terms`}
+              className="hover:text-brand-gold transition-colors"
+            >
+              {locale === "ru" ? "Условия обслуживания" : "Terms of Service"}
+            </Link>
           </div>
           <div className="flex items-center gap-4">
             <a

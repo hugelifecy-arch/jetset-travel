@@ -104,7 +104,8 @@
     "contactUs": "Contact Us",
     "location": "26A Agapinoros, 8049 Paphos, Cyprus",
     "copyright": "JetSet Travel Cyprus. All rights reserved.",
-    "privacyPolicy": "Privacy Policy"
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
   },
   "forms": {
     "name": "Name",
@@ -124,6 +125,13 @@
     "translationPending": "",
     "translationContact": "",
     "viewEnglish": ""
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: February 2026",
+    "translationPending": "Условия обслуживания — перевод готовится",
+    "translationContact": "If you have questions about our terms, please contact us at",
+    "viewEnglish": "Read in English"
   },
   "common": {
     "learnMore": "Learn more",
