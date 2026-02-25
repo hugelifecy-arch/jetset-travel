@@ -26,7 +26,7 @@ export default function CTABanner() {
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
-              href={`/${locale}/quote`}
+              href={`/${locale}/contact?type=quote`}
               className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-4 text-base font-semibold text-brand-navy shadow-luxury transition-opacity hover:opacity-90"
             >
               Request a Quote
