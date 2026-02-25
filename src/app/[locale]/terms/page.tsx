@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { localizedAlternates } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
@@ -19,7 +18,6 @@ export async function generateMetadata({
       locale === "ru"
         ? "Условия обслуживания JetSet K&K Travel Ltd. Условия бронирования, платежей и отмены поездок."
         : "Terms of Service and Booking Conditions for JetSet K&K Travel Ltd. Learn about our booking, payment, cancellation, and liability policies.",
-    alternates: localizedAlternates(locale, "/terms"),
   };
 }
 

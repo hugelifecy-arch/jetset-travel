@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { localizedAlternates } from "@/lib/seo";
 import ContactContent from "./ContactContent";
 
 export async function generateMetadata({
@@ -13,7 +12,6 @@ export async function generateMetadata({
     title: "Contact Us — JetSet Travel Cyprus, Paphos",
     description:
       "Get in touch with JetSet Travel Cyprus in Paphos. Call, email, or WhatsApp us for corporate travel, luxury holidays, visa assistance, and hotel bookings.",
-    alternates: localizedAlternates(locale, "/contact"),
   };
 }
 

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { localizedAlternates } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
@@ -19,7 +18,6 @@ export async function generateMetadata({
       locale === "ru"
         ? "Политика конфиденциальности JetSet K&K Travel Ltd. Узнайте, как мы собираем, используем и защищаем ваши персональные данные."
         : "Privacy Policy for JetSet K&K Travel Ltd. Learn how we collect, use, and protect your personal data in compliance with GDPR.",
-    alternates: localizedAlternates(locale, "/privacy"),
   };
 }
 
