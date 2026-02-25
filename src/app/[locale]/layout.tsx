@@ -4,6 +4,7 @@ import { getMessages } from "next-intl/server";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
+import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import { CANONICAL_ORIGIN, localizedAlternates } from "@/lib/seo";
 import { HtmlLangSetter } from "./HtmlLangSetter";
 
@@ -77,6 +78,7 @@ export default async function LocaleLayout({
       <main className="min-h-screen">{children}</main>
       <Footer />
       <WhatsAppButton />
+      <CookieConsentBanner />
     </NextIntlClientProvider>
   );
 }
