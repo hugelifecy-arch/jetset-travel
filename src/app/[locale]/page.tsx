@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import HeroSection from "@/components/sections/HeroSection";
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import TrustSection from "@/components/sections/TrustSection";
@@ -15,9 +16,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return {
-    title: "Corporate & Luxury Travel Management in Paphos, Cyprus",
+    title: {
+      absolute:
+        locale === "ru"
+          ? "Корпоративное и премиальное турагентство в Пафосе, Кипр | JetSet Travel"
+          : "Corporate & Luxury Travel Agency in Paphos, Cyprus | JetSet Travel",
+    },
     description:
-      "IATA-accredited corporate and luxury travel management in Paphos, Cyprus. Fast quotes, clean invoicing, 24/7 support, visa services, and hotel reservations.",
+      locale === "ru"
+        ? "Аккредитованное IATA турагентство: корпоративные поездки и элитный отдых. Быстрые предложения, поддержка 24/7, прозрачная отчётность. Пафос, Кипр с 2006."
+        : "IATA-accredited travel management for corporate teams and luxury leisure. Fast quotes, 24/7 support, compliant invoicing. Based in Paphos, Cyprus since 2006.",
+    alternates: localizedAlternates(locale),
   };
 }
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import Link from "next/link";
 import {
   Hotel,
@@ -20,9 +21,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return {
-    title: "Hotel Reservations — Negotiated Rates Worldwide from Cyprus",
+    title: {
+      absolute:
+        locale === "ru"
+          ? "Бронирование отелей | Выгодные тарифы по всему миру | JetSet Travel"
+          : "Hotel Reservations — Negotiated Rates Worldwide | JetSet Travel",
+    },
     description:
-      "Book hotels worldwide with negotiated rates through JetSet Travel Cyprus. Leisure resorts, business accommodation, extended stays, and group bookings.",
+      locale === "ru"
+        ? "Бронирование отелей по согласованным тарифам через JetSet Travel Cyprus. Курорты, бизнес-отели, длительное проживание и групповые заказы."
+        : "Book hotels worldwide with negotiated corporate and leisure rates. Resorts, business accommodation, extended stays, and group bookings from Cyprus.",
+    alternates: localizedAlternates(locale, "/hotel-reservations"),
   };
 }
 

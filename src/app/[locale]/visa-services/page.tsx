@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import Link from "next/link";
 import {
   FileCheck,
@@ -17,9 +18,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return {
-    title: "Visa Services — Application Assistance for Cyprus Travellers",
+    title: {
+      absolute:
+        locale === "ru"
+          ? "Визовая поддержка Кипр | Деловые и туристические визы | JetSet Travel"
+          : "Visa Assistance Services Cyprus | Business & Tourist Visas | JetSet Travel",
+    },
     description:
-      "Expert visa assistance from Cyprus — document preparation, embassy submissions, and appointment scheduling for UK, US, Canada, UAE, and more.",
+      locale === "ru"
+        ? "Профессиональная помощь в оформлении виз для деловых и туристических поездок. Чек-листы документов, сопровождение и координация."
+        : "Expert visa application support for business and tourist travel. Document checklists, processing guidance, and coordination for all major destinations.",
+    alternates: localizedAlternates(locale, "/visa-services"),
   };
 }
 
