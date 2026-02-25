@@ -112,10 +112,10 @@ export default function ContactContent() {
                     <div>
                       <p className="font-semibold mb-1">Email</p>
                       <a
-                        href="mailto:INFO@JETSET.COM.CY"
+                        href="mailto:info@jetset.com.cy"
                         className="text-white/70 text-sm hover:text-brand-gold transition-colors"
                       >
-                        INFO@JETSET.COM.CY
+                        info@jetset.com.cy
                       </a>
                     </div>
                   </li>
