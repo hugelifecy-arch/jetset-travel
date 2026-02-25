@@ -93,20 +93,48 @@ export default function Footer() {
                   href="tel:+35799478073"
                   className="hover:text-brand-gold transition-colors"
                 >
-                  +357 99 478 073 / +357 99 310 993
+                  +357 99 478 073
+                </a>
+                {" / "}
+                <a
+                  href="tel:+35799310993"
+                  className="hover:text-brand-gold transition-colors"
+                >
+                  +357 99 310 993
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:INFO@JETSET.COM.CY"
+                  href="mailto:info@jetset.com.cy"
                   className="hover:text-brand-gold transition-colors"
                 >
-                  INFO@JETSET.COM.CY
+                  info@jetset.com.cy
                 </a>
               </li>
-              <li className="leading-relaxed">26A Agapinoros, 8049 Paphos, Cyprus</li>
+              <li className="leading-relaxed">
+                <a
+                  href="https://maps.google.com/?q=26A+Agapinoros+8049+Paphos+Cyprus"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-brand-gold transition-colors"
+                >
+                  26A Agapinoros, 8049 Paphos, Cyprus
+                </a>
+              </li>
             </ul>
           </div>
+        </div>
+      </div>
+
+      {/* Company legal info */}
+      {/* TODO: Replace [PLACEHOLDER] with actual company registration number and VAT number */}
+      <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 text-center">
+          <p className="text-xs text-white/50">
+            {locale === "ru"
+              ? "JetSet K&K Travel Ltd | Рег. №: [PLACEHOLDER] | НДС: [PLACEHOLDER] | Лицензия на туризм: 7775"
+              : "JetSet K&K Travel Ltd | Reg. No. [PLACEHOLDER] | VAT: [PLACEHOLDER] | Tourism Licence: 7775"}
+          </p>
         </div>
       </div>
 
