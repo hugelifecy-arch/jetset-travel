@@ -11,6 +11,7 @@ export default function Footer() {
     { href: `/${locale}/about`, label: "About Us" },
     { href: `/${locale}/hotel-reservations`, label: "Our Services" },
     { href: `/${locale}/corporate-travel`, label: "Corporate Travel" },
+    { href: `/${locale}/faq`, label: "FAQ" },
     { href: `/${locale}/contact`, label: "Contact" },
   ];
 

@@ -6,7 +6,8 @@
     "visas": "Visas",
     "about": "About",
     "contact": "Contact",
-    "getQuote": "Get a Quote"
+    "getQuote": "Get a Quote",
+    "faq": "FAQ"
   },
   "hero": {
     "title": "Travel Managed.",
@@ -111,6 +112,7 @@
     "aboutUs": "About Us",
     "ourServices": "Our Services",
     "corporateTravel": "Corporate Travel",
+    "faq": "FAQ",
     "contact": "Contact",
     "services": "Services",
     "flightBooking": "Flight Booking",
@@ -165,6 +167,63 @@
     "analyticsDescription": "Help us understand how visitors interact with our website by collecting anonymous usage data.",
     "marketing": "Marketing Cookies",
     "marketingDescription": "Used to deliver relevant advertisements and track campaign effectiveness across websites."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about our travel services, bookings, payments, and more.",
+    "metaTitle": "FAQ — Frequently Asked Questions | JetSet Travel Cyprus",
+    "metaDescription": "Answers to common questions about booking, payment, cancellation, corporate accounts, visas, and our 24/7 support.",
+    "categoryBooking": "Booking & Services",
+    "categoryCorporate": "Corporate Travel",
+    "categoryPayments": "Payments & Cancellation",
+    "categoryVisa": "Visa Services",
+    "categoryAbout": "About Us",
+    "booking": {
+      "q1": "How do I request a travel quote?",
+      "a1": "Contact us via our website form, WhatsApp (+357 99 478 073), or email (info@jetset.com.cy). Tell us your destination, dates, number of travelers, and preferences. We typically respond with options within 24 hours.",
+      "q2": "What services does JetSet Travel offer?",
+      "a2": "We provide corporate travel management, luxury leisure travel planning, flight and hotel bookings, visa assistance, private transfers, and 24/7 travel disruption support.",
+      "q3": "Do you handle group bookings?",
+      "a3": "Yes. We manage group travel for corporate events, team retreats, and large family trips. We handle logistics, coordinated bookings, and negotiate group rates.",
+      "q4": "Can you book last-minute travel?",
+      "a4": "Absolutely. We have access to real-time availability and can arrange urgent travel. Contact us via WhatsApp for the fastest response."
+    },
+    "corporate": {
+      "q1": "How does your corporate travel management work?",
+      "a1": "We assign a dedicated account manager to your company. They handle all bookings, ensure policy compliance, provide clean invoicing for finance teams, and offer 24/7 disruption support.",
+      "q2": "Do you provide corporate invoicing?",
+      "a2": "Yes. We provide detailed, finance-ready invoices aligned with corporate compliance requirements. Monthly statements and reporting are available for corporate accounts.",
+      "q3": "What happens if there's a travel disruption?",
+      "a3": "Our 24/7 support team handles rebooking, rerouting, and real-time updates via WhatsApp. We manage the disruption so your team can focus on their work."
+    },
+    "payments": {
+      "q1": "What payment methods do you accept?",
+      "a1": "We accept bank transfers and major credit/debit cards. Payment terms for corporate accounts can be arranged.",
+      "q2": "What is your cancellation policy?",
+      "a2": "Cancellation terms vary depending on the supplier (airline, hotel, etc.). We always communicate specific terms before confirming any booking. Some bookings are non-refundable — we will make this clear upfront.",
+      "q3": "Is travel insurance included?",
+      "a3": "Travel insurance is not included but strongly recommended. We can help you find appropriate coverage for your trip."
+    },
+    "visa": {
+      "q1": "What visa services do you provide?",
+      "a1": "We provide document checklists, application guidance, and coordination support for business and tourist visas to most countries.",
+      "q2": "Do you guarantee visa approval?",
+      "a2": "No. Visa approval is at the discretion of the issuing authority. We maximize your chances by ensuring complete and accurate applications.",
+      "q3": "How long does visa processing take?",
+      "a3": "Processing times vary by country and visa type. Typical processing is 5–15 business days. We recommend applying at least 4–6 weeks before travel."
+    },
+    "about": {
+      "q1": "Is JetSet Travel IATA accredited?",
+      "a1": "Yes. We are a fully accredited IATA travel agent and hold Cyprus Tourism Organisation Licence #7775.",
+      "q2": "Where is your office?",
+      "a2": "26A Agapinoros, 8049 Paphos, Cyprus. Office hours: Monday to Friday, 9:00 AM to 6:30 PM (lunch break 1:00–3:00 PM).",
+      "q3": "Can I reach you outside office hours?",
+      "a3": "Yes. Our WhatsApp support is available 24/7 for existing bookings and urgent inquiries."
+    },
+    "ctaTitle": "Still have questions?",
+    "ctaSubtitle": "Our team is ready to help. Reach out via WhatsApp, email, or our contact form.",
+    "ctaContact": "Contact Us",
+    "ctaWhatsApp": "WhatsApp Us"
   },
   "common": {
     "learnMore": "Learn more",

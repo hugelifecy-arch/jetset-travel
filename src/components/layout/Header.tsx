@@ -12,6 +12,7 @@ const navKeys = [
   { href: "/visa-services", key: "visas" },
   { href: "/hotel-reservations", key: "services" },
   { href: "/about", key: "about" },
+  { href: "/faq", key: "faq" },
   { href: "/contact", key: "contact" },
 ] as const;
 
