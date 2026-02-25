@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { localizedAlternates } from "@/lib/seo";
 import HeroSection from "@/components/sections/HeroSection";
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import TrustSection from "@/components/sections/TrustSection";
@@ -19,7 +18,6 @@ export async function generateMetadata({
     title: "Corporate & Luxury Travel Management in Paphos, Cyprus",
     description:
       "IATA-accredited corporate and luxury travel management in Paphos, Cyprus. Fast quotes, clean invoicing, 24/7 support, visa services, and hotel reservations.",
-    alternates: localizedAlternates(locale, ""),
   };
 }
 

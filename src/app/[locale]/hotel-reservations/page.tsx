@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { localizedAlternates } from "@/lib/seo";
 import Link from "next/link";
 import {
   Hotel,
@@ -24,7 +23,6 @@ export async function generateMetadata({
     title: "Hotel Reservations — Negotiated Rates Worldwide from Cyprus",
     description:
       "Book hotels worldwide with negotiated rates through JetSet Travel Cyprus. Leisure resorts, business accommodation, extended stays, and group bookings.",
-    alternates: localizedAlternates(locale, "/hotel-reservations"),
   };
 }
 

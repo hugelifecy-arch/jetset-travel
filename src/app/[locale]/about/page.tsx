@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { localizedAlternates } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -21,7 +20,6 @@ export async function generateMetadata({
     title: "About Us — IATA-Accredited Travel Agency in Cyprus",
     description:
       "Learn about JetSet Travel Cyprus — our story, IATA accreditation, CTO licence, core values, and the team behind premium travel services in Paphos since 2006.",
-    alternates: localizedAlternates(locale, "/about"),
   };
 }
 

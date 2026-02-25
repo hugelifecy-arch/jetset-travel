@@ -5,8 +5,9 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
-import { CANONICAL_ORIGIN, localizedAlternates } from "@/lib/seo";
+import { CANONICAL_ORIGIN } from "@/lib/seo";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import HreflangTags from "@/components/seo/HreflangTags";
 import { HtmlLangSetter } from "./HtmlLangSetter";
 
 export async function generateMetadata({
@@ -58,7 +59,6 @@ export async function generateMetadata({
         : "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
       images: ["https://www.jetset-travel.com/images/jetset-og-image.jpg"],
     },
-    alternates: localizedAlternates(locale),
   };
 }
 
@@ -75,6 +75,7 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <HtmlLangSetter locale={locale} />
+      <HreflangTags />
       <Header />
       <main className="min-h-screen">{children}</main>
       <Footer />
