@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import CorporateTravelContent from "./CorporateTravelContent";
 
 export async function generateMetadata({
@@ -9,9 +10,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return {
-    title: "Corporate Travel Management — Fast Quotes & Clean Invoicing",
+    title: {
+      absolute:
+        locale === "ru"
+          ? "Корпоративное управление поездками Кипр | JetSet Travel"
+          : "Corporate Travel Management Cyprus | Policy-Compliant Bookings | JetSet Travel",
+    },
     description:
-      "IATA-accredited corporate travel management in Cyprus. Fast quotes, VAT-compliant invoicing, travel policy compliance, and 24/7 support for businesses.",
+      locale === "ru"
+        ? "Корпоративное управление поездками с прозрачной отчётностью, поддержкой 24/7 и персональными менеджерами. Более 500 корпоративных клиентов."
+        : "Executive travel management with clean invoicing, 24/7 disruption support, and dedicated account managers. Trusted by 500+ corporate clients.",
+    alternates: localizedAlternates(locale, "/corporate-travel"),
   };
 }
 

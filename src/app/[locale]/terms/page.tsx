@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
@@ -10,14 +11,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return {
-    title:
-      locale === "ru"
-        ? "Условия обслуживания — JetSet Travel Cyprus"
-        : "Terms of Service — JetSet Travel Cyprus",
+    title: {
+      absolute:
+        locale === "ru"
+          ? "Условия обслуживания и бронирования | JetSet Travel Cyprus"
+          : "Terms of Service & Booking Conditions | JetSet Travel Cyprus",
+    },
     description:
       locale === "ru"
-        ? "Условия обслуживания JetSet K&K Travel Ltd. Условия бронирования, платежей и отмены поездок."
-        : "Terms of Service and Booking Conditions for JetSet K&K Travel Ltd. Learn about our booking, payment, cancellation, and liability policies.",
+        ? "Условия бронирования, оплаты, отмены и ответственности JetSet K&K Travel Ltd."
+        : "Booking conditions, payment terms, cancellation policy, and liability for services provided by JetSet K&K Travel Ltd.",
+    alternates: localizedAlternates(locale, "/terms"),
   };
 }
 

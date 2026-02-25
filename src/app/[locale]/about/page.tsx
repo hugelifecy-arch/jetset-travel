@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -17,9 +18,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return {
-    title: "About Us — IATA-Accredited Travel Agency in Cyprus",
+    title: {
+      absolute:
+        locale === "ru"
+          ? "О JetSet Travel | Аккредитованное IATA агентство в Пафосе с 2006"
+          : "About JetSet Travel | IATA-Accredited Agency in Paphos Since 2006",
+    },
     description:
-      "Learn about JetSet Travel Cyprus — our story, IATA accreditation, CTO licence, core values, and the team behind premium travel services in Paphos since 2006.",
+      locale === "ru"
+        ? "Команда JetSet Travel Cyprus. 15+ лет опыта, аккредитация IATA, лицензия CTO №7775. Ваш надёжный партнёр в путешествиях."
+        : "Meet the team behind JetSet Travel Cyprus. 15+ years of experience, IATA accreditation, Cyprus Tourism Licence #7775. Your trusted travel partner.",
+    alternates: localizedAlternates(locale, "/about"),
   };
 }
 

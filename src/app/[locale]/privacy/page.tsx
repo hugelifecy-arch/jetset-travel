@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 
@@ -10,14 +11,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return {
-    title:
-      locale === "ru"
-        ? "Политика конфиденциальности — JetSet Travel Cyprus"
-        : "Privacy Policy — JetSet Travel Cyprus",
+    title: {
+      absolute:
+        locale === "ru"
+          ? "Политика конфиденциальности | JetSet Travel Cyprus"
+          : "Privacy Policy | JetSet Travel Cyprus",
+    },
     description:
       locale === "ru"
-        ? "Политика конфиденциальности JetSet K&K Travel Ltd. Узнайте, как мы собираем, используем и защищаем ваши персональные данные."
-        : "Privacy Policy for JetSet K&K Travel Ltd. Learn how we collect, use, and protect your personal data in compliance with GDPR.",
+        ? "Как JetSet K&K Travel Ltd собирает, использует и защищает ваши персональные данные в соответствии с GDPR."
+        : "How JetSet K&K Travel Ltd collects, uses, and protects your personal data in accordance with GDPR.",
+    alternates: localizedAlternates(locale, "/privacy"),
   };
 }
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localizedAlternates } from "@/lib/seo";
 import Link from "next/link";
 import {
   Palmtree,
@@ -17,9 +18,17 @@ export async function generateMetadata({
   const { locale } = await params;
 
   return {
-    title: "Luxury Travel — Bespoke Holidays & Premium Experiences from Cyprus",
+    title: {
+      absolute:
+        locale === "ru"
+          ? "Элитный отдых из Кипра | Индивидуальные путешествия | JetSet Travel"
+          : "Luxury Holiday Planning Cyprus | Bespoke Leisure Travel | JetSet Travel",
+    },
     description:
-      "Curated luxury holidays from Cyprus — private islands, alpine retreats, honeymoons, and five-star city breaks. Bespoke itineraries designed by JetSet Travel.",
+      locale === "ru"
+        ? "Эксклюзивные путешествия с частными трансферами, отелями класса люкс и индивидуальными маршрутами. Ваш премиальный партнёр на Кипре."
+        : "Curated luxury holidays with private transfers, suite-level hotels, and bespoke multi-city itineraries. Your premium travel partner in Cyprus.",
+    alternates: localizedAlternates(locale, "/luxury-travel"),
   };
 }
 
