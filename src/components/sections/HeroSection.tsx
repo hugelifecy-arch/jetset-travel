@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Shield, MessageCircle, Award } from "lucide-react";
+import { useLocale } from "next-intl";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -21,6 +22,7 @@ const trustBadges = [
 ];
 
 export default function HeroSection() {
+  const locale = useLocale();
   return (
     <section className="relative isolate flex min-h-screen items-center overflow-hidden">
       {/* Background image */}
@@ -84,13 +86,13 @@ export default function HeroSection() {
             custom={2}
           >
             <Link
-              href="/quote"
+              href={`/${locale}/quote`}
               className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-4 text-base font-semibold text-brand-navy shadow-luxury transition-opacity hover:opacity-90"
             >
               Get a Corporate Quote
             </Link>
             <Link
-              href="/luxury-travel"
+              href={`/${locale}/luxury-travel`}
               className="inline-flex items-center justify-center rounded-full border-2 border-white px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-white/10"
             >
               Plan a Luxury Trip

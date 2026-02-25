@@ -83,7 +83,12 @@ const destinations = [
   "Istanbul",
 ];
 
-export default function HotelReservationsPage() {
+export default async function HotelReservationsPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <>
       {/* Hero */}
@@ -103,7 +108,7 @@ export default function HotelReservationsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/contact"
+                href={`/${locale}/contact`}
                 className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
               >
                 Find a Hotel
@@ -246,7 +251,7 @@ export default function HotelReservationsPage() {
                 ))}
               </ul>
               <Link
-                href="/contact"
+                href={`/${locale}/contact`}
                 className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
               >
                 Request a Group Quote
