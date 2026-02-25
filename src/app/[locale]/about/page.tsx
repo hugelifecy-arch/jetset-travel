@@ -70,7 +70,12 @@ const team = [
   },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <>
       {/* Hero */}
@@ -291,14 +296,14 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/quote"
+              href={`/${locale}/quote`}
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
               Get a Quote
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="inline-flex items-center rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
             >
               Contact Us

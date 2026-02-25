@@ -114,7 +114,12 @@ const documents = [
   "Previous visa copies (if applicable)",
 ];
 
-export default function VisaServicesPage() {
+export default async function VisaServicesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <>
       {/* Hero */}
@@ -133,7 +138,7 @@ export default function VisaServicesPage() {
               trip.
             </p>
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
               Check Your Visa Requirements

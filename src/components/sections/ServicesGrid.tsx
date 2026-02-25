@@ -3,39 +3,42 @@
 import Link from "next/link";
 import { Briefcase, Palmtree, FileCheck, Building2 } from "lucide-react";
 import { motion } from "framer-motion";
-
-const services = [
-  {
-    icon: Briefcase,
-    title: "Corporate Travel",
-    description:
-      "Policy-compliant itineraries, clean invoicing, and 24/7 disruption rebooking for executive and team travel.",
-    href: "/corporate",
-  },
-  {
-    icon: Palmtree,
-    title: "Luxury Leisure",
-    description:
-      "Curated premium holidays, private transfers, suite-level hotels, and bespoke multi-city journeys.",
-    href: "/luxury-travel",
-  },
-  {
-    icon: FileCheck,
-    title: "Visa Services",
-    description:
-      "Document checklists, application guidance, and coordination support for business and tourist visas.",
-    href: "/visas",
-  },
-  {
-    icon: Building2,
-    title: "Hotels",
-    description:
-      "Negotiated rates at quality hotels worldwide — matched to your location, standards, and budget priorities.",
-    href: "/services#hotels",
-  },
-];
+import { useLocale } from "next-intl";
 
 export default function ServicesGrid() {
+  const locale = useLocale();
+
+  const services = [
+    {
+      icon: Briefcase,
+      title: "Corporate Travel",
+      description:
+        "Policy-compliant itineraries, clean invoicing, and 24/7 disruption rebooking for executive and team travel.",
+      href: `/${locale}/corporate-travel`,
+    },
+    {
+      icon: Palmtree,
+      title: "Luxury Leisure",
+      description:
+        "Curated premium holidays, private transfers, suite-level hotels, and bespoke multi-city journeys.",
+      href: `/${locale}/luxury-travel`,
+    },
+    {
+      icon: FileCheck,
+      title: "Visa Services",
+      description:
+        "Document checklists, application guidance, and coordination support for business and tourist visas.",
+      href: `/${locale}/visa-services`,
+    },
+    {
+      icon: Building2,
+      title: "Hotels",
+      description:
+        "Negotiated rates at quality hotels worldwide — matched to your location, standards, and budget priorities.",
+      href: `/${locale}/hotel-reservations`,
+    },
+  ];
+
   return (
     <section className="bg-white py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -1,21 +1,25 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-
-const quickLinks = [
-  { href: "/about", label: "About Us" },
-  { href: "/services", label: "Our Services" },
-  { href: "/corporate", label: "Corporate Travel" },
-  { href: "/contact", label: "Contact" },
-];
-
-const serviceLinks = [
-  { href: "/services#flights", label: "Flight Booking" },
-  { href: "/services#hotels", label: "Hotel Reservations" },
-  { href: "/visas", label: "Visa Assistance" },
-  { href: "/luxury", label: "Luxury Travel" },
-];
+import { useLocale } from "next-intl";
 
 export default function Footer() {
+  const locale = useLocale();
+
+  const quickLinks = [
+    { href: `/${locale}/about`, label: "About Us" },
+    { href: `/${locale}/hotel-reservations`, label: "Our Services" },
+    { href: `/${locale}/corporate-travel`, label: "Corporate Travel" },
+    { href: `/${locale}/contact`, label: "Contact" },
+  ];
+
+  const serviceLinks = [
+    { href: `/${locale}/contact`, label: "Flight Booking" },
+    { href: `/${locale}/hotel-reservations`, label: "Hotel Reservations" },
+    { href: `/${locale}/visa-services`, label: "Visa Assistance" },
+    { href: `/${locale}/luxury-travel`, label: "Luxury Travel" },
+  ];
   return (
     <footer className="bg-brand-dark text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">

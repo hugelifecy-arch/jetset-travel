@@ -7,10 +7,10 @@ import { useLocale, useTranslations } from "next-intl";
 import { Menu, X, Globe } from "lucide-react";
 
 const navKeys = [
-  { href: "/services", key: "services" },
-  { href: "/corporate", key: "corporate" },
-  { href: "/luxury", key: "luxury" },
-  { href: "/visas", key: "visas" },
+  { href: "/corporate-travel", key: "corporate" },
+  { href: "/luxury-travel", key: "luxury" },
+  { href: "/visa-services", key: "visas" },
+  { href: "/hotel-reservations", key: "services" },
   { href: "/about", key: "about" },
   { href: "/contact", key: "contact" },
 ] as const;

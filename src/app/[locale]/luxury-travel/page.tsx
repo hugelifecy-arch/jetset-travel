@@ -88,7 +88,12 @@ const destinations = [
   },
 ];
 
-export default function LuxuryTravelPage() {
+export default async function LuxuryTravelPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   return (
     <>
       {/* Full-width Hero */}
@@ -107,7 +112,7 @@ export default function LuxuryTravelPage() {
             stay with you.
           </p>
           <Link
-            href="/contact"
+            href={`/${locale}/contact`}
             className="inline-flex items-center rounded-full bg-brand-gold px-10 py-4 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
           >
             Plan Your Journey
@@ -253,7 +258,7 @@ export default function LuxuryTravelPage() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
               Send an Enquiry

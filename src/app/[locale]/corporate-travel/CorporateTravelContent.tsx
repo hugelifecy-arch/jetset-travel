@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 import {
   Zap,
   ShieldCheck,
@@ -106,6 +107,7 @@ const faqs = [
 
 export default function CorporateTravelContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const locale = useLocale();
 
   return (
     <>
@@ -126,7 +128,7 @@ export default function CorporateTravelContent() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/contact"
+                href={`/${locale}/contact`}
                 className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
               >
                 Request a Quote
@@ -298,7 +300,7 @@ export default function CorporateTravelContent() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/contact"
+              href={`/${locale}/contact`}
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
               <FileText className="mr-2 h-4 w-4" />
