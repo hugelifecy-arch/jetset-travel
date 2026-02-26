@@ -38,8 +38,8 @@ export function buildPageMetadata({
       title,
       description,
       url: `${CANONICAL_ORIGIN}/${locale}${routePath}`,
-      locale: isRussian ? "ru_CY" : "en_CY",
-      alternateLocale: isRussian ? "en_CY" : "ru_CY",
+      locale: isRussian ? "ru_RU" : "en_CY",
+      alternateLocale: isRussian ? "en_CY" : "ru_RU",
       images: [
         {
           url: OG_IMAGE,
