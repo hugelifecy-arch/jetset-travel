@@ -294,22 +294,23 @@ export default function ContactContent() {
           </div>
           <div className="overflow-hidden rounded-2xl border border-brand-navy/10 shadow-sm">
             <iframe
-              title="Jetset Travel office location"
+              title="JetSet Travel Cyprus office location"
+              // TODO: Go to Google Maps, search '26A Agapinoros Paphos Cyprus', click Share → Embed a map, copy the src URL and paste here
               src="https://www.google.com/maps?q=26A+Agapinoros%2C+8049+Paphos%2C+Cyprus&output=embed"
-              className="h-[420px] w-full"
+              className="h-[400px] w-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
           <div className="mt-4 text-center">
             <a
-              href="https://maps.app.goo.gl/iXHtVt8w6mXcPSN58"
+              href="https://maps.google.com/?q=26A+Agapinoros+8049+Paphos+Cyprus"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm font-semibold text-brand-navy underline decoration-brand-gold underline-offset-4 hover:text-brand-navy/70 transition-colors"
             >
               <MapPin className="h-4 w-4" />
-              {t("openInMaps")}
+              {t("getDirections")}
             </a>
           </div>
         </div>

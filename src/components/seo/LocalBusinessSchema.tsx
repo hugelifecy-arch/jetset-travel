@@ -1,3 +1,8 @@
+// TODO: Set up Google Business Profile at business.google.com
+// - Claim listing, add services/hours/photos
+// - Enable and respond to reviews
+// - This is critical for local SEO
+
 import JsonLd from "./JsonLd";
 
 export default function LocalBusinessSchema() {
@@ -24,6 +29,7 @@ export default function LocalBusinessSchema() {
       latitude: 34.772,
       longitude: 32.4246,
     },
+    hasMap: "https://maps.google.com/?q=26A+Agapinoros+8049+Paphos+Cyprus",
     openingHours: "Mo-Fr 09:00-18:30",
     sameAs: ["https://wa.me/35799478073", "https://t.me/jetsetnotis"],
   };
