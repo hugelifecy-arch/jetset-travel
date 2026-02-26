@@ -33,6 +33,8 @@ export async function generateMetadata({
 export default function HomePage() {
   return (
     <>
+      {/* Preload hero background image for faster LCP */}
+      <link rel="preload" as="image" href="/images/hero-bg.jpg" />
       <HeroSection />
       <ServicesGrid />
       <TrustSection />

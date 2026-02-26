@@ -1,10 +1,14 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Shield, MessageCircle, Award } from "lucide-react";
+import { Shield, MessageCircle, Award, Play } from "lucide-react";
 import { useLocale } from "next-intl";
+
+// TODO: Compress hero.mp4 to under 2MB:
+// ffmpeg -i hero.mp4 -vcodec h264 -crf 28 -preset medium -vf scale=1920:-2 -an hero-compressed.mp4
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -23,29 +27,75 @@ const trustBadges = [
 
 export default function HeroSection() {
   const locale = useLocale();
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
+
+  const handlePlayMobile = useCallback(() => {
+    setMobileVideoPlaying(true);
+  }, []);
+
   return (
     <section className="relative isolate flex min-h-screen items-center overflow-hidden">
-      {/* Background image */}
+      {/* Background image — always visible, acts as poster on mobile */}
       <div className="absolute inset-0 -z-20">
         <Image
           src="/images/hero-bg.jpg"
           alt="JetSet Travel Cyprus hero background"
           fill
+          sizes="100vw"
           className="object-cover"
           priority={true}
         />
       </div>
 
-      {/* Video background — desktop only */}
-      <video
-        className="absolute inset-0 -z-20 hidden h-full w-full object-cover md:block"
-        src="/videos/hero.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden="true"
-      />
+      {/* Video background — desktop only (conditionally rendered to prevent mobile download) */}
+      {isDesktop && (
+        <video
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+          src="/videos/hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          poster="/images/hero-bg.jpg"
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile: play button overlay to load video on demand */}
+      {!isDesktop && !mobileVideoPlaying && (
+        <button
+          onClick={handlePlayMobile}
+          className="absolute bottom-8 right-8 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors hover:bg-white/30"
+          aria-label="Play background video"
+        >
+          <Play className="h-5 w-5 text-white" />
+        </button>
+      )}
+
+      {/* Mobile video — only rendered after user taps play */}
+      {!isDesktop && mobileVideoPlaying && (
+        <video
+          className="absolute inset-0 -z-20 h-full w-full object-cover"
+          src="/videos/hero.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          poster="/images/hero-bg.jpg"
+          aria-hidden="true"
+        />
+      )}
 
       {/* Navy gradient overlay */}
       <div className="absolute inset-0 -z-10 bg-gradient-to-b from-brand-navy/90 via-brand-navy/70 to-brand-dark/90" />
