@@ -62,7 +62,7 @@ export default async function PrivacyPolicyPage({
               </p>
               <div className="mt-8">
                 <Link
-                  href="/en/privacy"
+                  href={`/${locale}/privacy`}
                   className="text-brand-gold hover:underline font-semibold"
                 >
                   {t("viewEnglish")}
