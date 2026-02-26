@@ -42,7 +42,6 @@ export default async function FAQPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "faq" });
-  const isRussian = locale === "ru";
 
   // Build all Q&A pairs for JSON-LD
   const allQAPairs: { question: string; answer: string }[] = [];
@@ -78,7 +77,7 @@ export default async function FAQPage({
       <section className="bg-brand-navy text-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
-            FAQ
+            {t("heroLabel")}
           </p>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
             {t("title")}
@@ -88,18 +87,6 @@ export default async function FAQPage({
           </p>
         </div>
       </section>
-
-      {/* Russian placeholder notice */}
-      {isRussian && (
-        <section className="bg-brand-gold/10 border-b border-brand-gold/20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 text-center">
-            <p className="text-sm text-brand-navy/70">
-              {/* TODO: Full Russian FAQ translation */}
-              Часто задаваемые вопросы — скоро полный перевод на русский язык.
-            </p>
-          </div>
-        </section>
-      )}
 
       {/* FAQ Categories */}
       <section className="py-20 bg-brand-light">

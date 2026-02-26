@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Menu, X, Globe } from "lucide-react";
 
@@ -20,6 +21,12 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const locale = useLocale();
   const t = useTranslations("nav");
+  const pathname = usePathname();
+
+  // Build the same page path in the other locale
+  const pathWithoutLocale = pathname.replace(/^\/(en|ru)/, "") || "";
+  const enHref = `/en${pathWithoutLocale}`;
+  const ruHref = `/ru${pathWithoutLocale}`;
 
   return (
     <header className="sticky top-0 z-50 bg-brand-navy border-b-2 border-brand-gold">
@@ -55,7 +62,7 @@ export default function Header() {
             <div className="flex items-center gap-1 text-sm">
               <Globe className="h-4 w-4 text-white/60" />
               <Link
-                href="/en"
+                href={enHref}
                 className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
                   locale === "en"
                     ? "font-bold text-brand-gold"
@@ -66,7 +73,7 @@ export default function Header() {
               </Link>
               <span className="text-white/30">|</span>
               <Link
-                href="/ru"
+                href={ruHref}
                 className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
                   locale === "ru"
                     ? "font-bold text-brand-gold"
@@ -119,7 +126,7 @@ export default function Header() {
               <div className="flex items-center gap-2 text-sm">
                 <Globe className="h-4 w-4 text-white/60" />
                 <Link
-                  href="/en"
+                  href={enHref}
                   className={`px-2 py-1 rounded text-sm ${
                     locale === "en"
                       ? "font-bold text-brand-gold"
@@ -130,7 +137,7 @@ export default function Header() {
                   EN
                 </Link>
                 <Link
-                  href="/ru"
+                  href={ruHref}
                   className={`px-2 py-1 rounded text-sm ${
                     locale === "ru"
                       ? "font-bold text-brand-gold"

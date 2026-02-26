@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { useTranslations } from "next-intl";
 import {
   Building2,
   Palmtree,
@@ -52,10 +53,22 @@ const labelClasses = "block text-sm font-semibold text-brand-navy mb-2";
 const errorClasses = "mt-1.5 text-sm text-red-500";
 
 /* ------------------------------------------------------------------ */
+/*  Translation function type                                          */
+/* ------------------------------------------------------------------ */
+
+type TFunction = ReturnType<typeof useTranslations<"quotePage">>;
+
+/* ------------------------------------------------------------------ */
 /*  Corporate Form                                                     */
 /* ------------------------------------------------------------------ */
 
-function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
+function CorporateForm({
+  onSuccess,
+  t,
+}: {
+  onSuccess: () => void;
+  t: TFunction;
+}) {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
@@ -78,7 +91,7 @@ function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
       if (!res.ok) throw new Error("Failed to submit");
       onSuccess();
     } catch {
-      setSubmitError("Something went wrong. Please try again or contact us via WhatsApp.");
+      setSubmitError(t("submitError"));
     }
   };
 
@@ -87,14 +100,14 @@ function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="companyName" className={labelClasses}>
-            Company Name *
+            {t("companyName")} *
           </label>
           <input
             id="companyName"
             type="text"
             {...register("companyName")}
             className={inputClasses}
-            placeholder="Your company"
+            placeholder={t("companyPlaceholder")}
           />
           {errors.companyName && (
             <p className={errorClasses}>{errors.companyName.message}</p>
@@ -102,14 +115,14 @@ function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
         </div>
         <div>
           <label htmlFor="corp-email" className={labelClasses}>
-            Business Email *
+            {t("businessEmail")} *
           </label>
           <input
             id="corp-email"
             type="email"
             {...register("email")}
             className={inputClasses}
-            placeholder="you@company.com"
+            placeholder={t("businessEmailPlaceholder")}
           />
           {errors.email && (
             <p className={errorClasses}>{errors.email.message}</p>
@@ -120,14 +133,14 @@ function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="corp-phone" className={labelClasses}>
-            Phone *
+            {t("phone")} *
           </label>
           <input
             id="corp-phone"
             type="tel"
             {...register("phone")}
             className={inputClasses}
-            placeholder="+357 ..."
+            placeholder={t("phonePlaceholder")}
           />
           {errors.phone && (
             <p className={errorClasses}>{errors.phone.message}</p>
@@ -135,14 +148,14 @@ function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
         </div>
         <div>
           <label htmlFor="travellers" className={labelClasses}>
-            Number of Travellers *
+            {t("travellers")} *
           </label>
           <input
             id="travellers"
             type="text"
             {...register("travellers")}
             className={inputClasses}
-            placeholder="e.g. 4"
+            placeholder={t("travellersPlaceholder")}
           />
           {errors.travellers && (
             <p className={errorClasses}>{errors.travellers.message}</p>
@@ -153,14 +166,14 @@ function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="travelDates" className={labelClasses}>
-            Travel Dates *
+            {t("travelDates")} *
           </label>
           <input
             id="travelDates"
             type="text"
             {...register("travelDates")}
             className={inputClasses}
-            placeholder="e.g. 15 Mar – 20 Mar 2026"
+            placeholder={t("datesPlaceholder")}
           />
           {errors.travelDates && (
             <p className={errorClasses}>{errors.travelDates.message}</p>
@@ -168,14 +181,14 @@ function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
         </div>
         <div>
           <label htmlFor="corp-destinations" className={labelClasses}>
-            Destinations *
+            {t("destinations")} *
           </label>
           <input
             id="corp-destinations"
             type="text"
             {...register("destinations")}
             className={inputClasses}
-            placeholder="e.g. London, Frankfurt"
+            placeholder={t("destPlaceholder")}
           />
           {errors.destinations && (
             <p className={errorClasses}>{errors.destinations.message}</p>
@@ -213,20 +226,20 @@ function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
           htmlFor="invoiceRequired"
           className="text-sm text-brand-navy cursor-pointer"
         >
-          VAT invoice required
+          {t("vatInvoice")}
         </label>
       </div>
 
       <div>
         <label htmlFor="corp-notes" className={labelClasses}>
-          Additional Notes
+          {t("additionalNotes")}
         </label>
         <textarea
           id="corp-notes"
           rows={4}
           {...register("notes")}
           className={`${inputClasses} resize-none`}
-          placeholder="Any special requirements or preferences..."
+          placeholder={t("notesPlaceholder")}
         />
       </div>
 
@@ -238,10 +251,10 @@ function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
         className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
-          "Submitting..."
+          t("submitting")
         ) : (
           <>
-            Submit Corporate Enquiry
+            {t("submitCorporate")}
             <ArrowRight className="ml-2 h-4 w-4" />
           </>
         )}
@@ -254,7 +267,13 @@ function CorporateForm({ onSuccess }: { onSuccess: () => void }) {
 /*  Luxury Form                                                        */
 /* ------------------------------------------------------------------ */
 
-function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
+function LuxuryForm({
+  onSuccess,
+  t,
+}: {
+  onSuccess: () => void;
+  t: TFunction;
+}) {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
@@ -276,7 +295,7 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
       if (!res.ok) throw new Error("Failed to submit");
       onSuccess();
     } catch {
-      setSubmitError("Something went wrong. Please try again or contact us via WhatsApp.");
+      setSubmitError(t("submitError"));
     }
   };
 
@@ -285,14 +304,14 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="lux-name" className={labelClasses}>
-            Full Name *
+            {t("fullName")} *
           </label>
           <input
             id="lux-name"
             type="text"
             {...register("name")}
             className={inputClasses}
-            placeholder="Your full name"
+            placeholder={t("namePlaceholder")}
           />
           {errors.name && (
             <p className={errorClasses}>{errors.name.message}</p>
@@ -300,14 +319,14 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
         </div>
         <div>
           <label htmlFor="lux-email" className={labelClasses}>
-            Email *
+            {t("email")} *
           </label>
           <input
             id="lux-email"
             type="email"
             {...register("email")}
             className={inputClasses}
-            placeholder="your@email.com"
+            placeholder={t("emailPlaceholder")}
           />
           {errors.email && (
             <p className={errorClasses}>{errors.email.message}</p>
@@ -318,14 +337,14 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="lux-phone" className={labelClasses}>
-            Phone *
+            {t("phone")} *
           </label>
           <input
             id="lux-phone"
             type="tel"
             {...register("phone")}
             className={inputClasses}
-            placeholder="+357 ..."
+            placeholder={t("phonePlaceholder")}
           />
           {errors.phone && (
             <p className={errorClasses}>{errors.phone.message}</p>
@@ -333,14 +352,14 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
         </div>
         <div>
           <label htmlFor="lux-destinations" className={labelClasses}>
-            Destinations *
+            {t("luxuryDest")} *
           </label>
           <input
             id="lux-destinations"
             type="text"
             {...register("destinations")}
             className={inputClasses}
-            placeholder="e.g. Maldives, Santorini"
+            placeholder={t("luxuryDestPlaceholder")}
           />
           {errors.destinations && (
             <p className={errorClasses}>{errors.destinations.message}</p>
@@ -351,14 +370,14 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="lux-dates" className={labelClasses}>
-            Travel Dates *
+            {t("luxuryDates")} *
           </label>
           <input
             id="lux-dates"
             type="text"
             {...register("dates")}
             className={inputClasses}
-            placeholder="e.g. June 2026"
+            placeholder={t("luxuryDatesPlaceholder")}
           />
           {errors.dates && (
             <p className={errorClasses}>{errors.dates.message}</p>
@@ -366,14 +385,14 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
         </div>
         <div>
           <label htmlFor="groupSize" className={labelClasses}>
-            Group Size *
+            {t("groupSize")} *
           </label>
           <input
             id="groupSize"
             type="text"
             {...register("groupSize")}
             className={inputClasses}
-            placeholder="e.g. 2 adults, 1 child"
+            placeholder={t("groupSizePlaceholder")}
           />
           {errors.groupSize && (
             <p className={errorClasses}>{errors.groupSize.message}</p>
@@ -383,7 +402,7 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
 
       <div>
         <label htmlFor="budget" className={labelClasses}>
-          Budget Range *
+          {t("budgetRange")} *
         </label>
         <select
           id="budget"
@@ -392,12 +411,12 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
           defaultValue=""
         >
           <option value="" disabled>
-            Select a budget range
+            {t("selectBudget")}
           </option>
-          <option value="under-2k">Under &euro;2,000</option>
-          <option value="2k-5k">&euro;2,000 – &euro;5,000</option>
-          <option value="5k-10k">&euro;5,000 – &euro;10,000</option>
-          <option value="10k-plus">&euro;10,000+</option>
+          <option value="under-2k">{t("budgetUnder2k")}</option>
+          <option value="2k-5k">{t("budget2k5k")}</option>
+          <option value="5k-10k">{t("budget5k10k")}</option>
+          <option value="10k-plus">{t("budget10kPlus")}</option>
         </select>
         {errors.budget && (
           <p className={errorClasses}>{errors.budget.message}</p>
@@ -406,14 +425,14 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
 
       <div>
         <label htmlFor="specialRequirements" className={labelClasses}>
-          Special Requirements
+          {t("specialRequirements")}
         </label>
         <textarea
           id="specialRequirements"
           rows={4}
           {...register("specialRequirements")}
           className={`${inputClasses} resize-none`}
-          placeholder="Dietary needs, accessibility, special occasions..."
+          placeholder={t("specialReqPlaceholder")}
         />
       </div>
 
@@ -425,10 +444,10 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
         className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
-          "Submitting..."
+          t("submitting")
         ) : (
           <>
-            Submit Luxury Enquiry
+            {t("submitLuxury")}
             <ArrowRight className="ml-2 h-4 w-4" />
           </>
         )}
@@ -441,18 +460,17 @@ function LuxuryForm({ onSuccess }: { onSuccess: () => void }) {
 /*  Success Screen                                                     */
 /* ------------------------------------------------------------------ */
 
-function SuccessScreen() {
+function SuccessScreen({ t }: { t: TFunction }) {
   return (
     <div className="flex flex-col items-center justify-center text-center py-16 lg:py-24">
       <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-gold/10 mb-8">
         <CheckCircle className="h-10 w-10 text-brand-gold" />
       </div>
       <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-        Enquiry Received!
+        {t("successTitle")}
       </h2>
       <p className="text-brand-navy/60 text-lg max-w-md mb-8">
-        We&apos;ll be in touch within 1 hour during business hours. For
-        immediate assistance, reach us on WhatsApp.
+        {t("successMessage")}
       </p>
       <a
         href="https://wa.me/35799478073?text=Hi%2C%20I%20just%20submitted%20a%20quote%20request%20on%20your%20website."
@@ -461,7 +479,7 @@ function SuccessScreen() {
         className="inline-flex items-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-sm font-semibold text-white hover:bg-[#22c35e] transition-colors"
       >
         <MessageCircle className="h-5 w-5" />
-        Chat on WhatsApp
+        {t("successWhatsApp")}
       </a>
     </div>
   );
@@ -472,6 +490,7 @@ function SuccessScreen() {
 /* ------------------------------------------------------------------ */
 
 export default function QuoteContent() {
+  const t = useTranslations("quotePage");
   const [branch, setBranch] = useState<"corporate" | "luxury" | null>(null);
   const [success, setSuccess] = useState(false);
 
@@ -481,14 +500,13 @@ export default function QuoteContent() {
       <section className="bg-brand-navy text-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
-            Get a Quote
+            {t("heroLabel")}
           </p>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Tell Us How You Travel
+            {t("heroTitle")}
           </h1>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            Select your travel type below and we&apos;ll tailor a quote to your
-            exact needs.
+            {t("heroSubtitle")}
           </p>
         </div>
       </section>
@@ -497,16 +515,16 @@ export default function QuoteContent() {
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           {success ? (
-            <SuccessScreen />
+            <SuccessScreen t={t} />
           ) : branch === null ? (
             /* Step 1: Choose Branch */
             <div>
               <div className="text-center mb-12">
                 <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-3">
-                  What type of travel?
+                  {t("typeTitle")}
                 </h2>
                 <p className="text-brand-navy/60">
-                  Choose the option that best describes your needs.
+                  {t("typeSubtitle")}
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -518,11 +536,10 @@ export default function QuoteContent() {
                     <Building2 className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-bold text-brand-navy mb-2">
-                    Corporate Travel
+                    {t("corporateTitle")}
                   </h3>
                   <p className="text-brand-navy/60 text-sm leading-relaxed">
-                    Business trips, conferences, group bookings with VAT invoicing
-                    and travel policy compliance.
+                    {t("corporateDesc")}
                   </p>
                 </button>
 
@@ -534,11 +551,10 @@ export default function QuoteContent() {
                     <Palmtree className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-bold text-brand-navy mb-2">
-                    Luxury Leisure
+                    {t("luxuryTitle")}
                   </h3>
                   <p className="text-brand-navy/60 text-sm leading-relaxed">
-                    Bespoke holidays, honeymoons, private villas, and curated
-                    experiences worldwide.
+                    {t("luxuryDesc")}
                   </p>
                 </button>
               </div>
@@ -551,7 +567,7 @@ export default function QuoteContent() {
                 className="inline-flex items-center gap-2 text-sm text-brand-navy/60 hover:text-brand-gold transition-colors mb-8"
               >
                 <ArrowLeft className="h-4 w-4" />
-                Back to selection
+                {t("backToSelection")}
               </button>
 
               <div className="mb-8">
@@ -562,24 +578,23 @@ export default function QuoteContent() {
                     <Palmtree className="h-4 w-4" />
                   )}
                   {branch === "corporate"
-                    ? "Corporate Travel"
-                    : "Luxury Leisure"}
+                    ? t("corporateTitle")
+                    : t("luxuryTitle")}
                 </div>
                 <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-2">
                   {branch === "corporate"
-                    ? "Corporate Travel Enquiry"
-                    : "Luxury Travel Enquiry"}
+                    ? t("corporateEnquiry")
+                    : t("luxuryEnquiry")}
                 </h2>
                 <p className="text-brand-navy/60 text-sm">
-                  Fill in the details below and we&apos;ll prepare a tailored
-                  quote for you.
+                  {t("formSubtitle")}
                 </p>
               </div>
 
               {branch === "corporate" ? (
-                <CorporateForm onSuccess={() => setSuccess(true)} />
+                <CorporateForm onSuccess={() => setSuccess(true)} t={t} />
               ) : (
-                <LuxuryForm onSuccess={() => setSuccess(true)} />
+                <LuxuryForm onSuccess={() => setSuccess(true)} t={t} />
               )}
             </div>
           )}

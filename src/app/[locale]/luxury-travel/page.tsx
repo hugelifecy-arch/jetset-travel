@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { localizedAlternates } from "@/lib/seo";
 import Link from "next/link";
 import {
@@ -32,75 +33,68 @@ export async function generateMetadata({
   };
 }
 
-const categories = [
-  {
-    icon: Palmtree,
-    title: "Private Islands",
-    description:
-      "Overwater villas, barefoot luxury, and seclusion in the world's most pristine archipelagos.",
-  },
-  {
-    icon: Mountain,
-    title: "Ski & Alpine",
-    description:
-      "Chalets in Courchevel, lodges in Zermatt, and helicopter transfers to untouched powder.",
-  },
-  {
-    icon: Building2,
-    title: "City Breaks",
-    description:
-      "Five-star suites in London, Paris, and New York with VIP restaurant reservations and private tours.",
-  },
-  {
-    icon: Heart,
-    title: "Honeymoon",
-    description:
-      "Bespoke romantic escapes with sunset dinners, spa rituals, and once-in-a-lifetime excursions.",
-  },
-];
-
-const editorials = [
-  {
-    title: "We Listen Before We Book",
-    description:
-      "Every luxury trip starts with a conversation — not a search engine. We learn how you travel, what excites you, and what you avoid. Then we design an itinerary that feels personal, not templated. Whether it's a quiet retreat or a celebration, we shape every detail around you.",
-    align: "left" as const,
-  },
-  {
-    title: "Access Others Cannot Offer",
-    description:
-      "Through our preferred partnerships with leading hotel groups, private villa networks, and concierge services, we unlock room upgrades, late checkouts, resort credits, and exclusive experiences that aren't available to the public. Our IATA accreditation and industry relationships mean you get more for the same price.",
-    align: "right" as const,
-  },
-];
-
-const destinations = [
-  {
-    name: "Maldives",
-    tagline: "Overwater serenity",
-    description:
-      "Private water villas, coral reef snorkelling, and candlelit beach dinners in the Indian Ocean.",
-  },
-  {
-    name: "Tuscany",
-    tagline: "Rolling hills & fine wine",
-    description:
-      "Restored farmhouse stays, vineyard tours, and truffle-hunting excursions in the Italian countryside.",
-  },
-  {
-    name: "Dubai",
-    tagline: "Modern opulence",
-    description:
-      "Skyline suites, desert safaris, and world-class dining in the city that redefines luxury.",
-  },
-];
-
 export default async function LuxuryTravelPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "luxuryPage" });
+
+  const categories = [
+    {
+      icon: Palmtree,
+      title: t("islandsTitle"),
+      description: t("islandsDesc"),
+    },
+    {
+      icon: Mountain,
+      title: t("skiTitle"),
+      description: t("skiDesc"),
+    },
+    {
+      icon: Building2,
+      title: t("cityTitle"),
+      description: t("cityDesc"),
+    },
+    {
+      icon: Heart,
+      title: t("honeymoonTitle"),
+      description: t("honeymoonDesc"),
+    },
+  ];
+
+  const editorials = [
+    {
+      title: t("listenTitle"),
+      description: t("listenDesc"),
+      align: "left" as const,
+    },
+    {
+      title: t("accessTitle"),
+      description: t("accessDesc"),
+      align: "right" as const,
+    },
+  ];
+
+  const destinations = [
+    {
+      name: t("maldivesName"),
+      tagline: t("maldivesTagline"),
+      description: t("maldivesDesc"),
+    },
+    {
+      name: t("tuscanyName"),
+      tagline: t("tuscanyTagline"),
+      description: t("tuscanyDesc"),
+    },
+    {
+      name: t("dubaiName"),
+      tagline: t("dubaiTagline"),
+      description: t("dubaiDesc"),
+    },
+  ];
+
   return (
     <>
       {/* Full-width Hero */}
@@ -108,21 +102,19 @@ export default async function LuxuryTravelPage({
         <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy to-brand-dark" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-6">
-            Luxury Travel
+            {t("heroLabel")}
           </p>
           <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-            The World, Curated for You
+            {t("heroTitle")}
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-10">
-            Bespoke journeys designed around your desires — not a catalogue.
-            From private islands to alpine retreats, we craft experiences that
-            stay with you.
+            {t("heroSubtitle")}
           </p>
           <Link
             href={`/${locale}/contact`}
             className="inline-flex items-center rounded-full bg-brand-gold px-10 py-4 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
           >
-            Plan Your Journey
+            {t("planJourney")}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>
@@ -133,11 +125,10 @@ export default async function LuxuryTravelPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Experiences We Craft
+              {t("categoriesTitle")}
             </h2>
             <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              Four categories of travel, each designed with obsessive attention
-              to detail.
+              {t("categoriesSubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -202,10 +193,10 @@ export default async function LuxuryTravelPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Featured Destinations
+              {t("destTitle")}
             </h2>
             <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              A glimpse of where we can take you — each trip fully bespoke.
+              {t("destSubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -241,14 +232,11 @@ export default async function LuxuryTravelPage({
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <Quote className="h-12 w-12 text-brand-gold/40 mx-auto mb-8" />
           <blockquote className="font-display text-2xl md:text-3xl lg:text-4xl leading-relaxed mb-8">
-            &ldquo;JetSet turned our anniversary into something
-            extraordinary. The villa in Santorini, the private sunset
-            cruise, the restaurant they found tucked in the cliffs — every
-            moment was perfect.&rdquo;
+            &ldquo;{t("testimonial")}&rdquo;
           </blockquote>
           <div>
-            <p className="text-brand-gold font-semibold">Elena & Dimitris K.</p>
-            <p className="text-white/50 text-sm">Limassol, Cyprus</p>
+            <p className="text-brand-gold font-semibold">{t("testimonialAuthor")}</p>
+            <p className="text-white/50 text-sm">{t("testimonialLocation")}</p>
           </div>
         </div>
       </section>
@@ -257,18 +245,17 @@ export default async function LuxuryTravelPage({
       <section className="py-20 bg-brand-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-            Begin Your Journey
+            {t("ctaTitle")}
           </h2>
           <p className="text-brand-navy/60 max-w-2xl mx-auto mb-8">
-            Tell us about your dream trip — no obligations, no templates. Just
-            a conversation about where the world can take you.
+            {t("ctaSubtitle")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href={`/${locale}/contact`}
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
-              Send an Enquiry
+              {t("ctaEnquiry")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <a
@@ -277,7 +264,7 @@ export default async function LuxuryTravelPage({
               rel="noopener noreferrer"
               className="inline-flex items-center rounded-full border border-brand-navy/20 px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-navy/5 transition-colors"
             >
-              WhatsApp Us
+              {t("ctaWhatsApp")}
             </a>
           </div>
         </div>

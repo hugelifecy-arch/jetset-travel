@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { localizedAlternates } from "@/lib/seo";
+import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import {
   FileCheck,
@@ -32,101 +33,99 @@ export async function generateMetadata({
   };
 }
 
-const visaCards = [
-  {
-    flag: "🇬🇧",
-    country: "United Kingdom",
-    processing: "15 working days",
-    difficulty: "Medium",
-    difficultyColor: "bg-yellow-100 text-yellow-800",
-  },
-  {
-    flag: "🇺🇸",
-    country: "United States",
-    processing: "3–6 weeks",
-    difficulty: "Hard",
-    difficultyColor: "bg-red-100 text-red-800",
-  },
-  {
-    flag: "🇨🇦",
-    country: "Canada",
-    processing: "4–8 weeks",
-    difficulty: "Hard",
-    difficultyColor: "bg-red-100 text-red-800",
-  },
-  {
-    flag: "🇦🇪",
-    country: "UAE (Dubai)",
-    processing: "3–5 working days",
-    difficulty: "Easy",
-    difficultyColor: "bg-green-100 text-green-800",
-  },
-  {
-    flag: "🇦🇺",
-    country: "Australia",
-    processing: "4–6 weeks",
-    difficulty: "Hard",
-    difficultyColor: "bg-red-100 text-red-800",
-  },
-  {
-    flag: "🇨🇳",
-    country: "China",
-    processing: "5–7 working days",
-    difficulty: "Medium",
-    difficultyColor: "bg-yellow-100 text-yellow-800",
-  },
-];
-
-const steps = [
-  {
-    number: "01",
-    icon: MessageCircle,
-    title: "Tell Us Your Destination",
-    description:
-      "Share where you're going, your nationality, and travel dates. We assess the requirements immediately.",
-  },
-  {
-    number: "02",
-    icon: FileCheck,
-    title: "Document Preparation",
-    description:
-      "We provide a personalised checklist and review every document before submission to avoid delays.",
-  },
-  {
-    number: "03",
-    icon: Clock,
-    title: "Application Submission",
-    description:
-      "We submit your application to the embassy or visa centre, handling forms, fees, and appointment scheduling.",
-  },
-  {
-    number: "04",
-    icon: ArrowRight,
-    title: "Visa Collection & Travel",
-    description:
-      "Once approved, we arrange collection and send you a confirmation. You're ready to fly.",
-  },
-];
-
-const documents = [
-  "Valid passport (6+ months validity)",
-  "Passport-sized photographs (recent)",
-  "Completed visa application form",
-  "Travel insurance certificate",
-  "Flight reservation confirmation",
-  "Hotel booking or accommodation proof",
-  "Bank statements (last 3–6 months)",
-  "Employment letter or business registration",
-  "Invitation letter (if applicable)",
-  "Previous visa copies (if applicable)",
-];
-
 export default async function VisaServicesPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "visaPage" });
+
+  const visaCards = [
+    {
+      flag: "🇬🇧",
+      country: t("uk"),
+      processing: t("ukTime"),
+      difficulty: t("medium"),
+      difficultyColor: "bg-yellow-100 text-yellow-800",
+    },
+    {
+      flag: "🇺🇸",
+      country: t("us"),
+      processing: t("usTime"),
+      difficulty: t("hard"),
+      difficultyColor: "bg-red-100 text-red-800",
+    },
+    {
+      flag: "🇨🇦",
+      country: t("canada"),
+      processing: t("canadaTime"),
+      difficulty: t("hard"),
+      difficultyColor: "bg-red-100 text-red-800",
+    },
+    {
+      flag: "🇦🇪",
+      country: t("uae"),
+      processing: t("uaeTime"),
+      difficulty: t("easy"),
+      difficultyColor: "bg-green-100 text-green-800",
+    },
+    {
+      flag: "🇦🇺",
+      country: t("australia"),
+      processing: t("australiaTime"),
+      difficulty: t("hard"),
+      difficultyColor: "bg-red-100 text-red-800",
+    },
+    {
+      flag: "🇨🇳",
+      country: t("china"),
+      processing: t("chinaTime"),
+      difficulty: t("medium"),
+      difficultyColor: "bg-yellow-100 text-yellow-800",
+    },
+  ];
+
+  const steps = [
+    {
+      number: "01",
+      icon: MessageCircle,
+      title: t("step1Title"),
+      description: t("step1Desc"),
+    },
+    {
+      number: "02",
+      icon: FileCheck,
+      title: t("step2Title"),
+      description: t("step2Desc"),
+    },
+    {
+      number: "03",
+      icon: Clock,
+      title: t("step3Title"),
+      description: t("step3Desc"),
+    },
+    {
+      number: "04",
+      icon: ArrowRight,
+      title: t("step4Title"),
+      description: t("step4Desc"),
+    },
+  ];
+
+  const documents = [
+    t("doc1"),
+    t("doc2"),
+    t("doc3"),
+    t("doc4"),
+    t("doc5"),
+    t("doc6"),
+    t("doc7"),
+    t("doc8"),
+    t("doc9"),
+    t("doc10"),
+  ];
+
   return (
     <>
       {/* Hero */}
@@ -134,21 +133,19 @@ export default async function VisaServicesPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
-              Visa Services
+              {t("heroLabel")}
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Visa Assistance, Done Right
+              {t("heroTitle")}
             </h1>
             <p className="text-lg text-white/70 mb-8 max-w-2xl">
-              Navigating visa requirements can be stressful. We handle the
-              paperwork, appointments, and follow-ups so you can focus on your
-              trip.
+              {t("heroSubtitle")}
             </p>
             <Link
               href={`/${locale}/contact`}
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
-              Check Your Visa Requirements
+              {t("checkRequirements")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
@@ -160,11 +157,10 @@ export default async function VisaServicesPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Popular Visa Destinations
+              {t("destTitle")}
             </h2>
             <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              Processing times and difficulty levels for the most requested
-              visas from Cyprus.
+              {t("destSubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -188,7 +184,7 @@ export default async function VisaServicesPage({
                 </div>
                 <div className="flex items-center gap-2 text-sm text-brand-navy/60">
                   <Clock className="h-4 w-4 text-brand-gold" />
-                  <span>Processing: {visa.processing}</span>
+                  <span>{t("processing")}: {visa.processing}</span>
                 </div>
               </div>
             ))}
@@ -201,10 +197,10 @@ export default async function VisaServicesPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              How We Help
+              {t("howTitle")}
             </h2>
             <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              A simple four-step process from enquiry to approved visa.
+              {t("howSubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -214,7 +210,7 @@ export default async function VisaServicesPage({
                   <step.icon className="h-6 w-6" />
                 </div>
                 <span className="block text-xs font-bold text-brand-gold uppercase tracking-wider mb-1">
-                  Step {step.number}
+                  {t("step")} {step.number}
                 </span>
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {step.title}
@@ -238,11 +234,10 @@ export default async function VisaServicesPage({
               </div>
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-2">
-                  Document Checklist
+                  {t("checklistTitle")}
                 </h2>
                 <p className="text-brand-navy/60">
-                  Prepare these documents before your visa consultation. The
-                  exact requirements vary by destination.
+                  {t("checklistSubtitle")}
                 </p>
               </div>
             </div>
@@ -255,9 +250,7 @@ export default async function VisaServicesPage({
               ))}
             </ul>
             <p className="text-brand-navy/40 text-xs">
-              This is a general checklist. We will provide a personalised list
-              based on your nationality and destination after your initial
-              consultation.
+              {t("checklistNote")}
             </p>
           </div>
         </div>
@@ -270,12 +263,7 @@ export default async function VisaServicesPage({
             <ShieldAlert className="h-5 w-5 text-brand-navy/40 flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-sm text-brand-navy/60 leading-relaxed">
-                <strong className="text-brand-navy">Disclaimer:</strong> JetSet
-                Travel Cyprus assists with visa application preparation and
-                submission. Final visa decisions are made solely by the
-                respective embassy or consulate. We do not guarantee visa
-                approval. Processing times are estimates and may vary based on
-                embassy workload, seasonality, and individual circumstances.
+                <strong className="text-brand-navy">{t("disclaimerLabel")}</strong> {t("disclaimer")}
               </p>
             </div>
           </div>
@@ -286,11 +274,10 @@ export default async function VisaServicesPage({
       <section className="py-20 bg-brand-navy text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Need Visa Help? Message Us Now
+            {t("ctaTitle")}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto mb-8">
-            Send us your destination and travel dates on WhatsApp. We&apos;ll
-            respond with requirements and next steps within the hour.
+            {t("ctaSubtitle")}
           </p>
           <a
             href="https://wa.me/35799478073?text=Hi%2C%20I%20need%20help%20with%20a%20visa%20application."
@@ -299,7 +286,7 @@ export default async function VisaServicesPage({
             className="inline-flex items-center rounded-full bg-[#25D366] px-8 py-3.5 text-sm font-semibold text-white hover:bg-[#20bd5a] transition-colors"
           >
             <MessageCircle className="mr-2 h-5 w-5" />
-            Chat on WhatsApp
+            {t("ctaWhatsApp")}
           </a>
         </div>
       </section>
