@@ -644,9 +644,9 @@
     img.addEventListener("error", () => tryNext());
   }
 
-  setImgFallback($("#brandLogo"), ["./jetset-logo.svg", "./jetset-logo.jpg", "./logo.png", "./logo.jpg"]);
-  setImgFallback($("#iataBadgeHero"), ["./iata-logo.jpg", "./iata.jpg", "./iata.png"]);
-  setImgFallback($("#tourismBadgeHero"), ["./tourism-logo.jpg", "./tourism.jpg", "./tourism.png"]);
+  setImgFallback($("#brandLogo"), ["./images/jetset-logo-transparent.svg", "./images/jetset-logo-brand.svg", "./images/jetset-logo.jpg"]);
+  setImgFallback($("#iataBadgeHero"), ["./images/iata-logo.jpg", "./iata-logo.jpg", "./iata.jpg", "./iata.png"]);
+  setImgFallback($("#tourismBadgeHero"), ["./images/tourism-logo.jpg", "./tourism-logo.jpg", "./tourism.jpg", "./tourism.png"]);
 
   // =========================
   // Footer year

@@ -1,12 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="JetSet Travel Cyprus logo">
-  <defs>
-    <filter id="black-to-transparent" color-interpolation-filters="sRGB">
-      <feColorMatrix in="SourceGraphic" type="luminanceToAlpha" result="alphaMask" />
-      <feComponentTransfer in="alphaMask" result="boostedMask">
-        <feFuncA type="gamma" amplitude="2.8" exponent="0.32" offset="0" />
-      </feComponentTransfer>
-      <feComposite in="SourceGraphic" in2="boostedMask" operator="in" />
-    </filter>
-  </defs>
-  <image href="./jetset-logo.jpg" width="1200" height="360" filter="url(#black-to-transparent)" preserveAspectRatio="xMidYMid meet" />
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="140" viewBox="0 0 520 140" role="img" aria-label="JetSet Travel Cyprus logo">
+  <!-- Clean version: White + Gold on transparent -->
+  <g fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round">
+    <path d="M12 95h320"/>
+    <path d="M12 112h492"/>
+  </g>
+  <g font-family="'DM Sans', 'Montserrat', 'Lato', Arial, sans-serif" font-weight="800" letter-spacing="0.5">
+    <text x="16" y="84" font-size="88" fill="#FFFFFF">JetSet</text>
+  </g>
+  <g font-family="'DM Sans', 'Montserrat', 'Lato', Arial, sans-serif" font-weight="700" letter-spacing="5">
+    <text x="348" y="84" font-size="36" fill="#C9A84C">TRAVEL</text>
+  </g>
 </svg>

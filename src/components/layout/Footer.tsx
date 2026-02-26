@@ -33,7 +33,7 @@ export default function Footer() {
               alt="JetSet Travel Cyprus"
               width={140}
               height={40}
-              className="h-10 w-auto brightness-0 invert"
+              className="h-10 w-auto"
               loading="lazy"
             />
             <p className="text-sm text-white/70 leading-relaxed">
