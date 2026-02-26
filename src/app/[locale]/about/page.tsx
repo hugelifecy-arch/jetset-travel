@@ -252,13 +252,13 @@ export default async function AboutPage({
                 key={member.name}
                 className="bg-white rounded-2xl border border-brand-navy/10 overflow-hidden hover:shadow-luxury transition-shadow"
               >
-                <div className="aspect-[4/3] relative overflow-hidden">
+                <div className="aspect-[3/4] relative overflow-hidden">
                   <Image
                     src={member.photo}
                     alt={member.name}
-                    width={600}
-                    height={450}
-                    className="object-cover w-full h-full"
+                    width={450}
+                    height={600}
+                    className="object-cover object-top w-full h-full"
                     loading="lazy"
                     unoptimized
                   />
