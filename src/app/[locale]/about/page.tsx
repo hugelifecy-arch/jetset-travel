@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { localizedAlternates } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,71 +33,68 @@ export async function generateMetadata({
   };
 }
 
-const values = [
-  {
-    icon: Eye,
-    title: "Transparency",
-    description:
-      "No hidden fees, no fine print. We show you exactly what you pay for and why — every quote, every invoice, every time.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Reliability",
-    description:
-      "When we say we'll deliver, we deliver. From instant confirmations to 24/7 emergency support, you can count on us.",
-  },
-  {
-    icon: Heart,
-    title: "Personalisation",
-    description:
-      "No two trips are the same because no two travellers are. We listen first, then design an experience tailored to you.",
-  },
-  {
-    icon: Scale,
-    title: "Accountability",
-    description:
-      "We own every booking from start to finish. If something goes wrong, we fix it — no excuses, no runaround.",
-  },
-];
-
-const team = [
-  {
-    name: "Maria Georgiou",
-    role: "Founder & Managing Director",
-    bio: "With over 20 years in the travel industry, Maria founded JetSet to bring world-class service to Cyprus.",
-  },
-  {
-    name: "Andreas Ioannou",
-    role: "Corporate Travel Manager",
-    bio: "Andreas oversees all corporate accounts, ensuring compliance, speed, and cost-efficiency for every business client.",
-  },
-  {
-    name: "Elena Christodoulou",
-    role: "Luxury Travel Consultant",
-    bio: "Elena crafts bespoke luxury itineraries, drawing on her network of premium hotel and experience partners worldwide.",
-  },
-];
-
 export default async function AboutPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "aboutPage" });
+
+  const values = [
+    {
+      icon: Eye,
+      title: t("transparencyTitle"),
+      description: t("transparencyDesc"),
+    },
+    {
+      icon: ShieldCheck,
+      title: t("reliabilityTitle"),
+      description: t("reliabilityDesc"),
+    },
+    {
+      icon: Heart,
+      title: t("personalisationTitle"),
+      description: t("personalisationDesc"),
+    },
+    {
+      icon: Scale,
+      title: t("accountabilityTitle"),
+      description: t("accountabilityDesc"),
+    },
+  ];
+
+  const team = [
+    {
+      name: t("member1Name"),
+      role: t("member1Role"),
+      bio: t("member1Bio"),
+    },
+    {
+      name: t("member2Name"),
+      role: t("member2Role"),
+      bio: t("member2Bio"),
+    },
+    {
+      name: t("member3Name"),
+      role: t("member3Role"),
+      bio: t("member3Bio"),
+    },
+  ];
+
   return (
     <>
       {/* Hero */}
       <section className="bg-brand-navy text-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
-            About JetSet Travel
+            {t("heroLabel")}
           </p>
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Your Trusted Travel Partner in Cyprus
+            {t("heroTitle")}
           </h1>
           <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            Since 2006, we&apos;ve been helping individuals and businesses
-            travel smarter, safer, and with confidence.
+            {t("heroSubtitle")}
           </p>
         </div>
       </section>
@@ -107,29 +105,20 @@ export default async function AboutPage({
           <div className="flex flex-col md:flex-row items-center gap-12">
             <div className="flex-1">
               <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
-                Our Story
+                {t("storyLabel")}
               </p>
               <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6">
-                From a Small Office in Paphos to a Nationwide Partner
+                {t("storyTitle")}
               </h2>
               <div className="space-y-4 text-brand-navy/70 leading-relaxed">
                 <p>
-                  JetSet Travel was founded in 2006 with a simple belief: travel
-                  should be personal, transparent, and handled by people who
-                  genuinely care about getting it right.
+                  {t("storyP1")}
                 </p>
                 <p>
-                  What started as a two-person office in Paphos has grown into
-                  one of Cyprus&apos;s most trusted travel agencies — serving
-                  corporate clients, luxury travellers, and families across the
-                  island. Over 20 years later, that founding principle hasn&apos;t
-                  changed.
+                  {t("storyP2")}
                 </p>
                 <p>
-                  We hold full IATA accreditation and are licensed by the Cyprus
-                  Tourism Organisation, giving our clients the confidence that
-                  their bookings are protected, compliant, and competitively
-                  priced.
+                  {t("storyP3")}
                 </p>
               </div>
             </div>
@@ -149,11 +138,10 @@ export default async function AboutPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Accreditations & Trust
+              {t("accreditationsTitle")}
             </h2>
             <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              Our credentials ensure your bookings are protected, compliant, and
-              backed by industry-leading standards.
+              {t("accreditationsSubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -169,11 +157,10 @@ export default async function AboutPage({
                 />
               </div>
               <h3 className="text-lg font-bold text-brand-navy mb-2">
-                IATA Accredited
+                {t("iataTitle")}
               </h3>
               <p className="text-brand-navy/60 text-sm leading-relaxed">
-                Internationally recognised accreditation for airline ticketing
-                and travel services.
+                {t("iataDescription")}
               </p>
             </div>
 
@@ -189,11 +176,10 @@ export default async function AboutPage({
                 />
               </div>
               <h3 className="text-lg font-bold text-brand-navy mb-2">
-                CTO Licensed
+                {t("ctoTitle")}
               </h3>
               <p className="text-brand-navy/60 text-sm leading-relaxed">
-                Licensed by the Cyprus Tourism Organisation — fully regulated
-                and compliant.
+                {t("ctoDescription")}
               </p>
             </div>
 
@@ -205,10 +191,10 @@ export default async function AboutPage({
                 </span>
               </div>
               <h3 className="text-lg font-bold text-brand-navy mb-2">
-                Years of Service
+                {t("yearsTitle")}
               </h3>
               <p className="text-brand-navy/60 text-sm leading-relaxed">
-                Trusted by thousands of clients across Cyprus since 2006.
+                {t("yearsDescription")}
               </p>
             </div>
           </div>
@@ -220,11 +206,10 @@ export default async function AboutPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              What We Stand For
+              {t("valuesTitle")}
             </h2>
             <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              Four principles that guide every booking, every conversation, and
-              every decision we make.
+              {t("valuesSubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -253,11 +238,10 @@ export default async function AboutPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Meet the Team
+              {t("teamTitle")}
             </h2>
             <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              The people behind your travel — experienced, dedicated, and always
-              a phone call away.
+              {t("teamSubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -295,25 +279,24 @@ export default async function AboutPage({
       <section className="py-20 bg-brand-navy text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Work With Us?
+            {t("ctaTitle")}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto mb-8">
-            Whether it&apos;s a business trip or the holiday of a lifetime —
-            we&apos;d love to help.
+            {t("ctaSubtitle")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href={`/${locale}/quote`}
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
-              Get a Quote
+              {t("ctaQuote")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <Link
               href={`/${locale}/contact`}
               className="inline-flex items-center rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
             >
-              Contact Us
+              {t("ctaContact")}
             </Link>
           </div>
         </div>

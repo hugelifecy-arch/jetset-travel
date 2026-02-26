@@ -2,24 +2,25 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function Footer() {
   const locale = useLocale();
+  const t = useTranslations("footer");
 
   const quickLinks = [
-    { href: `/${locale}/about`, label: "About Us" },
-    { href: `/${locale}/hotel-reservations`, label: "Our Services" },
-    { href: `/${locale}/corporate-travel`, label: "Corporate Travel" },
-    { href: `/${locale}/faq`, label: "FAQ" },
-    { href: `/${locale}/contact`, label: "Contact" },
+    { href: `/${locale}/about`, label: t("aboutUs") },
+    { href: `/${locale}/hotel-reservations`, label: t("ourServices") },
+    { href: `/${locale}/corporate-travel`, label: t("corporateTravel") },
+    { href: `/${locale}/faq`, label: t("faq") },
+    { href: `/${locale}/contact`, label: t("contact") },
   ];
 
   const serviceLinks = [
-    { href: `/${locale}/contact`, label: "Flight Booking" },
-    { href: `/${locale}/hotel-reservations`, label: "Hotel Reservations" },
-    { href: `/${locale}/visa-services`, label: "Visa Assistance" },
-    { href: `/${locale}/luxury-travel`, label: "Luxury Travel" },
+    { href: `/${locale}/contact`, label: t("flightBooking") },
+    { href: `/${locale}/hotel-reservations`, label: t("hotelReservations") },
+    { href: `/${locale}/visa-services`, label: t("visaAssistance") },
+    { href: `/${locale}/luxury-travel`, label: t("luxuryTravel") },
   ];
   return (
     <footer className="bg-brand-dark text-white">
@@ -36,19 +37,18 @@ export default function Footer() {
               loading="lazy"
             />
             <p className="text-sm text-white/70 leading-relaxed">
-              Your trusted travel partner in Cyprus. Premium travel services for
-              corporate and leisure clients since 2006.
+              {t("tagline")}
             </p>
             <div className="text-xs text-white/50 space-y-1">
-              <p>IATA Accredited Agent</p>
-              <p>Cyprus Tourism Organisation Licensed</p>
+              <p>{t("iataAccredited")}</p>
+              <p>{t("cyprusTourism")}</p>
             </div>
           </div>
 
           {/* Col 2: Quick Links */}
           <div>
             <h3 className="text-sm font-semibold text-brand-gold uppercase tracking-wider mb-4">
-              Quick Links
+              {t("quickLinks")}
             </h3>
             <ul className="space-y-2.5">
               {quickLinks.map((link) => (
@@ -67,7 +67,7 @@ export default function Footer() {
           {/* Col 3: Services */}
           <div>
             <h3 className="text-sm font-semibold text-brand-gold uppercase tracking-wider mb-4">
-              Services
+              {t("services")}
             </h3>
             <ul className="space-y-2.5">
               {serviceLinks.map((link) => (
@@ -86,7 +86,7 @@ export default function Footer() {
           {/* Col 4: Contact Details */}
           <div>
             <h3 className="text-sm font-semibold text-brand-gold uppercase tracking-wider mb-4">
-              Contact Us
+              {t("contactUs")}
             </h3>
             <ul className="space-y-2.5 text-sm text-white/70">
               <li>
@@ -119,7 +119,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-brand-gold transition-colors"
                 >
-                  26A Agapinoros, 8049 Paphos, Cyprus
+                  {t("location")}
                 </a>
               </li>
             </ul>
@@ -132,9 +132,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 text-center">
           <p className="text-xs text-white/50">
-            {locale === "ru"
-              ? "JetSet K&K Travel Ltd | Рег. №: [PLACEHOLDER] | НДС: [PLACEHOLDER] | Лицензия на туризм: 7775"
-              : "JetSet K&K Travel Ltd | Reg. No. [PLACEHOLDER] | VAT: [PLACEHOLDER] | Tourism Licence: 7775"}
+            {t("companyLegal")}
           </p>
         </div>
       </div>
@@ -144,22 +142,21 @@ export default function Footer() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3 text-xs text-white/50">
             <p>
-              &copy; {new Date().getFullYear()} JetSet Travel Cyprus. All rights
-              reserved.
+              &copy; {new Date().getFullYear()} {t("copyright")}
             </p>
             <span className="hidden sm:inline" aria-hidden="true">|</span>
             <Link
               href={`/${locale}/privacy`}
               className="hover:text-brand-gold transition-colors"
             >
-              {locale === "ru" ? "Политика конфиденциальности" : "Privacy Policy"}
+              {t("privacyPolicy")}
             </Link>
             <span className="hidden sm:inline" aria-hidden="true">|</span>
             <Link
               href={`/${locale}/terms`}
               className="hover:text-brand-gold transition-colors"
             >
-              {locale === "ru" ? "Условия обслуживания" : "Terms of Service"}
+              {t("termsOfService")}
             </Link>
           </div>
           <div className="flex items-center gap-4">

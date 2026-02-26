@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Zap,
   ShieldCheck,
@@ -16,98 +16,88 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-const pillars = [
-  {
-    icon: Zap,
-    title: "Speed",
-    description:
-      "Fast quotes within 30 minutes during business hours. Last-minute itinerary changes handled in real time.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Compliance",
-    description:
-      "Full VAT-compliant invoicing, travel policy enforcement, and detailed expense reporting for every trip.",
-  },
-  {
-    icon: Clock,
-    title: "Reliability",
-    description:
-      "24/7 emergency support line for travellers abroad. Dedicated account manager for your organisation.",
-  },
-];
-
-const steps = [
-  {
-    number: "01",
-    title: "Tell Us Your Needs",
-    description:
-      "Share your travel policy, preferred airlines, hotel tiers, and budget guidelines.",
-  },
-  {
-    number: "02",
-    title: "We Build Your Profile",
-    description:
-      "A dedicated account manager sets up your company profile with negotiated rates and approval workflows.",
-  },
-  {
-    number: "03",
-    title: "Book With Confidence",
-    description:
-      "Request trips via email, phone, or WhatsApp. We handle booking, ticketing, and confirmations.",
-  },
-  {
-    number: "04",
-    title: "Travel & Report",
-    description:
-      "Travellers receive full itineraries. Finance gets clean invoices and monthly spending reports.",
-  },
-];
-
-const coverageLeft = [
-  "International & domestic flights",
-  "Hotel reservations worldwide",
-  "Airport transfers & car hire",
-  "Travel insurance policies",
-  "Multi-city & complex itineraries",
-  "Loyalty programme management",
-];
-
-const coverageRight = [
-  "Conference & event travel",
-  "Group bookings (10+ travellers)",
-  "Visa assistance & documentation",
-  "Rail & ferry tickets",
-  "Emergency rebooking & cancellations",
-  "Monthly expense consolidation",
-];
-
-const faqs = [
-  {
-    question: "Do you provide VAT-compliant invoices?",
-    answer:
-      "Yes. Every booking comes with a detailed, VAT-compliant invoice suitable for EU tax reporting. We can also provide consolidated monthly invoices for easier accounting and integrate with your expense management system.",
-  },
-  {
-    question: "Can you enforce our company travel policy?",
-    answer:
-      "Absolutely. During onboarding we configure your policy rules — preferred airlines, hotel star ratings, cabin classes, and budget caps. Our system flags any out-of-policy requests for approval before booking.",
-  },
-  {
-    question: "How do you handle urgent or last-minute bookings?",
-    answer:
-      "We offer 24/7 emergency support for corporate clients. Urgent requests are prioritised, and our IATA-accredited status means we can issue tickets instantly without waiting for third-party confirmations.",
-  },
-  {
-    question: "What is your cancellation and rebooking policy?",
-    answer:
-      "We manage all cancellations and changes on your behalf at no additional service fee. You only pay any airline or hotel penalties that apply. We also proactively monitor fare changes and rebook when savings are available.",
-  },
-];
-
 export default function CorporateTravelContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const locale = useLocale();
+  const t = useTranslations("corporatePage");
+
+  const pillars = [
+    {
+      icon: Zap,
+      title: t("speedTitle"),
+      description: t("speedDesc"),
+    },
+    {
+      icon: ShieldCheck,
+      title: t("complianceTitle"),
+      description: t("complianceDesc"),
+    },
+    {
+      icon: Clock,
+      title: t("reliabilityTitle"),
+      description: t("reliabilityDesc"),
+    },
+  ];
+
+  const steps = [
+    {
+      number: "01",
+      title: t("step1Title"),
+      description: t("step1Desc"),
+    },
+    {
+      number: "02",
+      title: t("step2Title"),
+      description: t("step2Desc"),
+    },
+    {
+      number: "03",
+      title: t("step3Title"),
+      description: t("step3Desc"),
+    },
+    {
+      number: "04",
+      title: t("step4Title"),
+      description: t("step4Desc"),
+    },
+  ];
+
+  const coverageLeft = [
+    t("cover1"),
+    t("cover2"),
+    t("cover3"),
+    t("cover4"),
+    t("cover5"),
+    t("cover6"),
+  ];
+
+  const coverageRight = [
+    t("cover7"),
+    t("cover8"),
+    t("cover9"),
+    t("cover10"),
+    t("cover11"),
+    t("cover12"),
+  ];
+
+  const faqs = [
+    {
+      question: t("faq1Q"),
+      answer: t("faq1A"),
+    },
+    {
+      question: t("faq2Q"),
+      answer: t("faq2A"),
+    },
+    {
+      question: t("faq3Q"),
+      answer: t("faq3A"),
+    },
+    {
+      question: t("faq4Q"),
+      answer: t("faq4A"),
+    },
+  ];
 
   return (
     <>
@@ -116,22 +106,20 @@ export default function CorporateTravelContent() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
-              Corporate Travel
+              {t("heroLabel")}
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Corporate Travel Management That Works for Your Finance Team
+              {t("heroTitle")}
             </h1>
             <p className="text-lg text-white/70 mb-8 max-w-2xl">
-              IATA-accredited agency in Cyprus delivering fast quotes, clean
-              invoices, and 24/7 support for businesses that need travel done
-              right.
+              {t("heroSubtitle")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href={`/${locale}/contact`}
                 className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
               >
-                Request a Quote
+                {t("requestQuote")}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
               <a
@@ -141,7 +129,7 @@ export default function CorporateTravelContent() {
                 className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
               >
                 <Phone className="mr-2 h-4 w-4" />
-                Call Us Now
+                {t("callUsNow")}
               </a>
             </div>
           </div>
@@ -153,11 +141,10 @@ export default function CorporateTravelContent() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Why Businesses Choose JetSet
+              {t("whyTitle")}
             </h2>
             <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              Three pillars that make corporate travel effortless for your team
-              and transparent for your finance department.
+              {t("whySubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -186,10 +173,10 @@ export default function CorporateTravelContent() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              How It Works
+              {t("howTitle")}
             </h2>
             <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              From onboarding to your first trip — we make the process seamless.
+              {t("howSubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -215,11 +202,10 @@ export default function CorporateTravelContent() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              What We Cover
+              {t("coverTitle")}
             </h2>
             <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              A full-service corporate travel solution — everything your
-              business needs under one roof.
+              {t("coverSubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 max-w-3xl mx-auto">
@@ -248,7 +234,7 @@ export default function CorporateTravelContent() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Frequently Asked Questions
+              {t("faqTitle")}
             </h2>
           </div>
           <div className="max-w-3xl mx-auto space-y-4">
@@ -292,11 +278,10 @@ export default function CorporateTravelContent() {
             <PlaneTakeoff className="h-8 w-8" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Streamline Your Corporate Travel?
+            {t("ctaTitle")}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto mb-8">
-            Join law firms, tech companies, and enterprises across Cyprus who
-            trust JetSet for reliable, cost-effective business travel.
+            {t("ctaSubtitle")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
@@ -304,7 +289,7 @@ export default function CorporateTravelContent() {
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
               <FileText className="mr-2 h-4 w-4" />
-              Get a Free Quote
+              {t("ctaQuote")}
             </Link>
             <a
               href="https://wa.me/35799478073?text=Hi%2C%20I%27d%20like%20to%20set%20up%20a%20corporate%20travel%20account."
@@ -313,7 +298,7 @@ export default function CorporateTravelContent() {
               className="inline-flex items-center rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
             >
               <UserCheck className="mr-2 h-4 w-4" />
-              Set Up an Account
+              {t("ctaAccount")}
             </a>
           </div>
         </div>
