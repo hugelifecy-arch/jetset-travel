@@ -46,7 +46,7 @@ function checkRateLimit(ip: string): boolean {
 /* ------------------------------------------------------------------ */
 
 const WHATSAPP_NUMBER =
-  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "35799000000";
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "35799478073";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jetset-travel.com";
 
@@ -134,7 +134,7 @@ export async function POST(request: Request) {
   try {
     await sendResendEmail(apiKey, {
       from: "JetSet Travel <noreply@jetset-travel.com>",
-      to: "info@jetset-travel.com",
+      to: "info@jetset.com.cy",
       reply_to: data.email,
       subject: data.travelType
         ? `New Quote Request — ${data.name} (${data.travelType})`
