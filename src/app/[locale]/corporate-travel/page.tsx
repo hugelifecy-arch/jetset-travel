@@ -14,11 +14,11 @@ export async function generateMetadata({
     routePath: "/corporate-travel",
     title:
       locale === "ru"
-        ? "Корпоративное управление поездками Кипр | Бронирования с отчётностью | JetSet Travel"
+        ? "Управление корпоративными командировками на Кипре | JetSet Travel"
         : "Corporate Travel Management Cyprus | Policy-Compliant Bookings | JetSet Travel",
     description:
       locale === "ru"
-        ? "Корпоративное управление поездками для компаний Кипра. Прозрачная отчётность, соответствие политикам, перебронирование 24/7, персональный менеджер. Запросите бесплатное предложение."
+        ? "Организация корпоративных командировок для компаний на Кипре. Прозрачная отчётность, соблюдение корпоративной политики, перебронирование 24/7 и персональный менеджер."
         : "Corporate travel management for Cyprus businesses. Clean invoicing, policy compliance, 24/7 rebooking, and dedicated account management. Get a free quote today.",
   });
 }

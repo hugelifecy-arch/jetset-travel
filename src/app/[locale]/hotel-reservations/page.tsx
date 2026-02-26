@@ -26,11 +26,11 @@ export async function generateMetadata({
     routePath: "/hotel-reservations",
     title:
       locale === "ru"
-        ? "Бронирование отелей и согласованные тарифы | Корпоративные и частные | JetSet Travel Кипр"
+        ? "Бронирование отелей по корпоративным тарифам | JetSet Travel Кипр"
         : "Hotel Bookings & Negotiated Rates | Corporate & Leisure | JetSet Travel Cyprus",
     description:
       locale === "ru"
-        ? "Согласованные тарифы на отели по всему миру для корпоративных и частных путешественников. Качественное размещение под ваш бюджет, стандарты и потребности."
+        ? "Согласованные тарифы в лучших отелях мира для корпоративных и частных клиентов. Подбор размещения с учётом бюджета, стандартов и расположения."
         : "Negotiated hotel rates worldwide for corporate and leisure travelers. Quality accommodations matched to your budget, standards, and location needs.",
   });
 }

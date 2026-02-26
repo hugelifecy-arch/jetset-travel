@@ -23,11 +23,11 @@ export async function generateMetadata({
     routePath: "/luxury-travel",
     title:
       locale === "ru"
-        ? "Элитный отдых из Кипра | Премиальные путешествия и трансферы | JetSet"
+        ? "Премиальный отдых и путешествия из Кипра | JetSet Travel"
         : "Luxury Travel Planning Cyprus | Premium Holidays & Private Transfers | JetSet",
     description:
       locale === "ru"
-        ? "Эксклюзивные путешествия из Кипра. Отели класса люкс, частные трансферы, индивидуальные маршруты. Спланируйте премиальный отдых с JetSet Travel."
+        ? "Индивидуальные программы премиального отдыха с Кипра. Отели уровня люкс, личные трансферы, эксклюзивные маршруты. Спланируйте путешествие с JetSet Travel."
         : "Curated luxury travel experiences from Cyprus. Suite-level hotels, private transfers, bespoke multi-city journeys. Plan your premium getaway with JetSet Travel.",
   });
 }
