@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { localizedAlternates } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-
 export async function generateMetadata({
   params,
 }: {

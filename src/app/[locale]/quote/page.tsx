@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { localizedAlternates } from "@/lib/seo";
 import QuoteContent from "./QuoteContent";
-
 export async function generateMetadata({
   params,
 }: {
