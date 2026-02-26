@@ -3,19 +3,27 @@
 // - Enable and respond to reviews
 // - This is critical for local SEO
 
+import { getLocale } from "next-intl/server";
 import JsonLd from "./JsonLd";
 
-export default function LocalBusinessSchema() {
+export default async function LocalBusinessSchema() {
+  const locale = await getLocale();
+  const isRussian = locale === "ru";
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
     name: "JetSet Travel Cyprus",
     alternateName: "JetSet K&K Travel Ltd",
-    url: "https://www.jetset-travel.com",
+    url: isRussian
+      ? "https://www.jetset-travel.com/ru"
+      : "https://www.jetset-travel.com",
     logo: "https://www.jetset-travel.com/images/jetset-logo.svg",
     image: "https://www.jetset-travel.com/images/jetset-og-image.jpg",
-    description:
-      "IATA-accredited corporate and luxury travel management agency in Paphos, Cyprus. Specializing in corporate travel, luxury leisure, visa services, and hotel bookings.",
+    inLanguage: isRussian ? "ru" : "en",
+    description: isRussian
+      ? "Аккредитованное IATA корпоративное и премиальное туристическое агентство в Пафосе, Кипр. Специализируемся на корпоративных командировках, премиальном отдыхе, визовых услугах и бронировании отелей."
+      : "IATA-accredited corporate and luxury travel management agency in Paphos, Cyprus. Specializing in corporate travel, luxury leisure, visa services, and hotel bookings.",
     telephone: ["+357-99-478-073", "+357-99-310-993", "+357-26-911-095"],
     email: "info@jetset.com.cy",
     address: {

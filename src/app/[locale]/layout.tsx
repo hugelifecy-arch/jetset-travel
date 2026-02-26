@@ -9,6 +9,7 @@ import MobileActionBar from "@/components/layout/MobileActionBar";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import { CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import HreflangTags from "@/components/seo/HreflangTags";
 import "../globals.css";
 
 const dmSans = localFont({
@@ -66,8 +67,8 @@ export async function generateMetadata({
       : "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
     openGraph: {
       type: "website",
-      locale: isRussian ? "ru_CY" : "en_CY",
-      alternateLocale: isRussian ? "en_CY" : "ru_CY",
+      locale: isRussian ? "ru_RU" : "en_CY",
+      alternateLocale: isRussian ? "en_CY" : "ru_RU",
       siteName: "JetSet Travel Cyprus",
       url: `${CANONICAL_ORIGIN}/${locale}`,
       title: isRussian
@@ -114,6 +115,7 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://maps.google.com" />
+        <HreflangTags />
       </head>
       <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
