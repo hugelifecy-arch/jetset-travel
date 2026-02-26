@@ -69,15 +69,18 @@ export default function Header() {
               <span>+357 99 478 073</span>
             </a>
             <span className="text-white/20">|</span>
-            <div className="flex items-center gap-1 text-sm">
+            <nav aria-label="Language selection" className="flex items-center gap-1 text-sm">
               <Globe className="h-4 w-4 text-white/60" />
               <Link
                 href={enHref}
                 className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
                   locale === "en"
-                    ? "font-bold text-brand-gold"
-                    : "font-medium text-white/60 hover:text-white"
+                    ? "font-bold text-brand-gold underline underline-offset-4"
+                    : "font-normal text-white/50 hover:text-white"
                 }`}
+                aria-current={locale === "en" ? "page" : undefined}
+                aria-label="English"
+                title="English"
               >
                 EN
               </Link>
@@ -86,13 +89,16 @@ export default function Header() {
                 href={ruHref}
                 className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
                   locale === "ru"
-                    ? "font-bold text-brand-gold"
-                    : "font-medium text-white/60 hover:text-white"
+                    ? "font-bold text-brand-gold underline underline-offset-4"
+                    : "font-normal text-white/50 hover:text-white"
                 }`}
+                aria-current={locale === "ru" ? "page" : undefined}
+                aria-label="Русский"
+                title="Русский"
               >
                 RU
               </Link>
-            </div>
+            </nav>
 
             <Link
               href={`/${locale}/contact`}
@@ -102,18 +108,49 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 text-white"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
-          </button>
+          {/* Mobile: language switcher + hamburger */}
+          <div className="md:hidden flex items-center gap-2">
+            <nav aria-label="Language selection" className="flex items-center gap-1 text-sm">
+              <Link
+                href={enHref}
+                className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
+                  locale === "en"
+                    ? "font-bold text-brand-gold underline underline-offset-4"
+                    : "font-normal text-white/50 hover:text-white"
+                }`}
+                aria-current={locale === "en" ? "page" : undefined}
+                aria-label="English"
+                title="English"
+              >
+                EN
+              </Link>
+              <span className="text-white/30">|</span>
+              <Link
+                href={ruHref}
+                className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
+                  locale === "ru"
+                    ? "font-bold text-brand-gold underline underline-offset-4"
+                    : "font-normal text-white/50 hover:text-white"
+                }`}
+                aria-current={locale === "ru" ? "page" : undefined}
+                aria-label="Русский"
+                title="Русский"
+              >
+                RU
+              </Link>
+            </nav>
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="p-2 text-white"
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -133,31 +170,37 @@ export default function Header() {
             ))}
 
             <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between">
-              <div className="flex items-center gap-2 text-sm">
+              <nav aria-label="Language selection" className="flex items-center gap-2 text-sm">
                 <Globe className="h-4 w-4 text-white/60" />
                 <Link
                   href={enHref}
-                  className={`px-2 py-1 rounded text-sm ${
+                  className={`px-2 py-1 rounded text-sm transition-colors ${
                     locale === "en"
-                      ? "font-bold text-brand-gold"
-                      : "font-medium text-white/60"
+                      ? "font-bold text-brand-gold underline underline-offset-4"
+                      : "font-normal text-white/50 hover:text-white"
                   }`}
+                  aria-current={locale === "en" ? "page" : undefined}
+                  aria-label="English"
+                  title="English"
                   onClick={() => setMobileOpen(false)}
                 >
                   EN
                 </Link>
                 <Link
                   href={ruHref}
-                  className={`px-2 py-1 rounded text-sm ${
+                  className={`px-2 py-1 rounded text-sm transition-colors ${
                     locale === "ru"
-                      ? "font-bold text-brand-gold"
-                      : "font-medium text-white/60"
+                      ? "font-bold text-brand-gold underline underline-offset-4"
+                      : "font-normal text-white/50 hover:text-white"
                   }`}
+                  aria-current={locale === "ru" ? "page" : undefined}
+                  aria-label="Русский"
+                  title="Русский"
                   onClick={() => setMobileOpen(false)}
                 >
                   RU
                 </Link>
-              </div>
+              </nav>
 
               <Link
                 href={`/${locale}/contact`}
