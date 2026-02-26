@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -46,23 +45,6 @@ export default function TrustSection() {
               ))}
             </ul>
 
-            {/* Trust badge images */}
-            <div className="mt-8 flex items-center gap-6">
-              <Image
-                src="/images/iata-logo.jpg"
-                alt="IATA Accredited Travel Agent"
-                width={80}
-                height={80}
-                className="h-16 w-auto rounded object-contain"
-              />
-              <Image
-                src="/images/tourism-logo.jpg"
-                alt="Cyprus Tourism Organisation Licensed"
-                width={80}
-                height={80}
-                className="h-16 w-auto rounded object-contain"
-              />
-            </div>
           </motion.div>
 
           {/* Right: Stats */}
