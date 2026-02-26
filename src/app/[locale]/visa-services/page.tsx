@@ -11,7 +11,6 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
-
 export async function generateMetadata({
   params,
 }: {
@@ -24,12 +23,12 @@ export async function generateMetadata({
       absolute:
         locale === "ru"
           ? "Визовая поддержка Кипр | Деловые и туристические визы | JetSet Travel"
-          : "Visa Assistance Services Cyprus | Business & Tourist Visas | JetSet Travel",
+          : "Visa Assistance Services Cyprus | Business & Tourist Visa Support | JetSet Travel",
     },
     description:
       locale === "ru"
-        ? "Профессиональная помощь в оформлении виз для деловых и туристических поездок. Чек-листы документов, сопровождение и координация."
-        : "Expert visa application support for business and tourist travel. Document checklists, processing guidance, and coordination for all major destinations.",
+        ? "Профессиональная визовая помощь из Пафоса, Кипр. Чек-листы документов, сопровождение заявок и координация для деловых и туристических виз по всему миру."
+        : "Expert visa assistance from Paphos, Cyprus. Document checklists, application guidance, and coordination support for business and tourist visas worldwide.",
     alternates: localizedAlternates(locale, "/visa-services"),
   };
 }

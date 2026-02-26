@@ -6,22 +6,22 @@ const locales = ["en", "ru"] as const;
 
 const pages = [
   { path: "", priority: 1.0, changeFrequency: "weekly" as const },
-  { path: "/services", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/corporate-travel", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/luxury-travel", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/visa-services", priority: 0.8, changeFrequency: "monthly" as const },
+  { path: "/services", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/hotel-reservations", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/about", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/quote", priority: 0.8, changeFrequency: "monthly" as const },
-  { path: "/blog", priority: 0.7, changeFrequency: "weekly" as const },
-  { path: "/faq", priority: 0.7, changeFrequency: "monthly" as const },
-  { path: "/privacy", priority: 0.6, changeFrequency: "monthly" as const },
-  { path: "/terms", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/faq", priority: 0.6, changeFrequency: "monthly" as const },
+  { path: "/blog", priority: 0.6, changeFrequency: "weekly" as const },
+  { path: "/privacy", priority: 0.3, changeFrequency: "monthly" as const },
+  { path: "/terms", priority: 0.3, changeFrequency: "monthly" as const },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = "2026-02-25";
+  const lastModified = "2026-02-26";
 
   const staticPages = locales.flatMap((locale) =>
     pages.map((page) => ({

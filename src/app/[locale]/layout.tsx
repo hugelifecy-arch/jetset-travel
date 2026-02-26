@@ -11,6 +11,10 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import HreflangTags from "@/components/seo/HreflangTags";
 import { HtmlLangSetter } from "./HtmlLangSetter";
 
+export function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "ru" }];
+}
+
 export async function generateMetadata({
   params,
 }: {

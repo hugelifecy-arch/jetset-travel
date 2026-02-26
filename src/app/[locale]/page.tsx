@@ -7,7 +7,7 @@ import GoogleReviews from "@/components/sections/GoogleReviews";
 import ClientLogos from "@/components/sections/ClientLogos";
 import CTABanner from "@/components/sections/CTABanner";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
-
+import WebSiteSchema from "@/components/seo/WebSiteSchema";
 export async function generateMetadata({
   params,
 }: {
@@ -19,13 +19,13 @@ export async function generateMetadata({
     title: {
       absolute:
         locale === "ru"
-          ? "Корпоративное и премиальное турагентство в Пафосе, Кипр | JetSet Travel"
-          : "Corporate & Luxury Travel Agency in Paphos, Cyprus | JetSet Travel",
+          ? "Корпоративное турагентство в Пафосе, Кипр | JetSet Travel — Аккредитация IATA"
+          : "Corporate Travel Agency in Paphos, Cyprus | JetSet Travel — IATA Accredited",
     },
     description:
       locale === "ru"
-        ? "Аккредитованное IATA турагентство: корпоративные поездки и элитный отдых. Быстрые предложения, поддержка 24/7, прозрачная отчётность. Пафос, Кипр с 2006."
-        : "IATA-accredited travel management for corporate teams and luxury leisure. Fast quotes, 24/7 support, compliant invoicing. Based in Paphos, Cyprus since 2006.",
+        ? "Аккредитованное IATA агентство: корпоративные и премиальные путешествия на Кипре. Быстрые предложения, прозрачная отчётность, поддержка 24/7. Более 500 корпоративных клиентов с 2006 года."
+        : "IATA-accredited corporate & luxury travel management in Cyprus. Fast quotes, compliant invoicing, 24/7 disruption support. Serving 500+ corporate clients since 2006.",
     alternates: localizedAlternates(locale),
   };
 }
@@ -42,6 +42,7 @@ export default function HomePage() {
       <ClientLogos />
       <CTABanner />
       <LocalBusinessSchema />
+      <WebSiteSchema />
     </>
   );
 }

@@ -4,7 +4,6 @@ import { localizedAlternates } from "@/lib/seo";
 import { getAllPosts } from "@/lib/blog";
 import Link from "next/link";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
-
 export async function generateMetadata({
   params,
 }: {
@@ -16,13 +15,13 @@ export async function generateMetadata({
     title: {
       absolute:
         locale === "ru"
-          ? "Блог — Путешествия: советы и гиды | JetSet Travel Cyprus"
-          : "Blog — Travel Insights & Guides | JetSet Travel Cyprus",
+          ? "Блог | Корпоративные и премиальные путешествия из Кипра | JetSet Travel"
+          : "Travel Blog | Corporate & Luxury Travel Insights from Cyprus | JetSet Travel",
     },
     description:
       locale === "ru"
-        ? "Экспертные советы, гиды по направлениям и аналитика индустрии путешествий от команды JetSet Travel."
-        : "Expert tips, destination guides, and travel industry insights from the JetSet Travel team.",
+        ? "Экспертные материалы об управлении корпоративными поездками, советы по деловым путешествиям на Кипре, визовые гиды и обзоры премиальных направлений от JetSet Travel."
+        : "Expert insights on corporate travel management, Cyprus business travel tips, visa guides, and luxury destination reviews from JetSet Travel.",
     alternates: localizedAlternates(locale, "/blog"),
   };
 }

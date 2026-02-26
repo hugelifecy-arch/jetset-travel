@@ -14,7 +14,6 @@ import {
   MapPin,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
-
 export async function generateMetadata({
   params,
 }: {
@@ -26,13 +25,13 @@ export async function generateMetadata({
     title: {
       absolute:
         locale === "ru"
-          ? "Бронирование отелей | Выгодные тарифы по всему миру | JetSet Travel"
-          : "Hotel Reservations — Negotiated Rates Worldwide | JetSet Travel",
+          ? "Бронирование отелей и согласованные тарифы | Корпоративные и частные | JetSet Travel Кипр"
+          : "Hotel Bookings & Negotiated Rates | Corporate & Leisure | JetSet Travel Cyprus",
     },
     description:
       locale === "ru"
-        ? "Бронирование отелей по согласованным тарифам через JetSet Travel Cyprus. Курорты, бизнес-отели, длительное проживание и групповые заказы."
-        : "Book hotels worldwide with negotiated corporate and leisure rates. Resorts, business accommodation, extended stays, and group bookings from Cyprus.",
+        ? "Согласованные тарифы на отели по всему миру для корпоративных и частных путешественников. Качественное размещение под ваш бюджет, стандарты и потребности."
+        : "Negotiated hotel rates worldwide for corporate and leisure travelers. Quality accommodations matched to your budget, standards, and location needs.",
     alternates: localizedAlternates(locale, "/hotel-reservations"),
   };
 }

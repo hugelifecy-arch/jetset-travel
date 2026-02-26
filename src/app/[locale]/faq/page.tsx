@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import Accordion from "@/components/ui/Accordion";
 import JsonLd from "@/components/seo/JsonLd";
-
 export async function generateMetadata({
   params,
 }: {

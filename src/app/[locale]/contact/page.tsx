@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { localizedAlternates } from "@/lib/seo";
 import ContactContent from "./ContactContent";
-
 export async function generateMetadata({
   params,
 }: {
@@ -13,13 +12,13 @@ export async function generateMetadata({
     title: {
       absolute:
         locale === "ru"
-          ? "Контакты JetSet Travel Пафос | Ответ в течение 24 часов"
-          : "Contact JetSet Travel Paphos | Get a Quote Within 24 Hours",
+          ? "Контакты JetSet Travel Кипр | Бесплатная консультация | Запросить предложение"
+          : "Contact JetSet Travel Cyprus | Book a Free Consultation | Get a Quote",
     },
     description:
       locale === "ru"
-        ? "Запросите предложение на корпоративные или частные поездки. WhatsApp, телефон, email или форма на сайте. 26A Agapinoros, Пафос, Кипр."
-        : "Request a corporate or leisure travel quote. Reach us via WhatsApp, phone, email, or our contact form. 26A Agapinoros, Paphos, Cyprus.",
+        ? "Закажите бесплатную консультацию по корпоративным поездкам или запросите предложение. WhatsApp, телефон или форма. Ответ в течение 2 рабочих часов."
+        : "Book a free corporate travel consultation or request a quote. WhatsApp, call, or fill out our form. Response within 2 business hours.",
     alternates: localizedAlternates(locale, "/contact"),
   };
 }

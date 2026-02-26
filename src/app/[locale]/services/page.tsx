@@ -10,7 +10,6 @@ import {
   Briefcase,
   ArrowRight,
 } from "lucide-react";
-
 export async function generateMetadata({
   params,
 }: {
@@ -22,13 +21,13 @@ export async function generateMetadata({
     title: {
       absolute:
         locale === "ru"
-          ? "Наши услуги — Авиабилеты, отели, визы, корпоративные и премиальные путешествия | JetSet Travel"
-          : "Our Services — Flights, Hotels, Visas, Corporate & Luxury Travel | JetSet Travel",
+          ? "Все услуги | Корпоративные, премиальные, визы, отели | JetSet Travel Кипр"
+          : "All Travel Services | Corporate, Luxury, Visa, Hotels | JetSet Travel Cyprus",
     },
     description:
       locale === "ru"
-        ? "Полный спектр туристических услуг от JetSet Travel Cyprus: авиабилеты, бронирование отелей, визовая поддержка, корпоративные и премиальные путешествия."
-        : "Full-service travel management from JetSet Travel Cyprus: flights, hotel reservations, visa assistance, corporate travel, and luxury holiday planning.",
+        ? "Полный спектр услуг от одной надёжной команды на Кипре: корпоративные поездки, элитный отдых, визовая поддержка, бронирование отелей и круглосуточная поддержка."
+        : "Complete travel services from one accountable team in Cyprus: corporate travel, luxury holidays, visa assistance, hotel bookings, and 24/7 support.",
     alternates: localizedAlternates(locale, "/services"),
   };
 }

@@ -11,7 +11,6 @@ import {
   ArrowRight,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
-
 export async function generateMetadata({
   params,
 }: {
@@ -23,13 +22,13 @@ export async function generateMetadata({
     title: {
       absolute:
         locale === "ru"
-          ? "Элитный отдых из Кипра | Индивидуальные путешествия | JetSet Travel"
-          : "Luxury Holiday Planning Cyprus | Bespoke Leisure Travel | JetSet Travel",
+          ? "Элитный отдых из Кипра | Премиальные путешествия и трансферы | JetSet"
+          : "Luxury Travel Planning Cyprus | Premium Holidays & Private Transfers | JetSet",
     },
     description:
       locale === "ru"
-        ? "Эксклюзивные путешествия с частными трансферами, отелями класса люкс и индивидуальными маршрутами. Ваш премиальный партнёр на Кипре."
-        : "Curated luxury holidays with private transfers, suite-level hotels, and bespoke multi-city itineraries. Your premium travel partner in Cyprus.",
+        ? "Эксклюзивные путешествия из Кипра. Отели класса люкс, частные трансферы, индивидуальные маршруты. Спланируйте премиальный отдых с JetSet Travel."
+        : "Curated luxury travel experiences from Cyprus. Suite-level hotels, private transfers, bespoke multi-city journeys. Plan your premium getaway with JetSet Travel.",
     alternates: localizedAlternates(locale, "/luxury-travel"),
   };
 }

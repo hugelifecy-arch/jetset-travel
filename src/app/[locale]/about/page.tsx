@@ -15,7 +15,6 @@ import {
   Clock,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
-
 export async function generateMetadata({
   params,
 }: {
@@ -27,13 +26,13 @@ export async function generateMetadata({
     title: {
       absolute:
         locale === "ru"
-          ? "О JetSet Travel | Аккредитованное IATA агентство в Пафосе с 2006"
-          : "About JetSet Travel | IATA-Accredited Agency in Paphos Since 2006",
+          ? "О JetSet Travel Кипр | 15+ лет корпоративных и премиальных путешествий"
+          : "About JetSet Travel Cyprus | 15+ Years of Corporate & Luxury Travel",
     },
     description:
       locale === "ru"
-        ? "Нонтари Калаитсидис и Маро Коккину — владельцы JetSet Travel Cyprus. 15+ лет опыта, аккредитация IATA, лицензия CTO №7775. Ваш надёжный партнёр в путешествиях."
-        : "Meet Nontari Kalaitsidis and Maro Kokkinou, owners of JetSet Travel Cyprus. 15+ years of experience, IATA accreditation, Cyprus Tourism Licence #7775. Your trusted travel partner.",
+        ? "JetSet K&K Travel Ltd — аккредитованное IATA турагентство в Пафосе, Кипр с 2006 года. Познакомьтесь с нашей командой и узнайте, почему нам доверяют 500+ корпоративных клиентов."
+        : "JetSet K&K Travel Ltd — IATA-accredited travel agency in Paphos, Cyprus since 2006. Meet our team, learn our story, and discover why 500+ corporates trust us.",
     alternates: localizedAlternates(locale, "/about"),
   };
 }

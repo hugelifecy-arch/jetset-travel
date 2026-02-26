@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { localizedAlternates } from "@/lib/seo";
 import CorporateTravelContent from "./CorporateTravelContent";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
-
 export async function generateMetadata({
   params,
 }: {
@@ -14,13 +13,13 @@ export async function generateMetadata({
     title: {
       absolute:
         locale === "ru"
-          ? "Корпоративное управление поездками Кипр | JetSet Travel"
+          ? "Корпоративное управление поездками Кипр | Бронирования с отчётностью | JetSet Travel"
           : "Corporate Travel Management Cyprus | Policy-Compliant Bookings | JetSet Travel",
     },
     description:
       locale === "ru"
-        ? "Корпоративное управление поездками с прозрачной отчётностью, поддержкой 24/7 и персональными менеджерами. Более 500 корпоративных клиентов."
-        : "Executive travel management with clean invoicing, 24/7 disruption support, and dedicated account managers. Trusted by 500+ corporate clients.",
+        ? "Корпоративное управление поездками для компаний Кипра. Прозрачная отчётность, соответствие политикам, перебронирование 24/7, персональный менеджер. Запросите бесплатное предложение."
+        : "Corporate travel management for Cyprus businesses. Clean invoicing, policy compliance, 24/7 rebooking, and dedicated account management. Get a free quote today.",
     alternates: localizedAlternates(locale, "/corporate-travel"),
   };
 }
