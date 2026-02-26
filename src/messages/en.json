@@ -28,14 +28,15 @@
     "bullet1": "Finance-ready invoices and documentation aligned to corporate compliance requirements.",
     "bullet2": "Dedicated account management with single-point accountability for every trip.",
     "bullet3": "24/7 disruption handling — rebooking, rerouting, and real-time updates on WhatsApp.",
-    "statClientsValue": "500+",
+    "statClientsValue": "520+",
     "statClients": "Corporate Clients",
     "statExperienceValue": "15+",
     "statExperience": "Years Experience",
     "statSupportValue": "24/7",
     "statSupport": "Support Available",
     "statSatisfactionValue": "98%",
-    "statSatisfaction": "Client Satisfaction"
+    "statSatisfaction": "Client Satisfaction",
+    "statSatisfactionContext": "Based on annual client feedback"
   },
   "services": {
     "title": "What We Do",
@@ -69,17 +70,35 @@
     "subtitle": "Real feedback from corporate and leisure travellers.",
     "readMoreOnGoogle": "Read more reviews on Google",
     "review1": {
-      "role": "Operations Manager",
-      "text": "We had a cancellation on a meeting week. JetSet rerouted the team the same day and kept finance happy with clean documentation."
+      "role": "Operations Director",
+      "text": "We had a last-minute cancellation during a critical meeting week in Frankfurt. JetSet rerouted our entire 4-person team the same day — new flights, hotels, and ground transport. Finance got clean documentation within 24 hours."
     },
     "review2": {
-      "role": "Private Client",
-      "text": "They understood our preferences instantly — hotel, transfers, and details. We arrived relaxed, everything was handled."
+      "role": "Luxury Leisure",
+      "text": "After years of booking our own corporate travel, switching to JetSet saved us roughly 15 hours per month in admin time alone. The compliant invoicing and single point of contact made our finance team very happy."
     },
     "review3": {
       "role": "Founder & CEO",
-      "text": "Fast response on WhatsApp, clear options, no confusion. When plans changed, the solution was already in motion."
+      "text": "Fast response on WhatsApp, clear options with pricing breakdowns, no confusion. When our CEO's travel plans changed mid-trip, the solution was already in motion before we even called."
     }
+  },
+  "comparison": {
+    "title": "Why Not Just Book It Yourself?",
+    "subtitle": "Every corporate team asks this question. Here's what happens when you compare:",
+    "diyTitle": "Booking Yourself",
+    "diy1": "Hours spent comparing flights & hotels",
+    "diy2": "No one to call at 2 AM when flights cancel",
+    "diy3": "Receipts scattered across 6 different platforms",
+    "diy4": "No negotiated corporate rates",
+    "diy5": "Visa paperwork is your problem",
+    "jetsetTitle": "JetSet Handles It",
+    "jetset1": "Best options sent to you — just approve",
+    "jetset2": "24/7 WhatsApp support, rebooking in real-time",
+    "jetset3": "One clean invoice for your entire trip",
+    "jetset4": "IATA rates + negotiated hotel deals",
+    "jetset5": "Full visa coordination included",
+    "ctaText": "Stop wasting executive time on travel logistics.",
+    "ctaButton": "Book a Free Consultation"
   },
   "clients": {
     "trustedBy": "Trusted by teams across industries",
