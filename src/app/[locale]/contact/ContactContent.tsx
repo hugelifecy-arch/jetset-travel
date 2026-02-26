@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   MapPin,
   Phone,
@@ -35,6 +35,7 @@ const inputClass =
   "w-full rounded-xl border border-brand-navy/20 px-4 py-3 text-sm text-brand-navy placeholder:text-brand-navy/40 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors";
 
 export default function ContactContent() {
+  const locale = useLocale();
   const t = useTranslations("contactPage");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -152,7 +153,7 @@ export default function ContactContent() {
                 </ul>
               </div>
               <a
-                href="https://wa.me/35799478073?text=Hi%2C%20I%27d%20like%20to%20discuss%20my%20travel%20plans."
+                href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, я хотел бы обсудить мои планы на поездку.") : encodeURIComponent("Hi, I'd like to discuss my travel plans.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-10 flex items-center justify-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-sm font-semibold text-white hover:bg-[#22c35e] transition-colors"

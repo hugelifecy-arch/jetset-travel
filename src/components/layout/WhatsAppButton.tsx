@@ -8,7 +8,7 @@ export default function WhatsAppButton() {
   const locale = useLocale();
   const whatsappText =
     locale === "ru"
-      ? encodeURIComponent("Здравствуйте, JetSet, мне нужна помощь")
+      ? encodeURIComponent("Здравствуйте, JetSet! Мне нужна помощь с организацией поездки.")
       : encodeURIComponent("Hi JetSet, I need help");
 
   return (

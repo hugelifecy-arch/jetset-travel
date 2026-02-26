@@ -296,7 +296,7 @@ export default async function VisaServicesPage({
             {t("ctaSubtitle")}
           </p>
           <a
-            href="https://wa.me/35799478073?text=Hi%2C%20I%20need%20help%20with%20a%20visa%20application."
+            href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, мне нужна помощь с оформлением визы.") : encodeURIComponent("Hi, I need help with a visa application.")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center rounded-full bg-[#25D366] px-8 py-3.5 text-sm font-semibold text-white hover:bg-[#20bd5a] transition-colors"

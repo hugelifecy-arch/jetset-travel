@@ -1,13 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import CTALeadForm from "@/components/forms/CTALeadForm";
 
 const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "35799478073";
 
 export default function CTABanner() {
+  const locale = useLocale();
   const t = useTranslations("cta");
 
   return (
@@ -35,7 +36,7 @@ export default function CTABanner() {
             <p>{t("orContactDirectly")}</p>
             <div className="mt-2 flex items-center justify-center gap-4">
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, JetSet! Мне нужна помощь с организацией поездки.") : encodeURIComponent("Hi JetSet, I need help")}`}
                 className="text-white/70 underline transition-colors hover:text-white"
                 target="_blank"
                 rel="noopener noreferrer"

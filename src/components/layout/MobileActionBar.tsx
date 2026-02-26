@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import { Phone } from "lucide-react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function MobileActionBar() {
   const [footerVisible, setFooterVisible] = useState(false);
+  const locale = useLocale();
   const t = useTranslations("mobileBar");
 
   useEffect(() => {
@@ -39,7 +40,7 @@ export default function MobileActionBar() {
         <div className="w-px bg-white/10" />
 
         <a
-          href="https://wa.me/35799478073"
+          href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, JetSet! Мне нужна помощь с организацией поездки.") : encodeURIComponent("Hi JetSet, I need help")}`}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact via WhatsApp"

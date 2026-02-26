@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Building2,
   Palmtree,
@@ -461,6 +461,7 @@ function LuxuryForm({
 /* ------------------------------------------------------------------ */
 
 function SuccessScreen({ t }: { t: TFunction }) {
+  const locale = useLocale();
   return (
     <div className="flex flex-col items-center justify-center text-center py-16 lg:py-24">
       <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-gold/10 mb-8">
@@ -473,7 +474,7 @@ function SuccessScreen({ t }: { t: TFunction }) {
         {t("successMessage")}
       </p>
       <a
-        href="https://wa.me/35799478073?text=Hi%2C%20I%20just%20submitted%20a%20quote%20request%20on%20your%20website."
+        href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, я только что отправил запрос на предложение на вашем сайте.") : encodeURIComponent("Hi, I just submitted a quote request on your website.")}`}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-sm font-semibold text-white hover:bg-[#22c35e] transition-colors"
@@ -490,6 +491,7 @@ function SuccessScreen({ t }: { t: TFunction }) {
 /* ------------------------------------------------------------------ */
 
 export default function QuoteContent() {
+  const locale = useLocale();
   const t = useTranslations("quotePage");
   const [branch, setBranch] = useState<"corporate" | "luxury" | null>(null);
   const [success, setSuccess] = useState(false);
