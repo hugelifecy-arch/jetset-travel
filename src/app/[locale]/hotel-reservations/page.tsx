@@ -13,6 +13,7 @@ import {
   ArrowRight,
   MapPin,
 } from "lucide-react";
+import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 
 export async function generateMetadata({
   params,
@@ -266,6 +267,9 @@ export default async function HotelReservationsPage({
           </div>
         </div>
       </section>
+
+      {/* Cross-links */}
+      <ServicesCrossLinks locale={locale} exclude="hotels" />
     </>
   );
 }

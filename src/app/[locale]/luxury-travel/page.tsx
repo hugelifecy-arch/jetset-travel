@@ -10,6 +10,7 @@ import {
   Quote,
   ArrowRight,
 } from "lucide-react";
+import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 
 export async function generateMetadata({
   params,
@@ -241,6 +242,9 @@ export default async function LuxuryTravelPage({
         </div>
       </section>
 
+      {/* Cross-links */}
+      <ServicesCrossLinks locale={locale} exclude="luxury" />
+
       {/* Enquiry CTA */}
       <section className="py-20 bg-brand-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
@@ -252,7 +256,7 @@ export default async function LuxuryTravelPage({
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href={`/${locale}/contact`}
+              href={`/${locale}/contact?type=luxury`}
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
               {t("ctaEnquiry")}
