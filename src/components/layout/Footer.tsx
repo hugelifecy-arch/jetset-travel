@@ -10,7 +10,7 @@ export default function Footer() {
 
   const quickLinks = [
     { href: `/${locale}/about`, label: t("aboutUs") },
-    { href: `/${locale}/hotel-reservations`, label: t("ourServices") },
+    { href: `/${locale}/services`, label: t("ourServices") },
     { href: `/${locale}/corporate-travel`, label: t("corporateTravel") },
     { href: `/${locale}/faq`, label: t("faq") },
     { href: `/${locale}/blog`, label: t("blog") },
@@ -129,7 +129,6 @@ export default function Footer() {
       </div>
 
       {/* Company legal info */}
-      {/* TODO: Replace [PLACEHOLDER] with actual company registration number and VAT number */}
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 text-center">
           <p className="text-xs text-white/50">

@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const test = require('node:test');
-const assert = require('node:assert/strict');
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import '../jetset-utils.js';
 
 const {
   buildMailtoHref,
   isValidEmail,
   validateLeadPayload,
-} = require('../jetset-utils.js');
+} = globalThis.JetsetUtils;
 
 test('isValidEmail validates well-formed addresses', () => {
   assert.equal(isValidEmail('agent@example.com'), true);
