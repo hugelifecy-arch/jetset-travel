@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { localizedAlternates } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import {
   Palmtree,
@@ -18,19 +18,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return {
-    title: {
-      absolute:
-        locale === "ru"
-          ? "Элитный отдых из Кипра | Премиальные путешествия и трансферы | JetSet"
-          : "Luxury Travel Planning Cyprus | Premium Holidays & Private Transfers | JetSet",
-    },
+  return buildPageMetadata({
+    locale,
+    routePath: "/luxury-travel",
+    title:
+      locale === "ru"
+        ? "Элитный отдых из Кипра | Премиальные путешествия и трансферы | JetSet"
+        : "Luxury Travel Planning Cyprus | Premium Holidays & Private Transfers | JetSet",
     description:
       locale === "ru"
         ? "Эксклюзивные путешествия из Кипра. Отели класса люкс, частные трансферы, индивидуальные маршруты. Спланируйте премиальный отдых с JetSet Travel."
         : "Curated luxury travel experiences from Cyprus. Suite-level hotels, private transfers, bespoke multi-city journeys. Plan your premium getaway with JetSet Travel.",
-    alternates: localizedAlternates(locale, "/luxury-travel"),
-  };
+  });
 }
 
 export default async function LuxuryTravelPage({

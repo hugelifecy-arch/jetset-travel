@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import Header from "@/components/layout/Header";
+import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import MobileActionBar from "@/components/layout/MobileActionBar";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
-import { CANONICAL_ORIGIN } from "@/lib/seo";
+import { CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import HreflangTags from "@/components/seo/HreflangTags";
 import { HtmlLangSetter } from "./HtmlLangSetter";
@@ -36,7 +37,8 @@ export async function generateMetadata({
       : "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
     openGraph: {
       type: "website",
-      locale: isRussian ? "ru_RU" : "en_GB",
+      locale: isRussian ? "ru_CY" : "en_CY",
+      alternateLocale: isRussian ? "en_CY" : "ru_CY",
       siteName: "JetSet Travel Cyprus",
       url: `${CANONICAL_ORIGIN}/${locale}`,
       title: isRussian
@@ -47,7 +49,7 @@ export async function generateMetadata({
         : "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
       images: [
         {
-          url: "https://www.jetset-travel.com/images/jetset-og-image.jpg",
+          url: OG_IMAGE,
           width: 1200,
           height: 630,
           alt: "JetSet Travel Cyprus",
@@ -62,7 +64,7 @@ export async function generateMetadata({
       description: isRussian
         ? "Аккредитованное IATA туристическое агентство в Пафосе, Кипр."
         : "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
-      images: ["https://www.jetset-travel.com/images/jetset-og-image.jpg"],
+      images: [OG_IMAGE],
     },
   };
 }
@@ -88,6 +90,7 @@ export default async function LocaleLayout({
         Skip to main content
       </a>
       <Header />
+      <Breadcrumbs />
       <main id="main-content" className="min-h-screen">{children}</main>
       <Footer />
       <WhatsAppButton />

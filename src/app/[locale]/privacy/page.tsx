@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { localizedAlternates } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 export async function generateMetadata({
@@ -9,19 +9,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return {
-    title: {
-      absolute:
-        locale === "ru"
-          ? "Политика конфиденциальности | JetSet Travel Cyprus"
-          : "Privacy Policy | JetSet Travel Cyprus",
-    },
+  return buildPageMetadata({
+    locale,
+    routePath: "/privacy",
+    title:
+      locale === "ru"
+        ? "Политика конфиденциальности | JetSet Travel Cyprus"
+        : "Privacy Policy | JetSet Travel Cyprus",
     description:
       locale === "ru"
         ? "Как JetSet K&K Travel Ltd собирает, использует и защищает ваши персональные данные в соответствии с GDPR."
         : "How JetSet K&K Travel Ltd collects, uses, and protects your personal data in accordance with GDPR.",
-    alternates: localizedAlternates(locale, "/privacy"),
-  };
+  });
 }
 
 export default async function PrivacyPolicyPage({

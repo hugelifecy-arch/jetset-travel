@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { localizedAlternates } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
 import { getAllPosts } from "@/lib/blog";
 import Link from "next/link";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
@@ -11,19 +11,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return {
-    title: {
-      absolute:
-        locale === "ru"
-          ? "Блог | Корпоративные и премиальные путешествия из Кипра | JetSet Travel"
-          : "Travel Blog | Corporate & Luxury Travel Insights from Cyprus | JetSet Travel",
-    },
+  return buildPageMetadata({
+    locale,
+    routePath: "/blog",
+    title:
+      locale === "ru"
+        ? "Блог | Корпоративные и премиальные путешествия из Кипра | JetSet Travel"
+        : "Travel Blog | Corporate & Luxury Travel Insights from Cyprus | JetSet Travel",
     description:
       locale === "ru"
         ? "Экспертные материалы об управлении корпоративными поездками, советы по деловым путешествиям на Кипре, визовые гиды и обзоры премиальных направлений от JetSet Travel."
         : "Expert insights on corporate travel management, Cyprus business travel tips, visa guides, and luxury destination reviews from JetSet Travel.",
-    alternates: localizedAlternates(locale, "/blog"),
-  };
+  });
 }
 
 export default async function BlogPage({
