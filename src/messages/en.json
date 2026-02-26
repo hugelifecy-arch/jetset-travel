@@ -7,7 +7,8 @@
     "about": "About",
     "contact": "Contact",
     "getQuote": "Get a Quote",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "blog": "Blog"
   },
   "hero": {
     "title": "Travel Managed.",
@@ -119,6 +120,7 @@
     "ourServices": "Our Services",
     "corporateTravel": "Corporate Travel",
     "faq": "FAQ",
+    "blog": "Blog",
     "contact": "Contact",
     "services": "Services",
     "flightBooking": "Flight Booking",
@@ -611,6 +613,22 @@
   "mobileBar": {
     "call": "Call",
     "whatsapp": "WhatsApp"
+  },
+  "blogPage": {
+    "heroLabel": "Blog",
+    "title": "Travel Insights & Guides",
+    "subtitle": "Expert tips, destination guides, and travel industry insights from the JetSet Travel team.",
+    "comingSoon": "Coming Soon",
+    "comingSoonDesc": "We're preparing insightful articles about travel, visas, and luxury destinations. Check back soon!",
+    "readMore": "Read more",
+    "minRead": "min read",
+    "by": "By",
+    "relatedPosts": "Related Posts",
+    "ctaTitle": "Need help planning your trip?",
+    "ctaSubtitle": "Our team is ready to help you plan the perfect journey — corporate or leisure.",
+    "ctaContact": "Contact Us",
+    "backToBlog": "Back to Blog",
+    "noPosts": "No posts yet. Check back soon!"
   },
   "common": {
     "learnMore": "Learn more",
