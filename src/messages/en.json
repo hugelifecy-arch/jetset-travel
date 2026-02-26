@@ -607,6 +607,10 @@
     "ctaQuote": "Request a Quote",
     "ctaContact": "Contact Us"
   },
+  "mobileBar": {
+    "call": "Call",
+    "whatsapp": "WhatsApp"
+  },
   "common": {
     "learnMore": "Learn more",
     "readMore": "Read more",

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, Phone } from "lucide-react";
 
 const navKeys = [
   { href: "/corporate-travel", key: "corporate" },
@@ -57,8 +57,17 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Right side: language toggle + CTA */}
+          {/* Right side: phone + language toggle + CTA */}
           <div className="hidden md:flex items-center gap-3">
+            <a
+              href="tel:+35799478073"
+              className="flex items-center gap-1.5 text-xs text-white/60 hover:text-brand-gold transition-colors"
+              aria-label="Call JetSet Travel"
+            >
+              <Phone className="h-3.5 w-3.5" />
+              <span>+357 99 478 073</span>
+            </a>
+            <span className="text-white/20">|</span>
             <div className="flex items-center gap-1 text-sm">
               <Globe className="h-4 w-4 text-white/60" />
               <Link
