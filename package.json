@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "audit-check": "node scripts/audit-check.js"
   },
   "dependencies": {
     "@fontsource-variable/dm-sans": "^5.2.8",
