@@ -1,9 +1,11 @@
 {
   "nav": {
     "services": "Services",
-    "corporate": "Corporate",
-    "luxury": "Luxury",
-    "visas": "Visas",
+    "corporate": "Corporate Travel",
+    "luxury": "Luxury Travel",
+    "visas": "Visa Services",
+    "hotels": "Hotel Reservations",
+    "allServices": "All Services",
     "about": "About",
     "contact": "Contact",
     "getQuote": "Get a Quote",
