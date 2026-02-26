@@ -32,8 +32,8 @@ export async function generateMetadata({
     },
     description:
       locale === "ru"
-        ? "Команда JetSet Travel Cyprus. 15+ лет опыта, аккредитация IATA, лицензия CTO №7775. Ваш надёжный партнёр в путешествиях."
-        : "Meet the team behind JetSet Travel Cyprus. 15+ years of experience, IATA accreditation, Cyprus Tourism Licence #7775. Your trusted travel partner.",
+        ? "Нонтари Калаитсидис и Маро Коккину — владельцы JetSet Travel Cyprus. 15+ лет опыта, аккредитация IATA, лицензия CTO №7775. Ваш надёжный партнёр в путешествиях."
+        : "Meet Nontari Kalaitsidis and Maro Kokkinou, owners of JetSet Travel Cyprus. 15+ years of experience, IATA accreditation, Cyprus Tourism Licence #7775. Your trusted travel partner.",
     alternates: localizedAlternates(locale, "/about"),
   };
 }
@@ -74,16 +74,13 @@ export default async function AboutPage({
       name: t("member1Name"),
       role: t("member1Role"),
       bio: t("member1Bio"),
+      photo: "/images/nontari-kalaitsidis.svg",
     },
     {
       name: t("member2Name"),
       role: t("member2Role"),
       bio: t("member2Bio"),
-    },
-    {
-      name: t("member3Name"),
-      role: t("member3Role"),
-      bio: t("member3Bio"),
+      photo: "/images/maro-kokkinou.svg",
     },
   ];
 
@@ -249,19 +246,20 @@ export default async function AboutPage({
               {t("teamSubtitle")}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {team.map((member) => (
               <div
                 key={member.name}
                 className="bg-white rounded-2xl border border-brand-navy/10 overflow-hidden hover:shadow-luxury transition-shadow"
               >
-                <div className="aspect-[4/3] bg-gradient-to-br from-brand-navy/80 to-brand-dark flex items-center justify-center">
-                  <span className="text-white/20 text-5xl font-display font-bold">
-                    {member.name
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </span>
+                <div className="aspect-[4/3] relative">
+                  <Image
+                    src={member.photo}
+                    alt={member.name}
+                    fill
+                    className="object-cover"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-bold text-brand-navy mb-1">
