@@ -14,6 +14,7 @@ import {
   MessageCircle,
   Send,
   CheckCircle,
+  Calendar,
 } from "lucide-react";
 
 function createContactSchema(t: (key: string) => string) {
@@ -388,6 +389,31 @@ export default function ContactContent() {
                 </form>
               )}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Calendly Scheduling Section */}
+      <section className="bg-brand-light py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <Calendar className="mx-auto h-10 w-10 text-brand-gold mb-4" />
+            <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-3">
+              {t("calendlyTitle")}
+            </h2>
+            <p className="text-brand-navy/60 mb-8">
+              {t("calendlySubtitle")}
+            </p>
+            {/* TODO: Replace with actual Calendly URL once set up by the business owner */}
+            <a
+              href="https://calendly.com/jetset-travel/15min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-sm font-semibold text-white hover:bg-brand-navy/90 transition-colors"
+            >
+              <Calendar className="h-5 w-5" />
+              {t("calendlyButton")}
+            </a>
           </div>
         </div>
       </section>

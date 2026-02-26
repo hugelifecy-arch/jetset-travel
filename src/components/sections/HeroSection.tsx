@@ -137,7 +137,7 @@ export default function HeroSection() {
               {t("ctaCorporate")}
             </Link>
             <Link
-              href={`/${locale}/luxury-travel`}
+              href={`/${locale}/contact?type=luxury`}
               className="inline-flex items-center justify-center rounded-full border-2 border-white px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-white/10"
             >
               {t("ctaLuxury")}
