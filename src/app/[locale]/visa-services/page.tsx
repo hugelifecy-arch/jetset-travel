@@ -10,6 +10,7 @@ import {
   ArrowRight,
   ShieldAlert,
 } from "lucide-react";
+import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 
 export async function generateMetadata({
   params,
@@ -81,6 +82,20 @@ export default async function VisaServicesPage({
       flag: "🇨🇳",
       country: t("china"),
       processing: t("chinaTime"),
+      difficulty: t("medium"),
+      difficultyColor: "bg-yellow-100 text-yellow-800",
+    },
+    {
+      flag: "🇪🇺",
+      country: t("schengen"),
+      processing: t("schengenTime"),
+      difficulty: t("medium"),
+      difficultyColor: "bg-yellow-100 text-yellow-800",
+    },
+    {
+      flag: "🇷🇺",
+      country: t("russia"),
+      processing: t("russiaTime"),
       difficulty: t("medium"),
       difficultyColor: "bg-yellow-100 text-yellow-800",
     },
@@ -269,6 +284,9 @@ export default async function VisaServicesPage({
           </div>
         </div>
       </section>
+
+      {/* Cross-links */}
+      <ServicesCrossLinks locale={locale} exclude="visa" />
 
       {/* WhatsApp CTA */}
       <section className="py-20 bg-brand-navy text-white">

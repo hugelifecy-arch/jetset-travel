@@ -9,7 +9,12 @@ import {
   Heart,
   Scale,
   ArrowRight,
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
 } from "lucide-react";
+import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 
 export async function generateMetadata({
   params,
@@ -275,6 +280,69 @@ export default async function AboutPage({
         </div>
       </section>
 
+      {/* Office Info */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              {t("officeTitle")}
+            </h2>
+            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+              {t("officeSubtitle")}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex-shrink-0">
+                  <MapPin className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-semibold text-brand-navy mb-1">{t("officeAddress")}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex-shrink-0">
+                  <Phone className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-brand-navy">{t("officePhone1")}</p>
+                  <p className="text-brand-navy/60">{t("officePhone2")}</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex-shrink-0">
+                  <Mail className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="text-brand-navy">{t("officeEmail")}</p>
+                </div>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-start gap-4">
+                <div className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-brand-gold/10 text-brand-gold flex-shrink-0">
+                  <Clock className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-semibold text-brand-navy mb-2">{t("officeHoursTitle")}</p>
+                  <div className="space-y-1 text-sm text-brand-navy/70">
+                    <p>{t("officeSchedule")}</p>
+                    <p>{t("officeScheduleWed")}</p>
+                    <p>{t("officeScheduleSat")}</p>
+                    <p>{t("officeScheduleSun")}</p>
+                    <p className="text-brand-gold font-medium mt-2">{t("officeWhatsApp")}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cross-links */}
+      <ServicesCrossLinks locale={locale} exclude="flights" />
+
       {/* CTA */}
       <section className="py-20 bg-brand-navy text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
@@ -286,17 +354,17 @@ export default async function AboutPage({
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href={`/${locale}/quote`}
+              href={`/${locale}/contact`}
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
-              {t("ctaQuote")}
+              {t("ctaContact")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <Link
-              href={`/${locale}/contact`}
+              href={`/${locale}/quote`}
               className="inline-flex items-center rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
             >
-              {t("ctaContact")}
+              {t("ctaQuote")}
             </Link>
           </div>
         </div>

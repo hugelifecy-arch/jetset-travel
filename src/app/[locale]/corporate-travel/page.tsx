@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { localizedAlternates } from "@/lib/seo";
 import CorporateTravelContent from "./CorporateTravelContent";
+import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 
 export async function generateMetadata({
   params,
@@ -24,6 +25,17 @@ export async function generateMetadata({
   };
 }
 
-export default function CorporateTravelPage() {
-  return <CorporateTravelContent />;
+export default async function CorporateTravelPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
+  return (
+    <>
+      <CorporateTravelContent />
+      <ServicesCrossLinks locale={locale} exclude="corporate" />
+    </>
+  );
 }

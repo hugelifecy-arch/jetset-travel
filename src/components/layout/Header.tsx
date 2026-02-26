@@ -11,7 +11,7 @@ const navKeys = [
   { href: "/corporate-travel", key: "corporate" },
   { href: "/luxury-travel", key: "luxury" },
   { href: "/visa-services", key: "visas" },
-  { href: "/hotel-reservations", key: "services" },
+  { href: "/services", key: "services" },
   { href: "/about", key: "about" },
   { href: "/faq", key: "faq" },
   { href: "/contact", key: "contact" },
