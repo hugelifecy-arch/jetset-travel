@@ -170,16 +170,16 @@
   "privacy": {
     "title": "Privacy Policy",
     "lastUpdated": "Last updated: February 2026",
-    "translationPending": "",
-    "translationContact": "",
-    "viewEnglish": ""
+    "translationPending": "The Russian translation of this policy is being prepared. Please refer to the English version below.",
+    "translationContact": "If you need assistance in Russian, please contact us at",
+    "viewEnglish": "View Privacy Policy in English →"
   },
   "terms": {
     "title": "Terms of Service",
     "lastUpdated": "Last updated: February 2026",
-    "translationPending": "",
-    "translationContact": "",
-    "viewEnglish": ""
+    "translationPending": "The Russian translation of these terms is being prepared. Please refer to the English version below.",
+    "translationContact": "If you need assistance in Russian, please contact us at",
+    "viewEnglish": "View Terms of Service in English →"
   },
   "cookies": {
     "banner": "We use cookies to improve your experience. Essential cookies are required for the site to function. You can choose to accept or reject optional cookies.",
