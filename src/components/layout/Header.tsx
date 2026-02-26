@@ -1,33 +1,70 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { Menu, X, Globe, Phone } from "lucide-react";
+import { Menu, X, Globe, Phone, ChevronDown } from "lucide-react";
 
-const navKeys = [
+/** Service sub-links for the "Services" dropdown */
+const serviceLinks = [
   { href: "/corporate-travel", key: "corporate" },
   { href: "/luxury-travel", key: "luxury" },
   { href: "/visa-services", key: "visas" },
-  { href: "/services", key: "services" },
+  { href: "/hotel-reservations", key: "hotels" },
+  { href: "/services", key: "allServices" },
+] as const;
+
+/** Top-level nav items (excluding Services dropdown and FAQ) */
+const topLevelLinks = [
   { href: "/about", key: "about" },
-  { href: "/faq", key: "faq" },
   { href: "/blog", key: "blog" },
   { href: "/contact", key: "contact" },
 ] as const;
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const locale = useLocale();
   const t = useTranslations("nav");
   const pathname = usePathname();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   // Build the same page path in the other locale
   const pathWithoutLocale = pathname.replace(/^\/(en|ru)/, "") || "";
   const enHref = `/en${pathWithoutLocale}`;
   const ruHref = `/ru${pathWithoutLocale}`;
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileOpen(false);
+    setServicesOpen(false);
+  }, [pathname]);
+
+  // Close desktop dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setServicesOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Desktop hover handlers with a small delay to prevent flicker
+  const handleMouseEnter = () => {
+    if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+    setServicesOpen(true);
+  };
+  const handleMouseLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => setServicesOpen(false), 150);
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-brand-navy border-b-2 border-brand-gold">
@@ -47,7 +84,43 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-1">
-            {navKeys.map((link) => (
+            {/* Services Dropdown */}
+            <div
+              ref={dropdownRef}
+              className="relative"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <button
+                type="button"
+                onClick={() => setServicesOpen((prev) => !prev)}
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-white/80 hover:text-brand-gold transition-colors"
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+              >
+                {t("services")}
+                <ChevronDown
+                  className={`h-3.5 w-3.5 transition-transform ${servicesOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {servicesOpen && (
+                <div className="absolute left-0 top-full mt-1 w-56 rounded-lg bg-brand-navy border border-white/10 shadow-xl py-2">
+                  {serviceLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={`/${locale}${link.href}`}
+                      className="block px-4 py-2.5 text-sm text-white/80 hover:text-brand-gold hover:bg-white/5 transition-colors"
+                    >
+                      {t(link.key)}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Top-level links: About, Blog, Contact */}
+            {topLevelLinks.map((link) => (
               <Link
                 key={link.href}
                 href={`/${locale}${link.href}`}
@@ -101,47 +174,18 @@ export default function Header() {
             </nav>
 
             <Link
-              href={`/${locale}/contact`}
+              href={`/${locale}/quote`}
               className="rounded-full bg-brand-gold px-5 py-2 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
               {t("getQuote")}
             </Link>
           </div>
 
-          {/* Mobile: language switcher + hamburger */}
+          {/* Mobile: hamburger only (language switcher moved inside menu) */}
           <div className="md:hidden flex items-center gap-2">
-            <nav aria-label="Language selection" className="flex items-center gap-1 text-sm">
-              <Link
-                href={enHref}
-                className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
-                  locale === "en"
-                    ? "font-bold text-brand-gold underline underline-offset-4"
-                    : "font-normal text-white/50 hover:text-white"
-                }`}
-                aria-current={locale === "en" ? "page" : undefined}
-                aria-label="English"
-                title="English"
-              >
-                EN
-              </Link>
-              <span className="text-white/30">|</span>
-              <Link
-                href={ruHref}
-                className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
-                  locale === "ru"
-                    ? "font-bold text-brand-gold underline underline-offset-4"
-                    : "font-normal text-white/50 hover:text-white"
-                }`}
-                aria-current={locale === "ru" ? "page" : undefined}
-                aria-label="Русский"
-                title="Русский"
-              >
-                RU
-              </Link>
-            </nav>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 text-white"
+              className="p-2 text-white min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Toggle menu"
             >
               {mobileOpen ? (
@@ -157,24 +201,55 @@ export default function Header() {
       {/* Mobile slide-down nav */}
       {mobileOpen && (
         <div className="md:hidden border-t border-white/10 bg-brand-navy">
-          <nav className="px-4 py-4 space-y-1">
-            {navKeys.map((link) => (
+          <nav className="px-4 py-4 pb-24 space-y-1">
+            {/* Services section with tap-to-expand */}
+            <div>
+              <button
+                type="button"
+                onClick={() => setServicesOpen((prev) => !prev)}
+                className="flex items-center justify-between w-full px-3 py-3 text-base font-medium text-white/80 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px]"
+                aria-expanded={servicesOpen}
+              >
+                {t("services")}
+                <ChevronDown
+                  className={`h-4 w-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`}
+                />
+              </button>
+              {servicesOpen && (
+                <div className="ml-4 border-l border-white/10 pl-3 space-y-0.5">
+                  {serviceLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={`/${locale}${link.href}`}
+                      className="block px-3 py-3 text-sm font-medium text-white/60 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px] flex items-center"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {t(link.key)}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Top-level links */}
+            {topLevelLinks.map((link) => (
               <Link
                 key={link.href}
                 href={`/${locale}${link.href}`}
-                className="block px-3 py-2.5 text-base font-medium text-white/80 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors"
+                className="block px-3 py-3 text-base font-medium text-white/80 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px] flex items-center"
                 onClick={() => setMobileOpen(false)}
               >
                 {t(link.key)}
               </Link>
             ))}
 
+            {/* Footer: single language switcher + Get a Quote CTA */}
             <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between">
               <nav aria-label="Language selection" className="flex items-center gap-2 text-sm">
                 <Globe className="h-4 w-4 text-white/60" />
                 <Link
                   href={enHref}
-                  className={`px-2 py-1 rounded text-sm transition-colors ${
+                  className={`px-2 py-2 rounded text-sm transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
                     locale === "en"
                       ? "font-bold text-brand-gold underline underline-offset-4"
                       : "font-normal text-white/50 hover:text-white"
@@ -188,7 +263,7 @@ export default function Header() {
                 </Link>
                 <Link
                   href={ruHref}
-                  className={`px-2 py-1 rounded text-sm transition-colors ${
+                  className={`px-2 py-2 rounded text-sm transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
                     locale === "ru"
                       ? "font-bold text-brand-gold underline underline-offset-4"
                       : "font-normal text-white/50 hover:text-white"
@@ -203,8 +278,8 @@ export default function Header() {
               </nav>
 
               <Link
-                href={`/${locale}/contact`}
-                className="rounded-full bg-brand-gold px-5 py-2.5 text-sm font-semibold text-brand-navy"
+                href={`/${locale}/quote`}
+                className="rounded-full bg-brand-gold px-5 py-2.5 text-sm font-semibold text-brand-navy min-h-[44px] flex items-center"
                 onClick={() => setMobileOpen(false)}
               >
                 {t("getQuote")}
