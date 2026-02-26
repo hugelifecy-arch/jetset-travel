@@ -644,7 +644,7 @@
     img.addEventListener("error", () => tryNext());
   }
 
-  setImgFallback($("#brandLogo"), ["./images/jetset-logo-transparent.svg", "./images/jetset-logo-brand.svg", "./images/jetset-logo.jpg"]);
+  setImgFallback($("#brandLogo"), ["./images/jetset-logo.svg", "./images/jetset-logo-transparent.svg", "./images/jetset-logo.jpg"]);
   setImgFallback($("#iataBadgeHero"), ["./images/iata-logo.jpg", "./iata-logo.jpg", "./iata.jpg", "./iata.png"]);
   setImgFallback($("#tourismBadgeHero"), ["./images/tourism-logo.jpg", "./tourism-logo.jpg", "./tourism.jpg", "./tourism.png"]);
 
