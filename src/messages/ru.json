@@ -607,6 +607,10 @@
     "ctaQuote": "Запросить предложение",
     "ctaContact": "Связаться с нами"
   },
+  "mobileBar": {
+    "call": "Позвонить",
+    "whatsapp": "WhatsApp"
+  },
   "common": {
     "learnMore": "Подробнее",
     "readMore": "Читать далее",
