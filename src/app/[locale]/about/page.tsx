@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { localizedAlternates } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -22,19 +22,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return {
-    title: {
-      absolute:
-        locale === "ru"
-          ? "О JetSet Travel Кипр | 15+ лет корпоративных и премиальных путешествий"
-          : "About JetSet Travel Cyprus | 15+ Years of Corporate & Luxury Travel",
-    },
+  return buildPageMetadata({
+    locale,
+    routePath: "/about",
+    title:
+      locale === "ru"
+        ? "О JetSet Travel Кипр | 15+ лет корпоративных и премиальных путешествий"
+        : "About JetSet Travel Cyprus | 15+ Years of Corporate & Luxury Travel",
     description:
       locale === "ru"
         ? "JetSet K&K Travel Ltd — аккредитованное IATA турагентство в Пафосе, Кипр с 2006 года. Познакомьтесь с нашей командой и узнайте, почему нам доверяют 500+ корпоративных клиентов."
         : "JetSet K&K Travel Ltd — IATA-accredited travel agency in Paphos, Cyprus since 2006. Meet our team, learn our story, and discover why 500+ corporates trust us.",
-    alternates: localizedAlternates(locale, "/about"),
-  };
+  });
 }
 
 export default async function AboutPage({
@@ -259,7 +258,7 @@ export default async function AboutPage({
                     height={600}
                     className="object-cover object-top w-full h-full"
                     loading="lazy"
-                    unoptimized
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
                 <div className="p-6">

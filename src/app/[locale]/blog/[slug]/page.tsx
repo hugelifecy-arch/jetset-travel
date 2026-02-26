@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { localizedAlternates, CANONICAL_ORIGIN } from "@/lib/seo";
+import { localizedAlternates, CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -28,21 +28,33 @@ export async function generateMetadata({
     };
   }
 
+  const isRussian = locale === "ru";
+  const ogImage = post.frontmatter.image
+    ? `${CANONICAL_ORIGIN}${post.frontmatter.image}`
+    : OG_IMAGE;
+
   return {
     title: { absolute: `${post.frontmatter.title} | JetSet Travel Cyprus` },
     description: post.frontmatter.description,
     alternates: localizedAlternates(locale, `/blog/${slug}`),
     openGraph: {
       type: "article",
+      siteName: "JetSet Travel Cyprus",
       title: post.frontmatter.title,
       description: post.frontmatter.description,
       url: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}`,
-      images: post.frontmatter.image
-        ? [{ url: `${CANONICAL_ORIGIN}${post.frontmatter.image}`, width: 1200, height: 630 }]
-        : undefined,
+      locale: isRussian ? "ru_CY" : "en_CY",
+      alternateLocale: isRussian ? "en_CY" : "ru_CY",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.frontmatter.title }],
       publishedTime: post.frontmatter.date,
       authors: [post.frontmatter.author],
       tags: post.frontmatter.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.frontmatter.title,
+      description: post.frontmatter.description,
+      images: [ogImage],
     },
   };
 }

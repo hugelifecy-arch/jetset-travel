@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { localizedAlternates } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import Accordion from "@/components/ui/Accordion";
@@ -13,11 +13,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "faq" });
 
-  return {
-    title: { absolute: t("metaTitle") },
+  return buildPageMetadata({
+    locale,
+    routePath: "/faq",
+    title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localizedAlternates(locale, "/faq"),
-  };
+  });
 }
 
 interface FaqCategory {

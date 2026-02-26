@@ -3,37 +3,7 @@
 import { usePathname } from "next/navigation";
 import { CANONICAL_ORIGIN } from "@/lib/seo";
 import JsonLd from "./JsonLd";
-
-const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
-  en: {
-    about: "About Us",
-    contact: "Contact",
-    "corporate-travel": "Corporate Travel",
-    "hotel-reservations": "Hotel Reservations",
-    "luxury-travel": "Luxury Travel",
-    quote: "Get a Quote",
-    "visa-services": "Visa Services",
-    services: "All Services",
-    faq: "FAQ",
-    blog: "Blog",
-    privacy: "Privacy Policy",
-    terms: "Terms of Service",
-  },
-  ru: {
-    about: "О нас",
-    contact: "Контакты",
-    "corporate-travel": "Корпоративные поездки",
-    "hotel-reservations": "Бронирование отелей",
-    "luxury-travel": "Элитный отдых",
-    quote: "Запросить предложение",
-    "visa-services": "Визовые услуги",
-    services: "Все услуги",
-    faq: "Часто задаваемые вопросы",
-    blog: "Блог",
-    privacy: "Политика конфиденциальности",
-    terms: "Условия использования",
-  },
-};
+import { PATH_DISPLAY_NAMES, getHomeName } from "./breadcrumb-names";
 
 export default function BreadcrumbSchema() {
   const pathname = usePathname();
@@ -43,7 +13,7 @@ export default function BreadcrumbSchema() {
   const segments = parts.slice(1);
 
   const names = PATH_DISPLAY_NAMES[locale] ?? PATH_DISPLAY_NAMES.en;
-  const homeName = locale === "ru" ? "Главная" : "Home";
+  const homeName = getHomeName(locale);
 
   const items: Array<{
     "@type": string;

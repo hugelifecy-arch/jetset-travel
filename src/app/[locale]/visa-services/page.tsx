@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { localizedAlternates } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import {
@@ -18,19 +18,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return {
-    title: {
-      absolute:
-        locale === "ru"
-          ? "Визовая поддержка Кипр | Деловые и туристические визы | JetSet Travel"
-          : "Visa Assistance Services Cyprus | Business & Tourist Visa Support | JetSet Travel",
-    },
+  return buildPageMetadata({
+    locale,
+    routePath: "/visa-services",
+    title:
+      locale === "ru"
+        ? "Визовая поддержка Кипр | Деловые и туристические визы | JetSet Travel"
+        : "Visa Assistance Services Cyprus | Business & Tourist Visa Support | JetSet Travel",
     description:
       locale === "ru"
         ? "Профессиональная визовая помощь из Пафоса, Кипр. Чек-листы документов, сопровождение заявок и координация для деловых и туристических виз по всему миру."
         : "Expert visa assistance from Paphos, Cyprus. Document checklists, application guidance, and coordination support for business and tourist visas worldwide.",
-    alternates: localizedAlternates(locale, "/visa-services"),
-  };
+  });
 }
 
 export default async function VisaServicesPage({

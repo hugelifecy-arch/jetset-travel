@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { localizedAlternates } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import {
   Plane,
@@ -17,19 +17,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return {
-    title: {
-      absolute:
-        locale === "ru"
-          ? "Все услуги | Корпоративные, премиальные, визы, отели | JetSet Travel Кипр"
-          : "All Travel Services | Corporate, Luxury, Visa, Hotels | JetSet Travel Cyprus",
-    },
+  return buildPageMetadata({
+    locale,
+    routePath: "/services",
+    title:
+      locale === "ru"
+        ? "Все услуги | Корпоративные, премиальные, визы, отели | JetSet Travel Кипр"
+        : "All Travel Services | Corporate, Luxury, Visa, Hotels | JetSet Travel Cyprus",
     description:
       locale === "ru"
         ? "Полный спектр услуг от одной надёжной команды на Кипре: корпоративные поездки, элитный отдых, визовая поддержка, бронирование отелей и круглосуточная поддержка."
         : "Complete travel services from one accountable team in Cyprus: corporate travel, luxury holidays, visa assistance, hotel bookings, and 24/7 support.",
-    alternates: localizedAlternates(locale, "/services"),
-  };
+  });
 }
 
 export default async function ServicesPage({

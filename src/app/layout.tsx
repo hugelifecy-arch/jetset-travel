@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { CANONICAL_ORIGIN } from "@/lib/seo";
+import { CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
 
 const dmSans = localFont({
   src: [
@@ -43,15 +43,16 @@ export const metadata: Metadata = {
     "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
   openGraph: {
     type: "website",
-    locale: "en_GB",
+    locale: "en_CY",
+    alternateLocale: "ru_CY",
     siteName: "JetSet Travel Cyprus",
-    url: "https://www.jetset-travel.com",
+    url: CANONICAL_ORIGIN,
     title: "JetSet Travel Cyprus — Premium Travel Services",
     description:
       "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
     images: [
       {
-        url: "https://www.jetset-travel.com/images/jetset-og-image.jpg",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "JetSet Travel Cyprus",
@@ -63,7 +64,7 @@ export const metadata: Metadata = {
     title: "JetSet Travel Cyprus — Premium Travel Services",
     description:
       "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
-    images: ["https://www.jetset-travel.com/images/jetset-og-image.jpg"],
+    images: [OG_IMAGE],
   },
 };
 
@@ -74,6 +75,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://maps.google.com" />
+      </head>
       <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
         {children}
       </body>

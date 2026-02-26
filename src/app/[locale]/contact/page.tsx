@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { localizedAlternates } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
 import ContactContent from "./ContactContent";
 export async function generateMetadata({
   params,
@@ -8,19 +8,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return {
-    title: {
-      absolute:
-        locale === "ru"
-          ? "Контакты JetSet Travel Кипр | Бесплатная консультация | Запросить предложение"
-          : "Contact JetSet Travel Cyprus | Book a Free Consultation | Get a Quote",
-    },
+  return buildPageMetadata({
+    locale,
+    routePath: "/contact",
+    title:
+      locale === "ru"
+        ? "Контакты JetSet Travel Кипр | Бесплатная консультация | Запросить предложение"
+        : "Contact JetSet Travel Cyprus | Book a Free Consultation | Get a Quote",
     description:
       locale === "ru"
         ? "Закажите бесплатную консультацию по корпоративным поездкам или запросите предложение. WhatsApp, телефон или форма. Ответ в течение 2 рабочих часов."
         : "Book a free corporate travel consultation or request a quote. WhatsApp, call, or fill out our form. Response within 2 business hours.",
-    alternates: localizedAlternates(locale, "/contact"),
-  };
+  });
 }
 
 export default function ContactPage() {
