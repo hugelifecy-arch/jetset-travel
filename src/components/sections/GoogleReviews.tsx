@@ -114,10 +114,11 @@ export default function GoogleReviews() {
           ))}
         </div>
 
-        {/* TODO: Replace "#" with real Google Business Profile URL */}
         <div className="mt-8 text-center">
           <a
-            href="#"
+            href="https://maps.google.com/?q=JetSet+Travel+Agency+Paphos+Cyprus"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm text-brand-navy/60 underline underline-offset-2 transition-colors hover:text-brand-navy"
           >
             {t("readMoreOnGoogle")}

@@ -20,12 +20,18 @@ function createContactSchema(t: (key: string) => string) {
   return z.object({
     name: z.string().min(2, t("nameMinLength")),
     email: z.string().email(t("invalidEmail")),
-    phone: z.string().optional(),
-    message: z.string().min(10, t("messageMinLength")),
+    phone: z.string().min(8, t("phoneRequired")),
+    companyName: z.string().optional(),
+    travelType: z.string().optional(),
+    contactMethod: z.string().optional(),
+    message: z.string().optional(),
   });
 }
 
 type ContactFormData = z.infer<ReturnType<typeof createContactSchema>>;
+
+const inputClass =
+  "w-full rounded-xl border border-brand-navy/20 px-4 py-3 text-sm text-brand-navy placeholder:text-brand-navy/40 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors";
 
 export default function ContactContent() {
   const t = useTranslations("contactPage");
@@ -40,6 +46,9 @@ export default function ContactContent() {
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+    defaultValues: {
+      phone: "+357 ",
+    },
   });
 
   const onSubmit = async (data: ContactFormData) => {
@@ -167,7 +176,7 @@ export default function ContactContent() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   <div>
                     <h2 className="text-2xl font-bold text-brand-navy mb-2">
                       {t("formTitle")}
@@ -177,6 +186,7 @@ export default function ContactContent() {
                     </p>
                   </div>
 
+                  {/* Full Name */}
                   <div>
                     <label
                       htmlFor="name"
@@ -188,7 +198,7 @@ export default function ContactContent() {
                       id="name"
                       type="text"
                       {...register("name")}
-                      className="w-full rounded-xl border border-brand-navy/20 px-4 py-3 text-sm text-brand-navy placeholder:text-brand-navy/40 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors"
+                      className={inputClass}
                       placeholder={t("namePlaceholder")}
                     />
                     {errors.name && (
@@ -198,6 +208,7 @@ export default function ContactContent() {
                     )}
                   </div>
 
+                  {/* Email */}
                   <div>
                     <label
                       htmlFor="email"
@@ -209,7 +220,7 @@ export default function ContactContent() {
                       id="email"
                       type="email"
                       {...register("email")}
-                      className="w-full rounded-xl border border-brand-navy/20 px-4 py-3 text-sm text-brand-navy placeholder:text-brand-navy/40 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors"
+                      className={inputClass}
                       placeholder={t("emailPlaceholder")}
                     />
                     {errors.email && (
@@ -219,41 +230,118 @@ export default function ContactContent() {
                     )}
                   </div>
 
+                  {/* Phone Number */}
                   <div>
                     <label
                       htmlFor="phone"
                       className="block text-sm font-semibold text-brand-navy mb-2"
                     >
-                      {t("phoneNumber")}
+                      {t("phoneNumber")} *
                     </label>
                     <input
                       id="phone"
                       type="tel"
                       {...register("phone")}
-                      className="w-full rounded-xl border border-brand-navy/20 px-4 py-3 text-sm text-brand-navy placeholder:text-brand-navy/40 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors"
+                      className={inputClass}
                       placeholder={t("phonePlaceholder")}
+                    />
+                    {errors.phone && (
+                      <p className="mt-1.5 text-sm text-red-500">
+                        {errors.phone.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Company Name */}
+                  <div>
+                    <label
+                      htmlFor="companyName"
+                      className="block text-sm font-semibold text-brand-navy mb-2"
+                    >
+                      {t("companyName")}
+                    </label>
+                    <input
+                      id="companyName"
+                      type="text"
+                      {...register("companyName")}
+                      className={inputClass}
+                      placeholder={t("companyPlaceholder")}
                     />
                   </div>
 
+                  {/* Travel Type */}
+                  <div>
+                    <label
+                      htmlFor="travelType"
+                      className="block text-sm font-semibold text-brand-navy mb-2"
+                    >
+                      {t("travelType")}
+                    </label>
+                    <select
+                      id="travelType"
+                      {...register("travelType")}
+                      className={inputClass}
+                    >
+                      <option value="">{t("selectTravelType")}</option>
+                      <option value="corporate">{t("travelTypeCorporate")}</option>
+                      <option value="luxury">{t("travelTypeLuxury")}</option>
+                      <option value="visa">{t("travelTypeVisa")}</option>
+                      <option value="hotel">{t("travelTypeHotel")}</option>
+                      <option value="other">{t("travelTypeOther")}</option>
+                    </select>
+                  </div>
+
+                  {/* Preferred Contact Method */}
+                  <fieldset>
+                    <legend className="block text-sm font-semibold text-brand-navy mb-2">
+                      {t("contactMethod")}
+                    </legend>
+                    <div className="flex flex-wrap gap-4">
+                      <label className="inline-flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          value="whatsapp"
+                          {...register("contactMethod")}
+                          className="h-4 w-4 border-brand-navy/30 text-brand-gold focus:ring-brand-gold"
+                        />
+                        <span className="text-sm text-brand-navy">{t("contactWhatsApp")}</span>
+                      </label>
+                      <label className="inline-flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          value="phone"
+                          {...register("contactMethod")}
+                          className="h-4 w-4 border-brand-navy/30 text-brand-gold focus:ring-brand-gold"
+                        />
+                        <span className="text-sm text-brand-navy">{t("contactPhone")}</span>
+                      </label>
+                      <label className="inline-flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="radio"
+                          value="email"
+                          {...register("contactMethod")}
+                          className="h-4 w-4 border-brand-navy/30 text-brand-gold focus:ring-brand-gold"
+                        />
+                        <span className="text-sm text-brand-navy">{t("contactEmailOption")}</span>
+                      </label>
+                    </div>
+                  </fieldset>
+
+                  {/* Message / Trip Details */}
                   <div>
                     <label
                       htmlFor="message"
                       className="block text-sm font-semibold text-brand-navy mb-2"
                     >
-                      {t("message")} *
+                      {t("tripDetails")}
                     </label>
                     <textarea
                       id="message"
-                      rows={5}
+                      rows={4}
                       {...register("message")}
-                      className="w-full rounded-xl border border-brand-navy/20 px-4 py-3 text-sm text-brand-navy placeholder:text-brand-navy/40 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors resize-none"
-                      placeholder={t("messagePlaceholder")}
+                      className={`${inputClass} resize-none`}
+                      placeholder={t("tripDetailsPlaceholder")}
                     />
-                    {errors.message && (
-                      <p className="mt-1.5 text-sm text-red-500">
-                        {errors.message.message}
-                      </p>
-                    )}
                   </div>
 
                   {submitError && (
@@ -266,14 +354,37 @@ export default function ContactContent() {
                     className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
-                      t("sending")
+                      t("bookingConsultation")
                     ) : (
                       <>
-                        {t("sendMessage")}
+                        {t("bookConsultation")}
                         <Send className="ml-2 h-4 w-4" />
                       </>
                     )}
                   </button>
+
+                  {/* How It Works */}
+                  <div className="border-t border-brand-navy/10 pt-5 mt-2">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-brand-navy/50 mb-3">
+                      {t("howItWorks")}
+                    </p>
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 text-sm text-brand-navy/60">
+                      <span className="flex items-center gap-1.5">
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">1</span>
+                        {t("howStep1")}
+                      </span>
+                      <span className="hidden sm:inline text-brand-navy/30">&rarr;</span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">2</span>
+                        {t("howStep2")}
+                      </span>
+                      <span className="hidden sm:inline text-brand-navy/30">&rarr;</span>
+                      <span className="flex items-center gap-1.5">
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">3</span>
+                        {t("howStep3")}
+                      </span>
+                    </div>
+                  </div>
                 </form>
               )}
             </div>

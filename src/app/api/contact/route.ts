@@ -10,8 +10,10 @@ const contactSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   phone: z.string().optional(),
+  companyName: z.string().optional(),
   message: z.string().optional(),
   travelType: z.string().optional(),
+  contactMethod: z.string().optional(),
   dates: z.string().optional(),
   website: z.string().optional(), // honeypot — must remain empty
 });
@@ -58,7 +60,9 @@ function notificationHtml(data: z.infer<typeof contactSchema>): string {
         <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Name</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.name}</td></tr>
         <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Email</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.email}</td></tr>
         ${data.phone ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Phone</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.phone}</td></tr>` : ""}
+        ${data.companyName ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Company</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.companyName}</td></tr>` : ""}
         ${data.travelType ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Travel Type</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.travelType}</td></tr>` : ""}
+        ${data.contactMethod ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Preferred Contact</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.contactMethod}</td></tr>` : ""}
         ${data.dates ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Dates</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.dates}</td></tr>` : ""}
         ${data.message ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Message</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.message}</td></tr>` : ""}
       </table>
