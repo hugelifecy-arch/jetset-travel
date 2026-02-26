@@ -14,7 +14,7 @@ export async function generateMetadata({
     routePath: "/privacy",
     title:
       locale === "ru"
-        ? "Политика конфиденциальности | JetSet Travel Cyprus"
+        ? "Политика конфиденциальности | JetSet Travel Кипр"
         : "Privacy Policy | JetSet Travel Cyprus",
     description:
       locale === "ru"

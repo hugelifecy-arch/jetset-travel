@@ -20,7 +20,7 @@ export async function generateMetadata({
         : "Travel Blog | Corporate & Luxury Travel Insights from Cyprus | JetSet Travel",
     description:
       locale === "ru"
-        ? "Экспертные материалы об управлении корпоративными поездками, советы по деловым путешествиям на Кипре, визовые гиды и обзоры премиальных направлений от JetSet Travel."
+        ? "Экспертные материалы об организации корпоративных командировок, деловых поездках с Кипра, визовых гидах и обзорах премиальных направлений."
         : "Expert insights on corporate travel management, Cyprus business travel tips, visa guides, and luxury destination reviews from JetSet Travel.",
   });
 }

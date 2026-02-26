@@ -14,7 +14,7 @@ export async function generateMetadata({
     routePath: "/terms",
     title:
       locale === "ru"
-        ? "Условия обслуживания и бронирования | JetSet Travel Cyprus"
+        ? "Условия использования | JetSet Travel Кипр"
         : "Terms of Service & Booking Conditions | JetSet Travel Cyprus",
     description:
       locale === "ru"
