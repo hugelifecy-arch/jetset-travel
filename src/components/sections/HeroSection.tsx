@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Shield, MessageCircle, Award, Play } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 // TODO: Compress hero.mp4 to under 2MB:
 // ffmpeg -i hero.mp4 -vcodec h264 -crf 28 -preset medium -vf scale=1920:-2 -an hero-compressed.mp4
@@ -19,14 +19,11 @@ const fadeInUp = {
   }),
 };
 
-const trustBadges = [
-  { icon: Shield, label: "IATA Accredited" },
-  { icon: MessageCircle, label: "24/7 WhatsApp" },
-  { icon: Award, label: "Tourism License 7775" },
-];
+const trustBadgeIcons = [Shield, MessageCircle, Award] as const;
 
 export default function HeroSection() {
   const locale = useLocale();
+  const t = useTranslations("hero");
   const [isDesktop, setIsDesktop] = useState(false);
   const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false);
 
@@ -110,8 +107,8 @@ export default function HeroSection() {
             animate="visible"
             custom={0}
           >
-            Travel Managed.{" "}
-            <span className="text-brand-gold">Luxury Delivered.</span>
+            {t("title")}{" "}
+            <span className="text-brand-gold">{t("titleHighlight")}</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -122,9 +119,7 @@ export default function HeroSection() {
             animate="visible"
             custom={1}
           >
-            IATA-accredited corporate and luxury travel management based in
-            Paphos, Cyprus. Fast quotes, compliant invoicing, and 24/7
-            disruption support — so your team just has to show up.
+            {t("subtitle")}
           </motion.p>
 
           {/* CTAs */}
@@ -139,13 +134,13 @@ export default function HeroSection() {
               href={`/${locale}/contact?type=corporate`}
               className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-4 text-base font-semibold text-brand-navy shadow-luxury transition-opacity hover:opacity-90"
             >
-              Get a Corporate Quote
+              {t("ctaCorporate")}
             </Link>
             <Link
               href={`/${locale}/luxury-travel`}
               className="inline-flex items-center justify-center rounded-full border-2 border-white px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-white/10"
             >
-              Plan a Luxury Trip
+              {t("ctaLuxury")}
             </Link>
           </motion.div>
 
@@ -157,15 +152,18 @@ export default function HeroSection() {
             animate="visible"
             custom={3}
           >
-            {trustBadges.map((badge) => (
-              <div
-                key={badge.label}
-                className="flex items-center gap-2 text-sm text-white/80"
-              >
-                <badge.icon className="h-5 w-5 text-brand-gold" />
-                <span className="font-medium">{badge.label}</span>
-              </div>
-            ))}
+            {(["badgeIATA", "badgeWhatsApp", "badgeLicense"] as const).map((key, i) => {
+              const Icon = trustBadgeIcons[i];
+              return (
+                <div
+                  key={key}
+                  className="flex items-center gap-2 text-sm text-white/80"
+                >
+                  <Icon className="h-5 w-5 text-brand-gold" />
+                  <span className="font-medium">{t(key)}</span>
+                </div>
+              );
+            })}
           </motion.div>
         </div>
       </div>
