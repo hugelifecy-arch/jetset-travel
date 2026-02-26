@@ -6,13 +6,13 @@ const APEX_HOST = "jetset-travel.com";
 const locales = ["en", "ru"] as const;
 const PUBLIC_FILE = /\.(.*)$/;
 
-// Special-case bare-path redirects that don't map 1:1 to /en/<path>
+// Special-case bare-path redirects that don't map 1:1 to /<locale>/<path>
 const BARE_PATH_SPECIALS: Record<
   string,
   { pathname: string; extraSearch?: Record<string, string> }
 > = {
-  "/luxury-travel": { pathname: "/en/luxury" },
-  "/quote": { pathname: "/en/contact", extraSearch: { type: "quote" } },
+  "/luxury-travel": { pathname: "/luxury-travel" },
+  "/quote": { pathname: "/contact", extraSearch: { type: "quote" } },
 };
 
 function getHostname(req: NextRequest) {
@@ -31,17 +31,13 @@ export default function proxy(req: NextRequest) {
   const { pathname } = url;
   const lang = url.searchParams.get("lang");
 
-  // Do not interfere with local dev or Vercel preview/default domains
-  if (
+  const isLocalOrPreview =
     hostname.includes("localhost") ||
     hostname.endsWith(".vercel.app") ||
-    hostname.endsWith(".vercel-preview.app")
-  ) {
-    return NextResponse.next();
-  }
+    hostname.endsWith(".vercel-preview.app");
 
-  // Force apex -> canonical www (308)
-  if (hostname === APEX_HOST) {
+  // Force apex -> canonical www (308) — production only
+  if (!isLocalOrPreview && hostname === APEX_HOST) {
     const redirectUrl = url.clone();
     redirectUrl.hostname = CANONICAL_HOST;
     return NextResponse.redirect(redirectUrl, 308);
@@ -73,7 +69,7 @@ export default function proxy(req: NextRequest) {
   const special = BARE_PATH_SPECIALS[pathname];
   if (special) {
     const redirectUrl = url.clone();
-    redirectUrl.pathname = special.pathname;
+    redirectUrl.pathname = `/en${special.pathname}`;
     if (special.extraSearch) {
       for (const [key, value] of Object.entries(special.extraSearch)) {
         redirectUrl.searchParams.set(key, value);

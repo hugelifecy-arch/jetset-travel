@@ -2,11 +2,18 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useLocale } from "next-intl";
 
 export default function WhatsAppButton() {
+  const locale = useLocale();
+  const whatsappText =
+    locale === "ru"
+      ? encodeURIComponent("Здравствуйте, JetSet, мне нужна помощь")
+      : encodeURIComponent("Hi JetSet, I need help");
+
   return (
     <motion.a
-      href="https://wa.me/35799478073?text=Hi%20JetSet%2C%20I%20need%20help"
+      href={`https://wa.me/35799478073?text=${whatsappText}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contact us on WhatsApp"
