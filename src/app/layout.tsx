@@ -1,37 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
 import { CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
-
-const dmSans = localFont({
-  src: [
-    {
-      path: "../fonts/dm-sans-latin-wght-normal.woff2",
-      style: "normal",
-    },
-    {
-      path: "../fonts/dm-sans-latin-wght-italic.woff2",
-      style: "italic",
-    },
-  ],
-  variable: "--font-dm-sans",
-  display: "swap",
-});
-
-const playfair = localFont({
-  src: [
-    {
-      path: "../fonts/playfair-display-latin-wght-normal.woff2",
-      style: "normal",
-    },
-    {
-      path: "../fonts/playfair-display-latin-wght-italic.woff2",
-      style: "italic",
-    },
-  ],
-  variable: "--font-playfair",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(CANONICAL_ORIGIN),
@@ -73,16 +41,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://wa.me" />
-        <link rel="dns-prefetch" href="https://wa.me" />
-        <link rel="dns-prefetch" href="https://maps.google.com" />
-      </head>
-      <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
-        {children}
-      </body>
-    </html>
-  );
+  return children;
 }

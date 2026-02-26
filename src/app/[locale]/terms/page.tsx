@@ -62,7 +62,7 @@ export default async function TermsOfServicePage({
               </p>
               <div className="mt-8">
                 <Link
-                  href="/en/terms"
+                  href={`/${locale}/terms`}
                   className="text-brand-gold hover:underline font-semibold"
                 >
                   {t("viewEnglish")}

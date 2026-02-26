@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import Header from "@/components/layout/Header";
@@ -9,8 +10,37 @@ import MobileActionBar from "@/components/layout/MobileActionBar";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import { CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
-import HreflangTags from "@/components/seo/HreflangTags";
-import { HtmlLangSetter } from "./HtmlLangSetter";
+import "../globals.css";
+
+const dmSans = localFont({
+  src: [
+    {
+      path: "../../fonts/dm-sans-latin-wght-normal.woff2",
+      style: "normal",
+    },
+    {
+      path: "../../fonts/dm-sans-latin-wght-italic.woff2",
+      style: "italic",
+    },
+  ],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const playfair = localFont({
+  src: [
+    {
+      path: "../../fonts/playfair-display-latin-wght-normal.woff2",
+      style: "normal",
+    },
+    {
+      path: "../../fonts/playfair-display-latin-wght-italic.woff2",
+      style: "italic",
+    },
+  ],
+  variable: "--font-playfair",
+  display: "swap",
+});
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "ru" }];
@@ -80,23 +110,30 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider messages={messages}>
-      <HtmlLangSetter locale={locale} />
-      <HreflangTags />
-      <a
-        href="#main-content"
-        className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-[100] focus-visible:rounded-md focus-visible:bg-brand-navy focus-visible:px-4 focus-visible:py-2 focus-visible:text-white focus-visible:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E86C1]"
-      >
-        Skip to main content
-      </a>
-      <Header />
-      <Breadcrumbs />
-      <main id="main-content" className="min-h-screen">{children}</main>
-      <Footer />
-      <WhatsAppButton />
-      <MobileActionBar />
-      <BreadcrumbSchema />
-      <CookieConsentBanner />
-    </NextIntlClientProvider>
+    <html lang={locale} suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://wa.me" />
+        <link rel="dns-prefetch" href="https://maps.google.com" />
+      </head>
+      <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
+        <NextIntlClientProvider messages={messages}>
+          <a
+            href="#main-content"
+            className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-[100] focus-visible:rounded-md focus-visible:bg-brand-navy focus-visible:px-4 focus-visible:py-2 focus-visible:text-white focus-visible:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E86C1]"
+          >
+            {locale === "ru" ? "Перейти к основному содержанию" : "Skip to main content"}
+          </a>
+          <Header />
+          <Breadcrumbs />
+          <main id="main-content" className="min-h-screen">{children}</main>
+          <Footer />
+          <WhatsAppButton />
+          <MobileActionBar />
+          <BreadcrumbSchema />
+          <CookieConsentBanner />
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }

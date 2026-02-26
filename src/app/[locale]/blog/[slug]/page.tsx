@@ -24,7 +24,7 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: "Post Not Found",
+      title: locale === "ru" ? "Запись не найдена" : "Post Not Found",
     };
   }
 
