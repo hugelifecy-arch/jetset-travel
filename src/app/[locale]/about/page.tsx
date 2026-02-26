@@ -74,13 +74,13 @@ export default async function AboutPage({
       name: t("member1Name"),
       role: t("member1Role"),
       bio: t("member1Bio"),
-      photo: "/images/nontari-kalaitsidis.svg",
+      photo: "/images/nontari-kalaitsidis.jpg",
     },
     {
       name: t("member2Name"),
       role: t("member2Role"),
       bio: t("member2Bio"),
-      photo: "/images/maro-kokkinou.svg",
+      photo: "/images/maro-kokkinou.jpg",
     },
   ];
 
@@ -252,13 +252,15 @@ export default async function AboutPage({
                 key={member.name}
                 className="bg-white rounded-2xl border border-brand-navy/10 overflow-hidden hover:shadow-luxury transition-shadow"
               >
-                <div className="aspect-[4/3] relative">
+                <div className="aspect-[4/3] relative overflow-hidden">
                   <Image
                     src={member.photo}
                     alt={member.name}
-                    fill
-                    className="object-cover"
+                    width={600}
+                    height={450}
+                    className="object-cover w-full h-full"
                     loading="lazy"
+                    unoptimized
                   />
                 </div>
                 <div className="p-6">
