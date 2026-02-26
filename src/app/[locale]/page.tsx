@@ -3,6 +3,7 @@ import { localizedAlternates } from "@/lib/seo";
 import HeroSection from "@/components/sections/HeroSection";
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import TrustSection from "@/components/sections/TrustSection";
+import ComparisonSection from "@/components/sections/ComparisonSection";
 import GoogleReviews from "@/components/sections/GoogleReviews";
 import ClientLogos from "@/components/sections/ClientLogos";
 import CTABanner from "@/components/sections/CTABanner";
@@ -38,6 +39,7 @@ export default function HomePage() {
       <HeroSection />
       <ServicesGrid />
       <TrustSection />
+      <ComparisonSection />
       <GoogleReviews />
       <ClientLogos />
       <CTABanner />

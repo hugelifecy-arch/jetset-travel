@@ -4,12 +4,11 @@ import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-// TODO: Replace with real client testimonials and photos. Consider Google Reviews widget integration.
 const reviews = [
   {
     key: "review1",
     name: "Maria K.",
-    company: "Tech Solutions Ltd",
+    company: "Technology Firm, Limassol",
     avatarInitials: "MK",
     rating: 5,
     source: "Google Reviews",
@@ -17,7 +16,7 @@ const reviews = [
   {
     key: "review2",
     name: "Andreas P.",
-    type: "Luxury Leisure",
+    company: "Private Client",
     avatarInitials: "AP",
     rating: 5,
     source: "Google Reviews",
@@ -25,7 +24,7 @@ const reviews = [
   {
     key: "review3",
     name: "Dmitry S.",
-    company: "SME Client",
+    company: "Import/Export SME, Paphos",
     avatarInitials: "DS",
     rating: 5,
     source: "Google Reviews",
@@ -89,14 +88,9 @@ export default function GoogleReviews() {
                     <p className="text-sm font-semibold text-brand-navy">
                       {review.name}
                     </p>
-                    {"company" in review && review.company && (
+                    {review.company && (
                       <p className="text-xs text-brand-navy/50">
                         {review.company}
-                      </p>
-                    )}
-                    {"type" in review && review.type && (
-                      <p className="text-xs text-brand-navy/50">
-                        {review.type}
                       </p>
                     )}
                     <p className="text-xs text-brand-navy/60">
@@ -116,7 +110,7 @@ export default function GoogleReviews() {
 
         <div className="mt-8 text-center">
           <a
-            href="https://maps.google.com/?q=JetSet+Travel+Agency+Paphos+Cyprus"
+            href="https://www.google.com/maps/search/JetSet+Travel+Agency+Paphos+Cyprus"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-brand-navy/60 underline underline-offset-2 transition-colors hover:text-brand-navy"

@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Shield, MessageCircle, Award, Play } from "lucide-react";
+import { MessageCircle, Play } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
 // TODO: Compress hero.mp4 to under 2MB:
@@ -18,8 +18,6 @@ const fadeInUp = {
     transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" as const },
   }),
 };
-
-const trustBadgeIcons = [Shield, MessageCircle, Award] as const;
 
 export default function HeroSection() {
   const locale = useLocale();
@@ -152,18 +150,30 @@ export default function HeroSection() {
             animate="visible"
             custom={3}
           >
-            {(["badgeIATA", "badgeWhatsApp", "badgeLicense"] as const).map((key, i) => {
-              const Icon = trustBadgeIcons[i];
-              return (
-                <div
-                  key={key}
-                  className="flex items-center gap-2 text-sm text-white/80"
-                >
-                  <Icon className="h-5 w-5 text-brand-gold" />
-                  <span className="font-medium">{t(key)}</span>
-                </div>
-              );
-            })}
+            <div className="flex items-center gap-2 text-sm text-white/80">
+              <Image
+                src="/images/iata-logo.jpg"
+                alt="IATA Accredited Travel Agent"
+                width={28}
+                height={28}
+                className="h-7 w-7 rounded object-contain"
+              />
+              <span className="font-medium">{t("badgeIATA")}</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-white/80">
+              <MessageCircle className="h-5 w-5 text-brand-gold" />
+              <span className="font-medium">{t("badgeWhatsApp")}</span>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-white/80">
+              <Image
+                src="/images/tourism-logo.jpg"
+                alt="Cyprus Tourism Organisation Licensed"
+                width={28}
+                height={28}
+                className="h-7 w-7 rounded object-contain"
+              />
+              <span className="font-medium">{t("badgeLicense")}</span>
+            </div>
           </motion.div>
         </div>
       </div>
