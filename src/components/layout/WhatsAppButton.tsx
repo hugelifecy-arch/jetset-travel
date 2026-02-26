@@ -9,7 +9,7 @@ export default function WhatsAppButton() {
       href="https://wa.me/35799478073?text=Hi%20JetSet%2C%20I%20need%20help"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
+      aria-label="Contact us on WhatsApp"
       className="fixed bottom-6 right-6 z-50 hidden md:flex items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg hover:bg-[#20BD5A] transition-colors md:w-12 md:h-12"
       animate={{
         scale: [1, 1.1, 1],
@@ -25,7 +25,8 @@ export default function WhatsAppButton() {
     >
       <Image
         src="/images/icons/whatsapp.svg"
-        alt="WhatsApp"
+        alt=""
+        role="presentation"
         width={28}
         height={28}
         className="brightness-0 invert w-7 h-7 md:w-6 md:h-6"

@@ -77,8 +77,14 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <HtmlLangSetter locale={locale} />
       <HreflangTags />
+      <a
+        href="#main-content"
+        className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-[100] focus-visible:rounded-md focus-visible:bg-brand-navy focus-visible:px-4 focus-visible:py-2 focus-visible:text-white focus-visible:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E86C1]"
+      >
+        Skip to main content
+      </a>
       <Header />
-      <main className="min-h-screen">{children}</main>
+      <main id="main-content" className="min-h-screen">{children}</main>
       <Footer />
       <WhatsAppButton />
       <MobileActionBar />

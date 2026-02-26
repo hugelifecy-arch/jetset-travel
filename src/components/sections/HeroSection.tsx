@@ -48,7 +48,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 -z-20">
         <Image
           src="/images/hero-bg.jpg"
-          alt="JetSet Travel Cyprus hero background"
+          alt="Aerial view of the Mediterranean coastline in Cyprus with turquoise waters"
           fill
           sizes="100vw"
           className="object-cover"

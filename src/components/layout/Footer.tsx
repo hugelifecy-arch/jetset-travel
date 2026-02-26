@@ -164,11 +164,12 @@ export default function Footer() {
               href="https://wa.me/35799478073"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="WhatsApp"
+              aria-label="Contact us on WhatsApp"
             >
               <Image
                 src="/images/icons/whatsapp.svg"
-                alt="WhatsApp"
+                alt=""
+                role="presentation"
                 width={20}
                 height={20}
                 className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
@@ -179,11 +180,12 @@ export default function Footer() {
               href="https://t.me/jetsetnotis"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Telegram"
+              aria-label="Contact us on Telegram"
             >
               <Image
                 src="/images/icons/telegram.svg"
-                alt="Telegram"
+                alt=""
+                role="presentation"
                 width={20}
                 height={20}
                 className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
@@ -194,11 +196,12 @@ export default function Footer() {
               href="viber://chat?number=35799478073"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Viber"
+              aria-label="Contact us on Viber"
             >
               <Image
                 src="/images/icons/viber.svg"
-                alt="Viber"
+                alt=""
+                role="presentation"
                 width={20}
                 height={20}
                 className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
