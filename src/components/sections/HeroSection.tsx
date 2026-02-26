@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { MessageCircle, Play } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
-// TODO: Compress hero.mp4 to under 2MB:
+// TODO: Add hero.mp4 video file (compress to under 2MB):
 // ffmpeg -i hero.mp4 -vcodec h264 -crf 28 -preset medium -vf scale=1920:-2 -an hero-compressed.mp4
 
 const fadeInUp = {
@@ -24,6 +24,8 @@ export default function HeroSection() {
   const t = useTranslations("hero");
   const [isDesktop, setIsDesktop] = useState(false);
   const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false);
+  const [videoAvailable, setVideoAvailable] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const mql = window.matchMedia("(min-width: 768px)");
@@ -37,8 +39,12 @@ export default function HeroSection() {
     setMobileVideoPlaying(true);
   }, []);
 
+  const handleVideoError = useCallback(() => {
+    setVideoAvailable(false);
+  }, []);
+
   return (
-    <section className="relative isolate flex min-h-screen items-center overflow-hidden">
+    <section className="relative isolate flex min-h-screen items-center overflow-hidden bg-brand-navy">
       {/* Background image — always visible, acts as poster on mobile */}
       <div className="absolute inset-0 -z-20">
         <Image
@@ -52,8 +58,9 @@ export default function HeroSection() {
       </div>
 
       {/* Video background — desktop only (conditionally rendered to prevent mobile download) */}
-      {isDesktop && (
+      {isDesktop && videoAvailable && (
         <video
+          ref={videoRef}
           className="absolute inset-0 -z-20 h-full w-full object-cover"
           src="/videos/hero.mp4"
           autoPlay
@@ -63,11 +70,12 @@ export default function HeroSection() {
           preload="metadata"
           poster="/images/hero-bg.jpg"
           aria-hidden="true"
+          onError={handleVideoError}
         />
       )}
 
       {/* Mobile: play button overlay to load video on demand */}
-      {!isDesktop && !mobileVideoPlaying && (
+      {!isDesktop && !mobileVideoPlaying && videoAvailable && (
         <button
           onClick={handlePlayMobile}
           className="absolute bottom-8 right-8 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors hover:bg-white/30"
@@ -78,7 +86,7 @@ export default function HeroSection() {
       )}
 
       {/* Mobile video — only rendered after user taps play */}
-      {!isDesktop && mobileVideoPlaying && (
+      {!isDesktop && mobileVideoPlaying && videoAvailable && (
         <video
           className="absolute inset-0 -z-20 h-full w-full object-cover"
           src="/videos/hero.mp4"
@@ -89,6 +97,7 @@ export default function HeroSection() {
           preload="metadata"
           poster="/images/hero-bg.jpg"
           aria-hidden="true"
+          onError={handleVideoError}
         />
       )}
 
