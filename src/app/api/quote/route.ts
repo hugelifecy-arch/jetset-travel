@@ -3,35 +3,99 @@ import { z } from "zod";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { sendResendEmail } from "@/lib/email/resend";
 
-const QuoteSchema = z.object({
+/* ------------------------------------------------------------------ */
+/*  Schemas — one per form that POSTs to /api/quote                    */
+/* ------------------------------------------------------------------ */
+
+const CorporateSchema = z.object({
+  type: z.literal("corporate"),
+  companyName: z.string().min(2).max(120),
+  email: z.string().email().max(120),
+  phone: z.string().min(5).max(30),
+  travellers: z.string().min(1).max(50),
+  travelDates: z.string().min(1).max(200),
+  destinations: z.string().min(2).max(200),
+  invoiceRequired: z.boolean(),
+  notes: z.string().max(2000).optional().or(z.literal("")),
+});
+
+const LuxurySchema = z.object({
+  type: z.literal("luxury"),
+  name: z.string().min(2).max(80),
+  email: z.string().email().max(120),
+  phone: z.string().min(5).max(30),
+  destinations: z.string().min(2).max(200),
+  dates: z.string().min(1).max(80),
+  groupSize: z.string().min(1).max(50),
+  budget: z.string().min(1).max(50),
+  specialRequirements: z.string().max(2000).optional().or(z.literal("")),
+});
+
+const LeadSchema = z.object({
   name: z.string().min(2).max(80),
   phone: z.string().min(5).max(30),
-  email: z.string().email().max(120).optional().or(z.literal("")),
-  travelType: z.enum(["Corporate", "Luxury / Leisure", "Group / Event"]),
   route: z.string().min(3).max(200),
-  dates: z.string().min(2).max(80),
-  message: z.string().max(2000).optional().or(z.literal("")),
-  // Honeypot field must be empty
-  company: z.string().max(0).optional().or(z.literal("")),
 });
+
+const QuoteSchema = z.union([CorporateSchema, LuxurySchema, LeadSchema]);
+
+type QuoteData = z.infer<typeof QuoteSchema>;
+
+/* ------------------------------------------------------------------ */
+/*  Helpers                                                            */
+/* ------------------------------------------------------------------ */
 
 const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "35799478073";
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jetset-travel.com";
 
-function notificationHtml(data: z.infer<typeof QuoteSchema>): string {
+const TD = 'style="padding:8px 12px;border:1px solid #e5e7eb"';
+const TH = 'style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb"';
+
+function row(label: string, value: string): string {
+  return `<tr><td ${TH}>${label}</td><td ${TD}>${value}</td></tr>`;
+}
+
+function notificationHtml(data: QuoteData): string {
+  let heading: string;
+  let rows: string;
+
+  if ("type" in data && data.type === "corporate") {
+    heading = "New Corporate Quote Request";
+    rows =
+      row("Company", data.companyName) +
+      row("Email", data.email) +
+      row("Phone", data.phone) +
+      row("Travellers", data.travellers) +
+      row("Travel Dates", data.travelDates) +
+      row("Destinations", data.destinations) +
+      row("VAT Invoice Required", data.invoiceRequired ? "Yes" : "No") +
+      (data.notes ? row("Notes", data.notes) : "");
+  } else if ("type" in data && data.type === "luxury") {
+    heading = "New Luxury Quote Request";
+    rows =
+      row("Name", data.name) +
+      row("Email", data.email) +
+      row("Phone", data.phone) +
+      row("Destinations", data.destinations) +
+      row("Dates", data.dates) +
+      row("Group Size", data.groupSize) +
+      row("Budget", data.budget) +
+      (data.specialRequirements ? row("Special Requirements", data.specialRequirements) : "");
+  } else {
+    heading = "New Quick Quote Request";
+    rows =
+      row("Name", data.name) +
+      row("Phone", data.phone) +
+      row("Route / Details", data.route);
+  }
+
   return `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-      <h2 style="color:#0b1d3a">New Quote Request</h2>
+      <h2 style="color:#0b1d3a">${heading}</h2>
       <table style="border-collapse:collapse;width:100%;font-size:14px">
-        <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Name</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.name}</td></tr>
-        <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Phone</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.phone}</td></tr>
-        ${data.email ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Email</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.email}</td></tr>` : ""}
-        <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Travel Type</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.travelType}</td></tr>
-        <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Route</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.route}</td></tr>
-        <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Dates</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.dates}</td></tr>
-        ${data.message ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Message</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.message}</td></tr>` : ""}
+        ${rows}
       </table>
     </div>`;
 }
@@ -48,6 +112,20 @@ function autoReplyHtml(name: string): string {
     </div>`;
 }
 
+function getContactName(data: QuoteData): string {
+  if ("type" in data && data.type === "corporate") return data.companyName;
+  return data.name;
+}
+
+function getEmail(data: QuoteData): string | undefined {
+  if ("email" in data && data.email) return data.email;
+  return undefined;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Route handler                                                      */
+/* ------------------------------------------------------------------ */
+
 export async function POST(req: Request) {
   const body = await req.json().catch(() => null);
   const parsed = QuoteSchema.safeParse(body);
@@ -57,11 +135,6 @@ export async function POST(req: Request) {
   }
 
   const data = parsed.data;
-
-  /* Honeypot — silently accept to avoid tipping off bots */
-  if (data.company) {
-    return NextResponse.json({ ok: true });
-  }
 
   const forwardedFor = req.headers.get("x-forwarded-for");
   const ip = forwardedFor?.split(",")[0]?.trim() || "unknown";
@@ -76,15 +149,18 @@ export async function POST(req: Request) {
     throw error;
   }
 
+  const contactName = getContactName(data);
+  const email = getEmail(data);
+  const quoteType =
+    "type" in data ? (data.type === "corporate" ? "Corporate" : "Luxury") : "Quick";
+
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey || apiKey === "re_your_key_here") {
     console.log("[quote] Resend not configured – logging submission");
-    console.log("[quote] From:", data.name, data.phone, data.email || "(no email)");
-    console.log("[quote] Travel Type:", data.travelType);
-    console.log("[quote] Route:", data.route);
-    console.log("[quote] Dates:", data.dates);
-    if (data.message) console.log("[quote] Message:", data.message);
+    console.log("[quote] Type:", quoteType);
+    console.log("[quote] From:", contactName, email || "(no email)");
+    console.log("[quote] Data:", JSON.stringify(data));
     return NextResponse.json({ ok: true });
   }
 
@@ -92,17 +168,17 @@ export async function POST(req: Request) {
     await sendResendEmail(apiKey, {
       from: "JetSet Travel <noreply@jetset-travel.com>",
       to: "info@jetset.com.cy",
-      reply_to: data.email || undefined,
-      subject: `New Quote Request — ${data.name} (${data.travelType})`,
+      reply_to: email,
+      subject: `New ${quoteType} Quote Request — ${contactName}`,
       html: notificationHtml(data),
     });
 
-    if (data.email) {
+    if (email) {
       await sendResendEmail(apiKey, {
         from: "JetSet Travel <noreply@jetset-travel.com>",
-        to: data.email,
+        to: email,
         subject: "JetSet Travel — Your quote request is received",
-        html: autoReplyHtml(data.name),
+        html: autoReplyHtml(contactName),
       });
     }
   } catch (err) {
