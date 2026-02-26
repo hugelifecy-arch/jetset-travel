@@ -14,7 +14,7 @@
     "title": "Travel Managed.",
     "titleHighlight": "Luxury Delivered.",
     "subtitle": "IATA-accredited corporate and luxury travel management based in Paphos, Cyprus. Fast quotes, compliant invoicing, and 24/7 disruption support — so your team just has to show up.",
-    "ctaCorporate": "Get a Corporate Quote",
+    "ctaCorporate": "Book a Free Consultation",
     "ctaLuxury": "Plan a Luxury Trip",
     "badgeIATA": "IATA Accredited",
     "badgeWhatsApp": "24/7 WhatsApp",
@@ -344,6 +344,9 @@
     "iataOrg": "International Air Transport Association",
     "ctoLicensed": "CTO Licensed",
     "ctoOrg": "Cyprus Tourism Organisation",
+    "calendlyTitle": "Prefer to schedule directly?",
+    "calendlySubtitle": "Pick a 15-minute slot that works for you and we'll call at the scheduled time.",
+    "calendlyButton": "Schedule a Call Directly",
     "nameMinLength": "Name must be at least 2 characters",
     "invalidEmail": "Please enter a valid email address",
     "messageMinLength": "Message must be at least 10 characters"
