@@ -261,7 +261,7 @@ export default async function LuxuryTravelPage({
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <a
-              href="https://wa.me/35799478073?text=Hi%2C%20I%27m%20interested%20in%20a%20luxury%20travel%20experience."
+              href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, меня интересует премиальный отдых.") : encodeURIComponent("Hi, I'm interested in a luxury travel experience.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center rounded-full border border-brand-navy/20 px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-navy/5 transition-colors"
