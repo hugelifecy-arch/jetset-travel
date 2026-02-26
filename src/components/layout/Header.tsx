@@ -36,7 +36,7 @@ export default function Header() {
           <Link href={`/${locale}`} className="flex-shrink-0">
             <Image
               src="/images/jetset-logo.svg"
-              alt="JetSet Travel Cyprus"
+              alt="JetSet Travel Cyprus - Home"
               width={140}
               height={40}
               className="h-10 w-auto"
