@@ -27,8 +27,8 @@ export async function generateMetadata({
     routePath: "/about",
     title:
       locale === "ru"
-        ? "О компании JetSet Travel Кипр | Более 15 лет корпоративных и премиальных путешествий"
-        : "About JetSet Travel Cyprus | 15+ Years of Corporate & Luxury Travel",
+        ? "О компании JetSet Travel Кипр | Более 20 лет корпоративных и премиальных путешествий"
+        : "About JetSet Travel Cyprus | 20+ Years of Corporate & Luxury Travel",
     description:
       locale === "ru"
         ? "JetSet K&K Travel Ltd — аккредитованное IATA туристическое агентство в Пафосе, Кипр с 2006 года. Узнайте о нашей команде и причинах, по которым нам доверяют более 500 компаний."
@@ -183,11 +183,11 @@ export default async function AboutPage({
               </p>
             </div>
 
-            {/* 15 Years Badge */}
+            {/* 20 Years Badge */}
             <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-brand-navy/10 hover:shadow-luxury transition-shadow">
               <div className="w-24 h-24 rounded-full bg-brand-gold/10 flex items-center justify-center mb-6">
                 <span className="text-brand-gold font-display text-3xl font-bold">
-                  15+
+                  20+
                 </span>
               </div>
               <h3 className="text-lg font-bold text-brand-navy mb-2">
