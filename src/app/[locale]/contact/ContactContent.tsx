@@ -16,6 +16,7 @@ import {
   CheckCircle,
   Calendar,
 } from "lucide-react";
+import { useSpamProtection } from "@/hooks/useSpamProtection";
 
 function createContactSchema(t: (key: string) => string) {
   return z.object({
@@ -39,6 +40,7 @@ export default function ContactContent() {
   const t = useTranslations("contactPage");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const { getSpamFields } = useSpamProtection("contact");
 
   const contactSchema = createContactSchema(t);
 
@@ -56,10 +58,11 @@ export default function ContactContent() {
   const onSubmit = async (data: ContactFormData) => {
     setSubmitError(null);
     try {
+      const spamFields = await getSpamFields();
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, ...spamFields }),
       });
       if (!res.ok) throw new Error("Failed to send message");
       setSubmitted(true);
@@ -179,6 +182,19 @@ export default function ContactContent() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                  {/* Honeypot — hidden from real users, bots auto-fill this */}
+                  <div
+                    className="absolute -left-[9999px] opacity-0"
+                    aria-hidden="true"
+                  >
+                    <input
+                      type="text"
+                      name="website_url"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
                   <div>
                     <h2 className="text-2xl font-bold text-brand-navy mb-2">
                       {t("formTitle")}

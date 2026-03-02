@@ -1,7 +1,26 @@
+/**
+ * POST /api/quote — Quote request form handler.
+ *
+ * Anti-spam protection layers:
+ *   1. Rate limiting — Upstash Redis (existing) + in-memory fallback (3/IP/hour)
+ *   2. Honeypot field — hidden "website_url" input
+ *   3. Time-based validation — rejects submissions under 3 seconds
+ *   4. Gibberish detection — validates name/company/message patterns
+ *   5. Google reCAPTCHA v3 — invisible score-based verification
+ *
+ * Spam submissions are silently accepted (HTTP 200) but not processed,
+ * to avoid tipping off bots. Rejection reasons are logged server-side.
+ */
+
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { sendResendEmail } from "@/lib/email/resend";
+import {
+  extractSpamFields,
+  runSpamChecks,
+  spamChecksSummaryHtml,
+} from "@/lib/spam-protection";
 
 /* ------------------------------------------------------------------ */
 /*  Schemas — one per form that POSTs to /api/quote                    */
@@ -42,6 +61,31 @@ const QuoteSchema = z.union([CorporateSchema, LuxurySchema, LeadSchema]);
 type QuoteData = z.infer<typeof QuoteSchema>;
 
 /* ------------------------------------------------------------------ */
+/*  In-memory rate limiting fallback (3 requests per IP per hour)      */
+/* ------------------------------------------------------------------ */
+
+const rateLimitMap = new Map<string, number[]>();
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+const RATE_LIMIT_MAX = 3;
+
+function checkInMemoryRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const windowStart = now - RATE_LIMIT_WINDOW_MS;
+  const timestamps = (rateLimitMap.get(ip) || []).filter(
+    (t) => t > windowStart
+  );
+
+  if (timestamps.length >= RATE_LIMIT_MAX) {
+    rateLimitMap.set(ip, timestamps);
+    return false;
+  }
+
+  timestamps.push(now);
+  rateLimitMap.set(ip, timestamps);
+  return true;
+}
+
+/* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
@@ -57,7 +101,7 @@ function row(label: string, value: string): string {
   return `<tr><td ${TH}>${label}</td><td ${TD}>${value}</td></tr>`;
 }
 
-function notificationHtml(data: QuoteData): string {
+function notificationHtml(data: QuoteData, spamSummaryHtml: string): string {
   let heading: string;
   let rows: string;
 
@@ -97,6 +141,7 @@ function notificationHtml(data: QuoteData): string {
       <table style="border-collapse:collapse;width:100%;font-size:14px">
         ${rows}
       </table>
+      ${spamSummaryHtml}
     </div>`;
 }
 
@@ -127,8 +172,34 @@ function getEmail(data: QuoteData): string | undefined {
 /* ------------------------------------------------------------------ */
 
 export async function POST(req: Request) {
-  const body = await req.json().catch(() => null);
-  const parsed = QuoteSchema.safeParse(body);
+  const rawBody = await req.json().catch(() => null);
+  if (!rawBody) {
+    return NextResponse.json({ ok: false, error: "Invalid input" }, { status: 400 });
+  }
+
+  const forwardedFor = req.headers.get("x-forwarded-for");
+  const ip = forwardedFor?.split(",")[0]?.trim() || "unknown";
+
+  /* Rate limiting — Upstash Redis (primary) + in-memory fallback */
+  try {
+    await enforceRateLimit(ip);
+  } catch (error) {
+    if (error instanceof Error && error.message === "RATE_LIMIT") {
+      console.log(`[quote] RATE LIMITED (Upstash) — IP: ${ip}`);
+      return NextResponse.json({ ok: false, error: "Too many requests" }, { status: 429 });
+    }
+    throw error;
+  }
+
+  if (!checkInMemoryRateLimit(ip)) {
+    console.log(`[quote] RATE LIMITED (in-memory) — IP: ${ip}`);
+    return NextResponse.json({ ok: false, error: "Too many requests" }, { status: 429 });
+  }
+
+  /* Extract spam-protection fields before Zod validation */
+  const { cleanBody, spamFields } = extractSpamFields(rawBody as Record<string, unknown>);
+
+  const parsed = QuoteSchema.safeParse(cleanBody);
 
   if (!parsed.success) {
     return NextResponse.json({ ok: false, error: "Invalid input" }, { status: 400 });
@@ -136,25 +207,24 @@ export async function POST(req: Request) {
 
   const data = parsed.data;
 
-  const forwardedFor = req.headers.get("x-forwarded-for");
-  const ip = forwardedFor?.split(",")[0]?.trim() || "unknown";
-
-  try {
-    await enforceRateLimit(ip);
-  } catch (error) {
-    if (error instanceof Error && error.message === "RATE_LIMIT") {
-      return NextResponse.json({ ok: false, error: "Too many requests" }, { status: 429 });
-    }
-
-    throw error;
-  }
-
+  /* Run all spam checks (honeypot, timestamp, gibberish, reCAPTCHA) */
+  const spamResult = await runSpamChecks(cleanBody as Record<string, unknown>, spamFields);
   const contactName = getContactName(data);
   const email = getEmail(data);
+
+  if (spamResult.isSpam) {
+    console.log(`[quote] SPAM REJECTED — ${spamResult.summary} (IP: ${ip}, name: ${contactName})`);
+    /* Silently accept to avoid tipping off bots */
+    return NextResponse.json({ ok: true });
+  }
+
   const quoteType =
     "type" in data ? (data.type === "corporate" ? "Corporate" : "Luxury") : "Quick";
 
+  console.log(`[quote] ${spamResult.summary} — ${quoteType} from: ${contactName} (IP: ${ip})`);
+
   const apiKey = process.env.RESEND_API_KEY;
+  const spamSummary = spamChecksSummaryHtml(spamResult);
 
   if (!apiKey || apiKey === "re_your_key_here") {
     console.log("[quote] Resend not configured – logging submission");
@@ -170,7 +240,7 @@ export async function POST(req: Request) {
       to: "info@jetset.com.cy",
       reply_to: email,
       subject: `New ${quoteType} Quote Request — ${contactName}`,
-      html: notificationHtml(data),
+      html: notificationHtml(data, spamSummary),
     });
 
     if (email) {

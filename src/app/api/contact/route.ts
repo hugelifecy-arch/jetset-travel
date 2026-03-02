@@ -1,6 +1,25 @@
+/**
+ * POST /api/contact — Contact form handler.
+ *
+ * Anti-spam protection layers:
+ *   1. Rate limiting — 3 requests per IP per hour (in-memory)
+ *   2. Honeypot field — hidden "website" and "website_url" inputs
+ *   3. Time-based validation — rejects submissions under 3 seconds
+ *   4. Gibberish detection — validates name/message patterns
+ *   5. Google reCAPTCHA v3 — invisible score-based verification
+ *
+ * Spam submissions are silently accepted (HTTP 200) but not processed,
+ * to avoid tipping off bots. Rejection reasons are logged server-side.
+ */
+
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sendResendEmail } from "@/lib/email/resend";
+import {
+  extractSpamFields,
+  runSpamChecks,
+  spamChecksSummaryHtml,
+} from "@/lib/spam-protection";
 
 /* ------------------------------------------------------------------ */
 /*  Schema                                                             */
@@ -15,16 +34,16 @@ const contactSchema = z.object({
   travelType: z.string().optional(),
   contactMethod: z.string().optional(),
   dates: z.string().optional(),
-  website: z.string().optional(), // honeypot — must remain empty
+  website: z.string().optional(), // legacy honeypot — must remain empty
 });
 
 /* ------------------------------------------------------------------ */
-/*  Rate limiting (in-memory, 5 requests per IP per hour)              */
+/*  Rate limiting (in-memory, 3 requests per IP per hour)              */
 /* ------------------------------------------------------------------ */
 
 const rateLimitMap = new Map<string, number[]>();
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
-const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_MAX = 3;
 
 function checkRateLimit(ip: string): boolean {
   const now = Date.now();
@@ -52,7 +71,10 @@ const WHATSAPP_NUMBER =
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jetset-travel.com";
 
-function notificationHtml(data: z.infer<typeof contactSchema>): string {
+function notificationHtml(
+  data: z.infer<typeof contactSchema>,
+  spamSummaryHtml: string
+): string {
   return `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
       <h2 style="color:#0b1d3a">${data.travelType ? "New Quote Request" : "New Contact Message"}</h2>
@@ -66,6 +88,7 @@ function notificationHtml(data: z.infer<typeof contactSchema>): string {
         ${data.dates ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Dates</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.dates}</td></tr>` : ""}
         ${data.message ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Message</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.message}</td></tr>` : ""}
       </table>
+      ${spamSummaryHtml}
     </div>`;
 }
 
@@ -91,15 +114,16 @@ export async function POST(request: Request) {
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
   if (!checkRateLimit(ip)) {
+    console.log(`[contact] RATE LIMITED — IP: ${ip}`);
     return NextResponse.json(
       { error: "Too many requests. Please try again later." },
       { status: 429 }
     );
   }
 
-  let body: unknown;
+  let rawBody: Record<string, unknown>;
   try {
-    body = await request.json();
+    rawBody = await request.json();
   } catch {
     return NextResponse.json(
       { error: "Invalid request body." },
@@ -107,7 +131,10 @@ export async function POST(request: Request) {
     );
   }
 
-  const result = contactSchema.safeParse(body);
+  /* Extract spam-protection fields before Zod validation */
+  const { cleanBody, spamFields } = extractSpamFields(rawBody);
+
+  const result = contactSchema.safeParse(cleanBody);
 
   if (!result.success) {
     return NextResponse.json(
@@ -118,12 +145,25 @@ export async function POST(request: Request) {
 
   const data = result.data;
 
-  /* Honeypot — silently accept to avoid tipping off bots */
+  /* Legacy honeypot — silently accept to avoid tipping off bots */
   if (data.website) {
+    console.log(`[contact] SPAM REJECTED — legacy honeypot filled (IP: ${ip})`);
     return NextResponse.json({ success: true });
   }
 
+  /* Run all spam checks (honeypot, timestamp, gibberish, reCAPTCHA) */
+  const spamResult = await runSpamChecks(cleanBody as Record<string, unknown>, spamFields);
+
+  if (spamResult.isSpam) {
+    console.log(`[contact] SPAM REJECTED — ${spamResult.summary} (IP: ${ip})`);
+    /* Silently accept to avoid tipping off bots */
+    return NextResponse.json({ success: true });
+  }
+
+  console.log(`[contact] ${spamResult.summary} — from: ${data.name} <${data.email}> (IP: ${ip})`);
+
   const apiKey = process.env.RESEND_API_KEY;
+  const spamSummary = spamChecksSummaryHtml(spamResult);
 
   if (!apiKey || apiKey === "re_your_key_here") {
     console.log("[contact] Resend not configured – logging submission");
@@ -131,7 +171,6 @@ export async function POST(request: Request) {
     if (data.travelType) console.log("[contact] Travel Type:", data.travelType);
     if (data.dates) console.log("[contact] Dates:", data.dates);
     if (data.message) console.log("[contact] Message:", data.message);
-    // TODO: Connect to email service (Resend, SendGrid, or Nodemailer) to send to info@jetset.com.cy
     return NextResponse.json({ success: true });
   }
 
@@ -143,7 +182,7 @@ export async function POST(request: Request) {
       subject: data.travelType
         ? `New Quote Request — ${data.name} (${data.travelType})`
         : `New Contact Message — ${data.name}`,
-      html: notificationHtml(data),
+      html: notificationHtml(data, spamSummary),
     });
 
     await sendResendEmail(apiKey, {

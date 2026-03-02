@@ -10,11 +10,13 @@ import {
 } from "@/components/forms/schemas";
 import { Input, Textarea } from "@/components/ui/Input";
 import { cn } from "@/lib/utils/cn";
+import { useSpamProtection } from "@/hooks/useSpamProtection";
 
 export default function CTALeadForm() {
   const t = useTranslations("cta");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const { getSpamFields } = useSpamProtection("contact");
 
   const {
     register,
@@ -28,10 +30,11 @@ export default function CTALeadForm() {
   const onSubmit = async (data: CTALeadFormValues) => {
     setSubmitError(null);
     try {
+      const spamFields = await getSpamFields();
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, ...spamFields }),
       });
       if (!res.ok) throw new Error();
       setSubmitted(true);
@@ -72,11 +75,20 @@ export default function CTALeadForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="mx-auto max-w-3xl rounded-2xl bg-white/5 p-6 backdrop-blur-sm sm:p-8"
     >
-      {/* Honeypot */}
-      <div className="absolute -left-[9999px]" aria-hidden="true">
+      {/* Honeypot — hidden from real users, bots auto-fill this */}
+      <div
+        className="absolute -left-[9999px] opacity-0"
+        aria-hidden="true"
+      >
         <input
           type="text"
           {...register("website")}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+        <input
+          type="text"
+          name="website_url"
           tabIndex={-1}
           autoComplete="off"
         />

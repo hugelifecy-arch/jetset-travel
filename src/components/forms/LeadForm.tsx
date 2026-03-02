@@ -6,10 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button";
 import { Input, Textarea } from "@/components/ui/Input";
 import { leadFormSchema, type LeadFormValues } from "@/components/forms/schemas";
+import { useSpamProtection } from "@/hooks/useSpamProtection";
 
 export default function LeadForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const { getSpamFields } = useSpamProtection("quote");
 
   const {
     register,
@@ -24,10 +26,11 @@ export default function LeadForm() {
     setSubmitError(null);
     setSubmitted(false);
 
+    const spamFields = await getSpamFields();
     const response = await fetch("/api/quote", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, ...spamFields }),
     });
 
     if (!response.ok) {
@@ -49,6 +52,19 @@ export default function LeadForm() {
       })}
       className="space-y-4"
     >
+      {/* Honeypot — hidden from real users, bots auto-fill this */}
+      <div
+        className="absolute -left-[9999px] opacity-0"
+        aria-hidden="true"
+      >
+        <input
+          type="text"
+          name="website_url"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="space-y-1">
         <Input
           {...register("name")}
