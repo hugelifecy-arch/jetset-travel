@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useLocale, useTranslations } from "next-intl";
+import { getRecaptchaToken } from "@/lib/recaptcha";
 import {
   Building2,
   Palmtree,
@@ -70,6 +71,8 @@ function CorporateForm({
   t: TFunction;
 }) {
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const formLoadedAt = useRef(Date.now());
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const {
     register,
@@ -83,10 +86,17 @@ function CorporateForm({
   const onSubmit = async (data: CorporateFormData) => {
     setSubmitError(null);
     try {
+      const recaptchaToken = await getRecaptchaToken("quote");
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "corporate", ...data }),
+        body: JSON.stringify({
+          type: "corporate",
+          ...data,
+          website: honeypotRef.current?.value || "",
+          _formLoadedAt: formLoadedAt.current,
+          _recaptchaToken: recaptchaToken,
+        }),
       });
       if (!res.ok) throw new Error("Failed to submit");
       onSuccess();
@@ -97,6 +107,17 @@ function CorporateForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      {/* Honeypot — hidden from real users */}
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <input
+          type="text"
+          ref={honeypotRef}
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="companyName" className={labelClasses}>
@@ -275,6 +296,8 @@ function LuxuryForm({
   t: TFunction;
 }) {
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const formLoadedAt = useRef(Date.now());
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const {
     register,
@@ -287,10 +310,17 @@ function LuxuryForm({
   const onSubmit = async (data: LuxuryFormData) => {
     setSubmitError(null);
     try {
+      const recaptchaToken = await getRecaptchaToken("quote");
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type: "luxury", ...data }),
+        body: JSON.stringify({
+          type: "luxury",
+          ...data,
+          website: honeypotRef.current?.value || "",
+          _formLoadedAt: formLoadedAt.current,
+          _recaptchaToken: recaptchaToken,
+        }),
       });
       if (!res.ok) throw new Error("Failed to submit");
       onSuccess();
@@ -301,6 +331,17 @@ function LuxuryForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+      {/* Honeypot — hidden from real users */}
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <input
+          type="text"
+          ref={honeypotRef}
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="lux-name" className={labelClasses}>

@@ -3,9 +3,10 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import { getRecaptchaToken } from "@/lib/recaptcha";
 import {
   MapPin,
   Phone,
@@ -39,6 +40,8 @@ export default function ContactContent() {
   const t = useTranslations("contactPage");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const formLoadedAt = useRef(Date.now());
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const contactSchema = createContactSchema(t);
 
@@ -56,10 +59,16 @@ export default function ContactContent() {
   const onSubmit = async (data: ContactFormData) => {
     setSubmitError(null);
     try {
+      const recaptchaToken = await getRecaptchaToken("contact");
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          website: honeypotRef.current?.value || "",
+          _formLoadedAt: formLoadedAt.current,
+          _recaptchaToken: recaptchaToken,
+        }),
       });
       if (!res.ok) throw new Error("Failed to send message");
       setSubmitted(true);
@@ -179,6 +188,17 @@ export default function ContactContent() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                  {/* Honeypot — hidden from real users */}
+                  <div className="absolute -left-[9999px]" aria-hidden="true">
+                    <input
+                      type="text"
+                      ref={honeypotRef}
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
                   <div>
                     <h2 className="text-2xl font-bold text-brand-navy mb-2">
                       {t("formTitle")}

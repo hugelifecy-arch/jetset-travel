@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { sendResendEmail } from "@/lib/email/resend";
+import { runAntiSpamChecks } from "@/lib/anti-spam";
 
 /* ------------------------------------------------------------------ */
 /*  Schemas — one per form that POSTs to /api/quote                    */
@@ -127,17 +128,38 @@ function getEmail(data: QuoteData): string | undefined {
 /* ------------------------------------------------------------------ */
 
 export async function POST(req: Request) {
-  const body = await req.json().catch(() => null);
-  const parsed = QuoteSchema.safeParse(body);
+  const rawBody = await req.json().catch(() => null);
+
+  if (!rawBody || typeof rawBody !== "object") {
+    return NextResponse.json({ ok: false, error: "Invalid input" }, { status: 400 });
+  }
+
+  const forwardedFor = req.headers.get("x-forwarded-for");
+  const ip = forwardedFor?.split(",")[0]?.trim() || "unknown";
+
+  /* ---- Anti-spam checks (honeypot, timestamp, reCAPTCHA, gibberish) ---- */
+  const spam = await runAntiSpamChecks(rawBody as Record<string, unknown>);
+  if (spam.blocked) {
+    if (spam.silentReject) {
+      return NextResponse.json({ ok: true }); // honeypot — fake success
+    }
+    console.log(`[quote] Spam blocked: ${spam.reason}`, ip);
+    return NextResponse.json(
+      { ok: false, error: "Submission rejected." },
+      { status: 400 },
+    );
+  }
+
+  /* Strip anti-spam meta-fields before Zod validation */
+  const { website: _hp, _formLoadedAt: _ts, _recaptchaToken: _rc, ...formFields } = rawBody as Record<string, unknown>;
+
+  const parsed = QuoteSchema.safeParse(formFields);
 
   if (!parsed.success) {
     return NextResponse.json({ ok: false, error: "Invalid input" }, { status: 400 });
   }
 
   const data = parsed.data;
-
-  const forwardedFor = req.headers.get("x-forwarded-for");
-  const ip = forwardedFor?.split(",")[0]?.trim() || "unknown";
 
   try {
     await enforceRateLimit(ip);
