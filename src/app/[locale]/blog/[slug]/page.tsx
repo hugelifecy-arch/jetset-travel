@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { localizedAlternates, CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { markdownToHtml } from "@/lib/markdown";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar, Clock, User, ArrowLeft, ArrowRight } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight, ChevronRight } from "lucide-react";
+import SocialShare from "@/components/blog/SocialShare";
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -72,6 +74,8 @@ export default async function BlogPostPage({
     notFound();
   }
 
+  const htmlContent = await markdownToHtml(post.content);
+
   // Get related posts (same tags, different slug)
   const allPosts = getAllPosts(locale).filter(
     (p) => p.frontmatter.status === "published",
@@ -84,18 +88,108 @@ export default async function BlogPostPage({
     )
     .slice(0, 3);
 
+  const articleUrl = `${CANONICAL_ORIGIN}/${locale}/blog/${slug}`;
+  const ogImage = post.frontmatter.image
+    ? `${CANONICAL_ORIGIN}${post.frontmatter.image}`
+    : OG_IMAGE;
+
+  // Article JSON-LD schema
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.frontmatter.title,
+    description: post.frontmatter.description,
+    image: ogImage,
+    datePublished: post.frontmatter.date,
+    dateModified: post.frontmatter.date,
+    author: {
+      "@type": "Organization",
+      name: post.frontmatter.author,
+      url: CANONICAL_ORIGIN,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "JetSet Travel Cyprus",
+      logo: {
+        "@type": "ImageObject",
+        url: `${CANONICAL_ORIGIN}/images/jetset-logo.svg`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": articleUrl,
+    },
+    keywords: post.frontmatter.tags.join(", "),
+  };
+
+  // Breadcrumb JSON-LD schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: locale === "ru" ? "Главная" : "Home",
+        item: `${CANONICAL_ORIGIN}/${locale}`,
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: locale === "ru" ? "Блог" : "Blog",
+        item: `${CANONICAL_ORIGIN}/${locale}/blog`,
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.frontmatter.title,
+        item: articleUrl,
+      },
+    ],
+  };
+
   return (
     <>
-      {/* Hero / Banner Image */}
+      {/* JSON-LD Schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
+      {/* Hero / Banner */}
       <section className="bg-brand-navy text-white py-20 lg:py-28">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          <Link
-            href={`/${locale}/blog`}
-            className="inline-flex items-center text-sm text-white/60 hover:text-brand-gold transition-colors mb-8"
-          >
-            <ArrowLeft className="mr-1.5 h-4 w-4" />
-            {t("backToBlog")}
-          </Link>
+          {/* Breadcrumbs */}
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex items-center gap-1.5 text-sm text-white/50">
+              <li>
+                <Link
+                  href={`/${locale}`}
+                  className="hover:text-brand-gold transition-colors"
+                >
+                  {locale === "ru" ? "Главная" : "Home"}
+                </Link>
+              </li>
+              <li><ChevronRight className="h-3.5 w-3.5" /></li>
+              <li>
+                <Link
+                  href={`/${locale}/blog`}
+                  className="hover:text-brand-gold transition-colors"
+                >
+                  {locale === "ru" ? "Блог" : "Blog"}
+                </Link>
+              </li>
+              <li><ChevronRight className="h-3.5 w-3.5" /></li>
+              <li className="text-white/70 truncate max-w-[200px] sm:max-w-none">
+                {post.frontmatter.title}
+              </li>
+            </ol>
+          </nav>
+
           <div className="flex flex-wrap gap-2 mb-4">
             {post.frontmatter.tags.map((tag) => (
               <span
@@ -141,14 +235,17 @@ export default async function BlogPostPage({
       {/* Post Body */}
       <article className="py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg max-w-none text-brand-navy/80 leading-relaxed">
-            {post.content.split("\n\n").map((paragraph, i) => {
-              const trimmed = paragraph.trim();
-              if (!trimmed) return null;
-              return (
-                <p key={i}>{trimmed}</p>
-              );
-            })}
+          <div
+            className="prose prose-lg max-w-none text-brand-navy/80 leading-relaxed prose-headings:text-brand-navy prose-headings:font-display prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-brand-gold prose-a:underline hover:prose-a:text-brand-gold/80 prose-strong:text-brand-navy prose-li:text-brand-navy/80 prose-table:text-sm prose-th:bg-brand-navy/5 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-brand-navy/10 prose-hr:border-brand-navy/10"
+            dangerouslySetInnerHTML={{ __html: htmlContent }}
+          />
+
+          {/* Social Sharing */}
+          <div className="mt-12 pt-8 border-t border-brand-navy/10">
+            <SocialShare
+              url={articleUrl}
+              title={post.frontmatter.title}
+            />
           </div>
         </div>
       </article>

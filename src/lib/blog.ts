@@ -4,6 +4,17 @@ import matter from "gray-matter";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
+export const BLOG_CATEGORIES = [
+  "all",
+  "corporate-travel",
+  "luxury",
+  "visas-guides",
+  "cyprus",
+  "cruises",
+] as const;
+
+export type BlogCategory = (typeof BLOG_CATEGORIES)[number];
+
 export interface BlogPostFrontmatter {
   title: string;
   description: string;
@@ -11,6 +22,7 @@ export interface BlogPostFrontmatter {
   author: string;
   slug: string;
   image: string;
+  category: BlogCategory;
   tags: string[];
   locale: string;
   status: "draft" | "published";
@@ -62,4 +74,14 @@ export function getPublishedPosts(locale?: string) {
 export function getPostBySlug(slug: string): (BlogPost & { readTime: number }) | null {
   const posts = getAllPosts();
   return posts.find((p) => p.frontmatter.slug === slug) ?? null;
+}
+
+export function getPostsByCategory(category: BlogCategory, locale?: string) {
+  const posts = getPublishedPosts(locale);
+  if (category === "all") return posts;
+  return posts.filter((p) => p.frontmatter.category === category);
+}
+
+export function getAllCategories(): BlogCategory[] {
+  return [...BLOG_CATEGORIES];
 }
