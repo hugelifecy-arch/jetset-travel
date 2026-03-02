@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import Header from "@/components/layout/Header";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
@@ -10,6 +11,8 @@ import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import { CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import "../globals.css";
+
+const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 const dmSans = localFont({
   src: [
@@ -131,6 +134,13 @@ export default async function LocaleLayout({
           <MobileActionBar />
           <BreadcrumbSchema />
           <CookieConsentBanner />
+          {recaptchaSiteKey &&
+            recaptchaSiteKey !== "your_recaptcha_site_key" && (
+              <Script
+                src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
+                strategy="lazyOnload"
+              />
+            )}
         </NextIntlClientProvider>
       </body>
     </html>

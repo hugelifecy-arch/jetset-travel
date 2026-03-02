@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -10,11 +10,13 @@ import {
 } from "@/components/forms/schemas";
 import { Input, Textarea } from "@/components/ui/Input";
 import { cn } from "@/lib/utils/cn";
+import { getRecaptchaToken } from "@/lib/recaptcha";
 
 export default function CTALeadForm() {
   const t = useTranslations("cta");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const formLoadedAt = useRef(Date.now());
 
   const {
     register,
@@ -28,10 +30,15 @@ export default function CTALeadForm() {
   const onSubmit = async (data: CTALeadFormValues) => {
     setSubmitError(null);
     try {
+      const recaptchaToken = await getRecaptchaToken("contact");
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          _formLoadedAt: formLoadedAt.current,
+          _recaptchaToken: recaptchaToken,
+        }),
       });
       if (!res.ok) throw new Error();
       setSubmitted(true);

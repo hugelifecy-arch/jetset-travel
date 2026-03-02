@@ -1,15 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button";
 import { Input, Textarea } from "@/components/ui/Input";
 import { leadFormSchema, type LeadFormValues } from "@/components/forms/schemas";
+import { getRecaptchaToken } from "@/lib/recaptcha";
 
 export default function LeadForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const formLoadedAt = useRef(Date.now());
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const {
     register,
@@ -24,10 +27,16 @@ export default function LeadForm() {
     setSubmitError(null);
     setSubmitted(false);
 
+    const recaptchaToken = await getRecaptchaToken("quote");
     const response = await fetch("/api/quote", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        ...data,
+        website: honeypotRef.current?.value || "",
+        _formLoadedAt: formLoadedAt.current,
+        _recaptchaToken: recaptchaToken,
+      }),
     });
 
     if (!response.ok) {
@@ -49,6 +58,16 @@ export default function LeadForm() {
       })}
       className="space-y-4"
     >
+      {/* Honeypot — hidden from real users */}
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <input
+          type="text"
+          ref={honeypotRef}
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
       <div className="space-y-1">
         <Input
           {...register("name")}

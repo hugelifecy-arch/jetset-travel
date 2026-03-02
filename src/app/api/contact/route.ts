@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sendResendEmail } from "@/lib/email/resend";
+import { runAntiSpamChecks } from "@/lib/anti-spam";
 
 /* ------------------------------------------------------------------ */
 /*  Schema                                                             */
@@ -15,7 +16,6 @@ const contactSchema = z.object({
   travelType: z.string().optional(),
   contactMethod: z.string().optional(),
   dates: z.string().optional(),
-  website: z.string().optional(), // honeypot — must remain empty
 });
 
 /* ------------------------------------------------------------------ */
@@ -97,7 +97,7 @@ export async function POST(request: Request) {
     );
   }
 
-  let body: unknown;
+  let body: Record<string, unknown>;
   try {
     body = await request.json();
   } catch {
@@ -107,7 +107,24 @@ export async function POST(request: Request) {
     );
   }
 
-  const result = contactSchema.safeParse(body);
+  /* ---- Anti-spam checks (honeypot, timestamp, reCAPTCHA, gibberish) ---- */
+  const spam = await runAntiSpamChecks(body);
+  if (spam.blocked) {
+    if (spam.silentReject) {
+      /* Honeypot — return fake success so bots don't adapt */
+      return NextResponse.json({ success: true });
+    }
+    console.log(`[contact] Spam blocked: ${spam.reason}`, ip);
+    return NextResponse.json(
+      { error: "Submission rejected." },
+      { status: 400 },
+    );
+  }
+
+  /* Strip anti-spam meta-fields before Zod validation */
+  const { website: _hp, _formLoadedAt: _ts, _recaptchaToken: _rc, ...formFields } = body;
+
+  const result = contactSchema.safeParse(formFields);
 
   if (!result.success) {
     return NextResponse.json(
@@ -117,11 +134,6 @@ export async function POST(request: Request) {
   }
 
   const data = result.data;
-
-  /* Honeypot — silently accept to avoid tipping off bots */
-  if (data.website) {
-    return NextResponse.json({ success: true });
-  }
 
   const apiKey = process.env.RESEND_API_KEY;
 
