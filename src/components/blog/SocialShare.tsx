@@ -34,6 +34,11 @@ export default function SocialShare({
       href: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
       label: "WhatsApp",
     },
+    {
+      name: "Telegram",
+      href: `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`,
+      label: "Telegram",
+    },
   ];
 
   return (
