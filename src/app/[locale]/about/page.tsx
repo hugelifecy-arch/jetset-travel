@@ -339,7 +339,7 @@ export default async function AboutPage({
       </section>
 
       {/* Cross-links */}
-      <ServicesCrossLinks locale={locale} exclude="flights" />
+      <ServicesCrossLinks locale={locale} include={["corporate", "contact", "paphos"]} />
 
       {/* CTA */}
       <section className="py-20 bg-brand-navy text-white">

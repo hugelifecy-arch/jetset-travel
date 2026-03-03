@@ -34,7 +34,7 @@ export default async function CorporateTravelPage({
   return (
     <>
       <CorporateTravelContent />
-      <ServicesCrossLinks locale={locale} exclude="corporate" />
+      <ServicesCrossLinks locale={locale} include={["visa", "hotels", "luxury"]} />
       <ServiceSchema
         name="Corporate Travel Management"
         description="Corporate travel management for Cyprus businesses. Policy-compliant bookings, clean invoicing, 24/7 rebooking, dedicated account management, and disruption support."

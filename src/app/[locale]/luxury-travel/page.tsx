@@ -256,7 +256,7 @@ export default async function LuxuryTravelPage({
       </section>
 
       {/* Cross-links */}
-      <ServicesCrossLinks locale={locale} exclude="luxury" />
+      <ServicesCrossLinks locale={locale} include={["hotels", "cruises", "corporate"]} />
 
       {/* Enquiry CTA */}
       <section className="py-20 bg-brand-light">

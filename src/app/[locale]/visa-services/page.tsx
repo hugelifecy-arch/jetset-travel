@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
 import {
   FileCheck,
   Clock,
@@ -15,8 +14,6 @@ import {
   Send,
   BarChart3,
   Globe,
-  Briefcase,
-  Palmtree,
   ChevronDown,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
@@ -456,56 +453,13 @@ export default async function VisaServicesPage({
         </div>
       </section>
 
-      {/* Related Services — internal links to corporate-travel and luxury-travel */}
-      <section className="py-20 bg-brand-light">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-navy text-center mb-12">
-            {t("relatedTitle")}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <Link
-              href={`/${locale}/corporate-travel`}
-              className="group flex items-start gap-4 bg-white p-6 md:p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
-            >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex-shrink-0">
-                <Briefcase className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors">
-                  {locale === "ru" ? "Корпоративные поездки" : "Corporate Travel"}
-                </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
-                  {t("relatedCorporateDesc")}
-                </p>
-              </div>
-            </Link>
-            <Link
-              href={`/${locale}/luxury-travel`}
-              className="group flex items-start gap-4 bg-white p-6 md:p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
-            >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex-shrink-0">
-                <Palmtree className="h-6 w-6" />
-              </div>
-              <div>
-                <h3 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors">
-                  {locale === "ru" ? "Премиальный отдых" : "Luxury Travel"}
-                </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
-                  {t("relatedLuxuryDesc")}
-                </p>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* CTA with Lead Form */}
       <div id="visa-cta">
         <CTABanner />
       </div>
 
-      {/* Cross-links to other services */}
-      <ServicesCrossLinks locale={locale} exclude="visa" />
+      {/* Related Services */}
+      <ServicesCrossLinks locale={locale} include={["corporate", "luxury"]} />
 
       {/* WhatsApp CTA */}
       <section className="py-20 bg-brand-navy text-white">
