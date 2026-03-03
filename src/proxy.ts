@@ -36,14 +36,14 @@ export default function proxy(req: NextRequest) {
     hostname.endsWith(".vercel.app") ||
     hostname.endsWith(".vercel-preview.app");
 
-  // Force apex -> canonical www (308) — production only
+  // 1. Force apex → canonical www (301) — production only
   if (!isLocalOrPreview && hostname === APEX_HOST) {
     const redirectUrl = url.clone();
     redirectUrl.hostname = CANONICAL_HOST;
-    return NextResponse.redirect(redirectUrl, 308);
+    return NextResponse.redirect(redirectUrl, 301);
   }
 
-  // ignore Next.js internals / APIs / static files
+  // Ignore Next.js internals / APIs / static files
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -52,20 +52,27 @@ export default function proxy(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // Canonicalize query-param language into path-based locale
+  // 2. Strip trailing slashes (except root "/") for URL consistency
+  if (pathname !== "/" && pathname.endsWith("/")) {
+    const redirectUrl = url.clone();
+    redirectUrl.pathname = pathname.replace(/\/+$/, "");
+    return NextResponse.redirect(redirectUrl, 301);
+  }
+
+  // 3. Canonicalize query-param language into path-based locale
   if (lang === "ru" || lang === "en") {
     url.searchParams.delete("lang");
     url.pathname = `/${lang}${pathname === "/" ? "" : pathname}`;
-    return NextResponse.redirect(url, 308);
+    return NextResponse.redirect(url, 301);
   }
 
-  // already locale-prefixed: /en OR /en/... OR /ru OR /ru/...  → pass through
+  // 4. Already locale-prefixed: /en OR /en/... OR /ru OR /ru/... → pass through
   const localePrefix = new RegExp(`^/(${locales.join("|")})(/|$)`);
   if (localePrefix.test(pathname)) {
     return NextResponse.next();
   }
 
-  // Special-case bare paths that need a non-trivial destination
+  // 5. Special-case bare paths that need a non-trivial destination
   const special = BARE_PATH_SPECIALS[pathname];
   if (special) {
     const redirectUrl = url.clone();
@@ -78,7 +85,7 @@ export default function proxy(req: NextRequest) {
     return NextResponse.redirect(redirectUrl, 301);
   }
 
-  // All remaining bare paths → /en/<path> (301 permanent, query string preserved)
+  // 6. All remaining bare paths → /en/<path> (301, query string preserved)
   const redirectUrl = url.clone();
   redirectUrl.pathname = `/en${pathname === "/" ? "" : pathname}`;
   return NextResponse.redirect(redirectUrl, 301);
