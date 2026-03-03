@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { CANONICAL_ORIGIN } from "@/lib/seo";
 import JsonLd from "./JsonLd";
-import { PATH_DISPLAY_NAMES, getHomeName } from "./breadcrumb-names";
+import { PATH_DISPLAY_NAMES, getHomeName, slugToTitle } from "./breadcrumb-names";
 
 export default function BreadcrumbSchema() {
   const pathname = usePathname();
@@ -35,7 +35,7 @@ export default function BreadcrumbSchema() {
     items.push({
       "@type": "ListItem",
       position: i + 2,
-      name: names[segments[i]] ?? segments[i],
+      name: names[segments[i]] ?? slugToTitle(segments[i]),
       item: `${CANONICAL_ORIGIN}${cumulativePath}`,
     });
   }
