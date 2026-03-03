@@ -31,7 +31,7 @@ export function buildPageMetadata({
   return {
     title: { absolute: title },
     description,
-    alternates: localizedAlternates(locale, routePath),
+    // Hreflang + canonical are rendered by HreflangTags component in locale layout
     openGraph: {
       type: "website",
       siteName: "JetSet Travel Cyprus",
