@@ -67,6 +67,18 @@ const destinations = [
   "australia", "southAmerica", "middleEast", "worldCruises",
 ] as const;
 
+const destinationImages: Record<(typeof destinations)[number], string> = {
+  caribbean: "/images/destinations/caribbean.jpg",
+  med: "/images/destinations/med.jpg",
+  alaska: "/images/destinations/alaska.jpg",
+  northern: "/images/destinations/northern.jpg",
+  asia: "/images/destinations/asia.jpg",
+  australia: "/images/destinations/australia.jpg",
+  southAmerica: "/images/destinations/south-america.jpg",
+  middleEast: "/images/destinations/middle-east.jpg",
+  worldCruises: "/images/destinations/world-cruises.jpg",
+};
+
 const newShips = [
   { line: "Royal Caribbean", ship: "Legend of the Seas", pax: "7,600", cls: "Icon Class", when: "July 2026", detail: "World's largest ship. 28 restaurants, Category 6 waterpark, Crown's Edge skywalk.", sails: "Barcelona, Rome, Fort Lauderdale" },
   { line: "Norwegian", ship: "Norwegian Luna", pax: "3,571", cls: "Prima Plus Class", when: "March 2026", detail: "The Haven (123 suites), Aqua Slidecoaster, 10-story Drop slide.", sails: "Caribbean, Mediterranean" },
@@ -394,9 +406,16 @@ export default function CruisesContent({ locale }: { locale: string }) {
                 href="#cruise-enquiry"
                 className="group rounded-2xl overflow-hidden border border-brand-navy/10 hover:shadow-luxury transition-all"
               >
-                <div className="aspect-[16/10] bg-gradient-to-br from-[#0a3d62] to-brand-dark flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 bg-brand-navy/20 group-hover:bg-brand-navy/40 transition-colors" />
-                  <span className="relative text-white/30 text-3xl font-display font-bold group-hover:text-white/50 transition-colors">
+                <div className="aspect-[16/10] relative overflow-hidden">
+                  <Image
+                    src={destinationImages[dest]}
+                    alt={t(`${dest}Title`)}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent" />
+                  <span className="absolute bottom-3 left-4 text-white text-lg font-display font-bold drop-shadow-lg">
                     {t(`${dest}Title`)}
                   </span>
                 </div>
