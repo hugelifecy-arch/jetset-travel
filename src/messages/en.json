@@ -147,7 +147,11 @@
     "submitting": "Sending...",
     "success": "Thank you! We'll get back to you within 24 hours.",
     "error": "Something went wrong. Please try WhatsApp or call us directly.",
-    "orContactDirectly": "Or contact us directly"
+    "orContactDirectly": "Or contact us directly",
+    "responseTime": "Average response time: under 2 hours",
+    "freeConsultation": "Free consultation · No commitment required",
+    "trustLicence": "Tourism Licence 7775",
+    "trustClients": "520+ Corporate Clients"
   },
   "footer": {
     "tagline": "Your trusted travel partner in Cyprus. Premium travel services for corporate and leisure clients since 2006.",
@@ -388,7 +392,11 @@
     "calendlyButton": "Schedule a Call Directly",
     "nameMinLength": "Name must be at least 2 characters",
     "invalidEmail": "Please enter a valid email address",
-    "messageMinLength": "Message must be at least 10 characters"
+    "messageMinLength": "Message must be at least 10 characters",
+    "responseTime": "Average response time: under 2 hours",
+    "freeConsultation": "Free consultation · No commitment required",
+    "trustLicence": "Tourism Licence 7775",
+    "trustClients": "520+ Corporate Clients"
   },
   "corporatePage": {
     "heroLabel": "Corporate Travel",
@@ -575,7 +583,11 @@
     "submitError": "Something went wrong. Please try again or contact us via WhatsApp.",
     "successTitle": "Enquiry Received!",
     "successMessage": "We'll be in touch within 1 hour during business hours. For immediate assistance, reach us on WhatsApp.",
-    "successWhatsApp": "Chat on WhatsApp"
+    "successWhatsApp": "Chat on WhatsApp",
+    "responseTime": "Average response time: under 2 hours",
+    "freeConsultation": "Free consultation · No commitment required",
+    "trustLicence": "Tourism Licence 7775",
+    "trustClients": "520+ Corporate Clients"
   },
   "visaPage": {
     "heroLabel": "Visa Services",

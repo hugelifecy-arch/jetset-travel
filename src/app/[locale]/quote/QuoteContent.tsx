@@ -14,6 +14,7 @@ import {
   MessageCircle,
   ArrowLeft,
 } from "lucide-react";
+import FormTrustElements from "@/components/forms/FormTrustElements";
 
 /* ------------------------------------------------------------------ */
 /*  Zod Schemas                                                        */
@@ -280,6 +281,16 @@ function CorporateForm({
           </>
         )}
       </button>
+
+      <div className="mt-4">
+        <FormTrustElements
+          responseTime={t("responseTime")}
+          freeConsultation={t("freeConsultation")}
+          trustLicence={t("trustLicence")}
+          trustClients={t("trustClients")}
+          variant="dark"
+        />
+      </div>
     </form>
   );
 }
@@ -493,6 +504,16 @@ function LuxuryForm({
           </>
         )}
       </button>
+
+      <div className="mt-4">
+        <FormTrustElements
+          responseTime={t("responseTime")}
+          freeConsultation={t("freeConsultation")}
+          trustLicence={t("trustLicence")}
+          trustClients={t("trustClients")}
+          variant="dark"
+        />
+      </div>
     </form>
   );
 }
