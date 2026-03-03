@@ -97,6 +97,13 @@ export default async function VisaServicesPage({
       difficulty: t("medium"),
       difficultyColor: "bg-yellow-100 text-yellow-800",
     },
+    {
+      flag: "🇯🇵",
+      country: t("japan"),
+      processing: t("japanTime"),
+      difficulty: t("medium"),
+      difficultyColor: "bg-yellow-100 text-yellow-800",
+    },
   ];
 
   const steps = [
