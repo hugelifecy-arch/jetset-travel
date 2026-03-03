@@ -17,7 +17,7 @@ const pages = [
   { path: "/quote", priority: 0.8, changeFrequency: "weekly" as const },
   { path: "/faq", priority: 0.6, changeFrequency: "weekly" as const },
   { path: "/blog", priority: 0.6, changeFrequency: "weekly" as const },
-  { path: "/paphos-travel-agency", priority: 0.8, changeFrequency: "weekly" as const },
+  // /paphos-travel-agency is handled separately in crossLocalePages below
   { path: "/privacy", priority: 0.4, changeFrequency: "monthly" as const },
   { path: "/terms", priority: 0.4, changeFrequency: "monthly" as const },
 ];
@@ -41,6 +41,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
+  // Cross-locale pages with different slugs per locale
+  const crossLocalePages = [
+    {
+      url: `${CANONICAL_ORIGIN}/en/paphos-travel-agency`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: `${CANONICAL_ORIGIN}/en/paphos-travel-agency`,
+          ru: `${CANONICAL_ORIGIN}/ru/turisticheskoe-agentstvo-pafos`,
+          "x-default": `${CANONICAL_ORIGIN}/en/paphos-travel-agency`,
+        },
+      },
+    },
+    {
+      url: `${CANONICAL_ORIGIN}/ru/turisticheskoe-agentstvo-pafos`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: `${CANONICAL_ORIGIN}/en/paphos-travel-agency`,
+          ru: `${CANONICAL_ORIGIN}/ru/turisticheskoe-agentstvo-pafos`,
+          "x-default": `${CANONICAL_ORIGIN}/en/paphos-travel-agency`,
+        },
+      },
+    },
+  ];
+
   // Add published blog posts to sitemap
   const publishedPosts = getPublishedPosts();
   const blogPages = publishedPosts.map((post) => ({
@@ -57,5 +87,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   }));
 
-  return [...staticPages, ...blogPages];
+  return [...staticPages, ...crossLocalePages, ...blogPages];
 }
