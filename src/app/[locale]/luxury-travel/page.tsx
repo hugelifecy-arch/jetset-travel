@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Palmtree,
@@ -68,11 +69,15 @@ export default async function LuxuryTravelPage({
       title: t("listenTitle"),
       description: t("listenDesc"),
       align: "left" as const,
+      image: "/images/luxury/listen.jpg",
+      imageAlt: "Luxury resort poolside lounge at sunset",
     },
     {
       title: t("accessTitle"),
       description: t("accessDesc"),
       align: "right" as const,
+      image: "/images/luxury/access.jpg",
+      imageAlt: "Exclusive infinity pool overlooking the ocean",
     },
   ];
 
@@ -81,16 +86,22 @@ export default async function LuxuryTravelPage({
       name: t("maldivesName"),
       tagline: t("maldivesTagline"),
       description: t("maldivesDesc"),
+      image: "/images/luxury/maldives.jpg",
+      imageAlt: "Aerial view of overwater bungalows in the Maldives",
     },
     {
       name: t("tuscanyName"),
       tagline: t("tuscanyTagline"),
       description: t("tuscanyDesc"),
+      image: "/images/luxury/tuscany.jpg",
+      imageAlt: "Rolling Tuscan hills with vineyards and a villa",
     },
     {
       name: t("dubaiName"),
       tagline: t("dubaiTagline"),
       description: t("dubaiDesc"),
+      image: "/images/luxury/dubai.jpg",
+      imageAlt: "Dubai skyline with Burj Khalifa at sunset",
     },
   ];
 
@@ -162,16 +173,14 @@ export default async function LuxuryTravelPage({
               }`}
             >
               <div className="flex-1">
-                <div
-                  className={`aspect-[4/3] rounded-2xl ${
-                    index === 0
-                      ? "bg-gradient-to-br from-brand-navy to-brand-dark"
-                      : "bg-gradient-to-br from-brand-gold/20 to-brand-gold/5"
-                  } flex items-center justify-center`}
-                >
-                  <span className="text-6xl opacity-30">
-                    {index === 0 ? "✦" : "◆"}
-                  </span>
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                  <Image
+                    src={item.image}
+                    alt={item.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
               </div>
               <div className="flex-1">
@@ -204,10 +213,14 @@ export default async function LuxuryTravelPage({
                 key={dest.name}
                 className="group rounded-2xl overflow-hidden border border-brand-navy/10 hover:shadow-luxury transition-shadow"
               >
-                <div className="aspect-[16/10] bg-gradient-to-br from-brand-navy/80 to-brand-dark flex items-center justify-center">
-                  <span className="text-white/20 text-5xl font-display font-bold">
-                    {dest.name}
-                  </span>
+                <div className="aspect-[16/10] relative overflow-hidden">
+                  <Image
+                    src={dest.image}
+                    alt={dest.imageAlt}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
                 </div>
                 <div className="p-6">
                   <p className="text-brand-gold text-xs font-semibold uppercase tracking-wider mb-1">
