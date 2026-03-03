@@ -4,11 +4,13 @@ import { useState, useEffect } from "react";
 import { Phone } from "lucide-react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
+import { useCookieBannerOffset } from "@/hooks/useCookieBannerOffset";
 
 export default function MobileActionBar() {
   const [footerVisible, setFooterVisible] = useState(false);
   const locale = useLocale();
   const t = useTranslations("mobileBar");
+  const cookieOffset = useCookieBannerOffset();
 
   useEffect(() => {
     const footer = document.querySelector("footer");
@@ -25,8 +27,16 @@ export default function MobileActionBar() {
 
   if (footerVisible) return null;
 
+  const whatsappText =
+    locale === "ru"
+      ? encodeURIComponent("Здравствуйте JetSet, мне нужна помощь с...")
+      : encodeURIComponent("Hi JetSet, I'd like help with...");
+
   return (
-    <div className="fixed bottom-0 inset-x-0 z-50 md:hidden">
+    <div
+      className="fixed inset-x-0 z-50 md:hidden transition-[bottom] duration-300 ease-in-out"
+      style={{ bottom: `${cookieOffset}px` }}
+    >
       <div className="flex bg-brand-navy/90 backdrop-blur-sm border-t border-white/10">
         <a
           href="tel:+35799478073"
@@ -40,7 +50,7 @@ export default function MobileActionBar() {
         <div className="w-px bg-white/10" />
 
         <a
-          href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, JetSet! Мне нужна помощь с организацией поездки.") : encodeURIComponent("Hi JetSet, I need help")}`}
+          href={`https://wa.me/35799478073?text=${whatsappText}`}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact via WhatsApp"
