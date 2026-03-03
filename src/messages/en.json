@@ -86,6 +86,9 @@
     "title": "What Our Clients Say",
     "subtitle": "Real feedback from corporate and leisure travellers.",
     "readMoreOnGoogle": "Read more reviews on Google",
+    "viewAllReviews": "View All Reviews on Google",
+    "via": "on",
+    "posted": "Posted",
     "review1": {
       "role": "Operations Director",
       "text": "We had a last-minute cancellation during a critical meeting week in Frankfurt. JetSet rerouted our entire 4-person team the same day — new flights, hotels, and ground transport. Finance got clean documentation within 24 hours."
@@ -449,7 +452,14 @@
     "ctaTitle": "Ready to Streamline Your Corporate Travel?",
     "ctaSubtitle": "Join law firms, tech companies, and enterprises across Cyprus who trust JetSet for reliable, cost-effective business travel.",
     "ctaQuote": "Get a Free Quote",
-    "ctaAccount": "Set Up an Account"
+    "ctaAccount": "Set Up an Account",
+    "testimonialTitle": "What Corporate Clients Say",
+    "testimonial1Quote": "We had a last-minute cancellation during a critical meeting week in Frankfurt. JetSet rerouted our entire 4-person team the same day — new flights, hotels, and ground transport. Finance got clean documentation within 24 hours.",
+    "testimonial1Author": "Maria K.",
+    "testimonial1Role": "Operations Director — Technology Firm, Limassol",
+    "testimonial2Quote": "Fast response on WhatsApp, clear options with pricing breakdowns, no confusion. When our CEO's travel plans changed mid-trip, the solution was already in motion before we even called.",
+    "testimonial2Author": "Dmitry S.",
+    "testimonial2Role": "Founder & CEO — Import/Export SME, Paphos"
   },
   "hotelPage": {
     "heroLabel": "Hotel Reservations",
@@ -491,7 +501,11 @@
     "groupBenefit2": "Dedicated group coordinator",
     "groupBenefit3": "Meeting rooms & event space sourcing",
     "groupBenefit4": "Rooming lists & individual billing options",
-    "groupCta": "Request a Group Quote"
+    "groupCta": "Request a Group Quote",
+    "testimonialTitle": "What Our Hotel Guests Say",
+    "testimonial1Quote": "After years of booking our own corporate travel, switching to JetSet saved us roughly 15 hours per month in admin time alone. The compliant invoicing and single point of contact made our finance team very happy.",
+    "testimonial1Author": "Andreas P.",
+    "testimonial1Role": "Private Client"
   },
   "luxuryPage": {
     "heroLabel": "Luxury Travel",
@@ -678,7 +692,11 @@
     "ctaWhatsApp": "Chat on WhatsApp",
     "relatedTitle": "Related Services",
     "relatedCorporateDesc": "Travelling for business? Our corporate travel team handles flights, hotels, and visa coordination for your entire organisation.",
-    "relatedLuxuryDesc": "Planning a luxury holiday? Let us design a bespoke itinerary with visa support included."
+    "relatedLuxuryDesc": "Planning a luxury holiday? Let us design a bespoke itinerary with visa support included.",
+    "testimonialTitle": "What Clients Say About Our Service",
+    "testimonial1Quote": "Fast response on WhatsApp, clear options with pricing breakdowns, no confusion. When our CEO's travel plans changed mid-trip, the solution was already in motion before we even called.",
+    "testimonial1Author": "Dmitry S.",
+    "testimonial1Role": "Founder & CEO — Import/Export SME, Paphos"
   },
   "servicesPage": {
     "heroLabel": "Our Services",

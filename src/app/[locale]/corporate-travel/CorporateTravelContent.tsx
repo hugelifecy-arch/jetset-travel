@@ -15,6 +15,7 @@ import {
   Check,
   ArrowRight,
 } from "lucide-react";
+import InlineTestimonial from "@/components/sections/InlineTestimonial";
 
 export default function CorporateTravelContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -229,8 +230,31 @@ export default function CorporateTravelContent() {
         </div>
       </section>
 
-      {/* FAQ Accordion */}
+      {/* Client Testimonials */}
       <section className="py-20 bg-brand-light">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-8 text-center">
+            {t("testimonialTitle")}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <InlineTestimonial
+              quote={t("testimonial1Quote")}
+              author={t("testimonial1Author")}
+              role={t("testimonial1Role")}
+              date="2025-09"
+            />
+            <InlineTestimonial
+              quote={t("testimonial2Quote")}
+              author={t("testimonial2Author")}
+              role={t("testimonial2Role")}
+              date="2025-03"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Accordion */}
+      <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">

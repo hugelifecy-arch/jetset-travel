@@ -254,6 +254,20 @@ export default async function LuxuryTravelPage({
             <p className="text-brand-gold font-semibold">{t("testimonialAuthor")}</p>
             <p className="text-white/50 text-sm">{t("testimonialLocation")}</p>
           </div>
+          <div className="mt-6 flex items-center justify-center gap-2">
+            <span className="text-brand-gold text-sm" aria-hidden="true">★★★★★</span>
+            <span className="text-white/40 text-xs">
+              5/5{" "}
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-white/60 transition-colors"
+              >
+                via Google Reviews
+              </a>
+            </span>
+          </div>
         </div>
       </section>
 

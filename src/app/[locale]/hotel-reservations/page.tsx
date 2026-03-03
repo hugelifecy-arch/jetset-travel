@@ -15,6 +15,7 @@ import {
   MapPin,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import InlineTestimonial from "@/components/sections/InlineTestimonial";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 export async function generateMetadata({
   params,
@@ -223,6 +224,21 @@ export default async function HotelReservationsPage({
               </span>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Client Testimonial */}
+      <section className="py-16 bg-brand-light">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-8 text-center">
+            {t("testimonialTitle")}
+          </h2>
+          <InlineTestimonial
+            quote={t("testimonial1Quote")}
+            author={t("testimonial1Author")}
+            role={t("testimonial1Role")}
+            date="2025-06"
+          />
         </div>
       </section>
 
