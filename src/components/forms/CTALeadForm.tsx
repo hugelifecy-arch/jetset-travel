@@ -11,6 +11,7 @@ import {
 import { Input, Textarea } from "@/components/ui/Input";
 import { cn } from "@/lib/utils/cn";
 import { getRecaptchaToken } from "@/lib/recaptcha";
+import FormTrustElements from "@/components/forms/FormTrustElements";
 
 export default function CTALeadForm() {
   const t = useTranslations("cta");
@@ -204,6 +205,16 @@ export default function CTALeadForm() {
           t("submit")
         )}
       </button>
+
+      <div className="mt-5">
+        <FormTrustElements
+          responseTime={t("responseTime")}
+          freeConsultation={t("freeConsultation")}
+          trustLicence={t("trustLicence")}
+          trustClients={t("trustClients")}
+          variant="light"
+        />
+      </div>
     </form>
   );
 }

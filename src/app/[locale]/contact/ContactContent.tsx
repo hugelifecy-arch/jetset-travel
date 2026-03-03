@@ -17,6 +17,7 @@ import {
   CheckCircle,
   Calendar,
 } from "lucide-react";
+import FormTrustElements from "@/components/forms/FormTrustElements";
 
 function createContactSchema(t: (key: string) => string) {
   return z.object({
@@ -384,6 +385,16 @@ export default function ContactContent() {
                       </>
                     )}
                   </button>
+
+                  <div className="mt-4">
+                    <FormTrustElements
+                      responseTime={t("responseTime")}
+                      freeConsultation={t("freeConsultation")}
+                      trustLicence={t("trustLicence")}
+                      trustClients={t("trustClients")}
+                      variant="dark"
+                    />
+                  </div>
 
                   {/* How It Works */}
                   <div className="border-t border-brand-navy/10 pt-5 mt-2">
