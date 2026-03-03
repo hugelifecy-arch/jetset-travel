@@ -16,16 +16,17 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  trailingSlash: false,
   images: {
     formats: ["image/avif", "image/webp"],
   },
   async redirects() {
     return [
-      { source: "/", destination: "/en", permanent: true },
-      { source: "/en/en", destination: "/en", permanent: true },
-      { source: "/en/en/:path*", destination: "/en/:path*", permanent: true },
-      { source: "/ru/ru", destination: "/ru", permanent: true },
-      { source: "/ru/ru/:path*", destination: "/ru/:path*", permanent: true },
+      { source: "/", destination: "/en", statusCode: 301 },
+      { source: "/en/en", destination: "/en", statusCode: 301 },
+      { source: "/en/en/:path*", destination: "/en/:path*", statusCode: 301 },
+      { source: "/ru/ru", destination: "/ru", statusCode: 301 },
+      { source: "/ru/ru/:path*", destination: "/ru/:path*", statusCode: 301 },
     ];
   },
   async headers() {
