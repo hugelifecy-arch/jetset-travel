@@ -12,6 +12,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import ReviewSchema from "@/components/seo/ReviewSchema";
+import ServiceSchema from "@/components/seo/ServiceSchema";
 export async function generateMetadata({
   params,
 }: {
@@ -284,6 +286,21 @@ export default async function LuxuryTravelPage({
           </div>
         </div>
       </section>
+
+      <ServiceSchema
+        name="Luxury Travel Planning"
+        description="Curated luxury travel experiences from Cyprus. Suite-level hotels, private transfers, bespoke multi-city journeys, island getaways, and honeymoon planning."
+        url={`https://www.jetset-travel.com/${locale}/luxury-travel`}
+      />
+      <ReviewSchema
+        reviews={[
+          {
+            author: t("testimonialAuthor"),
+            reviewBody: t("testimonial"),
+            ratingValue: 5,
+          },
+        ]}
+      />
     </>
   );
 }

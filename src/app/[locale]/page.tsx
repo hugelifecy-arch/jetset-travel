@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
 import HeroSection from "@/components/sections/HeroSection";
 import ServicesGrid from "@/components/sections/ServicesGrid";
@@ -9,6 +10,7 @@ import ClientLogos from "@/components/sections/ClientLogos";
 import CTABanner from "@/components/sections/CTABanner";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 import WebSiteSchema from "@/components/seo/WebSiteSchema";
+import ReviewSchema from "@/components/seo/ReviewSchema";
 export async function generateMetadata({
   params,
 }: {
@@ -29,7 +31,20 @@ export async function generateMetadata({
   });
 }
 
-export default function HomePage() {
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "reviews" });
+
+  const reviews = [
+    { author: "Maria K.", reviewBody: t("review1.text"), ratingValue: 5 },
+    { author: "Andreas P.", reviewBody: t("review2.text"), ratingValue: 5 },
+    { author: "Dmitry S.", reviewBody: t("review3.text"), ratingValue: 5 },
+  ];
+
   return (
     <>
       {/* Preload hero background image for faster LCP */}
@@ -43,6 +58,7 @@ export default function HomePage() {
       <CTABanner />
       <LocalBusinessSchema />
       <WebSiteSchema />
+      <ReviewSchema reviews={reviews} />
     </>
   );
 }

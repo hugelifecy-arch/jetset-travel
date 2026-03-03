@@ -11,6 +11,7 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import ServiceSchema from "@/components/seo/ServiceSchema";
 export async function generateMetadata({
   params,
 }: {
@@ -313,6 +314,12 @@ export default async function VisaServicesPage({
           </a>
         </div>
       </section>
+
+      <ServiceSchema
+        name="Visa Services"
+        description="Expert visa assistance from Paphos, Cyprus. Document preparation, application guidance, and coordination support for business and tourist visas worldwide."
+        url={`https://www.jetset-travel.com/${locale}/visa-services`}
+      />
     </>
   );
 }
