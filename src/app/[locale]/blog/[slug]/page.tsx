@@ -5,7 +5,8 @@ import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { markdownToHtml } from "@/lib/markdown";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar, Clock, User, ArrowRight, ChevronRight } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight, ChevronRight, Home } from "lucide-react";
+import { PATH_DISPLAY_NAMES, getHomeName } from "@/components/seo/breadcrumb-names";
 import SocialShare from "@/components/blog/SocialShare";
 
 export async function generateStaticParams() {
@@ -122,42 +123,12 @@ export default async function BlogPostPage({
     keywords: post.frontmatter.tags.join(", "),
   };
 
-  // Breadcrumb JSON-LD schema
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: locale === "ru" ? "Главная" : "Home",
-        item: `${CANONICAL_ORIGIN}/${locale}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: locale === "ru" ? "Блог" : "Blog",
-        item: `${CANONICAL_ORIGIN}/${locale}/blog`,
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: post.frontmatter.title,
-        item: articleUrl,
-      },
-    ],
-  };
-
   return (
     <>
-      {/* JSON-LD Schemas */}
+      {/* JSON-LD Schema (breadcrumb schema handled by layout BreadcrumbSchema) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
       {/* Hero / Banner */}
@@ -169,22 +140,23 @@ export default async function BlogPostPage({
               <li>
                 <Link
                   href={`/${locale}`}
-                  className="hover:text-brand-gold transition-colors"
+                  className="flex items-center gap-1 hover:text-brand-gold transition-colors"
                 >
-                  {locale === "ru" ? "Главная" : "Home"}
+                  <Home className="h-3.5 w-3.5 flex-shrink-0" aria-hidden="true" />
+                  <span className="hidden sm:inline">{getHomeName(locale)}</span>
                 </Link>
               </li>
-              <li><ChevronRight className="h-3.5 w-3.5" /></li>
+              <li className="flex items-center"><ChevronRight className="h-3.5 w-3.5" aria-hidden="true" /></li>
               <li>
                 <Link
                   href={`/${locale}/blog`}
                   className="hover:text-brand-gold transition-colors"
                 >
-                  {locale === "ru" ? "Блог" : "Blog"}
+                  {(PATH_DISPLAY_NAMES[locale] ?? PATH_DISPLAY_NAMES.en).blog}
                 </Link>
               </li>
-              <li><ChevronRight className="h-3.5 w-3.5" /></li>
-              <li className="text-white/70 truncate max-w-[200px] sm:max-w-none">
+              <li className="flex items-center"><ChevronRight className="h-3.5 w-3.5" aria-hidden="true" /></li>
+              <li className="text-white/70 truncate max-w-[180px] sm:max-w-[300px] md:max-w-none" title={post.frontmatter.title}>
                 {post.frontmatter.title}
               </li>
             </ol>
