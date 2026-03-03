@@ -28,10 +28,8 @@ export default async function NotFound() {
 
   const whatsappText =
     locale === "ru"
-      ? encodeURIComponent(
-          "Здравствуйте, JetSet! Мне нужна помощь с организацией поездки."
-        )
-      : encodeURIComponent("Hi JetSet, I need help");
+      ? encodeURIComponent("Здравствуйте JetSet, мне нужна помощь с...")
+      : encodeURIComponent("Hi JetSet, I'd like help with...");
 
   const links = [
     {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
@@ -61,10 +61,27 @@ export default function CookieConsentBanner() {
     handleSave(preferences);
   }, [handleSave, preferences]);
 
+  const bannerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!visible) {
+      window.dispatchEvent(
+        new CustomEvent("cookie-banner-change", { detail: { visible: false, height: 0 } }),
+      );
+      return;
+    }
+    requestAnimationFrame(() => {
+      const height = bannerRef.current?.offsetHeight ?? 0;
+      window.dispatchEvent(
+        new CustomEvent("cookie-banner-change", { detail: { visible: true, height } }),
+      );
+    });
+  }, [visible, showSettings]);
+
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 p-4">
+    <div ref={bannerRef} className="fixed inset-x-0 bottom-0 z-[60] p-4">
       <div className="mx-auto max-w-4xl rounded-xl border border-brand-navy/10 bg-white shadow-luxury">
         {/* Main banner */}
         {!showSettings && (

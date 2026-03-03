@@ -3,13 +3,15 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useLocale } from "next-intl";
+import { useCookieBannerOffset } from "@/hooks/useCookieBannerOffset";
 
 export default function WhatsAppButton() {
   const locale = useLocale();
+  const cookieOffset = useCookieBannerOffset();
   const whatsappText =
     locale === "ru"
-      ? encodeURIComponent("Здравствуйте, JetSet! Мне нужна помощь с организацией поездки.")
-      : encodeURIComponent("Hi JetSet, I need help");
+      ? encodeURIComponent("Здравствуйте JetSet, мне нужна помощь с...")
+      : encodeURIComponent("Hi JetSet, I'd like help with...");
 
   return (
     <motion.a
@@ -17,7 +19,8 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contact us on WhatsApp"
-      className="fixed bottom-6 right-6 z-50 hidden md:flex items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg hover:bg-[#20BD5A] transition-colors md:w-12 md:h-12"
+      className="fixed right-6 z-50 hidden md:flex items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg hover:bg-[#20BD5A] transition-[bottom] duration-300 ease-in-out md:w-12 md:h-12"
+      style={{ bottom: `${24 + cookieOffset}px` }}
       animate={{
         scale: [1, 1.1, 1],
       }}

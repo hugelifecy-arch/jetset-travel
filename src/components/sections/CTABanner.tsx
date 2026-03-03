@@ -36,7 +36,7 @@ export default function CTABanner() {
             <p>{t("orContactDirectly")}</p>
             <div className="mt-2 flex items-center justify-center gap-4">
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, JetSet! Мне нужна помощь с организацией поездки.") : encodeURIComponent("Hi JetSet, I need help")}`}
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${locale === "ru" ? encodeURIComponent("Здравствуйте JetSet, мне нужна помощь с...") : encodeURIComponent("Hi JetSet, I'd like help with...")}`}
                 className="text-white/70 underline transition-colors hover:text-white"
                 target="_blank"
                 rel="noopener noreferrer"

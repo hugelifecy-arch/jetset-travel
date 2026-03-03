@@ -182,7 +182,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-4">
             <a
-              href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, JetSet! Мне нужна помощь с организацией поездки.") : encodeURIComponent("Hi JetSet, I need help")}`}
+              href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте JetSet, мне нужна помощь с...") : encodeURIComponent("Hi JetSet, I'd like help with...")}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contact us on WhatsApp"
