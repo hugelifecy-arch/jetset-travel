@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { localizedAlternates, CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
+import { CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { markdownToHtml } from "@/lib/markdown";
 import Link from "next/link";
@@ -38,7 +38,7 @@ export async function generateMetadata({
   return {
     title: { absolute: `${post.frontmatter.title} | JetSet Travel Cyprus` },
     description: post.frontmatter.description,
-    alternates: localizedAlternates(locale, `/blog/${slug}`),
+    // Hreflang + canonical are rendered by HreflangTags component in locale layout
     openGraph: {
       type: "article",
       siteName: "JetSet Travel Cyprus",
