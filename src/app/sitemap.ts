@@ -17,6 +17,7 @@ const pages = [
   { path: "/quote", priority: 0.8, changeFrequency: "weekly" as const },
   { path: "/faq", priority: 0.6, changeFrequency: "weekly" as const },
   { path: "/blog", priority: 0.6, changeFrequency: "weekly" as const },
+  { path: "/paphos-travel-agency", priority: 0.8, changeFrequency: "weekly" as const },
   { path: "/privacy", priority: 0.4, changeFrequency: "monthly" as const },
   { path: "/terms", priority: 0.4, changeFrequency: "monthly" as const },
 ];
