@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import CookieSettingsButton from "@/components/cookies/CookieSettingsButton";
 export async function generateMetadata({
   params,
 }: {
@@ -67,6 +68,9 @@ export default async function PrivacyPolicyPage({
                 >
                   {t("viewEnglish")}
                 </Link>
+              </div>
+              <div className="mt-6 not-prose">
+                <CookieSettingsButton />
               </div>
             </div>
           </div>
@@ -425,6 +429,9 @@ export default async function PrivacyPolicyPage({
               Please note that disabling essential cookies may affect the
               functionality of our website.
             </p>
+            <div className="mt-4 not-prose">
+              <CookieSettingsButton />
+            </div>
 
             {/* 11. Changes to This Policy */}
             <h2>11. Changes to This Policy</h2>

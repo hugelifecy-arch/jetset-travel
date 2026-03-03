@@ -29,6 +29,20 @@ export default function CookieConsentBanner() {
     }
   }, []);
 
+  useEffect(() => {
+    const handleReopen = () => {
+      const saved = getConsentPreferences();
+      if (saved) {
+        setPreferences(saved);
+      }
+      setShowSettings(true);
+      setVisible(true);
+    };
+    window.addEventListener("open-cookie-settings", handleReopen);
+    return () =>
+      window.removeEventListener("open-cookie-settings", handleReopen);
+  }, []);
+
   const handleSave = useCallback((prefs: CookiePreferences) => {
     setConsentPreferences(prefs);
     setVisible(false);
@@ -81,7 +95,7 @@ export default function CookieConsentBanner() {
                 onClick={() => setShowSettings(true)}
                 className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-brand-navy/70 underline underline-offset-2 transition-colors hover:text-brand-navy"
               >
-                {t("cookieSettings")}
+                {t("managePreferences")}
               </button>
             </div>
           </div>
