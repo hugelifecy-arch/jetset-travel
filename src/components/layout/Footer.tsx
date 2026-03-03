@@ -20,6 +20,7 @@ export default function Footer() {
   const serviceLinks = [
     { href: `/${locale}/contact`, label: t("flightBooking") },
     { href: `/${locale}/hotel-reservations`, label: t("hotelReservations") },
+    { href: `/${locale}/cruises`, label: t("cruises") },
     { href: `/${locale}/visa-services`, label: t("visaAssistance") },
     { href: `/${locale}/luxury-travel`, label: t("luxuryTravel") },
   ];
