@@ -1031,6 +1031,21 @@
     "ctaTitle": "Ready to book with a trusted travel agent in Paphos?",
     "ctaSubtitle": "Fill in the form and our team will get back to you within one business hour."
   },
+  "exitIntent": {
+    "heading": "Before You Go...",
+    "subheading": "Get a free travel quote in under 2 hours",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "travelTypeLabel": "Travel type",
+    "travelTypeCorporate": "Corporate",
+    "travelTypeLeisure": "Leisure",
+    "travelTypeVisa": "Visa",
+    "submit": "Get My Free Quote",
+    "submitting": "Sending...",
+    "disclaimer": "No spam, no commitment. We reply personally.",
+    "thankYou": "Thank you! We'll get back to you within 2 hours.",
+    "close": "Close"
+  },
   "common": {
     "learnMore": "Learn more",
     "readMore": "Read more",

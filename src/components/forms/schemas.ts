@@ -19,3 +19,12 @@ export const ctaLeadFormSchema = z.object({
 });
 
 export type CTALeadFormValues = z.infer<typeof ctaLeadFormSchema>;
+
+export const exitIntentSchema = z.object({
+  name: z.string().min(2, "Name is required"),
+  email: z.string().email("Please enter a valid email address"),
+  travelType: z.enum(["Corporate", "Leisure", "Visa"]),
+  website: z.string().optional(),
+});
+
+export type ExitIntentFormValues = z.infer<typeof exitIntentSchema>;
