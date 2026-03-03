@@ -26,12 +26,12 @@ export async function generateMetadata({
     routePath: "/luxury-travel",
     title:
       locale === "ru"
-        ? "Премиальный отдых и путешествия из Кипра | JetSet Travel"
-        : "Luxury Travel Planning Cyprus | Premium Holidays & Private Transfers | JetSet",
+        ? "Люкс Турагентство Пафос | Премиум Отдых — JetSet Travel Кипр"
+        : "Luxury Travel Agency Paphos | Premium Holiday Planning — JetSet Travel Cyprus",
     description:
       locale === "ru"
-        ? "Индивидуальные программы премиального отдыха с Кипра. Отели уровня люкс, личные трансферы, эксклюзивные маршруты. Спланируйте путешествие с JetSet Travel."
-        : "Curated luxury travel experiences from Cyprus. Suite-level hotels, private transfers, bespoke multi-city journeys. Plan your premium getaway with JetSet Travel.",
+        ? "Планирование люкс-путешествий из Пафоса, Кипр. Эксклюзивные отели, частные трансферы, индивидуальные маршруты. Бесплатная консультация."
+        : "Luxury travel planning from Paphos, Cyprus. Curated premium holidays, private transfers, suite-level hotels, and bespoke multi-city journeys. Get a free consultation.",
   });
 }
 

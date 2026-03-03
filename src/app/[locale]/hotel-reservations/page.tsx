@@ -28,12 +28,12 @@ export async function generateMetadata({
     routePath: "/hotel-reservations",
     title:
       locale === "ru"
-        ? "Бронирование отелей по корпоративным тарифам | JetSet Travel Кипр"
-        : "Hotel Bookings & Negotiated Rates | Corporate & Leisure | JetSet Travel Cyprus",
+        ? "Бронирование Отелей Кипр | Корпоративные Тарифы — JetSet Travel Пафос"
+        : "Hotel Booking Cyprus | Negotiated Corporate Rates — JetSet Travel Paphos",
     description:
       locale === "ru"
-        ? "Согласованные тарифы в лучших отелях мира для корпоративных и частных клиентов. Подбор размещения с учётом бюджета, стандартов и расположения."
-        : "Negotiated hotel rates worldwide for corporate and leisure travelers. Quality accommodations matched to your budget, standards, and location needs.",
+        ? "Бронирование отелей по всему миру с корпоративными скидками. Качественные отели под ваш бюджет и стандарты. JetSet Travel, Пафос, Кипр."
+        : "Hotel reservations worldwide with negotiated corporate rates. Quality hotels matched to your budget and standards. Book through JetSet Travel, Paphos, Cyprus.",
   });
 }
 

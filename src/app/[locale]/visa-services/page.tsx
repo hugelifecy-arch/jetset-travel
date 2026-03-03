@@ -24,12 +24,12 @@ export async function generateMetadata({
     routePath: "/visa-services",
     title:
       locale === "ru"
-        ? "Визовая поддержка на Кипре | Деловые и туристические визы | JetSet Travel"
-        : "Visa Assistance Services Cyprus | Business & Tourist Visa Support | JetSet Travel",
+        ? "Визовые Услуги Кипр | Шенгенская Виза Пафос — JetSet Travel"
+        : "Visa Services Cyprus | Business & Tourist Visa Assistance — JetSet Travel",
     description:
       locale === "ru"
-        ? "Профессиональная визовая поддержка из Пафоса, Кипр. Подготовка документов, консультации и координация подачи для деловых и туристических виз."
-        : "Expert visa assistance from Paphos, Cyprus. Document checklists, application guidance, and coordination support for business and tourist visas worldwide.",
+        ? "Визовая поддержка в Пафосе, Кипр. Чек-листы документов, помощь с шенгенской визой, координация для деловых и туристических виз."
+        : "Visa assistance services in Paphos, Cyprus. Document checklists, Schengen visa guidance, application coordination for business and tourist visas. Expert support.",
   });
 }
 
