@@ -313,13 +313,13 @@ export default function CruisesContent({ locale }: { locale: string }) {
                 className="group flex items-center justify-center p-4 rounded-xl bg-white border border-brand-navy/10 hover:border-brand-gold/40 hover:shadow-luxury transition-all"
                 title={`${t("enquireAbout")} ${line.name}`}
               >
-                <div className="relative h-12 w-full">
+                <div className="relative h-14 w-full">
                   <Image
                     src={line.logo}
                     alt={line.name}
                     fill
                     sizes="(max-width: 640px) 40vw, (max-width: 1024px) 28vw, 140px"
-                    className="object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                    className="object-contain group-hover:scale-105 transition-all duration-300"
                     loading="lazy"
                   />
                 </div>
@@ -333,16 +333,16 @@ export default function CruisesContent({ locale }: { locale: string }) {
               <a
                 key={line.name}
                 href="#cruise-enquiry"
-                className="group flex items-center justify-center p-3 rounded-xl bg-white border border-brand-navy/10 hover:border-brand-gold/40 hover:shadow-card transition-all"
+                className="group flex items-center justify-center p-4 rounded-xl bg-white border border-brand-navy/10 hover:border-brand-gold/40 hover:shadow-card transition-all"
                 title={`${t("enquireAbout")} ${line.name}`}
               >
-                <div className="relative h-10 w-full">
+                <div className="relative h-14 w-full">
                   <Image
                     src={line.logo}
                     alt={line.name}
                     fill
                     sizes="(max-width: 640px) 40vw, 200px"
-                    className="object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                    className="object-contain group-hover:scale-105 transition-all duration-300"
                     loading="lazy"
                   />
                 </div>
@@ -355,21 +355,21 @@ export default function CruisesContent({ locale }: { locale: string }) {
             <p className="text-sm font-semibold text-brand-navy/50 uppercase tracking-wider mb-4">
               {t("alsoBook")}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="flex flex-wrap items-center justify-center gap-4">
               {tier3Lines.map((line) => (
                 <a
                   key={line.name}
                   href="#cruise-enquiry"
-                  className="group flex items-center justify-center p-2 rounded-lg bg-white border border-brand-navy/5 hover:border-brand-gold/30 transition-all"
+                  className="group flex items-center justify-center p-3 rounded-lg bg-white border border-brand-navy/5 hover:border-brand-gold/30 transition-all"
                   title={`${t("enquireAbout")} ${line.name}`}
                 >
-                  <div className="relative h-7 w-24">
+                  <div className="relative h-10 w-28">
                     <Image
                       src={line.logo}
                       alt={line.name}
                       fill
-                      sizes="96px"
-                      className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                      sizes="112px"
+                      className="object-contain group-hover:scale-105 transition-all duration-300"
                       loading="lazy"
                     />
                   </div>
