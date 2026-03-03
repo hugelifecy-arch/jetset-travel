@@ -4,13 +4,20 @@ export const CANONICAL_ORIGIN = "https://www.jetset-travel.com";
 export const VERCEL_HOST = "jetset-travel.vercel.app";
 export const OG_IMAGE = `${CANONICAL_ORIGIN}/images/jetset-og-image.jpg`;
 
-export function localizedAlternates(locale: string, routePath = ""): Metadata["alternates"] {
+export function localizedAlternates(
+  locale: string,
+  routePath = "",
+  languagePaths?: { en: string; ru: string },
+): Metadata["alternates"] {
+  const enPath = languagePaths?.en ?? routePath;
+  const ruPath = languagePaths?.ru ?? routePath;
+
   return {
     canonical: `/${locale}${routePath}`,
     languages: {
-      en: `${CANONICAL_ORIGIN}/en${routePath}`,
-      ru: `${CANONICAL_ORIGIN}/ru${routePath}`,
-      "x-default": `${CANONICAL_ORIGIN}/en${routePath}`,
+      en: `${CANONICAL_ORIGIN}/en${enPath}`,
+      ru: `${CANONICAL_ORIGIN}/ru${ruPath}`,
+      "x-default": `${CANONICAL_ORIGIN}/en${enPath}`,
     },
   };
 }
@@ -20,18 +27,20 @@ export function buildPageMetadata({
   routePath = "",
   title,
   description,
+  languagePaths,
 }: {
   locale: string;
   routePath?: string;
   title: string;
   description: string;
+  languagePaths?: { en: string; ru: string };
 }): Metadata {
   const isRussian = locale === "ru";
 
   return {
     title: { absolute: title },
     description,
-    // Hreflang + canonical are rendered by HreflangTags component in locale layout
+    alternates: localizedAlternates(locale, routePath, languagePaths),
     openGraph: {
       type: "website",
       siteName: "JetSet Travel Cyprus",

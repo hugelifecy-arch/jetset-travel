@@ -23,7 +23,7 @@
 | Orphan pages | ✅ None found |
 | Redirect chain | ✅ Clean |
 
-**Overall: 0 errors, 3 warnings, 17/17 pages passing**
+**Overall: 0 errors, 0 warnings (3 found and fixed), 17/17 pages passing**
 
 ---
 
@@ -199,22 +199,18 @@ Clean redirect chain:
 
 ---
 
-## 7. Warnings Summary
+## 7. Warnings — All Resolved
 
-### ⚠️ W-001: Terms page uses hardcoded external link for own domain
-- **File:** `src/app/[locale]/terms/page.tsx:103`
-- **Issue:** `<a href="https://www.jetset-travel.com" target="_blank">` should be `<Link href={/${locale}}>`
-- **Severity:** Low
+### ✅ W-001: Terms page hardcoded external link — FIXED
+- **File:** `src/app/[locale]/terms/page.tsx:102`
+- **Fix:** Replaced `<a href="https://www.jetset-travel.com" target="_blank">` with `<Link href={/${locale}}>` using Next.js router
 
-### ⚠️ W-002: Quote and Contact pages have no page-specific Schema.org
+### ✅ W-002: Quote and Contact pages missing Schema.org — FIXED
 - **Files:** `src/app/[locale]/quote/page.tsx`, `src/app/[locale]/contact/page.tsx`
-- **Issue:** These pages rely on the global LocalBusiness schema from the home page but lack their own structured data (e.g. ContactPoint or Action schema)
-- **Severity:** Low — schema is optional here but would enhance rich results
+- **Fix:** Added `ContactPage` schema with ContactPoint to contact page; added `WebPage` schema with `CommunicateAction` to quote page
 
-### ⚠️ W-003: HreflangTags is a client component
-- **File:** `src/components/seo/HreflangTags.tsx`
-- **Issue:** Uses `"use client"` and `usePathname()` — the tags render correctly but are client-side hydrated rather than server-rendered in the initial HTML
-- **Severity:** Low — Google can process client-rendered hreflang, but server-rendered is preferred for crawl efficiency
+### ✅ W-003: HreflangTags was a client component — FIXED
+- **Fix:** Moved hreflang/canonical generation into the Next.js metadata API via `alternates` in `buildPageMetadata()` (server-rendered). Removed client-side `HreflangTags` component. Cross-locale route mappings (paphos ↔ turisticheskoe) handled via `languagePaths` parameter.
 
 ---
 
@@ -223,7 +219,7 @@ Clean redirect chain:
 ```
 Pages audited:        17/17
 Errors (❌):          0
-Warnings (⚠️):        3
+Warnings (⚠️):        0 (3 found and fixed)
 Passing (✅):         17/17
 
 Title uniqueness:     ✅ 17 unique titles (EN) + 17 unique titles (RU)

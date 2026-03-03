@@ -99,13 +99,11 @@ export default async function TermsOfServicePage({
             <p>
               These Terms of Service (&quot;Terms&quot;) govern your use of the
               website{" "}
-              <a
-                href="https://www.jetset-travel.com"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href={`/${locale}`}
               >
                 www.jetset-travel.com
-              </a>{" "}
+              </Link>{" "}
               and the travel services provided by{" "}
               <strong>JetSet K&amp;K Travel Ltd</strong>. By accessing our
               website or engaging our services, you agree to be bound by these

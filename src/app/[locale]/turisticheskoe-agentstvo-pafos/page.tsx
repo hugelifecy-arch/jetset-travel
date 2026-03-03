@@ -29,6 +29,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
+  const crossLocalePaths = {
+    en: "/paphos-travel-agency",
+    ru: "/turisticheskoe-agentstvo-pafos",
+  };
+
   if (locale === "en") {
     return buildPageMetadata({
       locale: "en",
@@ -36,6 +41,7 @@ export async function generateMetadata({
       title: "Travel Agency in Paphos, Cyprus | JetSet Travel — IATA Accredited Agent",
       description:
         "Looking for a trusted travel agency in Paphos? JetSet Travel is IATA accredited with 20+ years experience. Corporate travel, flights, hotels, visa services. Visit us at 26A Agapinoros.",
+      languagePaths: crossLocalePaths,
     });
   }
 
@@ -46,6 +52,7 @@ export async function generateMetadata({
       "Турагентство в Пафосе, Кипр | JetSet Travel — Аккредитация IATA",
     description:
       "Ищете надёжное турагентство в Пафосе? JetSet Travel — аккредитация IATA, более 20 лет опыта. Корпоративные поездки, авиабилеты, отели, визовые услуги. Ул. Агапинорос, 26А.",
+    languagePaths: crossLocalePaths,
   });
 }
 
