@@ -34,36 +34,32 @@ import Accordion from "@/components/ui/Accordion";
 /* ------------------------------------------------------------------ */
 
 const tier1Lines = [
-  { name: "Royal Caribbean", logo: "/images/cruise-logos/royal-caribbean.svg" },
-  { name: "MSC Cruises", logo: "/images/cruise-logos/msc-cruises.svg" },
-  { name: "Norwegian Cruise Line", logo: "/images/cruise-logos/norwegian.svg" },
-  { name: "Carnival Cruise Line", logo: "/images/cruise-logos/carnival.svg" },
-  { name: "Princess Cruises", logo: "/images/cruise-logos/princess.svg" },
-  { name: "Celebrity Cruises", logo: "/images/cruise-logos/celebrity.svg" },
+  { name: "Royal Caribbean", logo: "/images/cruise-logos/royal-caribbean.png" },
+  { name: "MSC Cruises", logo: "/images/cruise-logos/msc-cruises.png" },
+  { name: "Norwegian Cruise Line", logo: "/images/cruise-logos/norwegian.png" },
+  { name: "Carnival Cruise Line", logo: "/images/cruise-logos/carnival.jpg" },
+  { name: "Princess Cruises", logo: "/images/cruise-logos/princess.png" },
+  { name: "Celebrity Cruises", logo: "/images/cruise-logos/celebrity.png" },
 ];
 
 const tier2Lines = [
-  { name: "Costa Cruises", logo: "/images/cruise-logos/costa.svg" },
-  { name: "Holland America Line", logo: "/images/cruise-logos/holland-america.svg" },
-  { name: "Viking Ocean Cruises", logo: "/images/cruise-logos/viking.svg" },
-  { name: "Disney Cruise Line", logo: "/images/cruise-logos/disney.svg" },
-  { name: "Regent Seven Seas", logo: "/images/cruise-logos/regent.svg" },
-  { name: "Explora Journeys", logo: "/images/cruise-logos/explora.svg" },
+  { name: "Costa Cruises", logo: "/images/cruise-logos/costa.png" },
+  { name: "Holland America Line", logo: "/images/cruise-logos/holland-america.png" },
+  { name: "Disney Cruise Line", logo: "/images/cruise-logos/disney.png" },
+  { name: "Explora Journeys", logo: "/images/cruise-logos/explora-journeys.png" },
 ];
 
 const tier3Lines = [
-  { name: "Cunard", logo: "/images/cruise-logos/cunard.svg" },
-  { name: "Oceania", logo: "/images/cruise-logos/oceania.svg" },
-  { name: "Azamara", logo: "/images/cruise-logos/azamara.svg" },
-  { name: "Windstar", logo: "/images/cruise-logos/windstar.svg" },
-  { name: "Silversea", logo: "/images/cruise-logos/silversea.svg" },
-  { name: "Seabourn", logo: "/images/cruise-logos/seabourn.svg" },
-  { name: "Celestyal", logo: "/images/cruise-logos/celestyal.svg" },
-  { name: "Virgin Voyages", logo: "/images/cruise-logos/virgin-voyages.svg" },
-  { name: "P&O Cruises", logo: "/images/cruise-logos/po-cruises.svg" },
-  { name: "HX Expeditions", logo: "/images/cruise-logos/hurtigruten.svg" },
-  { name: "Ponant", logo: "/images/cruise-logos/ponant.svg" },
-  { name: "Four Seasons Yachts", logo: "/images/cruise-logos/four-seasons.svg" },
+  { name: "Cunard", logo: "/images/cruise-logos/cunard.png" },
+  { name: "Oceania", logo: "/images/cruise-logos/oceania.png" },
+  { name: "Azamara", logo: "/images/cruise-logos/azamara.png" },
+  { name: "Windstar", logo: "/images/cruise-logos/windstar.png" },
+  { name: "Silversea", logo: "/images/cruise-logos/silversea.png" },
+  { name: "Seabourn", logo: "/images/cruise-logos/seabourn.png" },
+  { name: "Celestyal", logo: "/images/cruise-logos/celestyal.png" },
+  { name: "Virgin Voyages", logo: "/images/cruise-logos/virgin-voyages.png" },
+  { name: "P&O Cruises", logo: "/images/cruise-logos/po-cruises.png" },
+  { name: "Ponant", logo: "/images/cruise-logos/ponant.png" },
 ];
 
 const destinations = [
@@ -330,7 +326,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
           </div>
 
           {/* Tier 2 — Medium logos */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
             {tier2Lines.map((line) => (
               <a
                 key={line.name}
