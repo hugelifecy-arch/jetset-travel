@@ -27,12 +27,12 @@ export async function generateMetadata({
     routePath: "/about",
     title:
       locale === "ru"
-        ? "О компании JetSet Travel Кипр | Более 20 лет корпоративных и премиальных путешествий"
-        : "About JetSet Travel Cyprus | 20+ Years of Corporate & Luxury Travel",
+        ? "О компании JetSet Travel Кипр | Более 20 лет в Пафосе — IATA и лицензия"
+        : "About JetSet Travel Cyprus | 20+ Years in Paphos — IATA & Licensed",
     description:
       locale === "ru"
-        ? "JetSet K&K Travel Ltd — аккредитованное IATA туристическое агентство в Пафосе, Кипр с 2006 года. Узнайте о нашей команде и причинах, по которым нам доверяют более 500 компаний."
-        : "JetSet K&K Travel Ltd — IATA-accredited travel agency in Paphos, Cyprus since 2006. Meet our team, learn our story, and discover why 500+ corporates trust us.",
+        ? "JetSet K&K Travel Ltd, основана в 2006 году в Пафосе, Кипр. Аккредитация IATA (14200130), туристическая лицензия 7775. Обслуживаем 520+ корпоративных клиентов с удовлетворённостью 98%."
+        : "JetSet K&K Travel Ltd, established 2006 in Paphos, Cyprus. IATA accredited (14200130), Tourism Licence 7775. Serving 520+ corporate clients with 98% satisfaction.",
   });
 }
 

@@ -15,12 +15,12 @@ export async function generateMetadata({
     routePath: "/cruises",
     title:
       locale === "ru"
-        ? "Круизы по всему миру | Все круизные линии, все направления | JetSet Travel Кипр"
-        : "Worldwide Cruises | Book Any Cruise Line, Any Destination | JetSet Travel Cyprus",
+        ? "Бронирование Круизов Кипр | Средиземноморские Круизы из Пафоса — JetSet Travel"
+        : "Cruise Booking Cyprus | Mediterranean Cruises from Paphos — JetSet Travel",
     description:
       locale === "ru"
-        ? "Бронирование круизов по всему миру на Royal Caribbean, MSC, Norwegian, Celebrity, Disney и 50+ круизных линиях. Карибы, Средиземноморье, Аляска, Азия. Аккредитация IATA. Бесплатные предложения."
-        : "Book worldwide cruises on Royal Caribbean, MSC, Norwegian, Celebrity, Disney and 50+ cruise lines. Caribbean, Mediterranean, Alaska, Asia and beyond. IATA-accredited cruise specialists. Free quotes.",
+        ? "Бронируйте средиземноморские круизы с Кипра. Эксклюзивные предложения на люкс и семейные круизы из Лимассола и региональных портов. Аккредитация IATA."
+        : "Book Mediterranean cruises from Cyprus. Exclusive deals on luxury and family cruises departing from Limassol and regional ports. IATA-accredited agency.",
   });
 }
 

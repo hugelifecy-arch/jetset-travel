@@ -13,12 +13,12 @@ export async function generateMetadata({
     routePath: "/contact",
     title:
       locale === "ru"
-        ? "Контакты JetSet Travel Кипр | Бесплатная консультация | Получить предложение"
-        : "Contact JetSet Travel Cyprus | Book a Free Consultation | Get a Quote",
+        ? "Контакты JetSet Travel Пафос | Бесплатное предложение — Турагентство Кипр"
+        : "Contact JetSet Travel Paphos | Get a Free Quote — Cyprus Travel Agency",
     description:
       locale === "ru"
-        ? "Закажите бесплатную консультацию по корпоративным командировкам или запросите предложение. WhatsApp, звонок или форма. Ответ в течение 2 рабочих часов."
-        : "Book a free corporate travel consultation or request a quote. WhatsApp, call, or fill out our form. Response within 2 business hours.",
+        ? "Свяжитесь с JetSet Travel в Пафосе, Кипр. Бесплатные предложения, поддержка WhatsApp, корпоративные консультации. Звоните +357 99 478 073 или посетите 26A Agapinoros, Пафос."
+        : "Contact JetSet Travel in Paphos, Cyprus. Free travel quotes, WhatsApp support, corporate travel consultations. Call +357 99 478 073 or visit 26A Agapinoros, Paphos.",
   });
 }
 

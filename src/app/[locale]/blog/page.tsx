@@ -19,12 +19,12 @@ export async function generateMetadata({
     routePath: "/blog",
     title:
       locale === "ru"
-        ? "Блог | Корпоративные и премиальные путешествия из Кипра | JetSet Travel"
-        : "Travel Blog | Corporate & Luxury Travel Insights from Cyprus | JetSet Travel",
+        ? "Блог о путешествиях | Советы и гиды по Кипру — JetSet Travel Пафос"
+        : "Travel Blog | Cyprus Travel Tips & Guides — JetSet Travel Paphos",
     description:
       locale === "ru"
-        ? "Экспертные материалы об организации корпоративных командировок, деловых поездках с Кипра, визовых гидах и обзорах премиальных направлений."
-        : "Expert insights on corporate travel management, Cyprus business travel tips, visa guides, and luxury destination reviews from JetSet Travel.",
+        ? "Советы по путешествиям, гиды по Кипру, визовая информация и обзоры направлений от JetSet Travel Пафос. Экспертные рекомендации для корпоративных и частных путешественников."
+        : "Travel tips, Cyprus guides, visa information, and destination insights from JetSet Travel Paphos. Expert advice for corporate and leisure travelers.",
   });
 }
 
