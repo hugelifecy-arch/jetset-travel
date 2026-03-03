@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Hotel,
@@ -258,8 +259,14 @@ export default async function HotelReservationsPage({
               </Link>
             </div>
             <div className="flex-1 w-full">
-              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-brand-gold/10 to-brand-dark flex items-center justify-center">
-                <Users className="h-20 w-20 text-white/10" />
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/hotel/group-event.jpg"
+                  alt="Hotel conference setup for group bookings and corporate events"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>
