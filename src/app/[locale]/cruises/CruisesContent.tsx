@@ -325,14 +325,16 @@ export default function CruisesContent({ locale }: { locale: string }) {
                 className="group flex items-center justify-center p-4 rounded-xl bg-white border border-brand-navy/10 hover:border-brand-gold/40 hover:shadow-luxury transition-all"
                 title={`${t("enquireAbout")} ${line.name}`}
               >
-                <Image
-                  src={line.logo}
-                  alt={line.name}
-                  width={200}
-                  height={60}
-                  className="h-12 w-auto grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
-                  loading="lazy"
-                />
+                <div className="relative h-14 w-full">
+                  <Image
+                    src={line.logo}
+                    alt={line.name}
+                    fill
+                    sizes="(max-width: 640px) 40vw, (max-width: 1024px) 28vw, 140px"
+                    className="object-contain group-hover:scale-105 transition-all duration-300"
+                    loading="lazy"
+                  />
+                </div>
               </a>
             ))}
           </div>
@@ -343,42 +345,46 @@ export default function CruisesContent({ locale }: { locale: string }) {
               <a
                 key={line.name}
                 href="#cruise-enquiry"
-                className="group flex items-center justify-center p-3 rounded-xl bg-white border border-brand-navy/10 hover:border-brand-gold/40 hover:shadow-card transition-all"
+                className="group flex items-center justify-center p-4 rounded-xl bg-white border border-brand-navy/10 hover:border-brand-gold/40 hover:shadow-card transition-all"
                 title={`${t("enquireAbout")} ${line.name}`}
               >
-                <Image
-                  src={line.logo}
-                  alt={line.name}
-                  width={200}
-                  height={60}
-                  className="h-10 w-auto grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
-                  loading="lazy"
-                />
+                <div className="relative h-14 w-full">
+                  <Image
+                    src={line.logo}
+                    alt={line.name}
+                    fill
+                    sizes="(max-width: 640px) 40vw, 200px"
+                    className="object-contain group-hover:scale-105 transition-all duration-300"
+                    loading="lazy"
+                  />
+                </div>
               </a>
             ))}
           </div>
 
-          {/* Tier 3 — "We also book" strip */}
-          <div className="text-center">
-            <p className="text-sm font-semibold text-brand-navy/50 uppercase tracking-wider mb-4">
+          {/* Tier 3 — "We also book" grid */}
+          <div>
+            <p className="text-sm font-semibold text-brand-navy/50 uppercase tracking-wider mb-4 text-center">
               {t("alsoBook")}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
               {tier3Lines.map((line) => (
                 <a
                   key={line.name}
                   href="#cruise-enquiry"
-                  className="group flex items-center justify-center p-2 rounded-lg bg-white border border-brand-navy/5 hover:border-brand-gold/30 transition-all"
+                  className="group flex items-center justify-center p-4 rounded-xl bg-white border border-brand-navy/5 hover:border-brand-gold/30 transition-all"
                   title={`${t("enquireAbout")} ${line.name}`}
                 >
-                  <Image
-                    src={line.logo}
-                    alt={line.name}
-                    width={160}
-                    height={40}
-                    className="h-7 w-auto grayscale group-hover:grayscale-0 transition-all duration-300"
-                    loading="lazy"
-                  />
+                  <div className="relative h-12 w-full">
+                    <Image
+                      src={line.logo}
+                      alt={line.name}
+                      fill
+                      sizes="(max-width: 640px) 40vw, (max-width: 1024px) 28vw, 180px"
+                      className="object-contain group-hover:scale-105 transition-all duration-300"
+                      loading="lazy"
+                    />
+                  </div>
                 </a>
               ))}
             </div>
