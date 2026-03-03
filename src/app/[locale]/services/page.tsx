@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Plane,
   Hotel,
@@ -118,8 +119,14 @@ export default async function ServicesPage({
               </div>
             </div>
             <div className="flex-1 w-full hidden md:block">
-              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-brand-navy to-brand-dark flex items-center justify-center">
-                <Plane className="h-20 w-20 text-white/10" />
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/services/flights.jpg"
+                  alt={t("flightsTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                />
               </div>
             </div>
           </div>
@@ -159,8 +166,14 @@ export default async function ServicesPage({
               </div>
             </div>
             <div className="flex-1 w-full hidden md:block">
-              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-brand-gold/20 to-brand-gold/5 flex items-center justify-center">
-                <Hotel className="h-20 w-20 text-brand-navy/10" />
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/services/hotels.jpg"
+                  alt={t("hotelsTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                />
               </div>
             </div>
           </div>
@@ -200,8 +213,14 @@ export default async function ServicesPage({
               </div>
             </div>
             <div className="flex-1 w-full hidden md:block">
-              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-brand-navy to-brand-dark flex items-center justify-center">
-                <FileText className="h-20 w-20 text-white/10" />
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/services/visa.jpg"
+                  alt={t("visasTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                />
               </div>
             </div>
           </div>
@@ -241,8 +260,14 @@ export default async function ServicesPage({
               </div>
             </div>
             <div className="flex-1 w-full hidden md:block">
-              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-brand-gold/20 to-brand-gold/5 flex items-center justify-center">
-                <Palmtree className="h-20 w-20 text-brand-navy/10" />
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/services/luxury.jpg"
+                  alt={t("luxuryTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                />
               </div>
             </div>
           </div>
@@ -282,8 +307,14 @@ export default async function ServicesPage({
               </div>
             </div>
             <div className="flex-1 w-full hidden md:block">
-              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-brand-navy to-brand-dark flex items-center justify-center">
-                <Briefcase className="h-20 w-20 text-white/10" />
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/services/corporate.jpg"
+                  alt={t("corporateTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                />
               </div>
             </div>
           </div>
