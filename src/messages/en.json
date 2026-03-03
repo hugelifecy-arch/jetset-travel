@@ -200,11 +200,11 @@
     "viewEnglish": "View Terms of Service in English →"
   },
   "cookies": {
-    "banner": "We use cookies to improve your experience. Essential cookies are required for the site to function. You can choose to accept or reject optional cookies.",
+    "banner": "We use cookies to improve your experience. Essential cookies are required for the site to function. Analytics cookies help us understand how you use our site.",
     "privacyLink": "Privacy Policy",
     "acceptAll": "Accept All",
     "rejectNonEssential": "Reject Non-Essential",
-    "cookieSettings": "Cookie Settings",
+    "managePreferences": "Manage Preferences",
     "settingsTitle": "Cookie Settings",
     "savePreferences": "Save Preferences",
     "essential": "Essential Cookies",
@@ -213,7 +213,8 @@
     "analytics": "Analytics Cookies",
     "analyticsDescription": "Help us understand how visitors interact with our website by collecting anonymous usage data.",
     "marketing": "Marketing Cookies",
-    "marketingDescription": "Used to deliver relevant advertisements and track campaign effectiveness across websites."
+    "marketingDescription": "Used to deliver relevant advertisements and track campaign effectiveness across websites.",
+    "reopenSettings": "Manage Cookie Preferences"
   },
   "faq": {
     "heroLabel": "FAQ",
