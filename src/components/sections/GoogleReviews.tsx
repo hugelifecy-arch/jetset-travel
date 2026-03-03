@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
+
+const GOOGLE_MAPS_URL =
+  "https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos";
 
 const reviews = [
   {
@@ -11,7 +14,7 @@ const reviews = [
     company: "Technology Firm, Limassol",
     avatarInitials: "MK",
     rating: 5,
-    source: "Google Reviews",
+    date: "2025-09",
   },
   {
     key: "review2",
@@ -19,7 +22,7 @@ const reviews = [
     company: "Private Client",
     avatarInitials: "AP",
     rating: 5,
-    source: "Google Reviews",
+    date: "2025-06",
   },
   {
     key: "review3",
@@ -27,7 +30,7 @@ const reviews = [
     company: "Import/Export SME, Paphos",
     avatarInitials: "DS",
     rating: 5,
-    source: "Google Reviews",
+    date: "2025-03",
   },
 ];
 
@@ -98,9 +101,26 @@ export default function GoogleReviews() {
                     </p>
                   </div>
                 </div>
-                {review.source && (
-                  <p className="mt-3 text-xs text-brand-navy/40">
-                    via {review.source}
+                {/* Star rating line with Google link */}
+                <div className="mt-3 flex items-center gap-1.5">
+                  <span className="text-brand-gold text-sm" aria-hidden="true">
+                    ★★★★★
+                  </span>
+                  <span className="text-xs text-brand-navy/60">
+                    {review.rating}/5 {t("via")}{" "}
+                    <a
+                      href={GOOGLE_MAPS_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-2 hover:text-brand-navy transition-colors"
+                    >
+                      Google Reviews
+                    </a>
+                  </span>
+                </div>
+                {review.date && (
+                  <p className="mt-1 text-xs text-brand-navy/30">
+                    {t("posted")} {review.date}
                   </p>
                 )}
               </figcaption>
@@ -108,9 +128,18 @@ export default function GoogleReviews() {
           ))}
         </div>
 
-        <div className="mt-8 text-center">
+        <div className="mt-10 flex flex-col items-center gap-4">
           <a
-            href="https://www.google.com/maps/search/JetSet+Travel+Agency+Paphos+Cyprus"
+            href={GOOGLE_MAPS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-brand-navy/20 bg-white px-6 py-3 text-sm font-semibold text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white"
+          >
+            {t("viewAllReviews")}
+            <ExternalLink className="h-4 w-4" />
+          </a>
+          <a
+            href={GOOGLE_MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-brand-navy/60 underline underline-offset-2 transition-colors hover:text-brand-navy"

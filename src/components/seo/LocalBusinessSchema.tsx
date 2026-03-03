@@ -45,6 +45,12 @@ export default async function LocalBusinessSchema() {
         closes: "18:00",
       },
     ],
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "47",
+      bestRating: "5",
+    },
     priceRange: "$$",
     foundingDate: "2006",
     numberOfEmployees: { "@type": "QuantitativeValue", value: "10+" },
