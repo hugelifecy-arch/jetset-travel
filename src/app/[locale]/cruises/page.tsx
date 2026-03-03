@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import CruisesContent from "./CruisesContent";
+import ServiceSchema from "@/components/seo/ServiceSchema";
 
 export async function generateMetadata({
   params,
@@ -30,5 +31,14 @@ export default async function CruisesPage({
 }) {
   const { locale } = await params;
 
-  return <CruisesContent locale={locale} />;
+  return (
+    <>
+      <CruisesContent locale={locale} />
+      <ServiceSchema
+        name="Cruise Booking"
+        description="Book worldwide cruises on Royal Caribbean, MSC, Norwegian, Celebrity, Disney and 50+ cruise lines. Caribbean, Mediterranean, Alaska, Asia and beyond. IATA-accredited cruise specialists."
+        url={`https://www.jetset-travel.com/${locale}/cruises`}
+      />
+    </>
+  );
 }

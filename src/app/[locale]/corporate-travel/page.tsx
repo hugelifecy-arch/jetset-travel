@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import CorporateTravelContent from "./CorporateTravelContent";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import ServiceSchema from "@/components/seo/ServiceSchema";
 export async function generateMetadata({
   params,
 }: {
@@ -34,6 +35,11 @@ export default async function CorporateTravelPage({
     <>
       <CorporateTravelContent />
       <ServicesCrossLinks locale={locale} exclude="corporate" />
+      <ServiceSchema
+        name="Corporate Travel Management"
+        description="Corporate travel management for Cyprus businesses. Policy-compliant bookings, clean invoicing, 24/7 rebooking, dedicated account management, and disruption support."
+        url={`https://www.jetset-travel.com/${locale}/corporate-travel`}
+      />
     </>
   );
 }

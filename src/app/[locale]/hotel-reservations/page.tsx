@@ -15,6 +15,7 @@ import {
   MapPin,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import ServiceSchema from "@/components/seo/ServiceSchema";
 export async function generateMetadata({
   params,
 }: {
@@ -275,6 +276,11 @@ export default async function HotelReservationsPage({
 
       {/* Cross-links */}
       <ServicesCrossLinks locale={locale} exclude="hotels" />
+      <ServiceSchema
+        name="Hotel Reservations"
+        description="Negotiated hotel rates worldwide for corporate and leisure travelers. Quality accommodations matched to your budget, standards, and location needs. Group bookings and extended stays."
+        url={`https://www.jetset-travel.com/${locale}/hotel-reservations`}
+      />
     </>
   );
 }
