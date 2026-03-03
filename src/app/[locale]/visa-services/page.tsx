@@ -9,9 +9,21 @@ import {
   MessageCircle,
   ArrowRight,
   ShieldAlert,
+  Phone,
+  ClipboardList,
+  Search,
+  Send,
+  BarChart3,
+  Globe,
+  Briefcase,
+  Palmtree,
+  ChevronDown,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import ServiceSchema from "@/components/seo/ServiceSchema";
+import JsonLd from "@/components/seo/JsonLd";
+import CTABanner from "@/components/sections/CTABanner";
+
 export async function generateMetadata({
   params,
 }: {
@@ -25,11 +37,11 @@ export async function generateMetadata({
     title:
       locale === "ru"
         ? "Визовые Услуги Кипр | Шенгенская Виза Пафос — JetSet Travel"
-        : "Visa Services Cyprus | Business & Tourist Visa Assistance — JetSet Travel",
+        : "Visa Services Cyprus | Schengen Visa Paphos | Business Visa — JetSet Travel",
     description:
       locale === "ru"
-        ? "Визовая поддержка в Пафосе, Кипр. Чек-листы документов, помощь с шенгенской визой, координация для деловых и туристических виз."
-        : "Visa assistance services in Paphos, Cyprus. Document checklists, Schengen visa guidance, application coordination for business and tourist visas. Expert support.",
+        ? "Визовые услуги в Пафосе, Кипр. Шенгенская виза, деловые визы, помощь с документами, координация с посольствами. Профессиональная поддержка от JetSet Travel."
+        : "Visa services in Paphos, Cyprus. Schengen visa assistance, business visa support, document preparation, embassy coordination. Expert help from JetSet Travel since 2006.",
   });
 }
 
@@ -107,30 +119,64 @@ export default async function VisaServicesPage({
     },
   ];
 
+  const visaTypes = [
+    {
+      icon: Globe,
+      title: t("schengenVisaTitle"),
+      description: t("schengenVisaDesc"),
+    },
+    {
+      icon: Globe,
+      title: t("ukVisaTitle"),
+      description: t("ukVisaDesc"),
+    },
+    {
+      icon: Globe,
+      title: t("usVisaTitle"),
+      description: t("usVisaDesc"),
+    },
+    {
+      icon: Globe,
+      title: t("uaeVisaTitle"),
+      description: t("uaeVisaDesc"),
+    },
+    {
+      icon: Globe,
+      title: t("russiaVisaTitle"),
+      description: t("russiaVisaDesc"),
+    },
+  ];
+
   const steps = [
     {
       number: "01",
-      icon: MessageCircle,
+      icon: Phone,
       title: t("step1Title"),
       description: t("step1Desc"),
     },
     {
       number: "02",
-      icon: FileCheck,
+      icon: ClipboardList,
       title: t("step2Title"),
       description: t("step2Desc"),
     },
     {
       number: "03",
-      icon: Clock,
+      icon: Search,
       title: t("step3Title"),
       description: t("step3Desc"),
     },
     {
       number: "04",
-      icon: ArrowRight,
+      icon: Send,
       title: t("step4Title"),
       description: t("step4Desc"),
+    },
+    {
+      number: "05",
+      icon: BarChart3,
+      title: t("step5Title"),
+      description: t("step5Desc"),
     },
   ];
 
@@ -147,6 +193,27 @@ export default async function VisaServicesPage({
     t("doc10"),
   ];
 
+  const faqs = [
+    { q: t("faq1Q"), a: t("faq1A") },
+    { q: t("faq2Q"), a: t("faq2A") },
+    { q: t("faq3Q"), a: t("faq3A") },
+    { q: t("faq4Q"), a: t("faq4A") },
+    { q: t("faq5Q"), a: t("faq5A") },
+  ];
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
+
   return (
     <>
       {/* Hero */}
@@ -162,13 +229,72 @@ export default async function VisaServicesPage({
             <p className="text-lg text-white/70 mb-8 max-w-2xl">
               {t("heroSubtitle")}
             </p>
-            <Link
-              href={`/${locale}/contact`}
-              className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
-            >
-              {t("checkRequirements")}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="#visa-cta"
+                className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
+              >
+                {t("getAssistance")}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+              <a
+                href="#visa-types"
+                className="inline-flex items-center rounded-full border border-white/30 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+              >
+                <ChevronDown className="mr-2 h-4 w-4" />
+                {t("visaTypesTitle")}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Intro */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-brand-navy/80 text-lg leading-relaxed mb-6">
+              {t("introP1")}
+            </p>
+            <p className="text-brand-navy/80 text-lg leading-relaxed">
+              {t("introP2")}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Visa Types We Assist With */}
+      <section id="visa-types" className="py-20 bg-brand-light">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              {t("visaTypesTitle")}
+            </h2>
+            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+              {t("visaTypesSubtitle")}
+            </p>
+          </div>
+          <div className="space-y-6">
+            {visaTypes.map((visa) => (
+              <div
+                key={visa.title}
+                className="bg-white p-6 md:p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury transition-shadow"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex-shrink-0">
+                    <visa.icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-brand-navy mb-3">
+                      {visa.title}
+                    </h3>
+                    <p className="text-brand-navy/70 leading-relaxed">
+                      {visa.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -205,7 +331,9 @@ export default async function VisaServicesPage({
                 </div>
                 <div className="flex items-center gap-2 text-sm text-brand-navy/60">
                   <Clock className="h-4 w-4 text-brand-gold" />
-                  <span>{t("processing")}: {visa.processing}</span>
+                  <span>
+                    {t("processing")}: {visa.processing}
+                  </span>
                 </div>
               </div>
             ))}
@@ -213,7 +341,7 @@ export default async function VisaServicesPage({
         </div>
       </section>
 
-      {/* 4-Step Process */}
+      {/* 5-Step Process */}
       <section className="py-20 bg-brand-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -224,7 +352,7 @@ export default async function VisaServicesPage({
               {t("howSubtitle")}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             {steps.map((step) => (
               <div key={step.number} className="relative">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold mb-4">
@@ -245,7 +373,7 @@ export default async function VisaServicesPage({
         </div>
       </section>
 
-      {/* Document Checklist Download Box */}
+      {/* Document Checklist */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="bg-brand-light rounded-2xl p-8 md:p-12 border border-brand-navy/10">
@@ -277,21 +405,106 @@ export default async function VisaServicesPage({
         </div>
       </section>
 
-      {/* Disclaimer */}
-      <section className="py-12 bg-brand-light">
+      {/* FAQ */}
+      <section className="py-20 bg-brand-light">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-start gap-3 p-6 rounded-xl bg-white border border-brand-navy/10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              {t("faqTitle")}
+            </h2>
+            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+              {t("faqSubtitle")}
+            </p>
+          </div>
+          <div className="space-y-6">
+            {faqs.map((faq) => (
+              <details
+                key={faq.q}
+                className="group bg-white rounded-2xl border border-brand-navy/10 overflow-hidden"
+              >
+                <summary className="flex items-center justify-between cursor-pointer p-6 text-left">
+                  <h3 className="text-base font-semibold text-brand-navy pr-4">
+                    {faq.q}
+                  </h3>
+                  <ChevronDown className="h-5 w-5 text-brand-navy/40 flex-shrink-0 transition-transform group-open:rotate-180" />
+                </summary>
+                <div className="px-6 pb-6">
+                  <p className="text-brand-navy/70 leading-relaxed">
+                    {faq.a}
+                  </p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Disclaimer */}
+      <section className="py-12 bg-white">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-start gap-3 p-6 rounded-xl bg-brand-light border border-brand-navy/10">
             <ShieldAlert className="h-5 w-5 text-brand-navy/40 flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-sm text-brand-navy/60 leading-relaxed">
-                <strong className="text-brand-navy">{t("disclaimerLabel")}</strong> {t("disclaimer")}
+                <strong className="text-brand-navy">
+                  {t("disclaimerLabel")}
+                </strong>{" "}
+                {t("disclaimer")}
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Cross-links */}
+      {/* Related Services — internal links to corporate-travel and luxury-travel */}
+      <section className="py-20 bg-brand-light">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-brand-navy text-center mb-12">
+            {t("relatedTitle")}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Link
+              href={`/${locale}/corporate-travel`}
+              className="group flex items-start gap-4 bg-white p-6 md:p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
+            >
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex-shrink-0">
+                <Briefcase className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors">
+                  {locale === "ru" ? "Корпоративные поездки" : "Corporate Travel"}
+                </h3>
+                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  {t("relatedCorporateDesc")}
+                </p>
+              </div>
+            </Link>
+            <Link
+              href={`/${locale}/luxury-travel`}
+              className="group flex items-start gap-4 bg-white p-6 md:p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
+            >
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold flex-shrink-0">
+                <Palmtree className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors">
+                  {locale === "ru" ? "Премиальный отдых" : "Luxury Travel"}
+                </h3>
+                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  {t("relatedLuxuryDesc")}
+                </p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA with Lead Form */}
+      <div id="visa-cta">
+        <CTABanner />
+      </div>
+
+      {/* Cross-links to other services */}
       <ServicesCrossLinks locale={locale} exclude="visa" />
 
       {/* WhatsApp CTA */}
@@ -315,11 +528,19 @@ export default async function VisaServicesPage({
         </div>
       </section>
 
+      {/* JSON-LD: Service Schema */}
       <ServiceSchema
-        name="Visa Services"
-        description="Expert visa assistance from Paphos, Cyprus. Document preparation, application guidance, and coordination support for business and tourist visas worldwide."
+        name={locale === "ru" ? "Визовые услуги" : "Visa Services"}
+        description={
+          locale === "ru"
+            ? "Профессиональные визовые услуги в Пафосе, Кипр. Подготовка документов, координация с посольствами, сопровождение для деловых и туристических виз по всему миру."
+            : "Expert visa assistance from Paphos, Cyprus. Document preparation, application guidance, embassy coordination, and status tracking for business and tourist visas worldwide."
+        }
         url={`https://www.jetset-travel.com/${locale}/visa-services`}
       />
+
+      {/* JSON-LD: FAQPage Schema */}
+      <JsonLd data={faqSchema} />
     </>
   );
 }
