@@ -1,15 +1,48 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { Briefcase, Palmtree, FileCheck, Building2 } from "lucide-react";
+import {
+  Plane,
+  Briefcase,
+  Palmtree,
+  FileCheck,
+  Building2,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 
 const serviceItems = [
-  { icon: Briefcase, titleKey: "corporate", href: "/corporate-travel" },
-  { icon: Palmtree, titleKey: "luxury", href: "/luxury-travel" },
-  { icon: FileCheck, titleKey: "visa", href: "/visa-services" },
-  { icon: Building2, titleKey: "hotels", href: "/hotel-reservations" },
+  {
+    icon: Plane,
+    titleKey: "flights",
+    href: "/corporate-travel",
+    image: "/images/services/flights.jpg",
+  },
+  {
+    icon: Building2,
+    titleKey: "hotels",
+    href: "/hotel-reservations",
+    image: "/images/services/hotels.jpg",
+  },
+  {
+    icon: FileCheck,
+    titleKey: "visa",
+    href: "/visa-services",
+    image: "/images/services/visa.jpg",
+  },
+  {
+    icon: Palmtree,
+    titleKey: "luxury",
+    href: "/luxury-travel",
+    image: "/images/services/luxury.jpg",
+  },
+  {
+    icon: Briefcase,
+    titleKey: "corporate",
+    href: "/corporate-travel",
+    image: "/images/services/corporate.jpg",
+  },
 ] as const;
 
 export default function ServicesGrid() {
@@ -28,7 +61,7 @@ export default function ServicesGrid() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {serviceItems.map((service, i) => (
             <motion.div
               key={service.titleKey}
@@ -39,20 +72,32 @@ export default function ServicesGrid() {
             >
               <Link
                 href={`/${locale}${service.href}`}
-                className="group flex h-full flex-col rounded-2xl border border-brand-navy/10 bg-brand-light/40 p-6 shadow-card transition-all hover:-translate-y-1 hover:shadow-luxury"
+                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-navy/10 bg-brand-light/40 shadow-card transition-all hover:-translate-y-1 hover:shadow-luxury"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gold/15">
-                  <service.icon className="h-6 w-6 text-brand-gold" />
+                <div className="relative h-44 w-full overflow-hidden">
+                  <Image
+                    src={service.image}
+                    alt={t(`${service.titleKey}.title`)}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent" />
+                  <div className="absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-lg bg-white/90 shadow-sm">
+                    <service.icon className="h-5 w-5 text-brand-gold" />
+                  </div>
                 </div>
-                <h3 className="mt-5 font-display text-lg font-bold text-brand-navy">
-                  {t(`${service.titleKey}.title`)}
-                </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-navy/65">
-                  {t(`${service.titleKey}.description`)}
-                </p>
-                <span className="mt-4 text-sm font-semibold text-brand-gold group-hover:underline">
-                  {t("learnMore")} &rarr;
-                </span>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="font-display text-lg font-bold text-brand-navy">
+                    {t(`${service.titleKey}.title`)}
+                  </h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-navy/65">
+                    {t(`${service.titleKey}.description`)}
+                  </p>
+                  <span className="mt-4 text-sm font-semibold text-brand-gold group-hover:underline">
+                    {t("learnMore")} &rarr;
+                  </span>
+                </div>
               </Link>
             </motion.div>
           ))}
