@@ -8,6 +8,7 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import MobileActionBar from "@/components/layout/MobileActionBar";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
+import ExitIntentPopup from "@/components/layout/ExitIntentPopup";
 import { CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import HreflangTags from "@/components/seo/HreflangTags";
@@ -136,6 +137,7 @@ export default async function LocaleLayout({
           <MobileActionBar />
           <BreadcrumbSchema />
           <CookieConsentBanner />
+          <ExitIntentPopup />
           {recaptchaSiteKey &&
             recaptchaSiteKey !== "your_recaptcha_site_key" && (
               <Script
