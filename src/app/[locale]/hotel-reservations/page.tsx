@@ -265,6 +265,7 @@ export default async function HotelReservationsPage({
                   src="/images/hotel/group-event.jpg"
                   alt="Hotel conference setup for group bookings and corporate events"
                   fill
+                  loading="lazy"
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />

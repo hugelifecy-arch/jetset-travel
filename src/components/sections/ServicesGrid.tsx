@@ -18,30 +18,35 @@ const serviceItems = [
     titleKey: "flights",
     href: "/corporate-travel",
     image: "/images/services/flights.jpg",
+    imageAlt: "Flight booking service - JetSet Travel Paphos Cyprus",
   },
   {
     icon: Building2,
     titleKey: "hotels",
     href: "/hotel-reservations",
     image: "/images/services/hotels.jpg",
+    imageAlt: "Hotel reservation service - luxury and business hotels worldwide",
   },
   {
     icon: FileCheck,
     titleKey: "visa",
     href: "/visa-services",
     image: "/images/services/visa.jpg",
+    imageAlt: "Visa services and application assistance in Paphos Cyprus",
   },
   {
     icon: Palmtree,
     titleKey: "luxury",
     href: "/luxury-travel",
     image: "/images/services/luxury.jpg",
+    imageAlt: "Luxury travel planning - premium holidays from Cyprus",
   },
   {
     icon: Briefcase,
     titleKey: "corporate",
     href: "/corporate-travel",
     image: "/images/services/corporate.jpg",
+    imageAlt: "Corporate travel management for Cyprus businesses",
   },
 ] as const;
 
@@ -77,8 +82,9 @@ export default function ServicesGrid() {
                 <div className="relative h-44 w-full overflow-hidden">
                   <Image
                     src={service.image}
-                    alt={t(`${service.titleKey}.title`)}
+                    alt={service.imageAlt}
                     fill
+                    loading="lazy"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
                   />

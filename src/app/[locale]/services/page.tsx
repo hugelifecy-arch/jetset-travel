@@ -122,8 +122,9 @@ export default async function ServicesPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/services/flights.jpg"
-                  alt={t("flightsTitle")}
+                  alt="Flight booking service - JetSet Travel Paphos Cyprus"
                   fill
+                  loading="lazy"
                   className="object-cover"
                   sizes="(min-width: 768px) 50vw, 100vw"
                 />
@@ -169,8 +170,9 @@ export default async function ServicesPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/services/hotels.jpg"
-                  alt={t("hotelsTitle")}
+                  alt="Hotel reservation service - luxury and business hotels worldwide"
                   fill
+                  loading="lazy"
                   className="object-cover"
                   sizes="(min-width: 768px) 50vw, 100vw"
                 />
@@ -216,8 +218,9 @@ export default async function ServicesPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/services/visa.jpg"
-                  alt={t("visasTitle")}
+                  alt="Visa services and application assistance in Paphos Cyprus"
                   fill
+                  loading="lazy"
                   className="object-cover"
                   sizes="(min-width: 768px) 50vw, 100vw"
                 />
@@ -263,8 +266,9 @@ export default async function ServicesPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/services/luxury.jpg"
-                  alt={t("luxuryTitle")}
+                  alt="Luxury travel planning - premium holidays from Cyprus"
                   fill
+                  loading="lazy"
                   className="object-cover"
                   sizes="(min-width: 768px) 50vw, 100vw"
                 />
@@ -310,8 +314,9 @@ export default async function ServicesPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/services/corporate.jpg"
-                  alt={t("corporateTitle")}
+                  alt="Corporate travel management for Cyprus businesses"
                   fill
+                  loading="lazy"
                   className="object-cover"
                   sizes="(min-width: 768px) 50vw, 100vw"
                 />
