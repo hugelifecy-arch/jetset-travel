@@ -1038,5 +1038,24 @@
     "next": "Next",
     "close": "Close",
     "loading": "Loading..."
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "subtitle": "Let's get you back on track",
+    "description": "The page you're looking for doesn't exist or may have been moved. Here are some helpful links to get you where you need to go.",
+    "errorCode": "404",
+    "linksTitle": "Helpful Links",
+    "homepage": "Homepage",
+    "homepageDesc": "Back to the main page",
+    "services": "Our Services",
+    "servicesDesc": "Explore what we offer",
+    "contact": "Contact Us",
+    "contactDesc": "Get in touch with our team",
+    "quote": "Get a Quote",
+    "quoteDesc": "Request a personalised travel quote",
+    "blog": "Blog",
+    "blogDesc": "Travel tips and insights",
+    "whatsappCta": "Can't find what you need? Message us on WhatsApp",
+    "whatsappButton": "Chat on WhatsApp"
   }
 }
