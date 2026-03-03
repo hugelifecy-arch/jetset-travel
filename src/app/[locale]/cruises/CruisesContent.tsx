@@ -313,14 +313,16 @@ export default function CruisesContent({ locale }: { locale: string }) {
                 className="group flex items-center justify-center p-4 rounded-xl bg-white border border-brand-navy/10 hover:border-brand-gold/40 hover:shadow-luxury transition-all"
                 title={`${t("enquireAbout")} ${line.name}`}
               >
-                <Image
-                  src={line.logo}
-                  alt={line.name}
-                  width={200}
-                  height={60}
-                  className="h-12 w-auto grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
-                  loading="lazy"
-                />
+                <div className="relative h-12 w-full">
+                  <Image
+                    src={line.logo}
+                    alt={line.name}
+                    fill
+                    sizes="(max-width: 640px) 40vw, (max-width: 1024px) 28vw, 140px"
+                    className="object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                    loading="lazy"
+                  />
+                </div>
               </a>
             ))}
           </div>
@@ -334,14 +336,16 @@ export default function CruisesContent({ locale }: { locale: string }) {
                 className="group flex items-center justify-center p-3 rounded-xl bg-white border border-brand-navy/10 hover:border-brand-gold/40 hover:shadow-card transition-all"
                 title={`${t("enquireAbout")} ${line.name}`}
               >
-                <Image
-                  src={line.logo}
-                  alt={line.name}
-                  width={200}
-                  height={60}
-                  className="h-10 w-auto grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
-                  loading="lazy"
-                />
+                <div className="relative h-10 w-full">
+                  <Image
+                    src={line.logo}
+                    alt={line.name}
+                    fill
+                    sizes="(max-width: 640px) 40vw, 200px"
+                    className="object-contain grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-300"
+                    loading="lazy"
+                  />
+                </div>
               </a>
             ))}
           </div>
@@ -359,14 +363,16 @@ export default function CruisesContent({ locale }: { locale: string }) {
                   className="group flex items-center justify-center p-2 rounded-lg bg-white border border-brand-navy/5 hover:border-brand-gold/30 transition-all"
                   title={`${t("enquireAbout")} ${line.name}`}
                 >
-                  <Image
-                    src={line.logo}
-                    alt={line.name}
-                    width={160}
-                    height={40}
-                    className="h-7 w-auto grayscale group-hover:grayscale-0 transition-all duration-300"
-                    loading="lazy"
-                  />
+                  <div className="relative h-7 w-24">
+                    <Image
+                      src={line.logo}
+                      alt={line.name}
+                      fill
+                      sizes="96px"
+                      className="object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                      loading="lazy"
+                    />
+                  </div>
                 </a>
               ))}
             </div>
