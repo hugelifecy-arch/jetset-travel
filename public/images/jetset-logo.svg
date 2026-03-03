@@ -1,14 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-label="JetSet Travel Cyprus logo">
   <!-- White background -->
   <rect width="1200" height="360" fill="#FFFFFF"/>
-  <!-- Airplane icon -->
-  <g transform="translate(100, 48) scale(1.65)" fill="#1B2A4A">
-    <path d="M80 8 L96 58 L148 92 L96 82 L91 130 L112 146 L80 135 L48 146 L69 130 L64 82 L12 92 L64 58 Z"/>
-  </g>
-  <!-- JETSET text -->
-  <text x="355" y="178" font-family="'Playfair Display', Georgia, 'Times New Roman', serif" font-weight="700" font-size="128" fill="#1B2A4A" letter-spacing="6">JETSET</text>
-  <!-- Gold separator line -->
-  <line x1="355" y1="205" x2="1080" y2="205" stroke="#C9A84C" stroke-width="3"/>
-  <!-- TRAVEL CYPRUS text -->
-  <text x="355" y="268" font-family="'DM Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="500" font-size="60" fill="#1B2A4A" letter-spacing="16">TRAVEL CYPRUS</text>
+  <!-- JetSet text in navy -->
+  <text x="100" y="200" font-family="'Playfair Display', Georgia, 'Times New Roman', serif" font-weight="700" font-size="150" fill="#1B2A4A" letter-spacing="2">JetSet</text>
+  <!-- Three decorative horizontal lines under JetSet -->
+  <line x1="100" y1="225" x2="620" y2="225" stroke="#1B2A4A" stroke-width="4"/>
+  <line x1="100" y1="240" x2="560" y2="240" stroke="#1B2A4A" stroke-width="3"/>
+  <line x1="100" y1="253" x2="500" y2="253" stroke="#1B2A4A" stroke-width="2.5"/>
+  <!-- TRAVEL text in gold -->
+  <text x="670" y="200" font-family="'DM Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="500" font-size="120" fill="#C9A84C" letter-spacing="10">TRAVEL</text>
 </svg>
