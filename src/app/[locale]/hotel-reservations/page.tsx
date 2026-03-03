@@ -275,7 +275,7 @@ export default async function HotelReservationsPage({
       </section>
 
       {/* Cross-links */}
-      <ServicesCrossLinks locale={locale} exclude="hotels" />
+      <ServicesCrossLinks locale={locale} include={["corporate", "luxury", "cruises"]} />
       <ServiceSchema
         name="Hotel Reservations"
         description="Negotiated hotel rates worldwide for corporate and leisure travelers. Quality accommodations matched to your budget, standards, and location needs. Group bookings and extended stays."

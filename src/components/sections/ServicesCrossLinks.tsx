@@ -7,12 +7,26 @@ import {
   Palmtree,
   Briefcase,
   Ship,
+  Phone,
+  Info,
+  MapPin,
   ArrowRight,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+type ServiceKey =
+  | "corporate"
+  | "luxury"
+  | "hotels"
+  | "visa"
+  | "flights"
+  | "cruises"
+  | "contact"
+  | "about"
+  | "paphos";
+
 interface ServiceLink {
-  key: "corporate" | "luxury" | "hotels" | "visa" | "flights" | "cruises";
+  key: ServiceKey;
   href: string;
   icon: LucideIcon;
 }
@@ -24,18 +38,27 @@ const allServices: ServiceLink[] = [
   { key: "hotels", href: "/hotel-reservations", icon: Hotel },
   { key: "visa", href: "/visa-services", icon: FileText },
   { key: "flights", href: "/services#flights", icon: Plane },
+  { key: "contact", href: "/contact", icon: Phone },
+  { key: "about", href: "/about", icon: Info },
+  { key: "paphos", href: "/paphos-travel-agency", icon: MapPin },
 ];
+
+const servicesByKey = new Map(allServices.map((s) => [s.key, s]));
 
 export default async function ServicesCrossLinks({
   locale,
   exclude,
+  include,
 }: {
   locale: string;
-  exclude: string;
+  exclude?: string;
+  include?: ServiceKey[];
 }) {
   const t = await getTranslations({ locale, namespace: "services" });
 
-  const services = allServices.filter((s) => s.key !== exclude).slice(0, 3);
+  const services = include
+    ? include.map((k) => servicesByKey.get(k)).filter(Boolean) as ServiceLink[]
+    : allServices.filter((s) => s.key !== exclude).slice(0, 3);
 
   return (
     <section className="py-20 bg-white">
@@ -48,7 +71,7 @@ export default async function ServicesCrossLinks({
             {t("exploreMoreSubtitle")}
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+        <div className={`grid grid-cols-1 gap-8 ${services.length === 2 ? "sm:grid-cols-2 max-w-4xl mx-auto" : "sm:grid-cols-3"}`}>
           {services.map((service) => (
             <Link
               key={service.key}

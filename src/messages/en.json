@@ -68,7 +68,19 @@
       "description": "GDS fare search, direct ticket issuance, booking management, and disruption handling across all major airlines."
     },
     "exploreMore": "Explore Our Services",
-    "exploreMoreSubtitle": "Discover how else JetSet can help with your travel needs."
+    "exploreMoreSubtitle": "Discover how else JetSet can help with your travel needs.",
+    "contact": {
+      "title": "Contact Us",
+      "description": "Get in touch with our travel experts for personalised advice, quotes, and bookings."
+    },
+    "about": {
+      "title": "About JetSet Travel",
+      "description": "Learn about our 20+ years of IATA-accredited travel expertise in Paphos, Cyprus."
+    },
+    "paphos": {
+      "title": "Travel Agency in Paphos",
+      "description": "Visit our Paphos office for face-to-face travel planning, bookings, and visa consultation."
+    }
   },
   "reviews": {
     "title": "What Our Clients Say",

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import CruisesContent from "./CruisesContent";
+import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 
 export async function generateMetadata({
@@ -34,6 +35,7 @@ export default async function CruisesPage({
   return (
     <>
       <CruisesContent locale={locale} />
+      <ServicesCrossLinks locale={locale} include={["luxury", "hotels"]} />
       <ServiceSchema
         name="Cruise Booking"
         description="Book worldwide cruises on Royal Caribbean, MSC, Norwegian, Celebrity, Disney and 50+ cruise lines. Caribbean, Mediterranean, Alaska, Asia and beyond. IATA-accredited cruise specialists."
