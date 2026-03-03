@@ -11,6 +11,7 @@ const pages = [
   { path: "/visa-services", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/services", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/hotel-reservations", priority: 0.8, changeFrequency: "monthly" as const },
+  { path: "/cruises", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/about", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/quote", priority: 0.8, changeFrequency: "monthly" as const },

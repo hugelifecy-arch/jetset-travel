@@ -1,0 +1,6 @@
+<!-- REPLACE WITH OFFICIAL LOGO -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" fill="none">
+  <rect width="200" height="60" rx="4" fill="#003DA5"/>
+  <text x="100" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="#FFD100">COSTA</text>
+  <text x="100" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#FFFFFF" opacity="0.8">CRUISES</text>
+</svg>

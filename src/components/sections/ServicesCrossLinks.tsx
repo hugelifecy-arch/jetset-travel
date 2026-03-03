@@ -6,12 +6,13 @@ import {
   FileText,
   Palmtree,
   Briefcase,
+  Ship,
   ArrowRight,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface ServiceLink {
-  key: "corporate" | "luxury" | "hotels" | "visa" | "flights";
+  key: "corporate" | "luxury" | "hotels" | "visa" | "flights" | "cruises";
   href: string;
   icon: LucideIcon;
 }
@@ -19,6 +20,7 @@ interface ServiceLink {
 const allServices: ServiceLink[] = [
   { key: "corporate", href: "/corporate-travel", icon: Briefcase },
   { key: "luxury", href: "/luxury-travel", icon: Palmtree },
+  { key: "cruises", href: "/cruises", icon: Ship },
   { key: "hotels", href: "/hotel-reservations", icon: Hotel },
   { key: "visa", href: "/visa-services", icon: FileText },
   { key: "flights", href: "/services#flights", icon: Plane },
