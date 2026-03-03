@@ -350,25 +350,25 @@ export default function CruisesContent({ locale }: { locale: string }) {
             ))}
           </div>
 
-          {/* Tier 3 — "We also book" strip */}
-          <div className="text-center">
-            <p className="text-sm font-semibold text-brand-navy/50 uppercase tracking-wider mb-4">
+          {/* Tier 3 — "We also book" grid */}
+          <div>
+            <p className="text-sm font-semibold text-brand-navy/50 uppercase tracking-wider mb-4 text-center">
               {t("alsoBook")}
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
               {tier3Lines.map((line) => (
                 <a
                   key={line.name}
                   href="#cruise-enquiry"
-                  className="group flex items-center justify-center p-3 rounded-lg bg-white border border-brand-navy/5 hover:border-brand-gold/30 transition-all"
+                  className="group flex items-center justify-center p-4 rounded-xl bg-white border border-brand-navy/5 hover:border-brand-gold/30 transition-all"
                   title={`${t("enquireAbout")} ${line.name}`}
                 >
-                  <div className="relative h-10 w-28">
+                  <div className="relative h-12 w-full">
                     <Image
                       src={line.logo}
                       alt={line.name}
                       fill
-                      sizes="112px"
+                      sizes="(max-width: 640px) 40vw, (max-width: 1024px) 28vw, 180px"
                       className="object-contain group-hover:scale-105 transition-all duration-300"
                       loading="lazy"
                     />
