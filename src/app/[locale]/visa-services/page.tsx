@@ -22,6 +22,7 @@ import InlineTestimonial from "@/components/sections/InlineTestimonial";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import JsonLd from "@/components/seo/JsonLd";
 import CTABanner from "@/components/sections/CTABanner";
+import Accordion from "@/components/ui/Accordion";
 
 export async function generateMetadata({
   params,
@@ -426,26 +427,12 @@ export default async function VisaServicesPage({
               {t("faqSubtitle")}
             </p>
           </div>
-          <div className="space-y-6">
-            {faqs.map((faq) => (
-              <details
-                key={faq.q}
-                className="group bg-white rounded-2xl border border-brand-navy/10 overflow-hidden"
-              >
-                <summary className="flex items-center justify-between cursor-pointer p-6 text-left">
-                  <h3 className="text-base font-semibold text-brand-navy pr-4">
-                    {faq.q}
-                  </h3>
-                  <ChevronDown className="h-5 w-5 text-brand-navy/40 flex-shrink-0 transition-transform group-open:rotate-180" />
-                </summary>
-                <div className="px-6 pb-6">
-                  <p className="text-brand-navy/70 leading-relaxed">
-                    {faq.a}
-                  </p>
-                </div>
-              </details>
-            ))}
-          </div>
+          <Accordion
+            items={faqs.map((faq) => ({
+              question: faq.q,
+              answer: faq.a,
+            }))}
+          />
         </div>
       </section>
 

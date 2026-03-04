@@ -14,6 +14,7 @@ import {
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import ReviewSchema from "@/components/seo/ReviewSchema";
 import ServiceSchema from "@/components/seo/ServiceSchema";
+import FAQSection from "@/components/sections/FAQSection";
 export async function generateMetadata({
   params,
 }: {
@@ -317,6 +318,18 @@ export default async function LuxuryTravelPage({
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FAQSection
+        title={t("faqTitle")}
+        items={[
+          { question: t("faq1Q"), answer: t("faq1A") },
+          { question: t("faq2Q"), answer: t("faq2A") },
+          { question: t("faq3Q"), answer: t("faq3A") },
+          { question: t("faq4Q"), answer: t("faq4A") },
+          { question: t("faq5Q"), answer: t("faq5A") },
+        ]}
+      />
 
       {/* Cross-links */}
       <ServicesCrossLinks locale={locale} include={["hotels", "cruises", "corporate"]} />
