@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
@@ -12,14 +11,13 @@ import {
   Phone,
   UserCheck,
   PlaneTakeoff,
-  ChevronDown,
   Check,
   ArrowRight,
 } from "lucide-react";
 import InlineTestimonial from "@/components/sections/InlineTestimonial";
+import Accordion from "@/components/ui/Accordion";
 
 export default function CorporateTravelContent() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const locale = useLocale();
   const t = useTranslations("corporatePage");
 
@@ -98,6 +96,14 @@ export default function CorporateTravelContent() {
     {
       question: t("faq4Q"),
       answer: t("faq4A"),
+    },
+    {
+      question: t("faq5Q"),
+      answer: t("faq5A"),
+    },
+    {
+      question: t("faq6Q"),
+      answer: t("faq6A"),
     },
   ];
 
@@ -273,36 +279,8 @@ export default function CorporateTravelContent() {
               {t("faqTitle")}
             </h2>
           </div>
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl border border-brand-navy/10 overflow-hidden"
-              >
-                <button
-                  onClick={() =>
-                    setOpenFaq(openFaq === index ? null : index)
-                  }
-                  className="w-full flex items-center justify-between px-6 py-5 text-left"
-                >
-                  <span className="font-semibold text-brand-navy pr-4">
-                    {faq.question}
-                  </span>
-                  <ChevronDown
-                    className={`h-5 w-5 text-brand-gold flex-shrink-0 transition-transform ${
-                      openFaq === index ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                {openFaq === index && (
-                  <div className="px-6 pb-5">
-                    <p className="text-brand-navy/60 leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
+          <div className="max-w-3xl mx-auto">
+            <Accordion items={faqs} />
           </div>
         </div>
       </section>
