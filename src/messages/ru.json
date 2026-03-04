@@ -40,6 +40,14 @@
     "statSatisfaction": "Удовлетворённость клиентов",
     "statSatisfactionContext": "По результатам ежегодного опроса клиентов"
   },
+  "credentialsBar": {
+    "iataAccredited": "Аккредитованный агент IATA",
+    "cyprusTourism": "Лицензия туризма Кипра",
+    "experience": "20+ лет опыта",
+    "clients": "520+ корпоративных клиентов",
+    "support": "Поддержка 24/7",
+    "satisfaction": "98% довольных клиентов"
+  },
   "services": {
     "title": "Наши услуги",
     "subtitle": "Всё, что вам нужно — в руках одной ответственной команды.",

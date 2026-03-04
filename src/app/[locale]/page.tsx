@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
 import HeroSection from "@/components/sections/HeroSection";
+import TrustCredentialsBar from "@/components/sections/TrustCredentialsBar";
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import TrustSection from "@/components/sections/TrustSection";
 import ComparisonSection from "@/components/sections/ComparisonSection";
@@ -50,6 +51,7 @@ export default async function HomePage({
       {/* Preload hero background image for faster LCP */}
       <link rel="preload" as="image" href="/images/hero-bg.jpg" />
       <HeroSection />
+      <TrustCredentialsBar />
       <ServicesGrid />
       <TrustSection />
       <ComparisonSection />
