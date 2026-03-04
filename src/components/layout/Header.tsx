@@ -34,10 +34,18 @@ export default function Header() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
+  // Cross-locale slug mapping for pages with different slugs per locale
+  const crossLocaleSlugMap: Record<string, string> = {
+    "/paphos-travel-agency": "/turisticheskoe-agentstvo-pafos",
+    "/turisticheskoe-agentstvo-pafos": "/paphos-travel-agency",
+  };
+
   // Build the same page path in the other locale
   const pathWithoutLocale = pathname.replace(/^\/(en|ru)/, "") || "";
-  const enHref = `/en${pathWithoutLocale}`;
-  const ruHref = `/ru${pathWithoutLocale}`;
+  const enPath = crossLocaleSlugMap[pathWithoutLocale] && locale === "ru" ? crossLocaleSlugMap[pathWithoutLocale] : pathWithoutLocale;
+  const ruPath = crossLocaleSlugMap[pathWithoutLocale] && locale === "en" ? crossLocaleSlugMap[pathWithoutLocale] : pathWithoutLocale;
+  const enHref = `/en${enPath}`;
+  const ruHref = `/ru${ruPath}`;
 
   // Close mobile menu on route change (adjust state during render)
   const [prevPathname, setPrevPathname] = useState(pathname);

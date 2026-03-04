@@ -342,7 +342,7 @@ export default async function TuristicheskoeAgentstvoPafosPage({
                     {t("emailLabel")}
                   </p>
                   <p className="text-brand-navy/70 text-sm">
-                    <a href="mailto:INFO@JETSET.COM.CY" className="hover:text-brand-gold transition-colors">
+                    <a href="mailto:info@jetset.com.cy" className="hover:text-brand-gold transition-colors">
                       {t("email")}
                     </a>
                   </p>

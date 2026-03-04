@@ -27,7 +27,7 @@ type ServiceKey =
 
 interface ServiceLink {
   key: ServiceKey;
-  href: string;
+  href: string | ((locale: string) => string);
   icon: LucideIcon;
 }
 
@@ -40,7 +40,7 @@ const allServices: ServiceLink[] = [
   { key: "flights", href: "/services#flights", icon: Plane },
   { key: "contact", href: "/contact", icon: Phone },
   { key: "about", href: "/about", icon: Info },
-  { key: "paphos", href: "/paphos-travel-agency", icon: MapPin },
+  { key: "paphos", href: (locale: string) => locale === "ru" ? "/turisticheskoe-agentstvo-pafos" : "/paphos-travel-agency", icon: MapPin },
 ];
 
 const servicesByKey = new Map(allServices.map((s) => [s.key, s]));
@@ -72,10 +72,12 @@ export default async function ServicesCrossLinks({
           </p>
         </div>
         <div className={`grid grid-cols-1 gap-8 ${services.length === 2 ? "sm:grid-cols-2 max-w-4xl mx-auto" : "sm:grid-cols-3"}`}>
-          {services.map((service) => (
+          {services.map((service) => {
+            const resolvedHref = typeof service.href === "function" ? service.href(locale) : service.href;
+            return (
             <Link
               key={service.key}
-              href={`/${locale}${service.href}`}
+              href={`/${locale}${resolvedHref}`}
               className="group p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
             >
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 group-hover:bg-brand-gold group-hover:text-white transition-colors">
@@ -92,7 +94,8 @@ export default async function ServicesCrossLinks({
                 <ArrowRight className="ml-1 h-4 w-4" />
               </span>
             </Link>
-          ))}
+          );
+          })}
         </div>
       </div>
     </section>
