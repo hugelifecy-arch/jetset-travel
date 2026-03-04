@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -9,6 +9,22 @@ import { useLocale, useTranslations } from "next-intl";
 
 // TODO: Add hero.mp4 video file (compress to under 2MB):
 // ffmpeg -i hero.mp4 -vcodec h264 -crf 28 -preset medium -vf scale=1920:-2 -an hero-compressed.mp4
+
+const DESKTOP_MQ = "(min-width: 768px)";
+
+function subscribeDesktop(callback: () => void) {
+  const mql = window.matchMedia(DESKTOP_MQ);
+  mql.addEventListener("change", callback);
+  return () => mql.removeEventListener("change", callback);
+}
+
+function getIsDesktop() {
+  return window.matchMedia(DESKTOP_MQ).matches;
+}
+
+function getIsDesktopServer() {
+  return false;
+}
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
@@ -22,18 +38,10 @@ const fadeInUp = {
 export default function HeroSection() {
   const locale = useLocale();
   const t = useTranslations("hero");
-  const [isDesktop, setIsDesktop] = useState(false);
+  const isDesktop = useSyncExternalStore(subscribeDesktop, getIsDesktop, getIsDesktopServer);
   const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false);
   const [videoAvailable, setVideoAvailable] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const mql = window.matchMedia("(min-width: 768px)");
-    setIsDesktop(mql.matches);
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
-  }, []);
 
   const handlePlayMobile = useCallback(() => {
     setMobileVideoPlaying(true);

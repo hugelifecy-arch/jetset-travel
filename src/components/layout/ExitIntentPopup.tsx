@@ -55,7 +55,8 @@ export default function ExitIntentPopup() {
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const triggered = useRef(false);
-  const formLoadedAt = useRef(Date.now());
+  const formLoadedAt = useRef(0);
+  useEffect(() => { formLoadedAt.current = Date.now(); }, []);
   const honeypotRef = useRef<HTMLInputElement>(null);
 
   const {
@@ -230,13 +231,15 @@ export default function ExitIntentPopup() {
             </p>
 
             <form
-              onSubmit={handleSubmit(async (data) => {
-                try {
-                  await onSubmit(data);
-                } catch {
-                  setSubmitError("Something went wrong. Please try again.");
-                }
-              })}
+              onSubmit={(e) => {
+                void handleSubmit(async (data) => {
+                  try {
+                    await onSubmit(data);
+                  } catch {
+                    setSubmitError("Something went wrong. Please try again.");
+                  }
+                })(e);
+              }}
               className="mt-5 space-y-3"
             >
               {/* Honeypot */}
