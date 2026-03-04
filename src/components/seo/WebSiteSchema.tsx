@@ -17,6 +17,11 @@ export default function WebSiteSchema() {
         url: "https://www.jetset-travel.com/images/jetset-logo.svg",
       },
     },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: "https://www.jetset-travel.com/en/blog?q={search_term_string}",
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return <JsonLd data={schema} />;

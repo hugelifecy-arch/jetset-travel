@@ -17,12 +17,18 @@ export default function Footer() {
     { href: `/${locale}/contact`, label: t("contact") },
   ];
 
+  const paphosSlug =
+    locale === "ru" ? "turisticheskoe-agentstvo-pafos" : "paphos-travel-agency";
+  const flightsSlug =
+    locale === "ru" ? "aviabilety-kipr" : "flight-tickets-cyprus";
+
   const serviceLinks = [
-    { href: `/${locale}/contact`, label: t("flightBooking") },
+    { href: `/${locale}/${flightsSlug}`, label: t("flightBooking") },
     { href: `/${locale}/hotel-reservations`, label: t("hotelReservations") },
     { href: `/${locale}/cruises`, label: t("cruises") },
     { href: `/${locale}/visa-services`, label: t("visaAssistance") },
     { href: `/${locale}/luxury-travel`, label: t("luxuryTravel") },
+    { href: `/${locale}/${paphosSlug}`, label: t("travelAgencyPaphos") },
   ];
   return (
     <footer className="bg-brand-dark text-white">

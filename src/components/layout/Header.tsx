@@ -38,6 +38,16 @@ export default function Header() {
   const crossLocaleSlugMap: Record<string, string> = {
     "/paphos-travel-agency": "/turisticheskoe-agentstvo-pafos",
     "/turisticheskoe-agentstvo-pafos": "/paphos-travel-agency",
+    "/corporate-travel-cyprus": "/korporativnye-poezdki-kipr",
+    "/korporativnye-poezdki-kipr": "/corporate-travel-cyprus",
+    "/visa-services-cyprus": "/vizovye-uslugi-kipr",
+    "/vizovye-uslugi-kipr": "/visa-services-cyprus",
+    "/luxury-travel-cyprus": "/luxusnyy-otdykh-kipr",
+    "/luxusnyy-otdykh-kipr": "/luxury-travel-cyprus",
+    "/flight-tickets-cyprus": "/aviabilety-kipr",
+    "/aviabilety-kipr": "/flight-tickets-cyprus",
+    "/hotel-booking-cyprus": "/bronirovanie-otelej-kipr",
+    "/bronirovanie-otelej-kipr": "/hotel-booking-cyprus",
   };
 
   // Build the same page path in the other locale
