@@ -123,10 +123,15 @@ export default async function AboutPage({
               </div>
             </div>
             <div className="flex-1">
-              <div className="aspect-[4/3] rounded-2xl bg-gradient-to-br from-brand-navy to-brand-dark flex items-center justify-center">
-                <span className="text-white/20 text-6xl font-display font-bold">
-                  JetSet
-                </span>
+              <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/paphos-cityscape.jpg"
+                  alt={t("storyImageAlt")}
+                  width={800}
+                  height={450}
+                  className="object-cover w-full h-full rounded-2xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>
