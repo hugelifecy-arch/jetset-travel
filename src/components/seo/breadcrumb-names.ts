@@ -14,6 +14,11 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     privacy: "Privacy Policy",
     terms: "Terms of Service",
     "paphos-travel-agency": "Travel Agency in Paphos",
+    "corporate-travel-cyprus": "Corporate Travel Cyprus",
+    "visa-services-cyprus": "Visa Services Cyprus",
+    "luxury-travel-cyprus": "Luxury Travel Cyprus",
+    "flight-tickets-cyprus": "Flight Tickets Cyprus",
+    "hotel-booking-cyprus": "Hotel Booking Cyprus",
   },
   ru: {
     about: "О нас",
@@ -30,6 +35,11 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     privacy: "Политика конфиденциальности",
     terms: "Условия использования",
     "turisticheskoe-agentstvo-pafos": "Турагентство в Пафосе",
+    "korporativnye-poezdki-kipr": "Корпоративные поездки Кипр",
+    "vizovye-uslugi-kipr": "Визовые услуги Кипр",
+    "luxusnyy-otdykh-kipr": "Люкс отдых Кипр",
+    "aviabilety-kipr": "Авиабилеты Кипр",
+    "bronirovanie-otelej-kipr": "Бронирование отелей Кипр",
   },
 };
 

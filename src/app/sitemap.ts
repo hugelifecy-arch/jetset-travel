@@ -42,34 +42,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
   );
 
   // Cross-locale pages with different slugs per locale
-  const crossLocalePages = [
-    {
-      url: `${CANONICAL_ORIGIN}/en/paphos-travel-agency`,
-      lastModified,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-      alternates: {
-        languages: {
-          en: `${CANONICAL_ORIGIN}/en/paphos-travel-agency`,
-          ru: `${CANONICAL_ORIGIN}/ru/turisticheskoe-agentstvo-pafos`,
-          "x-default": `${CANONICAL_ORIGIN}/en/paphos-travel-agency`,
-        },
-      },
-    },
-    {
-      url: `${CANONICAL_ORIGIN}/ru/turisticheskoe-agentstvo-pafos`,
-      lastModified,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-      alternates: {
-        languages: {
-          en: `${CANONICAL_ORIGIN}/en/paphos-travel-agency`,
-          ru: `${CANONICAL_ORIGIN}/ru/turisticheskoe-agentstvo-pafos`,
-          "x-default": `${CANONICAL_ORIGIN}/en/paphos-travel-agency`,
-        },
-      },
-    },
+  const crossLocalePageDefs = [
+    { en: "paphos-travel-agency", ru: "turisticheskoe-agentstvo-pafos" },
+    { en: "corporate-travel-cyprus", ru: "korporativnye-poezdki-kipr" },
+    { en: "visa-services-cyprus", ru: "vizovye-uslugi-kipr" },
+    { en: "luxury-travel-cyprus", ru: "luxusnyy-otdykh-kipr" },
+    { en: "flight-tickets-cyprus", ru: "aviabilety-kipr" },
+    { en: "hotel-booking-cyprus", ru: "bronirovanie-otelej-kipr" },
   ];
+
+  const crossLocalePages = crossLocalePageDefs.flatMap((def) => [
+    {
+      url: `${CANONICAL_ORIGIN}/en/${def.en}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: `${CANONICAL_ORIGIN}/en/${def.en}`,
+          ru: `${CANONICAL_ORIGIN}/ru/${def.ru}`,
+          "x-default": `${CANONICAL_ORIGIN}/en/${def.en}`,
+        },
+      },
+    },
+    {
+      url: `${CANONICAL_ORIGIN}/ru/${def.ru}`,
+      lastModified,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+      alternates: {
+        languages: {
+          en: `${CANONICAL_ORIGIN}/en/${def.en}`,
+          ru: `${CANONICAL_ORIGIN}/ru/${def.ru}`,
+          "x-default": `${CANONICAL_ORIGIN}/en/${def.en}`,
+        },
+      },
+    },
+  ]);
 
   // Add published blog posts to sitemap
   const publishedPosts = getPublishedPosts();
