@@ -40,6 +40,14 @@
     "statSatisfaction": "Client Satisfaction",
     "statSatisfactionContext": "Based on annual client feedback"
   },
+  "credentialsBar": {
+    "iataAccredited": "IATA Accredited Agent",
+    "cyprusTourism": "Cyprus Tourism Licensed",
+    "experience": "20+ Years Experience",
+    "clients": "520+ Corporate Clients",
+    "support": "24/7 Support",
+    "satisfaction": "98% Client Satisfaction"
+  },
   "services": {
     "title": "What We Do",
     "subtitle": "Everything you need — handled by one accountable team.",

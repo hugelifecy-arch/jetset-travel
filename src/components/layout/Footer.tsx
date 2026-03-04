@@ -41,25 +41,25 @@ export default function Footer() {
             <p className="text-sm text-white/70 leading-relaxed">
               {t("tagline")}
             </p>
-            <div className="text-xs text-white/50 space-y-2">
-              <div className="flex items-center gap-2">
+            <div className="text-xs text-white/50 space-y-3">
+              <div className="flex items-center gap-3">
                 <Image
                   src="/images/iata-logo.jpg"
                   alt="IATA Accredited Travel Agent"
-                  width={32}
-                  height={32}
-                  className="h-8 w-8 rounded object-contain"
+                  width={52}
+                  height={52}
+                  className="h-[52px] w-[52px] rounded-lg object-contain"
                   loading="lazy"
                 />
                 <p>{t("iataAccredited")}</p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <Image
                   src="/images/tourism-logo.jpg"
                   alt="Cyprus Tourism Organisation Licensed"
-                  width={32}
-                  height={32}
-                  className="h-8 w-8 rounded object-contain"
+                  width={52}
+                  height={52}
+                  className="h-[52px] w-[52px] rounded-lg object-contain"
                   loading="lazy"
                 />
                 <p>{t("cyprusTourism")}</p>
