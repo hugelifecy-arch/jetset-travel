@@ -11,6 +11,7 @@ import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import ExitIntentPopup from "@/components/layout/ExitIntentPopup";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
+import { Analytics } from "@vercel/analytics/next";
 import "../globals.css";
 
 const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -137,6 +138,7 @@ export default async function LocaleLayout({
           <BreadcrumbSchema />
           <CookieConsentBanner />
           <ExitIntentPopup />
+          <Analytics />
           {recaptchaSiteKey &&
             recaptchaSiteKey !== "your_recaptcha_site_key" && (
               <Script
