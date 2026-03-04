@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { markdownToHtml } from "@/lib/markdown";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, Clock, User, ArrowRight, ChevronRight, Home } from "lucide-react";
@@ -197,10 +198,17 @@ export default async function BlogPostPage({
 
       {/* Banner Image Area */}
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 -mt-8">
-        <div className="aspect-[2/1] rounded-2xl bg-gradient-to-br from-brand-navy/80 to-brand-dark overflow-hidden flex items-center justify-center">
-          <span className="text-white/10 text-6xl font-display font-bold">
-            JetSet
-          </span>
+        <div className="aspect-[2/1] relative rounded-2xl bg-gradient-to-br from-brand-navy/80 to-brand-dark overflow-hidden">
+          {post.frontmatter.image && (
+            <Image
+              src={post.frontmatter.image}
+              alt={post.frontmatter.title}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 896px"
+            />
+          )}
         </div>
       </div>
 
@@ -236,10 +244,16 @@ export default async function BlogPostPage({
                   href={`/${locale}/blog/${relatedPost.frontmatter.slug}`}
                   className="group rounded-2xl border border-brand-navy/10 overflow-hidden bg-white hover:shadow-luxury transition-shadow"
                 >
-                  <div className="aspect-[16/9] bg-gradient-to-br from-brand-navy/80 to-brand-dark flex items-center justify-center">
-                    <span className="text-white/20 text-3xl font-display font-bold">
-                      JetSet
-                    </span>
+                  <div className="aspect-[16/9] relative bg-gradient-to-br from-brand-navy/80 to-brand-dark overflow-hidden">
+                    {relatedPost.frontmatter.image && (
+                      <Image
+                        src={relatedPost.frontmatter.image}
+                        alt={relatedPost.frontmatter.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    )}
                   </div>
                   <div className="p-5">
                     <h3 className="text-base font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors">
