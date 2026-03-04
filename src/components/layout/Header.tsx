@@ -27,6 +27,7 @@ const topLevelLinks = [
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const locale = useLocale();
   const t = useTranslations("nav");
   const pathname = usePathname();
@@ -60,6 +61,16 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Scroll detection: transparent on hero → solid background on scroll
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 50);
+    }
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Desktop hover handlers with a small delay to prevent flicker
   const handleMouseEnter = () => {
     if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
@@ -70,7 +81,13 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-brand-navy border-b-2 border-brand-gold">
+    <header
+      className={`sticky top-0 z-50 border-b-2 border-brand-gold transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
+        scrolled || mobileOpen
+          ? "bg-brand-navy shadow-lg"
+          : "bg-brand-navy/70 backdrop-blur-md"
+      }`}
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between md:h-20">
           {/* Logo */}
@@ -205,6 +222,15 @@ export default function Header() {
       {mobileOpen && (
         <div className="md:hidden border-t border-white/10 bg-brand-navy">
           <nav className="px-4 py-4 pb-24 space-y-1">
+            {/* Home link */}
+            <Link
+              href={`/${locale}`}
+              className="block px-3 py-3 text-base font-medium text-white/80 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px] flex items-center"
+              onClick={() => setMobileOpen(false)}
+            >
+              {t("home")}
+            </Link>
+
             {/* Services section with tap-to-expand */}
             <div>
               <button
