@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button";
@@ -11,7 +11,8 @@ import { getRecaptchaToken } from "@/lib/recaptcha";
 export default function LeadForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const formLoadedAt = useRef(Date.now());
+  const formLoadedAt = useRef(0);
+  useEffect(() => { formLoadedAt.current = Date.now(); }, []);
   const honeypotRef = useRef<HTMLInputElement>(null);
 
   const {
@@ -49,13 +50,15 @@ export default function LeadForm() {
 
   return (
     <form
-      onSubmit={handleSubmit(async (data) => {
-        try {
-          await onSubmit(data);
-        } catch {
-          setSubmitError("Something went wrong. Please try again.");
-        }
-      })}
+      onSubmit={(e) => {
+        void handleSubmit(async (data) => {
+          try {
+            await onSubmit(data);
+          } catch {
+            setSubmitError("Something went wrong. Please try again.");
+          }
+        })(e);
+      }}
       className="space-y-4"
     >
       {/* Honeypot — hidden from real users */}

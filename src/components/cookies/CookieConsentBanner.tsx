@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { cn } from "@/lib/utils/cn";
@@ -12,22 +12,36 @@ import {
   setConsentPreferences,
 } from "@/lib/cookie-consent";
 
+function subscribeConsentStore(callback: () => void) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
+
+function getConsentSnapshot() {
+  return getConsentPreferences() !== null;
+}
+
+function getConsentServerSnapshot() {
+  return true;
+}
+
 export default function CookieConsentBanner() {
   const t = useTranslations("cookies");
   const params = useParams();
   const locale = (params?.locale as string) ?? "en";
 
-  const [visible, setVisible] = useState(false);
+  const hasExistingConsent = useSyncExternalStore(
+    subscribeConsentStore,
+    getConsentSnapshot,
+    getConsentServerSnapshot,
+  );
+
+  const [forcedVisible, setForcedVisible] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [preferences, setPreferences] =
     useState<CookiePreferences>(DEFAULT_PREFERENCES);
 
-  useEffect(() => {
-    const saved = getConsentPreferences();
-    if (!saved) {
-      setVisible(true);
-    }
-  }, []);
+  const visible = !hasExistingConsent || forcedVisible;
 
   useEffect(() => {
     const handleReopen = () => {
@@ -36,7 +50,7 @@ export default function CookieConsentBanner() {
         setPreferences(saved);
       }
       setShowSettings(true);
-      setVisible(true);
+      setForcedVisible(true);
     };
     window.addEventListener("open-cookie-settings", handleReopen);
     return () =>
@@ -45,7 +59,7 @@ export default function CookieConsentBanner() {
 
   const handleSave = useCallback((prefs: CookiePreferences) => {
     setConsentPreferences(prefs);
-    setVisible(false);
+    setForcedVisible(false);
     setShowSettings(false);
   }, []);
 

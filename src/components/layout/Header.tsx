@@ -38,11 +38,13 @@ export default function Header() {
   const enHref = `/en${pathWithoutLocale}`;
   const ruHref = `/ru${pathWithoutLocale}`;
 
-  // Close mobile menu on route change
-  useEffect(() => {
+  // Close mobile menu on route change (adjust state during render)
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setMobileOpen(false);
     setServicesOpen(false);
-  }, [pathname]);
+  }
 
   // Close desktop dropdown when clicking outside
   useEffect(() => {
