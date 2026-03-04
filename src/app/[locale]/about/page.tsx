@@ -85,17 +85,28 @@ export default async function AboutPage({
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-navy text-white py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
-            {t("heroLabel")}
-          </p>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            {t("heroTitle")}
-          </h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">
-            {t("heroSubtitle")}
-          </p>
+      <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
+        <Image
+          src="/images/services/about.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="relative w-full py-20 lg:py-28">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+            <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
+              {t("heroLabel")}
+            </p>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              {t("heroTitle")}
+            </h1>
+            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+              {t("heroSubtitle")}
+            </p>
+          </div>
         </div>
       </section>
 
@@ -283,8 +294,59 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* Office Info */}
+      {/* Milestones Timeline */}
       <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              {t("milestonesTitle")}
+            </h2>
+            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+              {t("milestonesSubtitle")}
+            </p>
+          </div>
+          <div className="relative max-w-4xl mx-auto">
+            {/* Vertical line */}
+            <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-brand-gold/20" />
+            {[
+              { year: t("milestone1Year"), title: t("milestone1Title"), desc: t("milestone1Desc") },
+              { year: t("milestone2Year"), title: t("milestone2Title"), desc: t("milestone2Desc") },
+              { year: t("milestone3Year"), title: t("milestone3Title"), desc: t("milestone3Desc") },
+              { year: t("milestone4Year"), title: t("milestone4Title"), desc: t("milestone4Desc") },
+              { year: t("milestone5Year"), title: t("milestone5Title"), desc: t("milestone5Desc") },
+            ].map((milestone, index) => (
+              <div
+                key={milestone.year}
+                className={`relative flex items-start gap-6 mb-12 last:mb-0 ${
+                  index % 2 === 0
+                    ? "md:flex-row"
+                    : "md:flex-row-reverse"
+                }`}
+              >
+                {/* Dot */}
+                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-gold border-4 border-white z-10 mt-1" />
+                {/* Content card */}
+                <div className={`ml-12 md:ml-0 md:w-[calc(50%-2rem)] ${
+                  index % 2 === 0 ? "md:pr-8 md:text-right" : "md:pl-8 md:ml-auto"
+                }`}>
+                  <span className="text-brand-gold font-display text-2xl font-bold">
+                    {milestone.year}
+                  </span>
+                  <h3 className="text-lg font-bold text-brand-navy mt-1 mb-2">
+                    {milestone.title}
+                  </h3>
+                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                    {milestone.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Office Info */}
+      <section className="py-20 bg-brand-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">

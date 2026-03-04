@@ -227,43 +227,53 @@ export default function CruisesContent({ locale }: { locale: string }) {
       {/* ============================================================ */}
       {/* SECTION 1: Hero                                               */}
       {/* ============================================================ */}
-      <section className="relative bg-brand-navy text-white py-24 lg:py-36 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-[#0a3d62] to-brand-dark opacity-90" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-6">
-            {t("heroLabel")}
-          </p>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
-            {t("heroTitle")}
-          </h1>
-          <p className="text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-10">
-            {t("heroSubtitle")}
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <a
-              href="#cruise-enquiry"
-              className="inline-flex items-center rounded-full bg-brand-gold px-8 py-4 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors shadow-lg hover:shadow-xl"
-            >
-              {t("heroCta")}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
-            <a
-              href="tel:+35799478073"
-              className="inline-flex items-center rounded-full border border-white/20 px-8 py-4 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
-            >
-              <Phone className="mr-2 h-4 w-4" />
-              {t("heroCall")}
-            </a>
-          </div>
-          {/* Stats ticker */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/50">
-            <span>{t("statPassengers")}</span>
-            <span className="hidden sm:inline" aria-hidden="true">|</span>
-            <span>{t("statLines")}</span>
-            <span className="hidden sm:inline" aria-hidden="true">|</span>
-            <span>{t("statDestinations")}</span>
-            <span className="hidden sm:inline" aria-hidden="true">|</span>
-            <span>{t("statDepartures")}</span>
+      <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
+        <Image
+          src="/images/services/cruises.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="relative w-full py-24 lg:py-36">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+            <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-6">
+              {t("heroLabel")}
+            </p>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
+              {t("heroTitle")}
+            </h1>
+            <p className="text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-10">
+              {t("heroSubtitle")}
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+              <a
+                href="#cruise-enquiry"
+                className="inline-flex items-center rounded-full bg-brand-gold px-8 py-4 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors shadow-lg hover:shadow-xl"
+              >
+                {t("heroCta")}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+              <a
+                href="tel:+35799478073"
+                className="inline-flex items-center rounded-full border border-white/20 px-8 py-4 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+              >
+                <Phone className="mr-2 h-4 w-4" />
+                {t("heroCall")}
+              </a>
+            </div>
+            {/* Stats ticker */}
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/50">
+              <span>{t("statPassengers")}</span>
+              <span className="hidden sm:inline" aria-hidden="true">|</span>
+              <span>{t("statLines")}</span>
+              <span className="hidden sm:inline" aria-hidden="true">|</span>
+              <span>{t("statDestinations")}</span>
+              <span className="hidden sm:inline" aria-hidden="true">|</span>
+              <span>{t("statDepartures")}</span>
+            </div>
           </div>
         </div>
       </section>

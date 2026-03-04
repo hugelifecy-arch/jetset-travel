@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
 import {
   Zap,
   ShieldCheck,
@@ -103,35 +104,46 @@ export default function CorporateTravelContent() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-navy text-white py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
-              {t("heroLabel")}
-            </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              {t("heroTitle")}
-            </h1>
-            <p className="text-lg text-white/70 mb-8 max-w-2xl">
-              {t("heroSubtitle")}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href={`/${locale}/contact`}
-                className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
-              >
-                {t("requestQuote")}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-              <a
-                href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, я хотел бы обсудить корпоративные тревел-услуги.") : encodeURIComponent("Hi, I'd like to discuss corporate travel services.")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
-              >
-                <Phone className="mr-2 h-4 w-4" />
-                {t("callUsNow")}
-              </a>
+      <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
+        <Image
+          src="/images/services/corporate.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="relative w-full py-20 lg:py-28">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl">
+              <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
+                {t("heroLabel")}
+              </p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                {t("heroTitle")}
+              </h1>
+              <p className="text-lg text-white/70 mb-8 max-w-2xl">
+                {t("heroSubtitle")}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href={`/${locale}/contact`}
+                  className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
+                >
+                  {t("requestQuote")}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+                <a
+                  href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, я хотел бы обсудить корпоративные тревел-услуги.") : encodeURIComponent("Hi, I'd like to discuss corporate travel services.")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+                >
+                  <Phone className="mr-2 h-4 w-4" />
+                  {t("callUsNow")}
+                </a>
+              </div>
             </div>
           </div>
         </div>
