@@ -464,19 +464,60 @@ export default function ContactContent() {
           <div className="overflow-hidden rounded-2xl border border-brand-navy/10 shadow-sm">
             <iframe
               title="JetSet Travel Cyprus office location"
-              // TODO: Go to Google Maps, search '26A Agapinoros Paphos Cyprus', click Share → Embed a map, copy the src URL and paste here
-              src="https://www.google.com/maps?q=26A+Agapinoros%2C+8049+Paphos%2C+Cyprus&output=embed"
-              className="h-[400px] w-full"
+              src="https://maps.google.com/maps?q=26A+Agapinoros+8049+Paphos+Cyprus&output=embed"
+              width="100%"
+              height="400"
+              style={{ border: 0, borderRadius: "12px" }}
+              allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-          <div className="mt-4 text-center">
+
+          {/* Contact details below map */}
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="flex items-start gap-3">
+              <MapPin className="h-5 w-5 text-brand-gold flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-semibold text-brand-navy">{t("officeAddress")}</p>
+                <p className="text-sm text-brand-navy/60">{t("mapAddress")}</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Phone className="h-5 w-5 text-brand-gold flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-semibold text-brand-navy">{t("telephone")}</p>
+                <p className="text-sm text-brand-navy/60">{t("mapPhone")}</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Mail className="h-5 w-5 text-brand-gold flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-semibold text-brand-navy">{t("email")}</p>
+                <a href="mailto:info@jetset.com.cy" className="text-sm text-brand-navy/60 hover:text-brand-gold transition-colors">
+                  {t("mapEmail")}
+                </a>
+              </div>
+            </div>
+            <div className="flex items-start gap-3">
+              <Clock className="h-5 w-5 text-brand-gold flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-semibold text-brand-navy">{t("officeHours")}</p>
+                <p className="text-sm text-brand-navy/60 leading-relaxed">
+                  {t("mapHoursLine1")}<br />
+                  {t("mapHoursLine2")}<br />
+                  {t("mapHoursLine3")}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 text-center">
             <a
               href="https://maps.google.com/?q=26A+Agapinoros+8049+Paphos+Cyprus"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-brand-navy underline decoration-brand-gold underline-offset-4 hover:text-brand-navy/70 transition-colors"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3 text-sm font-semibold text-white hover:bg-brand-navy/90 transition-colors"
             >
               <MapPin className="h-4 w-4" />
               {t("getDirections")}
