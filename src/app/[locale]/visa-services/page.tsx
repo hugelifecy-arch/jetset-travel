@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import {
   FileCheck,
   Clock,
@@ -215,33 +216,44 @@ export default async function VisaServicesPage({
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-navy text-white py-20 lg:py-28">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
-              {t("heroLabel")}
-            </p>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              {t("heroTitle")}
-            </h1>
-            <p className="text-lg text-white/70 mb-8 max-w-2xl">
-              {t("heroSubtitle")}
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="#visa-cta"
-                className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
-              >
-                {t("getAssistance")}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </a>
-              <a
-                href="#visa-types"
-                className="inline-flex items-center rounded-full border border-white/30 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
-              >
-                <ChevronDown className="mr-2 h-4 w-4" />
-                {t("visaTypesTitle")}
-              </a>
+      <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
+        <Image
+          src="/images/services/visa.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="relative w-full py-20 lg:py-28">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl">
+              <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
+                {t("heroLabel")}
+              </p>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+                {t("heroTitle")}
+              </h1>
+              <p className="text-lg text-white/70 mb-8 max-w-2xl">
+                {t("heroSubtitle")}
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  href="#visa-cta"
+                  className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
+                >
+                  {t("getAssistance")}
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+                <a
+                  href="#visa-types"
+                  className="inline-flex items-center rounded-full border border-white/30 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+                >
+                  <ChevronDown className="mr-2 h-4 w-4" />
+                  {t("visaTypesTitle")}
+                </a>
+              </div>
             </div>
           </div>
         </div>

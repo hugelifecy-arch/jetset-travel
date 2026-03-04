@@ -88,47 +88,90 @@ export default async function LuxuryTravelPage({
       name: t("maldivesName"),
       tagline: t("maldivesTagline"),
       description: t("maldivesDesc"),
+      price: t("maldivesPrice"),
       image: "/images/luxury/maldives.jpg",
       imageAlt: "Aerial view of overwater bungalows in the Maldives",
+      slug: "maldives",
     },
     {
-      name: t("tuscanyName"),
-      tagline: t("tuscanyTagline"),
-      description: t("tuscanyDesc"),
-      image: "/images/luxury/tuscany.jpg",
-      imageAlt: "Rolling Tuscan hills with vineyards and a villa",
+      name: t("santoriniName"),
+      tagline: t("santoriniTagline"),
+      description: t("santoriniDesc"),
+      price: t("santoriniPrice"),
+      image: "/images/luxury/santorini.jpg",
+      imageAlt: "White-washed buildings overlooking the Santorini caldera at sunset",
+      slug: "santorini",
     },
     {
       name: t("dubaiName"),
       tagline: t("dubaiTagline"),
       description: t("dubaiDesc"),
+      price: t("dubaiPrice"),
       image: "/images/luxury/dubai.jpg",
       imageAlt: "Dubai skyline with Burj Khalifa at sunset",
+      slug: "dubai",
+    },
+    {
+      name: t("swissAlpsName"),
+      tagline: t("swissAlpsTagline"),
+      description: t("swissAlpsDesc"),
+      price: t("swissAlpsPrice"),
+      image: "/images/luxury/swiss-alps.jpg",
+      imageAlt: "Snow-capped Swiss Alps with luxury chalet in the foreground",
+      slug: "swiss-alps",
+    },
+    {
+      name: t("seychellesName"),
+      tagline: t("seychellesTagline"),
+      description: t("seychellesDesc"),
+      price: t("seychellesPrice"),
+      image: "/images/luxury/seychelles.jpg",
+      imageAlt: "Pristine beach with granite boulders in the Seychelles",
+      slug: "seychelles",
+    },
+    {
+      name: t("tuscanyName"),
+      tagline: t("tuscanyTagline"),
+      description: t("tuscanyDesc"),
+      price: t("tuscanyPrice"),
+      image: "/images/luxury/tuscany.jpg",
+      imageAlt: "Rolling Tuscan hills with vineyards and a villa",
+      slug: "tuscany",
     },
   ];
 
   return (
     <>
       {/* Full-width Hero */}
-      <section className="relative bg-brand-navy text-white py-28 lg:py-36 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-navy via-brand-navy to-brand-dark" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-6">
-            {t("heroLabel")}
-          </p>
-          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-            {t("heroTitle")}
-          </h1>
-          <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-10">
-            {t("heroSubtitle")}
-          </p>
-          <Link
-            href={`/${locale}/contact`}
-            className="inline-flex items-center rounded-full bg-brand-gold px-10 py-4 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
-          >
-            {t("planJourney")}
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
+      <section className="relative bg-brand-navy text-white min-h-[400px] flex items-center overflow-hidden">
+        <Image
+          src="/images/services/luxury.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative w-full py-28 lg:py-36">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+            <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-6">
+              {t("heroLabel")}
+            </p>
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+              {t("heroTitle")}
+            </h1>
+            <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-10">
+              {t("heroSubtitle")}
+            </p>
+            <Link
+              href={`/${locale}/contact`}
+              className="inline-flex items-center rounded-full bg-brand-gold px-10 py-4 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
+            >
+              {t("planJourney")}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -210,11 +253,12 @@ export default async function LuxuryTravelPage({
               {t("destSubtitle")}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {destinations.map((dest) => (
-              <div
+              <Link
                 key={dest.name}
-                className="group rounded-2xl overflow-hidden border border-brand-navy/10 hover:shadow-luxury transition-shadow"
+                href={`/${locale}/contact?type=luxury&destination=${dest.slug}`}
+                className="group rounded-2xl overflow-hidden border border-brand-navy/10 hover:shadow-luxury transition-shadow block"
               >
                 <div className="aspect-[16/10] relative overflow-hidden">
                   <Image
@@ -223,8 +267,11 @@ export default async function LuxuryTravelPage({
                     fill
                     loading="lazy"
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
+                  <div className="absolute bottom-3 right-3 bg-brand-navy/80 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
+                    {dest.price}
+                  </div>
                 </div>
                 <div className="p-6">
                   <p className="text-brand-gold text-xs font-semibold uppercase tracking-wider mb-1">
@@ -237,7 +284,7 @@ export default async function LuxuryTravelPage({
                     {dest.description}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
