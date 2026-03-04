@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import ContactContent from "./ContactContent";
 export async function generateMetadata({
   params,
@@ -22,6 +23,59 @@ export async function generateMetadata({
   });
 }
 
-export default function ContactPage() {
-  return <ContactContent />;
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
+  const contactPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name:
+      locale === "ru"
+        ? "Контакты JetSet Travel"
+        : "Contact JetSet Travel",
+    url: `${CANONICAL_ORIGIN}/${locale}/contact`,
+    mainEntity: {
+      "@type": "TravelAgency",
+      name: "JetSet Travel Cyprus",
+      url: "https://www.jetset-travel.com",
+      telephone: ["+357-99-478-073", "+357-99-310-993"],
+      email: "info@jetset.com.cy",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "26A Agapinoros",
+        addressLocality: "Paphos",
+        postalCode: "8049",
+        addressCountry: "CY",
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: "+357-99-478-073",
+        contactType: "customer service",
+        availableLanguage: ["English", "Russian", "Greek"],
+      },
+      openingHoursSpecification: {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+        ],
+        opens: "09:00",
+        closes: "18:00",
+      },
+    },
+  };
+
+  return (
+    <>
+      <JsonLd data={contactPageSchema} />
+      <ContactContent />
+    </>
+  );
 }

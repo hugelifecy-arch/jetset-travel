@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
 import QuoteContent from "./QuoteContent";
 export async function generateMetadata({
   params,
@@ -22,6 +23,46 @@ export async function generateMetadata({
   });
 }
 
-export default function QuotePage() {
-  return <QuoteContent />;
+export default async function QuotePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+
+  const quotePageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name:
+      locale === "ru"
+        ? "Запросить предложение — JetSet Travel"
+        : "Get a Travel Quote — JetSet Travel",
+    url: `${CANONICAL_ORIGIN}/${locale}/quote`,
+    description:
+      locale === "ru"
+        ? "Запросите индивидуальное предложение от JetSet Travel Cyprus."
+        : "Request a tailored corporate or luxury travel quote from JetSet Travel Cyprus.",
+    potentialAction: {
+      "@type": "CommunicateAction",
+      target: `${CANONICAL_ORIGIN}/${locale}/quote`,
+      name:
+        locale === "ru"
+          ? "Запросить предложение"
+          : "Request Travel Quote",
+    },
+    mainEntity: {
+      "@type": "TravelAgency",
+      name: "JetSet Travel Cyprus",
+      url: "https://www.jetset-travel.com",
+      telephone: "+357-99-478-073",
+      email: "info@jetset.com.cy",
+    },
+  };
+
+  return (
+    <>
+      <JsonLd data={quotePageSchema} />
+      <QuoteContent />
+    </>
+  );
 }

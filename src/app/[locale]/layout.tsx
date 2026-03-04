@@ -9,9 +9,8 @@ import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import MobileActionBar from "@/components/layout/MobileActionBar";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import ExitIntentPopup from "@/components/layout/ExitIntentPopup";
-import { CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
+import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
-import HreflangTags from "@/components/seo/HreflangTags";
 import "../globals.css";
 
 const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -60,6 +59,7 @@ export async function generateMetadata({
   const isRussian = locale === "ru";
 
   return {
+    alternates: localizedAlternates(locale),
     title: {
       template: "%s | JetSet Travel Cyprus",
       default: isRussian
@@ -116,7 +116,6 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <HreflangTags />
         <link rel="preconnect" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://maps.google.com" />
