@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import {
   ShieldCheck,
@@ -149,6 +150,11 @@ export default async function PaphosTravelAgencyPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  if (locale === "ru") {
+    redirect("/ru/turisticheskoe-agentstvo-pafos");
+  }
+
   const t = await getTranslations({ locale, namespace: "paphosPage" });
   const tReviews = await getTranslations({ locale, namespace: "reviews" });
 
@@ -327,7 +333,7 @@ export default async function PaphosTravelAgencyPage({
                     {t("emailLabel")}
                   </p>
                   <p className="text-brand-navy/70 text-sm">
-                    <a href="mailto:INFO@JETSET.COM.CY" className="hover:text-brand-gold transition-colors">
+                    <a href="mailto:info@jetset.com.cy" className="hover:text-brand-gold transition-colors">
                       {t("email")}
                     </a>
                   </p>
