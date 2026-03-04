@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { Calendar, Clock, ArrowRight, Search } from "lucide-react";
@@ -129,10 +130,16 @@ export default function BlogFilters({ posts }: { posts: BlogPost[] }) {
               href={`/${locale}/blog/${post.frontmatter.slug}`}
               className="group rounded-2xl border border-brand-navy/10 overflow-hidden hover:shadow-luxury transition-shadow bg-white"
             >
-              <div className="aspect-[16/9] bg-gradient-to-br from-brand-navy/80 to-brand-dark flex items-center justify-center">
-                <span className="text-white/20 text-4xl font-display font-bold">
-                  JetSet
-                </span>
+              <div className="aspect-[16/9] relative bg-gradient-to-br from-brand-navy/80 to-brand-dark overflow-hidden">
+                {post.frontmatter.image && (
+                  <Image
+                    src={post.frontmatter.image}
+                    alt={post.frontmatter.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                )}
               </div>
               <div className="p-6">
                 <div className="flex items-center gap-3 text-xs text-brand-navy/50 mb-3">
