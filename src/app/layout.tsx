@@ -43,6 +43,9 @@ export const metadata: Metadata = {
       "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
     images: [OG_IMAGE],
   },
+  other: {
+    "mailru-verification": "2bfc57c56602f741",
+  },
 };
 
 export default function RootLayout({
