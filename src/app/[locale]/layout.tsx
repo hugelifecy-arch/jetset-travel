@@ -60,6 +60,9 @@ export async function generateMetadata({
   const isRussian = locale === "ru";
 
   return {
+    verification: {
+      yandex: "c693997a9fde5229",
+    },
     alternates: localizedAlternates(locale),
     title: {
       template: "%s | JetSet Travel Cyprus",
