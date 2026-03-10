@@ -15,6 +15,11 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/_next/static/"],
         crawlDelay: 2,
       },
+      {
+        userAgent: "Mail.RU_Bot",
+        allow: "/",
+        disallow: ["/api/", "/_next/static/"],
+      },
     ],
     sitemap: `${CANONICAL_ORIGIN}/sitemap.xml`,
     host: CANONICAL_ORIGIN,
