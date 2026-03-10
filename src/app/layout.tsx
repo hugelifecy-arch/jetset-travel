@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   manifest: "/site.webmanifest",
+  verification: {
+    yandex: "c693997a9fde5229",
+  },
   openGraph: {
     type: "website",
     locale: "en_CY",
