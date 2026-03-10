@@ -57,7 +57,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 -z-20">
         <Image
           src="/images/hero-bg.jpg"
-          alt="Aerial view of the Mediterranean coastline in Cyprus with turquoise waters"
+          alt={t("heroImageAlt")}
           fill
           sizes="100vw"
           className="object-cover"
@@ -170,7 +170,7 @@ export default function HeroSection() {
             <div className="flex items-center gap-2 text-sm text-white/80">
               <Image
                 src="/images/iata-logo.jpg"
-                alt="IATA Accredited Travel Agent"
+                alt={t("iataAlt")}
                 width={28}
                 height={28}
                 className="h-7 w-7 rounded object-contain"
@@ -184,7 +184,7 @@ export default function HeroSection() {
             <div className="flex items-center gap-2 text-sm text-white/80">
               <Image
                 src="/images/tourism-logo.jpg"
-                alt="Cyprus Tourism Organisation Licensed"
+                alt={t("tourismAlt")}
                 width={28}
                 height={28}
                 className="h-7 w-7 rounded object-contain"

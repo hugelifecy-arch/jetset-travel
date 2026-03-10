@@ -51,12 +51,29 @@ export default async function ContactPage({
         postalCode: "8049",
         addressCountry: "CY",
       },
-      contactPoint: {
-        "@type": "ContactPoint",
-        telephone: "+357-99-478-073",
-        contactType: "customer service",
-        availableLanguage: ["English", "Russian", "Greek"],
-      },
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          telephone: "+357-99-478-073",
+          contactType: "customer service",
+          areaServed: ["CY", "GR", "RU", "AE", "GB"],
+          availableLanguage: ["English", "Russian", "Greek"],
+          hoursAvailable: {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            opens: "09:00",
+            closes: "18:00",
+          },
+        },
+        {
+          "@type": "ContactPoint",
+          telephone: "+357-99-478-073",
+          contactType: "emergency",
+          contactOption: "TollFree",
+          description: "24/7 WhatsApp support for travel disruptions",
+          availableLanguage: ["English", "Russian"],
+        },
+      ],
       openingHoursSpecification: {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: [

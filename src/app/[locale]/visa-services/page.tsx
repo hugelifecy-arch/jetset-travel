@@ -40,8 +40,8 @@ export async function generateMetadata({
         : "Visa Services Cyprus | Schengen Visa Paphos | Business Visa — JetSet Travel",
     description:
       locale === "ru"
-        ? "Визовые услуги в Пафосе, Кипр. Шенгенская виза, деловые визы, помощь с документами, координация с посольствами. Профессиональная поддержка от JetSet Travel."
-        : "Visa services in Paphos, Cyprus. Schengen visa assistance, business visa support, document preparation, embassy coordination. Expert help from JetSet Travel since 2006.",
+        ? "Визовые услуги в Пафосе. Шенген, Великобритания, деловые визы — подготовка документов и координация с посольствами. JetSet Travel с 2006 года."
+        : "Visa services in Paphos, Cyprus. Schengen, UK, US visa assistance, document preparation & embassy coordination. Expert help from JetSet Travel since 2006.",
   });
 }
 

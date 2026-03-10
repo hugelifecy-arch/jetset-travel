@@ -15,6 +15,7 @@ import {
   Clock,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import JsonLd from "@/components/seo/JsonLd";
 export async function generateMetadata({
   params,
 }: {
@@ -82,8 +83,58 @@ export default async function AboutPage({
     },
   ];
 
+  const isRussian = locale === "ru";
+
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "JetSet K&K Travel Ltd",
+    alternateName: ["JetSet Travel Cyprus", "ДжетСет Трэвел Кипр"],
+    url: "https://www.jetset-travel.com",
+    logo: "https://www.jetset-travel.com/images/jetset-logo.svg",
+    description: isRussian
+      ? "Аккредитованное IATA туристическое агентство в Пафосе, Кипр. Более 20 лет опыта в корпоративных и премиальных путешествиях."
+      : "IATA-accredited travel agency in Paphos, Cyprus. Over 20 years of experience in corporate and luxury travel.",
+    foundingDate: "2006",
+    foundingLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Paphos",
+        addressCountry: "CY",
+      },
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "26A Agapinoros",
+      addressLocality: "Paphos",
+      postalCode: "8049",
+      addressCountry: "CY",
+    },
+    telephone: "+357-99-478-073",
+    email: "info@jetset.com.cy",
+    legalName: "JetSet K&K Travel Ltd",
+    taxID: "HE 181550",
+    sameAs: [
+      "https://www.facebook.com/JETSETCYPRUS/",
+      "https://wa.me/35799478073",
+      "https://t.me/jetsetnotis",
+    ],
+    hasCredential: [
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "IATA Accreditation",
+        recognizedBy: {
+          "@type": "Organization",
+          name: "International Air Transport Association",
+        },
+      },
+    ],
+  };
+
   return (
     <>
+      <JsonLd data={orgSchema} />
       {/* Hero */}
       <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
         <Image

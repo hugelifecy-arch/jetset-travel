@@ -307,7 +307,7 @@ export default async function LuxuryTravelPage({
             <span className="text-white/40 text-xs">
               5/5{" "}
               <a
-                href="https://www.google.com/maps/search/?api=1&query=JETSET%20TRAVEL%20AGENCY%20Paphos"
+                href="https://www.google.com/maps/place/JetSet+Travel+Agency/@34.7604,32.4224,17z/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="underline underline-offset-2 hover:text-white/60 transition-colors"

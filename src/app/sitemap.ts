@@ -82,19 +82,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Add published blog posts to sitemap
   const publishedPosts = getPublishedPosts();
-  const blogPages = publishedPosts.map((post) => ({
-    url: `${CANONICAL_ORIGIN}/${post.frontmatter.locale}/blog/${post.frontmatter.slug}`,
-    lastModified: post.frontmatter.date,
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-    alternates: {
-      languages: {
-        en: `${CANONICAL_ORIGIN}/en/blog/${post.frontmatter.slug}`,
-        ru: `${CANONICAL_ORIGIN}/ru/blog/${post.frontmatter.slug}`,
-        "x-default": `${CANONICAL_ORIGIN}/en/blog/${post.frontmatter.slug}`,
-      },
-    },
-  }));
+  const blogPages = publishedPosts.map((post) => {
+    const { locale, slug, translationSlug } = post.frontmatter;
+
+    // Build hreflang alternates based on whether a translation exists
+    const languages: Record<string, string> = {};
+    if (translationSlug) {
+      // Paired post — include both locales
+      const enSlug = locale === "en" ? slug : translationSlug;
+      const ruSlug = locale === "ru" ? slug : translationSlug;
+      languages.en = `${CANONICAL_ORIGIN}/en/blog/${enSlug}`;
+      languages.ru = `${CANONICAL_ORIGIN}/ru/blog/${ruSlug}`;
+      languages["x-default"] = `${CANONICAL_ORIGIN}/en/blog/${enSlug}`;
+    } else if (locale === "en") {
+      // EN-only post
+      languages.en = `${CANONICAL_ORIGIN}/en/blog/${slug}`;
+      languages["x-default"] = `${CANONICAL_ORIGIN}/en/blog/${slug}`;
+    } else {
+      // RU-only post
+      languages.ru = `${CANONICAL_ORIGIN}/ru/blog/${slug}`;
+    }
+
+    return {
+      url: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}`,
+      lastModified: post.frontmatter.date,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+      alternates: { languages },
+    };
+  });
 
   return [...staticPages, ...crossLocalePages, ...blogPages];
 }

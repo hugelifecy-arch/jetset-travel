@@ -21,8 +21,8 @@ export async function generateMetadata({
         : "Corporate Travel Agency Cyprus | Business Travel Management — JetSet Travel",
     description:
       locale === "ru"
-        ? "Организация корпоративных поездок на Кипре. Бронирование согласно политике компании, единый счёт, поддержка 24/7 при сбоях. Аккредитация IATA."
-        : "Corporate travel management in Cyprus. Policy-compliant bookings, clean invoicing, 24/7 disruption handling, and dedicated account management for businesses. IATA accredited.",
+        ? "Корпоративные поездки на Кипре. Прозрачная отчётность, бесплатная консультация, поддержка 24/7 при сбоях. Аккредитация IATA."
+        : "Corporate travel management in Cyprus. Free consultation, clean invoicing, 24/7 disruption support. IATA accredited, dedicated account manager for your business.",
   });
 }
 

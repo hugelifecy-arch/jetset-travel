@@ -26,6 +26,7 @@ export interface BlogPostFrontmatter {
   tags: string[];
   locale: string;
   status: "draft" | "published";
+  translationSlug?: string; // slug of the equivalent post in the other language
 }
 
 export interface BlogPost {
@@ -84,4 +85,26 @@ export function getPostsByCategory(category: BlogCategory, locale?: string) {
 
 export function getAllCategories(): BlogCategory[] {
   return [...BLOG_CATEGORIES];
+}
+
+export function getPostTranslationSlug(slug: string): { en?: string; ru?: string } {
+  const post = getPostBySlug(slug);
+  if (!post) return {};
+
+  const locale = post.frontmatter.locale;
+  const translationSlug = post.frontmatter.translationSlug;
+
+  if (translationSlug) {
+    // Paired post exists in the other language
+    if (locale === "en") {
+      return { en: slug, ru: translationSlug };
+    }
+    return { en: translationSlug, ru: slug };
+  }
+
+  // Single-language post
+  if (locale === "en") {
+    return { en: slug };
+  }
+  return { ru: slug };
 }

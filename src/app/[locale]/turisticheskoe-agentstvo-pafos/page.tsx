@@ -286,7 +286,7 @@ export default async function TuristicheskoeAgentstvoPafosPage({
             <div className="rounded-2xl overflow-hidden border border-brand-navy/10 shadow-card">
               <iframe
                 title="Офис JetSet Travel в Пафосе"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.5!2d32.4195!3d34.7587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2s26A+Agapinoros+Street%2C+8049+Paphos%2C+Cyprus!5e0!3m2!1sru!2s!4v1700000000000"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d815.4!2d32.4224!3d34.7604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDQ1JzM3LjQiTiAzMsKwMjUnMjAuNiJF!5e0!3m2!1sru!2scy!4v1700000000000"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
@@ -413,7 +413,7 @@ export default async function TuristicheskoeAgentstvoPafosPage({
           </div>
           <div className="mt-8 text-center">
             <a
-              href="https://www.google.com/maps/search/JetSet+Travel+Agency+Paphos+Cyprus"
+              href="https://www.google.com/maps/place/JetSet+Travel+Agency/@34.7604,32.4224,17z/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-brand-navy/60 underline underline-offset-2 transition-colors hover:text-brand-navy"
