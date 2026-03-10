@@ -22,7 +22,10 @@
     "ctaLuxury": "Plan a Luxury Trip",
     "badgeIATA": "IATA Accredited",
     "badgeWhatsApp": "24/7 WhatsApp",
-    "badgeLicense": "Tourism License 7775"
+    "badgeLicense": "Tourism License 7775",
+    "heroImageAlt": "Aerial view of the Mediterranean coastline in Cyprus with turquoise waters",
+    "iataAlt": "IATA Accredited Travel Agent",
+    "tourismAlt": "Cyprus Tourism Organisation Licensed"
   },
   "trust": {
     "title": "Why Corporates Choose Us",
@@ -53,28 +56,34 @@
     "subtitle": "Everything you need — handled by one accountable team.",
     "corporate": {
       "title": "Corporate Travel",
-      "description": "Policy-compliant itineraries, clean invoicing, and 24/7 disruption rebooking for executive and team travel."
+      "description": "Policy-compliant itineraries, clean invoicing, and 24/7 disruption rebooking for executive and team travel.",
+      "imageAlt": "Corporate travel management for Cyprus businesses"
     },
     "luxury": {
       "title": "Luxury Leisure",
-      "description": "Curated premium holidays, private transfers, suite-level hotels, and bespoke multi-city journeys."
+      "description": "Curated premium holidays, private transfers, suite-level hotels, and bespoke multi-city journeys.",
+      "imageAlt": "Luxury travel planning - premium holidays from Cyprus"
     },
     "visa": {
       "title": "Visa Services",
-      "description": "Document checklists, application guidance, and coordination support for business and tourist visas."
+      "description": "Document checklists, application guidance, and coordination support for business and tourist visas.",
+      "imageAlt": "Visa services and application assistance in Paphos Cyprus"
     },
     "hotels": {
       "title": "Hotels",
-      "description": "Negotiated rates at quality hotels worldwide — matched to your location, standards, and budget priorities."
+      "description": "Negotiated rates at quality hotels worldwide — matched to your location, standards, and budget priorities.",
+      "imageAlt": "Hotel reservation service - luxury and business hotels worldwide"
     },
     "cruises": {
       "title": "Cruises",
-      "description": "Worldwide cruise bookings on every major cruise line — Caribbean, Mediterranean, Alaska, Asia, and beyond."
+      "description": "Worldwide cruise bookings on every major cruise line — Caribbean, Mediterranean, Alaska, Asia, and beyond.",
+      "imageAlt": "Cruise bookings worldwide - Mediterranean and Caribbean cruises"
     },
     "learnMore": "Learn more",
     "flights": {
       "title": "Flights",
-      "description": "GDS fare search, direct ticket issuance, booking management, and disruption handling across all major airlines."
+      "description": "GDS fare search, direct ticket issuance, booking management, and disruption handling across all major airlines.",
+      "imageAlt": "Flight booking service - JetSet Travel Paphos Cyprus"
     },
     "exploreMore": "Explore Our Services",
     "exploreMoreSubtitle": "Discover how else JetSet can help with your travel needs.",

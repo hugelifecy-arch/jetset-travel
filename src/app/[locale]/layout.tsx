@@ -12,6 +12,8 @@ import ExitIntentPopup from "@/components/layout/ExitIntentPopup";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { Analytics } from "@vercel/analytics/next";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import YandexMetrica from "@/components/analytics/YandexMetrica";
 import "../globals.css";
 
 const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -62,6 +64,8 @@ export async function generateMetadata({
   return {
     verification: {
       yandex: "c693997a9fde5229",
+      // TODO: Replace PLACEHOLDER_GSC_TOKEN with actual Google Search Console verification token
+      google: "PLACEHOLDER_GSC_TOKEN",
     },
     alternates: localizedAlternates(locale),
     title: {
@@ -120,9 +124,16 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        {/* Analytics preconnects */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://mc.yandex.ru" />
+        {/* Maps */}
+        <link rel="dns-prefetch" href="https://maps.google.com" />
+        <link rel="dns-prefetch" href="https://www.google.com" />
+        {/* Messaging */}
         <link rel="preconnect" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://wa.me" />
-        <link rel="dns-prefetch" href="https://maps.google.com" />
       </head>
       <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
@@ -142,6 +153,8 @@ export default async function LocaleLayout({
           <CookieConsentBanner />
           <ExitIntentPopup />
           <Analytics />
+          <GoogleAnalytics />
+          <YandexMetrica />
           {recaptchaSiteKey &&
             recaptchaSiteKey !== "your_recaptcha_site_key" && (
               <Script

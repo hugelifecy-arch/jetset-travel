@@ -27,8 +27,8 @@ export async function generateMetadata({
         : "Travel Agency in Paphos, Cyprus | JetSet Travel — IATA Accredited",
     description:
       locale === "ru"
-        ? "Аккредитованное IATA турагентство в Пафосе, Кипр. Корпоративные поездки, люкс-отдых, авиабилеты, бронирование отелей, визовые услуги. Поддержка 24/7. Более 20 лет опыта."
-        : "IATA-accredited travel agency in Paphos, Cyprus. Corporate travel management, luxury holidays, flight booking, hotel reservations, and visa services. 24/7 support. 20+ years experience.",
+        ? "Аккредитованное IATA турагентство в Пафосе. Корпоративные поездки, премиальный отдых, визы. Поддержка 24/7 в WhatsApp. Бесплатное предложение за 2 часа."
+        : "IATA-accredited travel agency in Paphos, Cyprus. Corporate travel, luxury holidays & visa services. 24/7 WhatsApp support. Free quote in 2 hours.",
   });
 }
 

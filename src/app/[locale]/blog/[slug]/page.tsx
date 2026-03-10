@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getAllPosts, getPostBySlug, getPostTranslationSlug } from "@/lib/blog";
 import { markdownToHtml } from "@/lib/markdown";
 import Image from "next/image";
 import Link from "next/link";
@@ -40,7 +40,9 @@ export async function generateMetadata({
   return {
     title: { absolute: `${post.frontmatter.title} | JetSet Travel Cyprus` },
     description: post.frontmatter.description,
-    alternates: localizedAlternates(locale, `/blog/${slug}`),
+    alternates: post.frontmatter.translationSlug
+      ? localizedAlternates(locale, `/blog/${slug}`)
+      : { canonical: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}` },
     openGraph: {
       type: "article",
       siteName: "JetSet Travel Cyprus",
