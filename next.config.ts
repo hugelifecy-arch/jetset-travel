@@ -22,6 +22,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Redirect non-www to www (Yandex needs consistent Host)
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "jetset-travel.com" }],
+        destination: "https://www.jetset-travel.com/:path*",
+        permanent: true,
+      },
       { source: "/", destination: "/en", statusCode: 301 },
       { source: "/en/en", destination: "/en", statusCode: 301 },
       { source: "/en/en/:path*", destination: "/en/:path*", statusCode: 301 },
