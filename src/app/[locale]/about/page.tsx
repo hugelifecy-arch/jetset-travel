@@ -136,7 +136,7 @@ export default async function AboutPage({
     <>
       <JsonLd data={orgSchema} />
       {/* Hero */}
-      <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
+      <section className="relative bg-brand-navy text-white min-h-[320px] sm:min-h-[380px] flex items-center overflow-hidden">
         <Image
           src="/images/services/about.jpg"
           alt="JetSet Travel office in Paphos, Cyprus"
@@ -151,10 +151,10 @@ export default async function AboutPage({
             <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
               {t("heroLabel")}
             </p>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6">
               {t("heroTitle")}
             </h1>
-            <p className="text-lg text-white/70 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto">
               {t("heroSubtitle")}
             </p>
           </div>
@@ -164,12 +164,12 @@ export default async function AboutPage({
       {/* Our Story — two columns */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center gap-12">
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-1">
               <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
                 {t("storyLabel")}
               </p>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-6">
                 {t("storyTitle")}
               </h2>
               <div className="space-y-4 text-brand-navy/70 leading-relaxed">
@@ -279,11 +279,11 @@ export default async function AboutPage({
               {t("valuesSubtitle")}
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {values.map((value) => (
               <div
                 key={value.title}
-                className="group p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
+                className="group p-6 sm:p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
               >
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 group-hover:bg-brand-gold group-hover:text-white transition-colors">
                   <value.icon className="h-7 w-7" />

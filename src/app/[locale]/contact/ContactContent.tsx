@@ -81,15 +81,15 @@ export default function ContactContent() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-navy text-white py-20 lg:py-28">
+      <section className="bg-brand-navy text-white py-16 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
             {t("heroLabel")}
           </p>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6">
             {t("heroTitle")}
           </h1>
-          <p className="text-lg text-white/70 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-white/70 max-w-2xl mx-auto">
             {t("heroSubtitle")}
           </p>
         </div>
@@ -98,9 +98,9 @@ export default function ContactContent() {
       {/* Two-column: Info Card + Form */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
             {/* Left: Navy Info Card */}
-            <div className="bg-brand-navy text-white rounded-2xl p-8 lg:p-10 flex flex-col justify-between">
+            <div className="bg-brand-navy text-white rounded-2xl p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
               <div>
                 <h2 className="text-2xl font-bold mb-8">
                   JetSet Travel Cyprus
@@ -475,7 +475,7 @@ export default function ContactContent() {
           </div>
 
           {/* Contact details below map */}
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
             <div className="flex items-start gap-3">
               <MapPin className="h-5 w-5 text-brand-gold flex-shrink-0 mt-0.5" />
               <div>

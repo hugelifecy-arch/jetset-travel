@@ -116,7 +116,7 @@ export default function HeroSection() {
         <div className="max-w-3xl">
           {/* Headline */}
           <motion.h1
-            className="font-display text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl"
+            className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
             variants={fadeInUp}
             initial="hidden"
             animate="visible"
@@ -128,7 +128,7 @@ export default function HeroSection() {
 
           {/* Subtitle */}
           <motion.p
-            className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl"
+            className="mt-4 max-w-2xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg md:text-xl"
             variants={fadeInUp}
             initial="hidden"
             animate="visible"
@@ -161,7 +161,7 @@ export default function HeroSection() {
 
           {/* Trust badges */}
           <motion.div
-            className="mt-12 flex flex-wrap items-center gap-6"
+            className="mt-8 flex flex-wrap items-center gap-3 sm:mt-12 sm:gap-4 md:gap-6"
             variants={fadeInUp}
             initial="hidden"
             animate="visible"

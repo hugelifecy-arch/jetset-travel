@@ -33,7 +33,7 @@ export default function Footer() {
   return (
     <footer className="bg-brand-dark text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
           {/* Col 1: Logo + Tagline + Accreditation */}
           <div className="space-y-4">
             <Image

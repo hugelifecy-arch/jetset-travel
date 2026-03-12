@@ -106,7 +106,7 @@ export default async function HotelReservationsPage({
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
+      <section className="relative bg-brand-navy text-white min-h-[320px] sm:min-h-[380px] flex items-center overflow-hidden">
         <Image
           src="/images/services/hotels.jpg"
           alt="Premium hotel lobby showcasing quality accommodation options"
@@ -122,10 +122,10 @@ export default async function HotelReservationsPage({
               <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
                 {t("heroLabel")}
               </p>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6">
                 {t("heroTitle")}
               </h1>
-              <p className="text-lg text-white/70 mb-8 max-w-2xl">
+              <p className="text-base sm:text-lg text-white/70 mb-6 sm:mb-8 max-w-2xl">
                 {t("heroSubtitle")}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -161,11 +161,11 @@ export default async function HotelReservationsPage({
               {t("typesSubtitle")}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {serviceTypes.map((service) => (
               <div
                 key={service.title}
-                className="group p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
+                className="group p-6 sm:p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
               >
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 group-hover:bg-brand-gold group-hover:text-white transition-colors">
                   <service.icon className="h-7 w-7" />
@@ -257,12 +257,12 @@ export default async function HotelReservationsPage({
       {/* Group Bookings Callout */}
       <section className="py-20 bg-brand-navy text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center gap-12">
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-1">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold/10 text-brand-gold mb-6">
                 <Users className="h-8 w-8" />
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
                 {t("groupTitle")}
               </h2>
               <p className="text-white/70 leading-relaxed mb-6">

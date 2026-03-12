@@ -21,7 +21,7 @@ export default function ClientLogos() {
           {t("trustedBy")}
         </p>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-8 sm:gap-12 lg:gap-16">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-8 lg:gap-12">
           {industryIcons.map((industry) => (
             <div
               key={industry.key}
