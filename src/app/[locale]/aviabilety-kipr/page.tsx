@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
 import { redirect } from "next/navigation";
+import FlightPageContent from "../flight-tickets-cyprus/FlightPageContent";
+
+const languagePaths = {
+  en: "/flight-tickets-cyprus",
+  ru: "/aviabilety-kipr",
+};
 
 export async function generateMetadata({
   params,
@@ -20,10 +26,7 @@ export async function generateMetadata({
       locale === "ru"
         ? "Бронирование авиабилетов из Кипра с аккредитацией IATA. Лучшие цены из Пафоса (PFO) и Ларнаки (LCA). Бизнес-класс, групповое бронирование."
         : "Book flights from Cyprus with IATA-accredited JetSet Travel. Best fares from Paphos (PFO) and Larnaca (LCA) airports.",
-    languagePaths: {
-      en: "/flight-tickets-cyprus",
-      ru: "/aviabilety-kipr",
-    },
+    languagePaths,
   });
 }
 
@@ -34,5 +37,9 @@ export default async function AviabiletyKiprPage({
 }) {
   const { locale } = await params;
 
-  redirect(`/${locale}/flight-tickets-cyprus`);
+  if (locale !== "ru") {
+    redirect(`/${locale}/flight-tickets-cyprus`);
+  }
+
+  return <FlightPageContent locale={locale} />;
 }
