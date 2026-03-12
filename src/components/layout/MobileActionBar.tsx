@@ -58,7 +58,7 @@ export default function MobileActionBar() {
         >
           <Image
             src="/images/icons/whatsapp.svg"
-            alt=""
+            alt="WhatsApp"
             width={20}
             height={20}
             className="brightness-0 invert h-5 w-5"
