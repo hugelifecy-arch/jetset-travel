@@ -113,7 +113,7 @@ export default function CorporateTravelContent() {
       <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
         <Image
           src="/images/services/corporate.jpg"
-          alt=""
+          alt="Business professionals at an airport for corporate travel management"
           fill
           priority
           className="object-cover"

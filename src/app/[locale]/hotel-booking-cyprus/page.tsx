@@ -44,8 +44,8 @@ export async function generateMetadata({
     routePath: "/hotel-booking-cyprus",
     title:
       locale === "ru"
-        ? "Бронирование Отелей Кипр | Корпоративные Тарифы — JetSet Travel"
-        : "Hotel Booking Cyprus | Corporate & Leisure Rates — JetSet Travel",
+        ? "Бронирование Отелей Кипр | Лучшие Тарифы — JetSet"
+        : "Hotel Booking Cyprus | Best Rates — JetSet Travel",
     description:
       locale === "ru"
         ? "Бронирование отелей на Кипре и по всему миру. Корпоративные тарифы, партнёрские люксовые отели. Чистые счета. JetSet Travel Пафос."

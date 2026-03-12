@@ -42,8 +42,8 @@ export async function generateMetadata({
     routePath: "/visa-services-cyprus",
     title:
       locale === "ru"
-        ? "Визовые Услуги Кипр | Шенгенская Виза Пафос — JetSet Travel"
-        : "Visa Services Cyprus | Schengen & Business Visa Assistance — JetSet Travel",
+        ? "Визовые Услуги Кипр | Шенген Пафос — JetSet Travel"
+        : "Visa Services Cyprus | Schengen & Business — JetSet",
     description:
       locale === "ru"
         ? "Профессиональные визовые услуги в Пафосе, Кипр. Шенгенская виза, UK, US, бизнес виза. Подготовка документов. Бесплатная консультация."

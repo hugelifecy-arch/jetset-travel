@@ -30,8 +30,8 @@ export async function generateMetadata({
     routePath: "/hotel-reservations",
     title:
       locale === "ru"
-        ? "Бронирование Отелей Кипр | Корпоративные Тарифы — JetSet Travel Пафос"
-        : "Hotel Booking Cyprus | Negotiated Corporate Rates — JetSet Travel Paphos",
+        ? "Бронирование Отелей Кипр | Корпоративные Тарифы — JetSet"
+        : "Hotel Booking Cyprus | Corporate Rates — JetSet Travel",
     description:
       locale === "ru"
         ? "Бронирование отелей по всему миру с корпоративными скидками. Качественные отели под ваш бюджет и стандарты. JetSet Travel, Пафос, Кипр."
@@ -109,7 +109,7 @@ export default async function HotelReservationsPage({
       <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
         <Image
           src="/images/services/hotels.jpg"
-          alt=""
+          alt="Premium hotel lobby showcasing quality accommodation options"
           fill
           priority
           className="object-cover"

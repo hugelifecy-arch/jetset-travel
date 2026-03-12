@@ -17,8 +17,8 @@ export async function generateMetadata({
     routePath: "/corporate-travel",
     title:
       locale === "ru"
-        ? "Корпоративное Турагентство Кипр | Управление Деловыми Поездками — JetSet Travel"
-        : "Corporate Travel Agency Cyprus | Business Travel Management — JetSet Travel",
+        ? "Корпоративные Поездки Кипр | Деловой Туризм — JetSet"
+        : "Corporate Travel Cyprus | Business Travel — JetSet",
     description:
       locale === "ru"
         ? "Корпоративные поездки на Кипре. Прозрачная отчётность, бесплатная консультация, поддержка 24/7 при сбоях. Аккредитация IATA."

@@ -14,8 +14,8 @@ export async function generateMetadata({
     routePath: "/contact",
     title:
       locale === "ru"
-        ? "Контакты JetSet Travel Пафос | Бесплатное предложение — Турагентство Кипр"
-        : "Contact JetSet Travel Paphos | Get a Free Quote — Cyprus Travel Agency",
+        ? "Контакты JetSet Travel Пафос | Бесплатная Заявка"
+        : "Contact JetSet Travel Paphos | Free Quote",
     description:
       locale === "ru"
         ? "Свяжитесь с JetSet Travel в Пафосе, Кипр. Бесплатные предложения, поддержка WhatsApp, корпоративные консультации. Звоните +357 99 478 073 или посетите 26A Agapinoros, Пафос."

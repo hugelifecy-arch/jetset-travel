@@ -34,8 +34,8 @@ export async function generateMetadata({
     routePath: "/paphos-travel-agency",
     title:
       locale === "ru"
-        ? "Туристическое агентство в Пафосе, Кипр | JetSet Travel — Аккредитация IATA"
-        : "Travel Agency in Paphos, Cyprus | JetSet Travel — IATA Accredited Agent",
+        ? "Турагентство в Пафосе | JetSet Travel — IATA Кипр"
+        : "Travel Agency Paphos | JetSet Travel — IATA Agent",
     description:
       locale === "ru"
         ? "Ищете надёжное туристическое агентство в Пафосе? JetSet Travel — аккредитация IATA, 20+ лет опыта. Корпоративные поездки, авиабилеты, отели, визовые услуги. Посетите нас: Агапинорос 26А."
