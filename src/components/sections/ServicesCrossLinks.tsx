@@ -37,7 +37,7 @@ const allServices: ServiceLink[] = [
   { key: "cruises", href: "/cruises", icon: Ship },
   { key: "hotels", href: "/hotel-reservations", icon: Hotel },
   { key: "visa", href: "/visa-services", icon: FileText },
-  { key: "flights", href: "/services#flights", icon: Plane },
+  { key: "flights", href: (locale: string) => locale === "ru" ? "/aviabilety-kipr" : "/flight-tickets-cyprus", icon: Plane },
   { key: "contact", href: "/contact", icon: Phone },
   { key: "about", href: "/about", icon: Info },
   { key: "paphos", href: (locale: string) => locale === "ru" ? "/turisticheskoe-agentstvo-pafos" : "/paphos-travel-agency", icon: MapPin },
@@ -90,7 +90,7 @@ export default async function ServicesCrossLinks({
                 {t(`${service.key}.description`)}
               </p>
               <span className="inline-flex items-center text-sm font-semibold text-brand-gold group-hover:gap-2 transition-all">
-                {t("learnMore")}
+                {t(`${service.key}.cta`)}
                 <ArrowRight className="ml-1 h-4 w-4" />
               </span>
             </Link>

@@ -57,47 +57,56 @@
     "corporate": {
       "title": "Corporate Travel",
       "description": "Policy-compliant itineraries, clean invoicing, and 24/7 disruption rebooking for executive and team travel.",
-      "imageAlt": "Corporate travel management for Cyprus businesses"
+      "imageAlt": "Corporate travel management for Cyprus businesses",
+      "cta": "Explore corporate travel"
     },
     "luxury": {
       "title": "Luxury Leisure",
       "description": "Curated premium holidays, private transfers, suite-level hotels, and bespoke multi-city journeys.",
-      "imageAlt": "Luxury travel planning - premium holidays from Cyprus"
+      "imageAlt": "Luxury travel planning - premium holidays from Cyprus",
+      "cta": "Explore luxury travel"
     },
     "visa": {
       "title": "Visa Services",
       "description": "Document checklists, application guidance, and coordination support for business and tourist visas.",
-      "imageAlt": "Visa services and application assistance in Paphos Cyprus"
+      "imageAlt": "Visa services and application assistance in Paphos Cyprus",
+      "cta": "Explore visa services"
     },
     "hotels": {
       "title": "Hotels",
       "description": "Negotiated rates at quality hotels worldwide — matched to your location, standards, and budget priorities.",
-      "imageAlt": "Hotel reservation service - luxury and business hotels worldwide"
+      "imageAlt": "Hotel reservation service - luxury and business hotels worldwide",
+      "cta": "Explore hotels"
     },
     "cruises": {
       "title": "Cruises",
       "description": "Worldwide cruise bookings on every major cruise line — Caribbean, Mediterranean, Alaska, Asia, and beyond.",
-      "imageAlt": "Cruise bookings worldwide - Mediterranean and Caribbean cruises"
+      "imageAlt": "Cruise bookings worldwide - Mediterranean and Caribbean cruises",
+      "cta": "Explore cruises"
     },
     "learnMore": "Learn more",
     "flights": {
       "title": "Flights",
       "description": "GDS fare search, direct ticket issuance, booking management, and disruption handling across all major airlines.",
-      "imageAlt": "Flight booking service - JetSet Travel Paphos Cyprus"
+      "imageAlt": "Flight booking service - JetSet Travel Paphos Cyprus",
+      "cta": "Explore flights"
     },
     "exploreMore": "Explore Our Services",
     "exploreMoreSubtitle": "Discover how else JetSet can help with your travel needs.",
     "contact": {
       "title": "Contact Us",
-      "description": "Get in touch with our travel experts for personalised advice, quotes, and bookings."
+      "description": "Get in touch with our travel experts for personalised advice, quotes, and bookings.",
+      "cta": "Get in touch"
     },
     "about": {
       "title": "About JetSet Travel",
-      "description": "Learn about our 20+ years of IATA-accredited travel expertise in Paphos, Cyprus."
+      "description": "Learn about our 20+ years of IATA-accredited travel expertise in Paphos, Cyprus.",
+      "cta": "About us"
     },
     "paphos": {
       "title": "Travel Agency in Paphos",
-      "description": "Visit our Paphos office for face-to-face travel planning, bookings, and visa consultation."
+      "description": "Visit our Paphos office for face-to-face travel planning, bookings, and visa consultation.",
+      "cta": "Visit Paphos office"
     }
   },
   "reviews": {
@@ -193,6 +202,7 @@
     "cruises": "Cruises",
     "contactUs": "Contact Us",
     "location": "26A Agapinoros, 8049 Paphos, Cyprus",
+    "viewMap": "View map",
     "copyright": "JetSet Travel Cyprus. All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
