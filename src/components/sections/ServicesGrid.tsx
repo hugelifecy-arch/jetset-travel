@@ -16,31 +16,31 @@ const serviceItems = [
   {
     icon: Plane,
     titleKey: "flights",
-    href: "/corporate-travel",
+    href: { en: "/flight-tickets-cyprus", ru: "/aviabilety-kipr" },
     image: "/images/services/flights.jpg",
   },
   {
     icon: Building2,
     titleKey: "hotels",
-    href: "/hotel-reservations",
+    href: { en: "/hotel-reservations", ru: "/hotel-reservations" },
     image: "/images/services/hotels.jpg",
   },
   {
     icon: FileCheck,
     titleKey: "visa",
-    href: "/visa-services",
+    href: { en: "/visa-services", ru: "/visa-services" },
     image: "/images/services/visa.jpg",
   },
   {
     icon: Palmtree,
     titleKey: "luxury",
-    href: "/luxury-travel",
+    href: { en: "/luxury-travel", ru: "/luxury-travel" },
     image: "/images/services/luxury.jpg",
   },
   {
     icon: Briefcase,
     titleKey: "corporate",
-    href: "/corporate-travel",
+    href: { en: "/corporate-travel", ru: "/corporate-travel" },
     image: "/images/services/corporate.jpg",
   },
 ] as const;
@@ -71,7 +71,7 @@ export default function ServicesGrid() {
               transition={{ delay: i * 0.1, duration: 0.5 }}
             >
               <Link
-                href={`/${locale}${service.href}`}
+                href={`/${locale}${service.href[locale as "en" | "ru"] ?? service.href.en}`}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-navy/10 bg-brand-light/40 shadow-card transition-all hover:-translate-y-1 hover:shadow-luxury"
               >
                 <div className="relative h-44 w-full overflow-hidden">
@@ -96,7 +96,7 @@ export default function ServicesGrid() {
                     {t(`${service.titleKey}.description`)}
                   </p>
                   <span className="mt-4 text-sm font-semibold text-brand-gold group-hover:underline">
-                    {t("learnMore")} &rarr;
+                    {t(`${service.titleKey}.cta`)} &rarr;
                   </span>
                 </div>
               </Link>

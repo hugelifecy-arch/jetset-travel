@@ -258,7 +258,7 @@ export default async function LuxuryTravelPage({
             {destinations.map((dest) => (
               <Link
                 key={dest.name}
-                href={`/${locale}/contact?type=luxury&destination=${dest.slug}`}
+                href={`/${locale}/contact`}
                 className="group rounded-2xl overflow-hidden border border-brand-navy/10 hover:shadow-luxury transition-shadow block"
               >
                 <div className="aspect-[16/10] relative overflow-hidden">
@@ -345,7 +345,7 @@ export default async function LuxuryTravelPage({
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href={`/${locale}/contact?type=luxury`}
+              href={`/${locale}/contact`}
               className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
               {t("ctaEnquiry")}

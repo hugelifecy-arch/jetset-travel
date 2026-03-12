@@ -146,13 +146,13 @@ export default function HeroSection() {
             custom={2}
           >
             <Link
-              href={`/${locale}/contact?type=corporate`}
+              href={`/${locale}/contact`}
               className="inline-flex items-center justify-center rounded-full bg-brand-gold px-6 py-3 text-base font-semibold text-brand-navy shadow-luxury transition-opacity hover:opacity-90 sm:px-8 sm:py-4"
             >
               {t("ctaCorporate")}
             </Link>
             <Link
-              href={`/${locale}/contact?type=luxury`}
+              href={`/${locale}/quote`}
               className="inline-flex items-center justify-center rounded-full border-2 border-white px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10 sm:px-8 sm:py-4"
             >
               {t("ctaLuxury")}

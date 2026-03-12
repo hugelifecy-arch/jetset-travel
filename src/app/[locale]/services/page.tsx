@@ -295,7 +295,7 @@ export default async function ServicesPage({
               </div>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
-                  href={`/${locale}/contact?type=corporate`}
+                  href={`/${locale}/contact`}
                   className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
                 >
                   {t("corporateCta")}

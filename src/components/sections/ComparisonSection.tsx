@@ -103,7 +103,7 @@ export default function ComparisonSection() {
             {t("ctaText")}
           </p>
           <Link
-            href={`/${locale}/contact?type=corporate`}
+            href={`/${locale}/contact`}
             className="mt-4 inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-3 text-base font-semibold text-brand-navy shadow-luxury transition-opacity hover:opacity-90"
           >
             {t("ctaButton")} &rarr;

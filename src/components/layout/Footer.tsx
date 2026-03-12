@@ -141,13 +141,14 @@ export default function Footer() {
                 </a>
               </li>
               <li className="leading-relaxed">
+                <span>{t("location")}</span>{" "}
                 <a
                   href="https://maps.google.com/?q=26A+Agapinoros+8049+Paphos+Cyprus"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-brand-gold transition-colors"
+                  className="hover:text-brand-gold transition-colors underline"
                 >
-                  {t("location")}
+                  {t("viewMap")}
                 </a>
               </li>
             </ul>
