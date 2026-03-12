@@ -33,10 +33,10 @@ export default function FAQSection({
   return (
     <>
       <section
-        className={`py-20 ${background === "light" ? "bg-brand-light" : "bg-white"}`}
+        className={`py-16 sm:py-20 ${background === "light" ? "bg-brand-light" : "bg-white"}`}
       >
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-10 sm:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {title}
             </h2>

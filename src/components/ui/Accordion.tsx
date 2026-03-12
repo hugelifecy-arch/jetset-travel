@@ -24,7 +24,7 @@ function AccordionItem({ question, answer }: AccordionItemProps) {
           aria-expanded={isOpen}
           aria-controls={panelId}
           onClick={() => setIsOpen(!isOpen)}
-          className="flex w-full items-center justify-between gap-4 py-5 px-1 text-left text-base font-semibold text-brand-navy transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 rounded"
+          className="flex w-full items-center justify-between gap-4 py-4 px-1 text-left text-base font-semibold text-brand-navy transition-colors hover:text-brand-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 rounded sm:py-5"
         >
           <span>{question}</span>
           <ChevronDown

@@ -213,7 +213,7 @@ export default async function AboutPage({
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {/* IATA Badge */}
-            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-brand-navy/10 hover:shadow-luxury transition-shadow">
+            <div className="flex flex-col items-center text-center p-5 sm:p-6 md:p-8 rounded-2xl bg-white border border-brand-navy/10 hover:shadow-luxury transition-shadow">
               <div className="w-24 h-24 relative mb-6">
                 <Image
                   src="/images/iata-logo.jpg"
@@ -232,7 +232,7 @@ export default async function AboutPage({
             </div>
 
             {/* Tourism License */}
-            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-brand-navy/10 hover:shadow-luxury transition-shadow">
+            <div className="flex flex-col items-center text-center p-5 sm:p-6 md:p-8 rounded-2xl bg-white border border-brand-navy/10 hover:shadow-luxury transition-shadow">
               <div className="w-24 h-24 relative mb-6">
                 <Image
                   src="/images/tourism-logo.jpg"
@@ -251,7 +251,7 @@ export default async function AboutPage({
             </div>
 
             {/* 20 Years Badge */}
-            <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-brand-navy/10 hover:shadow-luxury transition-shadow">
+            <div className="flex flex-col items-center text-center p-5 sm:p-6 md:p-8 rounded-2xl bg-white border border-brand-navy/10 hover:shadow-luxury transition-shadow">
               <div className="w-24 h-24 rounded-full bg-brand-gold/10 flex items-center justify-center mb-6">
                 <span className="text-brand-gold font-display text-3xl font-bold">
                   20+
@@ -358,7 +358,7 @@ export default async function AboutPage({
           </div>
           <div className="relative max-w-4xl mx-auto">
             {/* Vertical line */}
-            <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-brand-gold/20" />
+            <div className="absolute left-4 sm:left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-brand-gold/20" />
             {[
               { year: t("milestone1Year"), title: t("milestone1Title"), desc: t("milestone1Desc") },
               { year: t("milestone2Year"), title: t("milestone2Title"), desc: t("milestone2Desc") },
@@ -375,9 +375,9 @@ export default async function AboutPage({
                 }`}
               >
                 {/* Dot */}
-                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-gold border-4 border-white z-10 mt-1" />
+                <div className="absolute left-4 sm:left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-gold border-4 border-white z-10 mt-1" />
                 {/* Content card */}
-                <div className={`ml-12 md:ml-0 md:w-[calc(50%-2rem)] ${
+                <div className={`ml-12 sm:ml-14 md:ml-0 md:w-[calc(50%-2rem)] ${
                   index % 2 === 0 ? "md:pr-8 md:text-right" : "md:pl-8 md:ml-auto"
                 }`}>
                   <span className="text-brand-gold font-display text-2xl font-bold">

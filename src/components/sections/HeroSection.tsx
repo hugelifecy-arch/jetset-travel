@@ -86,7 +86,7 @@ export default function HeroSection() {
       {!isDesktop && !mobileVideoPlaying && videoAvailable && (
         <button
           onClick={handlePlayMobile}
-          className="absolute bottom-8 right-8 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors hover:bg-white/30"
+          className="absolute bottom-4 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors hover:bg-white/30 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8"
           aria-label="Play background video"
         >
           <Play className="h-5 w-5 text-white" />
@@ -147,13 +147,13 @@ export default function HeroSection() {
           >
             <Link
               href={`/${locale}/contact?type=corporate`}
-              className="inline-flex items-center justify-center rounded-full bg-brand-gold px-8 py-4 text-base font-semibold text-brand-navy shadow-luxury transition-opacity hover:opacity-90"
+              className="inline-flex items-center justify-center rounded-full bg-brand-gold px-6 py-3 text-base font-semibold text-brand-navy shadow-luxury transition-opacity hover:opacity-90 sm:px-8 sm:py-4"
             >
               {t("ctaCorporate")}
             </Link>
             <Link
               href={`/${locale}/contact?type=luxury`}
-              className="inline-flex items-center justify-center rounded-full border-2 border-white px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-white/10"
+              className="inline-flex items-center justify-center rounded-full border-2 border-white px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10 sm:px-8 sm:py-4"
             >
               {t("ctaLuxury")}
             </Link>
