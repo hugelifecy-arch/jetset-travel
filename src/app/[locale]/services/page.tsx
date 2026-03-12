@@ -23,8 +23,8 @@ export async function generateMetadata({
     routePath: "/services",
     title:
       locale === "ru"
-        ? "Все услуги | Корпоративные поездки, премиальный отдых, визы | JetSet Travel Кипр"
-        : "All Travel Services | Corporate, Luxury, Visa, Hotels | JetSet Travel Cyprus",
+        ? "Все услуги | Корпоративные, люкс, визы — JetSet Кипр"
+        : "Travel Services | Corporate, Luxury & Visa — JetSet Cyprus",
     description:
       locale === "ru"
         ? "Полный спектр услуг от одной команды на Кипре: корпоративные командировки, премиальный отдых, визовая поддержка, бронирование отелей и круглосуточная поддержка."

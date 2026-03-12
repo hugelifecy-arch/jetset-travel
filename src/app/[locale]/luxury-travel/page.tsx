@@ -27,8 +27,8 @@ export async function generateMetadata({
     routePath: "/luxury-travel",
     title:
       locale === "ru"
-        ? "Люкс Турагентство Пафос | Премиум Отдых — JetSet Travel Кипр"
-        : "Luxury Travel Agency Paphos | Premium Holiday Planning — JetSet Travel Cyprus",
+        ? "Люкс Турагентство Пафос | Премиум — JetSet Кипр"
+        : "Luxury Travel Paphos | Premium Holidays — JetSet",
     description:
       locale === "ru"
         ? "Планирование люкс-путешествий из Пафоса, Кипр. Эксклюзивные отели, частные трансферы, индивидуальные маршруты. Бесплатная консультация."
@@ -147,7 +147,7 @@ export default async function LuxuryTravelPage({
       <section className="relative bg-brand-navy text-white min-h-[400px] flex items-center overflow-hidden">
         <Image
           src="/images/services/luxury.jpg"
-          alt=""
+          alt="Luxury resort with premium amenities for exclusive travel experiences"
           fill
           priority
           className="object-cover"

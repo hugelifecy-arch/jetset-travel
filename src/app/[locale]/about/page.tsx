@@ -28,8 +28,8 @@ export async function generateMetadata({
     routePath: "/about",
     title:
       locale === "ru"
-        ? "О компании JetSet Travel Кипр | Более 20 лет в Пафосе — IATA и лицензия"
-        : "About JetSet Travel Cyprus | 20+ Years in Paphos — IATA & Licensed",
+        ? "О компании JetSet Travel Кипр | 20+ лет — IATA"
+        : "About JetSet Travel Cyprus | 20+ Years — IATA",
     description:
       locale === "ru"
         ? "JetSet K&K Travel Ltd, основана в 2006 году в Пафосе, Кипр. Аккредитация IATA (14200130), туристическая лицензия 7775. Обслуживаем 520+ корпоративных клиентов с удовлетворённостью 98%."
@@ -139,7 +139,7 @@ export default async function AboutPage({
       <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
         <Image
           src="/images/services/about.jpg"
-          alt=""
+          alt="JetSet Travel office in Paphos, Cyprus"
           fill
           priority
           className="object-cover"

@@ -41,8 +41,8 @@ export async function generateMetadata({
     routePath: "/flight-tickets-cyprus",
     title:
       locale === "ru"
-        ? "Авиабилеты из Кипра | Рейсы из Пафоса и Ларнаки — JetSet Travel"
-        : "Flight Tickets from Cyprus | Paphos & Larnaca Flights — JetSet Travel",
+        ? "Авиабилеты Кипр | Пафос и Ларнака — JetSet Travel"
+        : "Flights from Cyprus | Paphos & Larnaca — JetSet",
     description:
       locale === "ru"
         ? "Бронируйте авиабилеты из Кипра с IATA-аккредитованным агентством JetSet Travel. Лучшие тарифы из аэропортов Пафоса (PFO) и Ларнаки (LCA). Бизнес-класс, групповые бронирования."

@@ -19,8 +19,8 @@ export async function generateMetadata({
     routePath: "/blog",
     title:
       locale === "ru"
-        ? "Блог о путешествиях | Советы и гиды по Кипру — JetSet Travel Пафос"
-        : "Travel Blog | Cyprus Travel Tips & Guides — JetSet Travel Paphos",
+        ? "Блог о путешествиях | Гиды по Кипру — JetSet Travel"
+        : "Travel Blog | Cyprus Tips & Guides — JetSet Travel",
     description:
       locale === "ru"
         ? "Советы по путешествиям, гиды по Кипру, визовая информация и обзоры направлений от JetSet Travel Пафос. Экспертные рекомендации для корпоративных и частных путешественников."
