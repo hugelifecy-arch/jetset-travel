@@ -66,7 +66,11 @@ export default function Header() {
   }
 
   // Close desktop dropdown when clicking outside
+  // Skip when mobile menu is open — mobile has its own toggle and this
+  // handler would unmount service links before the click event fires.
   useEffect(() => {
+    if (mobileOpen) return;
+
     function handleClickOutside(e: MouseEvent) {
       if (
         dropdownRef.current &&
@@ -77,7 +81,7 @@ export default function Header() {
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [mobileOpen]);
 
   // Scroll detection: transparent on hero → solid background on scroll
   useEffect(() => {
