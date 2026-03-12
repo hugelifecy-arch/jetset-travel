@@ -217,7 +217,7 @@ export default async function VisaServicesPage({
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
+      <section className="relative bg-brand-navy text-white min-h-[320px] sm:min-h-[380px] flex items-center overflow-hidden">
         <Image
           src="/images/services/visa.jpg"
           alt="Visa application documents and passport for travel services"
@@ -227,16 +227,16 @@ export default async function VisaServicesPage({
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-black/55" />
-        <div className="relative w-full py-20 lg:py-28">
+        <div className="relative w-full py-16 sm:py-20 lg:py-28">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl">
               <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
                 {t("heroLabel")}
               </p>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6">
                 {t("heroTitle")}
               </h1>
-              <p className="text-lg text-white/70 mb-8 max-w-2xl">
+              <p className="text-base sm:text-lg text-white/70 mb-6 sm:mb-8 max-w-2xl">
                 {t("heroSubtitle")}
               </p>
               <div className="flex flex-wrap gap-4">
@@ -321,7 +321,7 @@ export default async function VisaServicesPage({
               {t("destSubtitle")}
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {visaCards.map((visa) => (
               <div
                 key={visa.country}
@@ -363,7 +363,7 @@ export default async function VisaServicesPage({
               {t("howSubtitle")}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
             {steps.map((step) => (
               <div key={step.number} className="relative">
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold mb-4">

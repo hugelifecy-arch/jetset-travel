@@ -239,7 +239,7 @@ export default function Header() {
       {/* Mobile slide-down nav */}
       {mobileOpen && (
         <div className="md:hidden border-t border-white/10 bg-brand-navy">
-          <nav className="px-4 py-4 pb-24 space-y-1">
+          <nav className="px-4 py-4 pb-16 sm:pb-24 space-y-1">
             {/* Home link */}
             <Link
               href={`/${locale}`}

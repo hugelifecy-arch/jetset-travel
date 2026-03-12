@@ -144,7 +144,7 @@ export default async function LuxuryTravelPage({
   return (
     <>
       {/* Full-width Hero */}
-      <section className="relative bg-brand-navy text-white min-h-[400px] flex items-center overflow-hidden">
+      <section className="relative bg-brand-navy text-white min-h-[320px] sm:min-h-[400px] flex items-center overflow-hidden">
         <Image
           src="/images/services/luxury.jpg"
           alt="Luxury resort with premium amenities for exclusive travel experiences"
@@ -159,7 +159,7 @@ export default async function LuxuryTravelPage({
             <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-6">
               {t("heroLabel")}
             </p>
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 sm:mb-6">
               {t("heroTitle")}
             </h1>
             <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-10">
@@ -187,11 +187,11 @@ export default async function LuxuryTravelPage({
               {t("categoriesSubtitle")}
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             {categories.map((cat) => (
               <div
                 key={cat.title}
-                className="group p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
+                className="group p-6 sm:p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
               >
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 group-hover:bg-brand-gold group-hover:text-white transition-colors">
                   <cat.icon className="h-7 w-7" />
@@ -210,11 +210,11 @@ export default async function LuxuryTravelPage({
 
       {/* Editorial Alternating Sections */}
       <section className="py-20 bg-brand-light">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-20">
           {editorials.map((item, index) => (
             <div
               key={item.title}
-              className={`flex flex-col md:flex-row items-center gap-12 ${
+              className={`flex flex-col md:flex-row items-center gap-8 md:gap-12 ${
                 index % 2 !== 0 ? "md:flex-row-reverse" : ""
               }`}
             >
@@ -254,7 +254,7 @@ export default async function LuxuryTravelPage({
               {t("destSubtitle")}
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {destinations.map((dest) => (
               <Link
                 key={dest.name}

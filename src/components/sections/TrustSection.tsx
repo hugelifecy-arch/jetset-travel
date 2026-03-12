@@ -19,7 +19,7 @@ export default function TrustSection() {
   return (
     <section className="bg-brand-light py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div className="grid gap-8 lg:gap-12 lg:grid-cols-2 lg:items-center">
           {/* Left: Why corporates choose us */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -49,7 +49,7 @@ export default function TrustSection() {
 
           {/* Right: Stats */}
           <motion.div
-            className="grid grid-cols-2 gap-6"
+            className="grid grid-cols-2 gap-4 sm:gap-6"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -58,9 +58,9 @@ export default function TrustSection() {
             {stats.map((stat) => (
               <div
                 key={stat.labelKey}
-                className="rounded-2xl border border-brand-navy/10 bg-white p-6 text-center shadow-card"
+                className="rounded-2xl border border-brand-navy/10 bg-white p-4 sm:p-6 text-center shadow-card"
               >
-                <p className="font-display text-4xl font-bold text-brand-gold">
+                <p className="font-display text-3xl font-bold text-brand-gold sm:text-4xl">
                   {t(stat.valueKey)}
                 </p>
                 <p className="mt-2 text-sm font-medium text-brand-navy/70">

@@ -61,7 +61,7 @@ export default function ServicesGrid() {
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="mt-10 grid gap-4 sm:mt-14 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {serviceItems.map((service, i) => (
             <motion.div
               key={service.titleKey}
