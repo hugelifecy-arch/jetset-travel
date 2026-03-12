@@ -53,7 +53,7 @@
   },
   "services": {
     "title": "What We Do",
-    "subtitle": "Everything you need — handled by one accountable team.",
+    "subtitle": "Everything you need — managed and delivered by one accountable team.",
     "corporate": {
       "title": "Corporate Travel",
       "description": "Policy-compliant itineraries, clean invoicing, and 24/7 disruption rebooking for executive and team travel.",
@@ -144,7 +144,7 @@
     "jetset3": "One clean invoice for your entire trip",
     "jetset4": "IATA rates + negotiated hotel deals",
     "jetset5": "Full visa coordination included",
-    "ctaText": "Stop wasting executive time on travel logistics.",
+    "ctaText": "Stop wasting executive time on travel logistics — let it be managed for you.",
     "ctaButton": "Book a Free Consultation"
   },
   "clients": {
@@ -157,7 +157,7 @@
   },
   "cta": {
     "title": "Ready to simplify your corporate travel?",
-    "subtitle": "Send us your route, dates, and budget — we'll reply with the best options and clear rules.",
+    "subtitle": "Send us your route, dates, and budget — we'll reply with the best options delivered straight to you.",
     "requestQuote": "Request a Quote",
     "contactUs": "Contact Us",
     "fullName": "Full Name",
