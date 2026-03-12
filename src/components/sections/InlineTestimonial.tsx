@@ -24,7 +24,7 @@ export default function InlineTestimonial({
   postedLabel = "Posted",
 }: InlineTestimonialProps) {
   return (
-    <figure className="rounded-2xl border border-brand-navy/10 bg-brand-light/50 p-6 md:p-8">
+    <figure className="rounded-2xl border border-brand-navy/10 bg-brand-light/50 p-4 sm:p-6 md:p-8">
       <div className="flex gap-0.5 mb-4">
         {Array.from({ length: 5 }).map((_, i) => (
           <Star

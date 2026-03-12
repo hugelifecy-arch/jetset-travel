@@ -51,7 +51,7 @@ export default function ComparisonSection() {
         <div className="mt-14 grid gap-8 sm:grid-cols-2">
           {/* DIY Column */}
           <motion.div
-            className="rounded-2xl border border-red-200 bg-red-50/50 p-8"
+            className="rounded-2xl border border-red-200 bg-red-50/50 p-5 sm:p-6 md:p-8"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -72,7 +72,7 @@ export default function ComparisonSection() {
 
           {/* JetSet Column */}
           <motion.div
-            className="rounded-2xl border border-green-200 bg-green-50/50 p-8"
+            className="rounded-2xl border border-green-200 bg-green-50/50 p-5 sm:p-6 md:p-8"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}

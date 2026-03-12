@@ -78,7 +78,7 @@ export default function CTALeadForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-auto max-w-3xl rounded-2xl bg-white/5 p-6 backdrop-blur-sm sm:p-8"
+      className="mx-auto max-w-3xl rounded-2xl bg-white/5 p-4 backdrop-blur-sm sm:p-6 md:p-8"
     >
       {/* Honeypot */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
