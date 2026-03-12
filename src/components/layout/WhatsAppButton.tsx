@@ -35,8 +35,7 @@ export default function WhatsAppButton() {
     >
       <Image
         src="/images/icons/whatsapp.svg"
-        alt=""
-        role="presentation"
+        alt="WhatsApp"
         width={28}
         height={28}
         className="brightness-0 invert w-7 h-7 md:w-6 md:h-6"

@@ -196,8 +196,7 @@ export default function Footer() {
             >
               <Image
                 src="/images/icons/whatsapp.svg"
-                alt=""
-                role="presentation"
+                alt="WhatsApp"
                 width={20}
                 height={20}
                 className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
@@ -212,8 +211,7 @@ export default function Footer() {
             >
               <Image
                 src="/images/icons/telegram.svg"
-                alt=""
-                role="presentation"
+                alt="Telegram"
                 width={20}
                 height={20}
                 className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
@@ -228,8 +226,7 @@ export default function Footer() {
             >
               <Image
                 src="/images/icons/viber.svg"
-                alt=""
-                role="presentation"
+                alt="Viber"
                 width={20}
                 height={20}
                 className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
