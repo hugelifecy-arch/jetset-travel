@@ -24,7 +24,7 @@ export async function generateMetadata({
     title:
       locale === "ru"
         ? "Турагентство в Пафосе, Кипр | JetSet Travel — Аккредитация IATA"
-        : "Travel Agency in Paphos, Cyprus | JetSet Travel — IATA Accredited",
+        : "Travel Agency in Paphos | JetSet Travel — IATA Accredited",
     description:
       locale === "ru"
         ? "Аккредитованное IATA турагентство в Пафосе. Корпоративные поездки, премиальный отдых, визы. Поддержка 24/7 в WhatsApp. Бесплатное предложение за 2 часа."
