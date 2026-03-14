@@ -25,7 +25,7 @@ function getHostname(req: NextRequest) {
   return hostHeader.split(":")[0].trim().toLowerCase();
 }
 
-export default function proxy(req: NextRequest) {
+export default function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const hostname = getHostname(req);
   const { pathname } = url;
@@ -92,5 +92,5 @@ export default function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|api).*)"],
+  matcher: ["/((?!_next|api|sitemap\\.xml|robots\\.txt|favicon\\.ico).*)"],
 };
