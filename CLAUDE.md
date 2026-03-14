@@ -72,7 +72,7 @@ This file provides AI assistants with the context needed to work effectively in 
 │   ├── types/                   # Shared TypeScript types
 │   ├── fonts/                   # Local WOFF2 font files
 │   ├── i18n.ts                  # next-intl config (getRequestConfig)
-│   └── proxy.ts                 # Locale middleware/proxy
+│   └── middleware.ts             # Locale middleware/proxy
 ├── public/images/               # Static assets (logo, OG image, hero bg)
 ├── tests/
 │   └── jetset-utils.test.js     # Node.js native test runner (unit tests)
@@ -128,7 +128,7 @@ Both `RESEND_API_KEY` and Upstash variables have graceful fallbacks—the app ru
 
 All user-facing pages live under `src/app/[locale]/`. The `[locale]` segment is either `en` or `ru`. The root `src/app/page.tsx` redirects visitors to the appropriate locale.
 
-Middleware in `src/proxy.ts` handles locale detection and deduplication redirects (e.g., `/en/en/...` → `/en/...`).
+Middleware in `src/middleware.ts` handles locale detection and deduplication redirects (e.g., `/en/en/...` → `/en/...`).
 
 ### Internationalisation (i18n)
 
