@@ -87,6 +87,7 @@ export default function CTALeadForm() {
           {...register("website")}
           tabIndex={-1}
           autoComplete="off"
+          aria-label="Website"
         />
       </div>
 
@@ -134,6 +135,7 @@ export default function CTALeadForm() {
         <div className="space-y-1 text-left">
           <select
             {...register("travelType")}
+            aria-label={t("travelType")}
             className={cn(
               "w-full rounded-xl border border-white/20 bg-white px-4 py-3 text-sm text-brand-navy outline-none transition-colors focus:border-brand-gold focus:ring-1 focus:ring-brand-gold"
             )}

@@ -163,6 +163,7 @@
     "fullName": "Full Name",
     "email": "Email",
     "phonePlaceholder": "+357...",
+    "travelType": "Travel Type",
     "selectTravelType": "Select travel type",
     "travelTypeOptions": {
       "corporate": "Corporate Travel",
