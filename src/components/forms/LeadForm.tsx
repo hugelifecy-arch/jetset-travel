@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Input, Textarea } from "@/components/ui/Input";
 import { leadFormSchema, type LeadFormValues } from "@/components/forms/schemas";
 import { getRecaptchaToken } from "@/lib/recaptcha";
+import { trackLead } from "@/lib/analytics/fbpixel";
 
 export default function LeadForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -44,6 +45,7 @@ export default function LeadForm() {
       throw new Error("Failed to submit quote request");
     }
 
+    trackLead({ content_name: "Hero Lead Form", content_category: "quick_quote" });
     setSubmitted(true);
     reset();
   };
