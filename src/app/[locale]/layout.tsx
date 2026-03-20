@@ -14,6 +14,8 @@ import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import { Analytics } from "@vercel/analytics/next";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import YandexMetrica from "@/components/analytics/YandexMetrica";
+import FacebookPixel from "@/components/analytics/FacebookPixel";
+import MicrosoftClarity from "@/components/analytics/MicrosoftClarity";
 import "../globals.css";
 
 const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
@@ -128,6 +130,8 @@ export default async function LocaleLayout({
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://mc.yandex.ru" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://www.clarity.ms" />
         {/* Maps */}
         <link rel="dns-prefetch" href="https://maps.google.com" />
         <link rel="dns-prefetch" href="https://www.google.com" />
@@ -155,6 +159,8 @@ export default async function LocaleLayout({
           <Analytics />
           <GoogleAnalytics />
           <YandexMetrica />
+          <FacebookPixel />
+          <MicrosoftClarity />
           {recaptchaSiteKey &&
             recaptchaSiteKey !== "your_recaptcha_site_key" && (
               <Script
