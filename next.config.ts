@@ -20,6 +20,12 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   trailingSlash: false,
   images: {
+    localPatterns: [
+      {
+        pathname: "/images/**",
+        search: "",
+      },
+    ],
     formats: ["image/avif", "image/webp"],
   },
   async redirects() {
