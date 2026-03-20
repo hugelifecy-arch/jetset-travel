@@ -40,6 +40,17 @@ export function buildPageMetadata({
   return {
     title: { absolute: title },
     description,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     alternates: localizedAlternates(locale, routePath, languagePaths),
     openGraph: {
       type: "website",
