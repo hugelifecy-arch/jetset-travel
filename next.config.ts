@@ -32,7 +32,7 @@ const nextConfig: NextConfig = {
         destination: "https://www.jetset-travel.com/:path*",
         permanent: true,
       },
-      { source: "/", destination: "/en", statusCode: 301 },
+      // Root "/" redirect is handled by middleware (with Accept-Language detection)
       { source: "/en/en", destination: "/en", statusCode: 301 },
       { source: "/en/en/:path*", destination: "/en/:path*", statusCode: 301 },
       { source: "/ru/ru", destination: "/ru", statusCode: 301 },
@@ -56,6 +56,24 @@ const nextConfig: NextConfig = {
           {
             key: "Cache-Control",
             value: "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400",
+          },
+        ],
+      },
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/fonts/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },
