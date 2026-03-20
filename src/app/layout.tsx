@@ -1,5 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { CANONICAL_ORIGIN, OG_IMAGE } from "@/lib/seo";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(CANONICAL_ORIGIN),
@@ -47,6 +53,11 @@ export const metadata: Metadata = {
     description:
       "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
     images: [OG_IMAGE],
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
   other: {
     "mailru-verification": "2bfc57c56602f741",
