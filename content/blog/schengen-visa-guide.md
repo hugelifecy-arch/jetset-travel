@@ -2,8 +2,9 @@
 title: "Complete Schengen Visa Guide for Cyprus Residents"
 description: "Everything about applying for a Schengen visa from Cyprus — documents, timelines, and mistakes to avoid."
 date: "2026-02-25"
-author: "JetSet Travel Team"
+author: "Nontari Kalaitsidis"
 slug: "schengen-visa-guide-cyprus-residents"
+translationSlug: "shengenskaya-viza-dlya-zhitelej-kipra"
 image: "/images/blog/schengen-visa-guide.jpg"
 category: "visas-guides"
 tags:

@@ -2,8 +2,9 @@
 title: "Шенгенская виза для жителей Кипра: пошаговое руководство 2026"
 description: "Пошаговое руководство по оформлению шенгенской визы для жителей Кипра — необходимые документы, запись на приём, сроки рассмотрения и советы для одобрения."
 date: "2026-03-10"
-author: "JetSet Travel Team"
+author: "Nontari Kalaitsidis"
 slug: "shengenskaya-viza-dlya-zhitelej-kipra"
+translationSlug: "schengen-visa-guide-cyprus-residents"
 image: "/images/blog/schengen-visa-guide.jpg"
 category: "visas-guides"
 tags:

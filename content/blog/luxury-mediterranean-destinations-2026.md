@@ -2,8 +2,9 @@
 title: "Top Luxury Destinations in the Mediterranean for 2026"
 description: "The most sought-after luxury Mediterranean destinations for 2026 — curated by JetSet Travel."
 date: "2026-03-16"
-author: "JetSet Travel Team"
+author: "Maro Kokkinou"
 slug: "luxury-mediterranean-destinations-2026"
+translationSlug: "premialnyj-otdykh-sredizemnomorye-2026"
 image: "/images/blog/luxury-mediterranean-2026.jpg"
 category: "luxury"
 tags:

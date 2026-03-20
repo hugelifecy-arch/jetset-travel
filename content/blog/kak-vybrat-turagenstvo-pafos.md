@@ -2,8 +2,9 @@
 title: "Как выбрать лучшее туристическое агентство в Пафосе, Кипр (Гид 2026)"
 description: "Полное руководство по выбору туристического агентства в Пафосе. На что обращать внимание, какие вопросы задавать и почему аккредитация IATA важна для ваших бронирований."
 date: "2026-03-03"
-author: "JetSet Travel Team"
+author: "Maro Kokkinou"
 slug: "kak-vybrat-turagenstvo-pafos"
+translationSlug: "travel-agency-paphos-guide"
 image: "/images/blog/travel-agency-paphos-guide.jpg"
 category: "cyprus"
 tags:

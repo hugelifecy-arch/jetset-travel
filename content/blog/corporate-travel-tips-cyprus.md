@@ -2,8 +2,9 @@
 title: "5 Tips for Efficient Corporate Travel from Cyprus"
 description: "Practical advice for Cyprus businesses to streamline corporate travel and reduce costs."
 date: "2026-02-28"
-author: "JetSet Travel Team"
+author: "Nontari Kalaitsidis"
 slug: "corporate-travel-tips-cyprus"
+translationSlug: "korporativnye-komandirovki-kipr-gid"
 image: "/images/blog/corporate-travel-tips.jpg"
 category: "corporate-travel"
 tags:

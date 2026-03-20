@@ -2,8 +2,9 @@
 title: "A Business Traveler's Guide to Limassol"
 description: "Essential guide to business travel in Limassol — hotels, restaurants, meeting spaces, insider tips."
 date: "2026-03-16"
-author: "JetSet Travel Team"
+author: "Nontari Kalaitsidis"
 slug: "business-travelers-guide-limassol"
+translationSlug: "delovoj-gid-po-limassolu"
 image: "/images/blog/business-guide-limassol.jpg"
 category: "corporate-travel"
 tags:
