@@ -23,9 +23,10 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Redirect non-www to www (Yandex needs consistent Host)
+      // Redirect non-www to www — but skip robots.txt & sitemap.xml
+      // so Yandex can read them on the apex domain and see the Host directive.
       {
-        source: "/:path*",
+        source: "/((?!robots\\.txt|sitemap\\.xml).*)",
         has: [{ type: "host", value: "jetset-travel.com" }],
         destination: "https://www.jetset-travel.com/:path*",
         permanent: true,
