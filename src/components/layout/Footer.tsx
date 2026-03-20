@@ -189,6 +189,36 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-4">
             <a
+              href="https://www.facebook.com/JETSETCYPRUS/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow us on Facebook"
+            >
+              <Image
+                src="/images/icons/facebook.svg"
+                alt="Facebook"
+                width={20}
+                height={20}
+                className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
+                loading="lazy"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/jetsetcyprus"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow us on Instagram"
+            >
+              <Image
+                src="/images/icons/instagram.svg"
+                alt="Instagram"
+                width={20}
+                height={20}
+                className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
+                loading="lazy"
+              />
+            </a>
+            <a
               href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте JetSet, мне нужна помощь с...") : encodeURIComponent("Hi JetSet, I'd like help with...")}`}
               target="_blank"
               rel="noopener noreferrer"
