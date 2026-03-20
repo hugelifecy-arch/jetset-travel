@@ -138,7 +138,7 @@ export default async function AboutPage({
       {/* Hero */}
       <section className="relative bg-brand-navy text-white min-h-[320px] sm:min-h-[380px] flex items-center overflow-hidden">
         <Image
-          src="/images/services/about.jpg"
+          src="/images/cyprus-hero.jpg"
           alt="JetSet Travel office in Paphos, Cyprus"
           fill
           priority
