@@ -172,6 +172,7 @@
     "fullName": "Полное имя",
     "email": "Электронная почта",
     "phonePlaceholder": "+357...",
+    "travelType": "Тип поездки",
     "selectTravelType": "Выберите тип поездки",
     "travelTypeOptions": {
       "corporate": "Корпоративная поездка",
