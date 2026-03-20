@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useLocale, useTranslations } from "next-intl";
 import { getRecaptchaToken } from "@/lib/recaptcha";
+import { trackLead } from "@/lib/analytics/fbpixel";
 import {
   Building2,
   Palmtree,
@@ -100,6 +101,7 @@ function CorporateForm({
         }),
       });
       if (!res.ok) throw new Error("Failed to submit");
+      trackLead({ content_name: "Corporate Quote", content_category: "corporate" });
       onSuccess();
     } catch {
       setSubmitError(t("submitError"));
@@ -334,6 +336,7 @@ function LuxuryForm({
         }),
       });
       if (!res.ok) throw new Error("Failed to submit");
+      trackLead({ content_name: "Luxury Quote", content_category: "luxury" });
       onSuccess();
     } catch {
       setSubmitError(t("submitError"));

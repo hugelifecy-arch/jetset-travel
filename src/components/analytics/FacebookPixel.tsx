@@ -1,10 +1,31 @@
+"use client";
+
 // Set NEXT_PUBLIC_FB_PIXEL_ID env var in Vercel dashboard to activate
 import Script from "next/script";
+import { useEffect, useState } from "react";
+import { hasConsent } from "@/lib/cookie-consent";
 
 const pixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
 
 export default function FacebookPixel() {
-  if (!pixelId) return null;
+  const [consentGiven, setConsentGiven] = useState(false);
+
+  useEffect(() => {
+    const check = () => setConsentGiven(hasConsent("marketing"));
+    check();
+
+    // Re-check when cookie consent changes (banner saves preferences via storage event)
+    window.addEventListener("storage", check);
+    // Also listen for the cookie banner's custom event
+    const handleBannerChange = () => setTimeout(check, 0);
+    window.addEventListener("cookie-banner-change", handleBannerChange);
+    return () => {
+      window.removeEventListener("storage", check);
+      window.removeEventListener("cookie-banner-change", handleBannerChange);
+    };
+  }, []);
+
+  if (!pixelId || !consentGiven) return null;
 
   return (
     <>
