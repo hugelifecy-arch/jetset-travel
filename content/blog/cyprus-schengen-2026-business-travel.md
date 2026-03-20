@@ -2,8 +2,9 @@
 title: "Cyprus Joins Schengen in 2026: What It Means for Your Business Travel"
 description: "Cyprus is set to join the Schengen Area in 2026. Learn what this means for corporate travelers and the 90/180-day rule."
 date: "2026-03-02"
-author: "JetSet Travel Team"
+author: "Nontari Kalaitsidis"
 slug: "cyprus-schengen-2026-business-travel"
+translationSlug: "kipr-v-shengene-2026-delovye-poezdki"
 image: "/images/blog/cyprus-schengen-2026.jpg"
 category: "corporate-travel"
 tags:

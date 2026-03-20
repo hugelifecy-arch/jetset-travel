@@ -2,8 +2,9 @@
 title: "Лучшие круизы из Лимассола в 2026 году: маршруты и советы"
 description: "Полный гид по круизам из Лимассола в 2026 году — круизные линии, популярные маршруты, советы по бронированию и выбору кают."
 date: "2026-03-10"
-author: "JetSet Travel Team"
+author: "Maro Kokkinou"
 slug: "luchshie-kruizy-iz-limassola-2026"
+translationSlug: "cruises-from-limassol-2026"
 image: "/images/blog/cruises-limassol-2026.jpg"
 category: "cruises"
 tags:

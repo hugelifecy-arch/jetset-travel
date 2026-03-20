@@ -2,8 +2,9 @@
 title: "Best Time to Visit Cyprus: A Month-by-Month Guide"
 description: "Month-by-month Cyprus guide: weather, events, crowds, and pricing for every season."
 date: "2026-04-01"
-author: "JetSet Travel Team"
+author: "Maro Kokkinou"
 slug: "best-time-visit-cyprus-monthly-guide"
+translationSlug: "luchshee-vremya-dlya-poseshcheniya-kipra"
 image: "/images/blog/best-time-cyprus.jpg"
 category: "cyprus"
 tags:

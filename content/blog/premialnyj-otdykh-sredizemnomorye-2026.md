@@ -2,8 +2,9 @@
 title: "Премиальный отдых в Средиземноморье: топ направления 2026"
 description: "Лучшие направления премиального отдыха в Средиземноморье на 2026 год — Санторини, побережье Амальфи, Лазурный берег и другие эксклюзивные курорты."
 date: "2026-03-10"
-author: "JetSet Travel Team"
+author: "Maro Kokkinou"
 slug: "premialnyj-otdykh-sredizemnomorye-2026"
+translationSlug: "luxury-mediterranean-destinations-2026"
 image: "/images/blog/luxury-mediterranean-destinations-2026.jpg"
 category: "luxury"
 tags:

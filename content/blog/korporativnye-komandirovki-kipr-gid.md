@@ -2,8 +2,9 @@
 title: "Корпоративные командировки на Кипр: полное руководство для бизнеса"
 description: "Подробное руководство по организации корпоративных командировок на Кипр — визовые требования, лучшие отели для деловых встреч, преимущества IATA-агента и круглосуточная поддержка."
 date: "2026-03-10"
-author: "JetSet Travel Team"
+author: "Nontari Kalaitsidis"
 slug: "korporativnye-komandirovki-kipr-gid"
+translationSlug: "corporate-travel-tips-cyprus"
 image: "/images/blog/corporate-travel-tips-cyprus.jpg"
 category: "corporate-travel"
 tags:

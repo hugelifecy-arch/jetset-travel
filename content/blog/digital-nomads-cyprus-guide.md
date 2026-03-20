@@ -2,8 +2,9 @@
 title: "Digital Nomads in Cyprus: Visa, Lifestyle & Practical Guide"
 description: "Everything digital nomads need to know about Cyprus — visa, costs, coworking, lifestyle."
 date: "2026-04-01"
-author: "JetSet Travel Team"
+author: "Maro Kokkinou"
 slug: "digital-nomads-cyprus-guide"
+translationSlug: "digital-nomady-kipr-gid"
 image: "/images/blog/digital-nomads-cyprus.jpg"
 category: "visas-guides"
 tags:

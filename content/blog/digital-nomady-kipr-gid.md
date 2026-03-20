@@ -2,8 +2,9 @@
 title: "Цифровые кочевники на Кипре: виза, жизнь и практический гид"
 description: "Практический гид для цифровых кочевников на Кипре — виза Digital Nomad, стоимость жизни, коворкинги, интернет и налоги."
 date: "2026-03-10"
-author: "JetSet Travel Team"
+author: "Maro Kokkinou"
 slug: "digital-nomady-kipr-gid"
+translationSlug: "digital-nomads-cyprus-guide"
 image: "/images/blog/digital-nomads-cyprus.jpg"
 category: "cyprus"
 tags:
