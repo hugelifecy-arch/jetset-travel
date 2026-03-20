@@ -65,7 +65,7 @@ export default function ExitIntentPopup() {
     formState: { errors, isSubmitting },
   } = useForm<ExitIntentFormValues>({
     resolver: zodResolver(exitIntentSchema),
-    defaultValues: { travelType: "Leisure" },
+    defaultValues: {},
   });
 
   /* ---- Show the popup ---- */
@@ -145,7 +145,6 @@ export default function ExitIntentPopup() {
       body: JSON.stringify({
         name: data.name,
         email: data.email,
-        travelType: data.travelType,
         website: honeypotRef.current?.value || "",
         _formLoadedAt: formLoadedAt.current,
         _recaptchaToken: recaptchaToken,
@@ -280,21 +279,6 @@ export default function ExitIntentPopup() {
                     {errors.email.message}
                   </span>
                 )}
-              </div>
-
-              {/* Travel Type */}
-              <div className="space-y-1">
-                <select
-                  {...register("travelType")}
-                  className="w-full rounded-xl border border-brand-navy/20 bg-white px-4 py-3 text-sm text-brand-navy outline-none transition-colors focus:border-brand-gold focus:ring-1 focus:ring-brand-gold"
-                  aria-label={t("travelTypeLabel")}
-                >
-                  <option value="Corporate">
-                    {t("travelTypeCorporate")}
-                  </option>
-                  <option value="Leisure">{t("travelTypeLeisure")}</option>
-                  <option value="Visa">{t("travelTypeVisa")}</option>
-                </select>
               </div>
 
               {submitError && (
