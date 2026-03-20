@@ -125,58 +125,62 @@ export default function BlogFilters({ posts }: { posts: BlogPost[] }) {
       {paginatedPosts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {paginatedPosts.map((post) => (
-            <Link
+            <article
               key={post.frontmatter.slug}
-              href={`/${locale}/blog/${post.frontmatter.slug}`}
               className="group rounded-2xl border border-brand-navy/10 overflow-hidden hover:shadow-luxury transition-shadow bg-white"
             >
-              <div className="aspect-[16/9] relative bg-gradient-to-br from-brand-navy/80 to-brand-dark overflow-hidden">
-                {post.frontmatter.image && (
-                  <Image
-                    src={post.frontmatter.image}
-                    alt={post.frontmatter.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                )}
-              </div>
-              <div className="p-6">
-                <div className="flex items-center gap-3 text-xs text-brand-navy/50 mb-3">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-3.5 w-3.5" />
-                    {new Date(post.frontmatter.date).toLocaleDateString(
-                      locale === "ru" ? "ru-RU" : "en-GB",
-                      { day: "numeric", month: "short", year: "numeric" },
-                    )}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="h-3.5 w-3.5" />
-                    {post.readTime} {t("minRead")}
-                  </span>
+              <Link
+                href={`/${locale}/blog/${post.frontmatter.slug}`}
+                className="block"
+              >
+                <div className="aspect-[16/9] relative bg-gradient-to-br from-brand-navy/80 to-brand-dark overflow-hidden">
+                  {post.frontmatter.image && (
+                    <Image
+                      src={post.frontmatter.image}
+                      alt={post.frontmatter.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                  )}
                 </div>
-                <h2 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors line-clamp-2">
-                  {post.frontmatter.title}
-                </h2>
-                <p className="text-sm text-brand-navy/60 leading-relaxed line-clamp-3">
-                  {post.frontmatter.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5 mt-3">
-                  {post.frontmatter.tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs px-2 py-0.5 rounded-full bg-brand-navy/5 text-brand-navy/50"
-                    >
-                      {tag}
+                <div className="p-6">
+                  <div className="flex items-center gap-3 text-xs text-brand-navy/50 mb-3">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="h-3.5 w-3.5" />
+                      {new Date(post.frontmatter.date).toLocaleDateString(
+                        locale === "ru" ? "ru-RU" : "en-GB",
+                        { day: "numeric", month: "short", year: "numeric" },
+                      )}
                     </span>
-                  ))}
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3.5 w-3.5" />
+                      {post.readTime} {t("minRead")}
+                    </span>
+                  </div>
+                  <h2 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors line-clamp-2">
+                    {post.frontmatter.title}
+                  </h2>
+                  <p className="text-sm text-brand-navy/60 leading-relaxed line-clamp-3">
+                    {post.frontmatter.description}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5 mt-3">
+                    {post.frontmatter.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs px-2 py-0.5 rounded-full bg-brand-navy/5 text-brand-navy/50"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="inline-flex items-center mt-4 text-sm font-semibold text-brand-gold">
+                    {t("readMore")}
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </span>
                 </div>
-                <span className="inline-flex items-center mt-4 text-sm font-semibold text-brand-gold">
-                  {t("readMore")}
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </span>
-              </div>
-            </Link>
+              </Link>
+            </article>
           ))}
         </div>
       ) : (
