@@ -241,31 +241,35 @@ export default async function BlogPostPage({
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {related.map((relatedPost) => (
-                <Link
+                <article
                   key={relatedPost.frontmatter.slug}
-                  href={`/${locale}/blog/${relatedPost.frontmatter.slug}`}
                   className="group rounded-2xl border border-brand-navy/10 overflow-hidden bg-white hover:shadow-luxury transition-shadow"
                 >
-                  <div className="aspect-[16/9] relative bg-gradient-to-br from-brand-navy/80 to-brand-dark overflow-hidden">
-                    {relatedPost.frontmatter.image && (
-                      <Image
-                        src={relatedPost.frontmatter.image}
-                        alt={relatedPost.frontmatter.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                    )}
-                  </div>
-                  <div className="p-5">
-                    <h3 className="text-base font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors">
-                      {relatedPost.frontmatter.title}
-                    </h3>
-                    <p className="text-sm text-brand-navy/60 line-clamp-2">
-                      {relatedPost.frontmatter.description}
-                    </p>
-                  </div>
-                </Link>
+                  <Link
+                    href={`/${locale}/blog/${relatedPost.frontmatter.slug}`}
+                    className="block"
+                  >
+                    <div className="aspect-[16/9] relative bg-gradient-to-br from-brand-navy/80 to-brand-dark overflow-hidden">
+                      {relatedPost.frontmatter.image && (
+                        <Image
+                          src={relatedPost.frontmatter.image}
+                          alt={relatedPost.frontmatter.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        />
+                      )}
+                    </div>
+                    <div className="p-5">
+                      <h3 className="text-base font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors">
+                        {relatedPost.frontmatter.title}
+                      </h3>
+                      <p className="text-sm text-brand-navy/60 line-clamp-2">
+                        {relatedPost.frontmatter.description}
+                      </p>
+                    </div>
+                  </Link>
+                </article>
               ))}
             </div>
           </div>
