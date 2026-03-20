@@ -37,10 +37,16 @@ export default function middleware(req: NextRequest) {
     hostname.endsWith(".vercel-preview.app");
 
   // 1. Force apex → canonical www (301) — production only
+  //    Skip robots.txt, sitemap.xml, and Yandex verification files so
+  //    search engines can access them on the apex domain.
   if (!isLocalOrPreview && hostname === APEX_HOST) {
-    const redirectUrl = url.clone();
-    redirectUrl.hostname = CANONICAL_HOST;
-    return NextResponse.redirect(redirectUrl, 301);
+    const apexBypass =
+      /^\/(robots\.txt|sitemap\.xml|yandex_[a-f0-9]+\.html)$/i;
+    if (!apexBypass.test(pathname)) {
+      const redirectUrl = url.clone();
+      redirectUrl.hostname = CANONICAL_HOST;
+      return NextResponse.redirect(redirectUrl, 301);
+    }
   }
 
   // Ignore Next.js internals / APIs / static files
@@ -92,5 +98,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|sitemap\\.xml|robots\\.txt|favicon\\.ico).*)"],
+  matcher: ["/((?!_next|api|sitemap\\.xml|robots\\.txt|favicon\\.ico|yandex_).*)"],
 };
