@@ -7,10 +7,8 @@ import { motion } from "framer-motion";
 import { MessageCircle, Play } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
-// TODO: Add hero.mp4 video file (compress to under 2MB):
-// ffmpeg -i hero.mp4 -vcodec h264 -crf 28 -preset medium -vf scale=1920:-2 -an hero-compressed.mp4
-
 const DESKTOP_MQ = "(min-width: 768px)";
+const REDUCED_MOTION_MQ = "(prefers-reduced-motion: reduce)";
 
 function subscribeDesktop(callback: () => void) {
   const mql = window.matchMedia(DESKTOP_MQ);
@@ -23,6 +21,20 @@ function getIsDesktop() {
 }
 
 function getIsDesktopServer() {
+  return false;
+}
+
+function subscribeReducedMotion(callback: () => void) {
+  const mql = window.matchMedia(REDUCED_MOTION_MQ);
+  mql.addEventListener("change", callback);
+  return () => mql.removeEventListener("change", callback);
+}
+
+function getPrefersReducedMotion() {
+  return window.matchMedia(REDUCED_MOTION_MQ).matches;
+}
+
+function getPrefersReducedMotionServer() {
   return false;
 }
 
@@ -39,6 +51,7 @@ export default function HeroSection() {
   const locale = useLocale();
   const t = useTranslations("hero");
   const isDesktop = useSyncExternalStore(subscribeDesktop, getIsDesktop, getIsDesktopServer);
+  const prefersReducedMotion = useSyncExternalStore(subscribeReducedMotion, getPrefersReducedMotion, getPrefersReducedMotionServer);
   const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false);
   const [videoAvailable, setVideoAvailable] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -65,12 +78,11 @@ export default function HeroSection() {
         />
       </div>
 
-      {/* Video background — desktop only (conditionally rendered to prevent mobile download) */}
-      {isDesktop && videoAvailable && (
+      {/* Video background — desktop only, hidden when user prefers reduced motion */}
+      {isDesktop && videoAvailable && !prefersReducedMotion && (
         <video
           ref={videoRef}
           className="absolute inset-0 -z-20 h-full w-full object-cover"
-          src="/videos/hero.mp4"
           autoPlay
           loop
           muted
@@ -79,11 +91,14 @@ export default function HeroSection() {
           poster="/images/hero-bg.jpg"
           aria-hidden="true"
           onError={handleVideoError}
-        />
+        >
+          <source src="/videos/hero.webm" type="video/webm" />
+          <source src="/videos/hero.mp4" type="video/mp4" />
+        </video>
       )}
 
-      {/* Mobile: play button overlay to load video on demand */}
-      {!isDesktop && !mobileVideoPlaying && videoAvailable && (
+      {/* Mobile: play button overlay to load video on demand (hidden if reduced motion) */}
+      {!isDesktop && !mobileVideoPlaying && videoAvailable && !prefersReducedMotion && (
         <button
           onClick={handlePlayMobile}
           className="absolute bottom-4 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors hover:bg-white/30 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8"
@@ -97,7 +112,6 @@ export default function HeroSection() {
       {!isDesktop && mobileVideoPlaying && videoAvailable && (
         <video
           className="absolute inset-0 -z-20 h-full w-full object-cover"
-          src="/videos/hero.mp4"
           autoPlay
           loop
           muted
@@ -106,7 +120,10 @@ export default function HeroSection() {
           poster="/images/hero-bg.jpg"
           aria-hidden="true"
           onError={handleVideoError}
-        />
+        >
+          <source src="/videos/hero.webm" type="video/webm" />
+          <source src="/videos/hero.mp4" type="video/mp4" />
+        </video>
       )}
 
       {/* Navy gradient overlay */}
