@@ -15,6 +15,19 @@ const BARE_PATH_SPECIALS: Record<
   "/quote": { pathname: "/contact", extraSearch: { type: "quote" } },
 };
 
+function getPreferredLocale(req: NextRequest): (typeof locales)[number] {
+  const acceptLang = req.headers.get("accept-language") || "";
+  // Check if Russian appears before English in the Accept-Language header
+  const ruIndex = acceptLang.search(/\bru\b/i);
+  if (ruIndex !== -1) {
+    const enIndex = acceptLang.search(/\ben\b/i);
+    if (enIndex === -1 || ruIndex < enIndex) {
+      return "ru";
+    }
+  }
+  return "en";
+}
+
 function getHostname(req: NextRequest) {
   const urlHost = req.nextUrl?.hostname;
   if (urlHost) {
@@ -91,9 +104,12 @@ export default function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl, 301);
   }
 
-  // 6. All remaining bare paths → /en/<path> (301, query string preserved)
+  // 6. Detect preferred locale from Accept-Language for root path
+  const preferredLocale = pathname === "/" ? getPreferredLocale(req) : "en";
+
+  // All remaining bare paths → /<locale>/<path> (301, query string preserved)
   const redirectUrl = url.clone();
-  redirectUrl.pathname = `/en${pathname === "/" ? "" : pathname}`;
+  redirectUrl.pathname = `/${preferredLocale}${pathname === "/" ? "" : pathname}`;
   return NextResponse.redirect(redirectUrl, 301);
 }
 
