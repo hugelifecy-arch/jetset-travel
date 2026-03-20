@@ -1,7 +1,7 @@
-// TODO: Set NEXT_PUBLIC_GA_MEASUREMENT_ID env var in Vercel dashboard (format: G-XXXXXXXXXX)
 import Script from "next/script";
 
-const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+const GA_MEASUREMENT_ID = "G-RD25ZDGW5H";
+const measurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || GA_MEASUREMENT_ID;
 
 export default function GoogleAnalytics() {
   if (!measurementId) return null;
