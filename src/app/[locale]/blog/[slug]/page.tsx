@@ -40,6 +40,7 @@ export async function generateMetadata({
   return {
     title: { absolute: `${post.frontmatter.title} | JetSet Travel Cyprus` },
     description: post.frontmatter.description,
+    robots: { index: true, follow: true },
     alternates: post.frontmatter.translationSlug
       ? localizedAlternates(locale, `/blog/${slug}`)
       : { canonical: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}` },
