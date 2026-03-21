@@ -36,14 +36,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
           {/* Col 1: Logo + Tagline + Accreditation */}
           <div className="space-y-4">
-            <Image
-              src="/images/jetset-logo.svg"
-              alt="JetSet Travel Cyprus"
-              width={140}
-              height={40}
-              className="h-10 w-auto"
-              loading="lazy"
-            />
+            <Link href={`/${locale}`}>
+              <Image
+                src="/images/jetset-logo.svg"
+                alt="JetSet Travel Cyprus - Home"
+                width={140}
+                height={40}
+                className="h-10 w-auto"
+                loading="lazy"
+              />
+            </Link>
             <p className="text-sm text-white/70 leading-relaxed">
               {t("tagline")}
             </p>
