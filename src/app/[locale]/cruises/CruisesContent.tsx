@@ -477,17 +477,17 @@ export default function CruisesContent({ locale }: { locale: string }) {
           <div className="flex items-center justify-end gap-2 mb-6">
             <button
               onClick={() => scrollShips("left")}
-              className="p-2 rounded-full border border-white/20 hover:bg-white/10 transition-colors"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full border border-white/20 hover:bg-white/10 transition-colors"
               aria-label="Scroll left"
             >
-              <ArrowLeft className="h-4 w-4" />
+              <ArrowLeft className="h-5 w-5" />
             </button>
             <button
               onClick={() => scrollShips("right")}
-              className="p-2 rounded-full border border-white/20 hover:bg-white/10 transition-colors"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] rounded-full border border-white/20 hover:bg-white/10 transition-colors"
               aria-label="Scroll right"
             >
-              <ArrowRight className="h-4 w-4" />
+              <ArrowRight className="h-5 w-5" />
             </button>
           </div>
 
