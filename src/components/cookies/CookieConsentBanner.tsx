@@ -14,7 +14,11 @@ import {
 
 function subscribeConsentStore(callback: () => void) {
   window.addEventListener("storage", callback);
-  return () => window.removeEventListener("storage", callback);
+  window.addEventListener("cookie-consent-change", callback);
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener("cookie-consent-change", callback);
+  };
 }
 
 function getConsentSnapshot() {
