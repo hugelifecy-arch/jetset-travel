@@ -37,6 +37,7 @@ export function setConsentPreferences(prefs: CookiePreferences): void {
   const value = encodeURIComponent(JSON.stringify(prefs));
   const maxAge = COOKIE_MAX_AGE_DAYS * 24 * 60 * 60;
   document.cookie = `${COOKIE_NAME}=${value}; path=/; max-age=${maxAge}; SameSite=Lax`;
+  window.dispatchEvent(new Event("cookie-consent-change"));
 }
 
 export function hasConsent(category: keyof CookiePreferences): boolean {
