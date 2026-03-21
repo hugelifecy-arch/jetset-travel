@@ -219,13 +219,14 @@ export default async function LuxuryTravelPage({
               }`}
             >
               <div className="flex-1">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden relative">
+                <div className="rounded-2xl overflow-hidden">
                   <Image
                     src={item.image}
                     alt={item.imageAlt}
-                    fill
+                    width={1200}
+                    height={800}
                     loading="lazy"
-                    className="object-cover"
+                    className="w-full h-auto object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
@@ -261,13 +262,14 @@ export default async function LuxuryTravelPage({
                 href={`/${locale}/contact`}
                 className="group rounded-2xl overflow-hidden border border-brand-navy/10 hover:shadow-luxury transition-shadow block"
               >
-                <div className="aspect-[16/10] relative overflow-hidden">
+                <div className="relative overflow-hidden">
                   <Image
                     src={dest.image}
                     alt={dest.imageAlt}
-                    fill
+                    width={1200}
+                    height={750}
                     loading="lazy"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute bottom-3 right-3 bg-brand-navy/80 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
