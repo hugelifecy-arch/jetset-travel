@@ -5,7 +5,7 @@ date: "2026-03-10"
 author: "Maro Kokkinou"
 slug: "premialnyj-otdykh-sredizemnomorye-2026"
 translationSlug: "luxury-mediterranean-destinations-2026"
-image: "/images/blog/luxury-mediterranean-destinations-2026.jpg"
+image: "/images/blog/luxury-mediterranean-2026.jpg"
 category: "luxury"
 tags:
   - люкс

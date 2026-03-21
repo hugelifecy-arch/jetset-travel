@@ -5,7 +5,7 @@ date: "2026-03-10"
 author: "Nontari Kalaitsidis"
 slug: "korporativnye-komandirovki-kipr-gid"
 translationSlug: "corporate-travel-tips-cyprus"
-image: "/images/blog/corporate-travel-tips-cyprus.jpg"
+image: "/images/blog/corporate-travel-tips.jpg"
 category: "corporate-travel"
 tags:
   - кипр
