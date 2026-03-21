@@ -15,7 +15,7 @@ export default function TrustCredentialsBar() {
           <div className="flex items-center gap-3">
             <Image
               src="/images/iata-logo.jpg"
-              alt="IATA"
+              alt="IATA Accredited Travel Agent"
               width={72}
               height={72}
               className="h-16 w-16 rounded-lg object-contain sm:h-[72px] sm:w-[72px]"

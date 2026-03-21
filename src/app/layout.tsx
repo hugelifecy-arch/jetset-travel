@@ -26,8 +26,6 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   verification: {
     yandex: "c693997a9fde5229",
-    // TODO: Replace PLACEHOLDER_GSC_TOKEN with actual Google Search Console verification token
-    google: "PLACEHOLDER_GSC_TOKEN",
   },
   openGraph: {
     type: "website",

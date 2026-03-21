@@ -44,7 +44,7 @@ export default function FormTrustElements({
         <span className="flex items-center gap-1.5">
           <Image
             src="/images/iata-logo.jpg"
-            alt="IATA"
+            alt="IATA Accredited Travel Agent"
             width={16}
             height={16}
             className="h-4 w-4 rounded-sm object-contain"

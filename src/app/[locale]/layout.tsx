@@ -66,8 +66,6 @@ export async function generateMetadata({
   return {
     verification: {
       yandex: "c693997a9fde5229",
-      // TODO: Replace PLACEHOLDER_GSC_TOKEN with actual Google Search Console verification token
-      google: "PLACEHOLDER_GSC_TOKEN",
     },
     alternates: localizedAlternates(locale),
     title: {
@@ -89,7 +87,7 @@ export async function generateMetadata({
         ? "JetSet Travel Cyprus — Премиум Туристические Услуги"
         : "JetSet Travel Cyprus — Premium Travel Services",
       description: isRussian
-        ? "Аккредитованное IATA туристическое агентство в Пафосе, Кипр."
+        ? "Аккредитованное IATA туристическое агентство в Пафосе, Кипр. Корпоративные путешествия, элитный отдых, визовые услуги и бронирование отелей."
         : "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
       images: [
         {
@@ -106,7 +104,7 @@ export async function generateMetadata({
         ? "JetSet Travel Cyprus — Премиум Туристические Услуги"
         : "JetSet Travel Cyprus — Premium Travel Services",
       description: isRussian
-        ? "Аккредитованное IATA туристическое агентство в Пафосе, Кипр."
+        ? "Аккредитованное IATA туристическое агентство в Пафосе, Кипр. Корпоративные путешествия, элитный отдых, визовые услуги и бронирование отелей."
         : "IATA-accredited travel agency in Paphos, Cyprus offering corporate travel management, luxury holidays, visa services, and hotel reservations.",
       images: [OG_IMAGE],
     },
