@@ -168,7 +168,7 @@ export default function Footer() {
       {/* Bottom bar: copyright + social icons */}
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-3 text-xs text-white/50">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/50">
             <p>
               &copy; {new Date().getFullYear()} {t("copyright")}
             </p>
@@ -187,12 +187,13 @@ export default function Footer() {
               {t("termsOfService")}
             </Link>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-1">
             <a
               href="https://www.facebook.com/JETSETCYPRUS/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow us on Facebook"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
             >
               <Image
                 src="/images/icons/facebook.svg"
@@ -208,6 +209,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow us on Instagram"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
             >
               <Image
                 src="/images/icons/instagram.svg"
@@ -223,6 +225,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contact us on WhatsApp"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
             >
               <Image
                 src="/images/icons/whatsapp.svg"
@@ -238,6 +241,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contact us on Telegram"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
             >
               <Image
                 src="/images/icons/telegram.svg"
@@ -253,6 +257,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contact us on Viber"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
             >
               <Image
                 src="/images/icons/viber.svg"

@@ -247,7 +247,7 @@ export default function Header() {
             {/* Home link */}
             <Link
               href={`/${locale}`}
-              className="block px-3 py-3 text-base font-medium text-white/80 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px] flex items-center"
+              className="flex items-center px-3 py-3 text-base font-medium text-white/80 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px]"
               onClick={() => setMobileOpen(false)}
             >
               {t("home")}
@@ -272,7 +272,7 @@ export default function Header() {
                     <Link
                       key={link.href}
                       href={`/${locale}${link.href}`}
-                      className="block px-3 py-3 text-sm font-medium text-white/60 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px] flex items-center"
+                      className="flex items-center px-3 py-3 text-sm font-medium text-white/60 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px]"
                       onClick={() => setMobileOpen(false)}
                     >
                       {t(link.key)}
@@ -287,7 +287,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={`/${locale}${link.href}`}
-                className="block px-3 py-3 text-base font-medium text-white/80 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px] flex items-center"
+                className="flex items-center px-3 py-3 text-base font-medium text-white/80 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px]"
                 onClick={() => setMobileOpen(false)}
               >
                 {t(link.key)}
