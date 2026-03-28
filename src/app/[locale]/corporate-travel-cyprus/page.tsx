@@ -49,6 +49,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Управление корпоративными поездками на Кипре. Бронирование, чистые счета, поддержка 24/7. IATA. Пафос, Лимассол, Никосия, Ларнака."
         : "Corporate travel management across Cyprus. Policy-compliant bookings, 24/7 disruption support, clean invoicing. IATA accredited. Serving Paphos, Limassol, Nicosia & Larnaca.",
+    keywords:
+      locale === "ru"
+        ? ["корпоративные поездки Кипр", "деловой туризм Пафос Лимассол", "бизнес командировки Кипр", "IATA корпоративное агентство"]
+        : ["corporate travel Cyprus", "business travel Paphos Limassol", "corporate trips Cyprus", "IATA corporate agency"],
     languagePaths: {
       en: "/corporate-travel-cyprus",
       ru: "/korporativnye-poezdki-kipr",
@@ -384,6 +388,7 @@ export default async function CorporateTravelCyprusPage({
 
       {/* Structured Data */}
       <ServiceSchema
+        locale={locale}
         name="Corporate Travel Management Cyprus"
         description="Corporate travel management across Cyprus. Policy-compliant bookings, 24/7 disruption support, clean invoicing, and dedicated account management for businesses in Paphos, Limassol, Nicosia, and Larnaca. IATA accredited."
         url={`https://www.jetset-travel.com/${locale}/corporate-travel-cyprus`}

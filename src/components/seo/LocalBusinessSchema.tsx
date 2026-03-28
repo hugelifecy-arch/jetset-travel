@@ -8,22 +8,38 @@ export default async function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
+    "@id": "https://www.jetset-travel.com/#organization",
     name: "JetSet Travel Cyprus",
-    alternateName: ["JetSet K&K Travel Ltd", "\u0414\u0436\u0435\u0442\u0421\u0435\u0442 \u0422\u0440\u044D\u0432\u0435\u043B \u041A\u0438\u043F\u0440"],
+    legalName: "JetSet K&K Travel Ltd",
+    alternateName: [
+      "JetSet K&K Travel Ltd",
+      "ДжетСет Трэвел Кипр",
+      "JetSet Travel",
+    ],
     url: "https://www.jetset-travel.com",
-    logo: "https://www.jetset-travel.com/images/jetset-logo.svg",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://www.jetset-travel.com/images/jetset-logo.svg",
+      width: 300,
+      height: 60,
+    },
     image: "https://www.jetset-travel.com/images/hero-bg.jpg",
     description: isRussian
-      ? "\u0410\u043A\u043A\u0440\u0435\u0434\u0438\u0442\u043E\u0432\u0430\u043D\u043D\u043E\u0435 IATA \u043A\u043E\u0440\u043F\u043E\u0440\u0430\u0442\u0438\u0432\u043D\u043E\u0435 \u0438 \u043F\u0440\u0435\u043C\u0438\u0430\u043B\u044C\u043D\u043E\u0435 \u0442\u0443\u0440\u0438\u0441\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0435 \u0430\u0433\u0435\u043D\u0442\u0441\u0442\u0432\u043E \u0432 \u041F\u0430\u0444\u043E\u0441\u0435, \u041A\u0438\u043F\u0440. \u0411\u0440\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u0435 \u0430\u0432\u0438\u0430\u0431\u0438\u043B\u0435\u0442\u043E\u0432, \u043E\u0442\u0435\u043B\u0435\u0439, \u0432\u0438\u0437\u043E\u0432\u044B\u0435 \u0443\u0441\u043B\u0443\u0433\u0438 \u0438 \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u043A\u043E\u0440\u043F\u043E\u0440\u0430\u0442\u0438\u0432\u043D\u044B\u043C\u0438 \u043A\u043E\u043C\u0430\u043D\u0434\u0438\u0440\u043E\u0432\u043A\u0430\u043C\u0438 24/7."
-      : "IATA-accredited corporate and luxury travel agency in Paphos, Cyprus. Flight booking, hotel reservations, visa services, and 24/7 corporate travel management.",
+      ? "Аккредитованное IATA корпоративное и премиальное туристическое агентство в Пафосе, Кипр. Бронирование авиабилетов, отелей, визовые услуги и управление корпоративными командировками 24/7. С 2006 года. Лицензия №7775."
+      : "IATA-accredited corporate and luxury travel agency in Paphos, Cyprus. Flight booking, hotel reservations, visa services, and 24/7 corporate travel management. Established 2006. Tourism Licence 7775.",
     telephone: ["+357-99-478-073", "+357-99-310-993"],
     email: "info@jetset.com.cy",
+    foundingDate: "2006",
+    founder: [
+      { "@type": "Person", name: "Nontari Kalaitsidis" },
+      { "@type": "Person", name: "Maro Kokkinou" },
+    ],
     address: {
       "@type": "PostalAddress",
-      streetAddress: "26A Agapinoros",
-      addressLocality: "Paphos",
+      streetAddress: isRussian ? "Агапинорос 26А" : "26A Agapinoros",
+      addressLocality: isRussian ? "Пафос" : "Paphos",
       postalCode: "8049",
-      addressRegion: "Paphos District",
+      addressRegion: isRussian ? "Район Пафоса" : "Paphos District",
       addressCountry: "CY",
     },
     geo: {
@@ -31,18 +47,39 @@ export default async function LocalBusinessSchema() {
       latitude: 34.7604,
       longitude: 32.4224,
     },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        telephone: "+357-99-478-073",
+        contactType: "customer service",
+        availableLanguage: ["English", "Russian", "Greek"],
+        areaServed: ["CY", "GR", "RU", "AE", "GB"],
+      },
+      {
+        "@type": "ContactPoint",
+        telephone: "+357-99-310-993",
+        contactType: "reservations",
+        availableLanguage: ["English", "Russian", "Greek"],
+      },
+    ],
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-        ],
+        dayOfWeek: ["Monday", "Tuesday", "Thursday", "Friday"],
         opens: "09:00",
-        closes: "18:00",
+        closes: "13:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Monday", "Tuesday", "Thursday", "Friday"],
+        opens: "15:00",
+        closes: "18:30",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: ["Wednesday", "Saturday"],
+        opens: "09:00",
+        closes: "13:00",
       },
     ],
     aggregateRating: {
@@ -52,59 +89,92 @@ export default async function LocalBusinessSchema() {
       bestRating: "5",
     },
     priceRange: "$$",
-    foundingDate: "2006",
+    paymentAccepted: isRussian
+      ? "Банковский перевод, Кредитная карта, Дебетовая карта"
+      : "Bank Transfer, Credit Card, Debit Card",
+    currenciesAccepted: "EUR, USD, GBP, RUB",
     numberOfEmployees: { "@type": "QuantitativeValue", value: "10+" },
+    knowsLanguage: ["en", "ru", "el"],
     areaServed: [
-      { "@type": "City", name: "Paphos" },
-      { "@type": "City", name: "Limassol" },
-      { "@type": "City", name: "Nicosia" },
-      { "@type": "City", name: "Larnaca" },
-      { "@type": "Country", name: "Cyprus" },
+      { "@type": "City", name: isRussian ? "Пафос" : "Paphos" },
+      { "@type": "City", name: isRussian ? "Лимассол" : "Limassol" },
+      { "@type": "City", name: isRussian ? "Никосия" : "Nicosia" },
+      { "@type": "City", name: isRussian ? "Ларнака" : "Larnaca" },
+      { "@type": "Country", name: isRussian ? "Кипр" : "Cyprus" },
+    ],
+    hasCredential: [
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: "IATA Accreditation",
+        recognizedBy: {
+          "@type": "Organization",
+          name: "International Air Transport Association",
+        },
+        identifier: "14200130",
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        credentialCategory: isRussian ? "Туристическая лицензия Кипра" : "Cyprus Tourism Licence",
+        recognizedBy: {
+          "@type": "Organization",
+          name: isRussian
+            ? "Кипрская организация по туризму"
+            : "Cyprus Tourism Organisation",
+        },
+        identifier: "7775",
+      },
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Travel Services",
+      name: isRussian ? "Туристические услуги" : "Travel Services",
       itemListElement: [
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Corporate Travel Management",
+            name: isRussian ? "Управление корпоративными командировками" : "Corporate Travel Management",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Flight Booking",
+            name: isRussian ? "Бронирование авиабилетов" : "Flight Booking",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Hotel Reservations",
+            name: isRussian ? "Бронирование отелей" : "Hotel Reservations",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Visa Services",
+            name: isRussian ? "Визовые услуги" : "Visa Services",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Luxury Travel Planning",
+            name: isRussian ? "Планирование премиального отдыха" : "Luxury Travel Planning",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Service",
-            name: "Cruise Booking",
+            name: isRussian ? "Бронирование круизов" : "Cruise Booking",
+          },
+        },
+        {
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: isRussian ? "Трансферы из аэропорта" : "Airport Transfers",
           },
         },
       ],

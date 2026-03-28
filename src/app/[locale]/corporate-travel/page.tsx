@@ -23,6 +23,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Корпоративные поездки на Кипре. Прозрачная отчётность, бесплатная консультация, поддержка 24/7 при сбоях. Аккредитация IATA."
         : "Corporate travel management in Cyprus. Free consultation, clean invoicing, 24/7 disruption support. IATA accredited, dedicated account manager for your business.",
+    keywords:
+      locale === "ru"
+        ? ["корпоративные командировки Кипр", "деловой туризм Пафос", "бизнес поездки Кипр", "корпоративное турагентство", "IATA агентство Кипр"]
+        : ["corporate travel Cyprus", "business travel Paphos", "corporate travel management", "IATA travel agent Cyprus", "business trips Cyprus"],
   });
 }
 
@@ -61,6 +65,7 @@ export default async function CorporateTravelPage({
       <CorporateTravelContent />
       <ServicesCrossLinks locale={locale} include={["visa", "hotels", "luxury"]} />
       <ServiceSchema
+        locale={locale}
         name="Corporate Travel Management"
         description="Corporate travel management for Cyprus businesses. Policy-compliant bookings, clean invoicing, 24/7 rebooking, dedicated account management, and disruption support."
         url={`https://www.jetset-travel.com/${locale}/corporate-travel`}

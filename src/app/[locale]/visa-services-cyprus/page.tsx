@@ -48,6 +48,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Профессиональные визовые услуги в Пафосе, Кипр. Шенгенская виза, UK, US, бизнес виза. Подготовка документов. Бесплатная консультация."
         : "Professional visa services in Paphos, Cyprus. Schengen visa, UK visa, US visa, business & tourist visa assistance. Document preparation and application guidance.",
+    keywords:
+      locale === "ru"
+        ? ["визовые услуги Кипр Пафос", "шенгенская виза оформление", "деловая виза Кипр", "визовая помощь Пафос"]
+        : ["visa services Cyprus Paphos", "Schengen visa application", "business visa Cyprus", "visa help Paphos"],
     languagePaths: {
       en: "/visa-services-cyprus",
       ru: "/vizovye-uslugi-kipr",
@@ -414,6 +418,7 @@ export default async function VisaServicesCyprusPage({
 
       {/* JSON-LD: Service Schema */}
       <ServiceSchema
+        locale={locale}
         name="Visa Services Cyprus"
         description="Professional visa services in Paphos, Cyprus. Schengen visa, UK visa, US visa, business and tourist visa assistance. Document preparation and application guidance from JetSet Travel, IATA-accredited agency."
         url={`https://www.jetset-travel.com/${locale}/visa-services-cyprus`}

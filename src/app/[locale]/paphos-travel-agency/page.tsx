@@ -40,6 +40,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Ищете надёжное туристическое агентство в Пафосе? JetSet Travel — аккредитация IATA, 20+ лет опыта. Корпоративные поездки, авиабилеты, отели, визовые услуги. Посетите нас: Агапинорос 26А."
         : "Looking for a trusted travel agency in Paphos? JetSet Travel is IATA accredited with 20+ years experience. Corporate travel, flights, hotels, visa services. Visit us at 26A Agapinoros.",
+    keywords:
+      locale === "ru"
+        ? ["турагентство Пафос", "туристическое агентство Пафос Кипр", "лучшее турагентство Пафос", "IATA турагент Пафос"]
+        : ["travel agency Paphos", "best travel agency Paphos Cyprus", "IATA travel agent Paphos", "Paphos travel services"],
     languagePaths: {
       en: "/paphos-travel-agency",
       ru: "/turisticheskoe-agentstvo-pafos",
@@ -420,6 +424,7 @@ export default async function PaphosTravelAgencyPage({
 
       {/* Structured Data */}
       <ServiceSchema
+        locale={locale}
         name="Travel Agency in Paphos, Cyprus"
         description="IATA-accredited travel agency in Paphos, Cyprus with 20+ years experience. Corporate travel management, luxury holidays, hotel reservations, visa services, and cruise bookings. Located at 26A Agapinoros Street, 8049 Paphos."
         url={`https://www.jetset-travel.com/${locale}/paphos-travel-agency`}

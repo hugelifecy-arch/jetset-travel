@@ -46,6 +46,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Планирование люкс-путешествий с Кипра. 5-звёздочные отели, частные трансферы, индивидуальные маршруты, свадебные путешествия. Ваш премиум партнёр в Пафосе."
         : "Luxury travel planning from Cyprus. 5-star hotels, private transfers, bespoke itineraries, honeymoon packages. Your premium travel partner in Paphos.",
+    keywords:
+      locale === "ru"
+        ? ["люкс отдых Кипр", "премиальные путешествия Пафос", "VIP туры Кипр", "элитный отдых из Кипра"]
+        : ["luxury travel Cyprus", "premium holidays Paphos", "VIP tours Cyprus", "luxury vacations from Cyprus"],
     languagePaths,
   });
 }
@@ -342,6 +346,7 @@ export default async function LuxuryTravelCyprusPage({
 
       {/* Structured Data */}
       <ServiceSchema
+        locale={locale}
         name="Luxury Travel Planning Cyprus"
         description="Bespoke luxury travel planning from Cyprus. 5-star hotels, private transfers, honeymoon packages, and premium holiday itineraries. IATA-accredited agency in Paphos."
         url={`https://www.jetset-travel.com/${locale}/luxury-travel-cyprus`}

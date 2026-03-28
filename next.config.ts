@@ -33,7 +33,7 @@ const nextConfig: NextConfig = {
       // Redirect non-www to www — but skip robots.txt, sitemap.xml,
       // and Yandex verification files so they're accessible on the apex domain.
       {
-        source: "/((?!robots\\.txt|sitemap\\.xml|yandex_).*)",
+        source: "/((?!robots\\.txt|sitemap\\.xml|llms\\.txt|llms-full\\.txt|yandex_).*)",
         has: [{ type: "host", value: "jetset-travel.com" }],
         destination: "https://www.jetset-travel.com/:path*",
         permanent: true,

@@ -36,6 +36,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Бронирование отелей по всему миру с корпоративными скидками. Качественные отели под ваш бюджет и стандарты. JetSet Travel, Пафос, Кипр."
         : "Hotel reservations worldwide with negotiated corporate rates. Quality hotels matched to your budget and standards. Book through JetSet Travel, Paphos, Cyprus.",
+    keywords:
+      locale === "ru"
+        ? ["бронирование отелей Кипр", "корпоративные тарифы отели", "отели по всему миру", "гостиницы Кипр", "бронирование гостиниц"]
+        : ["hotel booking Cyprus", "corporate hotel rates", "hotel reservations worldwide", "business accommodation Cyprus"],
   });
 }
 
@@ -319,6 +323,7 @@ export default async function HotelReservationsPage({
       {/* Cross-links */}
       <ServicesCrossLinks locale={locale} include={["corporate", "luxury", "cruises"]} />
       <ServiceSchema
+        locale={locale}
         name="Hotel Reservations"
         description="Negotiated hotel rates worldwide for corporate and leisure travelers. Quality accommodations matched to your budget, standards, and location needs. Group bookings and extended stays."
         url={`https://www.jetset-travel.com/${locale}/hotel-reservations`}

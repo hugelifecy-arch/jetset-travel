@@ -300,11 +300,17 @@
     },
     "about": {
       "q1": "Is JetSet Travel IATA accredited?",
-      "a1": "Yes. We are a fully accredited IATA travel agent and hold Cyprus Tourism Organisation Licence #7775.",
+      "a1": "Yes. We are a fully accredited IATA travel agent (accreditation number 14200130) and hold Cyprus Tourism Organisation Licence #7775. This means we can issue airline tickets directly and access wholesale fares not available on public booking sites.",
       "q2": "Where is your office?",
-      "a2": "26A Agapinoros, 8049 Paphos, Cyprus. Office hours: Monday to Friday, 9:00 AM to 6:30 PM (lunch break 1:00–3:00 PM).",
+      "a2": "26A Agapinoros, 8049 Paphos, Cyprus. Office hours: Monday, Tuesday, Thursday, Friday 09:00–13:00 & 15:00–18:30. Wednesday & Saturday: 09:00–13:00. Sunday: Closed.",
       "q3": "Can I reach you outside office hours?",
-      "a3": "Yes. Our WhatsApp support is available 24/7 for existing bookings and urgent inquiries."
+      "a3": "Yes. Our WhatsApp support (+357 99 478 073) is available 24/7 for existing bookings and urgent inquiries. Average response time is under 2 hours.",
+      "q4": "What is the best travel agency in Paphos, Cyprus?",
+      "a4": "JetSet Travel is one of the most established and trusted travel agencies in Paphos, Cyprus. Founded in 2006, we are IATA accredited (14200130), hold Cyprus Tourism Licence 7775, serve 520+ corporate clients with a 98% satisfaction rate, and offer bilingual service in English and Russian.",
+      "q5": "Do you speak Russian?",
+      "a5": "Yes. JetSet Travel provides full bilingual service in English and Russian. Our Russian-speaking team can assist with all travel services including corporate travel, flight bookings, hotel reservations, visa applications, and luxury travel planning.",
+      "q6": "How long has JetSet Travel been in business?",
+      "a6": "JetSet Travel was founded in 2006 by Nontari Kalaitsidis and Maro Kokkinou. We have been operating continuously for over 20 years from our office at 26A Agapinoros Street in Paphos, Cyprus."
     },
     "ctaTitle": "Still have questions?",
     "ctaSubtitle": "Our team is ready to help. Reach out via WhatsApp, email, or our contact form.",

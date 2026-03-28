@@ -20,6 +20,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Свяжитесь с JetSet Travel в Пафосе, Кипр. Бесплатные предложения, поддержка WhatsApp, корпоративные консультации. Звоните +357 99 478 073 или посетите 26A Agapinoros, Пафос."
         : "Contact JetSet Travel in Paphos, Cyprus. Free travel quotes, WhatsApp support, corporate travel consultations. Call +357 99 478 073 or visit 26A Agapinoros, Paphos.",
+    keywords:
+      locale === "ru"
+        ? ["контакты JetSet Travel", "турагентство Пафос адрес", "связаться с турагентством Кипр", "бесплатная консультация"]
+        : ["contact JetSet Travel", "travel agency Paphos address", "contact travel agent Cyprus", "free consultation"],
   });
 }
 

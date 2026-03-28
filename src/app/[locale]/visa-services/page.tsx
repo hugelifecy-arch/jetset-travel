@@ -42,6 +42,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Визовые услуги в Пафосе. Шенген, Великобритания, деловые визы — подготовка документов и координация с посольствами. JetSet Travel с 2006 года."
         : "Visa services in Paphos, Cyprus. Schengen, UK, US visa assistance, document preparation & embassy coordination. Expert help from JetSet Travel since 2006.",
+    keywords:
+      locale === "ru"
+        ? ["визовые услуги Кипр", "шенгенская виза Пафос", "оформление визы Кипр", "деловая виза", "визовый центр Пафос"]
+        : ["visa services Cyprus", "Schengen visa Paphos", "visa assistance Cyprus", "business visa Cyprus", "UK visa Cyprus"],
   });
 }
 
@@ -499,6 +503,7 @@ export default async function VisaServicesPage({
 
       {/* JSON-LD: Service Schema */}
       <ServiceSchema
+        locale={locale}
         name={locale === "ru" ? "Визовые услуги" : "Visa Services"}
         description={
           locale === "ru"
