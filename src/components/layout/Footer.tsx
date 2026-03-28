@@ -145,7 +145,7 @@ export default function Footer() {
               <li className="leading-relaxed">
                 <span>{t("location")}</span>{" "}
                 <a
-                  href="https://maps.google.com/?q=26A+Agapinoros+8049+Paphos+Cyprus"
+                  href="https://maps.app.goo.gl/nA8De9MqgLmUphZ49"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-brand-gold transition-colors underline"
