@@ -17,9 +17,9 @@ import {
   MapPin,
   Phone,
   Mail,
-  Star,
 } from "lucide-react";
 import CTABanner from "@/components/sections/CTABanner";
+import GoogleReviews from "@/components/sections/GoogleReviews";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 
 export async function generateMetadata({
@@ -112,46 +112,6 @@ const services = [
   },
 ] as const;
 
-const testimonials = [
-  {
-    key: "review1",
-    name: "Мария К.",
-    company: "Технологическая компания, Лимассол",
-    avatarInitials: "МК",
-    rating: 5,
-  },
-  {
-    key: "review2",
-    name: "Андреас П.",
-    company: "Частный клиент",
-    avatarInitials: "АП",
-    rating: 5,
-  },
-  {
-    key: "review3",
-    name: "Дмитрий С.",
-    company: "Импорт/Экспорт, Пафос",
-    avatarInitials: "ДС",
-    rating: 5,
-  },
-];
-
-function StarRating({ rating = 5 }: { rating?: number }) {
-  return (
-    <div className="flex gap-0.5">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`h-5 w-5 ${
-            i < rating
-              ? "fill-brand-gold text-brand-gold"
-              : "fill-transparent text-brand-navy/20"
-          }`}
-        />
-      ))}
-    </div>
-  );
-}
 
 export default async function TuristicheskoeAgentstvoPafosPage({
   params,
@@ -165,7 +125,6 @@ export default async function TuristicheskoeAgentstvoPafosPage({
   }
 
   const t = await getTranslations({ locale, namespace: "turistAgentPage" });
-  const tReviews = await getTranslations({ locale, namespace: "reviews" });
 
   return (
     <>
@@ -367,62 +326,8 @@ export default async function TuristicheskoeAgentstvoPafosPage({
         </div>
       </section>
 
-      {/* Отзывы */}
-      <section className="py-20 bg-brand-light">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              {t("testimonialsTitle")}
-            </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
-              {t("testimonialsSubtitle")}
-            </p>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {testimonials.map((review) => (
-              <figure
-                key={review.key}
-                className="flex flex-col rounded-2xl border border-brand-navy/10 bg-white p-6 shadow-card"
-              >
-                <StarRating rating={review.rating} />
-                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-brand-navy/80">
-                  &ldquo;{tReviews(`${review.key}.text`)}&rdquo;
-                </blockquote>
-                <figcaption className="mt-5 border-t border-brand-navy/10 pt-4">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-navy text-sm font-semibold text-white">
-                      {review.avatarInitials}
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-brand-navy">
-                        {review.name}
-                      </p>
-                      {review.company && (
-                        <p className="text-xs text-brand-navy/50">
-                          {review.company}
-                        </p>
-                      )}
-                      <p className="text-xs text-brand-navy/60">
-                        {tReviews(`${review.key}.role`)}
-                      </p>
-                    </div>
-                  </div>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-          <div className="mt-8 text-center">
-            <a
-              href="https://www.google.com/maps/place/JetSet+Travel+Agency/@34.7604,32.4224,17z/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm text-brand-navy/60 underline underline-offset-2 transition-colors hover:text-brand-navy"
-            >
-              {tReviews("readMoreOnGoogle")}
-            </a>
-          </div>
-        </div>
-      </section>
+      {/* Google Reviews via Elfsight */}
+      <GoogleReviews />
 
       {/* CTA with Quote Form */}
       <CTABanner />
