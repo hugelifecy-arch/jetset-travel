@@ -34,6 +34,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "JetSet K&K Travel Ltd, основана в 2006 году в Пафосе, Кипр. Аккредитация IATA (14200130), туристическая лицензия 7775. Обслуживаем 520+ корпоративных клиентов с удовлетворённостью 98%."
         : "JetSet K&K Travel Ltd, established 2006 in Paphos, Cyprus. IATA accredited (14200130), Tourism Licence 7775. Serving 520+ corporate clients with 98% satisfaction.",
+    keywords:
+      locale === "ru"
+        ? ["о компании JetSet Travel", "турагентство Пафос Кипр", "IATA аккредитация", "туристическая лицензия 7775"]
+        : ["about JetSet Travel", "travel agency Paphos Cyprus", "IATA accreditation", "tourism licence 7775"],
   });
 }
 

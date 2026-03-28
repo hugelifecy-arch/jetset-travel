@@ -4,18 +4,15 @@ export default function WebSiteSchema() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": "https://www.jetset-travel.com/#website",
     name: "JetSet Travel Cyprus",
-    alternateName: "JetSet K&K Travel Ltd",
+    alternateName: ["JetSet K&K Travel Ltd", "ДжетСет Трэвел Кипр"],
     url: "https://www.jetset-travel.com",
+    description:
+      "IATA-accredited corporate and luxury travel agency in Paphos, Cyprus. Flights, hotels, visas, cruises, and corporate travel management.",
     inLanguage: ["en", "ru"],
     publisher: {
-      "@type": "Organization",
-      name: "JetSet Travel Cyprus",
-      url: "https://www.jetset-travel.com",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.jetset-travel.com/images/jetset-logo.svg",
-      },
+      "@id": "https://www.jetset-travel.com/#organization",
     },
     potentialAction: {
       "@type": "SearchAction",

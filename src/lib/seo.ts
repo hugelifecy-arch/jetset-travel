@@ -27,12 +27,14 @@ export function buildPageMetadata({
   routePath = "",
   title,
   description,
+  keywords,
   languagePaths,
 }: {
   locale: string;
   routePath?: string;
   title: string;
   description: string;
+  keywords?: string[];
   languagePaths?: { en: string; ru: string };
 }): Metadata {
   const isRussian = locale === "ru";
@@ -40,6 +42,7 @@ export function buildPageMetadata({
   return {
     title: { absolute: title },
     description,
+    ...(keywords && { keywords }),
     robots: {
       index: true,
       follow: true,
@@ -65,7 +68,9 @@ export function buildPageMetadata({
           url: OG_IMAGE,
           width: 1200,
           height: 630,
-          alt: "JetSet Travel Cyprus",
+          alt: isRussian
+            ? "JetSet Travel Cyprus — Туристическое агентство в Пафосе, Кипр"
+            : "JetSet Travel Cyprus — Travel Agency in Paphos, Cyprus",
         },
       ],
     },

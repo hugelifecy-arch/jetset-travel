@@ -20,6 +20,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Запросите индивидуальное предложение от JetSet Travel Cyprus. Корпоративные поездки с отчётностью или элитный отдых — ответ в течение 1 часа."
         : "Request a tailored corporate or luxury travel quote from JetSet Travel Cyprus. Compliant invoicing or bespoke holidays — we respond within 1 hour.",
+    keywords:
+      locale === "ru"
+        ? ["запросить предложение путешествие", "бесплатная консультация турагентство", "корпоративное предложение Кипр"]
+        : ["travel quote request", "free travel consultation", "corporate travel quote Cyprus"],
   });
 }
 

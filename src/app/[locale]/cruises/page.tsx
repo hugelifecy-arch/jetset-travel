@@ -22,6 +22,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Бронируйте средиземноморские круизы с Кипра. Эксклюзивные предложения на люкс и семейные круизы из Лимассола и региональных портов. Аккредитация IATA."
         : "Book Mediterranean cruises from Cyprus. Exclusive deals on luxury and family cruises departing from Limassol and regional ports. IATA-accredited agency.",
+    keywords:
+      locale === "ru"
+        ? ["круизы из Кипра", "средиземноморские круизы", "бронирование круизов Лимассол", "морские круизы Кипр"]
+        : ["cruise booking Cyprus", "Mediterranean cruises", "cruise from Limassol", "cruise holidays Cyprus"],
   });
 }
 
@@ -37,6 +41,7 @@ export default async function CruisesPage({
       <CruisesContent locale={locale} />
       <ServicesCrossLinks locale={locale} include={["luxury", "hotels"]} />
       <ServiceSchema
+        locale={locale}
         name="Cruise Booking"
         description="Book worldwide cruises on Royal Caribbean, MSC, Norwegian, Celebrity, Disney and 50+ cruise lines. Caribbean, Mediterranean, Alaska, Asia and beyond. IATA-accredited cruise specialists."
         url={`https://www.jetset-travel.com/${locale}/cruises`}

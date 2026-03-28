@@ -29,6 +29,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Полный спектр услуг от одной команды на Кипре: корпоративные командировки, премиальный отдых, визовая поддержка, бронирование отелей и круглосуточная поддержка."
         : "Complete travel services from one accountable team in Cyprus: corporate travel, luxury holidays, visa assistance, hotel bookings, and 24/7 support.",
+    keywords:
+      locale === "ru"
+        ? ["туристические услуги Кипр", "все услуги турагентства", "авиабилеты отели визы Кипр", "корпоративный и премиальный отдых"]
+        : ["travel services Cyprus", "all travel agency services", "flights hotels visas Cyprus", "corporate and luxury travel"],
   });
 }
 

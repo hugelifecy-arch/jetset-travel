@@ -18,6 +18,10 @@ export async function generateMetadata({
     routePath: "/faq",
     title: t("metaTitle"),
     description: t("metaDescription"),
+    keywords:
+      locale === "ru"
+        ? ["частые вопросы турагентство", "FAQ JetSet Travel", "вопросы и ответы путешествия Кипр", "IATA агентство вопросы"]
+        : ["travel agency FAQ", "JetSet Travel questions", "travel Cyprus FAQ", "IATA agency questions"],
   });
 }
 
@@ -32,7 +36,7 @@ const faqCategories: FaqCategory[] = [
   { titleKey: "categoryCorporate", namespace: "corporate", count: 3 },
   { titleKey: "categoryPayments", namespace: "payments", count: 3 },
   { titleKey: "categoryVisa", namespace: "visa", count: 3 },
-  { titleKey: "categoryAbout", namespace: "about", count: 3 },
+  { titleKey: "categoryAbout", namespace: "about", count: 6 },
 ];
 
 export default async function FAQPage({

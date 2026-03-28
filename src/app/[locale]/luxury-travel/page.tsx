@@ -33,6 +33,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Планирование люкс-путешествий из Пафоса, Кипр. Эксклюзивные отели, частные трансферы, индивидуальные маршруты. Бесплатная консультация."
         : "Luxury travel planning from Paphos, Cyprus. Curated premium holidays, private transfers, suite-level hotels, and bespoke multi-city journeys. Get a free consultation.",
+    keywords:
+      locale === "ru"
+        ? ["люкс отдых Кипр", "премиальный отдых Пафос", "элитные туры Кипр", "VIP путешествия", "медовый месяц Кипр"]
+        : ["luxury travel Cyprus", "premium holidays Paphos", "bespoke travel planning", "luxury holidays Cyprus", "honeymoon Cyprus"],
   });
 }
 
@@ -366,6 +370,7 @@ export default async function LuxuryTravelPage({
       </section>
 
       <ServiceSchema
+        locale={locale}
         name="Luxury Travel Planning"
         description="Curated luxury travel experiences from Cyprus. Suite-level hotels, private transfers, bespoke multi-city journeys, island getaways, and honeymoon planning."
         url={`https://www.jetset-travel.com/${locale}/luxury-travel`}
