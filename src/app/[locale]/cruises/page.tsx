@@ -24,8 +24,8 @@ export async function generateMetadata({
         : "Book Mediterranean cruises from Cyprus. Exclusive deals on luxury and family cruises departing from Limassol and regional ports. IATA-accredited agency.",
     keywords:
       locale === "ru"
-        ? ["круизы из Кипра", "средиземноморские круизы", "бронирование круизов Лимассол", "морские круизы Кипр"]
-        : ["cruise booking Cyprus", "Mediterranean cruises", "cruise from Limassol", "cruise holidays Cyprus"],
+        ? ["круизы из Кипра", "средиземноморские круизы", "бронирование круизов Лимассол", "морские круизы Кипр", "круизы из Лимассола 2026"]
+        : ["cruise booking Cyprus", "Mediterranean cruises", "cruise from Limassol", "cruise holidays Cyprus", "cruises from Limassol 2026"],
   });
 }
 

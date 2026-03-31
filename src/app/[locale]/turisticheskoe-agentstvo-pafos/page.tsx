@@ -41,6 +41,7 @@ export async function generateMetadata({
       title: "Travel Agency in Paphos, Cyprus | JetSet Travel — IATA Accredited Agent",
       description:
         "Looking for a trusted travel agency in Paphos? JetSet Travel is IATA accredited with 20+ years experience. Corporate travel, flights, hotels, visa services. Visit us at 26A Agapinoros.",
+      keywords: ["travel agent Paphos Cyprus", "best travel agency in Paphos", "IATA travel agent Paphos", "travel agency Paphos Cyprus", "corporate travel agency Paphos"],
       languagePaths: crossLocalePaths,
     });
   }
@@ -52,6 +53,7 @@ export async function generateMetadata({
       "Турагентство в Пафосе, Кипр | JetSet Travel — Аккредитация IATA",
     description:
       "Ищете надёжное турагентство в Пафосе? JetSet Travel — аккредитация IATA, более 20 лет опыта. Корпоративные поездки, авиабилеты, отели, визовые услуги. Ул. Агапинорос, 26А.",
+    keywords: ["турагентство Пафос", "турагентство с IATA Пафос", "лучшее турагентство в Пафосе для бизнеса", "туристическое агентство Пафос Кипр", "корпоративное турагентство Кипр"],
     languagePaths: crossLocalePaths,
   });
 }

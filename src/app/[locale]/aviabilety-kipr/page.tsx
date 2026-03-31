@@ -26,6 +26,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Бронирование авиабилетов из Кипра с аккредитацией IATA. Лучшие цены из Пафоса (PFO) и Ларнаки (LCA). Бизнес-класс, групповое бронирование."
         : "Book flights from Cyprus with IATA-accredited JetSet Travel. Best fares from Paphos (PFO) and Larnaca (LCA) airports.",
+    keywords:
+      locale === "ru"
+        ? ["авиабилеты Кипр", "авиабилеты Пафос", "авиабилеты из Пафоса", "авиабилеты Ларнака", "бронирование авиабилетов"]
+        : ["flights from Cyprus", "Paphos airport flights", "flight booking Paphos corporate", "Larnaca airport flights"],
     languagePaths,
   });
 }

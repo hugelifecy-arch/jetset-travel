@@ -50,8 +50,8 @@ export async function generateMetadata({
         : "Professional visa services in Paphos, Cyprus. Schengen visa, UK visa, US visa, business & tourist visa assistance. Document preparation and application guidance.",
     keywords:
       locale === "ru"
-        ? ["визовые услуги Кипр Пафос", "шенгенская виза оформление", "деловая виза Кипр", "визовая помощь Пафос"]
-        : ["visa services Cyprus Paphos", "Schengen visa application", "business visa Cyprus", "visa help Paphos"],
+        ? ["визовые услуги Кипр Пафос", "шенгенская виза оформление", "деловая виза Кипр", "визовая помощь Пафос", "виза на Кипр для россиян 2026", "как оформить визу на Кипр из России 2026"]
+        : ["visa services Cyprus Paphos", "Schengen visa application", "business visa Cyprus", "visa help Paphos", "visa support for business trips to Cyprus"],
     languagePaths: {
       en: "/visa-services-cyprus",
       ru: "/vizovye-uslugi-kipr",

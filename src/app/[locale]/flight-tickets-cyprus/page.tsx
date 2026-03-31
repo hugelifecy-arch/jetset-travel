@@ -28,8 +28,8 @@ export async function generateMetadata({
         : "Book flights from Cyprus with IATA-accredited JetSet Travel. Best fares from Paphos (PFO) and Larnaca (LCA) airports. Business class deals, group bookings.",
     keywords:
       locale === "ru"
-        ? ["авиабилеты Кипр", "авиабилеты из Пафоса", "авиабилеты Ларнака", "дешёвые билеты Кипр", "бронирование авиабилетов"]
-        : ["flights from Cyprus", "Paphos airport flights", "Larnaca airport flights", "cheap flights Cyprus", "flight booking"],
+        ? ["авиабилеты Кипр", "авиабилеты из Пафоса", "авиабилеты Ларнака", "дешёвые билеты Кипр", "бронирование авиабилетов", "авиабилеты Пафос"]
+        : ["flights from Cyprus", "Paphos airport flights", "Larnaca airport flights", "cheap flights Cyprus", "flight booking", "flight booking Paphos corporate"],
     languagePaths,
   });
 }
