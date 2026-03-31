@@ -51,8 +51,8 @@ export async function generateMetadata({
         : "Corporate travel management across Cyprus. Policy-compliant bookings, 24/7 disruption support, clean invoicing. IATA accredited. Serving Paphos, Limassol, Nicosia & Larnaca.",
     keywords:
       locale === "ru"
-        ? ["корпоративные поездки Кипр", "деловой туризм Пафос Лимассол", "бизнес командировки Кипр", "IATA корпоративное агентство"]
-        : ["corporate travel Cyprus", "business travel Paphos Limassol", "corporate trips Cyprus", "IATA corporate agency"],
+        ? ["корпоративные поездки Кипр", "деловой туризм Пафос Лимассол", "бизнес командировки Кипр", "IATA корпоративное агентство", "корпоративные путешествия Кипр", "корпоративное турагентство Кипр", "корпоративное обслуживание в Пафосе"]
+        : ["corporate travel Cyprus", "business travel Paphos Limassol", "corporate trips Cyprus", "IATA corporate agency", "corporate travel agency Paphos", "business travel management Cyprus", "how to get corporate travel policy Cyprus"],
     languagePaths: {
       en: "/corporate-travel-cyprus",
       ru: "/korporativnye-poezdki-kipr",

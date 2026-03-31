@@ -48,8 +48,8 @@ export async function generateMetadata({
         : "Luxury travel planning from Cyprus. 5-star hotels, private transfers, bespoke itineraries, honeymoon packages. Your premium travel partner in Paphos.",
     keywords:
       locale === "ru"
-        ? ["люкс отдых Кипр", "премиальные путешествия Пафос", "VIP туры Кипр", "элитный отдых из Кипра"]
-        : ["luxury travel Cyprus", "premium holidays Paphos", "VIP tours Cyprus", "luxury vacations from Cyprus"],
+        ? ["люкс отдых Кипр", "премиальные путешествия Пафос", "VIP туры Кипр", "элитный отдых из Кипра", "люкс отдых Кипр Пафос"]
+        : ["luxury travel Cyprus", "premium holidays Paphos", "VIP tours Cyprus", "luxury vacations from Cyprus", "luxury holidays from Paphos"],
     languagePaths,
   });
 }

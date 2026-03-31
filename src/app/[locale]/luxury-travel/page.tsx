@@ -35,8 +35,8 @@ export async function generateMetadata({
         : "Luxury travel planning from Paphos, Cyprus. Curated premium holidays, private transfers, suite-level hotels, and bespoke multi-city journeys. Get a free consultation.",
     keywords:
       locale === "ru"
-        ? ["люкс отдых Кипр", "премиальный отдых Пафос", "элитные туры Кипр", "VIP путешествия", "медовый месяц Кипр"]
-        : ["luxury travel Cyprus", "premium holidays Paphos", "bespoke travel planning", "luxury holidays Cyprus", "honeymoon Cyprus"],
+        ? ["люкс отдых Кипр", "премиальный отдых Пафос", "элитные туры Кипр", "VIP путешествия", "медовый месяц Кипр", "люкс отдых Кипр Пафос"]
+        : ["luxury travel Cyprus", "premium holidays Paphos", "bespoke travel planning", "luxury holidays Cyprus", "honeymoon Cyprus", "luxury holidays from Paphos", "luxury travel Paphos"],
   });
 }
 

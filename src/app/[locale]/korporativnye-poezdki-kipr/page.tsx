@@ -20,6 +20,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Управление корпоративными поездками на Кипре. Бронирование, чистые счета, поддержка 24/7. IATA. Пафос, Лимассол, Никосия, Ларнака."
         : "Corporate travel management across Cyprus. Policy-compliant bookings, 24/7 disruption support, clean invoicing. IATA accredited.",
+    keywords:
+      locale === "ru"
+        ? ["корпоративные поездки Кипр", "корпоративные путешествия Кипр", "корпоративное турагентство Кипр", "бизнес командировки Кипр", "корпоративное обслуживание в Пафосе"]
+        : ["corporate travel agency Paphos", "business travel management Cyprus", "corporate trips Cyprus", "IATA corporate agency"],
     languagePaths: {
       en: "/corporate-travel-cyprus",
       ru: "/korporativnye-poezdki-kipr",

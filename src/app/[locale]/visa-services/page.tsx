@@ -44,8 +44,8 @@ export async function generateMetadata({
         : "Visa services in Paphos, Cyprus. Schengen, UK, US visa assistance, document preparation & embassy coordination. Expert help from JetSet Travel since 2006.",
     keywords:
       locale === "ru"
-        ? ["визовые услуги Кипр", "шенгенская виза Пафос", "оформление визы Кипр", "деловая виза", "визовый центр Пафос"]
-        : ["visa services Cyprus", "Schengen visa Paphos", "visa assistance Cyprus", "business visa Cyprus", "UK visa Cyprus"],
+        ? ["визовые услуги Кипр", "шенгенская виза Пафос", "оформление визы Кипр", "деловая виза", "визовый центр Пафос", "виза на Кипр для россиян 2026", "как оформить визу на Кипр из России 2026"]
+        : ["visa services Cyprus", "Schengen visa Paphos", "visa assistance Cyprus", "business visa Cyprus", "UK visa Cyprus", "visa support for business trips to Cyprus", "visa services Cyprus Paphos"],
   });
 }
 

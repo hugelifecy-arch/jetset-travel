@@ -42,8 +42,8 @@ export async function generateMetadata({
         : "Looking for a trusted travel agency in Paphos? JetSet Travel is IATA accredited with 20+ years experience. Corporate travel, flights, hotels, visa services. Visit us at 26A Agapinoros.",
     keywords:
       locale === "ru"
-        ? ["турагентство Пафос", "туристическое агентство Пафос Кипр", "лучшее турагентство Пафос", "IATA турагент Пафос"]
-        : ["travel agency Paphos", "best travel agency Paphos Cyprus", "IATA travel agent Paphos", "Paphos travel services"],
+        ? ["турагентство Пафос", "туристическое агентство Пафос Кипр", "лучшее турагентство Пафос", "IATA турагент Пафос", "турагентство с IATA Пафос", "лучшее турагентство в Пафосе для бизнеса"]
+        : ["travel agency Paphos", "best travel agency Paphos Cyprus", "IATA travel agent Paphos", "Paphos travel services", "travel agent Paphos Cyprus", "best travel agency in Paphos"],
     languagePaths: {
       en: "/paphos-travel-agency",
       ru: "/turisticheskoe-agentstvo-pafos",

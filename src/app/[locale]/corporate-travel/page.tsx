@@ -25,8 +25,8 @@ export async function generateMetadata({
         : "Corporate travel management in Cyprus. Free consultation, clean invoicing, 24/7 disruption support. IATA accredited, dedicated account manager for your business.",
     keywords:
       locale === "ru"
-        ? ["корпоративные командировки Кипр", "деловой туризм Пафос", "бизнес поездки Кипр", "корпоративное турагентство", "IATA агентство Кипр"]
-        : ["corporate travel Cyprus", "business travel Paphos", "corporate travel management", "IATA travel agent Cyprus", "business trips Cyprus"],
+        ? ["корпоративные командировки Кипр", "деловой туризм Пафос", "бизнес поездки Кипр", "корпоративное турагентство", "IATA агентство Кипр", "корпоративные путешествия Кипр", "корпоративное турагентство Кипр", "корпоративное обслуживание в Пафосе"]
+        : ["corporate travel Cyprus", "business travel Paphos", "corporate travel management", "IATA travel agent Cyprus", "business trips Cyprus", "corporate travel agency Paphos", "business travel management Cyprus"],
   });
 }
 

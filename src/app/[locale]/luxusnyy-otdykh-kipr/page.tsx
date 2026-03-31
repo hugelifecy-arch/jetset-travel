@@ -20,6 +20,10 @@ export async function generateMetadata({
       locale === "ru"
         ? "Планирование люкс путешествий с Кипра. Отели высшего класса, приватные трансферы, индивидуальные маршруты. Ваш премиум партнёр с 2006 года."
         : "Luxury travel planning from Cyprus. 5-star hotels, private transfers, bespoke itineraries, honeymoon packages.",
+    keywords:
+      locale === "ru"
+        ? ["люкс отдых Кипр Пафос", "премиальные путешествия Пафос", "VIP туры Кипр", "элитный отдых из Кипра"]
+        : ["luxury travel Cyprus", "luxury holidays from Paphos", "premium holidays Paphos", "VIP tours Cyprus"],
     languagePaths: {
       en: "/luxury-travel-cyprus",
       ru: "/luxusnyy-otdykh-kipr",
