@@ -11,6 +11,7 @@ const BARE_PATH_SPECIALS: Record<
   string,
   { pathname: string; extraSearch?: Record<string, string> }
 > = {
+  "/luxury": { pathname: "/luxury-travel" },
   "/luxury-travel": { pathname: "/luxury-travel" },
   "/quote": { pathname: "/contact", extraSearch: { type: "quote" } },
 };

@@ -39,6 +39,17 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // Root "/" redirect is handled by middleware (with Accept-Language detection)
+      // /luxury → /luxury-travel redirects (404 fix)
+      {
+        source: "/en/luxury",
+        destination: "/en/luxury-travel",
+        permanent: true,
+      },
+      {
+        source: "/ru/luxury",
+        destination: "/ru/luxury-travel",
+        permanent: true,
+      },
       { source: "/en/en", destination: "/en", statusCode: 301 },
       { source: "/en/en/:path*", destination: "/en/:path*", statusCode: 301 },
       { source: "/ru/ru", destination: "/ru", statusCode: 301 },
