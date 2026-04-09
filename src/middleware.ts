@@ -105,12 +105,22 @@ export default function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl, 301);
   }
 
-  // 6. Detect preferred locale from Accept-Language for root path
-  const preferredLocale = pathname === "/" ? getPreferredLocale(req) : "en";
+  // 6. Root "/" — rewrite (not redirect) so the homepage serves a 200 instead
+  //    of a 301.  Google Search Console flags redirect-only URLs as
+  //    "Page with redirect", which hurts indexing.
+  if (pathname === "/") {
+    const preferredLocale = getPreferredLocale(req);
+    const rewriteUrl = url.clone();
+    rewriteUrl.pathname = `/${preferredLocale}`;
+    const res = NextResponse.rewrite(rewriteUrl);
+    // Tell caches that the response varies by language preference
+    res.headers.set("Vary", "Accept-Language");
+    return res;
+  }
 
   // All remaining bare paths → /<locale>/<path> (301, query string preserved)
   const redirectUrl = url.clone();
-  redirectUrl.pathname = `/${preferredLocale}${pathname === "/" ? "" : pathname}`;
+  redirectUrl.pathname = `/en${pathname}`;
   return NextResponse.redirect(redirectUrl, 301);
 }
 
