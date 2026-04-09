@@ -15,7 +15,6 @@ import {
 import CTABanner from "@/components/sections/CTABanner";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import ServiceSchema from "@/components/seo/ServiceSchema";
-import JsonLd from "@/components/seo/JsonLd";
 import FAQSection from "@/components/sections/FAQSection";
 
 export default async function FlightPageContent({
@@ -73,19 +72,6 @@ export default async function FlightPageContent({
     { question: t("faq4Q"), answer: t("faq4A") },
     { question: t("faq5Q"), answer: t("faq5A") },
   ];
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
 
   const slug =
     locale === "ru" ? "aviabilety-kipr" : "flight-tickets-cyprus";
@@ -348,7 +334,6 @@ export default async function FlightPageContent({
         description="Book flights from Cyprus with IATA-accredited JetSet Travel. Best fares from Paphos (PFO) and Larnaca (LCA) airports. Business class deals, group bookings, and 24/7 support."
         url={`https://www.jetset-travel.com/${locale}/${slug}`}
       />
-      <JsonLd data={faqSchema} />
     </>
   );
 }
