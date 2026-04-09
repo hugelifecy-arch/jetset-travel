@@ -24,7 +24,6 @@ import {
 import CTABanner from "@/components/sections/CTABanner";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import ServiceSchema from "@/components/seo/ServiceSchema";
-import JsonLd from "@/components/seo/JsonLd";
 import FAQSection from "@/components/sections/FAQSection";
 
 const languagePaths = {
@@ -142,19 +141,6 @@ export default async function HotelBookingCyprusPage({
     { question: t("faq4Q"), answer: t("faq4A") },
     { question: t("faq5Q"), answer: t("faq5A") },
   ];
-
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
 
   return (
     <>
@@ -408,7 +394,6 @@ export default async function HotelBookingCyprusPage({
         description="Hotel reservations in Cyprus and worldwide. Negotiated corporate rates, luxury hotel partners, clean invoicing, and 24/7 support. JetSet Travel Paphos, IATA-accredited agency."
         url={`https://www.jetset-travel.com/${locale}/hotel-booking-cyprus`}
       />
-      <JsonLd data={faqSchema} />
     </>
   );
 }
