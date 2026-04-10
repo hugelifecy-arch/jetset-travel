@@ -11,7 +11,7 @@ import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import ExitIntentPopup from "@/components/layout/ExitIntentPopup";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
-import { Analytics } from "@vercel/analytics/next";
+import VercelAnalytics from "@/components/analytics/VercelAnalytics";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 import YandexMetrica from "@/components/analytics/YandexMetrica";
 import FacebookPixel from "@/components/analytics/FacebookPixel";
@@ -154,7 +154,7 @@ export default async function LocaleLayout({
           <BreadcrumbSchema />
           <CookieConsentBanner />
           <ExitIntentPopup />
-          <Analytics />
+          <VercelAnalytics />
           <GoogleAnalytics />
           <YandexMetrica />
           <FacebookPixel />

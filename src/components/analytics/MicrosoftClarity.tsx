@@ -1,10 +1,28 @@
-// Set NEXT_PUBLIC_CLARITY_PROJECT_ID env var in Vercel dashboard to activate
+"use client";
+
 import Script from "next/script";
+import { useEffect, useState } from "react";
+import { hasConsent } from "@/lib/cookie-consent";
 
 const projectId = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID;
 
 export default function MicrosoftClarity() {
-  if (!projectId) return null;
+  const [consentGiven, setConsentGiven] = useState(false);
+
+  useEffect(() => {
+    const check = () => setConsentGiven(hasConsent("analytics"));
+    check();
+
+    window.addEventListener("storage", check);
+    const handleBannerChange = () => setTimeout(check, 0);
+    window.addEventListener("cookie-banner-change", handleBannerChange);
+    return () => {
+      window.removeEventListener("storage", check);
+      window.removeEventListener("cookie-banner-change", handleBannerChange);
+    };
+  }, []);
+
+  if (!projectId || !consentGiven) return null;
 
   return (
     <Script id="microsoft-clarity" strategy="afterInteractive">
