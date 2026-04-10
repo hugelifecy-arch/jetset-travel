@@ -24,7 +24,7 @@ interface BlogPost {
   readTime: number;
 }
 
-const POSTS_PER_PAGE = 6;
+const POSTS_PER_PAGE = 12;
 
 const CATEGORY_KEYS: Record<BlogCategory, string> = {
   all: "categoryAll",
