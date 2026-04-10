@@ -62,11 +62,15 @@ export default function ExitIntentPopup() {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<ExitIntentFormValues>({
     resolver: zodResolver(exitIntentSchema),
     defaultValues: {},
   });
+
+  const selectedTravelType = watch("travelType");
 
   /* ---- Show the popup ---- */
   const show = useCallback(() => {
@@ -145,6 +149,7 @@ export default function ExitIntentPopup() {
       body: JSON.stringify({
         name: data.name,
         email: data.email,
+        travelType: data.travelType,
         website: honeypotRef.current?.value || "",
         _formLoadedAt: formLoadedAt.current,
         _recaptchaToken: recaptchaToken,
@@ -279,6 +284,41 @@ export default function ExitIntentPopup() {
                     {errors.email.message}
                   </span>
                 )}
+              </div>
+
+              {/* Travel type pills */}
+              <div className="space-y-1">
+                <p className="text-xs font-medium text-brand-navy/70">
+                  {t("travelTypeLabel")}
+                </p>
+                <div className="flex gap-2">
+                  {(["Corporate", "Leisure", "Visa"] as const).map((type) => (
+                    <button
+                      key={type}
+                      type="button"
+                      onClick={() =>
+                        setValue(
+                          "travelType",
+                          selectedTravelType === type ? undefined : type,
+                          { shouldValidate: true },
+                        )
+                      }
+                      className={cn(
+                        "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
+                        selectedTravelType === type
+                          ? "border-brand-gold bg-brand-gold/10 text-brand-navy"
+                          : "border-brand-navy/20 text-brand-navy/60 hover:border-brand-gold hover:text-brand-navy",
+                      )}
+                    >
+                      {t(
+                        `travelType${type}` as
+                          | "travelTypeCorporate"
+                          | "travelTypeLeisure"
+                          | "travelTypeVisa",
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               {submitError && (

@@ -849,6 +849,13 @@
     "call": "Позвонить",
     "whatsapp": "WhatsApp"
   },
+  "blogStrip": {
+    "label": "Из блога",
+    "title": "Полезные статьи и гиды",
+    "viewAll": "Все статьи",
+    "readMore": "Читать далее",
+    "minRead": "мин. чтения"
+  },
   "blogPage": {
     "heroLabel": "Блог",
     "title": "Путешествия: советы и гиды",
