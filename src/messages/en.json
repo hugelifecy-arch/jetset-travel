@@ -849,6 +849,13 @@
     "call": "Call",
     "whatsapp": "WhatsApp"
   },
+  "blogStrip": {
+    "label": "From the Blog",
+    "title": "Travel Insights & Guides",
+    "viewAll": "View all articles",
+    "readMore": "Read more",
+    "minRead": "min read"
+  },
   "blogPage": {
     "heroLabel": "Blog",
     "title": "Travel Insights & Guides",

@@ -9,6 +9,7 @@ import ComparisonSection from "@/components/sections/ComparisonSection";
 import GoogleReviews from "@/components/sections/GoogleReviews";
 import ClientLogos from "@/components/sections/ClientLogos";
 import CTABanner from "@/components/sections/CTABanner";
+import LatestBlogStrip from "@/components/sections/LatestBlogStrip";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 import WebSiteSchema from "@/components/seo/WebSiteSchema";
 import ReviewSchema from "@/components/seo/ReviewSchema";
@@ -61,6 +62,7 @@ export default async function HomePage({
       <ComparisonSection />
       <GoogleReviews />
       <ClientLogos />
+      <LatestBlogStrip locale={locale} />
       <CTABanner />
       <LocalBusinessSchema />
       <WebSiteSchema />
