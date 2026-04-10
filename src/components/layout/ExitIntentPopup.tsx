@@ -247,11 +247,15 @@ export default function ExitIntentPopup() {
               className="mt-5 space-y-3"
             >
               {/* Honeypot */}
-              <div className="absolute -left-[9999px]" aria-hidden="true">
+              <div
+                className="absolute -left-[9999px]"
+                aria-hidden="true"
+                style={{ opacity: 0, height: 0, overflow: "hidden" }}
+              >
                 <input
                   type="text"
                   ref={honeypotRef}
-                  name="website"
+                  name="b_website"
                   tabIndex={-1}
                   autoComplete="off"
                 />

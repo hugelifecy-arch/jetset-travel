@@ -108,9 +108,9 @@ export default async function BlogPostPage({
     datePublished: post.frontmatter.date,
     dateModified: post.frontmatter.date,
     author: {
-      "@type": "Organization",
+      "@type": "Person",
       name: post.frontmatter.author,
-      url: CANONICAL_ORIGIN,
+      url: `${CANONICAL_ORIGIN}/en/about`,
     },
     publisher: {
       "@type": "Organization",

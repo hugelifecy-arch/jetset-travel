@@ -14,6 +14,7 @@ const serviceLinks = [
   { href: "/cruises", key: "cruises" },
   { href: "/visa-services", key: "visas" },
   { href: "/hotel-reservations", key: "hotels" },
+  { href: "/faq", key: "faq" },
   { href: "/services", key: "allServices" },
 ] as const;
 

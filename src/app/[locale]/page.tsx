@@ -12,7 +12,6 @@ import CTABanner from "@/components/sections/CTABanner";
 import LatestBlogStrip from "@/components/sections/LatestBlogStrip";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 import WebSiteSchema from "@/components/seo/WebSiteSchema";
-import ReviewSchema from "@/components/seo/ReviewSchema";
 export async function generateMetadata({
   params,
 }: {
@@ -64,9 +63,8 @@ export default async function HomePage({
       <ClientLogos />
       <LatestBlogStrip locale={locale} />
       <CTABanner />
-      <LocalBusinessSchema />
+      <LocalBusinessSchema reviews={reviews} />
       <WebSiteSchema />
-      <ReviewSchema reviews={reviews} />
     </>
   );
 }

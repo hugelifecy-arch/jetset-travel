@@ -1,7 +1,17 @@
 import { getLocale } from "next-intl/server";
 import JsonLd from "./JsonLd";
 
-export default async function LocalBusinessSchema() {
+interface ReviewData {
+  author: string;
+  reviewBody: string;
+  ratingValue: number;
+}
+
+export default async function LocalBusinessSchema({
+  reviews,
+}: {
+  reviews?: ReviewData[];
+} = {}) {
   const locale = await getLocale();
   const isRussian = locale === "ru";
 
@@ -84,10 +94,26 @@ export default async function LocalBusinessSchema() {
     ],
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.9",
+      ratingValue: "5.0",
       reviewCount: "47",
       bestRating: "5",
+      worstRating: "1",
     },
+    ...(reviews && reviews.length > 0
+      ? {
+          review: reviews.map((r) => ({
+            "@type": "Review",
+            author: { "@type": "Person", name: r.author },
+            reviewRating: {
+              "@type": "Rating",
+              ratingValue: r.ratingValue,
+              bestRating: 5,
+            },
+            reviewBody: r.reviewBody,
+            publisher: { "@type": "Organization", name: "Google Reviews" },
+          })),
+        }
+      : {}),
     priceRange: "$$",
     paymentAccepted: isRussian
       ? "Банковский перевод, Кредитная карта, Дебетовая карта"
