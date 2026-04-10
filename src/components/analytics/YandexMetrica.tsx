@@ -1,10 +1,28 @@
-// TODO: Set NEXT_PUBLIC_YANDEX_METRICA_ID env var in Vercel dashboard
+"use client";
+
 import Script from "next/script";
+import { useEffect, useState } from "react";
+import { hasConsent } from "@/lib/cookie-consent";
 
 const counterId = process.env.NEXT_PUBLIC_YANDEX_METRICA_ID;
 
 export default function YandexMetrica() {
-  if (!counterId) return null;
+  const [consentGiven, setConsentGiven] = useState(false);
+
+  useEffect(() => {
+    const check = () => setConsentGiven(hasConsent("analytics"));
+    check();
+
+    window.addEventListener("storage", check);
+    const handleBannerChange = () => setTimeout(check, 0);
+    window.addEventListener("cookie-banner-change", handleBannerChange);
+    return () => {
+      window.removeEventListener("storage", check);
+      window.removeEventListener("cookie-banner-change", handleBannerChange);
+    };
+  }, []);
+
+  if (!counterId || !consentGiven) return null;
 
   return (
     <>

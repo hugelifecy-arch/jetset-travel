@@ -117,16 +117,25 @@
     "via": "on",
     "posted": "Posted",
     "review1": {
+      "name": "Maria K.",
+      "company": "Tech Solutions Ltd",
       "role": "Operations Director",
-      "text": "We had a last-minute cancellation during a critical meeting week in Frankfurt. JetSet rerouted our entire 4-person team the same day — new flights, hotels, and ground transport. Finance got clean documentation within 24 hours."
+      "text": "We had a last-minute cancellation during a critical meeting week in Frankfurt. JetSet rerouted our entire 4-person team the same day — new flights, hotels, and ground transport. Finance got clean documentation within 24 hours.",
+      "source": "Google review"
     },
     "review2": {
-      "role": "Luxury Leisure",
-      "text": "After years of booking our own corporate travel, switching to JetSet saved us roughly 15 hours per month in admin time alone. The compliant invoicing and single point of contact made our finance team very happy."
+      "name": "Andreas P.",
+      "company": "Luxury Leisure",
+      "role": "Private Client",
+      "text": "After years of booking our own corporate travel, switching to JetSet saved us roughly 15 hours per month in admin time alone. The compliant invoicing and single point of contact made our finance team very happy.",
+      "source": "Google review"
     },
     "review3": {
+      "name": "Dmitry S.",
+      "company": "Small Business, Client",
       "role": "Founder & CEO",
-      "text": "Fast response on WhatsApp, clear options with pricing breakdowns, no confusion. When our CEO's travel plans changed mid-trip, the solution was already in motion before we even called."
+      "text": "Fast response on WhatsApp, clear options with pricing breakdowns, no confusion. When our CEO's travel plans changed mid-trip, the solution was already in motion before we even called.",
+      "source": "Google review"
     }
   },
   "comparison": {
