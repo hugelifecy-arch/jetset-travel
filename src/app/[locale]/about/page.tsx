@@ -136,9 +136,48 @@ export default async function AboutPage({
     ],
   };
 
+  // Person schema for founders — strengthens E-E-A-T (named experts)
+  const founderSchemas = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://www.jetset-travel.com/#person-nontari",
+      name: "Nontari Kalaitsidis",
+      jobTitle: isRussian ? "Сооснователь" : "Co-Founder",
+      worksFor: { "@id": "https://www.jetset-travel.com/#organization" },
+      image: "https://www.jetset-travel.com/images/nontari-kalaitsidis.jpg",
+      url: `https://www.jetset-travel.com/${locale}/about`,
+      knowsAbout: [
+        "Corporate Travel Management",
+        "IATA Flight Booking",
+        "Travel Agency Operations",
+        "Cyprus Travel Industry",
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://www.jetset-travel.com/#person-maro",
+      name: "Maro Kokkinou",
+      jobTitle: isRussian ? "Сооснователь" : "Co-Founder",
+      worksFor: { "@id": "https://www.jetset-travel.com/#organization" },
+      image: "https://www.jetset-travel.com/images/maro-kokkinou.jpg",
+      url: `https://www.jetset-travel.com/${locale}/about`,
+      knowsAbout: [
+        "Luxury Travel Planning",
+        "Cruise Booking",
+        "Visa Services",
+        "Mediterranean Destinations",
+      ],
+    },
+  ];
+
   return (
     <>
       <JsonLd data={orgSchema} />
+      {founderSchemas.map((schema) => (
+        <JsonLd key={schema["@id"]} data={schema} />
+      ))}
       {/* Hero */}
       <section className="relative bg-brand-navy text-white min-h-[320px] sm:min-h-[380px] flex items-center overflow-hidden">
         <Image

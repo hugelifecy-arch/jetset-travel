@@ -169,6 +169,18 @@ export default async function BlogPostPage({
     keywords: post.frontmatter.tags.join(", "),
     wordCount,
     ...(post.frontmatter.tags[0] && { articleSection: post.frontmatter.tags[0] }),
+    // Entity mentions for AI/LLM citation and Google entity SEO
+    about: [
+      { "@id": "https://www.jetset-travel.com/#organization" },
+      ...(post.frontmatter.tags.some((t) => t.toLowerCase().includes("cyprus") || t.toLowerCase().includes("paphos") || t.toLowerCase().includes("limassol"))
+        ? [{ "@type": "Place", name: "Cyprus" }]
+        : []),
+    ],
+    isPartOf: {
+      "@type": "Blog",
+      "@id": `${CANONICAL_ORIGIN}/${locale}/blog`,
+      name: locale === "ru" ? "Блог JetSet Travel" : "JetSet Travel Blog",
+    },
   };
 
   return (

@@ -88,6 +88,40 @@ export default async function BlogPage({
       {/* Newsletter Signup */}
       <NewsletterSignup />
 
+      {/* Popular Services — internal linking for SEO */}
+      <section className="py-16 bg-brand-light">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-2">
+              {locale === "ru" ? "Наши услуги" : "Our services"}
+            </p>
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-brand-navy">
+              {locale === "ru"
+                ? "Готовы превратить идею в поездку?"
+                : "Ready to turn inspiration into a trip?"}
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {[
+              { slug: "corporate-travel", en: "Corporate Travel", ru: "Корпоративные поездки" },
+              { slug: "luxury-travel", en: "Luxury Travel", ru: "Премиум отдых" },
+              { slug: "visa-services", en: "Visa Services", ru: "Визовые услуги" },
+              { slug: "hotel-reservations", en: "Hotels", ru: "Отели" },
+              { slug: "cruises", en: "Cruises", ru: "Круизы" },
+              { slug: locale === "en" ? "flight-tickets-cyprus" : "aviabilety-kipr", en: "Flights", ru: "Авиабилеты" },
+            ].map((svc) => (
+              <Link
+                key={svc.slug}
+                href={`/${locale}/${svc.slug}`}
+                className="flex items-center justify-center rounded-xl border border-brand-navy/10 bg-white px-4 py-3 text-sm font-semibold text-brand-navy hover:border-brand-gold hover:text-brand-gold hover:shadow-card transition-all"
+              >
+                {locale === "ru" ? svc.ru : svc.en}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA Banner */}
       <section className="py-20 bg-brand-navy text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">

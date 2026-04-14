@@ -46,6 +46,18 @@ export default function ServiceSchema({
         { "@type": "Language", name: "Russian" },
       ],
     },
+    offers: {
+      "@type": "Offer",
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        priceCurrency: "EUR",
+        description: isRussian
+          ? "Индивидуальное предложение — запросите бесплатную смету"
+          : "Custom quote — request a free, no-obligation estimate",
+      },
+      availability: "https://schema.org/InStock",
+      url: `${url.replace(/\/$/, "")}`,
+    },
   };
 
   return <JsonLd data={schema} />;
