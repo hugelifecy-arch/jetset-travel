@@ -5,6 +5,7 @@ interface ServiceSchemaProps {
   description: string;
   url: string;
   locale?: string;
+  serviceType?: string;
 }
 
 export default function ServiceSchema({
@@ -12,6 +13,7 @@ export default function ServiceSchema({
   description,
   url,
   locale = "en",
+  serviceType,
 }: ServiceSchemaProps) {
   const isRussian = locale === "ru";
 
@@ -21,6 +23,7 @@ export default function ServiceSchema({
     name,
     description,
     url,
+    ...(serviceType && { serviceType }),
     provider: {
       "@id": "https://www.jetset-travel.com/#organization",
     },

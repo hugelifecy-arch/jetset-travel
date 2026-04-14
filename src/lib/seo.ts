@@ -13,7 +13,7 @@ export function localizedAlternates(
   const ruPath = languagePaths?.ru ?? routePath;
 
   return {
-    canonical: `${CANONICAL_ORIGIN}/${locale}${routePath}`,
+    canonical: `${CANONICAL_ORIGIN}/${locale}${locale === "en" ? enPath : locale === "ru" ? ruPath : routePath}`,
     languages: {
       en: `${CANONICAL_ORIGIN}/en${enPath}`,
       ru: `${CANONICAL_ORIGIN}/ru${ruPath}`,

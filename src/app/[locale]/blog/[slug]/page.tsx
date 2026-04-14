@@ -41,9 +41,15 @@ export async function generateMetadata({
     title: { absolute: `${post.frontmatter.title} | JetSet Travel Cyprus` },
     description: post.frontmatter.description,
     robots: { index: true, follow: true },
-    alternates: post.frontmatter.translationSlug
-      ? localizedAlternates(locale, `/blog/${slug}`)
-      : { canonical: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}` },
+    alternates: (() => {
+      const slugs = getPostTranslationSlug(slug);
+      return slugs.en && slugs.ru
+        ? localizedAlternates(locale, `/blog/${slug}`, {
+            en: `/blog/${slugs.en}`,
+            ru: `/blog/${slugs.ru}`,
+          })
+        : { canonical: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}` };
+    })(),
     openGraph: {
       type: "article",
       siteName: "JetSet Travel Cyprus",

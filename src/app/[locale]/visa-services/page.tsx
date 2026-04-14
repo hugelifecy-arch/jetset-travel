@@ -511,6 +511,7 @@ export default async function VisaServicesPage({
             : "Expert visa assistance from Paphos, Cyprus. Document preparation, application guidance, embassy coordination, and status tracking for business and tourist visas worldwide."
         }
         url={`https://www.jetset-travel.com/${locale}/visa-services`}
+        serviceType="Visa Services"
       />
 
       {/* JSON-LD: FAQPage Schema */}

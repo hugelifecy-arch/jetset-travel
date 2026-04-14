@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
 import { getPublishedPosts } from "@/lib/blog";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import BlogFilters from "@/components/blog/BlogFilters";
 import NewsletterSignup from "@/components/blog/NewsletterSignup";
+import JsonLd from "@/components/seo/JsonLd";
 
 export async function generateMetadata({
   params,
@@ -60,6 +61,29 @@ export default async function BlogPage({
           <BlogFilters posts={posts} />
         </div>
       </section>
+
+      {/* Blog Schema */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name:
+            locale === "ru"
+              ? "Блог о путешествиях — JetSet Travel"
+              : "Travel Blog — JetSet Travel",
+          url: `${CANONICAL_ORIGIN}/${locale}/blog`,
+          mainEntity: {
+            "@type": "ItemList",
+            numberOfItems: posts.length,
+            itemListElement: posts.map((post, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              url: `${CANONICAL_ORIGIN}/${locale}/blog/${post.frontmatter.slug}`,
+              name: post.frontmatter.title,
+            })),
+          },
+        }}
+      />
 
       {/* Newsletter Signup */}
       <NewsletterSignup />

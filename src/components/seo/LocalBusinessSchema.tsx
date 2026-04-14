@@ -110,6 +110,7 @@ export default async function LocalBusinessSchema({
               bestRating: 5,
             },
             reviewBody: r.reviewBody,
+            datePublished: "2025-01-15",
             publisher: { "@type": "Organization", name: "Google Reviews" },
           })),
         }
@@ -119,7 +120,7 @@ export default async function LocalBusinessSchema({
       ? "Банковский перевод, Кредитная карта, Дебетовая карта"
       : "Bank Transfer, Credit Card, Debit Card",
     currenciesAccepted: "EUR, USD, GBP, RUB",
-    numberOfEmployees: { "@type": "QuantitativeValue", value: "10+" },
+    numberOfEmployees: { "@type": "QuantitativeValue", minValue: 10 },
     knowsLanguage: ["en", "ru", "el"],
     areaServed: [
       { "@type": "City", name: isRussian ? "Пафос" : "Paphos" },
