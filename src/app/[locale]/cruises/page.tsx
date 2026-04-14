@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import CruisesContent from "./CruisesContent";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import RelatedArticles from "@/components/sections/RelatedArticles";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 
 export async function generateMetadata({
@@ -39,6 +40,7 @@ export default async function CruisesPage({
   return (
     <>
       <CruisesContent locale={locale} />
+      <RelatedArticles locale={locale} tags={["cruise", "cruises", "limassol", "luxury"]} />
       <ServicesCrossLinks locale={locale} include={["luxury", "hotels"]} />
       <ServiceSchema
         locale={locale}

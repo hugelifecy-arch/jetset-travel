@@ -3,6 +3,7 @@ import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import CorporateTravelContent from "./CorporateTravelContent";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import RelatedArticles from "@/components/sections/RelatedArticles";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import JsonLd from "@/components/seo/JsonLd";
 export async function generateMetadata({
@@ -63,6 +64,7 @@ export default async function CorporateTravelPage({
   return (
     <>
       <CorporateTravelContent />
+      <RelatedArticles locale={locale} tags={["corporate", "business", "limassol"]} />
       <ServicesCrossLinks locale={locale} include={["visa", "hotels", "luxury"]} />
       <ServiceSchema
         locale={locale}

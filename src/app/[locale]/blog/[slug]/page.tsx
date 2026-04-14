@@ -117,8 +117,8 @@ export default async function BlogPostPage({
   };
   const relatedServices = Array.from(
     new Map(
-      post.frontmatter.tags
-        .flatMap((tag) => TAG_TO_SERVICES[tag.toLowerCase()] || [])
+      (post.frontmatter.tags ?? [])
+        .flatMap((tag) => TAG_TO_SERVICES[String(tag).toLowerCase()] || [])
         .map((s) => [s.slug, s]),
     ).values(),
   ).slice(0, 3);
@@ -131,7 +131,7 @@ export default async function BlogPostPage({
     .filter(
       (p) =>
         p.frontmatter.slug !== slug &&
-        p.frontmatter.tags.some((tag) => post.frontmatter.tags.includes(tag)),
+        (p.frontmatter.tags ?? []).some((tag) => (post.frontmatter.tags ?? []).includes(tag)),
     )
     .slice(0, 3);
 
@@ -172,7 +172,7 @@ export default async function BlogPostPage({
     // Entity mentions for AI/LLM citation and Google entity SEO
     about: [
       { "@id": "https://www.jetset-travel.com/#organization" },
-      ...(post.frontmatter.tags.some((t) => t.toLowerCase().includes("cyprus") || t.toLowerCase().includes("paphos") || t.toLowerCase().includes("limassol"))
+      ...((post.frontmatter.tags ?? []).some((t) => { const s = String(t).toLowerCase(); return s.includes("cyprus") || s.includes("paphos") || s.includes("limassol"); })
         ? [{ "@type": "Place", name: "Cyprus" }]
         : []),
     ],
@@ -180,6 +180,11 @@ export default async function BlogPostPage({
       "@type": "Blog",
       "@id": `${CANONICAL_ORIGIN}/${locale}/blog`,
       name: locale === "ru" ? "Блог JetSet Travel" : "JetSet Travel Blog",
+    },
+    // Speakable: identifies content suitable for voice assistants (Google Assistant, Alexa)
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "h2", ".prose p:first-of-type"],
     },
   };
 

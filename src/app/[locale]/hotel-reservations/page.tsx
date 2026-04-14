@@ -15,6 +15,7 @@ import {
   MapPin,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import RelatedArticles from "@/components/sections/RelatedArticles";
 import InlineTestimonial from "@/components/sections/InlineTestimonial";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FAQSection from "@/components/sections/FAQSection";
@@ -321,6 +322,7 @@ export default async function HotelReservationsPage({
       />
 
       {/* Cross-links */}
+      <RelatedArticles locale={locale} tags={["hotel", "hotels", "corporate", "luxury"]} />
       <ServicesCrossLinks locale={locale} include={["corporate", "luxury", "cruises"]} />
       <ServiceSchema
         locale={locale}

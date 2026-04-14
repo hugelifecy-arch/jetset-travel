@@ -12,6 +12,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import RelatedArticles from "@/components/sections/RelatedArticles";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FAQSection from "@/components/sections/FAQSection";
 export async function generateMetadata({
@@ -337,6 +338,7 @@ export default async function LuxuryTravelPage({
       />
 
       {/* Cross-links */}
+      <RelatedArticles locale={locale} tags={["luxury", "cyprus", "cruise"]} />
       <ServicesCrossLinks locale={locale} include={["hotels", "cruises", "corporate"]} />
 
       {/* Enquiry CTA */}

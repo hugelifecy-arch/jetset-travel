@@ -18,6 +18,7 @@ import {
   ChevronDown,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import RelatedArticles from "@/components/sections/RelatedArticles";
 import InlineTestimonial from "@/components/sections/InlineTestimonial";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import JsonLd from "@/components/seo/JsonLd";
@@ -478,6 +479,7 @@ export default async function VisaServicesPage({
       </div>
 
       {/* Related Services */}
+      <RelatedArticles locale={locale} tags={["visa", "schengen", "digital-nomad"]} />
       <ServicesCrossLinks locale={locale} include={["corporate", "luxury"]} />
 
       {/* WhatsApp CTA */}
