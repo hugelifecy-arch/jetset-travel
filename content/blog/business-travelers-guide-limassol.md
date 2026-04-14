@@ -1,6 +1,6 @@
 ---
 title: "A Business Traveler's Guide to Limassol"
-description: "Essential guide to business travel in Limassol — hotels, restaurants, meeting spaces, insider tips."
+description: "Essential business travel guide to Limassol: top corporate hotels, client-ready restaurants, meeting spaces, airport transfers from Larnaca, and insider tips from JetSet Travel Cyprus."
 date: "2026-03-16"
 author: "Nontari Kalaitsidis"
 slug: "business-travelers-guide-limassol"

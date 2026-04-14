@@ -1,6 +1,6 @@
 ---
 title: "Complete Schengen Visa Guide for Cyprus Residents"
-description: "Everything about applying for a Schengen visa from Cyprus — documents, timelines, and mistakes to avoid."
+description: "Complete Schengen visa guide for Cyprus residents: required documents, processing timelines, consulate requirements, common mistakes to avoid, and how IATA agents streamline approval."
 date: "2026-02-25"
 author: "Nontari Kalaitsidis"
 slug: "schengen-visa-guide-cyprus-residents"
