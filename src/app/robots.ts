@@ -1,87 +1,48 @@
 import type { MetadataRoute } from "next";
 import { CANONICAL_ORIGIN } from "@/lib/seo";
 
+// Common allow/disallow rules shared by every user-agent block.
+const COMMON_ALLOW = ["/", "/_next/static/"];
+const COMMON_DISALLOW = ["/api/", "/_next/data/"];
+
+// AI search / LLM crawlers — kept as an explicit opt-in list (functionally
+// covered by the `*` wildcard, but the explicit allow is a public signal
+// that the site welcomes AI-assisted search and citation).
+const AI_CRAWLERS = [
+  "GPTBot",
+  "ChatGPT-User",
+  "Claude-Web",
+  "anthropic-ai",
+  "ClaudeBot",
+  "Amazonbot",
+  "CCBot",
+  "Google-Extended",
+  "PerplexityBot",
+  "Applebot-Extended",
+  "cohere-ai",
+];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
+      // Default rule — covers every bot not explicitly listed below.
       {
         userAgent: "*",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
+        allow: COMMON_ALLOW,
+        disallow: COMMON_DISALLOW,
       },
-      // AI search engine crawlers — explicitly allowed
+      // AI search engine crawlers — explicitly welcomed.
       {
-        userAgent: "GPTBot",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
+        userAgent: AI_CRAWLERS,
+        allow: COMMON_ALLOW,
+        disallow: COMMON_DISALLOW,
       },
+      // Russian-market crawlers with a polite crawl delay.
       {
-        userAgent: "ChatGPT-User",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-      },
-      {
-        userAgent: "Claude-Web",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-      },
-      {
-        userAgent: "anthropic-ai",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-      },
-      {
-        userAgent: "ClaudeBot",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-      },
-      {
-        userAgent: "Amazonbot",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-      },
-      {
-        userAgent: "CCBot",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-      },
-      {
-        userAgent: "Google-Extended",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-      },
-      {
-        userAgent: "PerplexityBot",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-      },
-      {
-        userAgent: "Applebot-Extended",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-      },
-      {
-        userAgent: "cohere-ai",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-      },
-      // Russian search engines
-      {
-        userAgent: "Yandex",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
+        userAgent: ["Yandex", "YandexBot", "Mail.RU_Bot"],
+        allow: COMMON_ALLOW,
+        disallow: COMMON_DISALLOW,
         crawlDelay: 2,
-      },
-      {
-        userAgent: "YandexBot",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
-        crawlDelay: 2,
-      },
-      {
-        userAgent: "Mail.RU_Bot",
-        allow: ["/", "/_next/static/"],
-        disallow: ["/api/", "/_next/data/"],
       },
     ],
     sitemap: `${CANONICAL_ORIGIN}/sitemap.xml`,
