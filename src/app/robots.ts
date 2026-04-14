@@ -31,6 +31,21 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/_next/data/"],
       },
       {
+        userAgent: "ClaudeBot",
+        allow: ["/", "/_next/static/"],
+        disallow: ["/api/", "/_next/data/"],
+      },
+      {
+        userAgent: "Amazonbot",
+        allow: ["/", "/_next/static/"],
+        disallow: ["/api/", "/_next/data/"],
+      },
+      {
+        userAgent: "CCBot",
+        allow: ["/", "/_next/static/"],
+        disallow: ["/api/", "/_next/data/"],
+      },
+      {
         userAgent: "Google-Extended",
         allow: ["/", "/_next/static/"],
         disallow: ["/api/", "/_next/data/"],

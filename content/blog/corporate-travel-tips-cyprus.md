@@ -1,6 +1,6 @@
 ---
 title: "5 Tips for Efficient Corporate Travel from Cyprus"
-description: "Practical advice for Cyprus businesses to streamline corporate travel and reduce costs."
+description: "Practical corporate travel tips for Cyprus businesses: streamline booking workflows, cut travel spend, improve policy compliance, and handle disruptions with an IATA agent."
 date: "2026-02-28"
 author: "Nontari Kalaitsidis"
 slug: "corporate-travel-tips-cyprus"

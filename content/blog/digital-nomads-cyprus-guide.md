@@ -1,6 +1,6 @@
 ---
 title: "Digital Nomads in Cyprus: Visa, Lifestyle & Practical Guide"
-description: "Everything digital nomads need to know about Cyprus — visa, costs, coworking, lifestyle."
+description: "Digital nomad guide to Cyprus: visa eligibility, cost of living by city, coworking spaces, internet speeds, housing tips, and lifestyle advice for remote workers in Paphos and Limassol."
 date: "2026-04-01"
 author: "Maro Kokkinou"
 slug: "digital-nomads-cyprus-guide"

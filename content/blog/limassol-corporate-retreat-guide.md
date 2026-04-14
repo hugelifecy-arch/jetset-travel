@@ -1,6 +1,6 @@
 ---
 title: "Why Limassol Is Perfect for Your Next Corporate Retreat"
-description: "Why Limassol is the Mediterranean's rising corporate retreat destination."
+description: "Why Limassol is the Mediterranean's rising corporate retreat destination. Venue options, top hotels, team activities, and planning tips from JetSet Travel Cyprus corporate experts."
 date: "2026-03-16"
 author: "Nontari Kalaitsidis"
 slug: "limassol-corporate-retreat-guide"

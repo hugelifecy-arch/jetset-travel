@@ -1,6 +1,6 @@
 ---
 title: "Top Luxury Destinations in the Mediterranean for 2026"
-description: "The most sought-after luxury Mediterranean destinations for 2026 — curated by JetSet Travel."
+description: "The most sought-after luxury Mediterranean destinations for 2026. Curated by JetSet Travel Cyprus: private islands, five-star resorts, yacht itineraries, and bespoke travel planning."
 date: "2026-03-16"
 author: "Maro Kokkinou"
 slug: "luxury-mediterranean-destinations-2026"

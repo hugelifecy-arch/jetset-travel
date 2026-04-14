@@ -350,6 +350,7 @@ export default async function LuxuryTravelCyprusPage({
         name="Luxury Travel Planning Cyprus"
         description="Bespoke luxury travel planning from Cyprus. 5-star hotels, private transfers, honeymoon packages, and premium holiday itineraries. IATA-accredited agency in Paphos."
         url={`https://www.jetset-travel.com/${locale}/luxury-travel-cyprus`}
+        serviceType="Luxury Travel Planning"
       />
     </>
   );

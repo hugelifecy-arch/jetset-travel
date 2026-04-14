@@ -86,6 +86,7 @@ export default async function BlogPostPage({
   }
 
   const htmlContent = await markdownToHtml(post.content);
+  const wordCount = post.content.trim().split(/\s+/).length;
 
   // Get related posts (same tags, different slug)
   const allPosts = getAllPosts(locale).filter(
@@ -131,6 +132,8 @@ export default async function BlogPostPage({
       "@id": articleUrl,
     },
     keywords: post.frontmatter.tags.join(", "),
+    wordCount,
+    ...(post.frontmatter.tags[0] && { articleSection: post.frontmatter.tags[0] }),
   };
 
   return (
@@ -228,6 +231,32 @@ export default async function BlogPostPage({
             className="prose prose-lg max-w-none text-brand-navy/80 leading-relaxed prose-headings:text-brand-navy prose-headings:font-display prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-brand-gold prose-a:underline hover:prose-a:text-brand-gold/80 prose-strong:text-brand-navy prose-li:text-brand-navy/80 prose-table:text-sm prose-th:bg-brand-navy/5 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-brand-navy/10 prose-hr:border-brand-navy/10"
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           />
+
+          {/* Author Bio */}
+          <aside className="mt-12 rounded-2xl border border-brand-navy/10 bg-brand-light p-6 sm:p-8">
+            <div className="flex items-start gap-4">
+              <div className="flex-1">
+                <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold mb-2">
+                  {locale === "ru" ? "Об авторе" : "About the author"}
+                </p>
+                <h3 className="text-lg font-bold text-brand-navy mb-2">
+                  {post.frontmatter.author}
+                </h3>
+                <p className="text-sm text-brand-navy/70 mb-3">
+                  {locale === "ru"
+                    ? "Часть команды JetSet Travel Cyprus — аккредитованного IATA турагентства в Пафосе (лицензия 7775, IATA 14200130). Более 20 лет опыта в корпоративных и премиальных путешествиях."
+                    : "Part of the JetSet Travel Cyprus team — an IATA-accredited travel agency in Paphos (License 7775, IATA 14200130) with 20+ years of corporate and luxury travel experience."}
+                </p>
+                <Link
+                  href={`/${locale}/about`}
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-gold/80"
+                >
+                  {locale === "ru" ? "Больше о команде" : "More about our team"}
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </aside>
 
           {/* Social Sharing */}
           <div className="mt-12 pt-8 border-t border-brand-navy/10">

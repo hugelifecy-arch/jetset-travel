@@ -393,6 +393,7 @@ export default async function HotelBookingCyprusPage({
         name="Hotel Booking Cyprus"
         description="Hotel reservations in Cyprus and worldwide. Negotiated corporate rates, luxury hotel partners, clean invoicing, and 24/7 support. JetSet Travel Paphos, IATA-accredited agency."
         url={`https://www.jetset-travel.com/${locale}/hotel-booking-cyprus`}
+        serviceType="Hotel Reservation Service"
       />
     </>
   );
