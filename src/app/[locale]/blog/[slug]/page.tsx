@@ -88,6 +88,41 @@ export default async function BlogPostPage({
   const htmlContent = await markdownToHtml(post.content);
   const wordCount = post.content.trim().split(/\s+/).length;
 
+  // Map blog tags -> relevant service pages for inline interlinking (E-E-A-T + SEO)
+  const TAG_TO_SERVICES: Record<string, Array<{ slug: string; labelEn: string; labelRu: string }>> = {
+    visa: [{ slug: "visa-services", labelEn: "Visa Services", labelRu: "Визовые услуги" }],
+    "digital-nomad": [{ slug: "visa-services", labelEn: "Visa Services", labelRu: "Визовые услуги" }],
+    schengen: [{ slug: "visa-services", labelEn: "Visa Services", labelRu: "Визовые услуги" }],
+    corporate: [
+      { slug: "corporate-travel", labelEn: "Corporate Travel", labelRu: "Корпоративные поездки" },
+      { slug: "hotel-reservations", labelEn: "Hotel Reservations", labelRu: "Бронирование отелей" },
+    ],
+    business: [
+      { slug: "corporate-travel", labelEn: "Corporate Travel", labelRu: "Корпоративные поездки" },
+    ],
+    hotel: [{ slug: "hotel-reservations", labelEn: "Hotel Reservations", labelRu: "Бронирование отелей" }],
+    hotels: [{ slug: "hotel-reservations", labelEn: "Hotel Reservations", labelRu: "Бронирование отелей" }],
+    luxury: [{ slug: "luxury-travel", labelEn: "Luxury Travel", labelRu: "Премиум отдых" }],
+    cruise: [{ slug: "cruises", labelEn: "Cruise Booking", labelRu: "Круизы" }],
+    cruises: [{ slug: "cruises", labelEn: "Cruise Booking", labelRu: "Круизы" }],
+    flight: [
+      { slug: locale === "en" ? "flight-tickets-cyprus" : "aviabilety-kipr", labelEn: "Flights from Cyprus", labelRu: "Авиабилеты из Кипра" },
+    ],
+    flights: [
+      { slug: locale === "en" ? "flight-tickets-cyprus" : "aviabilety-kipr", labelEn: "Flights from Cyprus", labelRu: "Авиабилеты из Кипра" },
+    ],
+    paphos: [
+      { slug: locale === "en" ? "paphos-travel-agency" : "turisticheskoe-agentstvo-pafos", labelEn: "Paphos Travel Agency", labelRu: "Турагентство в Пафосе" },
+    ],
+  };
+  const relatedServices = Array.from(
+    new Map(
+      post.frontmatter.tags
+        .flatMap((tag) => TAG_TO_SERVICES[tag.toLowerCase()] || [])
+        .map((s) => [s.slug, s]),
+    ).values(),
+  ).slice(0, 3);
+
   // Get related posts (same tags, different slug)
   const allPosts = getAllPosts(locale).filter(
     (p) => p.frontmatter.status === "published",
@@ -108,7 +143,7 @@ export default async function BlogPostPage({
   // Article JSON-LD schema
   const articleSchema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.frontmatter.title,
     description: post.frontmatter.description,
     image: ogImage,
@@ -231,6 +266,33 @@ export default async function BlogPostPage({
             className="prose prose-lg max-w-none text-brand-navy/80 leading-relaxed prose-headings:text-brand-navy prose-headings:font-display prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-brand-gold prose-a:underline hover:prose-a:text-brand-gold/80 prose-strong:text-brand-navy prose-li:text-brand-navy/80 prose-table:text-sm prose-th:bg-brand-navy/5 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-brand-navy/10 prose-hr:border-brand-navy/10"
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           />
+
+          {/* Related Services — interlink blog topics to service pages */}
+          {relatedServices.length > 0 && (
+            <div className="mt-12 rounded-2xl border border-brand-gold/30 bg-brand-gold/5 p-6 sm:p-8">
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold mb-2">
+                {locale === "ru" ? "Связанные услуги" : "Related services"}
+              </p>
+              <h3 className="text-lg font-bold text-brand-navy mb-4">
+                {locale === "ru"
+                  ? "Планируете подобное путешествие? Мы поможем."
+                  : "Planning a trip like this? We can help."}
+              </h3>
+              <ul className="flex flex-wrap gap-3">
+                {relatedServices.map((svc) => (
+                  <li key={svc.slug}>
+                    <Link
+                      href={`/${locale}/${svc.slug}`}
+                      className="inline-flex items-center rounded-full border border-brand-navy/10 bg-white px-4 py-2 text-sm font-semibold text-brand-navy hover:border-brand-gold hover:text-brand-gold transition-colors"
+                    >
+                      {locale === "ru" ? svc.labelRu : svc.labelEn}
+                      <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Author Bio */}
           <aside className="mt-12 rounded-2xl border border-brand-navy/10 bg-brand-light p-6 sm:p-8">

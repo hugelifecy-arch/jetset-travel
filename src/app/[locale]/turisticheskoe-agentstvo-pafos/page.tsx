@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -341,6 +341,7 @@ export default async function TuristicheskoeAgentstvoPafosPage({
         description="Аккредитованное IATA турагентство в Пафосе, Кипр с более чем 20-летним опытом. Корпоративные поездки, авиабилеты, бронирование отелей, визовые услуги и круизы. Ул. Агапинорос, 26А, 8049 Пафос."
         url="https://www.jetset-travel.com/ru/turisticheskoe-agentstvo-pafos"
         serviceType="Travel Agency Services"
+        dateModified={SERVICE_LAST_UPDATED}
       />
     </>
   );

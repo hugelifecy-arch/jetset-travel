@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import {
@@ -512,6 +512,7 @@ export default async function VisaServicesPage({
         }
         url={`https://www.jetset-travel.com/${locale}/visa-services`}
         serviceType="Visa Services"
+        dateModified={SERVICE_LAST_UPDATED}
       />
 
       {/* JSON-LD: FAQPage Schema */}

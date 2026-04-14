@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -394,6 +394,7 @@ export default async function HotelBookingCyprusPage({
         description="Hotel reservations in Cyprus and worldwide. Negotiated corporate rates, luxury hotel partners, clean invoicing, and 24/7 support. JetSet Travel Paphos, IATA-accredited agency."
         url={`https://www.jetset-travel.com/${locale}/hotel-booking-cyprus`}
         serviceType="Hotel Reservation Service"
+        dateModified={SERVICE_LAST_UPDATED}
       />
     </>
   );

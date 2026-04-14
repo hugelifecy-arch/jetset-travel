@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -334,6 +334,7 @@ export default async function PaphosTravelAgencyPage({
         description="IATA-accredited travel agency in Paphos, Cyprus with 20+ years experience. Corporate travel management, luxury holidays, hotel reservations, visa services, and cruise bookings. Located at 26A Agapinoros Street, 8049 Paphos."
         url={`https://www.jetset-travel.com/${locale}/paphos-travel-agency`}
         serviceType="Travel Agency Services"
+        dateModified={SERVICE_LAST_UPDATED}
       />
     </>
   );

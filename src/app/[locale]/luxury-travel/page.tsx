@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -374,6 +374,7 @@ export default async function LuxuryTravelPage({
         description="Curated luxury travel experiences from Cyprus. Suite-level hotels, private transfers, bespoke multi-city journeys, island getaways, and honeymoon planning."
         url={`https://www.jetset-travel.com/${locale}/luxury-travel`}
         serviceType="Luxury Travel Planning"
+        dateModified={SERVICE_LAST_UPDATED}
       />
     </>
   );

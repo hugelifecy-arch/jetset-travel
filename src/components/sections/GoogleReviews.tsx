@@ -1,6 +1,5 @@
 "use client";
 
-import Script from "next/script";
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -93,18 +92,6 @@ export default function GoogleReviews() {
           >
             {t("viewAllReviews")} &rarr;
           </a>
-        </div>
-
-        {/* Elfsight Google Reviews Widget (supplementary) */}
-        <div className="mt-10 sm:mt-14">
-          <Script
-            src="https://static.elfsight.com/platform/platform.js"
-            strategy="lazyOnload"
-          />
-          <div
-            className="elfsight-app-37063581-926c-4328-b8f6-9ed56f0648ac"
-            data-elfsight-app-lazy
-          />
         </div>
       </div>
     </section>

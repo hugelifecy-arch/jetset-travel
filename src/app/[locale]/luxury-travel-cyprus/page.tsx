@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import {
@@ -351,6 +351,7 @@ export default async function LuxuryTravelCyprusPage({
         description="Bespoke luxury travel planning from Cyprus. 5-star hotels, private transfers, honeymoon packages, and premium holiday itineraries. IATA-accredited agency in Paphos."
         url={`https://www.jetset-travel.com/${locale}/luxury-travel-cyprus`}
         serviceType="Luxury Travel Planning"
+        dateModified={SERVICE_LAST_UPDATED}
       />
     </>
   );

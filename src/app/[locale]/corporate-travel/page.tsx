@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import CorporateTravelContent from "./CorporateTravelContent";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
@@ -70,6 +70,7 @@ export default async function CorporateTravelPage({
         description="Corporate travel management for Cyprus businesses. Policy-compliant bookings, clean invoicing, 24/7 rebooking, dedicated account management, and disruption support."
         url={`https://www.jetset-travel.com/${locale}/corporate-travel`}
         serviceType="Corporate Travel Management"
+        dateModified={SERVICE_LAST_UPDATED}
       />
       <JsonLd data={faqSchema} />
     </>

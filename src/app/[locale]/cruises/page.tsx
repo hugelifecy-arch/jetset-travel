@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import CruisesContent from "./CruisesContent";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import ServiceSchema from "@/components/seo/ServiceSchema";
@@ -46,6 +46,7 @@ export default async function CruisesPage({
         description="Book worldwide cruises on Royal Caribbean, MSC, Norwegian, Celebrity, Disney and 50+ cruise lines. Caribbean, Mediterranean, Alaska, Asia and beyond. IATA-accredited cruise specialists."
         url={`https://www.jetset-travel.com/${locale}/cruises`}
         serviceType="Cruise Booking Service"
+        dateModified={SERVICE_LAST_UPDATED}
       />
     </>
   );

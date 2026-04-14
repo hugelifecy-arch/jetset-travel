@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -393,6 +393,7 @@ export default async function CorporateTravelCyprusPage({
         description="Corporate travel management across Cyprus. Policy-compliant bookings, 24/7 disruption support, clean invoicing, and dedicated account management for businesses in Paphos, Limassol, Nicosia, and Larnaca. IATA accredited."
         url={`https://www.jetset-travel.com/${locale}/corporate-travel-cyprus`}
         serviceType="Corporate Travel Management"
+        dateModified={SERVICE_LAST_UPDATED}
       />
       <JsonLd data={faqSchema} />
     </>

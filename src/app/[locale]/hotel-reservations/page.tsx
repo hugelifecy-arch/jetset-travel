@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -328,6 +328,7 @@ export default async function HotelReservationsPage({
         description="Negotiated hotel rates worldwide for corporate and leisure travelers. Quality accommodations matched to your budget, standards, and location needs. Group bookings and extended stays."
         url={`https://www.jetset-travel.com/${locale}/hotel-reservations`}
         serviceType="Hotel Reservation Service"
+        dateModified={SERVICE_LAST_UPDATED}
       />
     </>
   );
