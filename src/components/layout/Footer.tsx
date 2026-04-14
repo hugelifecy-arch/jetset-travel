@@ -223,6 +223,22 @@ export default function Footer() {
               />
             </a>
             <a
+              href="https://www.linkedin.com/company/jetsetcyprus"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow us on LinkedIn"
+              className="flex items-center justify-center min-h-[44px] min-w-[44px] p-2"
+            >
+              <Image
+                src="/images/icons/linkedin.svg"
+                alt="LinkedIn"
+                width={20}
+                height={20}
+                className="brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
+                loading="lazy"
+              />
+            </a>
+            <a
               href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте JetSet, мне нужна помощь с...") : encodeURIComponent("Hi JetSet, I'd like help with...")}`}
               target="_blank"
               rel="noopener noreferrer"

@@ -209,6 +209,7 @@ export default async function LocalBusinessSchema({
     sameAs: [
       "https://www.facebook.com/JETSETCYPRUS/",
       "https://www.instagram.com/jetsetcyprus",
+      "https://www.linkedin.com/company/jetsetcyprus",
       "https://wa.me/35799478073",
       "https://t.me/jetsetnotis",
     ],

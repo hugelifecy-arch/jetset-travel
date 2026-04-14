@@ -121,6 +121,8 @@ export default async function AboutPage({
     taxID: "HE 181550",
     sameAs: [
       "https://www.facebook.com/JETSETCYPRUS/",
+      "https://www.instagram.com/jetsetcyprus",
+      "https://www.linkedin.com/company/jetsetcyprus",
       "https://wa.me/35799478073",
       "https://t.me/jetsetnotis",
     ],
