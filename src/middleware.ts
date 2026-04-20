@@ -4,7 +4,12 @@ import type { NextRequest } from "next/server";
 const CANONICAL_HOST = "www.jetset-travel.com";
 const APEX_HOST = "jetset-travel.com";
 const locales = ["en", "ru"] as const;
+type Locale = (typeof locales)[number];
 const PUBLIC_FILE = /\.(.*)$/;
+const LOCALE_PREFIX_RE = new RegExp(`^/(${locales.join("|")})(/|$)`);
+
+// Paths on the apex that must stay reachable (search engine verification).
+const APEX_BYPASS = /^\/(robots\.txt|sitemap\.xml|yandex_[a-f0-9]+\.html|mailru-verification[a-f0-9]+\.html)$/i;
 
 // Special-case bare-path redirects that don't map 1:1 to /<locale>/<path>
 const BARE_PATH_SPECIALS: Record<
@@ -16,9 +21,8 @@ const BARE_PATH_SPECIALS: Record<
   "/quote": { pathname: "/contact", extraSearch: { type: "quote" } },
 };
 
-function getPreferredLocale(req: NextRequest): (typeof locales)[number] {
+function getPreferredLocale(req: NextRequest): Locale {
   const acceptLang = req.headers.get("accept-language") || "";
-  // Check if Russian appears before English in the Accept-Language header
   const ruIndex = acceptLang.search(/\bru\b/i);
   if (ruIndex !== -1) {
     const enIndex = acceptLang.search(/\ben\b/i);
@@ -34,94 +38,136 @@ function getHostname(req: NextRequest) {
   if (urlHost) {
     return urlHost.toLowerCase();
   }
-
   const hostHeader = req.headers.get("host") || "";
   return hostHeader.split(":")[0].trim().toLowerCase();
+}
+
+/**
+ * Collapse repeated locale segments: /en/en/foo → /en/foo, /ru/ru → /ru.
+ * Runs until stable so /en/en/en/x also collapses in one pass.
+ */
+function collapseDoubleLocalePrefix(pathname: string): string {
+  let out = pathname;
+  for (const loc of locales) {
+    const re = new RegExp(`^/${loc}/${loc}(?=/|$)`, "i");
+    while (re.test(out)) {
+      out = out.replace(re, `/${loc}`);
+    }
+  }
+  return out;
 }
 
 export default function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const hostname = getHostname(req);
-  const { pathname } = url;
-  const lang = url.searchParams.get("lang");
+  const originalPathname = url.pathname;
+  const originalSearch = url.search;
 
   const isLocalOrPreview =
     hostname.includes("localhost") ||
     hostname.endsWith(".vercel.app") ||
     hostname.endsWith(".vercel-preview.app");
 
-  // 1. Force apex → canonical www (301) — production only
-  //    Skip robots.txt, sitemap.xml, and Yandex verification files so
-  //    search engines can access them on the apex domain.
-  if (!isLocalOrPreview && hostname === APEX_HOST) {
-    const apexBypass =
-      /^\/(robots\.txt|sitemap\.xml|yandex_[a-f0-9]+\.html)$/i;
-    if (!apexBypass.test(pathname)) {
+  const isInternal =
+    originalPathname.startsWith("/_next") ||
+    originalPathname.startsWith("/api") ||
+    PUBLIC_FILE.test(originalPathname);
+
+  // Decide the canonical hostname. Apex → www in production, with search-engine
+  // verification files bypassed so they remain fetchable on the apex.
+  const shouldCanonicalizeHost =
+    !isLocalOrPreview &&
+    hostname === APEX_HOST &&
+    !APEX_BYPASS.test(originalPathname);
+  const targetHost = shouldCanonicalizeHost ? CANONICAL_HOST : hostname;
+  const hostChanged = targetHost !== hostname;
+
+  // Internal / static requests: redirect only if the host needs canonicalizing,
+  // otherwise pass through untouched.
+  if (isInternal) {
+    if (hostChanged) {
       const redirectUrl = url.clone();
-      redirectUrl.hostname = CANONICAL_HOST;
+      redirectUrl.hostname = targetHost;
       return NextResponse.redirect(redirectUrl, 301);
     }
-  }
-
-  // Ignore Next.js internals / APIs / static files
-  if (
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
-    PUBLIC_FILE.test(pathname)
-  ) {
     return NextResponse.next();
   }
 
-  // 2. Strip trailing slashes (except root "/") for URL consistency
+  // --- Compute the canonical pathname in a single pass ---
+  let pathname = originalPathname;
+
+  // 1. Strip trailing slash (except bare root).
   if (pathname !== "/" && pathname.endsWith("/")) {
-    const redirectUrl = url.clone();
-    redirectUrl.pathname = pathname.replace(/\/+$/, "");
-    return NextResponse.redirect(redirectUrl, 301);
+    pathname = pathname.replace(/\/+$/, "");
   }
 
-  // 3. Canonicalize query-param language into path-based locale
-  if (lang === "ru" || lang === "en") {
-    url.searchParams.delete("lang");
-    url.pathname = `/${lang}${pathname === "/" ? "" : pathname}`;
-    return NextResponse.redirect(url, 301);
+  // 2. Collapse /en/en/... → /en/...
+  pathname = collapseDoubleLocalePrefix(pathname);
+
+  // 3. Handle ?lang= query: strip it and reconcile with the path prefix.
+  const searchParams = new URLSearchParams(url.search);
+  const lang = searchParams.get("lang");
+  let queryChanged = false;
+  if (lang === "en" || lang === "ru") {
+    searchParams.delete("lang");
+    queryChanged = true;
+    const prefixMatch = pathname.match(LOCALE_PREFIX_RE);
+    if (prefixMatch) {
+      // Already locale-prefixed: if it doesn't match lang, swap; else keep.
+      const existingLocale = prefixMatch[1] as Locale;
+      if (existingLocale !== lang) {
+        pathname = `/${lang}${pathname.slice(existingLocale.length + 1)}`;
+      }
+    } else {
+      // Bare path: add the requested locale prefix.
+      pathname = pathname === "/" ? `/${lang}` : `/${lang}${pathname}`;
+    }
   }
 
-  // 4. Already locale-prefixed: /en OR /en/... OR /ru OR /ru/... → pass through
-  const localePrefix = new RegExp(`^/(${locales.join("|")})(/|$)`);
-  if (localePrefix.test(pathname)) {
-    return NextResponse.next();
-  }
-
-  // 5. Special-case bare paths that need a non-trivial destination
+  // 4. Special-case bare paths (e.g. /luxury → /en/luxury-travel).
   const special = BARE_PATH_SPECIALS[pathname];
   if (special) {
-    const redirectUrl = url.clone();
-    redirectUrl.pathname = `/en${special.pathname}`;
+    pathname = `/en${special.pathname}`;
     if (special.extraSearch) {
-      for (const [key, value] of Object.entries(special.extraSearch)) {
-        redirectUrl.searchParams.set(key, value);
+      for (const [k, v] of Object.entries(special.extraSearch)) {
+        if (searchParams.get(k) !== v) {
+          searchParams.set(k, v);
+          queryChanged = true;
+        }
       }
     }
+  }
+
+  // 5. Bare path (not root, not locale-prefixed) → default to /en.
+  if (pathname !== "/" && !LOCALE_PREFIX_RE.test(pathname)) {
+    pathname = `/en${pathname}`;
+  }
+
+  // --- Decide: redirect, rewrite (root), or pass through ---
+  const newSearch = searchParams.toString() ? `?${searchParams.toString()}` : "";
+  const pathChanged = pathname !== originalPathname;
+  const searchStringChanged = queryChanged && newSearch !== originalSearch;
+
+  if (hostChanged || pathChanged || searchStringChanged) {
+    const redirectUrl = url.clone();
+    redirectUrl.hostname = targetHost;
+    redirectUrl.pathname = pathname;
+    redirectUrl.search = newSearch;
     return NextResponse.redirect(redirectUrl, 301);
   }
 
-  // 6. Root "/" — rewrite (not redirect) so the homepage serves a 200 instead
-  //    of a 301.  Google Search Console flags redirect-only URLs as
-  //    "Page with redirect", which hurts indexing.
+  // Root "/" — rewrite (200, not a redirect) to the preferred locale so GSC
+  // doesn't flag the homepage as "Page with redirect".
   if (pathname === "/") {
     const preferredLocale = getPreferredLocale(req);
     const rewriteUrl = url.clone();
     rewriteUrl.pathname = `/${preferredLocale}`;
     const res = NextResponse.rewrite(rewriteUrl);
-    // Tell caches that the response varies by language preference
     res.headers.set("Vary", "Accept-Language");
     return res;
   }
 
-  // All remaining bare paths → /<locale>/<path> (301, query string preserved)
-  const redirectUrl = url.clone();
-  redirectUrl.pathname = `/en${pathname}`;
-  return NextResponse.redirect(redirectUrl, 301);
+  return NextResponse.next();
 }
 
 export const config = {
