@@ -50,17 +50,15 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async redirects() {
+    // Host canonicalization (apex → www), `/en/en → /en`, trailing-slash,
+    // and `?lang=` stripping all live in `src/middleware.ts` so they happen
+    // in a single 301 hop. Keep only destination-specific redirects here.
+    //
+    // Order matters: `next.config.ts` redirects run BEFORE middleware. Any
+    // rule added here that the middleware would also match will create a
+    // redirect chain and re-trigger Google Search Console's "Page with
+    // redirect" validation failure.
     return [
-      // Redirect non-www to www — but skip robots.txt, sitemap.xml,
-      // and Yandex verification files so they're accessible on the apex domain.
-      {
-        source: "/((?!robots\\.txt|sitemap\\.xml|llms\\.txt|llms-full\\.txt|yandex_).*)",
-        has: [{ type: "host", value: "jetset-travel.com" }],
-        destination: "https://www.jetset-travel.com/:path*",
-        permanent: true,
-      },
-      // Root "/" redirect is handled by middleware (with Accept-Language detection)
-      // /luxury → /luxury-travel redirects (404 fix)
       {
         source: "/en/luxury",
         destination: "/en/luxury-travel",
@@ -71,10 +69,6 @@ const nextConfig: NextConfig = {
         destination: "/ru/luxury-travel",
         permanent: true,
       },
-      { source: "/en/en", destination: "/en", statusCode: 301 },
-      { source: "/en/en/:path*", destination: "/en/:path*", statusCode: 301 },
-      { source: "/ru/ru", destination: "/ru", statusCode: 301 },
-      { source: "/ru/ru/:path*", destination: "/ru/:path*", statusCode: 301 },
     ];
   },
   async headers() {
