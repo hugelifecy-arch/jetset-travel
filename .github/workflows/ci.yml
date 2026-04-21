@@ -28,7 +28,7 @@ jobs:
         run: npm run lint
 
       - name: Tests
-        run: node --test 'tests/*.test.js'
+        run: node --test tests/*.test.js
 
       - name: Build
         run: npm run build

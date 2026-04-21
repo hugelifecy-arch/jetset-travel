@@ -32,7 +32,7 @@ Open http://localhost:3000.
 | `npm run start` | Run the production server (after `build`) |
 | `npm run lint` | Run ESLint |
 | `npm run audit-check` | Run the custom audit script in `scripts/audit-check.js` |
-| `node --test 'tests/*.test.js'` | Run the Node test runner suite |
+| `node --test tests/*.test.js` | Run the Node test runner suite |
 
 ---
 
@@ -108,6 +108,6 @@ A scripted version is available at `scripts/verify-canonical-redirects.sh`.
 ## Contributing
 
 1. Branch from `main`.
-2. Run `npm run lint`, `node --test 'tests/*.test.js'`, and `npm run build` locally.
+2. Run `npm run lint`, `node --test tests/*.test.js`, and `npm run build` locally.
 3. Open a PR using the template in `.github/PULL_REQUEST_TEMPLATE.md`.
 4. CI runs lint + tests + build on every push and PR (see `.github/workflows/ci.yml`).

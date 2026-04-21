@@ -20,7 +20,7 @@
 
 - [ ] `npm run lint` passes
 - [ ] `npm run build` succeeds
-- [ ] `node --test 'tests/*.test.js'` passes
+- [ ] `node --test tests/*.test.js` passes
 - [ ] Manually verified in `npm run dev` (list pages checked)
 - [ ] Verified bilingual behaviour (EN + RU) where relevant
 
