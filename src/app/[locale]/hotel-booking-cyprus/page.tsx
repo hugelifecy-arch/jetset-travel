@@ -65,7 +65,7 @@ export default async function HotelBookingCyprusPage({
   const { locale } = await params;
 
   if (locale === "ru") {
-    redirect("/ru/bronirovanie-otelej-kipr");
+    redirect("/ru/bronirovanie-otelej-kipr/");
   }
 
   const t = await getTranslations({ locale, namespace: "hotelCyprusPage" });
@@ -392,7 +392,7 @@ export default async function HotelBookingCyprusPage({
         locale={locale}
         name="Hotel Booking Cyprus"
         description="Hotel reservations in Cyprus and worldwide. Negotiated corporate rates, luxury hotel partners, clean invoicing, and 24/7 support. JetSet Travel Paphos, IATA-accredited agency."
-        url={`https://www.jetset-travel.com/${locale}/hotel-booking-cyprus`}
+        url={`https://www.jetset-travel.com/${locale}/hotel-booking-cyprus/`}
         serviceType="Hotel Reservation Service"
         dateModified={SERVICE_LAST_UPDATED}
       />

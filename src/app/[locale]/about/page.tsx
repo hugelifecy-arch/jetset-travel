@@ -149,7 +149,7 @@ export default async function AboutPage({
       jobTitle: isRussian ? "Сооснователь" : "Co-Founder",
       worksFor: { "@id": "https://www.jetset-travel.com/#organization" },
       image: "https://www.jetset-travel.com/images/nontari-kalaitsidis.jpg",
-      url: `https://www.jetset-travel.com/${locale}/about`,
+      url: `https://www.jetset-travel.com/${locale}/about/`,
       knowsAbout: [
         "Corporate Travel Management",
         "IATA Flight Booking",
@@ -165,7 +165,7 @@ export default async function AboutPage({
       jobTitle: isRussian ? "Сооснователь" : "Co-Founder",
       worksFor: { "@id": "https://www.jetset-travel.com/#organization" },
       image: "https://www.jetset-travel.com/images/maro-kokkinou.jpg",
-      url: `https://www.jetset-travel.com/${locale}/about`,
+      url: `https://www.jetset-travel.com/${locale}/about/`,
       knowsAbout: [
         "Luxury Travel Planning",
         "Cruise Booking",

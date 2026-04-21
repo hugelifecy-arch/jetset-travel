@@ -38,5 +38,5 @@ export default async function KorporativnyePoezdkiKiprPage({
 }) {
   const { locale } = await params;
 
-  redirect(`/${locale}/corporate-travel-cyprus`);
+  redirect(`/${locale}/corporate-travel-cyprus/`);
 }

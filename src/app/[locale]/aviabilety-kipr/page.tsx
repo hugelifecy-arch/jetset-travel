@@ -42,7 +42,7 @@ export default async function AviabiletyKiprPage({
   const { locale } = await params;
 
   if (locale !== "ru") {
-    redirect(`/${locale}/flight-tickets-cyprus`);
+    redirect(`/${locale}/flight-tickets-cyprus/`);
   }
 
   return <FlightPageContent locale={locale} />;

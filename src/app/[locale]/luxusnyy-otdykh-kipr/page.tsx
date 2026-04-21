@@ -38,5 +38,5 @@ export default async function LuxusnyyOtdykhKiprPage({
 }) {
   const { locale } = await params;
 
-  redirect(`/${locale}/luxury-travel-cyprus`);
+  redirect(`/${locale}/luxury-travel-cyprus/`);
 }

@@ -41,7 +41,7 @@ export default async function ContactPage({
       locale === "ru"
         ? "Контакты JetSet Travel"
         : "Contact JetSet Travel",
-    url: `${CANONICAL_ORIGIN}/${locale}/contact`,
+    url: `${CANONICAL_ORIGIN}/${locale}/contact/`,
     mainEntity: {
       "@type": "TravelAgency",
       name: "JetSet Travel Cyprus",

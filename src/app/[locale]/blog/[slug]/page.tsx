@@ -48,14 +48,14 @@ export async function generateMetadata({
             en: `/blog/${slugs.en}`,
             ru: `/blog/${slugs.ru}`,
           })
-        : { canonical: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}` };
+        : { canonical: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}/` };
     })(),
     openGraph: {
       type: "article",
       siteName: "JetSet Travel Cyprus",
       title: post.frontmatter.title,
       description: post.frontmatter.description,
-      url: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}`,
+      url: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}/`,
       locale: isRussian ? "ru_RU" : "en_CY",
       alternateLocale: isRussian ? "en_CY" : "ru_RU",
       images: [{ url: ogImage, width: 1200, height: 630, alt: post.frontmatter.title }],
@@ -135,7 +135,7 @@ export default async function BlogPostPage({
     )
     .slice(0, 3);
 
-  const articleUrl = `${CANONICAL_ORIGIN}/${locale}/blog/${slug}`;
+  const articleUrl = `${CANONICAL_ORIGIN}/${locale}/blog/${slug}/`;
   const ogImage = post.frontmatter.image
     ? `${CANONICAL_ORIGIN}${post.frontmatter.image}`
     : OG_IMAGE;
@@ -152,7 +152,7 @@ export default async function BlogPostPage({
     author: {
       "@type": "Person",
       name: post.frontmatter.author,
-      url: `${CANONICAL_ORIGIN}/en/about`,
+      url: `${CANONICAL_ORIGIN}/en/about/`,
     },
     publisher: {
       "@type": "Organization",
@@ -178,7 +178,7 @@ export default async function BlogPostPage({
     ],
     isPartOf: {
       "@type": "Blog",
-      "@id": `${CANONICAL_ORIGIN}/${locale}/blog`,
+      "@id": `${CANONICAL_ORIGIN}/${locale}/blog/`,
       name: locale === "ru" ? "Блог JetSet Travel" : "JetSet Travel Blog",
     },
     // Speakable: identifies content suitable for voice assistants (Google Assistant, Alexa)

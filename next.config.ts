@@ -39,7 +39,10 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  trailingSlash: false,
+  // Canonical URL form is WITH a trailing slash across the site
+  // (see src/lib/canonical.ts). Next.js issues the non-slash → slash
+  // redirect for any page route that isn't already handled in middleware.
+  trailingSlash: true,
   images: {
     localPatterns: [
       {
@@ -61,12 +64,12 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/en/luxury",
-        destination: "/en/luxury-travel",
+        destination: "/en/luxury-travel/",
         permanent: true,
       },
       {
         source: "/ru/luxury",
-        destination: "/ru/luxury-travel",
+        destination: "/ru/luxury-travel/",
         permanent: true,
       },
     ];
