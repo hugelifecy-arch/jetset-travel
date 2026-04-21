@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   verification: {
+    ...(process.env.GOOGLE_SITE_VERIFICATION && {
+      google: process.env.GOOGLE_SITE_VERIFICATION,
+    }),
     yandex: "c693997a9fde5229",
   },
   openGraph: {
