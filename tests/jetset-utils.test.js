@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import '../jetset-utils.js';
+import '../archive/legacy-static-site/jetset-utils.js';
 
 const {
   buildMailtoHref,
