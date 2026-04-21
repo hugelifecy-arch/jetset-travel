@@ -109,6 +109,24 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: "/videos/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/:file(.+\\.(?:ico|png|svg|webmanifest|webp|jpg|jpeg|gif|woff|woff2|ttf|otf|mp4|webm))",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
       { source: "/(.*)", headers: securityHeaders },
       {
         source: "/:path*",

@@ -1,17 +1,28 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { getTranslations } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
 import HeroSection from "@/components/sections/HeroSection";
 import TrustCredentialsBar from "@/components/sections/TrustCredentialsBar";
-import ServicesGrid from "@/components/sections/ServicesGrid";
-import TrustSection from "@/components/sections/TrustSection";
 import ComparisonSection from "@/components/sections/ComparisonSection";
-import GoogleReviews from "@/components/sections/GoogleReviews";
 import ClientLogos from "@/components/sections/ClientLogos";
 import CTABanner from "@/components/sections/CTABanner";
 import LatestBlogStrip from "@/components/sections/LatestBlogStrip";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 import WebSiteSchema from "@/components/seo/WebSiteSchema";
+
+// Below-the-fold sections are code-split so their client JS chunks
+// (including framer-motion) are not bundled with the initial page load.
+// SSR remains enabled (default) so the HTML is still crawlable.
+const ServicesGrid = dynamic(
+  () => import("@/components/sections/ServicesGrid"),
+);
+const TrustSection = dynamic(
+  () => import("@/components/sections/TrustSection"),
+);
+const GoogleReviews = dynamic(
+  () => import("@/components/sections/GoogleReviews"),
+);
 export async function generateMetadata({
   params,
 }: {
