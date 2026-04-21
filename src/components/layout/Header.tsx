@@ -31,6 +31,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const locale = useLocale();
   const t = useTranslations("nav");
+  const tCommon = useTranslations("common");
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
@@ -117,7 +118,7 @@ export default function Header() {
           <Link href={`/${locale}`} className="flex-shrink-0">
             <Image
               src="/images/jetset-logo.svg"
-              alt="JetSet Travel Cyprus - Home"
+              alt={tCommon("logoAlt")}
               width={140}
               height={40}
               className="h-10 w-auto"

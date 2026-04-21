@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 export default function Footer() {
   const locale = useLocale();
   const t = useTranslations("footer");
+  const tCommon = useTranslations("common");
 
   const quickLinks = [
     { href: `/${locale}/about`, label: t("aboutUs") },
@@ -39,7 +40,7 @@ export default function Footer() {
             <Link href={`/${locale}`}>
               <Image
                 src="/images/jetset-logo.svg"
-                alt="JetSet Travel Cyprus - Home"
+                alt={tCommon("logoAlt")}
                 width={140}
                 height={40}
                 className="h-10 w-auto"
@@ -53,7 +54,7 @@ export default function Footer() {
               <div className="flex items-center gap-3">
                 <Image
                   src="/images/iata-logo.jpg"
-                  alt="IATA Accredited Travel Agent"
+                  alt={tCommon("iataAlt")}
                   width={52}
                   height={52}
                   className="h-[52px] w-[52px] rounded-lg object-contain"
@@ -64,7 +65,7 @@ export default function Footer() {
               <div className="flex items-center gap-3">
                 <Image
                   src="/images/tourism-logo.jpg"
-                  alt="Cyprus Tourism Organisation Licensed"
+                  alt={tCommon("ctoAlt")}
                   width={52}
                   height={52}
                   className="h-[52px] w-[52px] rounded-lg object-contain"

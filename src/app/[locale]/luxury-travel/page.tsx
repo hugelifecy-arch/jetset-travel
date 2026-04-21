@@ -77,14 +77,14 @@ export default async function LuxuryTravelPage({
       description: t("listenDesc"),
       align: "left" as const,
       image: "/images/luxury/listen.jpg",
-      imageAlt: "Luxury resort poolside lounge at sunset",
+      imageAlt: t("listenImageAlt"),
     },
     {
       title: t("accessTitle"),
       description: t("accessDesc"),
       align: "right" as const,
       image: "/images/luxury/access.jpg",
-      imageAlt: "Exclusive infinity pool overlooking the ocean",
+      imageAlt: t("accessImageAlt"),
     },
   ];
 
@@ -95,7 +95,7 @@ export default async function LuxuryTravelPage({
       description: t("maldivesDesc"),
       price: t("maldivesPrice"),
       image: "/images/luxury/maldives.jpg",
-      imageAlt: "Aerial view of overwater bungalows in the Maldives",
+      imageAlt: t("maldivesImageAlt"),
       slug: "maldives",
     },
     {
@@ -104,7 +104,7 @@ export default async function LuxuryTravelPage({
       description: t("santoriniDesc"),
       price: t("santoriniPrice"),
       image: "/images/luxury/santorini.jpg",
-      imageAlt: "White-washed buildings overlooking the Santorini caldera at sunset",
+      imageAlt: t("santoriniImageAlt"),
       slug: "santorini",
     },
     {
@@ -113,7 +113,7 @@ export default async function LuxuryTravelPage({
       description: t("dubaiDesc"),
       price: t("dubaiPrice"),
       image: "/images/luxury/dubai.jpg",
-      imageAlt: "Dubai skyline with Burj Khalifa at sunset",
+      imageAlt: t("dubaiImageAlt"),
       slug: "dubai",
     },
     {
@@ -122,7 +122,7 @@ export default async function LuxuryTravelPage({
       description: t("swissAlpsDesc"),
       price: t("swissAlpsPrice"),
       image: "/images/luxury/swiss-alps.jpg",
-      imageAlt: "Snow-capped Swiss Alps with luxury chalet in the foreground",
+      imageAlt: t("swissAlpsImageAlt"),
       slug: "swiss-alps",
     },
     {
@@ -131,7 +131,7 @@ export default async function LuxuryTravelPage({
       description: t("seychellesDesc"),
       price: t("seychellesPrice"),
       image: "/images/luxury/seychelles.jpg",
-      imageAlt: "Pristine beach with granite boulders in the Seychelles",
+      imageAlt: t("seychellesImageAlt"),
       slug: "seychelles",
     },
     {
@@ -140,7 +140,7 @@ export default async function LuxuryTravelPage({
       description: t("tuscanyDesc"),
       price: t("tuscanyPrice"),
       image: "/images/luxury/tuscany.jpg",
-      imageAlt: "Rolling Tuscan hills with vineyards and a villa",
+      imageAlt: t("tuscanyImageAlt"),
       slug: "tuscany",
     },
   ];
@@ -151,7 +151,7 @@ export default async function LuxuryTravelPage({
       <section className="relative bg-brand-navy text-white min-h-[320px] sm:min-h-[400px] flex items-center overflow-hidden">
         <Image
           src="/images/services/luxury.jpg"
-          alt="Luxury resort with premium amenities for exclusive travel experiences"
+          alt={t("heroImageAlt")}
           fill
           priority
           className="object-cover"

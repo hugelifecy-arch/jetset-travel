@@ -72,6 +72,7 @@ function CorporateForm({
   onSuccess: () => void;
   t: TFunction;
 }) {
+  const tCommon = useTranslations("common");
   const [submitError, setSubmitError] = useState<string | null>(null);
   const formLoadedAt = useRef(Date.now());
   const honeypotRef = useRef<HTMLInputElement>(null);
@@ -290,6 +291,7 @@ function CorporateForm({
           freeConsultation={t("freeConsultation")}
           trustLicence={t("trustLicence")}
           trustClients={t("trustClients")}
+          iataImageAlt={tCommon("iataAlt")}
           variant="dark"
         />
       </div>
@@ -308,6 +310,7 @@ function LuxuryForm({
   onSuccess: () => void;
   t: TFunction;
 }) {
+  const tCommon = useTranslations("common");
   const [submitError, setSubmitError] = useState<string | null>(null);
   const formLoadedAt = useRef(Date.now());
   const honeypotRef = useRef<HTMLInputElement>(null);
@@ -514,6 +517,7 @@ function LuxuryForm({
           freeConsultation={t("freeConsultation")}
           trustLicence={t("trustLicence")}
           trustClients={t("trustClients")}
+          iataImageAlt={tCommon("iataAlt")}
           variant="dark"
         />
       </div>

@@ -126,7 +126,7 @@ export default async function ServicesPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/services/flights.jpg"
-                  alt="Flight booking service - JetSet Travel Paphos Cyprus"
+                  alt={t("flightsImageAlt")}
                   fill
                   loading="lazy"
                   className="object-cover"
@@ -174,7 +174,7 @@ export default async function ServicesPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/services/hotels.jpg"
-                  alt="Hotel reservation service - luxury and business hotels worldwide"
+                  alt={t("hotelsImageAlt")}
                   fill
                   loading="lazy"
                   className="object-cover"
@@ -222,7 +222,7 @@ export default async function ServicesPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/services/visa.jpg"
-                  alt="Visa services and application assistance in Paphos Cyprus"
+                  alt={t("visasImageAlt")}
                   fill
                   loading="lazy"
                   className="object-cover"
@@ -270,7 +270,7 @@ export default async function ServicesPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/services/luxury.jpg"
-                  alt="Luxury travel planning - premium holidays from Cyprus"
+                  alt={t("luxuryImageAlt")}
                   fill
                   loading="lazy"
                   className="object-cover"
@@ -318,7 +318,7 @@ export default async function ServicesPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/services/corporate.jpg"
-                  alt="Corporate travel management for Cyprus businesses"
+                  alt={t("corporateImageAlt")}
                   fill
                   loading="lazy"
                   className="object-cover"

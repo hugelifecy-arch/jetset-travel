@@ -6,6 +6,7 @@ import { Clock, Users, HeartHandshake, Award } from "lucide-react";
 
 export default function TrustCredentialsBar() {
   const t = useTranslations("credentialsBar");
+  const tCommon = useTranslations("common");
 
   return (
     <section className="bg-brand-light/60 border-y border-brand-navy/5">
@@ -15,7 +16,7 @@ export default function TrustCredentialsBar() {
           <div className="flex items-center gap-3">
             <Image
               src="/images/iata-logo.jpg"
-              alt="IATA Accredited Travel Agent"
+              alt={tCommon("iataAlt")}
               width={72}
               height={72}
               className="h-16 w-16 rounded-lg object-contain sm:h-[72px] sm:w-[72px]"
@@ -29,7 +30,7 @@ export default function TrustCredentialsBar() {
           <div className="flex items-center gap-3">
             <Image
               src="/images/tourism-logo.jpg"
-              alt="Cyprus Tourism Organisation"
+              alt={tCommon("ctoAlt")}
               width={72}
               height={72}
               className="h-16 w-16 rounded-lg object-contain sm:h-[72px] sm:w-[72px]"
