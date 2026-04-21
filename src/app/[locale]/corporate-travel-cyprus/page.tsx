@@ -114,7 +114,7 @@ export default async function CorporateTravelCyprusPage({
   const { locale } = await params;
 
   if (locale === "ru") {
-    redirect("/ru/korporativnye-poezdki-kipr");
+    redirect("/ru/korporativnye-poezdki-kipr/");
   }
 
   const t = await getTranslations({
@@ -391,7 +391,7 @@ export default async function CorporateTravelCyprusPage({
         locale={locale}
         name="Corporate Travel Management Cyprus"
         description="Corporate travel management across Cyprus. Policy-compliant bookings, 24/7 disruption support, clean invoicing, and dedicated account management for businesses in Paphos, Limassol, Nicosia, and Larnaca. IATA accredited."
-        url={`https://www.jetset-travel.com/${locale}/corporate-travel-cyprus`}
+        url={`https://www.jetset-travel.com/${locale}/corporate-travel-cyprus/`}
         serviceType="Corporate Travel Management"
         dateModified={SERVICE_LAST_UPDATED}
       />

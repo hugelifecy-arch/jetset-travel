@@ -11,7 +11,9 @@ const LOCALE_PREFIX_RE = new RegExp(`^/(${locales.join("|")})(/|$)`);
 // Paths on the apex that must stay reachable (search engine verification).
 const APEX_BYPASS = /^\/(robots\.txt|sitemap\.xml|yandex_[a-f0-9]+\.html|mailru-verification[a-f0-9]+\.html)$/i;
 
-// Special-case bare-path redirects that don't map 1:1 to /<locale>/<path>
+// Special-case bare-path redirects that don't map 1:1 to /<locale>/<path>.
+// Values are the path WITHOUT the locale prefix — the locale prefix is added
+// below so the final URL ends up as /en/<pathname>/ (with trailing slash).
 const BARE_PATH_SPECIALS: Record<
   string,
   { pathname: string; extraSearch?: Record<string, string> }
@@ -57,6 +59,18 @@ function collapseDoubleLocalePrefix(pathname: string): string {
   return out;
 }
 
+/**
+ * Canonical form always has a trailing slash. Adds one when missing,
+ * collapses duplicates, and leaves the root "/" untouched.
+ */
+function ensureTrailingSlash(pathname: string): string {
+  if (!pathname) return "/";
+  // Collapse repeated slashes except for the leading one.
+  const collapsed = pathname.replace(/\/{2,}/g, "/");
+  if (collapsed === "/") return "/";
+  return collapsed.endsWith("/") ? collapsed : `${collapsed}/`;
+}
+
 export default function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const hostname = getHostname(req);
@@ -96,15 +110,15 @@ export default function middleware(req: NextRequest) {
   // --- Compute the canonical pathname in a single pass ---
   let pathname = originalPathname;
 
-  // 1. Strip trailing slash (except bare root).
-  if (pathname !== "/" && pathname.endsWith("/")) {
-    pathname = pathname.replace(/\/+$/, "");
-  }
+  // 1. Collapse /en/en/... → /en/... (runs before we touch trailing slash so
+  //    "/en/en/" and "/en/en" both reduce to the same intermediate form).
+  pathname = collapseDoubleLocalePrefix(
+    pathname.endsWith("/") && pathname !== "/"
+      ? pathname.replace(/\/+$/, "")
+      : pathname,
+  );
 
-  // 2. Collapse /en/en/... → /en/...
-  pathname = collapseDoubleLocalePrefix(pathname);
-
-  // 3. Handle ?lang= query: strip it and reconcile with the path prefix.
+  // 2. Handle ?lang= query: strip it and reconcile with the path prefix.
   const searchParams = new URLSearchParams(url.search);
   const lang = searchParams.get("lang");
   let queryChanged = false;
@@ -124,7 +138,7 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // 4. Special-case bare paths (e.g. /luxury → /en/luxury-travel).
+  // 3. Special-case bare paths (e.g. /luxury → /en/luxury-travel).
   const special = BARE_PATH_SPECIALS[pathname];
   if (special) {
     pathname = `/en${special.pathname}`;
@@ -138,10 +152,13 @@ export default function middleware(req: NextRequest) {
     }
   }
 
-  // 5. Bare path (not root, not locale-prefixed) → default to /en.
+  // 4. Bare path (not root, not locale-prefixed) → default to /en.
   if (pathname !== "/" && !LOCALE_PREFIX_RE.test(pathname)) {
     pathname = `/en${pathname}`;
   }
+
+  // 5. Ensure a trailing slash on the canonical pathname.
+  pathname = ensureTrailingSlash(pathname);
 
   // --- Decide: redirect, rewrite (root), or pass through ---
   const newSearch = searchParams.toString() ? `?${searchParams.toString()}` : "";
@@ -161,7 +178,7 @@ export default function middleware(req: NextRequest) {
   if (pathname === "/") {
     const preferredLocale = getPreferredLocale(req);
     const rewriteUrl = url.clone();
-    rewriteUrl.pathname = `/${preferredLocale}`;
+    rewriteUrl.pathname = `/${preferredLocale}/`;
     const res = NextResponse.rewrite(rewriteUrl);
     res.headers.set("Vary", "Accept-Language");
     return res;

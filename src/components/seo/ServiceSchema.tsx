@@ -56,7 +56,7 @@ export default function ServiceSchema({
           : "Custom quote — request a free, no-obligation estimate",
       },
       availability: "https://schema.org/InStock",
-      url: `${url.replace(/\/$/, "")}`,
+      url,
     },
   };
 

@@ -10,5 +10,5 @@ export default async function RootPage() {
   const enIndex = acceptLang.search(/\ben\b/i);
   const locale =
     ruIndex !== -1 && (enIndex === -1 || ruIndex < enIndex) ? "ru" : "en";
-  redirect(`/${locale}`);
+  redirect(`/${locale}/`);
 }

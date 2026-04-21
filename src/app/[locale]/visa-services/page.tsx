@@ -512,7 +512,7 @@ export default async function VisaServicesPage({
             ? "Профессиональные визовые услуги в Пафосе, Кипр. Подготовка документов, координация с посольствами, сопровождение для деловых и туристических виз по всему миру."
             : "Expert visa assistance from Paphos, Cyprus. Document preparation, application guidance, embassy coordination, and status tracking for business and tourist visas worldwide."
         }
-        url={`https://www.jetset-travel.com/${locale}/visa-services`}
+        url={`https://www.jetset-travel.com/${locale}/visa-services/`}
         serviceType="Visa Services"
         dateModified={SERVICE_LAST_UPDATED}
       />

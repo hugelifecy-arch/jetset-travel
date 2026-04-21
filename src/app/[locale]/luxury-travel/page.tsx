@@ -374,7 +374,7 @@ export default async function LuxuryTravelPage({
         locale={locale}
         name="Luxury Travel Planning"
         description="Curated luxury travel experiences from Cyprus. Suite-level hotels, private transfers, bespoke multi-city journeys, island getaways, and honeymoon planning."
-        url={`https://www.jetset-travel.com/${locale}/luxury-travel`}
+        url={`https://www.jetset-travel.com/${locale}/luxury-travel/`}
         serviceType="Luxury Travel Planning"
         dateModified={SERVICE_LAST_UPDATED}
       />

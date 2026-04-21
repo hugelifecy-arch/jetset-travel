@@ -34,5 +34,5 @@ export default async function BronirovanieOtelejKiprPage({
 }) {
   const { locale } = await params;
 
-  redirect(`/${locale}/hotel-booking-cyprus`);
+  redirect(`/${locale}/hotel-booking-cyprus/`);
 }

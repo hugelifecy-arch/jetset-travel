@@ -1,110 +1,139 @@
 import type { MetadataRoute } from "next";
-import { CANONICAL_ORIGIN } from "@/lib/seo";
+import { SERVICE_LAST_UPDATED } from "@/lib/seo";
+import {
+  CANONICAL_ORIGIN,
+  LOCALE_ALTERNATES,
+  getCanonicalUrl,
+  type Locale,
+} from "@/lib/canonical";
 import { getPublishedPosts } from "@/lib/blog";
 
-const locales = ["en", "ru"] as const;
+const locales = ["en", "ru"] as const satisfies readonly Locale[];
 
-const pages = [
-  { path: "", priority: 1.0, changeFrequency: "daily" as const },
-  { path: "/corporate-travel", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/luxury-travel", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/visa-services", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/services", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/hotel-reservations", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/cruises", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/about", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/contact", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/quote", priority: 0.8, changeFrequency: "weekly" as const },
-  { path: "/faq", priority: 0.6, changeFrequency: "weekly" as const },
-  { path: "/blog", priority: 0.6, changeFrequency: "weekly" as const },
-  // /paphos-travel-agency is handled separately in crossLocalePages below
-  { path: "/privacy", priority: 0.4, changeFrequency: "monthly" as const },
-  { path: "/terms", priority: 0.4, changeFrequency: "monthly" as const },
+type StaticPage = {
+  /** route path AFTER the locale (e.g. "" for locale root, "/about") */
+  path: string;
+  priority: number;
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+};
+
+const pages: StaticPage[] = [
+  { path: "", priority: 1.0, changeFrequency: "weekly" },
+  { path: "/corporate-travel", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/luxury-travel", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/visa-services", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/services", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/hotel-reservations", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/cruises", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/about", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/quote", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/blog", priority: 0.6, changeFrequency: "weekly" },
+  // /paphos-travel-agency + other cross-locale pages below
+  { path: "/privacy", priority: 0.4, changeFrequency: "yearly" },
+  { path: "/terms", priority: 0.4, changeFrequency: "yearly" },
 ];
 
+/**
+ * Cross-locale pages with different slugs per locale. Each entry emits
+ * BOTH /en/<def.en>/ and /ru/<def.ru>/ and wires them together via
+ * `alternates.languages` (which Next.js renders as <xhtml:link>).
+ */
+const crossLocalePageDefs: Array<{ en: string; ru: string }> = [
+  { en: "paphos-travel-agency", ru: "turisticheskoe-agentstvo-pafos" },
+  { en: "corporate-travel-cyprus", ru: "korporativnye-poezdki-kipr" },
+  { en: "visa-services-cyprus", ru: "vizovye-uslugi-kipr" },
+  { en: "luxury-travel-cyprus", ru: "luxusnyy-otdykh-kipr" },
+  { en: "flight-tickets-cyprus", ru: "aviabilety-kipr" },
+  { en: "hotel-booking-cyprus", ru: "bronirovanie-otelej-kipr" },
+];
+
+/**
+ * Build the `alternates.languages` map for a canonical locale-prefixed path
+ * by reading from LOCALE_ALTERNATES. If the URL isn't registered there we
+ * fall back to self-referencing the single locale.
+ */
+function alternatesFor(localePath: string) {
+  const entry = LOCALE_ALTERNATES[localePath];
+  const languages: Record<string, string> = {};
+  if (entry?.en) languages.en = `${CANONICAL_ORIGIN}${entry.en}`;
+  if (entry?.ru) languages.ru = `${CANONICAL_ORIGIN}${entry.ru}`;
+  languages["x-default"] =
+    languages.en ?? languages.ru ?? `${CANONICAL_ORIGIN}${localePath}`;
+  return { languages };
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date().toISOString().split("T")[0];
+  // Use a STABLE lastmod for unchanged static pages so Google doesn't
+  // dismiss the signal (GSC flags sitemaps whose every URL always reports
+  // today's date). Bump SERVICE_LAST_UPDATED in lib/seo.ts when service
+  // content is materially edited.
+  const staticLastMod = SERVICE_LAST_UPDATED;
 
   const staticPages = locales.flatMap((locale) =>
-    pages.map((page) => ({
-      url: `${CANONICAL_ORIGIN}/${locale}${page.path}`,
-      lastModified,
-      changeFrequency: page.changeFrequency,
-      priority: page.priority,
-      alternates: {
-        languages: {
-          en: `${CANONICAL_ORIGIN}/en${page.path}`,
-          ru: `${CANONICAL_ORIGIN}/ru${page.path}`,
-          "x-default": `${CANONICAL_ORIGIN}/en${page.path}`,
-        },
-      },
-    })),
+    pages.map((page) => {
+      const url = getCanonicalUrl(page.path, locale);
+      const localePath = new URL(url).pathname;
+      return {
+        url,
+        lastModified: staticLastMod,
+        changeFrequency: page.changeFrequency,
+        priority: page.priority,
+        alternates: alternatesFor(localePath),
+      };
+    }),
   );
 
-  // Cross-locale pages with different slugs per locale
-  const crossLocalePageDefs = [
-    { en: "paphos-travel-agency", ru: "turisticheskoe-agentstvo-pafos" },
-    { en: "corporate-travel-cyprus", ru: "korporativnye-poezdki-kipr" },
-    { en: "visa-services-cyprus", ru: "vizovye-uslugi-kipr" },
-    { en: "luxury-travel-cyprus", ru: "luxusnyy-otdykh-kipr" },
-    { en: "flight-tickets-cyprus", ru: "aviabilety-kipr" },
-    { en: "hotel-booking-cyprus", ru: "bronirovanie-otelej-kipr" },
-  ];
-
-  const crossLocalePages = crossLocalePageDefs.flatMap((def) => [
-    {
-      url: `${CANONICAL_ORIGIN}/en/${def.en}`,
-      lastModified,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-      alternates: {
-        languages: {
-          en: `${CANONICAL_ORIGIN}/en/${def.en}`,
-          ru: `${CANONICAL_ORIGIN}/ru/${def.ru}`,
-          "x-default": `${CANONICAL_ORIGIN}/en/${def.en}`,
-        },
+  const crossLocalePages = crossLocalePageDefs.flatMap((def) => {
+    const enUrl = getCanonicalUrl(`/${def.en}`, "en");
+    const ruUrl = getCanonicalUrl(`/${def.ru}`, "ru");
+    const enPath = new URL(enUrl).pathname;
+    const ruPath = new URL(ruUrl).pathname;
+    return [
+      {
+        url: enUrl,
+        lastModified: staticLastMod,
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+        alternates: alternatesFor(enPath),
       },
-    },
-    {
-      url: `${CANONICAL_ORIGIN}/ru/${def.ru}`,
-      lastModified,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-      alternates: {
-        languages: {
-          en: `${CANONICAL_ORIGIN}/en/${def.en}`,
-          ru: `${CANONICAL_ORIGIN}/ru/${def.ru}`,
-          "x-default": `${CANONICAL_ORIGIN}/en/${def.en}`,
-        },
+      {
+        url: ruUrl,
+        lastModified: staticLastMod,
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+        alternates: alternatesFor(ruPath),
       },
-    },
-  ]);
+    ];
+  });
 
-  // Add published blog posts to sitemap
+  // Add published blog posts to sitemap. Each post uses its own
+  // frontmatter `date` as the lastmod (no blanket today-for-everything).
   const publishedPosts = getPublishedPosts();
   const blogPages = publishedPosts.map((post) => {
-    const { locale, slug, translationSlug } = post.frontmatter;
+    const { locale: postLocale, slug, translationSlug } = post.frontmatter;
+    const loc = (postLocale === "ru" ? "ru" : "en") as Locale;
+    const url = getCanonicalUrl(`/blog/${slug}`, loc);
 
-    // Build hreflang alternates based on whether a translation exists
+    // Build hreflang alternates based on whether a translation exists.
     const languages: Record<string, string> = {};
     if (translationSlug) {
-      // Paired post — include both locales
-      const enSlug = locale === "en" ? slug : translationSlug;
-      const ruSlug = locale === "ru" ? slug : translationSlug;
-      languages.en = `${CANONICAL_ORIGIN}/en/blog/${enSlug}`;
-      languages.ru = `${CANONICAL_ORIGIN}/ru/blog/${ruSlug}`;
-      languages["x-default"] = `${CANONICAL_ORIGIN}/en/blog/${enSlug}`;
-    } else if (locale === "en") {
-      // EN-only post
-      languages.en = `${CANONICAL_ORIGIN}/en/blog/${slug}`;
-      languages["x-default"] = `${CANONICAL_ORIGIN}/en/blog/${slug}`;
+      const enSlug = loc === "en" ? slug : translationSlug;
+      const ruSlug = loc === "ru" ? slug : translationSlug;
+      languages.en = getCanonicalUrl(`/blog/${enSlug}`, "en");
+      languages.ru = getCanonicalUrl(`/blog/${ruSlug}`, "ru");
+      languages["x-default"] = languages.en;
+    } else if (loc === "en") {
+      languages.en = url;
+      languages["x-default"] = url;
     } else {
-      // RU-only post
-      languages.ru = `${CANONICAL_ORIGIN}/ru/blog/${slug}`;
+      languages.ru = url;
+      languages["x-default"] = url;
     }
 
     return {
-      url: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}`,
+      url,
       lastModified: post.frontmatter.date,
       changeFrequency: "monthly" as const,
       priority: 0.6,

@@ -38,5 +38,5 @@ export default async function VizovyeUslugiKiprPage({
 }) {
   const { locale } = await params;
 
-  redirect(`/${locale}/visa-services-cyprus`);
+  redirect(`/${locale}/visa-services-cyprus/`);
 }

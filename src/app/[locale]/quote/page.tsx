@@ -41,14 +41,14 @@ export default async function QuotePage({
       locale === "ru"
         ? "Запросить предложение — JetSet Travel"
         : "Get a Travel Quote — JetSet Travel",
-    url: `${CANONICAL_ORIGIN}/${locale}/quote`,
+    url: `${CANONICAL_ORIGIN}/${locale}/quote/`,
     description:
       locale === "ru"
         ? "Запросите индивидуальное предложение от JetSet Travel Cyprus."
         : "Request a tailored corporate or luxury travel quote from JetSet Travel Cyprus.",
     potentialAction: {
       "@type": "CommunicateAction",
-      target: `${CANONICAL_ORIGIN}/${locale}/quote`,
+      target: `${CANONICAL_ORIGIN}/${locale}/quote/`,
       name:
         locale === "ru"
           ? "Запросить предложение"

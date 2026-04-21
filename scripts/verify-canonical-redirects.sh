@@ -9,7 +9,7 @@
 set -u
 
 CANONICAL="https://www.jetset-travel.com/"
-CANONICAL_EN="https://www.jetset-travel.com/en"
+CANONICAL_EN="https://www.jetset-travel.com/en/"
 
 URLS=(
   "http://www.jetset-travel.com/"
