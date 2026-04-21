@@ -6,6 +6,7 @@ interface FormTrustElementsProps {
   freeConsultation: string;
   trustLicence: string;
   trustClients: string;
+  iataImageAlt: string;
   variant?: "light" | "dark";
 }
 
@@ -14,6 +15,7 @@ export default function FormTrustElements({
   freeConsultation,
   trustLicence,
   trustClients,
+  iataImageAlt,
   variant = "dark",
 }: FormTrustElementsProps) {
   const isLight = variant === "light";
@@ -44,7 +46,7 @@ export default function FormTrustElements({
         <span className="flex items-center gap-1.5">
           <Image
             src="/images/iata-logo.jpg"
-            alt="IATA Accredited Travel Agent"
+            alt={iataImageAlt}
             width={16}
             height={16}
             className="h-4 w-4 rounded-sm object-contain"

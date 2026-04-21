@@ -225,7 +225,7 @@ export default async function VisaServicesPage({
       <section className="relative bg-brand-navy text-white min-h-[320px] sm:min-h-[380px] flex items-center overflow-hidden">
         <Image
           src="/images/services/visa.jpg"
-          alt="Visa application documents and passport for travel services"
+          alt={t("heroImageAlt")}
           fill
           priority
           className="object-cover"

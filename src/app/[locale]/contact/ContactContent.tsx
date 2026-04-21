@@ -40,6 +40,7 @@ const inputClass =
 export default function ContactContent() {
   const locale = useLocale();
   const t = useTranslations("contactPage");
+  const tCommon = useTranslations("common");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const formLoadedAt = useRef(Date.now());
@@ -395,6 +396,7 @@ export default function ContactContent() {
                       freeConsultation={t("freeConsultation")}
                       trustLicence={t("trustLicence")}
                       trustClients={t("trustClients")}
+                      iataImageAlt={tCommon("iataAlt")}
                       variant="dark"
                     />
                   </div>
@@ -537,7 +539,7 @@ export default function ContactContent() {
               <div className="w-16 h-16 relative">
                 <Image
                   src="/images/iata-logo.jpg"
-                  alt="IATA Accredited Agent"
+                  alt={tCommon("iataAlt")}
                   fill
                   className="object-contain"
                   loading="lazy"
@@ -557,7 +559,7 @@ export default function ContactContent() {
               <div className="w-16 h-16 relative">
                 <Image
                   src="/images/tourism-logo.jpg"
-                  alt="Cyprus Tourism Organisation Licensed"
+                  alt={tCommon("ctoAlt")}
                   fill
                   className="object-contain"
                   loading="lazy"

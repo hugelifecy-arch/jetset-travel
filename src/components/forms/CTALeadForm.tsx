@@ -15,6 +15,7 @@ import FormTrustElements from "@/components/forms/FormTrustElements";
 
 export default function CTALeadForm() {
   const t = useTranslations("cta");
+  const tCommon = useTranslations("common");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const formLoadedAt = useRef(Date.now());
@@ -214,6 +215,7 @@ export default function CTALeadForm() {
           freeConsultation={t("freeConsultation")}
           trustLicence={t("trustLicence")}
           trustClients={t("trustClients")}
+          iataImageAlt={tCommon("iataAlt")}
           variant="light"
         />
       </div>

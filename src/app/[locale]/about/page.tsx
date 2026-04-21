@@ -48,6 +48,7 @@ export default async function AboutPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "aboutPage" });
+  const tCommon = await getTranslations({ locale, namespace: "common" });
 
   const values = [
     {
@@ -184,7 +185,7 @@ export default async function AboutPage({
       <section className="relative bg-brand-navy text-white min-h-[320px] sm:min-h-[380px] flex items-center overflow-hidden">
         <Image
           src="/images/cyprus-hero.jpg"
-          alt="JetSet Travel office in Paphos, Cyprus"
+          alt={t("heroImageAlt")}
           fill
           priority
           className="object-cover"
@@ -262,7 +263,7 @@ export default async function AboutPage({
               <div className="w-24 h-24 relative mb-6">
                 <Image
                   src="/images/iata-logo.jpg"
-                  alt="IATA Accredited Agent"
+                  alt={tCommon("iataAlt")}
                   fill
                   className="object-contain"
                   loading="lazy"
@@ -281,7 +282,7 @@ export default async function AboutPage({
               <div className="w-24 h-24 relative mb-6">
                 <Image
                   src="/images/tourism-logo.jpg"
-                  alt="Cyprus Tourism Organisation Licensed"
+                  alt={tCommon("ctoAlt")}
                   fill
                   className="object-contain"
                   loading="lazy"

@@ -230,7 +230,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
       <section className="relative bg-brand-navy text-white min-h-[380px] flex items-center overflow-hidden">
         <Image
           src="/images/services/cruises.jpg"
-          alt="Cruise ship sailing on the open sea for holiday cruise vacations"
+          alt={t("heroImageAlt")}
           fill
           priority
           className="object-cover"

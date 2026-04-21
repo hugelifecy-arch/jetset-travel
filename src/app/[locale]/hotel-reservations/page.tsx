@@ -114,7 +114,7 @@ export default async function HotelReservationsPage({
       <section className="relative bg-brand-navy text-white min-h-[320px] sm:min-h-[380px] flex items-center overflow-hidden">
         <Image
           src="/images/services/hotels.jpg"
-          alt="Premium hotel lobby showcasing quality accommodation options"
+          alt={t("heroImageAlt")}
           fill
           priority
           className="object-cover"
@@ -296,7 +296,7 @@ export default async function HotelReservationsPage({
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
                 <Image
                   src="/images/hotel/group-event.jpg"
-                  alt="Hotel conference setup for group bookings and corporate events"
+                  alt={t("groupImageAlt")}
                   fill
                   loading="lazy"
                   className="object-cover"
