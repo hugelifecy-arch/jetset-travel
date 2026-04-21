@@ -85,7 +85,7 @@ export default function GoogleReviews() {
         {/* "View all reviews" link */}
         <div className="mt-8 text-center">
           <a
-            href="https://www.google.com/maps/place/JetSet+K%26K+Travel+Ltd/@34.7585854,32.4178925,17z/data=!4m8!3m7!1s0x14e706f888b3f4e5:0x82a8dc67a2e3c8a8!8m2!3d34.7585854!4d32.4204674!9m1!1b1!16s%2Fg%2F11h3wqgc_x"
+            href="https://www.google.com/search?q=JetSet+Travel+Agency+-+Paphos#lrd=0x14e706ec2d62587f:0x4161901d9b64e1b4,1"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-sm font-semibold text-brand-gold transition-colors hover:text-brand-gold/80"

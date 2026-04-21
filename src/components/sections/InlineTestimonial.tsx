@@ -1,8 +1,7 @@
 import { Star } from "lucide-react";
 
-// TODO: Replace with actual Google Place ID URL once GBP is claimed
 const GOOGLE_MAPS_URL =
-  "https://www.google.com/maps/place/JetSet+Travel+Agency/@34.7604,32.4224,17z/";
+  "https://www.google.com/search?q=JetSet+Travel+Agency+-+Paphos#lrd=0x14e706ec2d62587f:0x4161901d9b64e1b4,1";
 
 interface InlineTestimonialProps {
   quote: string;
