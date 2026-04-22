@@ -5,6 +5,7 @@ import { Phone } from "lucide-react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useCookieBannerOffset } from "@/hooks/useCookieBannerOffset";
+import { trackCTAClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
 
 export default function MobileActionBar() {
   const [footerVisible, setFooterVisible] = useState(false);
@@ -41,6 +42,13 @@ export default function MobileActionBar() {
         <a
           href="tel:+35799478073"
           aria-label="Call JetSet Travel"
+          onClick={() =>
+            trackCTAClick({
+              location: "mobile_action_bar",
+              cta_type: "phone_call",
+              destination: "tel:+35799478073",
+            })
+          }
           className="flex flex-1 items-center justify-center gap-2 py-3 text-white active:bg-white/10 transition-colors min-h-[44px]"
         >
           <Phone className="h-5 w-5" />
@@ -54,6 +62,7 @@ export default function MobileActionBar() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contact via WhatsApp"
+          onClick={() => trackWhatsAppClick("mobile_action_bar", "generic")}
           className="flex flex-1 items-center justify-center gap-2 py-3 text-white active:bg-white/10 transition-colors min-h-[44px]"
         >
           <Image

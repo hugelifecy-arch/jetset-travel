@@ -8,13 +8,26 @@ import { Input, Textarea } from "@/components/ui/Input";
 import { leadFormSchema, type LeadFormValues } from "@/components/forms/schemas";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { trackLead } from "@/lib/analytics/fbpixel";
+import {
+  trackFormError,
+  trackFormStart,
+  trackFormSubmit,
+  trackFormSuccess,
+} from "@/lib/analytics/gtag";
 
 export default function LeadForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [formStarted, setFormStarted] = useState(false);
   const formLoadedAt = useRef(0);
   useEffect(() => { formLoadedAt.current = Date.now(); }, []);
   const honeypotRef = useRef<HTMLInputElement>(null);
+
+  const handleFormStart = () => {
+    if (formStarted) return;
+    setFormStarted(true);
+    trackFormStart("hero_lead_form");
+  };
 
   const {
     register,
@@ -28,6 +41,7 @@ export default function LeadForm() {
   const onSubmit = async (data: LeadFormValues) => {
     setSubmitError(null);
     setSubmitted(false);
+    trackFormSubmit("hero_lead_form");
 
     const recaptchaToken = await getRecaptchaToken("quote");
     const response = await fetch("/api/quote", {
@@ -42,10 +56,12 @@ export default function LeadForm() {
     });
 
     if (!response.ok) {
+      trackFormError("hero_lead_form", "network_or_server");
       throw new Error("Failed to submit quote request");
     }
 
     trackLead({ content_name: "Hero Lead Form", content_category: "quick_quote" });
+    trackFormSuccess("hero_lead_form");
     setSubmitted(true);
     reset();
   };
@@ -61,6 +77,7 @@ export default function LeadForm() {
           }
         })(e);
       }}
+      onFocus={handleFormStart}
       className="space-y-4"
     >
       {/* Honeypot — hidden from real users */}

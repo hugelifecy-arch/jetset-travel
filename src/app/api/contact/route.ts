@@ -16,6 +16,9 @@ const contactSchema = z.object({
   companyName: z.string().optional(),
   message: z.string().optional(),
   travelType: z.string().optional(),
+  travelers: z.string().optional(),
+  urgency: z.string().optional(),
+  budget: z.string().optional(),
   contactMethod: z.string().optional(),
   dates: z.string().optional(),
 });
@@ -44,6 +47,9 @@ function notificationHtml(data: z.infer<typeof contactSchema>): string {
         ${data.phone ? row("Phone", data.phone) : ""}
         ${data.companyName ? row("Company", data.companyName) : ""}
         ${data.travelType ? row("Travel Type", data.travelType) : ""}
+        ${data.travelers ? row("Travelers", data.travelers) : ""}
+        ${data.urgency ? row("Urgency", data.urgency) : ""}
+        ${data.budget ? row("Budget Band", data.budget) : ""}
         ${data.contactMethod ? row("Preferred Contact", data.contactMethod) : ""}
         ${data.dates ? row("Dates", data.dates) : ""}
         ${data.message ? row("Message", data.message) : ""}
