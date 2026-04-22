@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { sendResendEmail } from "@/lib/email/resend";
+import { escapeHtml } from "@/lib/email/escape";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 
 /* ------------------------------------------------------------------ */
@@ -55,7 +56,7 @@ const TD = 'style="padding:8px 12px;border:1px solid #e5e7eb"';
 const TH = 'style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb"';
 
 function row(label: string, value: string): string {
-  return `<tr><td ${TH}>${label}</td><td ${TD}>${value}</td></tr>`;
+  return `<tr><td ${TH}>${label}</td><td ${TD}>${escapeHtml(value)}</td></tr>`;
 }
 
 function notificationHtml(data: QuoteData): string {
@@ -104,7 +105,7 @@ function notificationHtml(data: QuoteData): string {
 function autoReplyHtml(name: string): string {
   return `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#333">
-      <h2 style="color:#0b1d3a">Thank you, ${name}!</h2>
+      <h2 style="color:#0b1d3a">Thank you, ${escapeHtml(name)}!</h2>
       <p>We've received your quote request and will get back to you within <strong>1 hour</strong> during business hours.</p>
       <p>For urgent enquiries you can reach us directly on WhatsApp:</p>
       <p><a href="https://wa.me/${WHATSAPP_NUMBER}" style="display:inline-block;background:#25D366;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600">Chat on WhatsApp</a></p>
@@ -162,7 +163,7 @@ export async function POST(req: Request) {
   const data = parsed.data;
 
   try {
-    await enforceRateLimit(ip);
+    await enforceRateLimit(ip, "quote");
   } catch (error) {
     if (error instanceof Error && error.message === "RATE_LIMIT") {
       return NextResponse.json({ ok: false, error: "Too many requests" }, { status: 429 });

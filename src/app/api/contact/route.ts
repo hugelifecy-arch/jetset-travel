@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sendResendEmail } from "@/lib/email/resend";
+import { escapeHtml } from "@/lib/email/escape";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
+import { enforceRateLimit } from "@/lib/rate-limit";
 
 /* ------------------------------------------------------------------ */
 /*  Schema                                                             */
@@ -19,31 +21,6 @@ const contactSchema = z.object({
 });
 
 /* ------------------------------------------------------------------ */
-/*  Rate limiting (in-memory, 5 requests per IP per hour)              */
-/* ------------------------------------------------------------------ */
-
-const rateLimitMap = new Map<string, number[]>();
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
-const RATE_LIMIT_MAX = 5;
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const windowStart = now - RATE_LIMIT_WINDOW_MS;
-  const timestamps = (rateLimitMap.get(ip) || []).filter(
-    (t) => t > windowStart
-  );
-
-  if (timestamps.length >= RATE_LIMIT_MAX) {
-    rateLimitMap.set(ip, timestamps);
-    return false;
-  }
-
-  timestamps.push(now);
-  rateLimitMap.set(ip, timestamps);
-  return true;
-}
-
-/* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
@@ -53,18 +30,23 @@ const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jetset-travel.com";
 
 function notificationHtml(data: z.infer<typeof contactSchema>): string {
+  const TH = 'style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb"';
+  const TD = 'style="padding:8px 12px;border:1px solid #e5e7eb"';
+  const row = (label: string, value: string) =>
+    `<tr><td ${TH}>${label}</td><td ${TD}>${escapeHtml(value)}</td></tr>`;
+
   return `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
       <h2 style="color:#0b1d3a">${data.travelType ? "New Quote Request" : "New Contact Message"}</h2>
       <table style="border-collapse:collapse;width:100%;font-size:14px">
-        <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Name</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.name}</td></tr>
-        <tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Email</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.email}</td></tr>
-        ${data.phone ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Phone</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.phone}</td></tr>` : ""}
-        ${data.companyName ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Company</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.companyName}</td></tr>` : ""}
-        ${data.travelType ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Travel Type</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.travelType}</td></tr>` : ""}
-        ${data.contactMethod ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Preferred Contact</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.contactMethod}</td></tr>` : ""}
-        ${data.dates ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Dates</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.dates}</td></tr>` : ""}
-        ${data.message ? `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">Message</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${data.message}</td></tr>` : ""}
+        ${row("Name", data.name)}
+        ${row("Email", data.email)}
+        ${data.phone ? row("Phone", data.phone) : ""}
+        ${data.companyName ? row("Company", data.companyName) : ""}
+        ${data.travelType ? row("Travel Type", data.travelType) : ""}
+        ${data.contactMethod ? row("Preferred Contact", data.contactMethod) : ""}
+        ${data.dates ? row("Dates", data.dates) : ""}
+        ${data.message ? row("Message", data.message) : ""}
       </table>
     </div>`;
 }
@@ -72,7 +54,7 @@ function notificationHtml(data: z.infer<typeof contactSchema>): string {
 function autoReplyHtml(name: string): string {
   return `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#333">
-      <h2 style="color:#0b1d3a">Thank you, ${name}!</h2>
+      <h2 style="color:#0b1d3a">Thank you, ${escapeHtml(name)}!</h2>
       <p>We've received your message and will get back to you within <strong>1 hour</strong> during business hours.</p>
       <p>For urgent enquiries you can reach us directly on WhatsApp:</p>
       <p><a href="https://wa.me/${WHATSAPP_NUMBER}" style="display:inline-block;background:#25D366;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600">Chat on WhatsApp</a></p>
@@ -86,15 +68,19 @@ function autoReplyHtml(name: string): string {
 /* ------------------------------------------------------------------ */
 
 export async function POST(request: Request) {
-  /* Rate limiting */
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
-  if (!checkRateLimit(ip)) {
-    return NextResponse.json(
-      { error: "Too many requests. Please try again later." },
-      { status: 429 }
-    );
+  try {
+    await enforceRateLimit(ip, "contact");
+  } catch (error) {
+    if (error instanceof Error && error.message === "RATE_LIMIT") {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+    throw error;
   }
 
   let body: Record<string, unknown>;
