@@ -1,0 +1,32 @@
+# Code Owners for JetSet Travel
+
+# Default owner for all files
+* @hugelifecy-arch
+
+# TypeScript/JavaScript configuration
+*.ts @hugelifecy-arch
+*.tsx @hugelifecy-arch
+*.js @hugelifecy-arch
+*.jsx @hugelifecy-arch
+*.json @hugelifecy-arch
+
+# Build configuration
+next.config.ts @hugelifecy-arch
+tsconfig.json @hugelifecy-arch
+eslint.config.mjs @hugelifecy-arch
+tailwind.config.ts @hugelifecy-arch
+postcss.config.mjs @hugelifecy-arch
+
+# Source code
+/src/** @hugelifecy-arch
+
+# GitHub configuration
+.github/** @hugelifecy-arch
+
+# Tests
+/tests/** @hugelifecy-arch
+
+# Documentation
+/docs/** @hugelifecy-arch
+README.md @hugelifecy-arch
+CONTRIBUTING.md @hugelifecy-arch
