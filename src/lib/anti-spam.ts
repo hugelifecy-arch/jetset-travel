@@ -81,36 +81,39 @@ export function isSubmittedTooFast(formLoadedAt: unknown): boolean {
 /**
  * Verify a reCAPTCHA v3 token with Google.
  *
- * In development: returns true when credentials are missing so local
- * dev doesn't require Google credentials.
- *
- * In production: returns false (fail-closed) when credentials are
- * missing, so a misconfigured deploy rejects submissions rather than
- * silently accepting all spam. Warnings are logged at module load
- * (below) and on every request.
+ * Returns true (allow) when the server-side secret is missing — same
+ * graceful-fallback pattern used by Resend and Upstash in this
+ * codebase — so the form keeps working on deploys that haven't
+ * configured reCAPTCHA yet. A warning is logged at module load so
+ * operators notice. Honeypot + timing + gibberish checks remain
+ * active regardless.
  */
 const recaptchaConfigured = Boolean(
   process.env.RECAPTCHA_SECRET_KEY &&
     process.env.RECAPTCHA_SECRET_KEY !== "your_recaptcha_secret_key",
 );
 
-if (!recaptchaConfigured && process.env.NODE_ENV === "production") {
-  console.error(
-    "[anti-spam] RECAPTCHA_SECRET_KEY is not set. " +
-      "reCAPTCHA verification will fail-closed in production.",
+if (!recaptchaConfigured) {
+  console.warn(
+    "[anti-spam] RECAPTCHA_SECRET_KEY is not set — reCAPTCHA verification " +
+      "is disabled. Other anti-spam checks (honeypot, timing, gibberish) remain active.",
   );
 }
 
 export async function verifyRecaptcha(token: unknown): Promise<boolean> {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
   if (!secretKey || secretKey === "your_recaptcha_secret_key") {
-    // Fail-closed in production so silent misconfiguration can't
-    // disable bot protection. In development allow the form through.
-    return process.env.NODE_ENV !== "production";
+    return true; // reCAPTCHA not configured — allow
   }
 
   if (typeof token !== "string" || !token) {
-    return false; // reCAPTCHA IS configured but no token supplied
+    // reCAPTCHA IS configured server-side but the client didn't send a
+    // token. This happens when NEXT_PUBLIC_RECAPTCHA_SITE_KEY is
+    // missing, or when the grecaptcha script fails to load. Don't
+    // block the user — log and allow. The other anti-spam checks
+    // (honeypot, timing, gibberish) still apply.
+    console.warn("[anti-spam] reCAPTCHA secret set but no token supplied — allowing submission");
+    return true;
   }
 
   try {
@@ -126,10 +129,7 @@ export async function verifyRecaptcha(token: unknown): Promise<boolean> {
     return data.success === true && (data.score ?? 1) >= 0.5;
   } catch (err) {
     console.error("[anti-spam] reCAPTCHA verification error:", err);
-    // Fail-closed on transient network errors in production so an
-    // attacker who can disrupt reCAPTCHA requests can't bypass the
-    // check. In development, let the user through.
-    return process.env.NODE_ENV !== "production";
+    return true; // Don't block users on transient verification failures
   }
 }
 
