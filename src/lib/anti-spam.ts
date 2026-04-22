@@ -80,14 +80,33 @@ export function isSubmittedTooFast(formLoadedAt: unknown): boolean {
 
 /**
  * Verify a reCAPTCHA v3 token with Google.
- * Returns true (allow) when credentials are missing so the site
- * works without reCAPTCHA configured — same graceful fallback pattern
- * used by Resend and Upstash in this codebase.
+ *
+ * In development: returns true when credentials are missing so local
+ * dev doesn't require Google credentials.
+ *
+ * In production: returns false (fail-closed) when credentials are
+ * missing, so a misconfigured deploy rejects submissions rather than
+ * silently accepting all spam. Warnings are logged at module load
+ * (below) and on every request.
  */
+const recaptchaConfigured = Boolean(
+  process.env.RECAPTCHA_SECRET_KEY &&
+    process.env.RECAPTCHA_SECRET_KEY !== "your_recaptcha_secret_key",
+);
+
+if (!recaptchaConfigured && process.env.NODE_ENV === "production") {
+  console.error(
+    "[anti-spam] RECAPTCHA_SECRET_KEY is not set. " +
+      "reCAPTCHA verification will fail-closed in production.",
+  );
+}
+
 export async function verifyRecaptcha(token: unknown): Promise<boolean> {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
   if (!secretKey || secretKey === "your_recaptcha_secret_key") {
-    return true; // reCAPTCHA not configured — allow
+    // Fail-closed in production so silent misconfiguration can't
+    // disable bot protection. In development allow the form through.
+    return process.env.NODE_ENV !== "production";
   }
 
   if (typeof token !== "string" || !token) {
@@ -105,8 +124,12 @@ export async function verifyRecaptcha(token: unknown): Promise<boolean> {
     );
     const data = (await res.json()) as { success?: boolean; score?: number };
     return data.success === true && (data.score ?? 1) >= 0.5;
-  } catch {
-    return true; // Don't block users on verification failures
+  } catch (err) {
+    console.error("[anti-spam] reCAPTCHA verification error:", err);
+    // Fail-closed on transient network errors in production so an
+    // attacker who can disrupt reCAPTCHA requests can't bypass the
+    // check. In development, let the user through.
+    return process.env.NODE_ENV !== "production";
   }
 }
 

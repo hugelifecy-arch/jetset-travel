@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sendResendEmail } from "@/lib/email/resend";
+import { escapeHtml } from "@/lib/email/escape";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
+import { enforceRateLimit } from "@/lib/rate-limit";
 
 /* ------------------------------------------------------------------ */
 /*  Schema                                                             */
@@ -23,31 +25,6 @@ const cruiseEnquirySchema = z.object({
   occasion: z.string().optional(),
   requirements: z.string().optional(),
 });
-
-/* ------------------------------------------------------------------ */
-/*  Rate limiting (in-memory, 5 requests per IP per hour)              */
-/* ------------------------------------------------------------------ */
-
-const rateLimitMap = new Map<string, number[]>();
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
-const RATE_LIMIT_MAX = 5;
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now();
-  const windowStart = now - RATE_LIMIT_WINDOW_MS;
-  const timestamps = (rateLimitMap.get(ip) || []).filter(
-    (t) => t > windowStart
-  );
-
-  if (timestamps.length >= RATE_LIMIT_MAX) {
-    rateLimitMap.set(ip, timestamps);
-    return false;
-  }
-
-  timestamps.push(now);
-  rateLimitMap.set(ip, timestamps);
-  return true;
-}
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -83,7 +60,7 @@ function notificationHtml(data: z.infer<typeof cruiseEnquirySchema>): string {
         ${rows
           .map(
             ([label, value]) =>
-              `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">${label}</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${value}</td></tr>`
+              `<tr><td style="padding:8px 12px;font-weight:600;border:1px solid #e5e7eb">${label}</td><td style="padding:8px 12px;border:1px solid #e5e7eb">${escapeHtml(value)}</td></tr>`
           )
           .join("")}
       </table>
@@ -93,7 +70,7 @@ function notificationHtml(data: z.infer<typeof cruiseEnquirySchema>): string {
 function autoReplyHtml(name: string): string {
   return `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#333">
-      <h2 style="color:#0b1d3a">Thank you, ${name}!</h2>
+      <h2 style="color:#0b1d3a">Thank you, ${escapeHtml(name)}!</h2>
       <p>We've received your cruise enquiry and our cruise specialist will review your preferences and get back to you within <strong>24 hours</strong> with personalized options.</p>
       <p>For urgent enquiries you can reach us directly on WhatsApp:</p>
       <p><a href="https://wa.me/${WHATSAPP_NUMBER}" style="display:inline-block;background:#25D366;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600">Chat on WhatsApp</a></p>
@@ -110,11 +87,16 @@ export async function POST(request: Request) {
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
 
-  if (!checkRateLimit(ip)) {
-    return NextResponse.json(
-      { error: "Too many requests. Please try again later." },
-      { status: 429 }
-    );
+  try {
+    await enforceRateLimit(ip, "cruise-enquiry");
+  } catch (error) {
+    if (error instanceof Error && error.message === "RATE_LIMIT") {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again later." },
+        { status: 429 }
+      );
+    }
+    throw error;
   }
 
   let body: Record<string, unknown>;
