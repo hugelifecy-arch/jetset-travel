@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { useLocale } from "next-intl";
 import { useCookieBannerOffset } from "@/hooks/useCookieBannerOffset";
+import { trackWhatsAppClick } from "@/lib/analytics/gtag";
 
 export default function WhatsAppButton() {
   const locale = useLocale();
@@ -19,6 +20,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contact us on WhatsApp"
+      onClick={() => trackWhatsAppClick("footer", "floating_button")}
       className="fixed right-4 sm:right-6 z-50 hidden md:flex items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg hover:bg-[#20BD5A] transition-[bottom] duration-300 ease-in-out w-12 h-12"
       style={{ bottom: `${24 + cookieOffset}px` }}
       animate={{

@@ -4,8 +4,11 @@ import { useState, useCallback, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { MessageCircle, Play } from "lucide-react";
+import { Clock, MessageCircle, Play } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
+import { trackCTAClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
+
+const WHATSAPP_NUMBER = "35799478073";
 
 const DESKTOP_MQ = "(min-width: 768px)";
 const REDUCED_MOTION_MQ = "(prefers-reduced-motion: reduce)";
@@ -156,9 +159,9 @@ export default function HeroSection() {
             {t("subtitle")}
           </motion.p>
 
-          {/* CTAs */}
+          {/* Dual-path CTAs — Corporate Concierge vs Luxury Planning, with WhatsApp quick-quote */}
           <motion.div
-            className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center"
+            className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-stretch"
             variants={fadeInUp}
             initial="hidden"
             animate="visible"
@@ -166,16 +169,81 @@ export default function HeroSection() {
           >
             <Link
               href={`/${locale}/contact`}
-              className="inline-flex items-center justify-center rounded-full bg-brand-gold px-6 py-3 text-base font-semibold text-brand-navy shadow-luxury transition-opacity hover:opacity-90 sm:px-8 sm:py-4"
+              onClick={() =>
+                trackCTAClick({
+                  location: "hero",
+                  cta_type: "corporate_consultation",
+                  cta_label: t("ctaCorporate"),
+                  destination: `/${locale}/contact`,
+                })
+              }
+              className="group inline-flex flex-col items-center justify-center rounded-2xl bg-brand-gold px-6 py-3 text-brand-navy shadow-luxury transition-opacity hover:opacity-90 sm:items-start sm:px-8 sm:py-4"
             >
-              {t("ctaCorporate")}
+              <span className="text-xs font-semibold uppercase tracking-wider text-brand-navy/70">
+                {t("pathCorporateLabel")}
+              </span>
+              <span className="mt-1 text-base font-semibold">
+                {t("ctaCorporate")}
+              </span>
+              <span className="mt-0.5 text-xs text-brand-navy/70">
+                {t("pathCorporateHint")}
+              </span>
             </Link>
             <Link
               href={`/${locale}/quote`}
-              className="inline-flex items-center justify-center rounded-full border-2 border-white px-6 py-3 text-base font-semibold text-white transition-colors hover:bg-white/10 sm:px-8 sm:py-4"
+              onClick={() =>
+                trackCTAClick({
+                  location: "hero",
+                  cta_type: "luxury_quote",
+                  cta_label: t("ctaLuxury"),
+                  destination: `/${locale}/quote`,
+                })
+              }
+              className="group inline-flex flex-col items-center justify-center rounded-2xl border-2 border-white px-6 py-3 text-white transition-colors hover:bg-white/10 sm:items-start sm:px-8 sm:py-4"
             >
-              {t("ctaLuxury")}
+              <span className="text-xs font-semibold uppercase tracking-wider text-white/80">
+                {t("pathLuxuryLabel")}
+              </span>
+              <span className="mt-1 text-base font-semibold">
+                {t("ctaLuxury")}
+              </span>
+              <span className="mt-0.5 text-xs text-white/70">
+                {t("pathLuxuryHint")}
+              </span>
             </Link>
+          </motion.div>
+
+          {/* Tertiary quick-path: WhatsApp + SLA microcopy */}
+          <motion.div
+            className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5"
+            variants={fadeInUp}
+            initial="hidden"
+            animate="visible"
+            custom={3}
+          >
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("ctaWhatsAppMessage"))}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                trackCTAClick({
+                  location: "hero",
+                  cta_type: "whatsapp_quick_quote",
+                  cta_label: t("ctaWhatsApp"),
+                  destination: "whatsapp",
+                });
+                trackWhatsAppClick("hero", "quick_quote");
+              }}
+              className="inline-flex items-center gap-2 text-sm font-medium text-white/90 underline-offset-4 hover:text-brand-gold hover:underline"
+            >
+              <MessageCircle className="h-4 w-4 text-brand-gold" aria-hidden="true" />
+              <span>{t("ctaWhatsApp")}</span>
+            </a>
+            <span className="hidden text-white/30 sm:inline" aria-hidden="true">•</span>
+            <span className="inline-flex items-center gap-2 text-xs text-white/70 sm:text-sm">
+              <Clock className="h-4 w-4" aria-hidden="true" />
+              {t("slaLine")}
+            </span>
           </motion.div>
 
           {/* Trust badges */}
@@ -184,7 +252,7 @@ export default function HeroSection() {
             variants={fadeInUp}
             initial="hidden"
             animate="visible"
-            custom={3}
+            custom={4}
           >
             <div className="flex items-center gap-2 text-sm text-white/80">
               <Image

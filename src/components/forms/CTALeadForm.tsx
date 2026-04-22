@@ -12,13 +12,26 @@ import { Input, Textarea } from "@/components/ui/Input";
 import { cn } from "@/lib/utils/cn";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import FormTrustElements from "@/components/forms/FormTrustElements";
+import {
+  trackFormError,
+  trackFormStart,
+  trackFormSubmit,
+  trackFormSuccess,
+} from "@/lib/analytics/gtag";
 
 export default function CTALeadForm() {
   const t = useTranslations("cta");
   const tCommon = useTranslations("common");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [formStarted, setFormStarted] = useState(false);
   const formLoadedAt = useRef(Date.now());
+
+  const handleFormStart = () => {
+    if (formStarted) return;
+    setFormStarted(true);
+    trackFormStart("cta_lead_form");
+  };
 
   const {
     register,
@@ -31,6 +44,7 @@ export default function CTALeadForm() {
 
   const onSubmit = async (data: CTALeadFormValues) => {
     setSubmitError(null);
+    trackFormSubmit("cta_lead_form");
     try {
       const recaptchaToken = await getRecaptchaToken("contact");
       const res = await fetch("/api/contact", {
@@ -43,9 +57,16 @@ export default function CTALeadForm() {
         }),
       });
       if (!res.ok) throw new Error();
+      trackFormSuccess("cta_lead_form", {
+        travel_type: data.travelType,
+        travelers: data.travelers,
+        urgency: data.urgency,
+        budget: data.budget,
+      });
       setSubmitted(true);
       reset();
     } catch {
+      trackFormError("cta_lead_form", "network_or_server");
       setSubmitError(t("error"));
     }
   };
@@ -76,9 +97,13 @@ export default function CTALeadForm() {
   const inputClass =
     "bg-white border-white/20 text-brand-navy placeholder:text-brand-navy/50 focus:border-brand-gold focus:ring-brand-gold";
 
+  const selectClass =
+    "w-full rounded-xl border border-white/20 bg-white px-4 py-3 text-sm text-brand-navy outline-none transition-colors focus:border-brand-gold focus:ring-1 focus:ring-brand-gold";
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
+      onFocus={handleFormStart}
       className="mx-auto max-w-3xl rounded-2xl bg-white/5 p-4 backdrop-blur-sm sm:p-6 md:p-8"
     >
       {/* Honeypot */}
@@ -137,9 +162,7 @@ export default function CTALeadForm() {
           <select
             {...register("travelType")}
             aria-label={t("travelType")}
-            className={cn(
-              "w-full rounded-xl border border-white/20 bg-white px-4 py-3 text-sm text-brand-navy outline-none transition-colors focus:border-brand-gold focus:ring-1 focus:ring-brand-gold"
-            )}
+            className={cn(selectClass)}
           >
             <option value="">{t("selectTravelType")}</option>
             <option value="corporate">
@@ -149,6 +172,53 @@ export default function CTALeadForm() {
             <option value="visa">{t("travelTypeOptions.visa")}</option>
             <option value="hotel">{t("travelTypeOptions.hotel")}</option>
             <option value="other">{t("travelTypeOptions.other")}</option>
+          </select>
+        </div>
+
+        {/* Travelers */}
+        <div className="space-y-1 text-left">
+          <select
+            {...register("travelers")}
+            aria-label={t("travelers")}
+            className={cn(selectClass)}
+          >
+            <option value="">{t("selectTravelers")}</option>
+            <option value="1">{t("travelersOptions.one")}</option>
+            <option value="2">{t("travelersOptions.two")}</option>
+            <option value="3-5">{t("travelersOptions.small")}</option>
+            <option value="6-10">{t("travelersOptions.medium")}</option>
+            <option value="10+">{t("travelersOptions.large")}</option>
+          </select>
+        </div>
+
+        {/* Urgency */}
+        <div className="space-y-1 text-left">
+          <select
+            {...register("urgency")}
+            aria-label={t("urgency")}
+            className={cn(selectClass)}
+          >
+            <option value="">{t("selectUrgency")}</option>
+            <option value="asap">{t("urgencyOptions.asap")}</option>
+            <option value="this_week">{t("urgencyOptions.thisWeek")}</option>
+            <option value="this_month">{t("urgencyOptions.thisMonth")}</option>
+            <option value="flexible">{t("urgencyOptions.flexible")}</option>
+          </select>
+        </div>
+
+        {/* Budget Band */}
+        <div className="space-y-1 text-left">
+          <select
+            {...register("budget")}
+            aria-label={t("budget")}
+            className={cn(selectClass)}
+          >
+            <option value="">{t("selectBudget")}</option>
+            <option value="under_1k">{t("budgetOptions.under1k")}</option>
+            <option value="1k_5k">{t("budgetOptions.band1k5k")}</option>
+            <option value="5k_15k">{t("budgetOptions.band5k15k")}</option>
+            <option value="15k_plus">{t("budgetOptions.over15k")}</option>
+            <option value="not_sure">{t("budgetOptions.notSure")}</option>
           </select>
         </div>
 
@@ -171,6 +241,13 @@ export default function CTALeadForm() {
           />
         </div>
       </div>
+
+      {/* SLA line */}
+      <p className="mt-4 text-left text-sm text-white/70">
+        <span aria-hidden="true">⏱</span>{" "}
+        <span className="font-medium">{t("slaHeadline")}</span>{" "}
+        <span className="text-white/60">{t("slaDetail")}</span>
+      </p>
 
       {submitError && (
         <p className="mt-4 text-left text-sm text-red-400">{submitError}</p>

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 import CTALeadForm from "@/components/forms/CTALeadForm";
+import { trackCTAClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
 
 const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "35799478073";
@@ -40,6 +41,7 @@ export default function CTABanner() {
                 className="text-white/70 underline transition-colors hover:text-white"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick("cta_banner", "generic")}
               >
                 WhatsApp
               </a>
@@ -47,6 +49,13 @@ export default function CTABanner() {
               <a
                 href="tel:+35799478073"
                 className="text-white/70 underline transition-colors hover:text-white"
+                onClick={() =>
+                  trackCTAClick({
+                    location: "cta_banner",
+                    cta_type: "phone_call",
+                    destination: "tel:+35799478073",
+                  })
+                }
               >
                 +357 99 478 073
               </a>
