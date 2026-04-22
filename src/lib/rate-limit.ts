@@ -7,21 +7,15 @@ const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
 const isConfigured = Boolean(redisUrl && redisToken);
 
 if (!isConfigured) {
-  if (process.env.NODE_ENV === "production") {
-    // Fail-closed in production: a misconfigured deploy must not run with
-    // rate limiting silently disabled. The route handlers call
-    // enforceRateLimit() and will surface this as a 500, which is the
-    // correct behavior — better to reject submissions than accept
-    // unlimited spam from a single IP.
-    console.error(
-      "[rate-limit] UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN are not set. " +
-        "Rate limiting is REQUIRED in production. Requests to rate-limited endpoints will fail.",
-    );
-  } else {
-    console.warn(
-      "[rate-limit] Upstash credentials not set — rate limiting disabled (development only).",
-    );
-  }
+  // Warn loudly so operators notice, but don't break submissions. Rate
+  // limiting is a hardening layer on top of honeypot + reCAPTCHA +
+  // gibberish detection — losing it shouldn't take the whole form
+  // offline. Set UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN
+  // to enable distributed rate limiting.
+  console.warn(
+    "[rate-limit] UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN are not set — " +
+      "rate limiting is disabled. Other anti-spam checks remain active.",
+  );
 }
 
 async function callPipeline(commands: unknown[][]) {
@@ -68,11 +62,9 @@ async function callPipeline(commands: unknown[][]) {
  */
 export async function enforceRateLimit(ip: string, scope: string = "default") {
   if (!redisUrl || !redisToken) {
-    if (process.env.NODE_ENV === "production") {
-      // Fail closed — rate limiting is a security control, not a nicety.
-      throw new Error("RATE_LIMIT_NOT_CONFIGURED");
-    }
-    // Non-production: skip (already warned at module load).
+    // Skip when Upstash isn't configured (already warned at module load).
+    // Consistent with the graceful-degradation pattern used by Resend
+    // and reCAPTCHA elsewhere in this codebase.
     return;
   }
 
