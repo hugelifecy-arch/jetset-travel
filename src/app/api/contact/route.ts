@@ -3,6 +3,7 @@ import { z } from "zod";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
 import { escapeHtml } from "@/lib/email/escape";
+import { logLeadFallback } from "@/lib/email/lead-log";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { getClientIp } from "@/lib/client-ip";
@@ -148,6 +149,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   }
 
+  /* Notification email. If Resend rejects the send (unverified domain,
+     sandbox sender can only reach the account owner, invalid API key,
+     etc.) we must NOT show the visitor a generic error — the form
+     already validated their input and passed anti-spam. Log the full
+     lead to stderr under a grep-friendly prefix so ops can recover
+     it from Vercel logs, then return success. The lead is not lost;
+     delivery resumes automatically the moment Resend is configured
+     correctly. */
+  let deliveryOk = true;
   try {
     await sendResendEmail(apiKey, {
       from: FROM_EMAIL,
@@ -159,25 +169,26 @@ export async function POST(request: Request) {
       html: notificationHtml(data),
     });
   } catch (err) {
-    console.error("[contact] Notification email failed:", err);
-    return NextResponse.json(
-      { error: "Failed to send email. Please try again." },
-      { status: 500 },
-    );
+    deliveryOk = false;
+    logLeadFallback("contact", data, err);
   }
 
   /* Auto-reply is a nice-to-have; don't fail the submission if it
-     can't go out (e.g. visitor's mailbox rejects our sender). The
-     lead is already safely in the office inbox. */
-  try {
-    await sendResendEmail(apiKey, {
-      from: FROM_EMAIL,
-      to: data.email,
-      subject: "JetSet Travel — Your message is received",
-      html: autoReplyHtml(data.name),
-    });
-  } catch (err) {
-    console.error("[contact] Auto-reply email failed (non-fatal):", err);
+     can't go out (e.g. visitor's mailbox rejects our sender). Skip
+     entirely if the notification itself failed — the sandbox sender
+     can't reach arbitrary visitor addresses anyway, and retrying
+     just produces a second error in the log for the same root cause. */
+  if (deliveryOk) {
+    try {
+      await sendResendEmail(apiKey, {
+        from: FROM_EMAIL,
+        to: data.email,
+        subject: "JetSet Travel — Your message is received",
+        html: autoReplyHtml(data.name),
+      });
+    } catch (err) {
+      console.error("[contact] Auto-reply email failed (non-fatal):", err);
+    }
   }
 
   return NextResponse.json({ success: true });
