@@ -162,15 +162,22 @@ export default async function BlogPostPage({
     ? `${CANONICAL_ORIGIN}${post.frontmatter.image}`
     : OG_IMAGE;
 
-  // Article JSON-LD schema
+  // Article JSON-LD schema. `image` is an ImageObject with explicit
+  // dimensions so Google Search Console's Article rich result requirement
+  // ("Image width and height are required") is satisfied.
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.frontmatter.title,
     description: post.frontmatter.description,
-    image: ogImage,
+    image: {
+      "@type": "ImageObject",
+      url: ogImage,
+      width: 1200,
+      height: 630,
+    },
     datePublished: post.frontmatter.date,
-    dateModified: post.frontmatter.date,
+    dateModified: post.frontmatter.dateModified ?? post.frontmatter.date,
     author: {
       "@type": "Person",
       name: post.frontmatter.author,
@@ -182,6 +189,8 @@ export default async function BlogPostPage({
       logo: {
         "@type": "ImageObject",
         url: `${CANONICAL_ORIGIN}/images/jetset-logo.svg`,
+        width: 300,
+        height: 60,
       },
     },
     mainEntityOfPage: {

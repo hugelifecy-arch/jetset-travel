@@ -19,6 +19,8 @@ export interface BlogPostFrontmatter {
   title: string;
   description: string;
   date: string;
+  /** Optional — when the article was last materially updated. Falls back to `date`. */
+  dateModified?: string;
   author: string;
   slug: string;
   image: string;

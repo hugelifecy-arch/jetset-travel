@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Calendar, Clock, ArrowRight, Search } from "lucide-react";
 import type { BlogCategory } from "@/lib/blog";
@@ -38,8 +39,11 @@ const CATEGORY_KEYS: Record<BlogCategory, string> = {
 export default function BlogFilters({ posts }: { posts: BlogPost[] }) {
   const locale = useLocale();
   const t = useTranslations("blogPage");
+  // Seed from `?q=` so the WebSite SearchAction (sitelinks search box)
+  // actually lands users on filtered results instead of the full archive.
+  const initialQuery = useSearchParams().get("q") ?? "";
   const [activeCategory, setActiveCategory] = useState<BlogCategory>("all");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [currentPage, setCurrentPage] = useState(1);
 
   const categories: BlogCategory[] = [
