@@ -1,22 +1,6 @@
-// @ts-check
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-
-/*
- * Mirror of src/lib/email/escape.ts — kept in sync.
- * We can't directly import TypeScript modules from node:test, so the
- * function body is inlined. Any change to escapeHtml() in src/ must be
- * reflected here.
- */
-function escapeHtml(value) {
-  if (value === null || value === undefined) return "";
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
+import { escapeHtml } from "../src/lib/email/escape.ts";
 
 describe("escapeHtml — email template XSS defence", () => {
   it("escapes HTML tags", () => {

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
-import { redirect } from "next/navigation";
 import FlightPageContent from "./FlightPageContent";
 
 const languagePaths = {
@@ -40,10 +39,7 @@ export default async function FlightTicketsCyprusPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  if (locale === "ru") {
-    redirect("/ru/aviabilety-kipr/");
-  }
-
+  // Off-locale visits (/ru/flight-tickets-cyprus/) are 308-redirected at the
+  // edge via next.config.ts → we always reach this page as English.
   return <FlightPageContent locale={locale} />;
 }

@@ -72,6 +72,31 @@ const nextConfig: NextConfig = {
         destination: "/ru/luxury-travel/",
         permanent: true,
       },
+      // Cross-locale SEO slug bridges. Each service page has a localised
+      // slug; off-locale visits used to be handled by a server-component
+      // `redirect()` call on every request, which forces Next to build and
+      // render a stub page just to emit a 307. Catching them here collapses
+      // each off-locale hit into a single 308 at the edge.
+      {
+        source: "/ru/paphos-travel-agency",
+        destination: "/ru/turisticheskoe-agentstvo-pafos/",
+        permanent: true,
+      },
+      {
+        source: "/en/turisticheskoe-agentstvo-pafos",
+        destination: "/en/paphos-travel-agency/",
+        permanent: true,
+      },
+      {
+        source: "/ru/flight-tickets-cyprus",
+        destination: "/ru/aviabilety-kipr/",
+        permanent: true,
+      },
+      {
+        source: "/en/aviabilety-kipr",
+        destination: "/en/flight-tickets-cyprus/",
+        permanent: true,
+      },
     ];
   },
   async headers() {

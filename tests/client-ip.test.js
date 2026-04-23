@@ -1,48 +1,9 @@
-// @ts-check
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-
-/*
- * The production code in src/lib/client-ip.ts is TypeScript and can't
- * be imported directly. We mirror the resolution logic here so the
- * tests exercise identical behavior.
- */
-
-function getClientIp(request) {
-  const vercel = request.headers.get("x-vercel-forwarded-for");
-  if (vercel) {
-    const first = vercel.split(",")[0]?.trim();
-    if (first) return first;
-  }
-
-  const realIp = request.headers.get("x-real-ip");
-  if (realIp) {
-    const trimmed = realIp.trim();
-    if (trimmed) return trimmed;
-  }
-
-  const forwarded = request.headers.get("x-forwarded-for");
-  if (forwarded) {
-    const parts = forwarded
-      .split(",")
-      .map((p) => p.trim())
-      .filter(Boolean);
-    const last = parts[parts.length - 1];
-    if (last) return last;
-  }
-
-  return "unknown";
-}
+import { getClientIp } from "../src/lib/client-ip.ts";
 
 function makeRequest(headers) {
-  return {
-    headers: {
-      get(name) {
-        const value = headers[name.toLowerCase()];
-        return value === undefined ? null : value;
-      },
-    },
-  };
+  return new Request("https://example.com", { headers });
 }
 
 describe("getClientIp", () => {
