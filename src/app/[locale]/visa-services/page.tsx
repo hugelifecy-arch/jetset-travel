@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import RelatedArticles from "@/components/sections/RelatedArticles";
+import FeaturedBlogPost from "@/components/sections/FeaturedBlogPost";
 import InlineTestimonial from "@/components/sections/InlineTestimonial";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import JsonLd from "@/components/seo/JsonLd";
@@ -479,6 +480,11 @@ export default async function VisaServicesPage({
       </div>
 
       {/* Related Services */}
+      <FeaturedBlogPost
+        locale={locale}
+        enSlug="digital-nomads-cyprus-guide"
+        ruSlug="digital-nomady-kipr-gid"
+      />
       <RelatedArticles locale={locale} tags={["visa", "schengen", "digital-nomad"]} />
       <ServicesCrossLinks locale={locale} include={["corporate", "luxury"]} />
 

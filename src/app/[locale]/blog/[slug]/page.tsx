@@ -11,7 +11,12 @@ import { PATH_DISPLAY_NAMES, getHomeName } from "@/components/seo/breadcrumb-nam
 import SocialShare from "@/components/blog/SocialShare";
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
+  // Only pre-render published posts. Drafts must not emit a public URL Google
+  // can crawl — thin draft pages compete with real articles and drag down the
+  // site's indexing signal (root cause of "Crawled - currently not indexed").
+  const posts = getAllPosts().filter(
+    (p) => p.frontmatter.status === "published",
+  );
   return posts.map((post) => ({
     locale: post.frontmatter.locale,
     slug: post.frontmatter.slug,
@@ -81,7 +86,7 @@ export default async function BlogPostPage({
   const t = await getTranslations({ locale, namespace: "blogPage" });
   const post = getPostBySlug(slug);
 
-  if (!post) {
+  if (!post || post.frontmatter.status !== "published") {
     notFound();
   }
 
@@ -123,17 +128,34 @@ export default async function BlogPostPage({
     ).values(),
   ).slice(0, 3);
 
-  // Get related posts (same tags, different slug)
+  // Get related posts — rank by number of overlapping tags so topically-close
+  // posts win over posts that merely share a weak tag like a year or "cyprus".
+  // Weak matching here was pushing on-topic posts out of the related list,
+  // weakening internal linking for pages that need index signal.
   const allPosts = getAllPosts(locale).filter(
     (p) => p.frontmatter.status === "published",
   );
+  const currentTags = (post.frontmatter.tags ?? []).map((t) =>
+    String(t).toLowerCase(),
+  );
   const related = allPosts
-    .filter(
-      (p) =>
-        p.frontmatter.slug !== slug &&
-        (p.frontmatter.tags ?? []).some((tag) => (post.frontmatter.tags ?? []).includes(tag)),
-    )
-    .slice(0, 3);
+    .filter((p) => p.frontmatter.slug !== slug)
+    .map((p) => {
+      const overlap = (p.frontmatter.tags ?? [])
+        .map((t) => String(t).toLowerCase())
+        .filter((t) => currentTags.includes(t)).length;
+      return { post: p, overlap };
+    })
+    .filter((m) => m.overlap > 0)
+    .sort((a, b) => {
+      if (b.overlap !== a.overlap) return b.overlap - a.overlap;
+      return (
+        new Date(b.post.frontmatter.date).getTime() -
+        new Date(a.post.frontmatter.date).getTime()
+      );
+    })
+    .slice(0, 3)
+    .map((m) => m.post);
 
   const articleUrl = `${CANONICAL_ORIGIN}/${locale}/blog/${slug}/`;
   const ogImage = post.frontmatter.image
