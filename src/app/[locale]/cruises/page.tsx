@@ -3,6 +3,7 @@ import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import CruisesContent from "./CruisesContent";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import RelatedArticles from "@/components/sections/RelatedArticles";
+import FeaturedBlogPost from "@/components/sections/FeaturedBlogPost";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 
 export async function generateMetadata({
@@ -40,6 +41,11 @@ export default async function CruisesPage({
   return (
     <>
       <CruisesContent locale={locale} />
+      <FeaturedBlogPost
+        locale={locale}
+        enSlug="cruises-from-limassol-2026"
+        ruSlug="luchshie-kruizy-iz-limassola-2026"
+      />
       <RelatedArticles locale={locale} tags={["cruise", "cruises", "limassol", "luxury"]} />
       <ServicesCrossLinks locale={locale} include={["luxury", "hotels"]} />
       <ServiceSchema

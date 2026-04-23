@@ -25,13 +25,28 @@ export default async function RelatedArticles({
   const posts = getPublishedPosts(locale);
   const wantedTags = tags.map((t) => t.toLowerCase());
 
+  // Rank by tag-overlap strength so topically-on-point posts win over recent
+  // posts whose only match is a weak tag (year, "cyprus"). Weak matches on the
+  // service pages were burying the very posts GSC flagged as "Crawled -
+  // currently not indexed".
   const matches = posts
-    .filter((p) =>
-      (p.frontmatter.tags ?? []).some((t) =>
-        wantedTags.includes(String(t).toLowerCase()),
-      ),
-    )
-    .slice(0, limit);
+    .map((p) => {
+      const postTags = (p.frontmatter.tags ?? []).map((t) =>
+        String(t).toLowerCase(),
+      );
+      const overlap = postTags.filter((t) => wantedTags.includes(t)).length;
+      return { post: p, overlap };
+    })
+    .filter((m) => m.overlap > 0)
+    .sort((a, b) => {
+      if (b.overlap !== a.overlap) return b.overlap - a.overlap;
+      return (
+        new Date(b.post.frontmatter.date).getTime() -
+        new Date(a.post.frontmatter.date).getTime()
+      );
+    })
+    .slice(0, limit)
+    .map((m) => m.post);
 
   if (matches.length === 0) return null;
 
