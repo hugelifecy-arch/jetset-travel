@@ -1,64 +1,10 @@
-// @ts-check
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-
-/*
- * We can't directly import TypeScript modules, so we inline the
- * gibberish-detection logic here to unit-test the algorithm.
- * The production code in src/lib/anti-spam.ts uses identical logic.
- */
-
-function isGibberish(text) {
-  if (!text) return false;
-  const trimmed = text.trim();
-  if (trimmed.length < 8) return false;
-
-  const alphaOnly = trimmed.replace(/[^a-zA-Z]/g, "");
-  if (alphaOnly.length < 6) return false;
-
-  /* Signal 1 — long single token with no spaces */
-  const hasNoSpaces = !trimmed.includes(" ") && !trimmed.includes("@");
-  const isLong = trimmed.length > 15;
-
-  /* Signal 2 — random case mixing */
-  let caseChanges = 0;
-  for (let i = 1; i < alphaOnly.length; i++) {
-    const prevUp = alphaOnly[i - 1] !== alphaOnly[i - 1].toLowerCase();
-    const currUp = alphaOnly[i] !== alphaOnly[i].toLowerCase();
-    if (prevUp !== currUp) caseChanges++;
-  }
-  const hasRandomCase = caseChanges / (alphaOnly.length - 1) > 0.35;
-
-  /* Signal 3 — low vowel ratio */
-  const vowelCount = (alphaOnly.match(/[aeiouAEIOU]/g) || []).length;
-  const hasLowVowels = vowelCount / alphaOnly.length < 0.12;
-
-  if (hasNoSpaces && isLong && (hasRandomCase || hasLowVowels)) return true;
-  if (hasRandomCase && hasLowVowels) return true;
-
-  return false;
-}
-
-function isSubmittedTooFast(formLoadedAt) {
-  if (typeof formLoadedAt !== "number" || formLoadedAt <= 0) return false;
-  return Date.now() - formLoadedAt < 3000;
-}
-
-const GIBBERISH_FIELDS = [
-  "name", "message", "companyName", "notes",
-  "specialRequirements", "route", "destinations",
-];
-
-function findGibberishField(data) {
-  for (const field of GIBBERISH_FIELDS) {
-    if (typeof data[field] === "string" && isGibberish(data[field])) {
-      return field;
-    }
-  }
-  return null;
-}
-
-// --- Tests ---
+import {
+  isGibberish,
+  isSubmittedTooFast,
+  findGibberishField,
+} from "../src/lib/anti-spam.ts";
 
 describe("isGibberish", () => {
   it("detects random string with mixed case (spam name)", () => {
