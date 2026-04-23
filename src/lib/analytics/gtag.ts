@@ -85,7 +85,6 @@ export function trackFormSuccess(
   } = {}
 ): void {
   pushEvent("generate_lead", { form_name, ...params });
-  pushEvent("form_success", { form_name, ...params });
 }
 
 export function trackFormError(form_name: FormName, reason: string): void {

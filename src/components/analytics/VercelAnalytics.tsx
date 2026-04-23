@@ -12,11 +12,10 @@ export default function VercelAnalytics() {
     check();
 
     window.addEventListener("storage", check);
-    const handleBannerChange = () => setTimeout(check, 0);
-    window.addEventListener("cookie-banner-change", handleBannerChange);
+    window.addEventListener("cookie-consent-change", check);
     return () => {
       window.removeEventListener("storage", check);
-      window.removeEventListener("cookie-banner-change", handleBannerChange);
+      window.removeEventListener("cookie-consent-change", check);
     };
   }, []);
 
