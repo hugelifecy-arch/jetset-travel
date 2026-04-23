@@ -160,7 +160,7 @@ export default function middleware(req: NextRequest) {
   // 5. Ensure a trailing slash on the canonical pathname.
   pathname = ensureTrailingSlash(pathname);
 
-  // --- Decide: redirect, rewrite (root), or pass through ---
+  // --- Decide: redirect (incl. root "/") or pass through ---
   const newSearch = searchParams.toString() ? `?${searchParams.toString()}` : "";
   const pathChanged = pathname !== originalPathname;
   const searchStringChanged = queryChanged && newSearch !== originalSearch;
@@ -173,13 +173,19 @@ export default function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl, 301);
   }
 
-  // Root "/" — rewrite (200, not a redirect) to the preferred locale so GSC
-  // doesn't flag the homepage as "Page with redirect".
+  // Root "/" — 301 redirect to the preferred locale. A rewrite (200) would
+  // leave the bare root URL serving content with a canonical pointing to
+  // /<locale>/, which GSC flags as "Alternate page with proper canonical
+  // tag" and won't let validation clear. A 301 redirect removes "/" from
+  // the alternates bucket entirely: Googlebot (Accept-Language: en) follows
+  // the redirect to /en/ and indexes only that, while real users keep
+  // locale-negotiated UX. `Vary: Accept-Language` keeps shared caches from
+  // serving the wrong-locale redirect.
   if (pathname === "/") {
     const preferredLocale = getPreferredLocale(req);
-    const rewriteUrl = url.clone();
-    rewriteUrl.pathname = `/${preferredLocale}/`;
-    const res = NextResponse.rewrite(rewriteUrl);
+    const redirectUrl = url.clone();
+    redirectUrl.pathname = `/${preferredLocale}/`;
+    const res = NextResponse.redirect(redirectUrl, 301);
     res.headers.set("Vary", "Accept-Language");
     return res;
   }
