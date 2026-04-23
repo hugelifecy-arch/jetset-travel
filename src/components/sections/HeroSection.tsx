@@ -256,7 +256,7 @@ export default function HeroSection() {
           >
             <div className="flex items-center gap-2 text-sm text-white/80">
               <Image
-                src="/images/iata-logo.jpg"
+                src="/images/iata-logo.png"
                 alt={t("iataAlt")}
                 width={28}
                 height={28}
@@ -270,7 +270,7 @@ export default function HeroSection() {
             </div>
             <div className="flex items-center gap-2 text-sm text-white/80">
               <Image
-                src="/images/tourism-logo.jpg"
+                src="/images/tourism-logo.png"
                 alt={t("tourismAlt")}
                 width={28}
                 height={28}

@@ -5,7 +5,7 @@ date: "2026-05-19"
 author: "Maro Kokkinou"
 slug: "private-villa-holidays-mykonos-santorini-crete"
 translationSlug: "villy-mikonos-santorini-krit-s-kipra"
-image: "/images/blog/luxury-mediterranean-2026.jpg"
+image: "/images/blog/private-villas-greek-islands.jpg"
 category: "luxury"
 tags:
   - luxury

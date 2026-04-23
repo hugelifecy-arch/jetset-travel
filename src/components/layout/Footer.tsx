@@ -53,7 +53,7 @@ export default function Footer() {
             <div className="text-xs text-white/50 space-y-3">
               <div className="flex items-center gap-3">
                 <Image
-                  src="/images/iata-logo.jpg"
+                  src="/images/iata-logo.png"
                   alt={tCommon("iataAlt")}
                   width={52}
                   height={52}
@@ -64,7 +64,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-3">
                 <Image
-                  src="/images/tourism-logo.jpg"
+                  src="/images/tourism-logo.png"
                   alt={tCommon("ctoAlt")}
                   width={52}
                   height={52}

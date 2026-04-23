@@ -37,7 +37,7 @@ const tier1Lines = [
   { name: "Royal Caribbean", logo: "/images/cruise-logos/royal-caribbean.png" },
   { name: "MSC Cruises", logo: "/images/cruise-logos/msc-cruises.png" },
   { name: "Norwegian Cruise Line", logo: "/images/cruise-logos/norwegian.png" },
-  { name: "Carnival Cruise Line", logo: "/images/cruise-logos/carnival.jpg" },
+  { name: "Carnival Cruise Line", logo: "/images/cruise-logos/carnival.png" },
   { name: "Princess Cruises", logo: "/images/cruise-logos/princess.png" },
   { name: "Celebrity Cruises", logo: "/images/cruise-logos/celebrity.png" },
 ];
