@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { sendResendEmail } from "@/lib/email/resend";
+import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
 import { escapeHtml } from "@/lib/email/escape";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { getClientIp } from "@/lib/client-ip";
+
+export const runtime = "nodejs";
 
 /* ------------------------------------------------------------------ */
 /*  Schema                                                             */
@@ -155,25 +158,29 @@ export async function POST(request: Request) {
 
   try {
     await sendResendEmail(apiKey, {
-      from: "JetSet Travel <noreply@jetset-travel.com>",
-      to: "info@jetset.com.cy",
+      from: FROM_EMAIL,
+      to: TO_EMAIL,
       reply_to: data.email,
       subject: `New Cruise Enquiry — ${data.name}${data.destination ? ` (${data.destination})` : ""}`,
       html: notificationHtml(data),
     });
+  } catch (err) {
+    console.error("[cruise-enquiry] Notification email failed:", err);
+    return NextResponse.json(
+      { error: "Failed to send email. Please try again." },
+      { status: 500 },
+    );
+  }
 
+  try {
     await sendResendEmail(apiKey, {
-      from: "JetSet Travel <noreply@jetset-travel.com>",
+      from: FROM_EMAIL,
       to: data.email,
       subject: "JetSet Travel — Your cruise enquiry is received",
       html: autoReplyHtml(data.name),
     });
   } catch (err) {
-    console.error("[cruise-enquiry] Email send error:", err);
-    return NextResponse.json(
-      { error: "Failed to send email. Please try again." },
-      { status: 500 }
-    );
+    console.error("[cruise-enquiry] Auto-reply email failed (non-fatal):", err);
   }
 
   return NextResponse.json({ success: true });

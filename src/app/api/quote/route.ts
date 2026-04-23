@@ -2,9 +2,12 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { sendResendEmail } from "@/lib/email/resend";
+import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
 import { escapeHtml } from "@/lib/email/escape";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { getClientIp } from "@/lib/client-ip";
+
+export const runtime = "nodejs";
 
 /* ------------------------------------------------------------------ */
 /*  Schemas — one per form that POSTs to /api/quote                    */
@@ -195,27 +198,31 @@ export async function POST(req: Request) {
 
   try {
     await sendResendEmail(apiKey, {
-      from: "JetSet Travel <noreply@jetset-travel.com>",
-      to: "info@jetset.com.cy",
+      from: FROM_EMAIL,
+      to: TO_EMAIL,
       reply_to: email,
       subject: `New ${quoteType} Quote Request — ${contactName}`,
       html: notificationHtml(data),
     });
+  } catch (err) {
+    console.error("[quote] Notification email failed:", err);
+    return NextResponse.json(
+      { ok: false, error: "Failed to send email. Please try again." },
+      { status: 500 },
+    );
+  }
 
-    if (email) {
+  if (email) {
+    try {
       await sendResendEmail(apiKey, {
-        from: "JetSet Travel <noreply@jetset-travel.com>",
+        from: FROM_EMAIL,
         to: email,
         subject: "JetSet Travel — Your quote request is received",
         html: autoReplyHtml(contactName),
       });
+    } catch (err) {
+      console.error("[quote] Auto-reply email failed (non-fatal):", err);
     }
-  } catch (err) {
-    console.error("[quote] Email send error:", err);
-    return NextResponse.json(
-      { ok: false, error: "Failed to send email. Please try again." },
-      { status: 500 }
-    );
   }
 
   return NextResponse.json({ ok: true });
