@@ -3,6 +3,7 @@ import { z } from "zod";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
 import { escapeHtml } from "@/lib/email/escape";
+import { logLeadFallback } from "@/lib/email/lead-log";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { getClientIp } from "@/lib/client-ip";
@@ -156,6 +157,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   }
 
+  /* Notification email. See /api/contact for the rationale — failures
+     here (unverified domain, sandbox-sender restrictions, etc.) must
+     not surface as a generic error to the visitor. The lead is logged
+     to stderr under a grep-friendly prefix for recovery from Vercel
+     logs until the Resend config is corrected. */
+  let deliveryOk = true;
   try {
     await sendResendEmail(apiKey, {
       from: FROM_EMAIL,
@@ -165,22 +172,21 @@ export async function POST(request: Request) {
       html: notificationHtml(data),
     });
   } catch (err) {
-    console.error("[cruise-enquiry] Notification email failed:", err);
-    return NextResponse.json(
-      { error: "Failed to send email. Please try again." },
-      { status: 500 },
-    );
+    deliveryOk = false;
+    logLeadFallback("cruise-enquiry", data, err);
   }
 
-  try {
-    await sendResendEmail(apiKey, {
-      from: FROM_EMAIL,
-      to: data.email,
-      subject: "JetSet Travel — Your cruise enquiry is received",
-      html: autoReplyHtml(data.name),
-    });
-  } catch (err) {
-    console.error("[cruise-enquiry] Auto-reply email failed (non-fatal):", err);
+  if (deliveryOk) {
+    try {
+      await sendResendEmail(apiKey, {
+        from: FROM_EMAIL,
+        to: data.email,
+        subject: "JetSet Travel — Your cruise enquiry is received",
+        html: autoReplyHtml(data.name),
+      });
+    } catch (err) {
+      console.error("[cruise-enquiry] Auto-reply email failed (non-fatal):", err);
+    }
   }
 
   return NextResponse.json({ success: true });

@@ -5,7 +5,7 @@ date: "2026-05-05"
 author: "Maro Kokkinou"
 slug: "luxury-travel-cyprus-2026-guide"
 translationSlug: "lyuks-puteshestviya-s-kipra-2026-gid"
-image: "/images/blog/luxury-mediterranean-2026.jpg"
+image: "/images/blog/luxury-travel-cyprus-2026.jpg"
 category: "luxury"
 tags:
   - luxury

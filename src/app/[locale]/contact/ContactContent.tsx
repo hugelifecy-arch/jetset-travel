@@ -538,7 +538,7 @@ export default function ContactContent() {
             <div className="flex items-center gap-3">
               <div className="w-16 h-16 relative">
                 <Image
-                  src="/images/iata-logo.jpg"
+                  src="/images/iata-logo.png"
                   alt={tCommon("iataAlt")}
                   fill
                   className="object-contain"
@@ -558,7 +558,7 @@ export default function ContactContent() {
             <div className="flex items-center gap-3">
               <div className="w-16 h-16 relative">
                 <Image
-                  src="/images/tourism-logo.jpg"
+                  src="/images/tourism-logo.png"
                   alt={tCommon("ctoAlt")}
                   fill
                   className="object-contain"

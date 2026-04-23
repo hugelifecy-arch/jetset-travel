@@ -45,7 +45,7 @@ export default function FormTrustElements({
       >
         <span className="flex items-center gap-1.5">
           <Image
-            src="/images/iata-logo.jpg"
+            src="/images/iata-logo.png"
             alt={iataImageAlt}
             width={16}
             height={16}

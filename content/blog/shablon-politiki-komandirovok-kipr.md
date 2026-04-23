@@ -5,7 +5,7 @@ date: "2026-05-26"
 author: "Nontari Kalaitsidis"
 slug: "shablon-politiki-komandirovok-kipr"
 translationSlug: "corporate-travel-policy-template-cyprus"
-image: "/images/blog/corporate-travel-tips.jpg"
+image: "/images/blog/corporate-travel-policy.jpg"
 category: "corporate-travel"
 tags:
   - корпоративные
