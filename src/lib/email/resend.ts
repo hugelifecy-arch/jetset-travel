@@ -1,39 +1,33 @@
-import { Resend } from "resend";
-
-type EmailPayload = {
-  from: string;
-  to: string | string[];
-  subject: string;
-  html?: string;
-  text?: string;
-  reply_to?: string | string[];
-  [key: string]: unknown;
-};
-
 /**
- * Send a transactional email via the Resend SDK.
+ * Send a transactional email via the Resend HTTP API.
  *
- * Accepts snake_case `reply_to` (kept for backwards-compat with the
- * previous fetch-based helper) and forwards it to the SDK's
- * camelCase `replyTo`. Any SDK-level error is re-thrown with the
- * full payload serialized so the caller's log line actually tells
- * us why the send failed (unverified domain, invalid API key, etc.).
+ * We call Resend directly with `fetch` instead of the `resend` SDK so
+ * the package doesn't need to be installed at runtime (and so its
+ * transitive dependencies aren't pulled into the bundle or audit
+ * surface). The REST API accepts snake_case `reply_to`, matching what
+ * the callers already pass, so no payload transformation is needed.
+ *
+ * Throws on any non-2xx response with the status and response body so
+ * the caller's log line explains why the send failed (unverified
+ * domain, invalid API key, validation error, etc.).
  */
 export async function sendResendEmail(
   apiKey: string,
   payload: Record<string, unknown>,
 ) {
-  const { reply_to, ...rest } = payload as EmailPayload;
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
 
-  const resend = new Resend(apiKey);
-  const { data, error } = await resend.emails.send({
-    ...rest,
-    ...(reply_to !== undefined ? { replyTo: reply_to } : {}),
-  } as Parameters<typeof resend.emails.send>[0]);
-
-  if (error) {
-    throw new Error(`Resend API error: ${JSON.stringify(error)}`);
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Resend API error (${response.status}): ${errorText}`);
   }
 
-  return data;
+  return response.json();
 }
