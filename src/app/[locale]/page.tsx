@@ -4,10 +4,6 @@ import { getTranslations } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
 import HeroSection from "@/components/sections/HeroSection";
 import TrustCredentialsBar from "@/components/sections/TrustCredentialsBar";
-import ComparisonSection from "@/components/sections/ComparisonSection";
-import ClientLogos from "@/components/sections/ClientLogos";
-import CTABanner from "@/components/sections/CTABanner";
-import LatestBlogStrip from "@/components/sections/LatestBlogStrip";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 import WebSiteSchema from "@/components/seo/WebSiteSchema";
 
@@ -20,8 +16,20 @@ const ServicesGrid = dynamic(
 const TrustSection = dynamic(
   () => import("@/components/sections/TrustSection"),
 );
+const ComparisonSection = dynamic(
+  () => import("@/components/sections/ComparisonSection"),
+);
 const GoogleReviews = dynamic(
   () => import("@/components/sections/GoogleReviews"),
+);
+const ClientLogos = dynamic(
+  () => import("@/components/sections/ClientLogos"),
+);
+const LatestBlogStrip = dynamic(
+  () => import("@/components/sections/LatestBlogStrip"),
+);
+const CTABanner = dynamic(
+  () => import("@/components/sections/CTABanner"),
 );
 export async function generateMetadata({
   params,
