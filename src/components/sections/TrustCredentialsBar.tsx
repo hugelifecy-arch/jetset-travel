@@ -15,7 +15,7 @@ export default function TrustCredentialsBar() {
           {/* IATA Badge */}
           <div className="flex items-center gap-3">
             <Image
-              src="/images/iata-logo.jpg"
+              src="/images/iata-logo.png"
               alt={tCommon("iataAlt")}
               width={72}
               height={72}
@@ -29,7 +29,7 @@ export default function TrustCredentialsBar() {
           {/* Cyprus Tourism Badge */}
           <div className="flex items-center gap-3">
             <Image
-              src="/images/tourism-logo.jpg"
+              src="/images/tourism-logo.png"
               alt={tCommon("ctoAlt")}
               width={72}
               height={72}

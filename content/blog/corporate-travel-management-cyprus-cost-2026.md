@@ -5,7 +5,7 @@ date: "2026-05-12"
 author: "Nontari Kalaitsidis"
 slug: "corporate-travel-management-cyprus-cost-2026"
 translationSlug: "korporativnye-komandirovki-kipr-stoimost-2026"
-image: "/images/blog/business-guide-limassol.jpg"
+image: "/images/blog/corporate-travel-cost-2026.jpg"
 category: "corporate-travel"
 tags:
   - corporate

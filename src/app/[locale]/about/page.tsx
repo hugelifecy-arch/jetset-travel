@@ -262,7 +262,7 @@ export default async function AboutPage({
             <div className="flex flex-col items-center text-center p-5 sm:p-6 md:p-8 rounded-2xl bg-white border border-brand-navy/10 hover:shadow-luxury transition-shadow">
               <div className="w-24 h-24 relative mb-6">
                 <Image
-                  src="/images/iata-logo.jpg"
+                  src="/images/iata-logo.png"
                   alt={tCommon("iataAlt")}
                   fill
                   className="object-contain"
@@ -281,7 +281,7 @@ export default async function AboutPage({
             <div className="flex flex-col items-center text-center p-5 sm:p-6 md:p-8 rounded-2xl bg-white border border-brand-navy/10 hover:shadow-luxury transition-shadow">
               <div className="w-24 h-24 relative mb-6">
                 <Image
-                  src="/images/tourism-logo.jpg"
+                  src="/images/tourism-logo.png"
                   alt={tCommon("ctoAlt")}
                   fill
                   className="object-contain"
