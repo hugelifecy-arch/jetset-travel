@@ -1,15 +1,32 @@
-export async function sendResendEmail(apiKey: string, payload: Record<string, unknown>) {
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+import { Resend } from "resend";
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Resend API error (${response.status}): ${errorText}`);
+type EmailPayload = {
+  from: string;
+  to: string | string[];
+  subject: string;
+  html?: string;
+  text?: string;
+  reply_to?: string | string[];
+  [key: string]: unknown;
+};
+
+export async function sendResendEmail(
+  apiKey: string,
+  payload: Record<string, unknown>,
+) {
+  const { reply_to, ...rest } = payload as EmailPayload;
+
+  const resend = new Resend(apiKey);
+  const { data, error } = await resend.emails.send({
+    ...rest,
+    ...(reply_to !== undefined ? { replyTo: reply_to } : {}),
+  } as Parameters<typeof resend.emails.send>[0]);
+
+  if (error) {
+    throw new Error(
+      `Resend API error (${error.name ?? "unknown"}): ${error.message}`,
+    );
   }
+
+  return data;
 }
