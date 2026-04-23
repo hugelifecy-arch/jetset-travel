@@ -18,7 +18,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # 22.6+ is required for native `.ts` import in `node --test`.
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
@@ -28,7 +29,7 @@ jobs:
         run: npm run lint
 
       - name: Tests
-        run: node --test tests/*.test.js
+        run: npm test
 
       - name: Build
         run: npm run build
