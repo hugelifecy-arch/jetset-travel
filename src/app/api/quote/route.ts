@@ -4,6 +4,7 @@ import { enforceRateLimit } from "@/lib/rate-limit";
 import { sendResendEmail } from "@/lib/email/resend";
 import { escapeHtml } from "@/lib/email/escape";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
+import { getClientIp } from "@/lib/client-ip";
 
 /* ------------------------------------------------------------------ */
 /*  Schemas — one per form that POSTs to /api/quote                    */
@@ -135,8 +136,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, error: "Invalid input" }, { status: 400 });
   }
 
-  const forwardedFor = req.headers.get("x-forwarded-for");
-  const ip = forwardedFor?.split(",")[0]?.trim() || "unknown";
+  const ip = getClientIp(req);
 
   /* ---- Anti-spam checks (honeypot, timestamp, reCAPTCHA, gibberish) ---- */
   const spam = await runAntiSpamChecks(rawBody as Record<string, unknown>);
@@ -167,6 +167,12 @@ export async function POST(req: Request) {
   } catch (error) {
     if (error instanceof Error && error.message === "RATE_LIMIT") {
       return NextResponse.json({ ok: false, error: "Too many requests" }, { status: 429 });
+    }
+    if (error instanceof Error && error.message === "SECURITY_NOT_CONFIGURED") {
+      return NextResponse.json(
+        { ok: false, error: "Service temporarily unavailable." },
+        { status: 503 },
+      );
     }
 
     throw error;
