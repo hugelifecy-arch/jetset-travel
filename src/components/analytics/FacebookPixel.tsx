@@ -16,12 +16,11 @@ export default function FacebookPixel() {
 
     // Re-check when cookie consent changes (banner saves preferences via storage event)
     window.addEventListener("storage", check);
-    // Also listen for the cookie banner's custom event
-    const handleBannerChange = () => setTimeout(check, 0);
-    window.addEventListener("cookie-banner-change", handleBannerChange);
+    // Also listen for the consent-change event dispatched by setConsentPreferences
+    window.addEventListener("cookie-consent-change", check);
     return () => {
       window.removeEventListener("storage", check);
-      window.removeEventListener("cookie-banner-change", handleBannerChange);
+      window.removeEventListener("cookie-consent-change", check);
     };
   }, []);
 
