@@ -4,6 +4,7 @@ import { enforceRateLimit } from "@/lib/rate-limit";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
 import { escapeHtml } from "@/lib/email/escape";
+import { logLeadFallback } from "@/lib/email/lead-log";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { getClientIp } from "@/lib/client-ip";
 
@@ -196,6 +197,12 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
+  /* Notification email. See /api/contact for the rationale — failures
+     here (unverified domain, sandbox-sender restrictions, etc.) must
+     not surface as a generic error to the visitor. The lead is logged
+     to stderr under a grep-friendly prefix for recovery from Vercel
+     logs until the Resend config is corrected. */
+  let deliveryOk = true;
   try {
     await sendResendEmail(apiKey, {
       from: FROM_EMAIL,
@@ -205,14 +212,11 @@ export async function POST(req: Request) {
       html: notificationHtml(data),
     });
   } catch (err) {
-    console.error("[quote] Notification email failed:", err);
-    return NextResponse.json(
-      { ok: false, error: "Failed to send email. Please try again." },
-      { status: 500 },
-    );
+    deliveryOk = false;
+    logLeadFallback("quote", data as Record<string, unknown>, err);
   }
 
-  if (email) {
+  if (email && deliveryOk) {
     try {
       await sendResendEmail(apiKey, {
         from: FROM_EMAIL,
