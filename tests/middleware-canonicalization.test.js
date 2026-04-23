@@ -49,8 +49,7 @@ function ensureTrailingSlash(pathname) {
 
 /**
  * Pure port of src/middleware.ts canonicalization. Returns either:
- *   { action: "redirect", url }   — single 301 target
- *   { action: "rewrite",  url }   — root rewrite to /en/ or /ru/ (200)
+ *   { action: "redirect", url }   — single 301 target (incl. root "/" → /<locale>/)
  *   { action: "passthrough" }     — already canonical
  */
 function canonicalize(inputUrl, { preferredLocale = "en" } = {}) {
@@ -152,7 +151,7 @@ function canonicalize(inputUrl, { preferredLocale = "en" } = {}) {
   if (pathname === "/") {
     const r = new URL(inputUrl);
     r.pathname = `/${preferredLocale}/`;
-    return { action: "rewrite", url: r.toString() };
+    return { action: "redirect", url: r.toString() };
   }
 
   return { action: "passthrough" };
@@ -167,9 +166,9 @@ describe("middleware: GSC 'Page with redirect' failing URLs", () => {
   // HTTPS upgrade before middleware runs. Assert on the https:// half of
   // the chain (which is what middleware controls).
 
-  it("http://www.jetset-travel.com/ (after HTTPS upgrade) rewrites to /en/ (no 301)", () => {
+  it("http://www.jetset-travel.com/ (after HTTPS upgrade) → single 301 to /en/", () => {
     const result = canonicalize("https://www.jetset-travel.com/");
-    assert.equal(result.action, "rewrite");
+    assert.equal(result.action, "redirect");
     assert.equal(result.url, "https://www.jetset-travel.com/en/");
   });
 
@@ -325,19 +324,19 @@ describe("middleware: trailing-slash canonicalization", () => {
     );
   });
 
-  it("root on canonical www with no lang → rewrite to /en/ (200, not 301)", () => {
+  it("root on canonical www with no lang → 301 to /en/", () => {
     const result = canonicalize("https://www.jetset-travel.com/", {
       preferredLocale: "en",
     });
-    assert.equal(result.action, "rewrite");
+    assert.equal(result.action, "redirect");
     assert.equal(result.url, "https://www.jetset-travel.com/en/");
   });
 
-  it("root on canonical www with RU Accept-Language → rewrite to /ru/", () => {
+  it("root on canonical www with RU Accept-Language → 301 to /ru/", () => {
     const result = canonicalize("https://www.jetset-travel.com/", {
       preferredLocale: "ru",
     });
-    assert.equal(result.action, "rewrite");
+    assert.equal(result.action, "redirect");
     assert.equal(result.url, "https://www.jetset-travel.com/ru/");
   });
 });
