@@ -10,6 +10,15 @@ type EmailPayload = {
   [key: string]: unknown;
 };
 
+/**
+ * Send a transactional email via the Resend SDK.
+ *
+ * Accepts snake_case `reply_to` (kept for backwards-compat with the
+ * previous fetch-based helper) and forwards it to the SDK's
+ * camelCase `replyTo`. Any SDK-level error is re-thrown with the
+ * full payload serialized so the caller's log line actually tells
+ * us why the send failed (unverified domain, invalid API key, etc.).
+ */
 export async function sendResendEmail(
   apiKey: string,
   payload: Record<string, unknown>,
@@ -23,9 +32,7 @@ export async function sendResendEmail(
   } as Parameters<typeof resend.emails.send>[0]);
 
   if (error) {
-    throw new Error(
-      `Resend API error (${error.name ?? "unknown"}): ${error.message}`,
-    );
+    throw new Error(`Resend API error: ${JSON.stringify(error)}`);
   }
 
   return data;
