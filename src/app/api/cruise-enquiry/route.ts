@@ -4,6 +4,7 @@ import { sendResendEmail } from "@/lib/email/resend";
 import { escapeHtml } from "@/lib/email/escape";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { enforceRateLimit } from "@/lib/rate-limit";
+import { getClientIp } from "@/lib/client-ip";
 
 /* ------------------------------------------------------------------ */
 /*  Schema                                                             */
@@ -84,8 +85,7 @@ function autoReplyHtml(name: string): string {
 /* ------------------------------------------------------------------ */
 
 export async function POST(request: Request) {
-  const ip =
-    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  const ip = getClientIp(request);
 
   try {
     await enforceRateLimit(ip, "cruise-enquiry");
@@ -94,6 +94,12 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: "Too many requests. Please try again later." },
         { status: 429 }
+      );
+    }
+    if (error instanceof Error && error.message === "SECURITY_NOT_CONFIGURED") {
+      return NextResponse.json(
+        { error: "Service temporarily unavailable." },
+        { status: 503 }
       );
     }
     throw error;
