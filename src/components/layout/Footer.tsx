@@ -57,7 +57,7 @@ export default function Footer() {
                   alt={tCommon("iataAlt")}
                   width={52}
                   height={52}
-                  className="h-[52px] w-[52px] rounded-lg object-contain"
+                  className="h-[52px] w-[52px] rounded-lg object-contain bg-white p-1"
                   loading="lazy"
                 />
                 <p>{t("iataAccredited")}</p>
@@ -68,7 +68,7 @@ export default function Footer() {
                   alt={tCommon("ctoAlt")}
                   width={52}
                   height={52}
-                  className="h-[52px] w-[52px] rounded-lg object-contain"
+                  className="h-[52px] w-[52px] rounded-lg object-contain bg-white p-1"
                   loading="lazy"
                 />
                 <p>{t("cyprusTourism")}</p>
