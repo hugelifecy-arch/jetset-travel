@@ -1,12 +1,12 @@
 /**
  * Central email-address config for transactional mail.
  *
- * `from` defaults to Resend's always-available sandbox sender
- * (`onboarding@resend.dev`) so the form works the moment a
- * RESEND_API_KEY is set — even before the operator has verified
- * a custom domain in the Resend dashboard. Set RESEND_FROM_EMAIL
- * to a verified sender (e.g. "JetSet Travel <noreply@jetset-travel.com>")
- * for production deliverability.
+ * `from` defaults to a sender on the verified `jetset-travel.com`
+ * Resend domain. Resend's sandbox sender (`onboarding@resend.dev`)
+ * cannot be used here: it is restricted to delivering to the Resend
+ * account owner's own address and returns 403 when we try to notify
+ * `info@jetset.com.cy`. Override RESEND_FROM_EMAIL only if you move
+ * to a different verified domain.
  *
  * `to` defaults to the inbox the office actually monitors; override
  * via CONTACT_EMAIL if that ever changes.
@@ -25,7 +25,7 @@ export function envOrDefault(value: string | undefined, fallback: string): strin
 
 export const FROM_EMAIL = envOrDefault(
   process.env.RESEND_FROM_EMAIL,
-  "JetSet Travel <onboarding@resend.dev>",
+  "JetSet Travel <noreply@jetset-travel.com>",
 );
 
 export const TO_EMAIL = envOrDefault(
