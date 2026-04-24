@@ -1,19 +1,13 @@
 /**
  * Central email-address config for transactional mail.
  *
- * `from` defaults to Resend's always-available sandbox sender
- * (`onboarding@resend.dev`), which Resend allows to deliver to the
- * Resend account owner's own address — in our case the office inbox
- * at `info@jetset.com.cy`. This is what was restoring delivery in the
- * Resend logs until the default was flipped to `noreply@jetset-travel.com`
- * on the assumption that domain was verified; it isn't (Resend 403s
- * every send from it), so we flip back to the sandbox default.
- *
- * Once `jetset-travel.com` is actually verified in the Resend
- * dashboard (DKIM + SPF records added), set RESEND_FROM_EMAIL to a
- * verified sender (e.g. `"JetSet Travel <noreply@jetset-travel.com>"`)
- * to remove the sandbox branding from the From: header. Until then,
- * leaving it unset keeps the office receiving leads.
+ * `from` defaults to `quotes@jetset-travel.com` — the local-part
+ * matches what these emails actually are (quote-request notifications),
+ * and it pairs naturally with `reply_to: info@jetset.com.cy` so replies
+ * land in the office inbox. The `jetset-travel.com` domain is verified
+ * in Resend with SPF + DKIM, so sends from this address deliver
+ * directly without falling through the sandbox-sender safety net in
+ * `resend.ts`.
  *
  * `to` defaults to the inbox the office actually monitors; override
  * via CONTACT_EMAIL if that ever changes.
@@ -32,7 +26,7 @@ export function envOrDefault(value: string | undefined, fallback: string): strin
 
 export const FROM_EMAIL = envOrDefault(
   process.env.RESEND_FROM_EMAIL,
-  "JetSet Travel <onboarding@resend.dev>",
+  "JetSet Travel <quotes@jetset-travel.com>",
 );
 
 export const TO_EMAIL = envOrDefault(
