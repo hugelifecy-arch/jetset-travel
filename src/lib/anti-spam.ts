@@ -92,42 +92,27 @@ const recaptchaConfigured = Boolean(
   process.env.RECAPTCHA_SECRET_KEY &&
     process.env.RECAPTCHA_SECRET_KEY !== "your_recaptcha_secret_key",
 );
-const isProduction = process.env.NODE_ENV === "production";
 
 if (!recaptchaConfigured) {
-  // Development: warn and allow so local dev and tests don't need a
-  // reCAPTCHA key. Production: log loudly — verifyRecaptcha() below
-  // rejects when the secret is missing.
-  const msg = "[anti-spam] RECAPTCHA_SECRET_KEY is not set.";
-  if (isProduction) {
-    console.error(`${msg} Form submissions will be rejected until configured.`);
-  } else {
-    console.warn(
-      `${msg} reCAPTCHA is disabled in development. Other anti-spam checks (honeypot, timing, gibberish) remain active.`,
-    );
-  }
+  console.warn(
+    "[anti-spam] RECAPTCHA_SECRET_KEY is not set — reCAPTCHA verification " +
+      "is disabled. Other anti-spam checks (honeypot, timing, gibberish) remain active.",
+  );
 }
 
 export async function verifyRecaptcha(token: unknown): Promise<boolean> {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
   if (!secretKey || secretKey === "your_recaptcha_secret_key") {
-    // Production: fail closed. Shipping a public form without CAPTCHA
-    // verification means every spammer gets a free pass.
-    if (isProduction) return false;
-    return true; // Development — allow so local dev doesn't need a key.
+    return true; // reCAPTCHA not configured — allow
   }
 
   if (typeof token !== "string" || !token) {
     // reCAPTCHA IS configured server-side but the client didn't send a
-    // token. In production this usually means the client script was
-    // blocked (ad-blocker) or NEXT_PUBLIC_RECAPTCHA_SITE_KEY is
-    // missing. Fail closed there; the other anti-spam checks
-    // (honeypot, timing, gibberish) still filter most spam.
-    if (isProduction) {
-      console.warn("[anti-spam] reCAPTCHA secret set but no token supplied — rejecting submission");
-      return false;
-    }
-    console.warn("[anti-spam] reCAPTCHA secret set but no token supplied — allowing submission (dev)");
+    // token (grecaptcha script blocked by an ad-blocker, or
+    // NEXT_PUBLIC_RECAPTCHA_SITE_KEY missing on the client build). Don't
+    // block legitimate users — honeypot + timing + gibberish still filter
+    // most spam. Log so operators notice missing client-side config.
+    console.warn("[anti-spam] reCAPTCHA secret set but no token supplied — allowing submission");
     return true;
   }
 
@@ -144,12 +129,7 @@ export async function verifyRecaptcha(token: unknown): Promise<boolean> {
     return data.success === true && (data.score ?? 1) >= 0.5;
   } catch (err) {
     console.error("[anti-spam] reCAPTCHA verification error:", err);
-    // Transient failures: in production, fail closed. A burst of
-    // Google-side errors is a plausible cover for an abuse spike; the
-    // honeypot + timing + gibberish checks still accept legitimate
-    // users who hit a one-off retry. In development we return true so
-    // flaky network doesn't block local work.
-    return !isProduction;
+    return true; // Don't block users on transient verification failures.
   }
 }
 
