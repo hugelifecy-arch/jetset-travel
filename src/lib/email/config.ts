@@ -5,8 +5,9 @@
  * Resend domain. Resend's sandbox sender (`onboarding@resend.dev`)
  * cannot be used here: it is restricted to delivering to the Resend
  * account owner's own address and returns 403 when we try to notify
- * `info@jetset.com.cy`. Override RESEND_FROM_EMAIL only if you move
- * to a different verified domain.
+ * `info@jetset.com.cy`. If RESEND_FROM_EMAIL points at the sandbox
+ * sender we ignore it and fall back to the verified-domain default,
+ * logging a warning so the operator fixes their env config.
  *
  * `to` defaults to the inbox the office actually monitors; override
  * via CONTACT_EMAIL if that ever changes.
@@ -23,10 +24,24 @@ export function envOrDefault(value: string | undefined, fallback: string): strin
   return trimmed ? trimmed : fallback;
 }
 
-export const FROM_EMAIL = envOrDefault(
-  process.env.RESEND_FROM_EMAIL,
-  "JetSet Travel <noreply@jetset-travel.com>",
-);
+const DEFAULT_FROM_EMAIL = "JetSet Travel <noreply@jetset-travel.com>";
+
+function resolveFromEmail(): string {
+  const configured = envOrDefault(process.env.RESEND_FROM_EMAIL, DEFAULT_FROM_EMAIL);
+  if (configured.toLowerCase().includes("onboarding@resend.dev")) {
+    console.warn(
+      "[email/config] RESEND_FROM_EMAIL is set to Resend's sandbox sender " +
+        "(onboarding@resend.dev), which can only deliver to the Resend " +
+        "account owner. Ignoring it and falling back to " +
+        `${DEFAULT_FROM_EMAIL}. Verify jetset-travel.com at ` +
+        "resend.com/domains and update the env var.",
+    );
+    return DEFAULT_FROM_EMAIL;
+  }
+  return configured;
+}
+
+export const FROM_EMAIL = resolveFromEmail();
 
 export const TO_EMAIL = envOrDefault(
   process.env.CONTACT_EMAIL,
