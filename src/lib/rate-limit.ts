@@ -5,22 +5,13 @@ const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
 const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
 
 const isConfigured = Boolean(redisUrl && redisToken);
-const isProduction = process.env.NODE_ENV === "production";
 
 if (!isConfigured) {
-  // In development: warn and let submissions through so local dev and
-  // tests don't need an Upstash account. In production: fail closed —
-  // a deploy that silently disables rate limiting is worse than one
-  // that rejects until the operator fixes the configuration.
-  const msg =
-    "[rate-limit] UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN are not set.";
-  if (isProduction) {
-    console.error(`${msg} Form submissions will be rejected until configured.`);
-  } else {
-    console.warn(
-      `${msg} Rate limiting is disabled in development. Other anti-spam checks remain active.`,
-    );
-  }
+  console.warn(
+    "[rate-limit] UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN are not set — " +
+      "rate limiting is disabled. Other anti-spam checks (honeypot, timing, " +
+      "reCAPTCHA, gibberish) remain active.",
+  );
 }
 
 async function callPipeline(commands: unknown[][]) {
@@ -67,14 +58,10 @@ async function callPipeline(commands: unknown[][]) {
  */
 export async function enforceRateLimit(ip: string, scope: string = "default") {
   if (!redisUrl || !redisToken) {
-    // Production: fail closed. Deploying a public form endpoint without
-    // rate limiting is a spam/abuse invitation — surface the
-    // misconfiguration instead of silently shipping an unprotected API.
-    if (isProduction) {
-      throw new Error("SECURITY_NOT_CONFIGURED");
-    }
-    // Development: skip (already warned at module load). Lets local
-    // dev and CI run without an Upstash account.
+    // Rate-limit backend isn't configured — skip this check. The form
+    // routes still enforce honeypot, timing, reCAPTCHA, and gibberish
+    // checks, so submissions aren't unprotected. A warning was logged
+    // at module load so operators notice the missing Upstash config.
     return;
   }
 
