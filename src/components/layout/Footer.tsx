@@ -28,7 +28,7 @@ export default function Footer() {
     { href: `/${locale}/hotel-reservations`, label: t("hotelReservations") },
     { href: `/${locale}/cruises`, label: t("cruises") },
     { href: `/${locale}/visa-services`, label: t("visaAssistance") },
-    { href: `/${locale}/luxury-travel`, label: t("luxuryTravel") },
+    { href: `/${locale}/luxury-travel/`, label: t("luxuryTravel") },
     { href: `/${locale}/${paphosSlug}`, label: t("travelAgencyPaphos") },
   ];
   return (

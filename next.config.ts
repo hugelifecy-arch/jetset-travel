@@ -63,6 +63,11 @@ const nextConfig: NextConfig = {
     // redirect" validation failure.
     return [
       {
+        source: "/luxury",
+        destination: "/en/luxury-travel/",
+        permanent: true,
+      },
+      {
         source: "/en/luxury",
         destination: "/en/luxury-travel/",
         permanent: true,

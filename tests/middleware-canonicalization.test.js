@@ -67,6 +67,12 @@ describe("middleware: GSC 'Page with redirect' failing URLs", () => {
     assert.equal(result.action, "redirect");
     assert.equal(result.url, CANONICAL_ROOT);
   });
+
+  it("https://www.jetset-travel.com/?lang=ru → single 301 to /ru/", () => {
+    const result = canonicalize("https://www.jetset-travel.com/?lang=ru");
+    assert.equal(result.action, "redirect");
+    assert.equal(result.url, "https://www.jetset-travel.com/ru/");
+  });
 });
 
 describe("middleware: trailing-slash canonicalization", () => {
