@@ -10,7 +10,7 @@ import { Menu, X, Globe, Phone, ChevronDown } from "lucide-react";
 /** Service sub-links for the "Services" dropdown */
 const serviceLinks = [
   { href: "/corporate-travel", key: "corporate" },
-  { href: "/luxury-travel", key: "luxury" },
+  { href: "/luxury-travel/", key: "luxury" },
   { href: "/cruises", key: "cruises" },
   { href: "/visa-services", key: "visas" },
   { href: "/hotel-reservations", key: "hotels" },
