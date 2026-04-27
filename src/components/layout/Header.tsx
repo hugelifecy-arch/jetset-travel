@@ -190,6 +190,7 @@ export default function Header() {
               <Globe className="h-4 w-4 text-white/60" />
               <Link
                 href={enHref}
+                hrefLang="en"
                 className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
                   locale === "en"
                     ? "font-bold text-brand-gold underline underline-offset-4"
@@ -204,6 +205,7 @@ export default function Header() {
               <span className="text-white/30">|</span>
               <Link
                 href={ruHref}
+                hrefLang="ru"
                 className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
                   locale === "ru"
                     ? "font-bold text-brand-gold underline underline-offset-4"
@@ -302,6 +304,7 @@ export default function Header() {
                 <Globe className="h-4 w-4 text-white/60" />
                 <Link
                   href={enHref}
+                  hrefLang="en"
                   className={`px-2 py-2 rounded text-sm transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
                     locale === "en"
                       ? "font-bold text-brand-gold underline underline-offset-4"
@@ -316,6 +319,7 @@ export default function Header() {
                 </Link>
                 <Link
                   href={ruHref}
+                  hrefLang="ru"
                   className={`px-2 py-2 rounded text-sm transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
                     locale === "ru"
                       ? "font-bold text-brand-gold underline underline-offset-4"
