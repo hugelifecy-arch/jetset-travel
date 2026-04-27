@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
+import { getCanonicalUrl, type Locale } from "@/lib/canonical";
 import { getAllPosts, getPostBySlug, getPostTranslationSlug } from "@/lib/blog";
 import { markdownToHtml } from "@/lib/markdown";
 import Image from "next/image";
@@ -48,19 +49,30 @@ export async function generateMetadata({
     robots: { index: true, follow: true },
     alternates: (() => {
       const slugs = getPostTranslationSlug(slug);
-      return slugs.en && slugs.ru
-        ? localizedAlternates(locale, `/blog/${slug}`, {
-            en: `/blog/${slugs.en}`,
-            ru: `/blog/${slugs.ru}`,
-          })
-        : { canonical: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}/` };
+      if (slugs.en && slugs.ru) {
+        return localizedAlternates(locale, `/blog/${slug}`, {
+          en: `/blog/${slugs.en}`,
+          ru: `/blog/${slugs.ru}`,
+        });
+      }
+      // Untranslated post: emit a self-referential canonical and x-default
+      // so every blog URL still ships with an x-default hreflang.
+      const loc = (locale === "ru" ? "ru" : "en") as Locale;
+      const selfUrl = getCanonicalUrl(`/blog/${slug}`, loc);
+      return {
+        canonical: selfUrl,
+        languages: {
+          [loc]: selfUrl,
+          "x-default": selfUrl,
+        },
+      };
     })(),
     openGraph: {
       type: "article",
       siteName: "JetSet Travel Cyprus",
       title: post.frontmatter.title,
       description: post.frontmatter.description,
-      url: `${CANONICAL_ORIGIN}/${locale}/blog/${slug}/`,
+      url: getCanonicalUrl(`/blog/${slug}`, (locale === "ru" ? "ru" : "en") as Locale),
       locale: isRussian ? "ru_RU" : "en_CY",
       alternateLocale: isRussian ? "en_CY" : "ru_RU",
       images: [{ url: ogImage, width: 1200, height: 630, alt: post.frontmatter.title }],
