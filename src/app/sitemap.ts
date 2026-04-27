@@ -17,6 +17,15 @@ type StaticPage = {
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
 };
 
+/**
+ * Bare paths the middleware 301-redirects to a different canonical URL.
+ * Keep this in sync with `BARE_PATH_SPECIALS` in `src/lib/canonicalize.ts`.
+ * Anything matching is rejected before it can be emitted as a <loc>.
+ */
+const REDIRECTED_ROUTE_PATHS: ReadonlySet<string> = new Set([
+  "/luxury",
+]);
+
 const pages: StaticPage[] = [
   { path: "", priority: 1.0, changeFrequency: "weekly" },
   { path: "/corporate-travel", priority: 0.8, changeFrequency: "monthly" },
@@ -72,41 +81,49 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticLastMod = SERVICE_LAST_UPDATED;
 
   const staticPages = locales.flatMap((locale) =>
-    pages.map((page) => {
-      const url = getCanonicalUrl(page.path, locale);
-      const localePath = new URL(url).pathname;
-      return {
-        url,
-        lastModified: staticLastMod,
-        changeFrequency: page.changeFrequency,
-        priority: page.priority,
-        alternates: alternatesFor(localePath),
-      };
-    }),
+    pages
+      .filter((page) => !REDIRECTED_ROUTE_PATHS.has(page.path))
+      .map((page) => {
+        const url = getCanonicalUrl(page.path, locale);
+        const localePath = new URL(url).pathname;
+        return {
+          url,
+          lastModified: staticLastMod,
+          changeFrequency: page.changeFrequency,
+          priority: page.priority,
+          alternates: alternatesFor(localePath),
+        };
+      }),
   );
 
-  const crossLocalePages = crossLocalePageDefs.flatMap((def) => {
-    const enUrl = getCanonicalUrl(`/${def.en}`, "en");
-    const ruUrl = getCanonicalUrl(`/${def.ru}`, "ru");
-    const enPath = new URL(enUrl).pathname;
-    const ruPath = new URL(ruUrl).pathname;
-    return [
-      {
-        url: enUrl,
-        lastModified: staticLastMod,
-        changeFrequency: "monthly" as const,
-        priority: 0.8,
-        alternates: alternatesFor(enPath),
-      },
-      {
-        url: ruUrl,
-        lastModified: staticLastMod,
-        changeFrequency: "monthly" as const,
-        priority: 0.8,
-        alternates: alternatesFor(ruPath),
-      },
-    ];
-  });
+  const crossLocalePages = crossLocalePageDefs
+    .filter(
+      (def) =>
+        !REDIRECTED_ROUTE_PATHS.has(`/${def.en}`) &&
+        !REDIRECTED_ROUTE_PATHS.has(`/${def.ru}`),
+    )
+    .flatMap((def) => {
+      const enUrl = getCanonicalUrl(`/${def.en}`, "en");
+      const ruUrl = getCanonicalUrl(`/${def.ru}`, "ru");
+      const enPath = new URL(enUrl).pathname;
+      const ruPath = new URL(ruUrl).pathname;
+      return [
+        {
+          url: enUrl,
+          lastModified: staticLastMod,
+          changeFrequency: "monthly" as const,
+          priority: 0.8,
+          alternates: alternatesFor(enPath),
+        },
+        {
+          url: ruUrl,
+          lastModified: staticLastMod,
+          changeFrequency: "monthly" as const,
+          priority: 0.8,
+          alternates: alternatesFor(ruPath),
+        },
+      ];
+    });
 
   // Add published blog posts to sitemap. Each post uses its own
   // frontmatter `date` as the lastmod (no blanket today-for-everything).
