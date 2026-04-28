@@ -28,6 +28,10 @@ export default function FAQSection({
         text: faq.answer,
       },
     })),
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h2"],
+    },
   };
 
   return (

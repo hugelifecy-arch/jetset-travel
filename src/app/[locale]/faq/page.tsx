@@ -36,7 +36,7 @@ const faqCategories: FaqCategory[] = [
   { titleKey: "categoryCorporate", namespace: "corporate", count: 3 },
   { titleKey: "categoryPayments", namespace: "payments", count: 3 },
   { titleKey: "categoryVisa", namespace: "visa", count: 3 },
-  { titleKey: "categoryAbout", namespace: "about", count: 6 },
+  { titleKey: "categoryAbout", namespace: "about", count: 9 },
 ];
 
 export default async function FAQPage({
@@ -71,6 +71,10 @@ export default async function FAQPage({
         text: qa.answer,
       },
     })),
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "h2", "[data-faq-answer]"],
+    },
   };
 
   return (

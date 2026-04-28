@@ -213,6 +213,10 @@ export default async function LocalBusinessSchema({
       "https://wa.me/35799478073",
       "https://t.me/jetsetnotis",
     ],
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", "[data-speakable]"],
+    },
   };
 
   return <JsonLd data={schema} />;
