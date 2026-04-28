@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
 import HeroSection from "@/components/sections/HeroSection";
 import TrustCredentialsBar from "@/components/sections/TrustCredentialsBar";
+import AboutBlurb from "@/components/sections/AboutBlurb";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 import WebSiteSchema from "@/components/seo/WebSiteSchema";
 
@@ -75,6 +76,7 @@ export default async function HomePage({
       <link rel="preload" as="image" href="/images/hero-bg.jpg" />
       <HeroSection />
       <TrustCredentialsBar />
+      <AboutBlurb />
       <ServicesGrid />
       <TrustSection />
       <ComparisonSection />

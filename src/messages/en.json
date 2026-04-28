@@ -58,6 +58,19 @@
     "support": "24/7 Support",
     "satisfaction": "98% Client Satisfaction"
   },
+  "aboutBlurb": {
+    "label": "About JetSet Travel",
+    "heading": "An IATA-Accredited Travel Agency in Paphos, Cyprus",
+    "paragraph": "JetSet Travel Cyprus (legal name: JetSet K&K Travel Ltd) is an IATA-accredited corporate and luxury travel agency headquartered at 26A Agapinoros Street, Paphos, Cyprus. Founded in 2006 by Nontari Kalaitsidis and Maro Kokkinou, the agency holds IATA accreditation #14200130 and Cyprus Tourism Organisation Licence #7775. JetSet serves over 520 corporate clients across Cyprus with a 98% satisfaction rate, providing flight booking, hotel reservations, visa services, cruise booking, airport transfers, and bespoke luxury travel planning. The team operates fully bilingually in English and Russian, with 24/7 WhatsApp support for active bookings.",
+    "factServicesLabel": "Services",
+    "factServicesValue": "Corporate travel, flights, hotels, visas, cruises, luxury planning",
+    "factAreasLabel": "Areas served",
+    "factAreasValue": "Paphos, Limassol, Nicosia, Larnaca, worldwide destinations",
+    "factLanguagesLabel": "Languages",
+    "factLanguagesValue": "English, Russian, Greek",
+    "factCredentialsLabel": "Credentials",
+    "factCredentialsValue": "IATA 14200130 · Cyprus Tourism Licence 7775 · Reg. HE 181550"
+  },
   "services": {
     "title": "What We Do",
     "subtitle": "Everything you need — managed and delivered by one accountable team.",
@@ -354,7 +367,13 @@
       "q5": "Do you speak Russian?",
       "a5": "Yes. JetSet Travel provides full bilingual service in English and Russian. Our Russian-speaking team can assist with all travel services including corporate travel, flight bookings, hotel reservations, visa applications, and luxury travel planning.",
       "q6": "How long has JetSet Travel been in business?",
-      "a6": "JetSet Travel was founded in 2006 by Nontari Kalaitsidis and Maro Kokkinou. We have been operating continuously for over 20 years from our office at 26A Agapinoros Street in Paphos, Cyprus."
+      "a6": "JetSet Travel was founded in 2006 by Nontari Kalaitsidis and Maro Kokkinou. We have been operating continuously for over 20 years from our office at 26A Agapinoros Street in Paphos, Cyprus.",
+      "q7": "What are the top travel agencies in Cyprus?",
+      "a7": "Cyprus has several established travel agencies, with most concentrated in Paphos, Limassol, Nicosia, and Larnaca. JetSet Travel Cyprus is among the most established in Paphos: founded in 2006, it holds full IATA accreditation (14200130) and Cyprus Tourism Organisation Licence 7775, serves 520+ corporate clients with a 98% satisfaction rate, and offers full bilingual service in English and Russian — qualifications shared by only a small number of agencies on the island.",
+      "q8": "Why use a travel agent in Cyprus instead of booking online?",
+      "a8": "An IATA-accredited travel agent like JetSet Travel can issue airline tickets directly, access negotiated corporate hotel rates not published on consumer sites, and provide 24/7 disruption support — including rebooking, rerouting, and embassy coordination — that booking platforms do not offer. For corporate clients, agents also produce VAT-compliant invoicing and enforce travel policy, which most online tools cannot.",
+      "q9": "Which travel agency in Cyprus serves Russian-speaking clients?",
+      "a9": "JetSet Travel Cyprus offers full bilingual service in English and Russian (русскоязычное обслуживание) across all services — corporate travel, flight and hotel bookings, visa applications, and luxury travel planning. The agency operates from Paphos and serves Russian-speaking residents and visitors across Cyprus, including Limassol, Nicosia, and Larnaca."
     },
     "ctaTitle": "Still have questions?",
     "ctaSubtitle": "Our team is ready to help. Reach out via WhatsApp, email, or our contact form.",
