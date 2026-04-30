@@ -136,6 +136,21 @@ export default async function LocaleLayout({
         {/* Messaging */}
         <link rel="preconnect" href="https://wa.me" />
         <link rel="dns-prefetch" href="https://wa.me" />
+        {/* AI search / LLM discovery — point crawlers at the
+            machine-readable summary and AI usage policy from any page. */}
+        <link
+          rel="alternate"
+          type="text/markdown"
+          title="JetSet Travel Cyprus — LLM-friendly summary"
+          href="/llms.txt"
+        />
+        <link
+          rel="alternate"
+          type="text/markdown"
+          title="JetSet Travel Cyprus — full AI knowledge file"
+          href="/llms-full.txt"
+        />
+        <link rel="ai-policy" href="/ai.txt" />
       </head>
       <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>

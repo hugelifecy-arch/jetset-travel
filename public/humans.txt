@@ -1,0 +1,24 @@
+/* TEAM */
+
+Founder & Director: Nontari Kalaitsidis
+Founder: Maro Kokkinou
+Site: https://www.jetset-travel.com
+Contact: info [at] jetset.com.cy
+Location: Paphos, Cyprus
+
+/* THANKS */
+
+To our 520+ corporate clients and the travellers who keep coming back.
+
+/* SITE */
+
+Last update: 2026-04-30
+Language: English, Русский, Ελληνικά
+Doctype: HTML5
+Standards: HTML5, CSS3, ES2022, Schema.org, hreflang
+Components: Next.js, React, TypeScript, Tailwind CSS, next-intl
+Hosting: Vercel
+Operator: JetSet K&K Travel Ltd
+Registration: Cyprus HE 181550
+Tourism Licence: Cyprus Tourism Organisation #7775
+Accreditation: IATA #14200130

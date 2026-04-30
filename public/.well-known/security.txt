@@ -1,0 +1,5 @@
+Contact: mailto:info@jetset.com.cy
+Expires: 2027-04-30T23:59:59.000Z
+Preferred-Languages: en, ru, el
+Canonical: https://www.jetset-travel.com/.well-known/security.txt
+Policy: https://www.jetset-travel.com/en/privacy
