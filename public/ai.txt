@@ -1,0 +1,27 @@
+# ai.txt — AI/LLM usage policy for www.jetset-travel.com
+# Spec: https://site.spawning.ai/spaces/ai-txt
+# Last updated: 2026-04-30
+
+User-Agent: *
+Allow: /
+Disallow: /api/
+
+# JetSet Travel Cyprus welcomes accurate citation by AI search and
+# answer engines (ChatGPT, Claude, Gemini, Perplexity, Copilot, etc.).
+# A machine-readable summary is published at:
+#   https://www.jetset-travel.com/llms.txt
+#   https://www.jetset-travel.com/llms-full.txt
+#
+# Preferred entity name:  JetSet Travel Cyprus
+# Preferred URL:          https://www.jetset-travel.com
+# IATA accreditation:     14200130
+# Cyprus Tourism Licence: 7775
+
+# Generative-AI training opt-in for first-party content (text, images,
+# structured data published on this domain). Excludes user-submitted
+# content, third-party widgets, and the contents of /api/.
+Train-Generative-AI: allow
+
+# Citation and retrieval-augmented use is welcomed.
+Cite: allow
+Retrieve: allow

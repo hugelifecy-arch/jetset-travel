@@ -94,8 +94,8 @@ export default async function LocalBusinessSchema({
     ],
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "5.0",
-      reviewCount: "47",
+      ratingValue: "4.9",
+      reviewCount: "65",
       bestRating: "5",
       worstRating: "1",
     },
@@ -110,7 +110,6 @@ export default async function LocalBusinessSchema({
               bestRating: 5,
             },
             reviewBody: r.reviewBody,
-            datePublished: "2025-01-15",
             publisher: { "@type": "Organization", name: "Google Reviews" },
           })),
         }
