@@ -1,7 +1,8 @@
 ---
-title: "Best Time to Visit Cyprus: A Month-by-Month Guide"
-description: "Month-by-month Cyprus travel guide covering weather, festivals, crowd levels, and flight/hotel pricing trends. Pick the best time to visit Paphos, Limassol, and Larnaca."
+title: "Best Time to Visit Cyprus 2026: Month-by-Month Weather & Crowd Guide"
+description: "Plan your 2026 Cyprus trip with our month-by-month guide: weather, festivals, crowd levels, flight and hotel pricing for Paphos, Limassol and Larnaca."
 date: "2026-04-01"
+dateModified: "2026-05-15"
 author: "Maro Kokkinou"
 slug: "best-time-visit-cyprus-monthly-guide"
 translationSlug: "luchshee-vremya-dlya-poseshcheniya-kipra"

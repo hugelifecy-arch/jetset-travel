@@ -9,7 +9,10 @@
     "lint": "eslint",
     "test": "node --test --test-reporter=spec \"tests/**/*.test.js\"",
     "audit-check": "node scripts/audit-check.js",
-    "check:do-not-disturb": "node scripts/check-do-not-disturb.mjs"
+    "check:do-not-disturb": "node scripts/check-do-not-disturb.mjs",
+    "check:serp-snippets": "node scripts/check-serp-snippets.mjs",
+    "serp-audit": "node scripts/serp-audit.mjs",
+    "gsc:weekly-delta": "node scripts/gsc-weekly-delta.mjs"
   },
   "engines": {
     "node": ">=22.6.0"

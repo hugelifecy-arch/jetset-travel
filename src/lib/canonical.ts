@@ -202,6 +202,12 @@ export const LOCALE_ALTERNATES: Record<
  * Returns the hreflang language map (absolute URLs) for a canonical
  * locale-prefixed path. Always includes an `x-default` pointing at the
  * English variant if available, else the path itself.
+ *
+ * Phase 5: explicitly emits `en-GB` and `ru-RU` aliases that point at the
+ * same URLs as `en` and `ru`. Google's hreflang docs accept language-only
+ * codes as a fallback, but UK GSC data shows the UK serps still send users
+ * to the bare `en` URL with low CTR; the regional codes make targeting
+ * explicit without duplicating content.
  */
 export function getHreflangAlternates(
   localePath: string,
@@ -218,6 +224,8 @@ export function getHreflangAlternates(
     out[extractLocaleFromPath(key) ?? DEFAULT_LOCALE] =
       `${CANONICAL_ORIGIN}${key}`;
   }
+  if (out.en && !out["en-GB"]) out["en-GB"] = out.en;
+  if (out.ru && !out["ru-RU"]) out["ru-RU"] = out.ru;
   if (!out["x-default"]) {
     out["x-default"] = out.en ?? Object.values(out)[0]!;
   }

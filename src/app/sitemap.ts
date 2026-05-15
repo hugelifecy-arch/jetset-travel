@@ -77,6 +77,9 @@ function alternatesFor(localePath: string) {
   const languages: Record<string, string> = {};
   if (entry?.en) languages.en = `${CANONICAL_ORIGIN}${entry.en}`;
   if (entry?.ru) languages.ru = `${CANONICAL_ORIGIN}${entry.ru}`;
+  // Phase 5: emit explicit regional codes alongside the bare language codes.
+  if (languages.en) languages["en-GB"] = languages.en;
+  if (languages.ru) languages["ru-RU"] = languages.ru;
   languages["x-default"] =
     languages.en ?? languages.ru ?? `${CANONICAL_ORIGIN}${localePath}`;
   return { languages };
@@ -157,6 +160,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       languages.ru = url;
       languages["x-default"] = url;
     }
+    // Phase 5: emit explicit regional codes alongside language-only ones.
+    if (languages.en) languages["en-GB"] = languages.en;
+    if (languages.ru) languages["ru-RU"] = languages.ru;
 
     return {
       url,

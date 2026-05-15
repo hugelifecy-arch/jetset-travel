@@ -1,7 +1,8 @@
 ---
-title: "Mediterranean Cruise Guide: Sailing from Limassol in 2026"
-description: "Complete guide to cruises departing Limassol in 2026. Mediterranean routes, top cruise lines, boarding tips, luxury suite options, and booking advice from JetSet Travel Cyprus."
+title: "Cruise Travel Agent in Cyprus — Limassol Departures 2026"
+description: "Licensed Cyprus cruise agent for 2026 Limassol departures. Mediterranean routes, top cruise lines, boarding tips, luxury suite booking from JetSet Travel Paphos."
 date: "2026-04-01"
+dateModified: "2026-05-15"
 author: "Maro Kokkinou"
 slug: "cruises-from-limassol-2026"
 translationSlug: "luchshie-kruizy-iz-limassola-2026"
