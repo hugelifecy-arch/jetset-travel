@@ -155,6 +155,44 @@ export default function CorporateTravelContent() {
         </div>
       </section>
 
+      {/* Phase 7 — contextual link into the Schengen 2026 hub from the
+          highest-authority B2B page. Sits above the fold of the long
+          page body so it counts as an in-body link, not a sidebar tile. */}
+      <section className="py-6 bg-brand-light border-b border-brand-navy/10">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <p className="text-sm sm:text-base text-brand-navy/80 leading-relaxed">
+            <span className="inline-block text-xs uppercase tracking-wider font-semibold text-brand-gold bg-brand-gold/10 px-2.5 py-1 rounded-full mr-2 align-middle">
+              {locale === "ru" ? "Шенген 2026" : "Schengen 2026"}
+            </span>
+            {locale === "ru" ? (
+              <>
+                Вступление Кипра в Шенгенскую зону потребует обновления
+                корпоративных тревел-политик. Полный гид —{" "}
+                <Link
+                  href={`/${locale}/schengen-cyprus-2026`}
+                  className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-gold"
+                >
+                  тематический хаб Кипр и Шенген 2026
+                </Link>
+                .
+              </>
+            ) : (
+              <>
+                Cyprus&rsquo;s Schengen accession will require corporate travel
+                policies to be updated. Full briefing in our{" "}
+                <Link
+                  href={`/${locale}/schengen-cyprus-2026`}
+                  className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-gold"
+                >
+                  Cyprus &amp; Schengen 2026 topic hub
+                </Link>
+                .
+              </>
+            )}
+          </p>
+        </div>
+      </section>
+
       {/* Three Pillars */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

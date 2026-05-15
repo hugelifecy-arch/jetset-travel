@@ -139,6 +139,18 @@ export const LOCALE_ALTERNATES: Record<
   "/en/terms": { en: "/en/terms", ru: "/ru/terms" },
   "/ru/terms": { en: "/en/terms", ru: "/ru/terms" },
 
+  // Phase 7 — Cyprus/Schengen 2026 topic hub (pillar page for the cluster
+  // surfaced by the +143% GSC impressions surge). Identical slug in both
+  // locales so the URL itself reads as a topic, not a translation choice.
+  "/en/schengen-cyprus-2026": {
+    en: "/en/schengen-cyprus-2026",
+    ru: "/ru/schengen-cyprus-2026",
+  },
+  "/ru/schengen-cyprus-2026": {
+    en: "/en/schengen-cyprus-2026",
+    ru: "/ru/schengen-cyprus-2026",
+  },
+
   // --- Cross-locale pages with localised slugs ---
   "/en/paphos-travel-agency": {
     en: "/en/paphos-travel-agency",
