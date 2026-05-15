@@ -5,6 +5,7 @@ import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import RelatedArticles from "@/components/sections/RelatedArticles";
 import FeaturedBlogPost from "@/components/sections/FeaturedBlogPost";
 import ServiceSchema from "@/components/seo/ServiceSchema";
+import TouristTripSchema from "@/components/seo/TouristTripSchema";
 
 export async function generateMetadata({
   params,
@@ -55,6 +56,30 @@ export default async function CruisesPage({
         url={`https://www.jetset-travel.com/${locale}/cruises`}
         serviceType="Cruise Booking Service"
         dateModified={SERVICE_LAST_UPDATED}
+        aggregateRating={{ ratingValue: "4.9", reviewCount: "65" }}
+      />
+      <TouristTripSchema
+        name={
+          locale === "ru"
+            ? "Средиземноморский круиз из Лимассола"
+            : "Mediterranean Cruise from Limassol"
+        }
+        description={
+          locale === "ru"
+            ? "Круизы по Средиземному морю из порта Лимассол. Греческие острова, Италия, Святая Земля. Бронирование Royal Caribbean, MSC, Celestyal через JetSet Travel."
+            : "Mediterranean cruises departing from Limassol Port. Greek Islands, Italy, Holy Land routes booked on Royal Caribbean, MSC, Celestyal via JetSet Travel Cyprus."
+        }
+        url={`https://www.jetset-travel.com/${locale}/cruises`}
+        image="https://www.jetset-travel.com/images/destinations/med.jpg"
+        touristType={["Mediterranean", "Greek Islands", "Italy", "Cyprus"]}
+        itinerary={[
+          { name: locale === "ru" ? "Лимассол, Кипр" : "Limassol, Cyprus" },
+          { name: locale === "ru" ? "Греческие острова" : "Greek Islands" },
+          { name: locale === "ru" ? "Италия" : "Italy" },
+          { name: locale === "ru" ? "Святая Земля" : "Holy Land" },
+        ]}
+        validFrom="2026-01-01"
+        validThrough="2026-12-31"
       />
     </>
   );

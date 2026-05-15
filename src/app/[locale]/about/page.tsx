@@ -137,6 +137,16 @@ export default async function AboutPage({
         },
       },
     ],
+    // Phase 6 Step 50: Review snippet eligibility on /about. Numbers must
+    // match LocalBusinessSchema (sourced from the Google Business Profile
+    // total) — never invent ratings.
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "4.9",
+      reviewCount: "65",
+      bestRating: "5",
+      worstRating: "1",
+    },
   };
 
   // Person schema for founders — strengthens E-E-A-T (named experts)

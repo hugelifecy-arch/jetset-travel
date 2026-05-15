@@ -90,6 +90,16 @@ export default async function ContactPage({
         opens: "09:00",
         closes: "18:00",
       },
+      // Phase 6 Step 50: aggregateRating on /contact so the page becomes
+      // eligible for Review-snippet rich results on its own URL. Sourced
+      // from the same Google Business Profile total as LocalBusinessSchema.
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.9",
+        reviewCount: "65",
+        bestRating: "5",
+        worstRating: "1",
+      },
     },
   };
 

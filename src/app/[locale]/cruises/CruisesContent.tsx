@@ -974,33 +974,6 @@ export default function CruisesContent({ locale }: { locale: string }) {
         }}
       />
 
-      {/* Schema.org Service structured data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Service",
-            name: "Worldwide Cruise Booking",
-            provider: {
-              "@type": "TravelAgency",
-              name: "JetSet Travel Cyprus",
-              url: "https://www.jetset-travel.com",
-              telephone: "+357-99-478-073",
-              address: {
-                "@type": "PostalAddress",
-                streetAddress: "26A Agapinoros Street",
-                addressLocality: "Paphos",
-                postalCode: "8049",
-                addressCountry: "CY",
-              },
-            },
-            areaServed: "Worldwide",
-            description:
-              "Book worldwide cruises on Royal Caribbean, MSC, Norwegian, Celebrity, Disney and 50+ cruise lines. Caribbean, Mediterranean, Alaska, Asia and beyond.",
-          }),
-        }}
-      />
     </>
   );
 }
