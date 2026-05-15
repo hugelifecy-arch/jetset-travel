@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 import CTABanner from "@/components/sections/CTABanner";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import FeaturedBlogPost from "@/components/sections/FeaturedBlogPost";
+import RelatedArticles from "@/components/sections/RelatedArticles";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import JsonLd from "@/components/seo/JsonLd";
 import Accordion from "@/components/ui/Accordion";
@@ -407,6 +409,19 @@ export default async function VisaServicesCyprusPage({
 
       {/* CTA Banner */}
       <CTABanner />
+
+      {/* Phase 6 Step 52 — amplify the Schengen guide that GSC flagged with
+          +143% impressions but underwater CTR. Permanent anchor link from
+          the highest-intent visa-services landing page in both locales. */}
+      <FeaturedBlogPost
+        locale={locale}
+        enSlug="schengen-visa-guide-cyprus-residents"
+        ruSlug="shengenskaya-viza-dlya-zhitelej-kipra"
+      />
+      <RelatedArticles
+        locale={locale}
+        tags={["visa", "schengen", "visas"]}
+      />
 
       {/* Related Services */}
       <ServicesCrossLinks locale={locale} include={["corporate", "paphos"]} />
