@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
+import Link from "next/link";
 import {
   FileCheck,
   Clock,
@@ -276,6 +277,42 @@ export default async function VisaServicesPage({
             <p className="text-brand-navy/80 text-lg leading-relaxed">
               {t("introP2")}
             </p>
+
+            {/* Phase 7 — in-body contextual link from a high-authority page
+                (visa-services has 41 internal inbound links) into the
+                Schengen 2026 cluster the GSC data shows as fastest-growing. */}
+            <div className="mt-8 p-5 rounded-xl border border-brand-gold/30 bg-brand-gold/5">
+              <p className="text-brand-navy text-base leading-relaxed">
+                <strong className="font-semibold">
+                  {locale === "ru" ? "Кипр и Шенген 2026: " : "Cyprus & Schengen 2026: "}
+                </strong>
+                {locale === "ru" ? (
+                  <>
+                    Кипр готовится к вступлению в Шенгенскую зону. Узнайте, как
+                    это повлияет на визовые требования и сроки подачи в нашем{" "}
+                    <Link
+                      href={`/${locale}/schengen-cyprus-2026`}
+                      className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-gold"
+                    >
+                      тематическом хабе по Шенгену 2026
+                    </Link>
+                    .
+                  </>
+                ) : (
+                  <>
+                    Cyprus is preparing for Schengen accession. See how the new
+                    rules affect visa timelines and documentation in our{" "}
+                    <Link
+                      href={`/${locale}/schengen-cyprus-2026`}
+                      className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-gold"
+                    >
+                      Cyprus &amp; Schengen 2026 topic hub
+                    </Link>
+                    .
+                  </>
+                )}
+              </p>
+            </div>
           </div>
         </div>
       </section>
