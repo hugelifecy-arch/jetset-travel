@@ -26,23 +26,27 @@ import { resolveAlternateUrls } from "../src/lib/i18n-route-resolver.ts";
  * The static redirects from next.config.ts plus the bare-path special-cases
  * in canonicalize.ts. None of these source paths may ever appear as a
  * sitemap <loc> — they would each cost Google a 308 hop on fetch.
+ *
+ * Phase 3: stored in the no-slash canonical form to match LOCALE_ALTERNATES.
  */
 const RETIRED_PATHS = new Set([
   "/luxury",
   "/en/luxury",
   "/ru/luxury",
-  "/ru/paphos-travel-agency/",
-  "/en/turisticheskoe-agentstvo-pafos/",
-  "/ru/flight-tickets-cyprus/",
-  "/en/aviabilety-kipr/",
-  "/en/vizovye-uslugi-kipr/",
-  "/ru/vizovye-uslugi-kipr/",
-  "/en/luxusnyy-otdykh-kipr/",
-  "/ru/luxusnyy-otdykh-kipr/",
-  "/en/korporativnye-poezdki-kipr/",
-  "/ru/korporativnye-poezdki-kipr/",
-  "/en/bronirovanie-otelej-kipr/",
-  "/ru/bronirovanie-otelej-kipr/",
+  "/ru/paphos-travel-agency",
+  "/en/turisticheskoe-agentstvo-pafos",
+  "/ru/flight-tickets-cyprus",
+  "/en/aviabilety-kipr",
+  "/en/vizovye-uslugi-kipr",
+  "/ru/vizovye-uslugi-kipr",
+  "/en/luxusnyy-otdykh-kipr",
+  "/ru/luxusnyy-otdykh-kipr",
+  "/en/korporativnye-poezdki-kipr",
+  "/ru/korporativnye-poezdki-kipr",
+  "/en/bronirovanie-otelej-kipr",
+  "/ru/bronirovanie-otelej-kipr",
+  // Phase 3 wrong-folder fix: RU folder was serving an EN-only slug.
+  "/ru/blog/cyprus-schengen-2026-business-travel",
 ]);
 
 function assertCanonical(url, context) {
@@ -78,12 +82,12 @@ describe("seo: every sitemap URL is canonical", () => {
     }
   });
 
-  it("every <loc> uses the trailing-slash canonical form", () => {
+  it("every <loc> uses the NO-trailing-slash canonical form", () => {
     for (const entry of entries) {
       const { pathname } = new URL(entry.url);
       assert.ok(
-        pathname.endsWith("/"),
-        `sitemap <loc> missing trailing slash: ${entry.url}`,
+        pathname === "/" || !pathname.endsWith("/"),
+        `sitemap <loc> has stray trailing slash: ${entry.url}`,
       );
       assert.ok(
         !pathname.includes("//"),
@@ -136,7 +140,7 @@ describe("seo: every sitemap URL is canonical", () => {
       const langs = entry.alternates?.languages;
       if (!langs) continue;
       const { pathname } = new URL(entry.url);
-      const selfLocale = pathname.startsWith("/ru/") ? "ru" : "en";
+      const selfLocale = pathname.startsWith("/ru") ? "ru" : "en";
       const selfHreflang = langs[selfLocale];
       assert.ok(
         selfHreflang,
@@ -152,25 +156,25 @@ describe("seo: every sitemap URL is canonical", () => {
 });
 
 describe("seo: LOCALE_ALTERNATES is internally consistent", () => {
-  it("every entry's keys point at trailing-slash absolute paths", () => {
+  it("every entry's keys point at no-trailing-slash absolute paths", () => {
     for (const [key, entry] of Object.entries(LOCALE_ALTERNATES)) {
       assert.ok(
-        key.startsWith("/") && key.endsWith("/"),
-        `LOCALE_ALTERNATES key is not trailing-slash form: ${key}`,
+        key.startsWith("/") && !key.endsWith("/"),
+        `LOCALE_ALTERNATES key is not no-trailing-slash form: ${key}`,
       );
       for (const [locale, target] of Object.entries(entry)) {
         if (!target) continue;
         assert.ok(
-          target.startsWith("/") && target.endsWith("/"),
-          `LOCALE_ALTERNATES[${key}].${locale} is not trailing-slash form: ${target}`,
+          target.startsWith("/") && !target.endsWith("/"),
+          `LOCALE_ALTERNATES[${key}].${locale} is not no-trailing-slash form: ${target}`,
         );
       }
     }
   });
 
   it("every alternate target is itself a key (round-trip consistency)", () => {
-    // Prevents one-way links: if /en/foo/ claims /ru/bar/ as its RU
-    // alternate, then /ru/bar/ must also claim /en/foo/ as its EN.
+    // Prevents one-way links: if /en/foo claims /ru/bar as its RU
+    // alternate, then /ru/bar must also claim /en/foo as its EN.
     for (const [key, entry] of Object.entries(LOCALE_ALTERNATES)) {
       for (const [locale, target] of Object.entries(entry)) {
         if (!target || target === key) continue;
@@ -200,39 +204,39 @@ describe("seo: language switcher resolver", () => {
   // be hidden, never to a guessed string-substituted path. These cases
   // are the ones URL Inspection flagged: /en/about, /en/cruises, etc.
 
-  it("resolves /en/about/ → real /ru/about/", () => {
-    const { en, ru } = resolveAlternateUrls("/en/about/");
-    assert.equal(en, `${CANONICAL_ORIGIN}/en/about/`);
-    assert.equal(ru, `${CANONICAL_ORIGIN}/ru/about/`);
+  it("resolves /en/about → real /ru/about", () => {
+    const { en, ru } = resolveAlternateUrls("/en/about");
+    assert.equal(en, `${CANONICAL_ORIGIN}/en/about`);
+    assert.equal(ru, `${CANONICAL_ORIGIN}/ru/about`);
   });
 
-  it("resolves /ru/about/ → real /en/about/", () => {
-    const { en, ru } = resolveAlternateUrls("/ru/about/");
-    assert.equal(en, `${CANONICAL_ORIGIN}/en/about/`);
-    assert.equal(ru, `${CANONICAL_ORIGIN}/ru/about/`);
+  it("resolves /ru/about → real /en/about", () => {
+    const { en, ru } = resolveAlternateUrls("/ru/about");
+    assert.equal(en, `${CANONICAL_ORIGIN}/en/about`);
+    assert.equal(ru, `${CANONICAL_ORIGIN}/ru/about`);
   });
 
-  it("cross-locale slug pair: /en/paphos-travel-agency/ ↔ /ru/turisticheskoe-agentstvo-pafos/", () => {
-    const { en, ru } = resolveAlternateUrls("/en/paphos-travel-agency/");
-    assert.equal(en, `${CANONICAL_ORIGIN}/en/paphos-travel-agency/`);
-    assert.equal(ru, `${CANONICAL_ORIGIN}/ru/turisticheskoe-agentstvo-pafos/`);
+  it("cross-locale slug pair: /en/paphos-travel-agency ↔ /ru/turisticheskoe-agentstvo-pafos", () => {
+    const { en, ru } = resolveAlternateUrls("/en/paphos-travel-agency");
+    assert.equal(en, `${CANONICAL_ORIGIN}/en/paphos-travel-agency`);
+    assert.equal(ru, `${CANONICAL_ORIGIN}/ru/turisticheskoe-agentstvo-pafos`);
   });
 
-  it("cross-locale slug pair (reverse): /ru/turisticheskoe-agentstvo-pafos/ ↔ /en/paphos-travel-agency/", () => {
-    const { en, ru } = resolveAlternateUrls("/ru/turisticheskoe-agentstvo-pafos/");
-    assert.equal(en, `${CANONICAL_ORIGIN}/en/paphos-travel-agency/`);
-    assert.equal(ru, `${CANONICAL_ORIGIN}/ru/turisticheskoe-agentstvo-pafos/`);
+  it("cross-locale slug pair (reverse): /ru/turisticheskoe-agentstvo-pafos ↔ /en/paphos-travel-agency", () => {
+    const { en, ru } = resolveAlternateUrls("/ru/turisticheskoe-agentstvo-pafos");
+    assert.equal(en, `${CANONICAL_ORIGIN}/en/paphos-travel-agency`);
+    assert.equal(ru, `${CANONICAL_ORIGIN}/ru/turisticheskoe-agentstvo-pafos`);
   });
 
   it("blog post with translation: returns both locales", () => {
     // digital-nomads-cyprus-guide ↔ digital-nomady-kipr-gid (confirmed
     // present in content/blog/).
     const { en, ru } = resolveAlternateUrls(
-      "/en/blog/digital-nomads-cyprus-guide/",
+      "/en/blog/digital-nomads-cyprus-guide",
     );
     assert.equal(
       en,
-      `${CANONICAL_ORIGIN}/en/blog/digital-nomads-cyprus-guide/`,
+      `${CANONICAL_ORIGIN}/en/blog/digital-nomads-cyprus-guide`,
     );
     assert.ok(ru, "blog post with translationSlug should resolve RU URL");
     assert.ok(
@@ -242,26 +246,26 @@ describe("seo: language switcher resolver", () => {
   });
 
   it("unknown blog slug: hides the other-locale link", () => {
-    const { en, ru } = resolveAlternateUrls("/en/blog/does-not-exist/");
-    assert.equal(en, `${CANONICAL_ORIGIN}/en/blog/does-not-exist/`);
+    const { en, ru } = resolveAlternateUrls("/en/blog/does-not-exist");
+    assert.equal(en, `${CANONICAL_ORIGIN}/en/blog/does-not-exist`);
     assert.equal(ru, null, "missing post slug must not emit a guessed alternate");
   });
 
   it("locale roots resolve to both locale roots", () => {
-    const { en, ru } = resolveAlternateUrls("/en/");
-    assert.equal(en, `${CANONICAL_ORIGIN}/en/`);
-    assert.equal(ru, `${CANONICAL_ORIGIN}/ru/`);
+    const { en, ru } = resolveAlternateUrls("/en");
+    assert.equal(en, `${CANONICAL_ORIGIN}/en`);
+    assert.equal(ru, `${CANONICAL_ORIGIN}/ru`);
   });
 
   it("returned URLs survive canonicalize() as passthrough", () => {
     const paths = [
-      "/en/",
-      "/ru/",
-      "/en/about/",
-      "/ru/contact/",
-      "/en/paphos-travel-agency/",
-      "/ru/turisticheskoe-agentstvo-pafos/",
-      "/en/blog/digital-nomads-cyprus-guide/",
+      "/en",
+      "/ru",
+      "/en/about",
+      "/ru/contact",
+      "/en/paphos-travel-agency",
+      "/ru/turisticheskoe-agentstvo-pafos",
+      "/en/blog/digital-nomads-cyprus-guide",
     ];
     for (const path of paths) {
       const alt = resolveAlternateUrls(path);

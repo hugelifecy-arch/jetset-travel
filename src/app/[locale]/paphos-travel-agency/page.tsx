@@ -328,7 +328,7 @@ export default async function PaphosTravelAgencyPage({
         locale={locale}
         name="Travel Agency in Paphos, Cyprus"
         description="IATA-accredited travel agency in Paphos, Cyprus with 20+ years experience. Corporate travel management, luxury holidays, hotel reservations, visa services, and cruise bookings. Located at 26A Agapinoros Street, 8049 Paphos."
-        url={`https://www.jetset-travel.com/${locale}/paphos-travel-agency/`}
+        url={`https://www.jetset-travel.com/${locale}/paphos-travel-agency`}
         serviceType="Travel Agency Services"
         dateModified={SERVICE_LAST_UPDATED}
       />

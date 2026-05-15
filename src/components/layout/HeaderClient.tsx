@@ -10,7 +10,7 @@ import { Menu, X, Globe, Phone, ChevronDown } from "lucide-react";
 /** Service sub-links for the "Services" dropdown */
 const serviceLinks = [
   { href: "/corporate-travel", key: "corporate" },
-  { href: "/luxury-travel/", key: "luxury" },
+  { href: "/luxury-travel", key: "luxury" },
   { href: "/cruises", key: "cruises" },
   { href: "/visa-services", key: "visas" },
   { href: "/hotel-reservations", key: "hotels" },
@@ -49,7 +49,7 @@ export default function HeaderClient({
 
   // The language-switcher URLs are resolved server-side from the canonical
   // alternates map (LOCALE_ALTERNATES + per-post blog `translationSlug`),
-  // so they're always trailing-slash canonical and `null` if no
+  // so they're always no-slash canonical and `null` if no
   // counterpart exists. See `lib/i18n-route-resolver.ts`.
   const enHref = alternates.en;
   const ruHref = alternates.ru;

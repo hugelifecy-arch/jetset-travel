@@ -2,7 +2,7 @@
  * Regression test for src/lib/canonicalize.ts.
  *
  * Proves that every URL variant reaches the canonical target
- * (https://www.jetset-travel.com/<locale>/<path>/ — WITH trailing slash)
+ * (https://www.jetset-travel.com/<locale>/<path> — NO trailing slash, Phase 3)
  * in a single middleware hop (after the unavoidable Vercel HTTP→HTTPS 308
  * for http:// variants).
  */
@@ -13,17 +13,17 @@ import { canonicalize } from "../src/lib/canonicalize.ts";
 
 // ---- GSC validation cases ----
 
-const CANONICAL_ROOT = "https://www.jetset-travel.com/en/";
+const CANONICAL_ROOT = "https://www.jetset-travel.com/en";
 
 describe("middleware: GSC 'Page with redirect' failing URLs", () => {
   // The http:// variant gets an unavoidable 308 from Vercel's platform
   // HTTPS upgrade before middleware runs. Assert on the https:// half of
   // the chain (which is what middleware controls).
 
-  it("http://www.jetset-travel.com/ (after HTTPS upgrade) → single 301 to /en/", () => {
+  it("http://www.jetset-travel.com/ (after HTTPS upgrade) → single 301 to /en", () => {
     const result = canonicalize("https://www.jetset-travel.com/");
     assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/en/");
+    assert.equal(result.url, "https://www.jetset-travel.com/en");
   });
 
   it("http://jetset-travel.com/ (after HTTPS upgrade) → single 301 to canonical", () => {
@@ -38,118 +38,118 @@ describe("middleware: GSC 'Page with redirect' failing URLs", () => {
     assert.equal(result.url, "https://www.jetset-travel.com/");
   });
 
-  it("https://www.jetset-travel.com/en/en/ → single 301 to /en/", () => {
+  it("https://www.jetset-travel.com/en/en/ → single 301 to /en", () => {
     const result = canonicalize("https://www.jetset-travel.com/en/en/");
     assert.equal(result.action, "redirect");
     assert.equal(result.url, CANONICAL_ROOT);
   });
 
-  it("https://jetset-travel.com/en → single 301 to canonical /en/", () => {
+  it("https://jetset-travel.com/en → single 301 to canonical /en", () => {
     const result = canonicalize("https://jetset-travel.com/en");
     assert.equal(result.action, "redirect");
     assert.equal(result.url, CANONICAL_ROOT);
   });
 
-  it("https://jetset-travel.com/?lang=en → single 301 to canonical /en/", () => {
+  it("https://jetset-travel.com/?lang=en → single 301 to canonical /en", () => {
     const result = canonicalize("https://jetset-travel.com/?lang=en");
     assert.equal(result.action, "redirect");
     assert.equal(result.url, CANONICAL_ROOT);
   });
 
-  it("https://jetset-travel.com/en?lang=en → single 301 to canonical /en/ (no double prefix)", () => {
+  it("https://jetset-travel.com/en?lang=en → single 301 to canonical /en (no double prefix)", () => {
     const result = canonicalize("https://jetset-travel.com/en?lang=en");
     assert.equal(result.action, "redirect");
     assert.equal(result.url, CANONICAL_ROOT);
   });
 
-  it("https://www.jetset-travel.com/en?lang=en → single 301 to /en/ (no double prefix)", () => {
+  it("https://www.jetset-travel.com/en?lang=en → single 301 to /en (no double prefix)", () => {
     const result = canonicalize("https://www.jetset-travel.com/en?lang=en");
     assert.equal(result.action, "redirect");
     assert.equal(result.url, CANONICAL_ROOT);
   });
 
-  it("https://www.jetset-travel.com/?lang=ru → single 301 to /ru/", () => {
+  it("https://www.jetset-travel.com/?lang=ru → single 301 to /ru", () => {
     const result = canonicalize("https://www.jetset-travel.com/?lang=ru");
     assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/ru/");
+    assert.equal(result.url, "https://www.jetset-travel.com/ru");
   });
 });
 
-describe("middleware: trailing-slash canonicalization", () => {
-  it("already-canonical /en/ is passed through", () => {
-    const result = canonicalize("https://www.jetset-travel.com/en/");
-    assert.equal(result.action, "passthrough");
-  });
-
-  it("already-canonical /ru/about/ is passed through", () => {
-    const result = canonicalize("https://www.jetset-travel.com/ru/about/");
-    assert.equal(result.action, "passthrough");
-  });
-
-  it("/en/about (no trailing slash) → 301 to /en/about/", () => {
-    const result = canonicalize("https://www.jetset-travel.com/en/about");
-    assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/en/about/");
-  });
-
-  it("/en (no trailing slash) → 301 to /en/", () => {
+describe("middleware: no-trailing-slash canonicalization", () => {
+  it("already-canonical /en is passed through", () => {
     const result = canonicalize("https://www.jetset-travel.com/en");
-    assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/en/");
+    assert.equal(result.action, "passthrough");
   });
 
-  it("/ru (no trailing slash) → 301 to /ru/", () => {
-    const result = canonicalize("https://www.jetset-travel.com/ru");
-    assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/ru/");
+  it("already-canonical /ru/about is passed through", () => {
+    const result = canonicalize("https://www.jetset-travel.com/ru/about");
+    assert.equal(result.action, "passthrough");
   });
 
-  it("/en/blog/post-slug → 301 to /en/blog/post-slug/", () => {
+  it("/en/about/ (trailing slash) → 301 to /en/about", () => {
+    const result = canonicalize("https://www.jetset-travel.com/en/about/");
+    assert.equal(result.action, "redirect");
+    assert.equal(result.url, "https://www.jetset-travel.com/en/about");
+  });
+
+  it("/en/ (locale root with trailing slash) → 301 to /en", () => {
+    const result = canonicalize("https://www.jetset-travel.com/en/");
+    assert.equal(result.action, "redirect");
+    assert.equal(result.url, "https://www.jetset-travel.com/en");
+  });
+
+  it("/ru/ (locale root with trailing slash) → 301 to /ru", () => {
+    const result = canonicalize("https://www.jetset-travel.com/ru/");
+    assert.equal(result.action, "redirect");
+    assert.equal(result.url, "https://www.jetset-travel.com/ru");
+  });
+
+  it("/en/blog/post-slug/ → 301 to /en/blog/post-slug", () => {
     const result = canonicalize(
-      "https://www.jetset-travel.com/en/blog/post-slug",
+      "https://www.jetset-travel.com/en/blog/post-slug/",
     );
     assert.equal(result.action, "redirect");
     assert.equal(
       result.url,
-      "https://www.jetset-travel.com/en/blog/post-slug/",
+      "https://www.jetset-travel.com/en/blog/post-slug",
     );
   });
 
-  it("?lang=ru on /en/about/ swaps locale to /ru/about/ in one hop", () => {
+  it("?lang=ru on /en/about swaps locale to /ru/about in one hop", () => {
     const result = canonicalize(
       "https://www.jetset-travel.com/en/about?lang=ru",
     );
     assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/ru/about/");
+    assert.equal(result.url, "https://www.jetset-travel.com/ru/about");
   });
 
-  it("/ru/ru/blog/ collapses to /ru/blog/ in one hop", () => {
+  it("/ru/ru/blog/ collapses to /ru/blog in one hop", () => {
     const result = canonicalize("https://www.jetset-travel.com/ru/ru/blog/");
     assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/ru/blog/");
+    assert.equal(result.url, "https://www.jetset-travel.com/ru/blog");
   });
 
-  it("bare /about on apex → single 301 to canonical /en/about/", () => {
+  it("bare /about on apex → single 301 to canonical /en/about", () => {
     const result = canonicalize("https://jetset-travel.com/about");
     assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/en/about/");
+    assert.equal(result.url, "https://www.jetset-travel.com/en/about");
   });
 
-  it("/luxury special-case resolves to /en/luxury-travel/ in one hop", () => {
+  it("/luxury special-case resolves to /en/luxury-travel in one hop", () => {
     const result = canonicalize("https://www.jetset-travel.com/luxury");
     assert.equal(result.action, "redirect");
     assert.equal(
       result.url,
-      "https://www.jetset-travel.com/en/luxury-travel/",
+      "https://www.jetset-travel.com/en/luxury-travel",
     );
   });
 
-  it("/quote special-case resolves to /en/contact/?type=quote in one hop", () => {
+  it("/quote special-case resolves to /en/contact?type=quote in one hop", () => {
     const result = canonicalize("https://www.jetset-travel.com/quote");
     assert.equal(result.action, "redirect");
     assert.equal(
       result.url,
-      "https://www.jetset-travel.com/en/contact/?type=quote",
+      "https://www.jetset-travel.com/en/contact?type=quote",
     );
   });
 
@@ -164,12 +164,12 @@ describe("middleware: trailing-slash canonicalization", () => {
   });
 
   it("localhost requests are never redirected to www", () => {
-    const result = canonicalize("http://localhost:3000/en/");
+    const result = canonicalize("http://localhost:3000/en");
     assert.equal(result.action, "passthrough");
   });
 
   it("Vercel preview domain is never redirected to www", () => {
-    const result = canonicalize("https://jetset-travel-abc.vercel.app/en/");
+    const result = canonicalize("https://jetset-travel-abc.vercel.app/en");
     assert.equal(result.action, "passthrough");
   });
 
@@ -177,7 +177,7 @@ describe("middleware: trailing-slash canonicalization", () => {
   // counterparts that bounced back to the EN-slug page (creating an infinite
   // redirect loop visible in GSC). The retired slugs are now 308-redirected
   // to the consolidated Latin slug at the edge in next.config.ts; middleware
-  // sees the same Latin slug for both locales and just appends the trailing
+  // sees the same Latin slug for both locales and just strips any trailing
   // slash. These cases lock the post-edge behaviour in place.
   for (const slug of [
     "visa-services-cyprus",
@@ -185,19 +185,19 @@ describe("middleware: trailing-slash canonicalization", () => {
     "corporate-travel-cyprus",
     "hotel-booking-cyprus",
   ]) {
-    it(`/ru/${slug} (no trailing slash) → 301 to /ru/${slug}/ (no loop)`, () => {
-      const result = canonicalize(`https://www.jetset-travel.com/ru/${slug}`);
+    it(`/ru/${slug}/ (trailing slash) → 301 to /ru/${slug} (no loop)`, () => {
+      const result = canonicalize(`https://www.jetset-travel.com/ru/${slug}/`);
       assert.equal(result.action, "redirect");
-      assert.equal(result.url, `https://www.jetset-travel.com/ru/${slug}/`);
+      assert.equal(result.url, `https://www.jetset-travel.com/ru/${slug}`);
     });
 
-    it(`already-canonical /ru/${slug}/ is passed through (no loop)`, () => {
-      const result = canonicalize(`https://www.jetset-travel.com/ru/${slug}/`);
+    it(`already-canonical /ru/${slug} is passed through (no loop)`, () => {
+      const result = canonicalize(`https://www.jetset-travel.com/ru/${slug}`);
       assert.equal(result.action, "passthrough");
     });
 
-    it(`already-canonical /en/${slug}/ is passed through`, () => {
-      const result = canonicalize(`https://www.jetset-travel.com/en/${slug}/`);
+    it(`already-canonical /en/${slug} is passed through`, () => {
+      const result = canonicalize(`https://www.jetset-travel.com/en/${slug}`);
       assert.equal(result.action, "passthrough");
     });
   }
@@ -209,23 +209,23 @@ describe("middleware: trailing-slash canonicalization", () => {
     assert.equal(result.action, "redirect");
     assert.equal(
       result.url,
-      "https://www.jetset-travel.com/en/blog/?utm_source=twitter",
+      "https://www.jetset-travel.com/en/blog?utm_source=twitter",
     );
   });
 
-  it("root on canonical www with no lang → 301 to /en/", () => {
+  it("root on canonical www with no lang → 301 to /en", () => {
     const result = canonicalize("https://www.jetset-travel.com/", {
       preferredLocale: "en",
     });
     assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/en/");
+    assert.equal(result.url, "https://www.jetset-travel.com/en");
   });
 
-  it("root on canonical www with RU Accept-Language → 301 to /ru/", () => {
+  it("root on canonical www with RU Accept-Language → 301 to /ru", () => {
     const result = canonicalize("https://www.jetset-travel.com/", {
       preferredLocale: "ru",
     });
     assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/ru/");
+    assert.equal(result.url, "https://www.jetset-travel.com/ru");
   });
 });

@@ -1,0 +1,44 @@
+{
+  "$schema": "./do-not-disturb.schema.json",
+  "description": "Phase 3 — protected slugs. Every URL listed here is currently ranking in Google (see docs/seo/phase-3-performance-report.md). Do NOT rename, delete, or alter these route paths. If page content needs editing, edit the content but keep the URL identical. The companion CI script `scripts/check-do-not-disturb.mjs` asserts each URL responds 200 (or 301-to-200) — runs as part of `npm run check:do-not-disturb`.",
+  "origin": "https://www.jetset-travel.com",
+  "canonicalForm": "no-trailing-slash",
+  "urls": [
+    "/en",
+    "/ru",
+
+    "/en/blog/cyprus-schengen-2026-business-travel",
+    "/en/blog/best-time-visit-cyprus-monthly-guide",
+    "/en/blog/schengen-visa-guide-cyprus-residents",
+    "/en/blog/digital-nomads-cyprus-guide",
+    "/en/blog/luxury-mediterranean-destinations-2026",
+    "/en/blog/corporate-travel-tips-cyprus",
+    "/en/blog/corporate-travel-policy-template-cyprus",
+    "/en/blog/business-travelers-guide-limassol",
+    "/en/blog/limassol-corporate-retreat-guide",
+    "/en/blog/luxury-travel-cyprus-2026-guide",
+    "/en/blog/cruises-from-limassol-2026",
+    "/en/blog/corporate-travel-management-cyprus-cost-2026",
+    "/en/blog/private-villa-holidays-mykonos-santorini-crete",
+    "/en/blog/travel-agency-paphos-guide",
+
+    "/en/cruises",
+    "/en/visa-services",
+    "/en/corporate-travel",
+    "/en/corporate-travel-cyprus",
+    "/en/flight-tickets-cyprus",
+    "/en/paphos-travel-agency",
+    "/en/contact",
+    "/en/about",
+    "/en/faq",
+    "/en/privacy",
+
+    "/ru/blog/luchshie-kruizy-iz-limassola-2026",
+    "/ru/blog/kipr-v-shengene-2026-delovye-poezdki",
+    "/ru/blog/kak-vybrat-turagenstvo-pafos",
+    "/ru/blog/luchshee-vremya-dlya-poseshcheniya-kipra",
+    "/ru/blog/villy-mikonos-santorini-krit-s-kipra",
+
+    "/ru/about"
+  ]
+}

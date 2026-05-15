@@ -169,7 +169,7 @@ export default async function BlogPostPage({
     .slice(0, 3)
     .map((m) => m.post);
 
-  const articleUrl = `${CANONICAL_ORIGIN}/${locale}/blog/${slug}/`;
+  const articleUrl = `${CANONICAL_ORIGIN}/${locale}/blog/${slug}`;
   const ogImage = post.frontmatter.image
     ? `${CANONICAL_ORIGIN}${post.frontmatter.image}`
     : OG_IMAGE;
@@ -193,7 +193,7 @@ export default async function BlogPostPage({
     author: {
       "@type": "Person",
       name: post.frontmatter.author,
-      url: `${CANONICAL_ORIGIN}/en/about/`,
+      url: `${CANONICAL_ORIGIN}/en/about`,
     },
     publisher: {
       "@type": "Organization",
@@ -221,7 +221,7 @@ export default async function BlogPostPage({
     ],
     isPartOf: {
       "@type": "Blog",
-      "@id": `${CANONICAL_ORIGIN}/${locale}/blog/`,
+      "@id": `${CANONICAL_ORIGIN}/${locale}/blog`,
       name: locale === "ru" ? "Блог JetSet Travel" : "JetSet Travel Blog",
     },
     // Speakable: identifies content suitable for voice assistants (Google Assistant, Alexa)

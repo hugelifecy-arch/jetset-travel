@@ -333,7 +333,7 @@ export default async function FlightPageContent({
         locale={locale}
         name="Flight Booking from Cyprus"
         description="Book flights from Cyprus with IATA-accredited JetSet Travel. Best fares from Paphos (PFO) and Larnaca (LCA) airports. Business class deals, group bookings, and 24/7 support."
-        url={`https://www.jetset-travel.com/${locale}/${slug}/`}
+        url={`https://www.jetset-travel.com/${locale}/${slug}`}
         serviceType="Flight Booking Service"
         dateModified={SERVICE_LAST_UPDATED}
       />

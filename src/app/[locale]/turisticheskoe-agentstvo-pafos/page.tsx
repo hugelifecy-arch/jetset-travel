@@ -335,7 +335,7 @@ export default async function TuristicheskoeAgentstvoPafosPage({
         locale={locale}
         name="Турагентство в Пафосе, Кипр — JetSet Travel"
         description="Аккредитованное IATA турагентство в Пафосе, Кипр с более чем 20-летним опытом. Корпоративные поездки, авиабилеты, бронирование отелей, визовые услуги и круизы. Ул. Агапинорос, 26А, 8049 Пафос."
-        url="https://www.jetset-travel.com/ru/turisticheskoe-agentstvo-pafos/"
+        url="https://www.jetset-travel.com/ru/turisticheskoe-agentstvo-pafos"
         serviceType="Travel Agency Services"
         dateModified={SERVICE_LAST_UPDATED}
       />

@@ -416,7 +416,7 @@ export default async function VisaServicesCyprusPage({
         locale={locale}
         name="Visa Services Cyprus"
         description="Professional visa services in Paphos, Cyprus. Schengen visa, UK visa, US visa, business and tourist visa assistance. Document preparation and application guidance from JetSet Travel, IATA-accredited agency."
-        url={`https://www.jetset-travel.com/${locale}/visa-services-cyprus/`}
+        url={`https://www.jetset-travel.com/${locale}/visa-services-cyprus`}
         serviceType="Visa Services"
         dateModified={SERVICE_LAST_UPDATED}
       />

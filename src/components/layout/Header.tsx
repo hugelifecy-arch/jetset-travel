@@ -7,7 +7,7 @@
  * Resolving server-side guarantees:
  *  - the language-switcher hrefs render in the initial HTML (no client-only
  *    "wrong link then upgrade" flash for visitors who follow them quickly);
- *  - links use the canonical trailing-slash form so middleware doesn't have
+ *  - links use the canonical no-slash form so middleware doesn't have
  *    to bounce them through a 301;
  *  - links to non-existent translations are suppressed at HTML generation
  *    time instead of relying on a 404 fallback.
@@ -21,7 +21,7 @@ import HeaderClient from "./HeaderClient";
 
 export default async function Header() {
   const reqHeaders = await headers();
-  const pathname = reqHeaders.get("x-pathname") ?? "/en/";
+  const pathname = reqHeaders.get("x-pathname") ?? "/en";
   const alternates = resolveAlternateUrls(pathname);
   return <HeaderClient alternates={alternates} />;
 }

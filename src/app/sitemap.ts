@@ -67,7 +67,13 @@ const crossLocalePageDefs: Array<{ en: string; ru: string }> = [
  * fall back to self-referencing the single locale.
  */
 function alternatesFor(localePath: string) {
-  const entry = LOCALE_ALTERNATES[localePath];
+  // LOCALE_ALTERNATES keys are no-slash form; strip a stray trailing slash
+  // before lookup so callers can pass either.
+  const key =
+    localePath.length > 1 && localePath.endsWith("/")
+      ? localePath.replace(/\/+$/, "")
+      : localePath;
+  const entry = LOCALE_ALTERNATES[key];
   const languages: Record<string, string> = {};
   if (entry?.en) languages.en = `${CANONICAL_ORIGIN}${entry.en}`;
   if (entry?.ru) languages.ru = `${CANONICAL_ORIGIN}${entry.ru}`;

@@ -29,7 +29,7 @@ export default function middleware(req: NextRequest) {
 
   const target = new URL(result.url);
   const isRootLocaleRedirect =
-    req.nextUrl.pathname === "/" && target.pathname === `/${preferredLocale}/`;
+    req.nextUrl.pathname === "/" && target.pathname === `/${preferredLocale}`;
 
   const redirectUrl = req.nextUrl.clone();
   redirectUrl.hostname = target.hostname;

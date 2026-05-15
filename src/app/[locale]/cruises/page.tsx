@@ -52,7 +52,7 @@ export default async function CruisesPage({
         locale={locale}
         name="Cruise Booking"
         description="Book worldwide cruises on Royal Caribbean, MSC, Norwegian, Celebrity, Disney and 50+ cruise lines. Caribbean, Mediterranean, Alaska, Asia and beyond. IATA-accredited cruise specialists."
-        url={`https://www.jetset-travel.com/${locale}/cruises/`}
+        url={`https://www.jetset-travel.com/${locale}/cruises`}
         serviceType="Cruise Booking Service"
         dateModified={SERVICE_LAST_UPDATED}
       />

@@ -9,8 +9,8 @@ export const viewport: Viewport = {
 };
 
 // Default canonical (used only if a child route forgets to set its own).
-// Must derive from getCanonicalUrl so it carries the trailing slash and
-// matches sitemap.xml byte-for-byte.
+// Must derive from getCanonicalUrl so it carries the canonical (no-slash)
+// form and matches sitemap.xml byte-for-byte.
 const DEFAULT_CANONICAL = getCanonicalUrl("", DEFAULT_LOCALE);
 
 export const metadata: Metadata = {

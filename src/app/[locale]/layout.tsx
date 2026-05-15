@@ -82,7 +82,7 @@ export async function generateMetadata({
       locale: isRussian ? "ru_RU" : "en_CY",
       alternateLocale: isRussian ? "en_CY" : "ru_RU",
       siteName: "JetSet Travel Cyprus",
-      url: `${CANONICAL_ORIGIN}/${locale}/`,
+      url: `${CANONICAL_ORIGIN}/${locale}`,
       title: isRussian
         ? "JetSet Travel Cyprus — Премиум Туристические Услуги"
         : "JetSet Travel Cyprus — Premium Travel Services",
