@@ -4,7 +4,7 @@ import {
   getCanonicalUrl,
   getHreflangAlternates,
   type Locale,
-} from "@/lib/canonical";
+} from "./canonical.ts";
 
 export { CANONICAL_ORIGIN };
 export const VERCEL_HOST = "jetset-travel.vercel.app";
