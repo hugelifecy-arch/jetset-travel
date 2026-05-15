@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
-import { SERVICE_LAST_UPDATED } from "@/lib/seo";
+import { SERVICE_LAST_UPDATED } from "../lib/seo.ts";
 import {
   CANONICAL_ORIGIN,
   LOCALE_ALTERNATES,
   getCanonicalUrl,
   type Locale,
-} from "@/lib/canonical";
-import { getPublishedPosts } from "@/lib/blog";
+} from "../lib/canonical.ts";
+import { getPublishedPosts } from "../lib/blog.ts";
 
 const locales = ["en", "ru"] as const satisfies readonly Locale[];
 

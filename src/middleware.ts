@@ -19,7 +19,12 @@ export default function middleware(req: NextRequest) {
   const result = canonicalize(inputUrl, { preferredLocale });
 
   if (result.action === "passthrough") {
-    return NextResponse.next();
+    // Expose the request pathname to server components (the language
+    // switcher reads it via `headers()` so it can resolve the
+    // cross-locale URL of the current page).
+    const requestHeaders = new Headers(req.headers);
+    requestHeaders.set("x-pathname", req.nextUrl.pathname);
+    return NextResponse.next({ request: { headers: requestHeaders } });
   }
 
   const target = new URL(result.url);

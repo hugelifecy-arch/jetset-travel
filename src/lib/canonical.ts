@@ -234,3 +234,24 @@ function extractLocaleFromPath(p: string): Locale | null {
   const m = p.match(/^\/(en|ru)(?:\/|$)/);
   return m ? (m[1] as Locale) : null;
 }
+
+/**
+ * Resolve the canonical path for the same content in the other locale.
+ *
+ * Used by the language switcher in the header so it points at a real
+ * 200-OK URL instead of guessing one by string substitution. Returns
+ * `null` when no counterpart exists (the caller should hide the link).
+ *
+ * Blog posts are NOT covered here — they have per-post translation
+ * metadata; see `src/lib/i18n-route-resolver.ts` for the combined map.
+ */
+export function getAlternateLocalePath(
+  currentLocalePath: string,
+  targetLocale: Locale,
+): string | null {
+  const key = normalizeLocalePath(currentLocalePath);
+  const entry = LOCALE_ALTERNATES[key];
+  if (!entry) return null;
+  const target = entry[targetLocale];
+  return target ?? null;
+}
