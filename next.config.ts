@@ -102,6 +102,53 @@ const nextConfig: NextConfig = {
         destination: "/en/flight-tickets-cyprus/",
         permanent: true,
       },
+      // Consolidate the four cross-locale "cyprus" landing pages onto the
+      // Latin slug in BOTH locales. The transliterated Russian slugs were
+      // duplicate landing pages with no content (pure redirect stubs); they
+      // looped against the EN-slug page's `redirect("/ru/<ru-slug>/")` and
+      // showed up in GSC as "Redirect error" / "Discovered — not indexed".
+      // After this consolidation the canonical Russian URL is the same
+      // Latin slug as English (mirrors /ru/visa-services/, /ru/about/, etc.).
+      {
+        source: "/en/vizovye-uslugi-kipr",
+        destination: "/en/visa-services-cyprus/",
+        permanent: true,
+      },
+      {
+        source: "/ru/vizovye-uslugi-kipr",
+        destination: "/ru/visa-services-cyprus/",
+        permanent: true,
+      },
+      {
+        source: "/en/luxusnyy-otdykh-kipr",
+        destination: "/en/luxury-travel-cyprus/",
+        permanent: true,
+      },
+      {
+        source: "/ru/luxusnyy-otdykh-kipr",
+        destination: "/ru/luxury-travel-cyprus/",
+        permanent: true,
+      },
+      {
+        source: "/en/korporativnye-poezdki-kipr",
+        destination: "/en/corporate-travel-cyprus/",
+        permanent: true,
+      },
+      {
+        source: "/ru/korporativnye-poezdki-kipr",
+        destination: "/ru/corporate-travel-cyprus/",
+        permanent: true,
+      },
+      {
+        source: "/en/bronirovanie-otelej-kipr",
+        destination: "/en/hotel-booking-cyprus/",
+        permanent: true,
+      },
+      {
+        source: "/ru/bronirovanie-otelej-kipr",
+        destination: "/ru/hotel-booking-cyprus/",
+        permanent: true,
+      },
     ];
   },
   async headers() {

@@ -22,6 +22,23 @@ URLS=(
   "https://www.jetset-travel.com/en?lang=en"
 )
 
+# Retired transliterated Russian slugs for the four "*-cyprus" landing pages.
+# Each must 308 in a single hop to the canonical Latin slug for its locale.
+# Until 2026-05 these URLs participated in an infinite redirect loop with
+# the EN-slug page's `redirect("/ru/<ru-slug>/")` guard — which is what
+# Google Search Console flagged as "Redirect error" / "Discovered — not
+# indexed" in the May 14 inbox.
+RETIRED_PAIRS=(
+  "https://www.jetset-travel.com/en/vizovye-uslugi-kipr|https://www.jetset-travel.com/en/visa-services-cyprus/"
+  "https://www.jetset-travel.com/ru/vizovye-uslugi-kipr|https://www.jetset-travel.com/ru/visa-services-cyprus/"
+  "https://www.jetset-travel.com/en/luxusnyy-otdykh-kipr|https://www.jetset-travel.com/en/luxury-travel-cyprus/"
+  "https://www.jetset-travel.com/ru/luxusnyy-otdykh-kipr|https://www.jetset-travel.com/ru/luxury-travel-cyprus/"
+  "https://www.jetset-travel.com/en/korporativnye-poezdki-kipr|https://www.jetset-travel.com/en/corporate-travel-cyprus/"
+  "https://www.jetset-travel.com/ru/korporativnye-poezdki-kipr|https://www.jetset-travel.com/ru/corporate-travel-cyprus/"
+  "https://www.jetset-travel.com/en/bronirovanie-otelej-kipr|https://www.jetset-travel.com/en/hotel-booking-cyprus/"
+  "https://www.jetset-travel.com/ru/bronirovanie-otelej-kipr|https://www.jetset-travel.com/ru/hotel-booking-cyprus/"
+)
+
 bold() { printf '\033[1m%s\033[0m\n' "$1"; }
 dim()  { printf '\033[2m%s\033[0m\n' "$1"; }
 
@@ -63,6 +80,36 @@ for url in "${URLS[@]}"; do
   else
     printf '  \033[31mFAIL\033[0m hops=%s final=%s code=%s (expected ≤%s hops, final=%s or %s, code=200)\n' \
       "$hops" "$final" "$code" "$max_hops" "$CANONICAL" "$CANONICAL_EN"
+    fail_count=$((fail_count + 1))
+  fi
+
+  echo ""
+done
+
+for pair in "${RETIRED_PAIRS[@]}"; do
+  url="${pair%%|*}"
+  expected="${pair##*|}"
+  bold "== $url  (retired slug)"
+
+  output=$(curl -sIL -A "JetSet-Canonical-Check/1.0" \
+    --max-redirs 5 \
+    -w "\n---\nfinal_url=%{url_effective}\nnum_redirects=%{num_redirects}\nhttp_code=%{http_code}\n" \
+    "$url" 2>&1)
+
+  echo "$output" | grep -iE '^(HTTP/|location:|final_url=|num_redirects=|http_code=)' || true
+
+  hops=$(echo "$output" | grep -oE 'num_redirects=[0-9]+' | tail -1 | cut -d= -f2)
+  final=$(echo "$output" | grep -oE 'final_url=[^[:space:]]+' | tail -1 | cut -d= -f2)
+  code=$(echo "$output"  | grep -oE 'http_code=[0-9]+'     | tail -1 | cut -d= -f2)
+
+  # Expected: a single edge 308 to the canonical Latin slug, ending in 200.
+  # Anything more than 1 hop means the loop has reappeared.
+  if [[ "$final" == "$expected" ]] && [[ "$code" == "200" ]] && [[ "$hops" -le 1 ]]; then
+    printf '  \033[32mPASS\033[0m hops=%s final=%s\n' "$hops" "$final"
+    pass_count=$((pass_count + 1))
+  else
+    printf '  \033[31mFAIL\033[0m hops=%s final=%s code=%s (expected ≤1 hop, final=%s, code=200)\n' \
+      "$hops" "$final" "$code" "$expected"
     fail_count=$((fail_count + 1))
   fi
 

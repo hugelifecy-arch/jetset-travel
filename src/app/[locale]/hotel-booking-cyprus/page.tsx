@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import {
   Hotel,
@@ -28,7 +27,7 @@ import FAQSection from "@/components/sections/FAQSection";
 
 const languagePaths = {
   en: "/hotel-booking-cyprus",
-  ru: "/bronirovanie-otelej-kipr",
+  ru: "/hotel-booking-cyprus",
 };
 
 export async function generateMetadata({
@@ -63,10 +62,6 @@ export default async function HotelBookingCyprusPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  if (locale === "ru") {
-    redirect("/ru/bronirovanie-otelej-kipr/");
-  }
 
   const t = await getTranslations({ locale, namespace: "hotelCyprusPage" });
 

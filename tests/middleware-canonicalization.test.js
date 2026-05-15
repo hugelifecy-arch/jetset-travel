@@ -173,6 +173,35 @@ describe("middleware: trailing-slash canonicalization", () => {
     assert.equal(result.action, "passthrough");
   });
 
+  // The four "*-cyprus" landing pages used to have transliterated Russian
+  // counterparts that bounced back to the EN-slug page (creating an infinite
+  // redirect loop visible in GSC). The retired slugs are now 308-redirected
+  // to the consolidated Latin slug at the edge in next.config.ts; middleware
+  // sees the same Latin slug for both locales and just appends the trailing
+  // slash. These cases lock the post-edge behaviour in place.
+  for (const slug of [
+    "visa-services-cyprus",
+    "luxury-travel-cyprus",
+    "corporate-travel-cyprus",
+    "hotel-booking-cyprus",
+  ]) {
+    it(`/ru/${slug} (no trailing slash) → 301 to /ru/${slug}/ (no loop)`, () => {
+      const result = canonicalize(`https://www.jetset-travel.com/ru/${slug}`);
+      assert.equal(result.action, "redirect");
+      assert.equal(result.url, `https://www.jetset-travel.com/ru/${slug}/`);
+    });
+
+    it(`already-canonical /ru/${slug}/ is passed through (no loop)`, () => {
+      const result = canonicalize(`https://www.jetset-travel.com/ru/${slug}/`);
+      assert.equal(result.action, "passthrough");
+    });
+
+    it(`already-canonical /en/${slug}/ is passed through`, () => {
+      const result = canonicalize(`https://www.jetset-travel.com/en/${slug}/`);
+      assert.equal(result.action, "passthrough");
+    });
+  }
+
   it("query params unrelated to lang are preserved through redirect", () => {
     const result = canonicalize(
       "https://jetset-travel.com/en/blog?utm_source=twitter",

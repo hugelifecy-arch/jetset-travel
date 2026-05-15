@@ -146,30 +146,46 @@ export const LOCALE_ALTERNATES: Record<
     en: "/en/paphos-travel-agency/",
     ru: "/ru/turisticheskoe-agentstvo-pafos/",
   },
+  // The four "cyprus" landing pages below use the SAME Latin slug in both
+  // locales. Their transliterated Russian counterparts (vizovye-uslugi-kipr,
+  // luxusnyy-otdykh-kipr, korporativnye-poezdki-kipr, bronirovanie-otelej-kipr)
+  // were retired because they were redirect-only stubs that looped against
+  // the EN page's locale guard — see next.config.ts for the retiring 308s.
   "/en/corporate-travel-cyprus/": {
     en: "/en/corporate-travel-cyprus/",
-    ru: "/ru/korporativnye-poezdki-kipr/",
+    ru: "/ru/corporate-travel-cyprus/",
   },
-  "/ru/korporativnye-poezdki-kipr/": {
+  "/ru/corporate-travel-cyprus/": {
     en: "/en/corporate-travel-cyprus/",
-    ru: "/ru/korporativnye-poezdki-kipr/",
+    ru: "/ru/corporate-travel-cyprus/",
   },
   "/en/visa-services-cyprus/": {
     en: "/en/visa-services-cyprus/",
-    ru: "/ru/vizovye-uslugi-kipr/",
+    ru: "/ru/visa-services-cyprus/",
   },
-  "/ru/vizovye-uslugi-kipr/": {
+  "/ru/visa-services-cyprus/": {
     en: "/en/visa-services-cyprus/",
-    ru: "/ru/vizovye-uslugi-kipr/",
+    ru: "/ru/visa-services-cyprus/",
   },
   "/en/luxury-travel-cyprus/": {
     en: "/en/luxury-travel-cyprus/",
-    ru: "/ru/luxusnyy-otdykh-kipr/",
+    ru: "/ru/luxury-travel-cyprus/",
   },
-  "/ru/luxusnyy-otdykh-kipr/": {
+  "/ru/luxury-travel-cyprus/": {
     en: "/en/luxury-travel-cyprus/",
-    ru: "/ru/luxusnyy-otdykh-kipr/",
+    ru: "/ru/luxury-travel-cyprus/",
   },
+  "/en/hotel-booking-cyprus/": {
+    en: "/en/hotel-booking-cyprus/",
+    ru: "/ru/hotel-booking-cyprus/",
+  },
+  "/ru/hotel-booking-cyprus/": {
+    en: "/en/hotel-booking-cyprus/",
+    ru: "/ru/hotel-booking-cyprus/",
+  },
+  // flight-tickets-cyprus / aviabilety-kipr keeps the per-locale slug pair
+  // because both locales have full standalone content pages (see
+  // src/app/[locale]/aviabilety-kipr/page.tsx) and edge 308s in next.config.ts.
   "/en/flight-tickets-cyprus/": {
     en: "/en/flight-tickets-cyprus/",
     ru: "/ru/aviabilety-kipr/",
@@ -177,14 +193,6 @@ export const LOCALE_ALTERNATES: Record<
   "/ru/aviabilety-kipr/": {
     en: "/en/flight-tickets-cyprus/",
     ru: "/ru/aviabilety-kipr/",
-  },
-  "/en/hotel-booking-cyprus/": {
-    en: "/en/hotel-booking-cyprus/",
-    ru: "/ru/bronirovanie-otelej-kipr/",
-  },
-  "/ru/bronirovanie-otelej-kipr/": {
-    en: "/en/hotel-booking-cyprus/",
-    ru: "/ru/bronirovanie-otelej-kipr/",
   },
 };
 

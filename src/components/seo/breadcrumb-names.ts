@@ -35,11 +35,14 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     privacy: "Политика конфиденциальности",
     terms: "Условия использования",
     "turisticheskoe-agentstvo-pafos": "Турагентство в Пафосе",
-    "korporativnye-poezdki-kipr": "Корпоративные поездки Кипр",
-    "vizovye-uslugi-kipr": "Визовые услуги Кипр",
-    "luxusnyy-otdykh-kipr": "Люкс отдых Кипр",
     "aviabilety-kipr": "Авиабилеты Кипр",
-    "bronirovanie-otelej-kipr": "Бронирование отелей Кипр",
+    // The four "*-cyprus" landing pages share their Latin slug across both
+    // locales (the transliterated Russian counterparts were retired). Russian
+    // breadcrumb labels for them live below under their Latin slug keys.
+    "corporate-travel-cyprus": "Корпоративные поездки Кипр",
+    "visa-services-cyprus": "Визовые услуги Кипр",
+    "luxury-travel-cyprus": "Люкс отдых Кипр",
+    "hotel-booking-cyprus": "Бронирование отелей Кипр",
   },
 };
 

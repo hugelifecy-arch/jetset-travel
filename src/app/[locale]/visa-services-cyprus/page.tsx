@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import {
   Globe,
@@ -54,7 +53,7 @@ export async function generateMetadata({
         : ["visa services Cyprus Paphos", "Schengen visa application", "business visa Cyprus", "visa help Paphos", "visa support for business trips to Cyprus"],
     languagePaths: {
       en: "/visa-services-cyprus",
-      ru: "/vizovye-uslugi-kipr",
+      ru: "/visa-services-cyprus",
     },
   });
 }
@@ -169,10 +168,6 @@ export default async function VisaServicesCyprusPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  if (locale === "ru") {
-    redirect("/ru/vizovye-uslugi-kipr/");
-  }
 
   const t = await getTranslations({ locale, namespace: "visaCyprusPage" });
 

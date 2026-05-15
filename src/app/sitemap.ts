@@ -39,7 +39,14 @@ const pages: StaticPage[] = [
   { path: "/quote", priority: 0.8, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
   { path: "/blog", priority: 0.6, changeFrequency: "weekly" },
-  // /paphos-travel-agency + other cross-locale pages below
+  // The four "*-cyprus" SEO landing pages share one Latin slug across both
+  // locales (their transliterated Russian counterparts were retired — see
+  // canonical.ts and next.config.ts). The two genuinely-bilingual cross-locale
+  // pairs (paphos / flight-tickets) live in `crossLocalePageDefs` below.
+  { path: "/corporate-travel-cyprus", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/luxury-travel-cyprus", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/visa-services-cyprus", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/hotel-booking-cyprus", priority: 0.8, changeFrequency: "monthly" },
   { path: "/privacy", priority: 0.4, changeFrequency: "yearly" },
   { path: "/terms", priority: 0.4, changeFrequency: "yearly" },
 ];
@@ -51,11 +58,7 @@ const pages: StaticPage[] = [
  */
 const crossLocalePageDefs: Array<{ en: string; ru: string }> = [
   { en: "paphos-travel-agency", ru: "turisticheskoe-agentstvo-pafos" },
-  { en: "corporate-travel-cyprus", ru: "korporativnye-poezdki-kipr" },
-  { en: "visa-services-cyprus", ru: "vizovye-uslugi-kipr" },
-  { en: "luxury-travel-cyprus", ru: "luxusnyy-otdykh-kipr" },
   { en: "flight-tickets-cyprus", ru: "aviabilety-kipr" },
-  { en: "hotel-booking-cyprus", ru: "bronirovanie-otelej-kipr" },
 ];
 
 /**
