@@ -20,7 +20,7 @@ export const SERVICE_LAST_UPDATED = "2026-04-14";
  * Pass "" or "/" for the locale root.
  *
  * If the EN and RU variants live at DIFFERENT localised slugs (e.g.
- * /en/corporate-travel-cyprus vs /ru/korporativnye-poezdki-kipr), pass
+ * /en/paphos-travel-agency vs /ru/turisticheskoe-agentstvo-pafos), pass
  * `languagePaths` to provide both — otherwise the same `routePath` is used
  * for both locales.
  *

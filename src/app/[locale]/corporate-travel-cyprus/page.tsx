@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import {
   Plane,
@@ -55,7 +54,7 @@ export async function generateMetadata({
         : ["corporate travel Cyprus", "business travel Paphos Limassol", "corporate trips Cyprus", "IATA corporate agency", "corporate travel agency Paphos", "business travel management Cyprus", "how to get corporate travel policy Cyprus"],
     languagePaths: {
       en: "/corporate-travel-cyprus",
-      ru: "/korporativnye-poezdki-kipr",
+      ru: "/corporate-travel-cyprus",
     },
   });
 }
@@ -112,10 +111,6 @@ export default async function CorporateTravelCyprusPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  if (locale === "ru") {
-    redirect("/ru/korporativnye-poezdki-kipr/");
-  }
 
   const t = await getTranslations({
     locale,

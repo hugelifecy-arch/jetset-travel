@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import {
   Star,
   Gem,
@@ -25,7 +24,7 @@ import FAQSection from "@/components/sections/FAQSection";
 
 const languagePaths = {
   en: "/luxury-travel-cyprus",
-  ru: "/luxusnyy-otdykh-kipr",
+  ru: "/luxury-travel-cyprus",
 };
 
 export async function generateMetadata({
@@ -60,10 +59,6 @@ export default async function LuxuryTravelCyprusPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  if (locale === "ru") {
-    redirect("/ru/luxusnyy-otdykh-kipr/");
-  }
 
   const t = await getTranslations({ locale, namespace: "luxuryCyprusPage" });
 
