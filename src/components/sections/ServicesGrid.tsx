@@ -34,7 +34,7 @@ const serviceItems = [
   {
     icon: Palmtree,
     titleKey: "luxury",
-    href: { en: "/luxury-travel/", ru: "/luxury-travel/" },
+    href: { en: "/luxury-travel", ru: "/luxury-travel" },
     image: "/images/services/luxury.jpg",
   },
   {

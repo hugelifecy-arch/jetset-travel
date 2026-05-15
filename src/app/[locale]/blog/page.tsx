@@ -71,14 +71,14 @@ export default async function BlogPage({
             locale === "ru"
               ? "Блог о путешествиях — JetSet Travel"
               : "Travel Blog — JetSet Travel",
-          url: `${CANONICAL_ORIGIN}/${locale}/blog/`,
+          url: `${CANONICAL_ORIGIN}/${locale}/blog`,
           mainEntity: {
             "@type": "ItemList",
             numberOfItems: posts.length,
             itemListElement: posts.map((post, i) => ({
               "@type": "ListItem",
               position: i + 1,
-              url: `${CANONICAL_ORIGIN}/${locale}/blog/${post.frontmatter.slug}/`,
+              url: `${CANONICAL_ORIGIN}/${locale}/blog/${post.frontmatter.slug}`,
               name: post.frontmatter.title,
             })),
           },

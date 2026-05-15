@@ -5,10 +5,11 @@
  * it directly without needing the Next.js runtime. The middleware is a
  * thin wrapper that converts {@link CanonicalAction} into `NextResponse`.
  *
- * Canonical form: `https://www.jetset-travel.com/<locale>/<path>/`
- * (WITH trailing slash). Every variant — apex host, missing/duplicate
- * locale prefix, `?lang=`, bare paths — resolves to that form in a
- * single redirect hop.
+ * Canonical form: `https://www.jetset-travel.com/<locale>/<path>`
+ * (NO trailing slash — Phase 3, locked in by GSC Performance data showing
+ * Google selects the no-slash variant for nearly every ranking URL). Every
+ * variant — apex host, missing/duplicate locale prefix, `?lang=`, bare paths,
+ * any trailing slash — resolves to that form in a single redirect hop.
  */
 
 export const CANONICAL_HOST = "www.jetset-travel.com";
@@ -25,8 +26,8 @@ const APEX_BYPASS =
 const PUBLIC_FILE = /\.(.*)$/;
 
 // Special-case bare-path redirects that don't map 1:1 to /<locale>/<path>.
-// Values are the path WITHOUT the locale prefix — the /en/ prefix is added
-// below so the final URL is /en/<pathname>/ (with trailing slash).
+// Values are the path WITHOUT the locale prefix — the /en prefix is added
+// below so the final URL is /en/<pathname> (no trailing slash).
 const BARE_PATH_SPECIALS: Record<
   string,
   { pathname: string; extraSearch?: Record<string, string> }
@@ -52,14 +53,14 @@ function collapseDoubleLocalePrefix(pathname: string): string {
 }
 
 /**
- * Canonical form always has a trailing slash. Adds one when missing,
- * collapses duplicates, and leaves the root "/" untouched.
+ * Canonical form has NO trailing slash. Strips trailing slashes (and
+ * collapses duplicate inner slashes), but leaves the root "/" untouched.
  */
-function ensureTrailingSlash(pathname: string): string {
+function stripTrailingSlash(pathname: string): string {
   if (!pathname) return "/";
   const collapsed = pathname.replace(/\/{2,}/g, "/");
   if (collapsed === "/") return "/";
-  return collapsed.endsWith("/") ? collapsed : `${collapsed}/`;
+  return collapsed.replace(/\/+$/, "") || "/";
 }
 
 export type CanonicalAction =
@@ -118,7 +119,7 @@ export function canonicalize(
   // 1. Collapse /en/en/... → /en/... (runs before trailing-slash normalization
   //    so "/en/en/" and "/en/en" reduce to the same intermediate form).
   pathname = collapseDoubleLocalePrefix(
-    pathname.endsWith("/") && pathname !== "/"
+    pathname.length > 1 && pathname.endsWith("/")
       ? pathname.replace(/\/+$/, "")
       : pathname,
   );
@@ -160,8 +161,8 @@ export function canonicalize(
     pathname = `/en${pathname}`;
   }
 
-  // 5. Canonical form carries a trailing slash.
-  pathname = ensureTrailingSlash(pathname);
+  // 5. Canonical form has NO trailing slash.
+  pathname = stripTrailingSlash(pathname);
 
   const newSearch = searchParams.toString()
     ? `?${searchParams.toString()}`
@@ -179,7 +180,7 @@ export function canonicalize(
 
   if (pathname === "/") {
     const r = new URL(inputUrl);
-    r.pathname = `/${preferredLocale}/`;
+    r.pathname = `/${preferredLocale}`;
     return { action: "redirect", url: r.toString() };
   }
 

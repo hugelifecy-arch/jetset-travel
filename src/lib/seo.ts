@@ -24,8 +24,8 @@ export const SERVICE_LAST_UPDATED = "2026-04-14";
  * `languagePaths` to provide both — otherwise the same `routePath` is used
  * for both locales.
  *
- * Every URL emitted carries a trailing slash so it matches the sitemap <loc>
- * byte-for-byte.
+ * Every URL emitted carries NO trailing slash so it matches the sitemap <loc>
+ * byte-for-byte (Phase 3 canonical form locked in by GSC Performance data).
  */
 export function localizedAlternates(
   locale: string,
@@ -50,7 +50,7 @@ export function localizedAlternates(
 
 /**
  * Convenience: get the hreflang map for the canonical locale-prefixed path
- * (e.g. "/en/corporate-travel-cyprus/"). Delegates to the LOCALE_ALTERNATES
+ * (e.g. "/en/corporate-travel-cyprus"). Delegates to the LOCALE_ALTERNATES
  * source of truth so sitemap and pages can't drift.
  */
 export { getHreflangAlternates };

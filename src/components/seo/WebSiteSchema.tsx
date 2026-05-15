@@ -16,7 +16,7 @@ export default function WebSiteSchema() {
     },
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://www.jetset-travel.com/en/blog/?q={search_term_string}",
+      target: "https://www.jetset-travel.com/en/blog?q={search_term_string}",
       "query-input": "required name=search_term_string",
     },
   };

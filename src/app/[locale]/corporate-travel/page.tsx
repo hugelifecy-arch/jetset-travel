@@ -70,7 +70,7 @@ export default async function CorporateTravelPage({
         locale={locale}
         name="Corporate Travel Management"
         description="Corporate travel management for Cyprus businesses. Policy-compliant bookings, clean invoicing, 24/7 rebooking, dedicated account management, and disruption support."
-        url={`https://www.jetset-travel.com/${locale}/corporate-travel/`}
+        url={`https://www.jetset-travel.com/${locale}/corporate-travel`}
         serviceType="Corporate Travel Management"
         dateModified={SERVICE_LAST_UPDATED}
       />

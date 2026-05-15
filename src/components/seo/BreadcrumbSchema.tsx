@@ -25,7 +25,7 @@ export default function BreadcrumbSchema() {
       "@type": "ListItem",
       position: 1,
       name: homeName,
-      item: `${CANONICAL_ORIGIN}/${locale}/`,
+      item: `${CANONICAL_ORIGIN}/${locale}`,
     },
   ];
 
@@ -36,7 +36,7 @@ export default function BreadcrumbSchema() {
       "@type": "ListItem",
       position: i + 2,
       name: names[segments[i]] ?? slugToTitle(segments[i]),
-      item: `${CANONICAL_ORIGIN}${cumulativePath}/`,
+      item: `${CANONICAL_ORIGIN}${cumulativePath}`,
     });
   }
 

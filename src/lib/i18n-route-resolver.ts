@@ -11,7 +11,7 @@
  *   2. Per-post `translationSlug` frontmatter in `content/blog/*.md` — read
  *      via `lib/blog.ts`. This is filesystem-backed, hence server-only.
  *
- * Returns absolute canonical URLs (origin + locale + path + trailing slash),
+ * Returns absolute canonical URLs (origin + locale + path, NO trailing slash),
  * or `null` for a locale when no counterpart exists.
  */
 import {
@@ -37,7 +37,7 @@ function normalizePath(p: string): string {
   let out = p.trim();
   if (!out.startsWith("/")) out = `/${out}`;
   out = out.replace(/\/+/g, "/");
-  if (out.length > 1 && !out.endsWith("/")) out = `${out}/`;
+  if (out.length > 1 && out.endsWith("/")) out = out.replace(/\/+$/, "");
   return out;
 }
 
@@ -53,13 +53,13 @@ function extractLocale(p: string): Locale | null {
  * other locale, returns the equivalent URL if one exists, else `null`.
  *
  * Examples:
- *   resolveAlternateUrls("/en/about/")
- *     → { en: ".../en/about/", ru: ".../ru/about/" }
- *   resolveAlternateUrls("/en/blog/digital-nomads-cyprus-guide/")
- *     → { en: ".../en/blog/digital-nomads-cyprus-guide/",
- *         ru: ".../ru/blog/digital-nomady-kipr-gid/" }
- *   resolveAlternateUrls("/en/blog/luxury-mediterranean-destinations-2026/")
- *     → { en: ".../en/blog/luxury-mediterranean-destinations-2026/",
+ *   resolveAlternateUrls("/en/about")
+ *     → { en: ".../en/about", ru: ".../ru/about" }
+ *   resolveAlternateUrls("/en/blog/digital-nomads-cyprus-guide")
+ *     → { en: ".../en/blog/digital-nomads-cyprus-guide",
+ *         ru: ".../ru/blog/digital-nomady-kipr-gid" }
+ *   resolveAlternateUrls("/en/blog/luxury-mediterranean-destinations-2026")
+ *     → { en: ".../en/blog/luxury-mediterranean-destinations-2026",
  *         ru: null }   // no Russian translation of this post
  */
 export function resolveAlternateUrls(localePath: string): AlternateUrls {

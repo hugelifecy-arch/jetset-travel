@@ -328,7 +328,7 @@ export default async function HotelReservationsPage({
         locale={locale}
         name="Hotel Reservations"
         description="Negotiated hotel rates worldwide for corporate and leisure travelers. Quality accommodations matched to your budget, standards, and location needs. Group bookings and extended stays."
-        url={`https://www.jetset-travel.com/${locale}/hotel-reservations/`}
+        url={`https://www.jetset-travel.com/${locale}/hotel-reservations`}
         serviceType="Hotel Reservation Service"
         dateModified={SERVICE_LAST_UPDATED}
       />

@@ -39,10 +39,17 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  // Canonical URL form is WITH a trailing slash across the site
-  // (see src/lib/canonical.ts). Next.js issues the non-slash → slash
-  // redirect for any page route that isn't already handled in middleware.
-  trailingSlash: true,
+  // Phase 3: canonical URL form has NO trailing slash across the site
+  // (see src/lib/canonical.ts). GSC Performance data confirmed Google
+  // currently selects the no-slash form for nearly every ranking URL
+  // (homepage /en beats /en/ 24:12, /en/blog/cruises-from-limassol-2026
+  // beats its slashed twin 21:6, /en/blog/cyprus-schengen-2026-business-
+  // travel beats its slashed twin 11:6). Next.js automatically issues a
+  // single 308 from /path/ → /path for any page route that arrives with
+  // a trailing slash, so the redirects below only need to handle
+  // destination-specific bridges (locale slug swaps, retired stubs, the
+  // wrong-folder fix).
+  trailingSlash: false,
   images: {
     localPatterns: [
       {
@@ -62,19 +69,29 @@ const nextConfig: NextConfig = {
     // redirect chain and re-trigger Google Search Console's "Page with
     // redirect" validation failure.
     return [
+      // Phase 3 — wrong-folder critical fix (5 clicks, 1,865 impressions).
+      // GSC Performance shows the RU folder is currently serving an EN-only
+      // slug. Send it to the EN equivalent (where its translation actually
+      // lives) instead of 404ing.
+      {
+        source: "/ru/blog/cyprus-schengen-2026-business-travel",
+        destination: "/en/blog/cyprus-schengen-2026-business-travel",
+        permanent: true,
+      },
+      // Bare-path bridges (legacy inbound links from before the locale split).
       {
         source: "/luxury",
-        destination: "/en/luxury-travel/",
+        destination: "/en/luxury-travel",
         permanent: true,
       },
       {
         source: "/en/luxury",
-        destination: "/en/luxury-travel/",
+        destination: "/en/luxury-travel",
         permanent: true,
       },
       {
         source: "/ru/luxury",
-        destination: "/ru/luxury-travel/",
+        destination: "/ru/luxury-travel",
         permanent: true,
       },
       // Cross-locale SEO slug bridges. Each service page has a localised
@@ -84,69 +101,69 @@ const nextConfig: NextConfig = {
       // each off-locale hit into a single 308 at the edge.
       {
         source: "/ru/paphos-travel-agency",
-        destination: "/ru/turisticheskoe-agentstvo-pafos/",
+        destination: "/ru/turisticheskoe-agentstvo-pafos",
         permanent: true,
       },
       {
         source: "/en/turisticheskoe-agentstvo-pafos",
-        destination: "/en/paphos-travel-agency/",
+        destination: "/en/paphos-travel-agency",
         permanent: true,
       },
       {
         source: "/ru/flight-tickets-cyprus",
-        destination: "/ru/aviabilety-kipr/",
+        destination: "/ru/aviabilety-kipr",
         permanent: true,
       },
       {
         source: "/en/aviabilety-kipr",
-        destination: "/en/flight-tickets-cyprus/",
+        destination: "/en/flight-tickets-cyprus",
         permanent: true,
       },
       // Consolidate the four cross-locale "cyprus" landing pages onto the
       // Latin slug in BOTH locales. The transliterated Russian slugs were
       // duplicate landing pages with no content (pure redirect stubs); they
-      // looped against the EN-slug page's `redirect("/ru/<ru-slug>/")` and
+      // looped against the EN-slug page's `redirect("/ru/<ru-slug>")` and
       // showed up in GSC as "Redirect error" / "Discovered — not indexed".
       // After this consolidation the canonical Russian URL is the same
-      // Latin slug as English (mirrors /ru/visa-services/, /ru/about/, etc.).
+      // Latin slug as English (mirrors /ru/visa-services, /ru/about, etc.).
       {
         source: "/en/vizovye-uslugi-kipr",
-        destination: "/en/visa-services-cyprus/",
+        destination: "/en/visa-services-cyprus",
         permanent: true,
       },
       {
         source: "/ru/vizovye-uslugi-kipr",
-        destination: "/ru/visa-services-cyprus/",
+        destination: "/ru/visa-services-cyprus",
         permanent: true,
       },
       {
         source: "/en/luxusnyy-otdykh-kipr",
-        destination: "/en/luxury-travel-cyprus/",
+        destination: "/en/luxury-travel-cyprus",
         permanent: true,
       },
       {
         source: "/ru/luxusnyy-otdykh-kipr",
-        destination: "/ru/luxury-travel-cyprus/",
+        destination: "/ru/luxury-travel-cyprus",
         permanent: true,
       },
       {
         source: "/en/korporativnye-poezdki-kipr",
-        destination: "/en/corporate-travel-cyprus/",
+        destination: "/en/corporate-travel-cyprus",
         permanent: true,
       },
       {
         source: "/ru/korporativnye-poezdki-kipr",
-        destination: "/ru/corporate-travel-cyprus/",
+        destination: "/ru/corporate-travel-cyprus",
         permanent: true,
       },
       {
         source: "/en/bronirovanie-otelej-kipr",
-        destination: "/en/hotel-booking-cyprus/",
+        destination: "/en/hotel-booking-cyprus",
         permanent: true,
       },
       {
         source: "/ru/bronirovanie-otelej-kipr",
-        destination: "/ru/hotel-booking-cyprus/",
+        destination: "/ru/hotel-booking-cyprus",
         permanent: true,
       },
     ];
