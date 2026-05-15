@@ -155,6 +155,49 @@ describe("seo: every sitemap URL is canonical", () => {
   });
 });
 
+describe("seo: hreflang regional codes (Phase 5)", () => {
+  // The UK GSC data showed the brand at position 2 with 0% CTR; one
+  // hypothesis was that UK SERPs need an explicit en-GB targeting signal
+  // even though the URL serves the same content as en. We now emit
+  // en-GB / ru-RU aliases alongside the bare en / ru codes.
+  const entries = sitemap();
+
+  it("every entry exposes en-GB whenever it exposes en", () => {
+    for (const entry of entries) {
+      const langs = entry.alternates?.languages;
+      if (!langs?.en) continue;
+      assert.equal(
+        langs["en-GB"],
+        langs.en,
+        `${entry.url}: en-GB hreflang alias missing or mismatched`,
+      );
+    }
+  });
+
+  it("every entry exposes ru-RU whenever it exposes ru", () => {
+    for (const entry of entries) {
+      const langs = entry.alternates?.languages;
+      if (!langs?.ru) continue;
+      assert.equal(
+        langs["ru-RU"],
+        langs.ru,
+        `${entry.url}: ru-RU hreflang alias missing or mismatched`,
+      );
+    }
+  });
+
+  it("every entry still has an x-default", () => {
+    for (const entry of entries) {
+      const langs = entry.alternates?.languages;
+      if (!langs) continue;
+      assert.ok(
+        langs["x-default"],
+        `${entry.url}: missing x-default hreflang`,
+      );
+    }
+  });
+});
+
 describe("seo: LOCALE_ALTERNATES is internally consistent", () => {
   it("every entry's keys point at no-trailing-slash absolute paths", () => {
     for (const [key, entry] of Object.entries(LOCALE_ALTERNATES)) {

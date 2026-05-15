@@ -39,16 +39,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
+  // Phase 5 — Step 35/37: rewrite EN title + meta description to lead with
+  // the licensing/credibility signal UK B2B searchers expect and to
+  // disambiguate the homepage from a generic "JetSet Travel" brand match.
+  // Targets: "cyprus travel agency" (UK, pos 29.9, 0 CTR) and
+  // "travel agency paphos" (UK, pos 2.3, 0 CTR). Mobile brand CTR (25.6%)
+  // must not regress, so RU title kept close to the previous version.
   return buildPageMetadata({
     locale,
     title:
       locale === "ru"
-        ? "Турагентство в Пафосе, Кипр | JetSet Travel — Аккредитация IATA"
-        : "Travel Agency in Paphos | JetSet Travel — IATA Accredited",
+        ? "Турагентство в Пафосе, Кипр 2026 | JetSet — Аккредитация IATA"
+        : "Travel Agency in Cyprus — Paphos & Limassol | JetSet Travel",
     description:
       locale === "ru"
-        ? "Аккредитованное IATA турагентство в Пафосе. Корпоративные поездки, премиальный отдых, визы. Поддержка 24/7 в WhatsApp. Бесплатное предложение за 2 часа."
-        : "IATA-accredited travel agency in Paphos, Cyprus. Corporate travel, luxury holidays & visa services. 24/7 WhatsApp support. Free quote in 2 hours.",
+        ? "JetSet Travel — аккредитованное IATA турагентство в Пафосе, Кипр (лицензия 7775). Корпоративные поездки, премиальный отдых, визы, авиабилеты. Поддержка 24/7."
+        : "IATA-accredited Cyprus travel agency in Paphos (Licence 7775). Corporate trips, luxury holidays, visa & flights for UK, EU and local travellers in 2026.",
     keywords:
       locale === "ru"
         ? ["туристическое агентство Кипр", "IATA турагентство Пафос", "авиабилеты Пафос", "туры из Кипра", "бронирование отелей Кипр", "корпоративные поездки Кипр", "JetSet Travel", "турагентство с IATA Пафос", "лучшее турагентство в Пафосе для бизнеса", "корпоративное турагентство Кипр"]

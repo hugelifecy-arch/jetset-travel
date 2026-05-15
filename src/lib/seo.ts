@@ -37,13 +37,19 @@ export function localizedAlternates(
   const ruPath = languagePaths?.ru ?? routePath;
 
   const canonical = getCanonicalUrl(loc === "en" ? enPath : ruPath, loc);
+  const enUrl = getCanonicalUrl(enPath, "en");
+  const ruUrl = getCanonicalUrl(ruPath, "ru");
 
   return {
     canonical,
     languages: {
-      en: getCanonicalUrl(enPath, "en"),
-      ru: getCanonicalUrl(ruPath, "ru"),
-      "x-default": getCanonicalUrl(enPath, "en"),
+      en: enUrl,
+      // Phase 5: explicit en-GB / ru-RU regional codes alongside language-only
+      // ones so UK and Russian SERPs get an unambiguous targeting signal.
+      "en-GB": enUrl,
+      ru: ruUrl,
+      "ru-RU": ruUrl,
+      "x-default": enUrl,
     },
   };
 }

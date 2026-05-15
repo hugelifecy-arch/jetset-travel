@@ -59,10 +59,13 @@ export async function generateMetadata({
       // so every blog URL still ships with an x-default hreflang.
       const loc = (locale === "ru" ? "ru" : "en") as Locale;
       const selfUrl = getCanonicalUrl(`/blog/${slug}`, loc);
+      // Phase 5: emit explicit en-GB / ru-RU regional codes too.
+      const regional = loc === "ru" ? "ru-RU" : "en-GB";
       return {
         canonical: selfUrl,
         languages: {
           [loc]: selfUrl,
+          [regional]: selfUrl,
           "x-default": selfUrl,
         },
       };
