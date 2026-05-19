@@ -6,7 +6,7 @@ import { getAllPosts, getPostBySlug, getPostTranslationSlug } from "@/lib/blog";
 import { markdownToHtml } from "@/lib/markdown";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { Calendar, Clock, User, ArrowRight, ChevronRight, Home } from "lucide-react";
 import { PATH_DISPLAY_NAMES, getHomeName } from "@/components/seo/breadcrumb-names";
 import SocialShare from "@/components/blog/SocialShare";
@@ -35,6 +35,16 @@ export async function generateMetadata({
   if (!post) {
     return {
       title: locale === "ru" ? "Запись не найдена" : "Post Not Found",
+    };
+  }
+
+  // Wrong-locale URL — the page handler will 308 to the correct one. Emit a
+  // minimal noindex metadata here so the redirect target's metadata isn't
+  // shadowed by a wrong-locale title if something pre-renders this branch.
+  if (post.frontmatter.locale !== locale) {
+    return {
+      title: post.frontmatter.title,
+      robots: { index: false, follow: true },
     };
   }
 
@@ -103,6 +113,25 @@ export default async function BlogPostPage({
 
   if (!post || post.frontmatter.status !== "published") {
     notFound();
+  }
+
+  // Locale-mismatch guard. `getPostBySlug` is locale-agnostic, so a request
+  // for /en/blog/<russian-slug> (or /ru/blog/<english-slug>) would otherwise
+  // 200-render the wrong-locale article. Send those to the correct URL with
+  // a 308 so Google deduplicates them. GSC flagged the two known cases:
+  //   /en/blog/luchshee-vremya-dlya-poseshcheniya-kipra
+  //   /ru/blog/best-time-visit-cyprus-monthly-guide
+  if (post.frontmatter.locale !== locale) {
+    const translationSlug = post.frontmatter.translationSlug;
+    if (translationSlug) {
+      const translated = getPostBySlug(translationSlug);
+      if (translated?.frontmatter.locale === locale) {
+        permanentRedirect(`/${locale}/blog/${translationSlug}`);
+      }
+    }
+    permanentRedirect(
+      `/${post.frontmatter.locale}/blog/${post.frontmatter.slug}`,
+    );
   }
 
   const htmlContent = await markdownToHtml(post.content);
