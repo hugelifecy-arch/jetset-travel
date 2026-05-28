@@ -25,6 +25,7 @@ export default function YandexMetrica() {
 
   return (
     <>
+      <link rel="dns-prefetch" href="https://mc.yandex.ru" />
       <Script id="yandex-metrica" strategy="afterInteractive">
         {`
           (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

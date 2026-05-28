@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
+import { buildPageMetadata, CANONICAL_ORIGIN, REVIEW_AGGREGATE } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import ContactContent from "./ContactContent";
 export async function generateMetadata({
@@ -95,8 +95,8 @@ export default async function ContactPage({
       // from the same Google Business Profile total as LocalBusinessSchema.
       aggregateRating: {
         "@type": "AggregateRating",
-        ratingValue: "4.9",
-        reviewCount: "65",
+        ratingValue: REVIEW_AGGREGATE.ratingValue,
+        reviewCount: REVIEW_AGGREGATE.reviewCount,
         bestRating: "5",
         worstRating: "1",
       },

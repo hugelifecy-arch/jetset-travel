@@ -113,7 +113,6 @@ export default function CTALeadForm() {
           {...register("website")}
           tabIndex={-1}
           autoComplete="off"
-          aria-label="Website"
         />
       </div>
 
@@ -123,11 +122,13 @@ export default function CTALeadForm() {
           <Input
             {...register("name")}
             placeholder={t("fullName")}
+            aria-label={t("fullName")}
             className={inputClass}
             aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? "cta-name-error" : undefined}
           />
           {errors.name && (
-            <span className="text-sm text-red-400">{errors.name.message}</span>
+            <span id="cta-name-error" role="alert" className="text-sm text-red-400">{errors.name.message}</span>
           )}
         </div>
 
@@ -137,11 +138,13 @@ export default function CTALeadForm() {
             type="email"
             {...register("email")}
             placeholder={t("email")}
+            aria-label={t("email")}
             className={inputClass}
             aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "cta-email-error" : undefined}
           />
           {errors.email && (
-            <span className="text-sm text-red-400">
+            <span id="cta-email-error" role="alert" className="text-sm text-red-400">
               {errors.email.message}
             </span>
           )}
@@ -153,6 +156,7 @@ export default function CTALeadForm() {
             type="tel"
             {...register("phone")}
             placeholder={t("phonePlaceholder")}
+            aria-label={t("phonePlaceholder")}
             className={inputClass}
           />
         </div>
@@ -227,6 +231,7 @@ export default function CTALeadForm() {
           <Input
             {...register("dates")}
             placeholder={t("datesPlaceholder")}
+            aria-label={t("datesPlaceholder")}
             className={inputClass}
           />
         </div>
@@ -237,6 +242,7 @@ export default function CTALeadForm() {
             {...register("message")}
             rows={3}
             placeholder={t("messagePlaceholder")}
+            aria-label={t("messagePlaceholder")}
             className={inputClass}
           />
         </div>

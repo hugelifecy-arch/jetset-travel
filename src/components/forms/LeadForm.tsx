@@ -98,11 +98,13 @@ export default function LeadForm() {
         <Input
           {...register("name")}
           placeholder="Name"
+          aria-label="Name"
           className="input"
           aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? "lead-name-error" : undefined}
         />
         {errors.name && (
-          <span className="text-sm text-red-500">{errors.name.message}</span>
+          <span id="lead-name-error" role="alert" className="text-sm text-red-500">{errors.name.message}</span>
         )}
       </div>
 
@@ -110,11 +112,13 @@ export default function LeadForm() {
         <Input
           {...register("phone")}
           placeholder="Phone / WhatsApp"
+          aria-label="Phone / WhatsApp"
           className="input"
           aria-invalid={Boolean(errors.phone)}
+          aria-describedby={errors.phone ? "lead-phone-error" : undefined}
         />
         {errors.phone && (
-          <span className="text-sm text-red-500">{errors.phone.message}</span>
+          <span id="lead-phone-error" role="alert" className="text-sm text-red-500">{errors.phone.message}</span>
         )}
       </div>
 
@@ -122,11 +126,13 @@ export default function LeadForm() {
         <Textarea
           {...register("route")}
           placeholder="Route details (from/to, dates, travelers, cabin class)"
+          aria-label="Route details (from/to, dates, travelers, cabin class)"
           className="input min-h-28"
           aria-invalid={Boolean(errors.route)}
+          aria-describedby={errors.route ? "lead-route-error" : undefined}
         />
         {errors.route && (
-          <span className="text-sm text-red-500">{errors.route.message}</span>
+          <span id="lead-route-error" role="alert" className="text-sm text-red-500">{errors.route.message}</span>
         )}
       </div>
 

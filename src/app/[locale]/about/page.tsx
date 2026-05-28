@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, REVIEW_AGGREGATE } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -142,8 +142,8 @@ export default async function AboutPage({
     // total) — never invent ratings.
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "65",
+      ratingValue: REVIEW_AGGREGATE.ratingValue,
+      reviewCount: REVIEW_AGGREGATE.reviewCount,
       bestRating: "5",
       worstRating: "1",
     },
