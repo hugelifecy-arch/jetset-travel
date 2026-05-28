@@ -1,4 +1,5 @@
 import { getLocale } from "next-intl/server";
+import { REVIEW_AGGREGATE } from "@/lib/seo";
 import JsonLd from "./JsonLd";
 
 interface ReviewData {
@@ -94,8 +95,8 @@ export default async function LocalBusinessSchema({
     ],
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: "4.9",
-      reviewCount: "65",
+      ratingValue: REVIEW_AGGREGATE.ratingValue,
+      reviewCount: REVIEW_AGGREGATE.reviewCount,
       bestRating: "5",
       worstRating: "1",
     },

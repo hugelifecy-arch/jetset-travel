@@ -28,6 +28,7 @@ export default function FacebookPixel() {
 
   return (
     <>
+      <link rel="dns-prefetch" href="https://connect.facebook.net" />
       <Script id="facebook-pixel" strategy="afterInteractive">
         {`
           !function(f,b,e,v,n,t,s)

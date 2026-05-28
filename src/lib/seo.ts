@@ -14,6 +14,17 @@ export const OG_IMAGE = `${CANONICAL_ORIGIN}/images/jetset-og-image.jpg`;
 export const SERVICE_LAST_UPDATED = "2026-04-14";
 
 /**
+ * Business-wide aggregate review rating, sourced from the Google Business
+ * Profile total. Single source of truth for every `AggregateRating` block on
+ * the site (TravelAgency, Service, and per-page schema). Update here only —
+ * the numbers must agree across all pages and must never be invented.
+ */
+export const REVIEW_AGGREGATE = {
+  ratingValue: "4.9",
+  reviewCount: "65",
+} as const;
+
+/**
  * Build the Metadata `alternates` object for a page.
  *
  * `routePath` is the path AFTER the locale segment (e.g. "/about", "/blog/foo").

@@ -317,7 +317,7 @@ export default async function PaphosTravelAgencyPage({
         </div>
       </section>
 
-      {/* Google Reviews via Elfsight */}
+      {/* Google Reviews (native SSR component) */}
       <GoogleReviews />
 
       {/* CTA with Quote Form */}

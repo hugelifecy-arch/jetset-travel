@@ -124,12 +124,10 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        {/* Analytics preconnects */}
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://mc.yandex.ru" />
-        <link rel="dns-prefetch" href="https://connect.facebook.net" />
-        <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        {/* Analytics connection hints live inside the consent-gated analytics
+            components (GoogleAnalytics, YandexMetrica, FacebookPixel,
+            MicrosoftClarity) so we don't open connections to trackers before
+            the visitor grants consent. */}
         {/* Maps */}
         <link rel="dns-prefetch" href="https://maps.google.com" />
         <link rel="dns-prefetch" href="https://www.google.com" />
