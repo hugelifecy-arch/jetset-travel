@@ -224,6 +224,16 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        // Step 6 — non-content text files (AI/LLM discovery + humans.txt)
+        // stay reachable but must never be indexed as standalone "pages".
+        // X-Robots-Tag: noindex keeps them out of web search while leaving
+        // them fully readable to AI crawlers (which ignore noindex). They
+        // are deliberately absent from sitemap.xml; this is the belt-and-
+        // braces signal so GSC can't surface them as thin results.
+        source: "/:file(ai\\.txt|llms\\.txt|llms-full\\.txt|humans\\.txt)",
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+      },
       { source: "/(.*)", headers: securityHeaders },
       {
         source: "/:path*",

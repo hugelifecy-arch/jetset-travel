@@ -12,7 +12,8 @@
     "check:do-not-disturb": "node scripts/check-do-not-disturb.mjs",
     "check:serp-snippets": "node scripts/check-serp-snippets.mjs",
     "serp-audit": "node scripts/serp-audit.mjs",
-    "gsc:weekly-delta": "node scripts/gsc-weekly-delta.mjs"
+    "gsc:weekly-delta": "node scripts/gsc-weekly-delta.mjs",
+    "verify:routes": "node scripts/verify-routes.mjs"
   },
   "engines": {
     "node": ">=22.6.0"
