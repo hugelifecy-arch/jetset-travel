@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -58,6 +58,7 @@ export default async function VisaServicesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "visaPage" });
 
   const visaCards = [

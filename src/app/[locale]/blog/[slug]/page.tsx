@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
 import { getCanonicalUrl, type Locale } from "@/lib/canonical";
 import { getAllPosts, getPostBySlug, getPostTranslationSlug } from "@/lib/blog";
@@ -108,6 +108,7 @@ export default async function BlogPostPage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "blogPage" });
   const post = getPostBySlug(slug);
 

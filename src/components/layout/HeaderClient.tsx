@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Menu, X, Globe, Phone, ChevronDown } from "lucide-react";
+import { resolveAlternateUrls } from "@/lib/i18n-route-resolver";
 
 /** Service sub-links for the "Services" dropdown */
 const serviceLinks = [
@@ -25,18 +26,7 @@ const topLevelLinks = [
   { href: "/contact", key: "contact" },
 ] as const;
 
-export interface HeaderAlternates {
-  /** Absolute canonical URL of the EN equivalent of the current page, or null if none exists. */
-  en: string | null;
-  /** Absolute canonical URL of the RU equivalent of the current page, or null if none exists. */
-  ru: string | null;
-}
-
-export default function HeaderClient({
-  alternates,
-}: {
-  alternates: HeaderAlternates;
-}) {
+export default function HeaderClient() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -47,10 +37,13 @@ export default function HeaderClient({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
-  // The language-switcher URLs are resolved server-side from the canonical
-  // alternates map (LOCALE_ALTERNATES + per-post blog `translationSlug`),
-  // so they're always no-slash canonical and `null` if no
-  // counterpart exists. See `lib/i18n-route-resolver.ts`.
+  // The language-switcher URLs are resolved from the canonical alternates
+  // map (LOCALE_ALTERNATES + the checked-in blog slug-pair map), so they're
+  // always no-slash canonical and `null` if no counterpart exists. Resolution
+  // is client-safe and runs off usePathname() — the previous server-side
+  // `headers()` read forced the whole site into per-request SSR.
+  // See `lib/i18n-route-resolver.ts`.
+  const alternates = useMemo(() => resolveAlternateUrls(pathname), [pathname]);
   const enHref = alternates.en;
   const ruHref = alternates.ru;
 

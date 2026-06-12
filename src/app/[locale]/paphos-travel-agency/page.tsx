@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import {
   ShieldCheck,
@@ -113,6 +113,7 @@ export default async function PaphosTravelAgencyPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   // Off-locale visits (/ru/paphos-travel-agency/) are 308-redirected at
   // the edge via next.config.ts → we always reach this page as English.
   const t = await getTranslations({ locale, namespace: "paphosPage" });

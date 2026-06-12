@@ -42,12 +42,18 @@ function estimateReadTime(content: string): number {
   return Math.max(1, Math.ceil(words / wordsPerMinute));
 }
 
-export function getAllPosts(locale?: string): (BlogPost & { readTime: number })[] {
+/* Parse-once cache. Post files are immutable at runtime (new content ships
+   via redeploy), and every page/sitemap call re-walked the directory —
+   noticeable at build time where dozens of pages each call getAllPosts.
+   Disabled in development so content edits show up without a restart. */
+let postsCache: (BlogPost & { readTime: number })[] | null = null;
+
+function readAllPosts(): (BlogPost & { readTime: number })[] {
   if (!fs.existsSync(BLOG_DIR)) return [];
 
   const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".md"));
 
-  const posts = files.map((filename) => {
+  return files.map((filename) => {
     const filePath = path.join(BLOG_DIR, filename);
     const raw = fs.readFileSync(filePath, "utf-8");
     const { data, content } = matter(raw);
@@ -58,12 +64,19 @@ export function getAllPosts(locale?: string): (BlogPost & { readTime: number })[
       readTime: estimateReadTime(content),
     };
   });
+}
+
+export function getAllPosts(locale?: string): (BlogPost & { readTime: number })[] {
+  const useCache = process.env.NODE_ENV === "production";
+  const posts = useCache
+    ? (postsCache ??= readAllPosts())
+    : readAllPosts();
 
   const filtered = locale
     ? posts.filter((p) => p.frontmatter.locale === locale)
     : posts;
 
-  return filtered.sort(
+  return [...filtered].sort(
     (a, b) =>
       new Date(b.frontmatter.date).getTime() -
       new Date(a.frontmatter.date).getTime(),

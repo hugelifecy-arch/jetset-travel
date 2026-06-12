@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import {
   Globe,
@@ -169,6 +169,7 @@ export default async function VisaServicesCyprusPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "visaCyprusPage" });
 

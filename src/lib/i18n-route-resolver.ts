@@ -1,5 +1,5 @@
 /**
- * Server-side resolver that maps a locale-prefixed pathname (e.g.
+ * Client-safe resolver that maps a locale-prefixed pathname (e.g.
  * `/en/about/`, `/ru/blog/digital-nomads-cyprus-guide/`) to the canonical
  * URL of the same content in the OTHER locale.
  *
@@ -8,8 +8,13 @@
  *
  * Combines two sources of truth:
  *   1. `LOCALE_ALTERNATES` in `lib/canonical.ts` — static service pages.
- *   2. Per-post `translationSlug` frontmatter in `content/blog/*.md` — read
- *      via `lib/blog.ts`. This is filesystem-backed, hence server-only.
+ *   2. `BLOG_SLUG_PAIRS_EN_TO_RU` in `lib/blog-translation-pairs.ts` — the
+ *      checked-in mirror of per-post `translationSlug` frontmatter (guarded
+ *      against drift by tests/blog-translation-pairs.test.js).
+ *
+ * Both sources are plain objects, so this module runs in client components.
+ * That matters: the header previously resolved the pathname server-side via
+ * `headers()`, which opted every page on the site out of static rendering.
  *
  * Returns absolute canonical URLs (origin + locale + path, NO trailing slash),
  * or `null` for a locale when no counterpart exists.
@@ -21,7 +26,7 @@ import {
   LOCALES,
   type Locale,
 } from "./canonical.ts";
-import { getPostBySlug } from "./blog.ts";
+import { getPairedBlogSlug } from "./blog-translation-pairs.ts";
 
 export interface AlternateUrls {
   en: string | null;
@@ -58,35 +63,28 @@ function extractLocale(p: string): Locale | null {
  *   resolveAlternateUrls("/en/blog/digital-nomads-cyprus-guide")
  *     → { en: ".../en/blog/digital-nomads-cyprus-guide",
  *         ru: ".../ru/blog/digital-nomady-kipr-gid" }
- *   resolveAlternateUrls("/en/blog/luxury-mediterranean-destinations-2026")
- *     → { en: ".../en/blog/luxury-mediterranean-destinations-2026",
+ *   resolveAlternateUrls("/en/blog/some-untranslated-post")
+ *     → { en: ".../en/blog/some-untranslated-post",
  *         ru: null }   // no Russian translation of this post
  */
 export function resolveAlternateUrls(localePath: string): AlternateUrls {
   const path = normalizePath(localePath);
 
-  // Blog post detail page: resolve via per-post translationSlug frontmatter.
+  // Blog post detail page: resolve via the checked-in slug-pair map.
   const blogMatch = path.match(BLOG_POST_RE);
   if (blogMatch) {
     const currentLocale = blogMatch[1] as Locale;
     const slug = blogMatch[2];
-    const post = getPostBySlug(slug);
-
-    // Unknown slug — fall back to the listing in the same locale only;
-    // we can't fabricate a translated post URL.
-    if (!post) {
-      return {
-        en: currentLocale === "en" ? getCanonicalUrl(`/blog/${slug}`, "en") : null,
-        ru: currentLocale === "ru" ? getCanonicalUrl(`/blog/${slug}`, "ru") : null,
-      };
-    }
 
     const selfUrl = getCanonicalUrl(`/blog/${slug}`, currentLocale);
     const otherLocale: Locale = currentLocale === "en" ? "ru" : "en";
-    const translationSlug = post.frontmatter.translationSlug;
-    const otherUrl = translationSlug
-      ? getCanonicalUrl(`/blog/${translationSlug}`, otherLocale)
-      : null;
+    const pairedSlug = getPairedBlogSlug(slug, otherLocale);
+    // Untranslated or unknown slug — self-link the current locale only;
+    // we can't fabricate a translated post URL that might 404.
+    const otherUrl =
+      pairedSlug && pairedSlug !== slug
+        ? getCanonicalUrl(`/blog/${pairedSlug}`, otherLocale)
+        : null;
 
     return currentLocale === "en"
       ? { en: selfUrl, ru: otherUrl }

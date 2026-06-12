@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
 import { ArrowRight, FileText, Briefcase, Calendar, ShieldCheck, Plane, MapPin } from "lucide-react";
@@ -72,6 +73,7 @@ export default async function SchengenCyprus2026Hub({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const isRu = locale === "ru";
 
   const hubUrl = `${CANONICAL_ORIGIN}/${locale}/schengen-cyprus-2026`;

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata, SERVICE_LAST_UPDATED, REVIEW_AGGREGATE } from "@/lib/seo";
 import CruisesContent from "./CruisesContent";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
@@ -38,6 +39,7 @@ export default async function CruisesPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
 
   return (
     <>

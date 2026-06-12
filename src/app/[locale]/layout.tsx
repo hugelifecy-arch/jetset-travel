@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
-import Header from "@/components/layout/Header";
+import HeaderClient from "@/components/layout/HeaderClient";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
@@ -10,6 +11,7 @@ import MobileActionBar from "@/components/layout/MobileActionBar";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import ExitIntentPopup from "@/components/layout/ExitIntentPopup";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
+import { pickClientMessages } from "@/lib/client-messages";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import VercelAnalytics from "@/components/analytics/VercelAnalytics";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
@@ -119,7 +121,12 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const messages = (await import(`../../messages/${locale}.json`)).default;
+  // Only the namespaces client components consume are serialized into the
+  // page payload; server components read the full catalog via next-intl's
+  // request config. Guarded by tests/client-messages.test.js.
+  const clientMessages = pickClientMessages(messages);
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -151,14 +158,14 @@ export default async function LocaleLayout({
         <link rel="ai-policy" href="/ai.txt" />
       </head>
       <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={clientMessages}>
           <a
             href="#main-content"
             className="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-[100] focus-visible:rounded-md focus-visible:bg-brand-navy focus-visible:px-4 focus-visible:py-2 focus-visible:text-white focus-visible:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2E86C1]"
           >
             {locale === "ru" ? "Перейти к основному содержанию" : "Skip to main content"}
           </a>
-          <Header />
+          <HeaderClient />
           <Breadcrumbs />
           <main id="main-content" className="min-h-screen">{children}</main>
           <Footer />

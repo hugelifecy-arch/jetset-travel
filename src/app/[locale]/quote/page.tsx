@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import QuoteContent from "./QuoteContent";
@@ -33,6 +34,7 @@ export default async function QuotePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
 
   const quotePageSchema = {
     "@context": "https://schema.org",
