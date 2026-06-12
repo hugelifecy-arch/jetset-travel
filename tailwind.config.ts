@@ -11,8 +11,20 @@ const config: Config = {
         "brand-dark": "#0F1A2E",
       },
       fontFamily: {
-        sans: ["var(--font-dm-sans)", "DM Sans", "sans-serif"],
-        display: ["var(--font-playfair)", "Playfair Display", "serif"],
+        // Cyrillic subsets follow the brand faces; per-glyph fallback routes
+        // only Cyrillic text to them (DM Sans has no Cyrillic).
+        sans: [
+          "var(--font-dm-sans)",
+          "var(--font-inter-cyrillic)",
+          "DM Sans",
+          "sans-serif",
+        ],
+        display: [
+          "var(--font-playfair)",
+          "var(--font-playfair-cyrillic)",
+          "Playfair Display",
+          "serif",
+        ],
       },
       boxShadow: {
         luxury: "0 4px 20px rgba(27, 42, 74, 0.15)",

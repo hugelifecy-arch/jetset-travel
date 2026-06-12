@@ -226,7 +226,7 @@ export default async function BlogPostPage({
     author: {
       "@type": "Person",
       name: post.frontmatter.author,
-      url: `${CANONICAL_ORIGIN}/en/about`,
+      url: `${CANONICAL_ORIGIN}/${locale}/about`,
     },
     publisher: {
       "@type": "Organization",

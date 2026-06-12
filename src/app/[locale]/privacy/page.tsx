@@ -10,7 +10,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return buildPageMetadata({
+  const metadata = buildPageMetadata({
     locale,
     routePath: "/privacy",
     title:
@@ -22,6 +22,14 @@ export async function generateMetadata({
         ? "Как JetSet K&K Travel Ltd собирает, использует и защищает ваши персональные данные в соответствии с GDPR."
         : "How JetSet K&K Travel Ltd collects, uses, and protects your personal data in accordance with GDPR.",
   });
+
+  // The RU page is still a translation-pending stub — keep it reachable for
+  // users but out of the index until the full Russian policy text ships.
+  if (locale === "ru") {
+    metadata.robots = { index: false, follow: true };
+  }
+
+  return metadata;
 }
 
 export default async function PrivacyPolicyPage({

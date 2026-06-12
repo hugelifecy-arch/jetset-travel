@@ -10,7 +10,7 @@ import { canonicalize, pickPreferredLocale } from "./lib/canonicalize";
  * The root "/" redirect carries `Vary: Accept-Language` so shared caches
  * don't serve a wrong-locale redirect to another visitor.
  */
-export default function middleware(req: NextRequest) {
+export default function proxy(req: NextRequest) {
   const preferredLocale = pickPreferredLocale(
     req.headers.get("accept-language"),
   );

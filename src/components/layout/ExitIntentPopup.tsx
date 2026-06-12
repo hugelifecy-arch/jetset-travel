@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,9 +8,10 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import {
-  exitIntentSchema,
+  buildExitIntentSchema,
   type ExitIntentFormValues,
 } from "@/components/forms/schemas";
+import { useFormMessages } from "@/components/forms/useFormMessages";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { cn } from "@/lib/utils/cn";
 
@@ -62,6 +63,12 @@ export default function ExitIntentPopup() {
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
+  const formMessages = useFormMessages();
+  const schema = useMemo(
+    () => buildExitIntentSchema(formMessages),
+    [formMessages],
+  );
+
   const {
     register,
     handleSubmit,
@@ -69,7 +76,7 @@ export default function ExitIntentPopup() {
     control,
     formState: { errors, isSubmitting },
   } = useForm<ExitIntentFormValues>({
-    resolver: zodResolver(exitIntentSchema),
+    resolver: zodResolver(schema),
     defaultValues: {},
   });
 

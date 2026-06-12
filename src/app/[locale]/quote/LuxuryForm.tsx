@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { getRecaptchaToken } from "@/lib/recaptcha";
+import { useFormMessages } from "@/components/forms/useFormMessages";
 import { trackLead } from "@/lib/analytics/fbpixel";
 import FormTrustElements from "@/components/forms/FormTrustElements";
 import {
@@ -16,18 +17,22 @@ import {
   type QuoteTFunction,
 } from "./shared";
 
-const luxurySchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Please enter a valid email"),
-  phone: z.string().min(5, "Phone number is required"),
-  destinations: z.string().min(2, "Destinations are required"),
-  dates: z.string().min(1, "Travel dates are required"),
-  groupSize: z.string().min(1, "Group size is required"),
-  budget: z.string().min(1, "Please select a budget range"),
-  specialRequirements: z.string().optional(),
-});
+/* Validation messages come from the `forms` namespace so they localize;
+   errors render directly under their field, so the generic strings stay
+   unambiguous. */
+const buildLuxurySchema = (m: { required: string; invalidEmail: string }) =>
+  z.object({
+    name: z.string().min(2, m.required),
+    email: z.string().email(m.invalidEmail),
+    phone: z.string().min(5, m.required),
+    destinations: z.string().min(2, m.required),
+    dates: z.string().min(1, m.required),
+    groupSize: z.string().min(1, m.required),
+    budget: z.string().min(1, m.required),
+    specialRequirements: z.string().optional(),
+  });
 
-type LuxuryFormData = z.infer<typeof luxurySchema>;
+type LuxuryFormData = z.infer<ReturnType<typeof buildLuxurySchema>>;
 
 export default function LuxuryForm({
   onSuccess,
@@ -41,12 +46,17 @@ export default function LuxuryForm({
   const formLoadedAt = useRef(Date.now());
   const honeypotRef = useRef<HTMLInputElement>(null);
 
+  const formMessages = useFormMessages();
+  const schema = useMemo(
+    () => buildLuxurySchema(formMessages),
+    [formMessages],
+  );
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LuxuryFormData>({
-    resolver: zodResolver(luxurySchema),
+    resolver: zodResolver(schema),
   });
 
   const onSubmit = async (data: LuxuryFormData) => {

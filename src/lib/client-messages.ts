@@ -25,6 +25,7 @@ export const CLIENT_NAMESPACES = [
   "cta",
   "exitIntent",
   "footer",
+  "forms",
   "hero",
   "mobileBar",
   "nav",

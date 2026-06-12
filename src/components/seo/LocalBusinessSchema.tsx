@@ -102,6 +102,10 @@ export default async function LocalBusinessSchema({
     },
     ...(reviews && reviews.length > 0
       ? {
+          /* No third-party `publisher` attribution: Google's review-snippet
+             policy disallows marking up ratings sourced from other sites,
+             and the attribution itself flagged them as such. The quotes are
+             displayed on-page in the reviews section. */
           review: reviews.map((r) => ({
             "@type": "Review",
             author: { "@type": "Person", name: r.author },
@@ -111,7 +115,6 @@ export default async function LocalBusinessSchema({
               bestRating: 5,
             },
             reviewBody: r.reviewBody,
-            publisher: { "@type": "Organization", name: "Google Reviews" },
           })),
         }
       : {}),

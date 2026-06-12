@@ -52,6 +52,46 @@ const playfair = localFont({
   display: "swap",
 });
 
+/* Cyrillic coverage for /ru. The latin-subset files above contain zero
+   Cyrillic glyphs, so Russian pages used to render entirely in system
+   fallback fonts. Playfair Display ships an official Cyrillic subset;
+   DM Sans has no Cyrillic at all, so Inter (its closest Cyrillic-capable
+   cousin) backs the body stack — per-glyph fallback means Latin text still
+   renders in DM Sans/Playfair and only Cyrillic falls through.
+   `preload: false`: browsers download a font only when rendered text needs
+   one of its glyphs, so EN visitors never fetch these files. */
+const playfairCyrillic = localFont({
+  src: [
+    {
+      path: "../../fonts/playfair-display-cyrillic-wght-normal.woff2",
+      style: "normal",
+    },
+    {
+      path: "../../fonts/playfair-display-cyrillic-wght-italic.woff2",
+      style: "italic",
+    },
+  ],
+  variable: "--font-playfair-cyrillic",
+  display: "swap",
+  preload: false,
+});
+
+const interCyrillic = localFont({
+  src: [
+    {
+      path: "../../fonts/inter-cyrillic-wght-normal.woff2",
+      style: "normal",
+    },
+    {
+      path: "../../fonts/inter-cyrillic-wght-italic.woff2",
+      style: "italic",
+    },
+  ],
+  variable: "--font-inter-cyrillic",
+  display: "swap",
+  preload: false,
+});
+
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "ru" }];
 }
@@ -157,7 +197,9 @@ export default async function LocaleLayout({
         />
         <link rel="ai-policy" href="/ai.txt" />
       </head>
-      <body className={`${dmSans.variable} ${playfair.variable} antialiased`}>
+      <body
+        className={`${dmSans.variable} ${playfair.variable} ${interCyrillic.variable} ${playfairCyrillic.variable} antialiased`}
+      >
         <NextIntlClientProvider locale={locale} messages={clientMessages}>
           <a
             href="#main-content"

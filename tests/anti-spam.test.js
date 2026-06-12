@@ -4,6 +4,7 @@ import {
   isGibberish,
   isSubmittedTooFast,
   findGibberishField,
+  runAntiSpamChecks,
 } from "../src/lib/anti-spam.ts";
 
 describe("isGibberish", () => {
@@ -100,5 +101,47 @@ describe("findGibberishField", () => {
       message: "I'd like to book a trip to Greece.",
     };
     assert.equal(findGibberishField(cleanPayload), null);
+  });
+});
+
+describe("runAntiSpamChecks — timing field is mandatory", () => {
+  // Every first-party form sends _formLoadedAt; omission means the payload
+  // didn't come from our UI. (reCAPTCHA is unconfigured in the test env, so
+  // these run without network access.)
+  it("blocks a payload without _formLoadedAt", async () => {
+    const res = await runAntiSpamChecks({
+      name: "John Smith",
+      email: "john@example.com",
+    });
+    assert.equal(res.blocked, true);
+    assert.equal(res.reason, "missing_timing");
+  });
+
+  it("blocks a non-numeric _formLoadedAt", async () => {
+    const res = await runAntiSpamChecks({
+      name: "John Smith",
+      _formLoadedAt: "not-a-number",
+    });
+    assert.equal(res.blocked, true);
+    assert.equal(res.reason, "missing_timing");
+  });
+
+  it("still blocks instant submissions", async () => {
+    const res = await runAntiSpamChecks({
+      name: "John Smith",
+      _formLoadedAt: Date.now(),
+    });
+    assert.equal(res.blocked, true);
+    assert.equal(res.reason, "too_fast");
+  });
+
+  it("allows a plausibly-timed clean payload", async () => {
+    const res = await runAntiSpamChecks({
+      name: "John Smith",
+      email: "john@example.com",
+      message: "I'd like to book a trip to Greece.",
+      _formLoadedAt: Date.now() - 30_000,
+    });
+    assert.equal(res.blocked, false);
   });
 });
