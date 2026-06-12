@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { buildPageMetadata, SERVICE_LAST_UPDATED, CANONICAL_ORIGIN } from "@/lib/seo";
+import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
 import { ArrowRight, FileText, Briefcase, Calendar, ShieldCheck, Plane, MapPin } from "lucide-react";
 import JsonLd from "@/components/seo/JsonLd";
 import CTABanner from "@/components/sections/CTABanner";

@@ -141,10 +141,9 @@ export async function POST(req: Request) {
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey || apiKey === "re_your_key_here") {
-    console.log("[quote] Resend not configured – logging submission");
-    console.log("[quote] Type:", quoteType);
-    console.log("[quote] From:", contactName, email || "(no email)");
-    console.log("[quote] Data:", JSON.stringify(data));
+    /* Same grep-friendly prefix as delivery failures so a misconfigured
+       deploy's leads can be recovered from logs with one search. */
+    logLeadFallback("quote", data as Record<string, unknown>, "RESEND_API_KEY not configured");
     return ok();
   }
 

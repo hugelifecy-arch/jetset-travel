@@ -34,7 +34,6 @@ const securityHeaders = [
       "upgrade-insecure-requests",
     ].join("; "),
   },
-  { key: "Vary", value: "User-Agent" },
 ];
 
 const nextConfig: NextConfig = {

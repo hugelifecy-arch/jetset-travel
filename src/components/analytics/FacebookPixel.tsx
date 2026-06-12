@@ -44,6 +44,8 @@ export default function FacebookPixel() {
         `}
       </Script>
       <noscript>
+        {/* 1×1 no-JS tracking beacon — next/image does not apply here */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           height="1"
           width="1"

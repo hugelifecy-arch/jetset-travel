@@ -78,8 +78,8 @@ export default async function HomePage({
 
   return (
     <>
-      {/* Preload hero background image for faster LCP */}
-      <link rel="preload" as="image" href="/images/hero-bg.jpg" />
+      {/* Hero image preload is emitted by next/image (priority) in HeroSection;
+          a manual raw-file preload here would double-download the asset. */}
       <HeroSection />
       <TrustCredentialsBar />
       <AboutBlurb />

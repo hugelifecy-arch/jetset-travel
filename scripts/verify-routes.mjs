@@ -33,7 +33,6 @@
  */
 
 const BASE = (process.env.BASE_URL || "http://localhost:3000").replace(/\/+$/, "");
-const CANONICAL_ORIGIN = "https://www.jetset-travel.com";
 const CANONICAL_HOST = "www.jetset-travel.com";
 const MAX_REDIRS = 10;
 

@@ -58,6 +58,7 @@ export default function GoogleReviews() {
                 <svg
                   className="ml-auto h-4 w-4"
                   viewBox="0 0 24 24"
+                  role="img"
                   aria-label="Google"
                 >
                   <path

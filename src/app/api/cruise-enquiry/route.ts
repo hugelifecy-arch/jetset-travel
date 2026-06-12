@@ -13,21 +13,23 @@ export const runtime = "nodejs";
 /*  Schema                                                             */
 /* ------------------------------------------------------------------ */
 
+/* Max lengths mirror the quote route's caps so an oversized payload can't
+   be relayed into a multi-megabyte staff email. */
 const cruiseEnquirySchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().optional(),
-  country: z.string().optional(),
-  destination: z.string().optional(),
-  cruiseLine: z.string().optional(),
-  dates: z.string().optional(),
-  duration: z.string().optional(),
-  adults: z.string().optional(),
-  children: z.string().optional(),
-  cabin: z.string().optional(),
-  budget: z.string().optional(),
-  occasion: z.string().optional(),
-  requirements: z.string().optional(),
+  name: z.string().min(2).max(80),
+  email: z.string().email().max(120),
+  phone: z.string().max(30).optional(),
+  country: z.string().max(80).optional(),
+  destination: z.string().max(120).optional(),
+  cruiseLine: z.string().max(120).optional(),
+  dates: z.string().max(200).optional(),
+  duration: z.string().max(50).optional(),
+  adults: z.string().max(20).optional(),
+  children: z.string().max(20).optional(),
+  cabin: z.string().max(80).optional(),
+  budget: z.string().max(50).optional(),
+  occasion: z.string().max(120).optional(),
+  requirements: z.string().max(2000).optional(),
 });
 
 function buildNotification(data: z.infer<typeof cruiseEnquirySchema>): string {
@@ -91,11 +93,9 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey || apiKey === "re_your_key_here") {
-    console.log("[cruise-enquiry] Resend not configured – logging submission");
-    console.log("[cruise-enquiry] From:", data.name, data.email);
-    if (data.destination) console.log("[cruise-enquiry] Destination:", data.destination);
-    if (data.cruiseLine) console.log("[cruise-enquiry] Cruise Line:", data.cruiseLine);
-    if (data.dates) console.log("[cruise-enquiry] Dates:", data.dates);
+    /* Same grep-friendly prefix as delivery failures so a misconfigured
+       deploy's leads can be recovered from logs with one search. */
+    logLeadFallback("cruise-enquiry", data, "RESEND_API_KEY not configured");
     return ok();
   }
 

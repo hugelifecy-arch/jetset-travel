@@ -37,9 +37,6 @@ export async function rateLimitGuard(
     if (error instanceof Error && error.message === "RATE_LIMIT") {
       return fail("Too many requests. Please try again later.", 429);
     }
-    if (error instanceof Error && error.message === "SECURITY_NOT_CONFIGURED") {
-      return fail("Service temporarily unavailable.", 503);
-    }
     throw error;
   }
 }

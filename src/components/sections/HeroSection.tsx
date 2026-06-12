@@ -97,8 +97,10 @@ export default function HeroSection() {
           aria-hidden="true"
           onError={handleVideoError}
         >
-          <source src="/videos/hero.webm" type="video/webm" />
+          {/* mp4 first: it is the smaller encode (2.0MB vs 2.9MB webm), and
+              browsers take the first playable source. */}
           <source src="/videos/hero.mp4" type="video/mp4" />
+          <source src="/videos/hero.webm" type="video/webm" />
         </video>
       )}
 
@@ -126,8 +128,8 @@ export default function HeroSection() {
           aria-hidden="true"
           onError={handleVideoError}
         >
-          <source src="/videos/hero.webm" type="video/webm" />
           <source src="/videos/hero.mp4" type="video/mp4" />
+          <source src="/videos/hero.webm" type="video/webm" />
         </video>
       )}
 

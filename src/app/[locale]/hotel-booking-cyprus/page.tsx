@@ -3,20 +3,16 @@ import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import {
-  Hotel,
   Building2,
   Star,
   Shield,
-  Clock,
   ArrowRight,
   CheckCircle,
-  Briefcase,
   CreditCard,
   HeadphonesIcon,
   MapPin,
   Award,
   Gem,
-  Users,
   FileText,
   Palmtree,
 } from "lucide-react";

@@ -1253,7 +1253,8 @@
     "submitting": "Sending...",
     "disclaimer": "No spam, no commitment. We reply personally.",
     "thankYou": "Thank you! We'll get back to you within 2 hours.",
-    "close": "Close"
+    "close": "Close",
+    "error": "Something went wrong. Please try again."
   },
   "common": {
     "learnMore": "Learn more",

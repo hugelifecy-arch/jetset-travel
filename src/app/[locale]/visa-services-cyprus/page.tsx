@@ -7,7 +7,6 @@ import {
   Briefcase,
   Palmtree,
   GraduationCap,
-  Plane,
   ShieldCheck,
   FileText,
   Phone,
