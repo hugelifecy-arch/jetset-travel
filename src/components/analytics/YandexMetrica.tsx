@@ -38,6 +38,8 @@ export default function YandexMetrica() {
       </Script>
       <noscript>
         <div>
+          {/* No-JS tracking beacon — next/image does not apply here */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={`https://mc.yandex.ru/watch/${counterId}`}
             style={{ position: "absolute", left: "-9999px" }}

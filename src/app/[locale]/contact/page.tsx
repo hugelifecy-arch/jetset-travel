@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata, CANONICAL_ORIGIN, REVIEW_AGGREGATE } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import ContactContent from "./ContactContent";
@@ -33,6 +34,7 @@ export default async function ContactPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
 
   const contactPageSchema = {
     "@context": "https://schema.org",

@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { getRecaptchaToken } from "@/lib/recaptcha";
+import { useFormMessages } from "@/components/forms/useFormMessages";
 import { trackLead } from "@/lib/analytics/fbpixel";
 import FormTrustElements from "@/components/forms/FormTrustElements";
 import {
@@ -16,18 +17,22 @@ import {
   type QuoteTFunction,
 } from "./shared";
 
-const corporateSchema = z.object({
-  companyName: z.string().min(2, "Company name is required"),
-  email: z.string().email("Please enter a valid business email"),
-  phone: z.string().min(5, "Phone number is required"),
-  travellers: z.string().min(1, "Number of travellers is required"),
-  travelDates: z.string().min(1, "Travel dates are required"),
-  destinations: z.string().min(2, "Destinations are required"),
-  invoiceRequired: z.boolean(),
-  notes: z.string().optional(),
-});
+/* Validation messages come from the `forms` namespace so they localize;
+   errors render directly under their field, so the generic strings stay
+   unambiguous. */
+const buildCorporateSchema = (m: { required: string; invalidEmail: string }) =>
+  z.object({
+    companyName: z.string().min(2, m.required),
+    email: z.string().email(m.invalidEmail),
+    phone: z.string().min(5, m.required),
+    travellers: z.string().min(1, m.required),
+    travelDates: z.string().min(1, m.required),
+    destinations: z.string().min(2, m.required),
+    invoiceRequired: z.boolean(),
+    notes: z.string().optional(),
+  });
 
-type CorporateFormData = z.infer<typeof corporateSchema>;
+type CorporateFormData = z.infer<ReturnType<typeof buildCorporateSchema>>;
 
 export default function CorporateForm({
   onSuccess,
@@ -41,12 +46,18 @@ export default function CorporateForm({
   const formLoadedAt = useRef(Date.now());
   const honeypotRef = useRef<HTMLInputElement>(null);
 
+  const formMessages = useFormMessages();
+  const schema = useMemo(
+    () => buildCorporateSchema(formMessages),
+    [formMessages],
+  );
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<CorporateFormData>({
-    resolver: zodResolver(corporateSchema),
+    resolver: zodResolver(schema),
     defaultValues: { invoiceRequired: false },
   });
 

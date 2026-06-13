@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 export async function generateMetadata({
   params,
@@ -9,7 +9,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  return buildPageMetadata({
+  const metadata = buildPageMetadata({
     locale,
     routePath: "/terms",
     title:
@@ -21,6 +21,14 @@ export async function generateMetadata({
         ? "Условия бронирования, оплаты, отмены и ответственности JetSet K&K Travel Ltd."
         : "Booking conditions, payment terms, cancellation policy, and liability for services provided by JetSet K&K Travel Ltd.",
   });
+
+  // The RU page is still a translation-pending stub — keep it reachable for
+  // users but out of the index until the full Russian terms text ships.
+  if (locale === "ru") {
+    metadata.robots = { index: false, follow: true };
+  }
+
+  return metadata;
 }
 
 export default async function TermsOfServicePage({
@@ -29,6 +37,7 @@ export default async function TermsOfServicePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations("terms");
 
   if (locale === "ru") {

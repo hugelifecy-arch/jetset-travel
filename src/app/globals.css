@@ -12,16 +12,19 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Cyrillic fallbacks sit AFTER the brand faces: per-glyph fallback keeps
+   Latin text in DM Sans / Playfair and routes only Cyrillic to the
+   Inter / Playfair-Cyrillic subsets (DM Sans has no Cyrillic). */
 body {
   background-color: #ffffff;
   color: var(--color-brand-navy);
-  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-family: var(--font-dm-sans), var(--font-inter-cyrillic), "DM Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-playfair), "Playfair Display", serif;
+  font-family: var(--font-playfair), var(--font-playfair-cyrillic), "Playfair Display", serif;
 }
 
 /* Global focus-visible style for keyboard navigation */
@@ -30,8 +33,27 @@ h1, h2, h3, h4 {
   outline-offset: 2px;
 }
 
+/* Entrance fade for modal overlays (the modal mounts only while open,
+   so a CSS transition can't run — use an animation instead) */
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-modal-in {
+  animation: modal-fade-in 200ms ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .animate-modal-in {
+    animation: none;
   }
 }

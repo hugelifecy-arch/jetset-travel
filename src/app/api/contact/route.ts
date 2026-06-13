@@ -13,18 +13,20 @@ export const runtime = "nodejs";
 /*  Schema                                                             */
 /* ------------------------------------------------------------------ */
 
+/* Max lengths mirror the quote route's caps so an oversized payload can't
+   be relayed into a multi-megabyte staff email. */
 const contactSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().optional(),
-  companyName: z.string().optional(),
-  message: z.string().optional(),
-  travelType: z.string().optional(),
-  travelers: z.string().optional(),
-  urgency: z.string().optional(),
-  budget: z.string().optional(),
-  contactMethod: z.string().optional(),
-  dates: z.string().optional(),
+  name: z.string().min(2).max(80),
+  email: z.string().email().max(120),
+  phone: z.string().max(30).optional(),
+  companyName: z.string().max(120).optional(),
+  message: z.string().max(2000).optional(),
+  travelType: z.string().max(50).optional(),
+  travelers: z.string().max(50).optional(),
+  urgency: z.string().max(50).optional(),
+  budget: z.string().max(50).optional(),
+  contactMethod: z.string().max(50).optional(),
+  dates: z.string().max(200).optional(),
 });
 
 function buildNotification(data: z.infer<typeof contactSchema>): string {
@@ -86,11 +88,9 @@ export async function POST(request: Request) {
   const apiKey = process.env.RESEND_API_KEY;
 
   if (!apiKey || apiKey === "re_your_key_here") {
-    console.log("[contact] Resend not configured – logging submission");
-    console.log("[contact] From:", data.name, data.email);
-    if (data.travelType) console.log("[contact] Travel Type:", data.travelType);
-    if (data.dates) console.log("[contact] Dates:", data.dates);
-    if (data.message) console.log("[contact] Message:", data.message);
+    /* Same grep-friendly prefix as delivery failures so a misconfigured
+       deploy's leads can be recovered from logs with one search. */
+    logLeadFallback("contact", data, "RESEND_API_KEY not configured");
     return ok();
   }
 

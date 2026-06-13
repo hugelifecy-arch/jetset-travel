@@ -10,7 +10,7 @@ import { canonicalize, pickPreferredLocale } from "./lib/canonicalize";
  * The root "/" redirect carries `Vary: Accept-Language` so shared caches
  * don't serve a wrong-locale redirect to another visitor.
  */
-export default function middleware(req: NextRequest) {
+export default function proxy(req: NextRequest) {
   const preferredLocale = pickPreferredLocale(
     req.headers.get("accept-language"),
   );
@@ -19,12 +19,11 @@ export default function middleware(req: NextRequest) {
   const result = canonicalize(inputUrl, { preferredLocale });
 
   if (result.action === "passthrough") {
-    // Expose the request pathname to server components (the language
-    // switcher reads it via `headers()` so it can resolve the
-    // cross-locale URL of the current page).
-    const requestHeaders = new Headers(req.headers);
-    requestHeaders.set("x-pathname", req.nextUrl.pathname);
-    return NextResponse.next({ request: { headers: requestHeaders } });
+    // No request mutation on passthrough. (The language switcher used to
+    // read an injected `x-pathname` header server-side, which forced every
+    // page into per-request SSR; it now resolves from `usePathname()` on
+    // the client — see `lib/i18n-route-resolver.ts`.)
+    return NextResponse.next();
   }
 
   const target = new URL(result.url);

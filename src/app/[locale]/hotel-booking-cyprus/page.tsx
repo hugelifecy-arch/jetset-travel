@@ -1,22 +1,18 @@
 import type { Metadata } from "next";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import {
-  Hotel,
   Building2,
   Star,
   Shield,
-  Clock,
   ArrowRight,
   CheckCircle,
-  Briefcase,
   CreditCard,
   HeadphonesIcon,
   MapPin,
   Award,
   Gem,
-  Users,
   FileText,
   Palmtree,
 } from "lucide-react";
@@ -62,6 +58,7 @@ export default async function HotelBookingCyprusPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "hotelCyprusPage" });
 

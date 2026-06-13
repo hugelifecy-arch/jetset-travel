@@ -21,10 +21,14 @@ export function fail(error: string, status: number) {
 }
 
 /**
- * Enforce the per-endpoint rate limit. Returns an error Response when the
- * request is throttled (429) or the limiter backend is misconfigured (503),
- * or null when the request may proceed. Unexpected errors are re-thrown so
- * they surface as a 500, matching the previous per-route behaviour.
+ * Enforce the per-endpoint rate limit. Returns a 429 Response when the
+ * request is throttled, or null when it may proceed.
+ *
+ * Limiter-backend failures (Upstash outage, network error) FAIL OPEN: these
+ * are lead-capture endpoints, and dropping a legitimate enquiry costs more
+ * than letting one window of submissions through unthrottled. The error is
+ * logged so ops can see the outage; honeypot/timing/reCAPTCHA/gibberish
+ * checks still run for every request.
  */
 export async function rateLimitGuard(
   ip: string,
@@ -37,10 +41,11 @@ export async function rateLimitGuard(
     if (error instanceof Error && error.message === "RATE_LIMIT") {
       return fail("Too many requests. Please try again later.", 429);
     }
-    if (error instanceof Error && error.message === "SECURITY_NOT_CONFIGURED") {
-      return fail("Service temporarily unavailable.", 503);
-    }
-    throw error;
+    console.error(
+      `[rate-limit] backend error — allowing request (fail-open) [${scope}]:`,
+      error instanceof Error ? error.message : error,
+    );
+    return null;
   }
 }
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
 import HeroSection from "@/components/sections/HeroSection";
 import TrustCredentialsBar from "@/components/sections/TrustCredentialsBar";
@@ -68,6 +68,7 @@ export default async function HomePage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "reviews" });
 
   const reviews = [
@@ -78,8 +79,8 @@ export default async function HomePage({
 
   return (
     <>
-      {/* Preload hero background image for faster LCP */}
-      <link rel="preload" as="image" href="/images/hero-bg.jpg" />
+      {/* Hero image preload is emitted by next/image (priority) in HeroSection;
+          a manual raw-file preload here would double-download the asset. */}
       <HeroSection />
       <TrustCredentialsBar />
       <AboutBlurb />

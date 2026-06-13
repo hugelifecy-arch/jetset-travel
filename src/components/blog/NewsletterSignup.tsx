@@ -20,7 +20,7 @@ export default function NewsletterSignup() {
   return (
     <section className="py-16 bg-brand-light">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center">
-        <Mail className="h-8 w-8 text-brand-gold mx-auto mb-4" />
+        <Mail className="h-8 w-8 text-brand-gold mx-auto mb-4" aria-hidden="true" />
         <h2 className="text-2xl font-bold text-brand-navy mb-2">
           {t("newsletterTitle")}
         </h2>
@@ -38,6 +38,7 @@ export default function NewsletterSignup() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={t("newsletterPlaceholder")}
+              aria-label={t("newsletterPlaceholder")}
               required
               className="flex-1 px-4 py-3 rounded-xl border border-brand-navy/10 bg-white text-sm text-brand-navy placeholder:text-brand-navy/40 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors"
             />

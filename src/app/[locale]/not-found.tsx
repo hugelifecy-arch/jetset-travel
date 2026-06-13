@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
-import { headers } from "next/headers";
+import { getLocale, getTranslations } from "next-intl/server";
 import {
   Home,
   Briefcase,
@@ -11,19 +10,13 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-function getLocaleFromHeaders(headersList: Headers): string {
-  const pathname =
-    headersList.get("x-next-url") ??
-    headersList.get("x-invoke-path") ??
-    headersList.get("referer") ??
-    "";
-  if (pathname.includes("/ru")) return "ru";
-  return "en";
-}
-
 export default async function NotFound() {
-  const headersList = await headers();
-  const locale = getLocaleFromHeaders(headersList);
+  // Resolve the locale via next-intl's request scope (seeded by the [locale]
+  // layout's setRequestLocale) instead of sniffing request headers. This
+  // matters beyond correctness: the not-found boundary is embedded in every
+  // page's prerendered payload, so a headers() call here used to opt the
+  // ENTIRE [locale] tree out of static generation.
+  const locale = await getLocale();
   const t = await getTranslations({ locale, namespace: "notFound" });
 
   const whatsappText =

@@ -154,7 +154,12 @@ export async function runAntiSpamChecks(
     return { blocked: true, reason: "honeypot", silentReject: true };
   }
 
-  /* 2. Time-based */
+  /* 2. Time-based. Every first-party form sends `_formLoadedAt`, so a
+     payload without it didn't come from our UI — previously omission
+     silently skipped the timing check, giving scripted bots a free pass. */
+  if (typeof body._formLoadedAt !== "number" || body._formLoadedAt <= 0) {
+    return { blocked: true, reason: "missing_timing" };
+  }
   if (isSubmittedTooFast(body._formLoadedAt)) {
     return { blocked: true, reason: "too_fast" };
   }

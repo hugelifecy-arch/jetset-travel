@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
 import FlightPageContent from "../flight-tickets-cyprus/FlightPageContent";
 
@@ -39,6 +40,7 @@ export default async function AviabiletyKiprPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   // Off-locale visits (/en/aviabilety-kipr/) are 308-redirected at the edge
   // via next.config.ts → we always reach this page as Russian.
   return <FlightPageContent locale={locale} />;

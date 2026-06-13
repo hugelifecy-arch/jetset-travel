@@ -34,7 +34,6 @@ const securityHeaders = [
       "upgrade-insecure-requests",
     ].join("; "),
   },
-  { key: "Vary", value: "User-Agent" },
 ];
 
 const nextConfig: NextConfig = {
@@ -61,10 +60,10 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     // Host canonicalization (apex → www), `/en/en → /en`, trailing-slash,
-    // and `?lang=` stripping all live in `src/middleware.ts` so they happen
+    // and `?lang=` stripping all live in `src/proxy.ts` so they happen
     // in a single 301 hop. Keep only destination-specific redirects here.
     //
-    // Order matters: `next.config.ts` redirects run BEFORE middleware. Any
+    // Order matters: `next.config.ts` redirects run BEFORE the proxy. Any
     // rule added here that the middleware would also match will create a
     // redirect chain and re-trigger Google Search Console's "Page with
     // redirect" validation failure.

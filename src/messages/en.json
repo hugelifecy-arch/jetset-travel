@@ -32,7 +32,9 @@
     "badgeLicense": "Tourism License 7775",
     "heroImageAlt": "Aerial view of the Mediterranean coastline in Cyprus with turquoise waters",
     "iataAlt": "IATA Accredited Travel Agent",
-    "tourismAlt": "Cyprus Tourism Organisation Licensed"
+    "tourismAlt": "Cyprus Tourism Organisation Licensed",
+    "playVideo": "Play background video",
+    "pauseVideo": "Pause background video"
   },
   "trust": {
     "title": "Why Corporates Choose Us",
@@ -134,6 +136,7 @@
     "subtitle": "Real feedback from corporate and leisure travellers.",
     "readMoreOnGoogle": "Read more reviews on Google",
     "viewAllReviews": "View All Reviews on Google",
+    "aggregateLine": "Rated {rating} out of 5 by {count}+ clients on Google",
     "via": "on",
     "posted": "Posted",
     "review1": {
@@ -1253,7 +1256,8 @@
     "submitting": "Sending...",
     "disclaimer": "No spam, no commitment. We reply personally.",
     "thankYou": "Thank you! We'll get back to you within 2 hours.",
-    "close": "Close"
+    "close": "Close",
+    "error": "Something went wrong. Please try again."
   },
   "common": {
     "learnMore": "Learn more",

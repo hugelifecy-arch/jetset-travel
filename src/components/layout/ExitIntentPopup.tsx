@@ -1,16 +1,17 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useParams, usePathname } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import {
-  exitIntentSchema,
+  buildExitIntentSchema,
   type ExitIntentFormValues,
 } from "@/components/forms/schemas";
+import { useFormMessages } from "@/components/forms/useFormMessages";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { cn } from "@/lib/utils/cn";
 
@@ -40,14 +41,15 @@ function isExcludedPage(pathname: string): boolean {
   return EXCLUDED_SUFFIXES.some((s) => pathname.endsWith(s));
 }
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([tabindex="-1"]), select, textarea, [tabindex]:not([tabindex="-1"])';
+
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
 export default function ExitIntentPopup() {
   const pathname = usePathname();
-  const params = useParams();
-  const locale = (params?.locale as string) ?? "en";
   const t = useTranslations("exitIntent");
 
   const [visible, setVisible] = useState(false);
@@ -58,19 +60,27 @@ export default function ExitIntentPopup() {
   const formLoadedAt = useRef(0);
   useEffect(() => { formLoadedAt.current = Date.now(); }, []);
   const honeypotRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  const formMessages = useFormMessages();
+  const schema = useMemo(
+    () => buildExitIntentSchema(formMessages),
+    [formMessages],
+  );
 
   const {
     register,
     handleSubmit,
     setValue,
-    watch,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<ExitIntentFormValues>({
-    resolver: zodResolver(exitIntentSchema),
+    resolver: zodResolver(schema),
     defaultValues: {},
   });
 
-  const selectedTravelType = watch("travelType");
+  const selectedTravelType = useWatch({ control, name: "travelType" });
 
   /* ---- Show the popup ---- */
   const show = useCallback(() => {
@@ -137,6 +147,44 @@ export default function ExitIntentPopup() {
     return () => document.removeEventListener("keydown", onKey);
   }, [visible, close]);
 
+  /* ---- Focus management: move focus into the dialog while it is open,
+          return it to the previously focused element when it closes
+          (covers both manual dismissal and the post-submit auto-close) ---- */
+  useEffect(() => {
+    if (!visible) return;
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    const frame = requestAnimationFrame(() => {
+      dialogRef.current
+        ?.querySelector<HTMLElement>(FOCUSABLE_SELECTOR)
+        ?.focus();
+    });
+    return () => {
+      cancelAnimationFrame(frame);
+      previousFocusRef.current?.focus?.();
+    };
+  }, [visible]);
+
+  /* ---- Trap Tab inside the dialog while open ---- */
+  const handleTrapKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key !== "Tab") return;
+      const dialog = dialogRef.current;
+      if (!dialog) return;
+      const focusables = dialog.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    },
+    [],
+  );
+
   /* ---- Form submit ---- */
   const onSubmit = async (data: ExitIntentFormValues) => {
     setSubmitError(null);
@@ -165,19 +213,20 @@ export default function ExitIntentPopup() {
     setTimeout(() => setVisible(false), 3000);
   };
 
-  /* ---- Don't render on excluded pages ---- */
+  /* ---- Don't render on excluded pages, or while hidden. Rendering
+          nothing (instead of an opacity-0 overlay) keeps the dialog and
+          its form fields out of the accessibility tree and tab order. ---- */
   if (isExcludedPage(pathname)) return null;
+  if (!visible) return null;
 
   /* ---- Render ---- */
   return (
     <div
-      className={cn(
-        "fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300",
-        visible ? "opacity-100" : "pointer-events-none opacity-0",
-      )}
+      className="fixed inset-0 z-[70] flex items-center justify-center animate-modal-in"
       role="dialog"
       aria-modal="true"
       aria-label={t("heading")}
+      onKeyDown={handleTrapKeyDown}
     >
       {/* Backdrop */}
       <div
@@ -186,14 +235,17 @@ export default function ExitIntentPopup() {
       />
 
       {/* Modal */}
-      <div className="relative mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-luxury sm:p-8">
+      <div
+        ref={dialogRef}
+        className="relative mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-luxury sm:p-8"
+      >
         {/* Close button */}
         <button
           onClick={close}
           className="absolute right-4 top-4 text-brand-navy/50 transition-colors hover:text-brand-navy"
           aria-label={t("close")}
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <path
               d="M15 5L5 15M5 5l10 10"
               stroke="currentColor"
@@ -216,6 +268,7 @@ export default function ExitIntentPopup() {
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
+                aria-hidden="true"
               >
                 <path d="M20 6L9 17l-5-5" />
               </svg>
@@ -240,7 +293,7 @@ export default function ExitIntentPopup() {
                   try {
                     await onSubmit(data);
                   } catch {
-                    setSubmitError("Something went wrong. Please try again.");
+                    setSubmitError(t("error"));
                   }
                 })(e);
               }}
@@ -266,10 +319,16 @@ export default function ExitIntentPopup() {
                 <Input
                   {...register("name")}
                   placeholder={t("namePlaceholder")}
+                  aria-label={t("namePlaceholder")}
                   aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? "exit-intent-name-error" : undefined}
                 />
                 {errors.name && (
-                  <span className="text-xs text-red-500">
+                  <span
+                    id="exit-intent-name-error"
+                    role="alert"
+                    className="text-xs text-red-500"
+                  >
                     {errors.name.message}
                   </span>
                 )}
@@ -281,10 +340,16 @@ export default function ExitIntentPopup() {
                   {...register("email")}
                   type="email"
                   placeholder={t("emailPlaceholder")}
+                  aria-label={t("emailPlaceholder")}
                   aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? "exit-intent-email-error" : undefined}
                 />
                 {errors.email && (
-                  <span className="text-xs text-red-500">
+                  <span
+                    id="exit-intent-email-error"
+                    role="alert"
+                    className="text-xs text-red-500"
+                  >
                     {errors.email.message}
                   </span>
                 )}
@@ -300,6 +365,7 @@ export default function ExitIntentPopup() {
                     <button
                       key={type}
                       type="button"
+                      aria-pressed={selectedTravelType === type}
                       onClick={() =>
                         setValue(
                           "travelType",
@@ -326,7 +392,7 @@ export default function ExitIntentPopup() {
               </div>
 
               {submitError && (
-                <p className="text-xs text-red-600">{submitError}</p>
+                <p role="alert" className="text-xs text-red-600">{submitError}</p>
               )}
 
               <Button

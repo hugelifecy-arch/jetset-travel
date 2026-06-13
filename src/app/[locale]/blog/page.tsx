@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
 import { getPublishedPosts } from "@/lib/blog";
 import Link from "next/link";
@@ -35,6 +36,7 @@ export default async function BlogPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "blogPage" });
   const posts = getPublishedPosts(locale);
 
@@ -55,10 +57,14 @@ export default async function BlogPage({
         </div>
       </section>
 
-      {/* Blog Grid with Filters */}
+      {/* Blog Grid with Filters. BlogFilters reads useSearchParams() (the
+          ?q= seed for the sitelinks search box), so it must sit inside a
+          Suspense boundary for the page to prerender statically. */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <BlogFilters posts={posts} />
+          <Suspense>
+            <BlogFilters posts={posts} />
+          </Suspense>
         </div>
       </section>
 

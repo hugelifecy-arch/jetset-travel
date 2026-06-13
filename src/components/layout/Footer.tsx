@@ -8,6 +8,7 @@ export default function Footer() {
   const locale = useLocale();
   const t = useTranslations("footer");
   const tCommon = useTranslations("common");
+  const tCookies = useTranslations("cookies");
 
   const quickLinks = [
     { href: `/${locale}/about`, label: t("aboutUs") },
@@ -189,6 +190,16 @@ export default function Footer() {
             >
               {t("termsOfService")}
             </Link>
+            <span className="hidden sm:inline" aria-hidden="true">|</span>
+            <button
+              type="button"
+              onClick={() =>
+                window.dispatchEvent(new Event("open-cookie-settings"))
+              }
+              className="hover:text-brand-gold transition-colors"
+            >
+              {tCookies("reopenSettings")}
+            </button>
           </div>
           <div className="flex items-center gap-1">
             <a

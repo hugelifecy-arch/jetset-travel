@@ -4,7 +4,7 @@ import { useState, useCallback, useRef, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Clock, MessageCircle, Play } from "lucide-react";
+import { Clock, MessageCircle, Pause, Play } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { trackCTAClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
 
@@ -57,6 +57,7 @@ export default function HeroSection() {
   const prefersReducedMotion = useSyncExternalStore(subscribeReducedMotion, getPrefersReducedMotion, getPrefersReducedMotionServer);
   const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false);
   const [videoAvailable, setVideoAvailable] = useState(true);
+  const [videoPaused, setVideoPaused] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handlePlayMobile = useCallback(() => {
@@ -65,6 +66,19 @@ export default function HeroSection() {
 
   const handleVideoError = useCallback(() => {
     setVideoAvailable(false);
+  }, []);
+
+  /* WCAG 2.2.2 — auto-playing content longer than 5s needs a pause control */
+  const toggleVideoPaused = useCallback(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      void video.play();
+      setVideoPaused(false);
+    } else {
+      video.pause();
+      setVideoPaused(true);
+    }
   }, []);
 
   return (
@@ -97,9 +111,27 @@ export default function HeroSection() {
           aria-hidden="true"
           onError={handleVideoError}
         >
-          <source src="/videos/hero.webm" type="video/webm" />
+          {/* mp4 first: it is the smaller encode (2.0MB vs 2.9MB webm), and
+              browsers take the first playable source. */}
           <source src="/videos/hero.mp4" type="video/mp4" />
+          <source src="/videos/hero.webm" type="video/webm" />
         </video>
+      )}
+
+      {/* Desktop: pause/resume control for the auto-playing video (WCAG 2.2.2) */}
+      {isDesktop && videoAvailable && !prefersReducedMotion && (
+        <button
+          onClick={toggleVideoPaused}
+          className="absolute bottom-4 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors hover:bg-white/30 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8"
+          aria-label={videoPaused ? t("playVideo") : t("pauseVideo")}
+          aria-pressed={videoPaused}
+        >
+          {videoPaused ? (
+            <Play className="h-5 w-5 text-white" aria-hidden="true" />
+          ) : (
+            <Pause className="h-5 w-5 text-white" aria-hidden="true" />
+          )}
+        </button>
       )}
 
       {/* Mobile: play button overlay to load video on demand (hidden if reduced motion) */}
@@ -107,9 +139,9 @@ export default function HeroSection() {
         <button
           onClick={handlePlayMobile}
           className="absolute bottom-4 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors hover:bg-white/30 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8"
-          aria-label="Play background video"
+          aria-label={t("playVideo")}
         >
-          <Play className="h-5 w-5 text-white" />
+          <Play className="h-5 w-5 text-white" aria-hidden="true" />
         </button>
       )}
 
@@ -126,8 +158,8 @@ export default function HeroSection() {
           aria-hidden="true"
           onError={handleVideoError}
         >
-          <source src="/videos/hero.webm" type="video/webm" />
           <source src="/videos/hero.mp4" type="video/mp4" />
+          <source src="/videos/hero.webm" type="video/webm" />
         </video>
       )}
 

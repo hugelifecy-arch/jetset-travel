@@ -1,8 +1,8 @@
 /**
- * Pure URL canonicalization used by `src/middleware.ts`.
+ * Pure URL canonicalization used by `src/proxy.ts`.
  *
  * Kept framework-free (no `next/server` imports) so unit tests can import
- * it directly without needing the Next.js runtime. The middleware is a
+ * it directly without needing the Next.js runtime. The proxy is a
  * thin wrapper that converts {@link CanonicalAction} into `NextResponse`.
  *
  * Canonical form: `https://www.jetset-travel.com/<locale>/<path>`

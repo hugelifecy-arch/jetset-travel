@@ -1,13 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import {
-  ctaLeadFormSchema,
+  buildCtaLeadFormSchema,
   type CTALeadFormValues,
 } from "@/components/forms/schemas";
+import { useFormMessages } from "@/components/forms/useFormMessages";
 import { Input, Textarea } from "@/components/ui/Input";
 import { cn } from "@/lib/utils/cn";
 import { getRecaptchaToken } from "@/lib/recaptcha";
@@ -33,13 +34,19 @@ export default function CTALeadForm() {
     trackFormStart("cta_lead_form");
   };
 
+  const formMessages = useFormMessages();
+  const schema = useMemo(
+    () => buildCtaLeadFormSchema(formMessages),
+    [formMessages],
+  );
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<CTALeadFormValues>({
-    resolver: zodResolver(ctaLeadFormSchema),
+    resolver: zodResolver(schema),
   });
 
   const onSubmit = async (data: CTALeadFormValues) => {

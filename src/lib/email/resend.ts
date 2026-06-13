@@ -33,6 +33,9 @@ async function postEmail(apiKey: string, payload: Record<string, unknown>) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
+    // A hung Resend call must not hold the serverless function until the
+    // platform kills it; 10s is generous for a single API send.
+    signal: AbortSignal.timeout(10_000),
   });
 }
 

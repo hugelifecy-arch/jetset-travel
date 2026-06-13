@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import {
   Globe,
@@ -12,7 +11,6 @@ import {
   Tag,
   ArrowRight,
   ArrowLeft,
-  ChevronDown,
   Calendar,
   MapPin,
   Ship,
@@ -26,7 +24,6 @@ import {
   Send,
   Check,
 } from "lucide-react";
-import { cn } from "@/lib/utils/cn";
 import Accordion from "@/components/ui/Accordion";
 
 /* ------------------------------------------------------------------ */
@@ -156,7 +153,6 @@ function AnimatedCounter({ target, suffix = "" }: { target: string; suffix?: str
 
 export default function CruisesContent({ locale }: { locale: string }) {
   const t = useTranslations("cruisesPage");
-  const [shipScrollIdx, setShipScrollIdx] = useState(0);
   const shipContainerRef = useRef<HTMLDivElement>(null);
 
   // Form state
@@ -188,7 +184,6 @@ export default function CruisesContent({ locale }: { locale: string }) {
       ? Math.max(0, container.scrollLeft - cardWidth)
       : Math.min(maxScroll, container.scrollLeft + cardWidth);
     container.scrollTo({ left: newScroll, behavior: "smooth" });
-    setShipScrollIdx(Math.round(newScroll / cardWidth));
   }, []);
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {

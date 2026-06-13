@@ -3,6 +3,7 @@
 import { Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { REVIEW_AGGREGATE } from "@/lib/seo";
 
 const reviewKeys = ["review1", "review2", "review3"] as const;
 
@@ -18,6 +19,16 @@ export default function GoogleReviews() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-navy/70">
             {t("subtitle")}
+          </p>
+          {/* The aggregate the TravelAgency schema claims, shown on-page so
+              the markup matches visible content (single source of truth:
+              REVIEW_AGGREGATE in lib/seo.ts). */}
+          <p className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-navy">
+            <Star className="h-4 w-4 fill-brand-gold text-brand-gold" aria-hidden="true" />
+            {t("aggregateLine", {
+              rating: REVIEW_AGGREGATE.ratingValue,
+              count: REVIEW_AGGREGATE.reviewCount,
+            })}
           </p>
         </div>
 
@@ -58,6 +69,7 @@ export default function GoogleReviews() {
                 <svg
                   className="ml-auto h-4 w-4"
                   viewBox="0 0 24 24"
+                  role="img"
                   aria-label="Google"
                 >
                   <path
