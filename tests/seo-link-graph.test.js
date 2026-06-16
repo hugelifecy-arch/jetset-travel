@@ -222,6 +222,40 @@ describe("Phase 7 — trailing-slash variants don't coexist in the link graph", 
       );
     });
   }
+
+  // The loop above only catches the hard-coded "/en/…/" and "/ru/…/"
+  // literals. In practice almost every internal link is built as a
+  // `/${locale}/<path>` template literal, so a stray trailing slash there
+  // (e.g. `/${locale}/luxury-travel/`) 308-redirects at runtime yet slips
+  // past the locale-literal checks above. Guard the locale-agnostic form by
+  // matching the route suffix immediately after a `${…}` interpolation closes.
+  const SUFFIX_NO_SLASH = [
+    ...new Set(CANONICAL_NO_SLASH.map((p) => p.replace(/^\/(en|ru)/, ""))),
+  ];
+  for (const suffix of SUFFIX_NO_SLASH) {
+    it(`no internal Link emits "\${locale}${suffix}/" (template trailing slash)`, () => {
+      const offenders = [];
+      for (const file of allSources()) {
+        const src = stripComments(readFileSync(file, "utf-8"));
+        // "}" = end of a `${…}` interpolation, then the suffix, then "/" and
+        // a closing quote/backtick. Requiring the leading "}" avoids matching
+        // child routes (`/blog/${slug}`) and sibling slugs
+        // (`/corporate-travel-cyprus`).
+        const re = new RegExp(
+          "\\}" + suffix.replace(/\//g, "\\/") + "\\/(?=[\"'`])",
+          "g",
+        );
+        if (re.test(src)) offenders.push(file);
+      }
+      assert.deepStrictEqual(
+        offenders,
+        [],
+        `Trailing-slash regression: ${offenders.length} file(s) emit ` +
+          `"\${locale}${suffix}/" instead of "\${locale}${suffix}". ` +
+          `Files: ${offenders.join(", ")}`,
+      );
+    });
+  }
 });
 
 describe("Phase 7 — Schengen hub is wired into canonical + sitemap + breadcrumbs", () => {

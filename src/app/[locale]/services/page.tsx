@@ -170,6 +170,15 @@ export default async function ServicesPage({
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
+              <p className="mt-4">
+                <Link
+                  href={`/${locale}/hotel-booking-cyprus`}
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-gold/80 transition-colors"
+                >
+                  {t("hotelsCyprusLink")}
+                  <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
+              </p>
             </div>
             <div className="flex-1 w-full hidden md:block">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
@@ -218,6 +227,15 @@ export default async function ServicesPage({
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
+              <p className="mt-4">
+                <Link
+                  href={`/${locale}/visa-services-cyprus`}
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-gold/80 transition-colors"
+                >
+                  {t("visasCyprusLink")}
+                  <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
+              </p>
             </div>
             <div className="flex-1 w-full hidden md:block">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
@@ -266,6 +284,15 @@ export default async function ServicesPage({
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
+              <p className="mt-4">
+                <Link
+                  href={`/${locale}/luxury-travel-cyprus`}
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-gold/80 transition-colors"
+                >
+                  {t("luxuryCyprusLink")}
+                  <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
+              </p>
             </div>
             <div className="flex-1 w-full hidden md:block">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
@@ -314,6 +341,15 @@ export default async function ServicesPage({
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
+              <p className="mt-4">
+                <Link
+                  href={`/${locale}/corporate-travel-cyprus`}
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-gold/80 transition-colors"
+                >
+                  {t("corporateCyprusLink")}
+                  <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
+              </p>
             </div>
             <div className="flex-1 w-full hidden md:block">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
