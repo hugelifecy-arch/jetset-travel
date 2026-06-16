@@ -7,19 +7,6 @@ interface ServiceSchemaProps {
   locale?: string;
   serviceType?: string;
   dateModified?: string;
-  /**
-   * Optional aggregateRating attached directly to this Service so the page
-   * is eligible for Review-snippet rich results on its own URL (rather than
-   * relying on the homepage TravelAgency rating, which Google scopes to /).
-   * Source must be a real published rating (Google Business Profile total)
-   * — never invent numbers. Phase 6 Step 50.
-   */
-  aggregateRating?: {
-    ratingValue: number | string;
-    reviewCount: number | string;
-    bestRating?: number | string;
-    worstRating?: number | string;
-  };
 }
 
 export default function ServiceSchema({
@@ -29,7 +16,6 @@ export default function ServiceSchema({
   locale = "en",
   serviceType,
   dateModified,
-  aggregateRating,
 }: ServiceSchemaProps) {
   const isRussian = locale === "ru";
 
@@ -44,15 +30,6 @@ export default function ServiceSchema({
     provider: {
       "@id": "https://www.jetset-travel.com/#organization",
     },
-    ...(aggregateRating && {
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: String(aggregateRating.ratingValue),
-        reviewCount: String(aggregateRating.reviewCount),
-        bestRating: String(aggregateRating.bestRating ?? 5),
-        worstRating: String(aggregateRating.worstRating ?? 1),
-      },
-    }),
     areaServed: [
       { "@type": "City", name: isRussian ? "Пафос" : "Paphos" },
       { "@type": "City", name: isRussian ? "Лимассол" : "Limassol" },

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { buildPageMetadata, SERVICE_LAST_UPDATED, REVIEW_AGGREGATE } from "@/lib/seo";
+import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import CruisesContent from "./CruisesContent";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import RelatedArticles from "@/components/sections/RelatedArticles";
@@ -58,7 +58,6 @@ export default async function CruisesPage({
         url={`https://www.jetset-travel.com/${locale}/cruises`}
         serviceType="Cruise Booking Service"
         dateModified={SERVICE_LAST_UPDATED}
-        aggregateRating={REVIEW_AGGREGATE}
       />
       <TouristTripSchema
         name={
