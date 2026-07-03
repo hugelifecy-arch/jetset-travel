@@ -70,6 +70,18 @@ const STATIC_PAGE_METADATA = [
     description:
       "Свяжитесь с JetSet Travel в Пафосе, Кипр. Бесплатные предложения, поддержка WhatsApp, корпоративные консультации. Звоните +357 99 478 073 или посетите 26A Agapinoros, Пафос.",
   },
+  {
+    page: "/en/private",
+    title: "Private & Family Office Travel Services in Cyprus | JetSet Travel",
+    description:
+      "Discreet, principal-led travel management for private clients, families and family offices in Cyprus. Private aviation, yacht charter, VIP airport services, consolidated billing. Limassol & Paphos.",
+  },
+  {
+    page: "/ru/private",
+    title: "Тревел-услуги для частных клиентов и семейных офисов на Кипре | JetSet Travel",
+    description:
+      "Конфиденциальное управление поездками для частных клиентов, семей и семейных офисов на Кипре. Частная авиация, яхты, VIP-услуги. Лимассол и Пафос.",
+  },
 ];
 
 function isWithin(value, min, max) {

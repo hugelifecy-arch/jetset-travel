@@ -367,6 +367,27 @@ export default async function ServicesPage({
         </div>
       </section>
 
+      {/* Private & Family Office Travel — quiet card, deliberately without
+          the quote CTAs used by the sections above (PRIVATE_OFFICE_PAGE_SPEC §8.3) */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Link
+            href={`/${locale}/private`}
+            className="block rounded-2xl bg-brand-dark p-8 sm:p-12 transition-colors hover:bg-brand-navy"
+          >
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.25em] text-brand-gold/80">
+              {t("privateCardLink")}
+            </p>
+            <h2 className="font-display text-2xl md:text-3xl text-white mb-3">
+              {t("privateCardTitle")}
+            </h2>
+            <p className="text-white/60 max-w-2xl">
+              {t("privateCardDesc")}
+            </p>
+          </Link>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="py-20 bg-brand-navy text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
