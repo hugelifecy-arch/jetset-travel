@@ -39,6 +39,9 @@ const pages: StaticPage[] = [
   { path: "/quote", priority: 0.8, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
   { path: "/blog", priority: 0.6, changeFrequency: "weekly" },
+  // Private & Family Office Travel — discovery is deliberately quiet
+  // (nav/footer/direct URL only), hence the lower priority.
+  { path: "/private", priority: 0.7, changeFrequency: "monthly" },
   // The four "*-cyprus" SEO landing pages share one Latin slug across both
   // locales (their transliterated Russian counterparts were retired — see
   // canonical.ts and next.config.ts). The two genuinely-bilingual cross-locale

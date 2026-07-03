@@ -13,6 +13,7 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     blog: "Blog",
     privacy: "Privacy Policy",
     terms: "Terms of Service",
+    private: "Private & Family Office Travel",
     "paphos-travel-agency": "Travel Agency in Paphos",
     "corporate-travel-cyprus": "Corporate Travel Cyprus",
     "visa-services-cyprus": "Visa Services Cyprus",
@@ -35,6 +36,7 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     blog: "Блог",
     privacy: "Политика конфиденциальности",
     terms: "Условия использования",
+    private: "Поездки для частных клиентов",
     "turisticheskoe-agentstvo-pafos": "Турагентство в Пафосе",
     "aviabilety-kipr": "Авиабилеты Кипр",
     // The four "*-cyprus" landing pages share their Latin slug across both

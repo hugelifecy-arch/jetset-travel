@@ -35,7 +35,9 @@ function setSessionCookie(name: string) {
 /*  Excluded paths (contact / quote pages in both locales)             */
 /* ------------------------------------------------------------------ */
 
-const EXCLUDED_SUFFIXES = ["/contact", "/quote"];
+/* /private is excluded because the Private & Family Office page bans
+   mass-market conversion patterns (PRIVATE_OFFICE_PAGE_SPEC §2). */
+const EXCLUDED_SUFFIXES = ["/contact", "/quote", "/private"];
 
 function isExcludedPage(pathname: string): boolean {
   return EXCLUDED_SUFFIXES.some((s) => pathname.endsWith(s));

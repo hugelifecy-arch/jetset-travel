@@ -161,6 +161,15 @@ export default function HeaderClient() {
                 {t(link.key)}
               </Link>
             ))}
+
+            {/* Private Clients — deliberately muted; last position before
+                the CTA (PRIVATE_OFFICE_PAGE_SPEC §1.2) */}
+            <Link
+              href={`/${locale}/private`}
+              className="px-3 py-2 text-sm font-medium text-white/60 hover:text-brand-gold transition-colors"
+            >
+              {t("privateClients")}
+            </Link>
           </nav>
 
           {/* Right side: phone + language toggle + CTA */}
@@ -289,6 +298,16 @@ export default function HeaderClient() {
                 {t(link.key)}
               </Link>
             ))}
+
+            {/* Private Clients — deliberately muted; last position before
+                the CTA (PRIVATE_OFFICE_PAGE_SPEC §1.2) */}
+            <Link
+              href={`/${locale}/private`}
+              className="flex items-center px-3 py-3 text-base font-medium text-white/60 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px]"
+              onClick={() => setMobileOpen(false)}
+            >
+              {t("privateClients")}
+            </Link>
 
             {/* Footer: single language switcher + Get a Quote CTA */}
             <div className="pt-3 mt-3 border-t border-white/10 flex items-center justify-between">

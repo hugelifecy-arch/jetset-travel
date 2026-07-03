@@ -134,6 +134,8 @@ export const LOCALE_ALTERNATES: Record<
   "/ru/faq": { en: "/en/faq", ru: "/ru/faq" },
   "/en/blog": { en: "/en/blog", ru: "/ru/blog" },
   "/ru/blog": { en: "/en/blog", ru: "/ru/blog" },
+  "/en/private": { en: "/en/private", ru: "/ru/private" },
+  "/ru/private": { en: "/en/private", ru: "/ru/private" },
   "/en/privacy": { en: "/en/privacy", ru: "/ru/privacy" },
   "/ru/privacy": { en: "/en/privacy", ru: "/ru/privacy" },
   "/en/terms": { en: "/en/terms", ru: "/ru/terms" },
