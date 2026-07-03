@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import Image from "next/image";
 import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import PrivateIntroductionForm from "./PrivateIntroductionForm";
@@ -11,16 +12,16 @@ import PrivateIntroductionForm from "./PrivateIntroductionForm";
  * generous whitespace, exactly two CTA styles ("Request an introduction",
  * "Call the principal").
  *
- * TODO(images): supply 2–3 licensed dark/low-saturation images for the
- * three slots below (currently elegant dark gradient blocks):
- *   1. hero      — private jet cabin/apron at dusk
- *   2. aviation  — divider band above the "Scope" section
- *   3. marine    — divider band above the "Selected situations" section
- * TODO(name): confirm public spelling "Nontari Kalaitsidis" (Greek:
- * "Νοντάρι Καλαϊτσίδης"; Russian: "Нонтари Калаицидис") — owner wrote
- * "KALAISTIDIS"; verify preferred public form before promoting the page.
- * TODO(photo): optional principal photo for the principal-led section —
- * recommended but not required for launch.
+ * Imagery: hero and marine slots use the best licensed low-key images in
+ * the repo (dusk skyline, blue-hour Mediterranean), heavily darkened and
+ * desaturated to stay quiet. The only aircraft photo in the repo is a
+ * branded commercial airliner — wrong register for private aviation, so:
+ * TODO(images): supply one licensed dark/low-saturation private-jet image
+ * (cabin or apron at dusk) for the aviation divider band above "Scope";
+ * it currently uses an elegant dark gradient block.
+ *
+ * Name spellings confirmed by the owner (2026-07): EN "Nontari
+ * Kalaitsidis", EL "Νοντάρι Καλαϊτσίδης", RU "Нодари Калаицидис".
  */
 
 const PHONE_DISPLAY = "+357 99 478073";
@@ -44,7 +45,7 @@ export async function generateMetadata({
         : "Private & Family Office Travel Services in Cyprus | JetSet Travel",
     description:
       locale === "ru"
-        ? "Конфиденциальное персональное управление поездками для частных клиентов, семей и семейных офисов на Кипре. Частная авиация, аренда яхт, VIP-услуги в аэропортах, консолидированные счета. Лимассол и Пафос."
+        ? "Конфиденциальное управление поездками для частных клиентов, семей и семейных офисов на Кипре. Частная авиация, яхты, VIP-услуги. Лимассол и Пафос."
         : "Discreet, principal-led travel management for private clients, families and family offices in Cyprus. Private aviation, yacht charter, VIP airport services, consolidated billing. Limassol & Paphos.",
   });
 }
@@ -83,8 +84,21 @@ export default async function PrivateClientsPage({
 
   return (
     <div className="bg-brand-dark text-white">
-      {/* Hero — TODO(images) slot 1: dark gradient stands in for photography */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-brand-dark via-brand-navy to-brand-dark">
+      {/* Hero — dusk skyline, darkened and desaturated to a quiet backdrop */}
+      <section className="relative overflow-hidden bg-brand-dark">
+        <Image
+          src="/images/luxury/dubai.jpg"
+          alt=""
+          fill
+          priority
+          aria-hidden="true"
+          className="object-cover opacity-40 saturate-50"
+          sizes="100vw"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-dark/70 via-brand-dark/40 to-brand-dark"
+        />
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(201,168,76,0.08),transparent_55%)]"
@@ -150,26 +164,37 @@ export default async function PrivateClientsPage({
             <p>{t("principalBody1")}</p>
             <p>{t("principalBody2")}</p>
           </div>
-          <p className="mt-10 text-sm tracking-wide text-white/50">
-            {t("principalName")} · {t("principalRole")} ·{" "}
-            <a
-              href={PHONE_HREF}
-              className="transition-colors hover:text-brand-gold"
-            >
-              {PHONE_DISPLAY}
-            </a>{" "}
-            ·{" "}
-            <a
-              href={`mailto:${EMAIL}`}
-              className="transition-colors hover:text-brand-gold"
-            >
-              {EMAIL}
-            </a>
-          </p>
+          <div className="mt-10 flex items-center gap-5">
+            <Image
+              src="/images/nontari-kalaitsidis.jpg"
+              alt={`${t("principalName")} — ${t("principalRole")}`}
+              width={64}
+              height={64}
+              loading="lazy"
+              className="h-16 w-16 rounded-full object-cover saturate-[.85]"
+            />
+            <p className="text-sm tracking-wide text-white/50">
+              {t("principalName")} · {t("principalRole")} ·{" "}
+              <a
+                href={PHONE_HREF}
+                className="transition-colors hover:text-brand-gold"
+              >
+                {PHONE_DISPLAY}
+              </a>{" "}
+              ·{" "}
+              <a
+                href={`mailto:${EMAIL}`}
+                className="transition-colors hover:text-brand-gold"
+              >
+                {EMAIL}
+              </a>
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* TODO(images) slot 2: aviation — divider band */}
+      {/* TODO(images): aviation divider band — gradient until the owner
+          supplies a licensed private-jet image (see header comment) */}
       <div
         aria-hidden="true"
         className="h-40 border-t border-white/10 bg-gradient-to-r from-brand-dark via-brand-navy to-brand-dark md:h-56"
@@ -223,11 +248,21 @@ export default async function PrivateClientsPage({
         </div>
       </section>
 
-      {/* TODO(images) slot 3: marine — divider band */}
+      {/* Marine divider band — blue-hour Mediterranean, darkened */}
       <div
         aria-hidden="true"
-        className="h-40 border-t border-white/10 bg-gradient-to-r from-brand-dark via-brand-navy to-brand-dark md:h-56"
-      />
+        className="relative h-40 overflow-hidden border-t border-white/10 md:h-56"
+      >
+        <Image
+          src="/images/destinations/med.jpg"
+          alt=""
+          fill
+          loading="lazy"
+          className="object-cover object-center opacity-35 saturate-50"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/60 via-transparent to-brand-dark/60" />
+      </div>
 
       {/* Selected situations */}
       <section className="border-t border-white/10">
