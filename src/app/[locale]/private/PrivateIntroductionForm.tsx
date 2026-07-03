@@ -133,11 +133,19 @@ export default function PrivateIntroductionForm({
           id="private-name"
           type="text"
           autoComplete="name"
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? "private-name-error" : undefined}
           {...register("name")}
           className={inputClass}
         />
         {errors.name && (
-          <p className="mt-1.5 text-sm text-red-400">{errors.name.message}</p>
+          <p
+            id="private-name-error"
+            role="alert"
+            className="mt-1.5 text-sm text-red-400"
+          >
+            {errors.name.message}
+          </p>
         )}
       </div>
 
@@ -147,7 +155,7 @@ export default function PrivateIntroductionForm({
           className="mb-2 block text-sm font-medium text-white/80"
         >
           {labels.organisation}{" "}
-          <span className="font-normal text-white/40">
+          <span className="font-normal text-white/50">
             ({labels.optional})
           </span>
         </label>
@@ -171,11 +179,19 @@ export default function PrivateIntroductionForm({
           id="private-email"
           type="email"
           autoComplete="email"
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "private-email-error" : undefined}
           {...register("email")}
           className={inputClass}
         />
         {errors.email && (
-          <p className="mt-1.5 text-sm text-red-400">{errors.email.message}</p>
+          <p
+            id="private-email-error"
+            role="alert"
+            className="mt-1.5 text-sm text-red-400"
+          >
+            {errors.email.message}
+          </p>
         )}
       </div>
 
@@ -185,7 +201,7 @@ export default function PrivateIntroductionForm({
           className="mb-2 block text-sm font-medium text-white/80"
         >
           {labels.phone}{" "}
-          <span className="font-normal text-white/40">
+          <span className="font-normal text-white/50">
             ({labels.optional})
           </span>
         </label>
@@ -211,15 +227,22 @@ export default function PrivateIntroductionForm({
               <input
                 type="radio"
                 value={method.value}
+                aria-describedby={
+                  errors.contactMethod ? "private-method-error" : undefined
+                }
                 {...register("contactMethod")}
-                className="h-4 w-4 border-white/30 bg-white/5 text-brand-gold focus:ring-brand-gold"
+                className="h-4 w-4 accent-brand-gold focus:ring-brand-gold"
               />
               <span className="text-sm text-white/80">{method.label}</span>
             </label>
           ))}
         </div>
         {errors.contactMethod && (
-          <p className="mt-1.5 text-sm text-red-400">
+          <p
+            id="private-method-error"
+            role="alert"
+            className="mt-1.5 text-sm text-red-400"
+          >
             {errors.contactMethod.message}
           </p>
         )}
@@ -231,7 +254,7 @@ export default function PrivateIntroductionForm({
           className="mb-2 block text-sm font-medium text-white/80"
         >
           {labels.message}{" "}
-          <span className="font-normal text-white/40">
+          <span className="font-normal text-white/50">
             ({labels.optional})
           </span>
         </label>

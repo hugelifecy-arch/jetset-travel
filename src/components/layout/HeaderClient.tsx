@@ -47,6 +47,13 @@ export default function HeaderClient() {
   const enHref = alternates.en;
   const ruHref = alternates.ru;
 
+  // The Private & Family Office page bans quote CTAs and allows exactly two
+  // CTA styles (PRIVATE_OFFICE_PAGE_SPEC §2.4, §9) — on it, the header CTA
+  // becomes the page's own primary action instead of "Get a Quote".
+  const onPrivatePage = pathname.endsWith("/private");
+  const ctaHref = onPrivatePage ? "#introduction" : `/${locale}/quote`;
+  const ctaLabel = onPrivatePage ? t("requestIntroduction") : t("getQuote");
+
   // Close mobile menu on route change (adjust state during render)
   const [prevPathname, setPrevPathname] = useState(pathname);
   if (pathname !== prevPathname) {
@@ -221,10 +228,10 @@ export default function HeaderClient() {
             </nav>
 
             <Link
-              href={`/${locale}/quote`}
+              href={ctaHref}
               className="rounded-full bg-brand-gold px-5 py-2 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
             >
-              {t("getQuote")}
+              {ctaLabel}
             </Link>
           </div>
 
@@ -350,11 +357,11 @@ export default function HeaderClient() {
               </nav>
 
               <Link
-                href={`/${locale}/quote`}
+                href={ctaHref}
                 className="rounded-full bg-brand-gold px-5 py-2.5 text-sm font-semibold text-brand-navy min-h-[44px] flex items-center"
                 onClick={() => setMobileOpen(false)}
               >
-                {t("getQuote")}
+                {ctaLabel}
               </Link>
             </div>
           </nav>
