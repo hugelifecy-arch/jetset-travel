@@ -415,12 +415,39 @@ export default async function PrivateClientsPage({
       {/* Quiet footer note */}
       <section className="border-t border-white/10">
         <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-          <p className="text-center text-xs leading-relaxed text-white/40">
+          {/* white/50, not /40: 12px text needs ≥4.5:1 on brand-dark (WCAG AA) */}
+          <p className="text-center text-xs leading-relaxed text-white/50">
             {t("footerNote")}
           </p>
         </div>
       </section>
 
+      {/* Compact organization node so the Service's `provider` @id resolves
+          on this page (the full TravelAgency schema lives on the homepage;
+          Google merges nodes sharing an @id). */}
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "TravelAgency",
+          "@id": "https://www.jetset-travel.com/#organization",
+          name: "JetSet Travel Cyprus",
+          legalName: "JetSet K&K Travel Ltd",
+          url: "https://www.jetset-travel.com",
+          logo: {
+            "@type": "ImageObject",
+            url: "https://www.jetset-travel.com/images/jetset-logo.svg",
+          },
+          telephone: ["+357-99-478-073", "+357-99-310-993"],
+          email: "info@jetset.com.cy",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "26A Agapinoros",
+            addressLocality: "Paphos",
+            postalCode: "8049",
+            addressCountry: "CY",
+          },
+        }}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",
