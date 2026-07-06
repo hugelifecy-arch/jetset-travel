@@ -2,6 +2,23 @@
 
 Tracked from the Month 1 bilingual blog-post drop (branch `claude/add-bilingual-blog-posts-EkcBA`).
 
+## July 2026 blog drop (branch `claude/cyprus-travel-blog-posts-edbwgm`)
+
+Two new EN posts from the playbook's priority-topic queue:
+
+- `larnaca-vs-paphos-airport-2026` — primary keyword "Larnaca vs Paphos airport"
+- `travel-insurance-cyprus-visitors-guide` — primary keyword "travel insurance for Cyprus"
+
+**Russian translations pending.** Both posts shipped EN-only (self-referential canonical + x-default per the untranslated-post handling). Per the playbook, RU versions need a native-speaker pass before publishing — once translated, add the RU file and set `translationSlug` on both sides so hreflang pairs up.
+
+**Facts to sanity-check before requesting indexing:**
+
+- Airport post: 2025 passenger figures (LCA 9.91M / PFO 3.84M / 13.75M total — Hermes Airports press data), route/airline lists as of June 2026 (Jet2/easyJet year-round UK routes, Ryanair focus-city status), and the approximate drive times table.
+- Insurance post: "€2 million medical cover" and "under €15 single-trip" price guidance are defensible 2026 ranges, not quotes; the €30,000 visa insurance minimum and EHIC/GHIC/GeSY coverage claims are sourced (EC Visa Code, NHS/GOV.UK, gesy.org.cy).
+- Insurance post deliberately states "we are not authorised to sell insurance products," matching Terms §8. Note that two existing strings contradict the terms and should be reviewed separately: `visaServices.faq3A` ("We can arrange compliant insurance") and `luxury included6` ("Premium travel insurance...") in `src/messages/en.json` (+ RU equivalents).
+
+**Hero images:** bespoke 1600×900 progressive JPEGs added at `/images/blog/larnaca-vs-paphos-airport-2026.jpg` and `/images/blog/travel-insurance-cyprus-2026.jpg`. Source: Unsplash (photo IDs 1569154941061-e231b4725ef1, 1578894381163-e72c17f2d45f), Unsplash License.
+
 ## Hero images
 
 The 4 new posts currently reuse existing blog hero images so they render cleanly in production. Replace each with a bespoke 1600×900 JPG when available:
