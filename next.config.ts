@@ -69,12 +69,16 @@ const nextConfig: NextConfig = {
     // redirect" validation failure.
     return [
       // Phase 3 — wrong-folder critical fix (5 clicks, 1,865 impressions).
-      // GSC Performance shows the RU folder is currently serving an EN-only
-      // slug. Send it to the EN equivalent (where its translation actually
-      // lives) instead of 404ing.
+      // The RU folder was serving an EN-only slug. Originally bridged to the
+      // EN post because no translation existed; the RU translation now does
+      // (kipr-v-shengene-2026-delovye-poezdki, paired via translationSlug),
+      // so send Russian-folder traffic to the Russian article. Cross-language
+      // redirects are also a GSC "Page with redirect" validation irritant —
+      // Google re-crawls the RU URL, lands on an EN page, and keeps the URL
+      // in limbo instead of consolidating onto the hreflang pair.
       {
         source: "/ru/blog/cyprus-schengen-2026-business-travel",
-        destination: "/en/blog/cyprus-schengen-2026-business-travel",
+        destination: "/ru/blog/kipr-v-shengene-2026-delovye-poezdki",
         permanent: true,
       },
       // Bare-path bridges (legacy inbound links from before the locale split).
