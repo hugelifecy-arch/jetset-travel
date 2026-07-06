@@ -304,9 +304,20 @@ export default async function TermsOfServicePage({
               <li>Personal liability</li>
             </ul>
             <p>
-              Travel insurance is not included in any of our quoted prices and
-              remains the client&apos;s own responsibility to arrange. We are
-              not authorised to sell insurance products.
+              Travel insurance is not included in our quoted prices unless
+              expressly stated in your Booking Confirmation.
+            </p>
+            <p>
+              We can arrange travel insurance for your trip. We act as a
+              sub-agent of insurance providers licensed in the Republic of
+              Cyprus, in accordance with Cyprus legislation implementing the
+              EU Insurance Distribution Directive (EU) 2016/97. We do not
+              underwrite insurance ourselves: any policy we arrange is issued
+              and underwritten by the relevant licensed insurer, whose policy
+              terms govern the cover, and all claims are made directly to and
+              handled by that insurer. Details of the insurer and the policy
+              terms and conditions are provided to you before purchase. You
+              are always free to arrange your own cover elsewhere instead.
             </p>
 
             {/* 9. Liability */}

@@ -20,7 +20,7 @@ status: "published"
 
 It is one of the most common questions we hear at JetSet Travel, usually asked in a tone that hopes the answer is no. Cyprus is in the EU, it is safe, the healthcare is good, and plenty of visitors carry a European Health Insurance Card — so is a policy really necessary?
 
-One thing to be clear about up front: **we are a travel agency, not an insurance broker**. We are not authorised to sell insurance products and we do not earn anything when you buy a policy. What follows is the same independent advice we give every client after 20 years of watching trips go right — and occasionally very wrong — as an IATA-accredited agency (Tourism Licence 7775) based in Paphos.
+One thing to be clear about up front: **we are a travel agency, not an insurance company**. Where we arrange cover, we do so as sub-agents of licensed Cyprus insurance providers — the policy itself is always issued and underwritten by the insurer, never by us, and you are always free to buy your cover elsewhere. What follows is the same practical advice we give every client after 20 years of watching trips go right — and occasionally very wrong — as an IATA-accredited agency (Tourism Licence 7775) based in Paphos.
 
 ## The Short Answer
 
@@ -85,7 +85,7 @@ The same logic runs in reverse. GeSY beneficiaries receive a Cypriot-issued EHIC
 
 ## Where JetSet Fits In
 
-We do not sell insurance, and that is deliberate — it keeps our advice independent. What we do is review your itinerary when we book it and tell you plainly what your policy needs to cover: the cruise extension, the quad-bike exclusion, the cancellation number that actually matches your trip cost, the €30,000 visa certificate. It takes ten minutes and it is part of the service.
+We can arrange travel insurance alongside your booking — as sub-agents of licensed Cyprus insurance providers, with the policy issued and underwritten by the insurer — or sanity-check a policy you have bought elsewhere. Either way works. What we always do is review your itinerary when we book it and tell you plainly what your cover needs to include: the cruise extension, the quad-bike exclusion, the cancellation number that actually matches your trip cost, the €30,000 visa certificate. It takes ten minutes and it is part of the service.
 
 ## FAQ
 
