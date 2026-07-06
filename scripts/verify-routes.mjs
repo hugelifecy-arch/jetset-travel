@@ -158,6 +158,11 @@ const REDIRECT_CASES = [
   { from: "/luxury", to: "/en/luxury-travel", label: "bare-path special" },
   { from: "/en/vizovye-uslugi-kipr", to: "/en/visa-services-cyprus", label: "retired *-cyprus slug" },
   { from: "/ru/korporativnye-poezdki-kipr", to: "/ru/corporate-travel-cyprus", label: "retired *-cyprus slug (ru)" },
+  {
+    from: "/ru/blog/cyprus-schengen-2026-business-travel",
+    to: "/ru/blog/kipr-v-shengene-2026-delovye-poezdki",
+    label: "wrong-folder RU slug → RU translation",
+  },
 ];
 
 async function checkRedirects() {
