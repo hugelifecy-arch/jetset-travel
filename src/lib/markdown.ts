@@ -1,5 +1,6 @@
 import { unified } from "unified";
 import remarkParse from "remark-parse";
+import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
 
 /**
@@ -11,12 +12,16 @@ import remarkHtml from "remark-html";
  * markdown source (blog content files, future CMS input, etc.), which
  * was then rendered via dangerouslySetInnerHTML.
  *
- * Blog posts in this project are plain markdown (headings, lists,
- * links, tables) and do not need raw HTML passthrough.
+ * remark-gfm is required for pipe tables: without it CommonMark treats
+ * them as plain paragraphs, so posts ship literal "| --- |" text and the
+ * blog template's prose-table styles never apply. The GitHub sanitize
+ * schema already allows table/thead/tbody/tr/th/td, so GFM output
+ * survives sanitization.
  */
 export async function markdownToHtml(markdown: string): Promise<string> {
   const result = await unified()
     .use(remarkParse)
+    .use(remarkGfm)
     .use(remarkHtml)
     .process(markdown);
   return result.toString();
