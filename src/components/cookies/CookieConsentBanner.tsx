@@ -10,16 +10,8 @@ import {
   ACCEPT_ALL,
   getConsentPreferences,
   setConsentPreferences,
+  subscribeConsentChanges,
 } from "@/lib/cookie-consent";
-
-function subscribeConsentStore(callback: () => void) {
-  window.addEventListener("storage", callback);
-  window.addEventListener("cookie-consent-change", callback);
-  return () => {
-    window.removeEventListener("storage", callback);
-    window.removeEventListener("cookie-consent-change", callback);
-  };
-}
 
 function getConsentSnapshot() {
   return getConsentPreferences() !== null;
@@ -35,7 +27,7 @@ export default function CookieConsentBanner() {
   const locale = (params?.locale as string) ?? "en";
 
   const hasExistingConsent = useSyncExternalStore(
-    subscribeConsentStore,
+    subscribeConsentChanges,
     getConsentSnapshot,
     getConsentServerSnapshot,
   );
