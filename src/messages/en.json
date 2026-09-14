@@ -274,6 +274,7 @@
     "privateClients": "Private Clients"
   },
   "forms": {
+    "invalidPhone": "Please enter a valid phone number",
     "name": "Name",
     "email": "Email",
     "phone": "Phone",
