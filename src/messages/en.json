@@ -239,7 +239,7 @@
     "submit": "Get a Free Quote",
     "submitting": "Sending...",
     "success": "Thank you! We'll get back to you within 24 hours.",
-    "error": "Something went wrong. Please try WhatsApp or call us directly.",
+    "error": "We could not confirm delivery. Please try again, or contact us on WhatsApp / +357 99 478 073.",
     "orContactDirectly": "Or contact us directly",
     "responseTime": "Average response time: under 2 hours",
     "freeConsultation": "Free consultation · No commitment required",
@@ -281,7 +281,7 @@
     "submit": "Submit",
     "sending": "Sending...",
     "success": "Message sent successfully!",
-    "error": "Something went wrong. Please try again.",
+    "error": "We could not confirm delivery. Please try again, or contact us on WhatsApp / +357 99 478 073.",
     "required": "This field is required",
     "invalidEmail": "Please enter a valid email address"
   },
@@ -506,7 +506,7 @@
     "howStep3": "Options in your inbox same day",
     "sendMessage": "Send Message",
     "sending": "Sending...",
-    "submitError": "Something went wrong. Please try again or contact us via WhatsApp.",
+    "submitError": "We could not confirm delivery. Please try again, or contact us on WhatsApp / +357 99 478 073.",
     "findUs": "Find Us",
     "findUsSubtitle": "Visit our office at 26A Agapinoros, 8049 Paphos, Cyprus.",
     "openInMaps": "Open in Google Maps",
@@ -778,7 +778,7 @@
     "budget10kPlus": "€10,000+",
     "submitLuxury": "Submit Luxury Enquiry",
     "submitting": "Submitting...",
-    "submitError": "Something went wrong. Please try again or contact us via WhatsApp.",
+    "submitError": "We could not confirm delivery. Please try again, or contact us on WhatsApp / +357 99 478 073.",
     "successTitle": "Enquiry Received!",
     "successMessage": "We'll be in touch within 1 hour during business hours. For immediate assistance, reach us on WhatsApp.",
     "successWhatsApp": "Chat on WhatsApp",
@@ -1088,7 +1088,7 @@
     "formSubmit": "Get My Free Cruise Quote",
     "formSubmitting": "Sending...",
     "formSuccess": "Thank you! Our cruise specialist will contact you within 24 hours with personalized cruise options.",
-    "formError": "Something went wrong. Please try again or contact us via WhatsApp.",
+    "formError": "We could not confirm delivery. Please try again, or contact us on WhatsApp / +357 99 478 073.",
     "formPreferCall": "Prefer to talk? Call +357 99 478 073 or WhatsApp us",
     "destNotSure": "Not Sure — Help Me Choose",
     "lineAny": "Any / Best Value",
@@ -1267,7 +1267,7 @@
     "disclaimer": "No spam, no commitment. We reply personally.",
     "thankYou": "Thank you! We'll get back to you within 2 hours.",
     "close": "Close",
-    "error": "Something went wrong. Please try again."
+    "error": "We could not confirm delivery. Please try again, or contact us on WhatsApp / +357 99 478 073."
   },
   "common": {
     "learnMore": "Learn more",
@@ -1752,7 +1752,7 @@
     "formSubmit": "Request an introduction",
     "formSubmitting": "Sending…",
     "formSuccess": "Thank you. You will hear from us personally, usually within the day.",
-    "formError": "Something went wrong — please try again, or call us directly.",
+    "formError": "We could not confirm delivery. Please try again, or contact us on WhatsApp / +357 99 478 073.",
     "directLocation": "Limassol · Paphos · Cyprus",
     "footerNote": "JetSet K&K Travel Ltd is an IATA-accredited travel agency (IATA 14200130) licensed by the Deputy Ministry of Tourism of the Republic of Cyprus (Licence 7775)."
   }

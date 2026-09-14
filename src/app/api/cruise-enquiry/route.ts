@@ -1,7 +1,8 @@
 import { z } from "zod";
+import { readJsonObject } from "@/lib/json-body";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
-import { logLeadFallback } from "@/lib/email/lead-log";
+import { logLeadDeliveryFailure } from "@/lib/email/lead-log";
 import { emailRow, notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { getClientIp } from "@/lib/client-ip";
@@ -66,15 +67,12 @@ export async function POST(request: Request) {
   const limited = await rateLimitGuard(ip, "cruise-enquiry");
   if (limited) return limited;
 
-  let body: Record<string, unknown>;
-  try {
-    body = await request.json();
-  } catch {
-    return fail("Invalid request body.", 400);
-  }
+  const input = await readJsonObject(request);
+  if (!input.ok) return fail(input.error, input.status);
+  const body = input.body;
 
   /* Anti-spam checks */
-  const spam = await runAntiSpamChecks(body);
+  const spam = await runAntiSpamChecks(body, "cruise_enquiry");
   if (spam.blocked) {
     if (spam.silentReject) {
       return ok();
@@ -90,21 +88,14 @@ export async function POST(request: Request) {
 
   const data = result.data;
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
 
   if (!apiKey || apiKey === "re_your_key_here") {
-    /* Same grep-friendly prefix as delivery failures so a misconfigured
-       deploy's leads can be recovered from logs with one search. */
-    logLeadFallback("cruise-enquiry", data, "RESEND_API_KEY not configured");
-    return ok();
+    logLeadDeliveryFailure("cruise-enquiry", "RESEND_API_KEY not configured");
+    return fail("Unable to deliver your enquiry. Please try again or contact us directly.", 503);
   }
 
-  /* Notification email. See /api/contact for the rationale — failures
-     here (unverified domain, sandbox-sender restrictions, etc.) must
-     not surface as a generic error to the visitor. The lead is logged
-     to stderr under a grep-friendly prefix for recovery from Vercel
-     logs until the Resend config is corrected. */
-  let deliveryOk = true;
+  // Acknowledgement requires provider acceptance; logs are not durable lead storage.
   try {
     await sendResendEmail(apiKey, {
       from: FROM_EMAIL,
@@ -114,24 +105,22 @@ export async function POST(request: Request) {
       html: buildNotification(data),
     });
   } catch (err) {
-    deliveryOk = false;
-    logLeadFallback("cruise-enquiry", data, err);
+    logLeadDeliveryFailure("cruise-enquiry", err);
+    return fail("Unable to deliver your enquiry. Please try again or contact us directly.", 503);
   }
 
-  if (deliveryOk) {
-    try {
-      await sendResendEmail(apiKey, {
-        from: FROM_EMAIL,
-        to: data.email,
-        subject: "JetSet Travel — Your cruise enquiry is received",
-        html: autoReplyEmail(
-          data.name,
-          "<p>We've received your cruise enquiry and our cruise specialist will review your preferences and get back to you within <strong>24 hours</strong> with personalized options.</p>",
-        ),
-      });
-    } catch (err) {
-      console.error("[cruise-enquiry] Auto-reply email failed (non-fatal):", err);
-    }
+  try {
+    await sendResendEmail(apiKey, {
+      from: FROM_EMAIL,
+      to: data.email,
+      subject: "JetSet Travel — Your cruise enquiry is received",
+      html: autoReplyEmail(
+        data.name,
+        "<p>We've received your cruise enquiry and our cruise specialist will review your preferences and get back to you within <strong>24 hours</strong> with personalized options.</p>",
+      ),
+    });
+  } catch (err) {
+    logLeadDeliveryFailure("cruise-enquiry-auto-reply", err);
   }
 
   return ok();

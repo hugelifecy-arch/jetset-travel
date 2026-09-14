@@ -1,7 +1,8 @@
 import { z } from "zod";
+import { readJsonObject } from "@/lib/json-body";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
-import { logLeadFallback } from "@/lib/email/lead-log";
+import { logLeadDeliveryFailure } from "@/lib/email/lead-log";
 import { emailRow, notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { getClientIp } from "@/lib/client-ip";
@@ -108,17 +109,12 @@ export async function POST(req: Request) {
   const limited = await rateLimitGuard(ip, "quote");
   if (limited) return limited;
 
-  let rawBody: Record<string, unknown>;
-  try {
-    const json = await req.json();
-    if (!json || typeof json !== "object") throw new Error("not an object");
-    rawBody = json as Record<string, unknown>;
-  } catch {
-    return fail("Invalid input", 400);
-  }
+  const input = await readJsonObject(req);
+  if (!input.ok) return fail(input.error, input.status);
+  const rawBody = input.body;
 
   /* ---- Anti-spam checks (honeypot, timestamp, reCAPTCHA, gibberish) ---- */
-  const spam = await runAntiSpamChecks(rawBody);
+  const spam = await runAntiSpamChecks(rawBody, "quote");
   if (spam.blocked) {
     if (spam.silentReject) {
       return ok(); // honeypot — fake success
@@ -138,21 +134,14 @@ export async function POST(req: Request) {
   const quoteType =
     "type" in data ? (data.type === "corporate" ? "Corporate" : "Luxury") : "Quick";
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
 
   if (!apiKey || apiKey === "re_your_key_here") {
-    /* Same grep-friendly prefix as delivery failures so a misconfigured
-       deploy's leads can be recovered from logs with one search. */
-    logLeadFallback("quote", data as Record<string, unknown>, "RESEND_API_KEY not configured");
-    return ok();
+    logLeadDeliveryFailure("quote", "RESEND_API_KEY not configured");
+    return fail("Unable to deliver your enquiry. Please try again or contact us directly.", 503);
   }
 
-  /* Notification email. See /api/contact for the rationale — failures
-     here (unverified domain, sandbox-sender restrictions, etc.) must
-     not surface as a generic error to the visitor. The lead is logged
-     to stderr under a grep-friendly prefix for recovery from Vercel
-     logs until the Resend config is corrected. */
-  let deliveryOk = true;
+  // Acknowledgement requires provider acceptance; logs are not durable lead storage.
   try {
     await sendResendEmail(apiKey, {
       from: FROM_EMAIL,
@@ -162,11 +151,11 @@ export async function POST(req: Request) {
       html: buildNotification(data),
     });
   } catch (err) {
-    deliveryOk = false;
-    logLeadFallback("quote", data as Record<string, unknown>, err);
+    logLeadDeliveryFailure("quote", err);
+    return fail("Unable to deliver your enquiry. Please try again or contact us directly.", 503);
   }
 
-  if (email && deliveryOk) {
+  if (email) {
     try {
       await sendResendEmail(apiKey, {
         from: FROM_EMAIL,
@@ -178,7 +167,7 @@ export async function POST(req: Request) {
         ),
       });
     } catch (err) {
-      console.error("[quote] Auto-reply email failed (non-fatal):", err);
+      logLeadDeliveryFailure("quote-auto-reply", err);
     }
   }
 

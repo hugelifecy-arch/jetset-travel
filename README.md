@@ -13,7 +13,7 @@ luxury leisure travellers — in English and Russian.
 
 ## Getting started
 
-Requirements: Node.js 20+ and npm.
+Requirements: Node.js 22.6+ and npm (CI uses Node.js 22).
 
 ```bash
 npm install
@@ -29,6 +29,7 @@ Open http://localhost:3000.
 | --- | --- |
 | `npm run dev` | Start the Next.js dev server |
 | `npm run build` | Production build |
+| `npm run test:forms` | Check built form routes with synthetic data and mocked email/CAPTCHA providers; run after build |
 | `npm run start` | Run the production server (after `build`) |
 | `npm run lint` | Run ESLint |
 | `npm run audit-check` | Run the custom audit script in `scripts/audit-check.js` |

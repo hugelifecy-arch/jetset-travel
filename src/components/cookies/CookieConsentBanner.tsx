@@ -226,6 +226,7 @@ function CookieCategory({
       <button
         type="button"
         role="switch"
+        aria-label={label}
         aria-checked={checked}
         disabled={disabled}
         onClick={() => onChange?.(!checked)}

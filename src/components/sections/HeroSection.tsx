@@ -222,13 +222,13 @@ export default function HeroSection() {
               </span>
             </Link>
             <Link
-              href={`/${locale}/quote`}
+              href={`/${locale}/quote?type=luxury`}
               onClick={() =>
                 trackCTAClick({
                   location: "hero",
                   cta_type: "luxury_quote",
                   cta_label: t("ctaLuxury"),
-                  destination: `/${locale}/quote`,
+                  destination: `/${locale}/quote?type=luxury`,
                 })
               }
               className="group inline-flex flex-col items-center justify-center rounded-2xl border-2 border-white px-6 py-3 text-white transition-colors hover:bg-white/10 sm:items-start sm:px-8 sm:py-4"

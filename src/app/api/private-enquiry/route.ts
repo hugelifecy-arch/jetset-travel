@@ -1,7 +1,9 @@
 import { z } from "zod";
+import { createPrivateEnquirySchema } from "@/lib/private-enquiry-schema";
+import { readJsonObject } from "@/lib/json-body";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
-import { logLeadFallback } from "@/lib/email/lead-log";
+import { logLeadDeliveryFailure } from "@/lib/email/lead-log";
 import { emailRow, notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { getClientIp } from "@/lib/client-ip";
@@ -17,13 +19,8 @@ export const runtime = "nodejs";
    enquiring and how they prefer to be contacted. No budget, dates or trip
    type. Max lengths mirror the other lead routes' caps so an oversized
    payload can't be relayed into a multi-megabyte staff email. */
-const privateEnquirySchema = z.object({
-  name: z.string().min(2).max(80),
-  organisation: z.string().max(120).optional(),
-  email: z.string().email().max(120),
-  phone: z.string().max(30).optional(),
-  contactMethod: z.enum(["phone", "email", "whatsapp"]),
-  message: z.string().max(2000).optional(),
+const privateEnquirySchema = createPrivateEnquirySchema({
+  required: "Required", invalidEmail: "Invalid email", invalidPhone: "Invalid phone",
 });
 
 function buildNotification(data: z.infer<typeof privateEnquirySchema>): string {
@@ -52,15 +49,12 @@ export async function POST(request: Request) {
   const limited = await rateLimitGuard(ip, "private-enquiry");
   if (limited) return limited;
 
-  let body: Record<string, unknown>;
-  try {
-    body = await request.json();
-  } catch {
-    return fail("Invalid request body.", 400);
-  }
+  const input = await readJsonObject(request);
+  if (!input.ok) return fail(input.error, input.status);
+  const body = input.body;
 
   /* Anti-spam checks */
-  const spam = await runAntiSpamChecks(body);
+  const spam = await runAntiSpamChecks(body, "private_enquiry");
   if (spam.blocked) {
     if (spam.silentReject) {
       return ok();
@@ -76,21 +70,14 @@ export async function POST(request: Request) {
 
   const data = result.data;
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
 
   if (!apiKey || apiKey === "re_your_key_here") {
-    /* Same grep-friendly prefix as delivery failures so a misconfigured
-       deploy's leads can be recovered from logs with one search. */
-    logLeadFallback("private-enquiry", data, "RESEND_API_KEY not configured");
-    return ok();
+    logLeadDeliveryFailure("private-enquiry", "RESEND_API_KEY not configured");
+    return fail("Unable to deliver your enquiry. Please try again or contact us directly.", 503);
   }
 
-  /* Notification email. See /api/contact for the rationale — failures
-     here (unverified domain, sandbox-sender restrictions, etc.) must
-     not surface as a generic error to the visitor. The lead is logged
-     to stderr under a grep-friendly prefix for recovery from Vercel
-     logs until the Resend config is corrected. */
-  let deliveryOk = true;
+  // Acknowledgement requires provider acceptance; logs are not durable lead storage.
   try {
     await sendResendEmail(apiKey, {
       from: FROM_EMAIL,
@@ -100,24 +87,22 @@ export async function POST(request: Request) {
       html: buildNotification(data),
     });
   } catch (err) {
-    deliveryOk = false;
-    logLeadFallback("private-enquiry", data, err);
+    logLeadDeliveryFailure("private-enquiry", err);
+    return fail("Unable to deliver your enquiry. Please try again or contact us directly.", 503);
   }
 
-  if (deliveryOk) {
-    try {
-      await sendResendEmail(apiKey, {
-        from: FROM_EMAIL,
-        to: data.email,
-        subject: "JetSet Travel — Your introduction request is received",
-        html: autoReplyEmail(
-          data.name,
-          "<p>Thank you for your introduction request. You will hear from us personally, usually within the day.</p>",
-        ),
-      });
-    } catch (err) {
-      console.error("[private-enquiry] Auto-reply email failed (non-fatal):", err);
-    }
+  try {
+    await sendResendEmail(apiKey, {
+      from: FROM_EMAIL,
+      to: data.email,
+      subject: "JetSet Travel — Your introduction request is received",
+      html: autoReplyEmail(
+        data.name,
+        "<p>Thank you for your introduction request. You will hear from us personally, usually within the day.</p>",
+      ),
+    });
+  } catch (err) {
+    logLeadDeliveryFailure("private-enquiry-auto-reply", err);
   }
 
   return ok();
