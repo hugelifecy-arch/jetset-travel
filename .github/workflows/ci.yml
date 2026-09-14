@@ -35,3 +35,9 @@ jobs:
         run: npm run build
         env:
           NEXT_TELEMETRY_DISABLED: "1"
+
+      - name: Form delivery smoke checks (mock providers)
+        run: npm run test:forms
+
+      - name: Production dependency audit
+        run: npm audit --omit=dev --audit-level=high

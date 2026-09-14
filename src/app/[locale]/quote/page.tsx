@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
@@ -68,7 +69,9 @@ export default async function QuotePage({
   return (
     <>
       <JsonLd data={quotePageSchema} />
-      <QuoteContent />
+      <Suspense>
+        <QuoteContent />
+      </Suspense>
     </>
   );
 }

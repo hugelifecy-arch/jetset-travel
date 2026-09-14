@@ -21,7 +21,6 @@ interface BlogPost {
     locale: string;
     status: string;
   };
-  content: string;
   readTime: number;
 }
 

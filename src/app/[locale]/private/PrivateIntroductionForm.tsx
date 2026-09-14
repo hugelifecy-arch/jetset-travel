@@ -1,9 +1,10 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { createPrivateEnquirySchema } from "@/lib/private-enquiry-schema";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 
 /*
@@ -33,22 +34,10 @@ export interface PrivateFormLabels {
   error: string;
   required: string;
   invalidEmail: string;
+  invalidPhone: string;
 }
 
-function createSchema(labels: PrivateFormLabels) {
-  return z.object({
-    name: z.string().min(2, labels.required),
-    organisation: z.string().optional(),
-    email: z.string().email(labels.invalidEmail),
-    phone: z.string().optional(),
-    contactMethod: z.enum(["phone", "email", "whatsapp"], {
-      message: labels.required,
-    }),
-    message: z.string().optional(),
-  });
-}
-
-type PrivateFormData = z.infer<ReturnType<typeof createSchema>>;
+type PrivateFormData = z.infer<ReturnType<typeof createPrivateEnquirySchema>>;
 
 const inputClass =
   "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-brand-gold focus:ring-1 focus:ring-brand-gold";
@@ -66,10 +55,14 @@ export default function PrivateIntroductionForm({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<PrivateFormData>({
-    resolver: zodResolver(createSchema(labels)),
+    resolver: zodResolver(createPrivateEnquirySchema(labels)),
   });
+
+  const method = useWatch({ control, name: "contactMethod" });
+  const needsPhone = method === "phone" || method === "whatsapp";
 
   const onSubmit = async (data: PrivateFormData) => {
     setSubmitError(null);
@@ -201,17 +194,19 @@ export default function PrivateIntroductionForm({
           className="mb-2 block text-sm font-medium text-white/80"
         >
           {labels.phone}{" "}
-          <span className="font-normal text-white/50">
-            ({labels.optional})
-          </span>
+          {!needsPhone && <span className="font-normal text-white/50">({labels.optional})</span>}
         </label>
         <input
           id="private-phone"
           type="tel"
           autoComplete="tel"
+          aria-required={needsPhone}
+          aria-invalid={Boolean(errors.phone)}
+          aria-describedby={errors.phone ? "private-phone-error" : undefined}
           {...register("phone")}
           className={inputClass}
         />
+        {errors.phone && <p id="private-phone-error" role="alert" className="mt-1.5 text-sm text-red-400">{errors.phone.message}</p>}
       </div>
 
       <fieldset>

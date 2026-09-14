@@ -24,6 +24,7 @@ import {
   Send,
   Check,
 } from "lucide-react";
+import { getRecaptchaToken } from "@/lib/recaptcha";
 import Accordion from "@/components/ui/Accordion";
 
 /* ------------------------------------------------------------------ */
@@ -155,6 +156,9 @@ export default function CruisesContent({ locale }: { locale: string }) {
   const t = useTranslations("cruisesPage");
   const shipContainerRef = useRef<HTMLDivElement>(null);
 
+  const formLoadedAt = useRef(0);
+  useEffect(() => { formLoadedAt.current = Date.now(); }, []);
+
   // Form state
   const [formData, setFormData] = useState({
     name: "",
@@ -194,10 +198,11 @@ export default function CruisesContent({ locale }: { locale: string }) {
     e.preventDefault();
     setFormStatus("submitting");
     try {
+      const recaptchaToken = await getRecaptchaToken("cruise_enquiry");
       const res = await fetch("/api/cruise-enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, _formLoadedAt: Date.now() }),
+        body: JSON.stringify({ ...formData, _formLoadedAt: formLoadedAt.current, _recaptchaToken: recaptchaToken }),
       });
       if (res.ok) {
         setFormStatus("success");

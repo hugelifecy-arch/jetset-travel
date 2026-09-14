@@ -27,6 +27,7 @@ async function callPipeline(commands: unknown[][]) {
     },
     body: JSON.stringify(commands),
     cache: "no-store",
+    signal: AbortSignal.timeout(3_000),
   });
 
   if (!response.ok) {

@@ -369,6 +369,7 @@ export default async function PrivateClientsPage({
                   error: t("formError"),
                   required: tForms("required"),
                   invalidEmail: tForms("invalidEmail"),
+                  invalidPhone: tForms("invalidPhone"),
                 }}
               />
             </div>

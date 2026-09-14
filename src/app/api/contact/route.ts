@@ -1,7 +1,8 @@
 import { z } from "zod";
+import { readJsonObject } from "@/lib/json-body";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
-import { logLeadFallback } from "@/lib/email/lead-log";
+import { logLeadDeliveryFailure } from "@/lib/email/lead-log";
 import { emailRow, notificationEmail, autoReplyEmail } from "@/lib/email/templates";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { getClientIp } from "@/lib/client-ip";
@@ -60,15 +61,12 @@ export async function POST(request: Request) {
   const limited = await rateLimitGuard(ip, "contact");
   if (limited) return limited;
 
-  let body: Record<string, unknown>;
-  try {
-    body = await request.json();
-  } catch {
-    return fail("Invalid request body.", 400);
-  }
+  const input = await readJsonObject(request);
+  if (!input.ok) return fail(input.error, input.status);
+  const body = input.body;
 
   /* ---- Anti-spam checks (honeypot, timestamp, reCAPTCHA, gibberish) ---- */
-  const spam = await runAntiSpamChecks(body);
+  const spam = await runAntiSpamChecks(body, "contact");
   if (spam.blocked) {
     if (spam.silentReject) {
       /* Honeypot — return fake success so bots don't adapt */
@@ -85,24 +83,14 @@ export async function POST(request: Request) {
 
   const data = result.data;
 
-  const apiKey = process.env.RESEND_API_KEY;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
 
   if (!apiKey || apiKey === "re_your_key_here") {
-    /* Same grep-friendly prefix as delivery failures so a misconfigured
-       deploy's leads can be recovered from logs with one search. */
-    logLeadFallback("contact", data, "RESEND_API_KEY not configured");
-    return ok();
+    logLeadDeliveryFailure("contact", "RESEND_API_KEY not configured");
+    return fail("Unable to deliver your enquiry. Please try again or contact us directly.", 503);
   }
 
-  /* Notification email. If Resend rejects the send (unverified domain,
-     sandbox sender can only reach the account owner, invalid API key,
-     etc.) we must NOT show the visitor a generic error — the form
-     already validated their input and passed anti-spam. Log the full
-     lead to stderr under a grep-friendly prefix so ops can recover
-     it from Vercel logs, then return success. The lead is not lost;
-     delivery resumes automatically the moment Resend is configured
-     correctly. */
-  let deliveryOk = true;
+  // Acknowledgement requires provider acceptance; logs are not durable lead storage.
   try {
     await sendResendEmail(apiKey, {
       from: FROM_EMAIL,
@@ -114,29 +102,23 @@ export async function POST(request: Request) {
       html: buildNotification(data),
     });
   } catch (err) {
-    deliveryOk = false;
-    logLeadFallback("contact", data, err);
+    logLeadDeliveryFailure("contact", err);
+    return fail("Unable to deliver your enquiry. Please try again or contact us directly.", 503);
   }
 
-  /* Auto-reply is a nice-to-have; don't fail the submission if it
-     can't go out (e.g. visitor's mailbox rejects our sender). Skip
-     entirely if the notification itself failed — the sandbox sender
-     can't reach arbitrary visitor addresses anyway, and retrying
-     just produces a second error in the log for the same root cause. */
-  if (deliveryOk) {
-    try {
-      await sendResendEmail(apiKey, {
-        from: FROM_EMAIL,
-        to: data.email,
-        subject: "JetSet Travel — Your message is received",
-        html: autoReplyEmail(
-          data.name,
-          "<p>We've received your message and will get back to you within <strong>1 hour</strong> during business hours.</p>",
-        ),
-      });
-    } catch (err) {
-      console.error("[contact] Auto-reply email failed (non-fatal):", err);
-    }
+  // A failed visitor acknowledgement must not duplicate a delivered staff notification.
+  try {
+    await sendResendEmail(apiKey, {
+      from: FROM_EMAIL,
+      to: data.email,
+      subject: "JetSet Travel — Your message is received",
+      html: autoReplyEmail(
+        data.name,
+        "<p>We've received your message and will get back to you within <strong>1 hour</strong> during business hours.</p>",
+      ),
+    });
+  } catch (err) {
+    logLeadDeliveryFailure("contact-auto-reply", err);
   }
 
   return ok();

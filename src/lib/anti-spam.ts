@@ -78,58 +78,45 @@ export function isSubmittedTooFast(formLoadedAt: unknown): boolean {
   return Date.now() - formLoadedAt < 3000;
 }
 
-/**
- * Verify a reCAPTCHA v3 token with Google.
- *
- * Returns true (allow) when the server-side secret is missing — same
- * graceful-fallback pattern used by Resend and Upstash in this
- * codebase — so the form keeps working on deploys that haven't
- * configured reCAPTCHA yet. A warning is logged at module load so
- * operators notice. Honeypot + timing + gibberish checks remain
- * active regardless.
- */
-const recaptchaConfigured = Boolean(
-  process.env.RECAPTCHA_SECRET_KEY &&
-    process.env.RECAPTCHA_SECRET_KEY !== "your_recaptcha_secret_key",
-);
-
-if (!recaptchaConfigured) {
-  console.warn(
-    "[anti-spam] RECAPTCHA_SECRET_KEY is not set — reCAPTCHA verification " +
-      "is disabled. Other anti-spam checks (honeypot, timing, gibberish) remain active.",
-  );
-}
-
-export async function verifyRecaptcha(token: unknown): Promise<boolean> {
-  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+/** Verify server-issued reCAPTCHA evidence for this form and deployment. */
+export async function verifyRecaptcha(
+  token: unknown,
+  expectedAction: string = "submit",
+): Promise<boolean> {
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY?.trim();
   if (!secretKey || secretKey === "your_recaptcha_secret_key") {
-    return true; // reCAPTCHA not configured — allow
-  }
-
-  if (typeof token !== "string" || !token) {
-    // reCAPTCHA IS configured server-side but the client didn't send a
-    // token (grecaptcha script blocked by an ad-blocker, or
-    // NEXT_PUBLIC_RECAPTCHA_SITE_KEY missing on the client build). Don't
-    // block legitimate users — honeypot + timing + gibberish still filter
-    // most spam. Log so operators notice missing client-side config.
-    console.warn("[anti-spam] reCAPTCHA secret set but no token supplied — allowing submission");
+    // Local development can run without Google credentials. Deployed forms cannot.
+    if (process.env.NODE_ENV === "production") {
+      console.error("[anti-spam] reCAPTCHA configuration missing");
+      return false;
+    }
     return true;
   }
+  if (typeof token !== "string" || !token.trim()) return false;
 
+  const allowedHosts = new Set(
+    (process.env.RECAPTCHA_ALLOWED_HOSTNAMES || "www.jetset-travel.com,jetset-travel.com")
+      .split(",").map((host) => host.trim().toLowerCase()).filter(Boolean),
+  );
   try {
-    const res = await fetch(
-      "https://www.google.com/recaptcha/api/siteverify",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: `secret=${encodeURIComponent(secretKey)}&response=${encodeURIComponent(token)}`,
-      },
-    );
-    const data = (await res.json()) as { success?: boolean; score?: number };
-    return data.success === true && (data.score ?? 1) >= 0.5;
-  } catch (err) {
-    console.error("[anti-spam] reCAPTCHA verification error:", err);
-    return true; // Don't block users on transient verification failures.
+    const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ secret: secretKey, response: token }).toString(),
+      signal: AbortSignal.timeout(5_000),
+    });
+    if (!res.ok) return false;
+    const data = (await res.json()) as {
+      success?: boolean; score?: number; action?: string; hostname?: string;
+    } | null;
+    return data?.success === true &&
+      typeof data.score === "number" && Number.isFinite(data.score) &&
+      data.score >= 0.5 && data.score <= 1 &&
+      data.action === expectedAction && typeof data.hostname === "string" &&
+      allowedHosts.has(data.hostname.toLowerCase());
+  } catch {
+    console.error("[anti-spam] reCAPTCHA verification unavailable");
+    return false;
   }
 }
 
@@ -148,6 +135,7 @@ export interface AntiSpamResult {
 
 export async function runAntiSpamChecks(
   body: Record<string, unknown>,
+  expectedAction: string = "submit",
 ): Promise<AntiSpamResult> {
   /* 1. Honeypot */
   if (body.website) {
@@ -157,7 +145,7 @@ export async function runAntiSpamChecks(
   /* 2. Time-based. Every first-party form sends `_formLoadedAt`, so a
      payload without it didn't come from our UI — previously omission
      silently skipped the timing check, giving scripted bots a free pass. */
-  if (typeof body._formLoadedAt !== "number" || body._formLoadedAt <= 0) {
+  if (typeof body._formLoadedAt !== "number" || !Number.isFinite(body._formLoadedAt) || body._formLoadedAt <= 0) {
     return { blocked: true, reason: "missing_timing" };
   }
   if (isSubmittedTooFast(body._formLoadedAt)) {
@@ -165,7 +153,7 @@ export async function runAntiSpamChecks(
   }
 
   /* 3. reCAPTCHA */
-  const captchaOk = await verifyRecaptcha(body._recaptchaToken);
+  const captchaOk = await verifyRecaptcha(body._recaptchaToken, expectedAction);
   if (!captchaOk) {
     return { blocked: true, reason: "recaptcha_failed" };
   }

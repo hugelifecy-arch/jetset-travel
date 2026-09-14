@@ -24,11 +24,14 @@ export async function getRecaptchaToken(
   try {
     if (!window.grecaptcha) return null;
 
-    await new Promise<void>((resolve) => {
-      window.grecaptcha!.ready(() => resolve());
+    return await new Promise<string | null>((resolve) => {
+      const timeout = window.setTimeout(() => resolve(null), 8_000);
+      window.grecaptcha!.ready(() => {
+        window.grecaptcha!.execute(siteKey, { action })
+          .then(resolve, () => resolve(null))
+          .finally(() => window.clearTimeout(timeout));
+      });
     });
-
-    return await window.grecaptcha.execute(siteKey, { action });
   } catch {
     return null;
   }

@@ -6,7 +6,6 @@ import { getPublishedPosts } from "@/lib/blog";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import BlogFilters from "@/components/blog/BlogFilters";
-import NewsletterSignup from "@/components/blog/NewsletterSignup";
 import JsonLd from "@/components/seo/JsonLd";
 
 export async function generateMetadata({
@@ -63,7 +62,7 @@ export default async function BlogPage({
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <Suspense>
-            <BlogFilters posts={posts} />
+            <BlogFilters posts={posts.map(({ frontmatter, readTime }) => ({ frontmatter, readTime }))} />
           </Suspense>
         </div>
       </section>
@@ -90,9 +89,6 @@ export default async function BlogPage({
           },
         }}
       />
-
-      {/* Newsletter Signup */}
-      <NewsletterSignup />
 
       {/* Popular Services — internal linking for SEO */}
       <section className="py-16 bg-brand-light">

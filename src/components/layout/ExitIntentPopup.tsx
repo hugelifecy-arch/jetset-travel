@@ -191,7 +191,7 @@ export default function ExitIntentPopup() {
   const onSubmit = async (data: ExitIntentFormValues) => {
     setSubmitError(null);
 
-    const recaptchaToken = await getRecaptchaToken("exit_intent");
+    const recaptchaToken = await getRecaptchaToken("contact");
 
     const res = await fetch("/api/contact", {
       method: "POST",

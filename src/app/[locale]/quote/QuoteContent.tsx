@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
@@ -43,9 +44,17 @@ function SuccessScreen({ t }: { t: QuoteTFunction }) {
   );
 }
 
+type QuoteBranch = "corporate" | "luxury" | null;
+
 export default function QuoteContent() {
+  const type = useSearchParams().get("type");
+  const initialBranch = type === "corporate" || type === "luxury" ? type : null;
+  return <QuoteFlow key={initialBranch ?? "selection"} initialBranch={initialBranch} />;
+}
+
+function QuoteFlow({ initialBranch }: { initialBranch: QuoteBranch }) {
   const t = useTranslations("quotePage");
-  const [branch, setBranch] = useState<"corporate" | "luxury" | null>(null);
+  const [branch, setBranch] = useState<QuoteBranch>(initialBranch);
   const [success, setSuccess] = useState(false);
 
   return (
