@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { createPrivateEnquirySchema } from "../src/lib/private-enquiry-schema.ts";
@@ -22,3 +23,20 @@ describe("preferred contact validation", () => {
     assert.equal(schema.safeParse({ ...person, contactMethod: "email", message: "x".repeat(2001) }).success, false);
   });
 });
+
+for (const locale of ["en", "ru"]) {
+  it(`provides translated private-form validation messages for ${locale}`, () => {
+    const { forms } = JSON.parse(readFileSync(new URL(`../src/messages/${locale}.json`, import.meta.url), "utf8"));
+    for (const key of ["required", "invalidEmail", "invalidPhone"]) {
+      assert.equal(typeof forms[key], "string", `${locale}: missing forms.${key}`);
+      assert.ok(forms[key].trim().length > 0, `${locale}: empty forms.${key}`);
+    }
+    const result = createPrivateEnquirySchema(forms).safeParse({
+      ...person, contactMethod: "whatsapp", phone: "",
+    });
+    assert.equal(result.success, false);
+    assert.ok(result.error.issues.some(issue =>
+      issue.path.join(".") === "phone" && issue.message === forms.invalidPhone
+    ));
+  });
+}
