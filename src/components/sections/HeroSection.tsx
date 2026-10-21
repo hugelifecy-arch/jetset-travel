@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useCallback, useRef, useSyncExternalStore } from "react";
+import { useState, useCallback, useRef, useSyncExternalStore, type CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Clock, MessageCircle, Pause, Play } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { trackCTAClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
@@ -40,15 +39,6 @@ function getPrefersReducedMotion() {
 function getPrefersReducedMotionServer() {
   return false;
 }
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.15, duration: 0.6, ease: "easeOut" as const },
-  }),
-};
 
 export default function HeroSection() {
   const locale = useLocale();
@@ -169,35 +159,25 @@ export default function HeroSection() {
       <div className="mx-auto w-full max-w-7xl px-4 py-32 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           {/* Headline */}
-          <motion.h1
-            className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            custom={0}
+          <h1
+            className="enter-up font-display text-3xl font-bold tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
           >
             {t("title")}{" "}
             <span className="text-brand-gold">{t("titleHighlight")}</span>
-          </motion.h1>
+          </h1>
 
           {/* Subtitle */}
-          <motion.p
-            className="mt-4 max-w-2xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg md:text-xl"
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            custom={1}
+          <p
+            className="enter-up mt-4 max-w-2xl text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg md:text-xl"
+            style={{ "--enter-step": 1 } as CSSProperties}
           >
             {t("subtitle")}
-          </motion.p>
+          </p>
 
           {/* Dual-path CTAs — Corporate Concierge vs Luxury Planning, with WhatsApp quick-quote */}
-          <motion.div
-            className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-stretch"
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            custom={2}
+          <div
+            className="enter-up mt-10 flex flex-col gap-4 sm:flex-row sm:items-stretch"
+            style={{ "--enter-step": 2 } as CSSProperties}
           >
             <Link
               href={`/${locale}/contact`}
@@ -243,15 +223,12 @@ export default function HeroSection() {
                 {t("pathLuxuryHint")}
               </span>
             </Link>
-          </motion.div>
+          </div>
 
           {/* Tertiary quick-path: WhatsApp + SLA microcopy */}
-          <motion.div
-            className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5"
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            custom={3}
+          <div
+            className="enter-up mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5"
+            style={{ "--enter-step": 3 } as CSSProperties}
           >
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("ctaWhatsAppMessage"))}`}
@@ -276,15 +253,12 @@ export default function HeroSection() {
               <Clock className="h-4 w-4" aria-hidden="true" />
               {t("slaLine")}
             </span>
-          </motion.div>
+          </div>
 
           {/* Trust badges */}
-          <motion.div
-            className="mt-8 flex flex-wrap items-center gap-3 sm:mt-12 sm:gap-4 md:gap-6"
-            variants={fadeInUp}
-            initial="hidden"
-            animate="visible"
-            custom={4}
+          <div
+            className="enter-up mt-8 flex flex-wrap items-center gap-3 sm:mt-12 sm:gap-4 md:gap-6"
+            style={{ "--enter-step": 4 } as CSSProperties}
           >
             <div className="flex items-center gap-2 text-sm text-white/80">
               <Image
@@ -310,7 +284,7 @@ export default function HeroSection() {
               />
               <span className="font-medium">{t("badgeLicense")}</span>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -29,34 +26,22 @@ export default function ComparisonSection() {
     <section className="bg-white py-20 sm:py-24 overflow-x-clip">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <motion.h2
-            className="font-display text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
+          <h2
+            className="reveal-up font-display text-3xl font-bold tracking-tight text-brand-navy sm:text-4xl"
           >
             {t("title")}
-          </motion.h2>
-          <motion.p
-            className="mx-auto mt-4 max-w-2xl text-lg text-brand-navy/70"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: 0.1, duration: 0.5 }}
+          </h2>
+          <p
+            className="reveal-up mx-auto mt-4 max-w-2xl text-lg text-brand-navy/70"
           >
             {t("subtitle")}
-          </motion.p>
+          </p>
         </div>
 
         <div className="mt-14 grid gap-8 sm:grid-cols-2">
           {/* DIY Column */}
-          <motion.div
-            className="rounded-2xl border border-red-200 bg-red-50/50 p-5 sm:p-6 md:p-8"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
+          <div
+            className="reveal-left rounded-2xl border border-red-200 bg-red-50/50 p-5 sm:p-6 md:p-8"
           >
             <h3 className="font-display text-xl font-bold text-brand-navy">
               {t("diyTitle")}
@@ -69,15 +54,11 @@ export default function ComparisonSection() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* JetSet Column */}
-          <motion.div
-            className="rounded-2xl border border-green-200 bg-green-50/50 p-5 sm:p-6 md:p-8"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5 }}
+          <div
+            className="reveal-right rounded-2xl border border-green-200 bg-green-50/50 p-5 sm:p-6 md:p-8"
           >
             <h3 className="font-display text-xl font-bold text-brand-navy">
               {t("jetsetTitle")}
@@ -90,15 +71,11 @@ export default function ComparisonSection() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          className="mt-12 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ delay: 0.2, duration: 0.5 }}
+        <div
+          className="reveal-up mt-12 text-center"
         >
           <p className="text-lg font-semibold text-brand-navy">
             {t("ctaText")}
@@ -109,7 +86,7 @@ export default function ComparisonSection() {
           >
             {t("ctaButton")} &rarr;
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

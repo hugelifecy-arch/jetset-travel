@@ -17,8 +17,17 @@ function getConsentSnapshot() {
   return getConsentPreferences() !== null;
 }
 
+/* The server renders the banner for every visitor, so first-time visitors see
+   it at first paint instead of after hydration (it was the LCP element on
+   slow phones). Returning visitors never see it: the inline script in the
+   locale layout marks <html data-consent> before paint and globals.css hides
+   the server-rendered copy; after hydration the client snapshot unmounts it. */
 function getConsentServerSnapshot() {
-  return true;
+  return false;
+}
+
+function subscribeNothing() {
+  return () => {};
 }
 
 export default function CookieConsentBanner() {
@@ -38,6 +47,9 @@ export default function CookieConsentBanner() {
     useState<CookiePreferences>(DEFAULT_PREFERENCES);
 
   const visible = !hasExistingConsent || forcedVisible;
+  // "ssr" until hydrated, so the pre-paint CSS rule only ever hides the
+  // server-rendered copy, never a banner reopened from "Manage cookies".
+  const hydrated = useSyncExternalStore(subscribeNothing, () => true, () => false);
 
   useEffect(() => {
     const handleReopen = () => {
@@ -91,7 +103,11 @@ export default function CookieConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div ref={bannerRef} className="fixed inset-x-0 bottom-0 z-[60] p-4">
+    <div
+      ref={bannerRef}
+      data-cookie-banner={hydrated ? "client" : "ssr"}
+      className="fixed inset-x-0 bottom-0 z-[60] p-4"
+    >
       <div className="mx-auto max-w-4xl rounded-xl border border-brand-navy/10 bg-white shadow-luxury">
         {/* Main banner */}
         {!showSettings && (

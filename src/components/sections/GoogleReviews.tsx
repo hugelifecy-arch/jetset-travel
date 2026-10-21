@@ -1,7 +1,4 @@
-"use client";
-
 import { Star } from "lucide-react";
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { REVIEW_AGGREGATE } from "@/lib/seo";
 
@@ -34,14 +31,10 @@ export default function GoogleReviews() {
 
         {/* Native testimonial cards */}
         <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
-          {reviewKeys.map((key, i) => (
-            <motion.div
+          {reviewKeys.map((key) => (
+            <div
               key={key}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="flex flex-col rounded-2xl border border-brand-navy/10 bg-brand-light/40 p-6 shadow-card"
+              className="reveal-up flex flex-col rounded-2xl border border-brand-navy/10 bg-brand-light/40 p-6 shadow-card"
             >
               <div className="flex items-center gap-1">
                 {Array.from({ length: 5 }).map((_, s) => (
@@ -90,7 +83,7 @@ export default function GoogleReviews() {
                   />
                 </svg>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 

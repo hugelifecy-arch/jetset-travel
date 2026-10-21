@@ -16,7 +16,6 @@ export const CLIENT_NAMESPACES = [
   "blogPage",
   "clients",
   "common",
-  "comparison",
   "contactPage",
   "cookies",
   "corporatePage",
@@ -30,9 +29,6 @@ export const CLIENT_NAMESPACES = [
   "mobileBar",
   "nav",
   "quotePage",
-  "reviews",
-  "services",
-  "trust",
 ] as const;
 
 type Messages = Record<string, unknown>;
