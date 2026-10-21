@@ -2,11 +2,16 @@ import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { createServer } from "node:net";
 import { once } from "node:events";
-import { resolve } from "node:path";
+import { resolve, join } from "node:path";
+import { mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { setTimeout as delay } from "node:timers/promises";
 
 // Runs only against a loopback server with synthetic credentials and mocked providers.
 const root = resolve(import.meta.dirname, "..");
+const recordFile = join(mkdtempSync(join(tmpdir(), "jetset-smoke-")), "emails.jsonl");
+writeFileSync(recordFile, "");
+const recorded = () => readFileSync(recordFile, "utf8").trim().split("\n").filter(Boolean).map((line) => JSON.parse(line));
 const routes = [
   ["contact", "contact", {}],
   ["quote", "quote", { route: "Paphos to Athens" }],
@@ -27,7 +32,7 @@ async function start(emailKey = "smoke-key-not-real") {
   ], {
     cwd: root,
     env: {
-      ...process.env, NODE_ENV: "production", NEXT_TELEMETRY_DISABLED: "1", JETSET_HTTP_SMOKE: "1",
+      ...process.env, NODE_ENV: "production", NEXT_TELEMETRY_DISABLED: "1", JETSET_HTTP_SMOKE: "1", JETSET_SMOKE_RECORD: recordFile,
       RESEND_API_KEY: emailKey, RECAPTCHA_SECRET_KEY: "smoke-secret-not-real",
       RECAPTCHA_ALLOWED_HOSTNAMES: "localhost", UPSTASH_REDIS_REST_URL: "", UPSTASH_REDIS_REST_TOKEN: "",
       CONTACT_EMAIL: "office@example.invalid", RESEND_FROM_EMAIL: "JetSet <sender@example.invalid>",
@@ -93,6 +98,22 @@ try {
   }
   await check(server, "private-enquiry", payload("private_enquiry", { contactMethod: "whatsapp", phone: "" }), 400);
   await check(server, "contact", payload("contact", { email: "reply-fails@example.invalid" }), 200);
+  // Audit F-11: RU submissions get a Russian acknowledgement whose replies go to the office.
+  writeFileSync(recordFile, "");
+  await check(server, "contact", payload("contact", { locale: "ru" }), 200);
+  const [, ack] = recorded().filter((mail) => mail.to === "office@example.invalid" || mail.to === "visitor@example.invalid");
+  assert.equal(ack?.to, "visitor@example.invalid");
+  assert.equal(ack.reply_to, "office@example.invalid");
+  assert.match(ack.subject, /получили/);
+  checks++;
+  // Audit F-01/F-06: unknown paths return 404 (previously 500 for /ads.txt etc.)
+  // with an HTML document. Localized rendering is checked in a browser (report §9).
+  for (const path of ["/ads.txt", "/xmlrpc.php", "/apple-touch-icon-precomposed.png", "/en/no-such-page", "/ru/no-such-page"]) {
+    const res = await fetch(`${server.origin}${path}`, { redirect: "manual" });
+    assert.equal(res.status, 404, `${path}: expected 404, received ${res.status}`);
+    assert.match(await res.text(), /<html/, `${path}: not an HTML document`);
+    checks++;
+  }
   for (const policy of ["privacy", "terms"]) {
     const html = await (await fetch(`${server.origin}/ru/${policy}`)).text();
     assert.match(html, new RegExp(`href="/en/${policy}"`));
