@@ -17,6 +17,8 @@ import {
   errorClasses,
   type QuoteTFunction,
 } from "./shared";
+import { enquiryAttribution } from "@/lib/attribution";
+import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
 
 /* Validation messages come from the `forms` namespace so they localize;
    errors render directly under their field, so the generic strings stay
@@ -42,6 +44,7 @@ export default function LuxuryForm({
   onSuccess: () => void;
   t: QuoteTFunction;
 }) {
+  const markEnquiryStart = useEnquiryStart("luxury_quote");
   const tCommon = useTranslations("common");
   const [submitError, setSubmitError] = useState<string | null>(null);
   const formLoadedAt = useRef(Date.now());
@@ -74,6 +77,7 @@ export default function LuxuryForm({
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
           locale: document.documentElement.lang,
+          _attribution: enquiryAttribution(),
         }),
       });
       if (!res.ok) throw new Error("Failed to submit");
@@ -87,7 +91,7 @@ export default function LuxuryForm({
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form onFocus={markEnquiryStart} onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       {/* Honeypot — hidden from real users */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <input

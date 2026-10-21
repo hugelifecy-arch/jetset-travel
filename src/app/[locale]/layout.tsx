@@ -10,6 +10,7 @@ import MobileActionBar from "@/components/layout/MobileActionBar";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import ExitIntentPopup from "@/components/layout/ExitIntentPopup";
 import RecaptchaOnFormFocus from "@/components/forms/RecaptchaOnFormFocus";
+import VisitStartTracker from "@/components/analytics/VisitStartTracker";
 import { notFound } from "next/navigation";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
 import { LOCALES } from "@/lib/canonical";
@@ -254,6 +255,7 @@ export default async function LocaleLayout({
           <VercelAnalytics />
           <GoogleAnalytics />
           <ContactClickTracker />
+          <VisitStartTracker />
           <YandexMetrica />
           <FacebookPixel />
           <MicrosoftClarity />

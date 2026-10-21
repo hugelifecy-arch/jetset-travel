@@ -33,7 +33,7 @@ const cruiseEnquirySchema = z.object({
   requirements: z.string().max(2000).optional(),
 });
 
-function buildNotification(data: z.infer<typeof cruiseEnquirySchema>): string {
+function buildNotification(data: z.infer<typeof cruiseEnquirySchema>, attribution: unknown): string {
   const rows = [
     ["Name", data.name],
     ["Email", data.email],
@@ -54,6 +54,7 @@ function buildNotification(data: z.infer<typeof cruiseEnquirySchema>): string {
   return notificationEmail(
     "New Cruise Enquiry",
     rows.map(([label, value]) => emailRow(label, value)).join(""),
+    attribution,
   );
 }
 
@@ -104,7 +105,7 @@ export async function POST(request: Request) {
       to: TO_EMAIL,
       reply_to: data.email,
       subject: `New Cruise Enquiry — ${data.name}${data.destination ? ` (${data.destination})` : ""}`,
-      html: buildNotification(data),
+      html: buildNotification(data, body._attribution),
     });
   } catch (err) {
     logLeadDeliveryFailure("cruise-enquiry", err);

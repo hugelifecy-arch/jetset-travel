@@ -14,6 +14,8 @@ import { useFormMessages } from "@/components/forms/useFormMessages";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import { cn } from "@/lib/utils/cn";
+import { enquiryAttribution } from "@/lib/attribution";
+import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([tabindex="-1"]), select, textarea, [tabindex]:not([tabindex="-1"])';
@@ -33,6 +35,7 @@ export default function ExitIntentDialog({
   /** Enquiry accepted by the server; the parent closes the dialog later. */
   onSubmitted: () => void;
 }) {
+  const markEnquiryStart = useEnquiryStart("exit_intent_form");
   const t = useTranslations("exitIntent");
 
   const [submitted, setSubmitted] = useState(false);
@@ -132,6 +135,7 @@ export default function ExitIntentDialog({
         _formLoadedAt: formLoadedAt.current,
         _recaptchaToken: recaptchaToken,
         locale: document.documentElement.lang,
+        _attribution: enquiryAttribution(),
       }),
     });
 
@@ -214,6 +218,7 @@ export default function ExitIntentDialog({
             </p>
 
             <form
+              onFocus={markEnquiryStart}
               onSubmit={(e) => {
                 void handleSubmit(async (data) => {
                   try {

@@ -27,6 +27,8 @@ import {
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import Accordion from "@/components/ui/Accordion";
+import { enquiryAttribution } from "@/lib/attribution";
+import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -154,6 +156,7 @@ function AnimatedCounter({ target, suffix = "" }: { target: string; suffix?: str
 /* ------------------------------------------------------------------ */
 
 export default function CruisesContent({ locale }: { locale: string }) {
+  const markEnquiryStart = useEnquiryStart("cruise_enquiry");
   const t = useTranslations("cruisesPage");
   const shipContainerRef = useRef<HTMLDivElement>(null);
 
@@ -203,7 +206,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
       const res = await fetch("/api/cruise-enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, _formLoadedAt: formLoadedAt.current, _recaptchaToken: recaptchaToken, locale: document.documentElement.lang }),
+        body: JSON.stringify({ ...formData, _formLoadedAt: formLoadedAt.current, _recaptchaToken: recaptchaToken, locale: document.documentElement.lang, _attribution: enquiryAttribution() }),
       });
       if (res.ok) {
         trackFormSuccess("cruise_enquiry");
@@ -624,7 +627,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
               <p className="text-brand-navy/70 text-sm">{t("formPreferCall")}</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onFocus={markEnquiryStart} onSubmit={handleSubmit} className="space-y-6">
               {/* Honeypot */}
               <div className="hidden" aria-hidden="true">
                 <input

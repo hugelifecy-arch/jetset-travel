@@ -23,7 +23,7 @@ const privateEnquirySchema = createPrivateEnquirySchema({
   required: "Required", invalidEmail: "Invalid email", invalidPhone: "Invalid phone",
 });
 
-function buildNotification(data: z.infer<typeof privateEnquirySchema>): string {
+function buildNotification(data: z.infer<typeof privateEnquirySchema>, attribution: unknown): string {
   const rows = [
     ["Name", data.name],
     data.organisation ? ["Organisation / Family Office", data.organisation] : null,
@@ -36,6 +36,7 @@ function buildNotification(data: z.infer<typeof privateEnquirySchema>): string {
   return notificationEmail(
     "Private Clients — Introduction Request",
     rows.map(([label, value]) => emailRow(label, value)).join(""),
+    attribution,
   );
 }
 
@@ -86,7 +87,7 @@ export async function POST(request: Request) {
       to: TO_EMAIL,
       reply_to: data.email,
       subject: "Private Clients — Introduction Request",
-      html: buildNotification(data),
+      html: buildNotification(data, body._attribution),
     });
   } catch (err) {
     logLeadDeliveryFailure("private-enquiry", err);

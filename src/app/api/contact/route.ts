@@ -30,7 +30,7 @@ const contactSchema = z.object({
   dates: z.string().max(200).optional(),
 });
 
-function buildNotification(data: z.infer<typeof contactSchema>): string {
+function buildNotification(data: z.infer<typeof contactSchema>, attribution: unknown): string {
   const rows = [
     emailRow("Name", data.name),
     emailRow("Email", data.email),
@@ -48,6 +48,7 @@ function buildNotification(data: z.infer<typeof contactSchema>): string {
   return notificationEmail(
     data.travelType ? "New Quote Request" : "New Contact Message",
     rows,
+    attribution,
   );
 }
 
@@ -101,7 +102,7 @@ export async function POST(request: Request) {
       subject: data.travelType
         ? `New Quote Request — ${data.name} (${data.travelType})`
         : `New Contact Message — ${data.name}`,
-      html: buildNotification(data),
+      html: buildNotification(data, body._attribution),
     });
   } catch (err) {
     logLeadDeliveryFailure("contact", err);

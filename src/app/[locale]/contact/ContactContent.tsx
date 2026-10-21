@@ -20,6 +20,8 @@ import {
   Calendar,
 } from "lucide-react";
 import FormTrustElements from "@/components/forms/FormTrustElements";
+import { enquiryAttribution } from "@/lib/attribution";
+import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
 
 function createContactSchema(t: (key: string) => string) {
   return z.object({
@@ -43,6 +45,7 @@ const inputClass =
   "w-full rounded-xl border border-brand-navy/20 px-4 py-3 text-sm text-brand-navy placeholder:text-brand-navy/70 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors";
 
 export default function ContactContent() {
+  const markEnquiryStart = useEnquiryStart("contact_form");
   const locale = useLocale();
   const t = useTranslations("contactPage");
   const tCommon = useTranslations("common");
@@ -77,6 +80,7 @@ export default function ContactContent() {
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
           locale: document.documentElement.lang,
+          _attribution: enquiryAttribution(),
         }),
       });
       if (!res.ok) throw new Error("Failed to send message");
@@ -200,7 +204,7 @@ export default function ContactContent() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <form onFocus={markEnquiryStart} onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   {/* Honeypot — hidden from real users */}
                   <div className="absolute -left-[9999px]" aria-hidden="true">
                     <input

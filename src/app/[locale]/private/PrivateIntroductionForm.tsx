@@ -7,6 +7,8 @@ import { z } from "zod";
 import { createPrivateEnquirySchema } from "@/lib/private-enquiry-schema";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
+import { enquiryAttribution } from "@/lib/attribution";
+import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
 
 /*
  * Deliberately stripped-down enquiry form for the Private & Family Office
@@ -48,6 +50,7 @@ export default function PrivateIntroductionForm({
 }: {
   labels: PrivateFormLabels;
 }) {
+  const markEnquiryStart = useEnquiryStart("private_enquiry");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const formLoadedAt = useRef(Date.now());
@@ -78,6 +81,7 @@ export default function PrivateIntroductionForm({
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
           locale: document.documentElement.lang,
+          _attribution: enquiryAttribution(),
         }),
       });
       if (!res.ok) throw new Error("Failed to send enquiry");
@@ -107,7 +111,7 @@ export default function PrivateIntroductionForm({
   ] as const;
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+    <form onFocus={markEnquiryStart} onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
       {/* Honeypot — hidden from real users */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <input
