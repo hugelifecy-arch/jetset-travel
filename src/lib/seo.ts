@@ -14,6 +14,17 @@ export const OG_IMAGE = `${CANONICAL_ORIGIN}/images/jetset-og-image.jpg`;
 export const SERVICE_LAST_UPDATED = "2026-04-14";
 
 /**
+ * Locale-prefixed paths that render with `robots: noindex` (translation-pending
+ * stubs). The pages read this set to decide their robots meta, and sitemap.ts
+ * excludes them, so a noindexed URL can never be submitted in sitemap.xml.
+ * Remove an entry once the real translated text ships.
+ */
+export const NOINDEX_LOCALE_PATHS: ReadonlySet<string> = new Set([
+  "/ru/privacy",
+  "/ru/terms",
+]);
+
+/**
  * Business-wide aggregate review rating, sourced from the Google Business
  * Profile total. Single source of truth for every `AggregateRating` block on
  * the site (TravelAgency, Service, and per-page schema). Update here only —

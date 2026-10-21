@@ -161,4 +161,4 @@ Here is a quick summary of the five tips:
 
 **JetSet Travel manages corporate accounts for businesses across Cyprus.** Whether you are a team of five or five hundred, we can build a travel programme that saves your company time and money. [Contact us](/en/contact) to schedule a free consultation, or [request a corporate travel quote](/en/quote) today.
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)

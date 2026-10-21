@@ -194,4 +194,4 @@ As a Cyprus-based, IATA-accredited travel agency (Tourism Licence 7775) that has
 
 **Planning a trip to Cyprus?** Whether it is a summer beach holiday, a shoulder-season cultural escape, or a winter mountain retreat, JetSet Travel can design the perfect itinerary for your chosen dates. [Contact us](/en/contact) for personalised advice, or [request a quote](/en/quote) for flights, hotels, and experiences.
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)

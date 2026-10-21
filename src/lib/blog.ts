@@ -58,6 +58,10 @@ function readAllPosts(): (BlogPost & { readTime: number })[] {
     const raw = fs.readFileSync(filePath, "utf-8");
     const { data, content } = matter(raw);
     const frontmatter = data as BlogPostFrontmatter;
+    // YAML reads an unquoted `- 2026` tag as a number. The blog search calls
+    // tag.toLowerCase(), so one numeric tag crashed /blog the moment a visitor
+    // typed in the search box or arrived with ?q= (audit F-19).
+    frontmatter.tags = Array.isArray(frontmatter.tags) ? frontmatter.tags.map(String) : [];
     return {
       frontmatter,
       content,

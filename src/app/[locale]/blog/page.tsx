@@ -5,7 +5,7 @@ import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
 import { getPublishedPosts } from "@/lib/blog";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import BlogFilters from "@/components/blog/BlogFilters";
+import BlogFilters, { BlogFiltersView } from "@/components/blog/BlogFilters";
 import JsonLd from "@/components/seo/JsonLd";
 
 export async function generateMetadata({
@@ -38,6 +38,7 @@ export default async function BlogPage({
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "blogPage" });
   const posts = getPublishedPosts(locale);
+  const gridPosts = posts.map(({ frontmatter, readTime }) => ({ frontmatter, readTime }));
 
   return (
     <>
@@ -61,8 +62,8 @@ export default async function BlogPage({
           Suspense boundary for the page to prerender statically. */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Suspense>
-            <BlogFilters posts={posts.map(({ frontmatter, readTime }) => ({ frontmatter, readTime }))} />
+          <Suspense fallback={<BlogFiltersView posts={gridPosts} initialQuery="" />}>
+            <BlogFilters posts={gridPosts} />
           </Suspense>
         </div>
       </section>

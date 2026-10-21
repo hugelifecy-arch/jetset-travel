@@ -3,7 +3,7 @@ import { readJsonObject } from "@/lib/json-body";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
 import { logLeadDeliveryFailure } from "@/lib/email/lead-log";
-import { emailRow, notificationEmail, autoReplyEmail } from "@/lib/email/templates";
+import { emailRow, notificationEmail, emailLocale, visitorAutoReply } from "@/lib/email/templates";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { getClientIp } from "@/lib/client-ip";
 import { ok, fail, rateLimitGuard, stripMetaFields } from "@/lib/api-response";
@@ -112,6 +112,8 @@ export async function POST(req: Request) {
   const input = await readJsonObject(req);
   if (!input.ok) return fail(input.error, input.status);
   const rawBody = input.body;
+  // Language of the page the visitor submitted from (EN/RU auto-reply).
+  const locale = emailLocale(rawBody.locale);
 
   /* ---- Anti-spam checks (honeypot, timestamp, reCAPTCHA, gibberish) ---- */
   const spam = await runAntiSpamChecks(rawBody, "quote");
@@ -157,14 +159,15 @@ export async function POST(req: Request) {
 
   if (email) {
     try {
+      const reply = visitorAutoReply("quote", locale, contactName);
       await sendResendEmail(apiKey, {
         from: FROM_EMAIL,
         to: email,
-        subject: "JetSet Travel — Your quote request is received",
-        html: autoReplyEmail(
-          contactName,
-          "<p>We've received your quote request and will get back to you within <strong>1 hour</strong> during business hours.</p>",
-        ),
+        // Replies to the acknowledgement must reach the monitored office inbox,
+        // not the sending address (audit F-11).
+        reply_to: TO_EMAIL,
+        subject: reply.subject,
+        html: reply.html,
       });
     } catch (err) {
       logLeadDeliveryFailure("quote-auto-reply", err);

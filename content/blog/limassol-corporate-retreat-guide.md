@@ -142,4 +142,4 @@ At JetSet Travel, we provide end-to-end retreat planning for corporate groups vi
 
 **Planning a corporate retreat in Limassol?** Let JetSet Travel handle the logistics while you focus on your team. [Contact us](/en/contact) for a complimentary consultation, or [request a group quote](/en/quote) with your dates and team size.
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)

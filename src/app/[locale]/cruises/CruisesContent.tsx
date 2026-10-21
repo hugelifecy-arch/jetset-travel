@@ -25,6 +25,7 @@ import {
   Check,
 } from "lucide-react";
 import { getRecaptchaToken } from "@/lib/recaptcha";
+import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import Accordion from "@/components/ui/Accordion";
 
 /* ------------------------------------------------------------------ */
@@ -202,14 +203,17 @@ export default function CruisesContent({ locale }: { locale: string }) {
       const res = await fetch("/api/cruise-enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, _formLoadedAt: formLoadedAt.current, _recaptchaToken: recaptchaToken }),
+        body: JSON.stringify({ ...formData, _formLoadedAt: formLoadedAt.current, _recaptchaToken: recaptchaToken, locale: document.documentElement.lang }),
       });
       if (res.ok) {
+        trackFormSuccess("cruise_enquiry");
         setFormStatus("success");
       } else {
+        trackFormError("cruise_enquiry", `http_${res.status}`);
         setFormStatus("error");
       }
     } catch {
+      trackFormError("cruise_enquiry", "network");
       setFormStatus("error");
     }
   };

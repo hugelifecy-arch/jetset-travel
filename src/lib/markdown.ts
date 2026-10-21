@@ -2,6 +2,21 @@ import { unified } from "unified";
 import remarkParse from "remark-parse";
 import remarkGfm from "remark-gfm";
 import remarkHtml from "remark-html";
+import { defaultSchema } from "hast-util-sanitize";
+
+/**
+ * GitHub sanitize schema plus the `tel:` protocol. The default schema strips
+ * `tel:` hrefs, so every "[Call: +357 …](tel:…)" link in a post rendered as a
+ * dead `<a>` with no href (audit 2026-10-21, F-04). Only the href protocol
+ * list is widened; raw HTML is still sanitized exactly as before.
+ */
+const schema = {
+  ...defaultSchema,
+  protocols: {
+    ...defaultSchema.protocols,
+    href: [...(defaultSchema.protocols?.href ?? []), "tel"],
+  },
+};
 
 /**
  * Convert a markdown string to HTML.
@@ -22,7 +37,7 @@ export async function markdownToHtml(markdown: string): Promise<string> {
   const result = await unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkHtml)
+    .use(remarkHtml, { sanitize: schema })
     .process(markdown);
   return result.toString();
 }

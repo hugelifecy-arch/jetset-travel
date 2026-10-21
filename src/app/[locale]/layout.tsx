@@ -10,11 +10,14 @@ import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import MobileActionBar from "@/components/layout/MobileActionBar";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import ExitIntentPopup from "@/components/layout/ExitIntentPopup";
+import { notFound } from "next/navigation";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
+import { LOCALES } from "@/lib/canonical";
 import { pickClientMessages } from "@/lib/client-messages";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import VercelAnalytics from "@/components/analytics/VercelAnalytics";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import ContactClickTracker from "@/components/analytics/ContactClickTracker";
 import YandexMetrica from "@/components/analytics/YandexMetrica";
 import FacebookPixel from "@/components/analytics/FacebookPixel";
 import MicrosoftClarity from "@/components/analytics/MicrosoftClarity";
@@ -161,6 +164,10 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  // Unknown first segments (/ads.txt, /xmlrpc.php, /apple-touch-icon-precomposed.png)
+  // reach this layout as `locale`. Reject them before the dynamic import below,
+  // which otherwise throws MODULE_NOT_FOUND and returns HTTP 500.
+  if (!(LOCALES as readonly string[]).includes(locale)) notFound();
   setRequestLocale(locale);
   const messages = (await import(`../../messages/${locale}.json`)).default;
   // Only the namespaces client components consume are serialized into the
@@ -218,6 +225,7 @@ export default async function LocaleLayout({
           <ExitIntentPopup />
           <VercelAnalytics />
           <GoogleAnalytics />
+          <ContactClickTracker />
           <YandexMetrica />
           <FacebookPixel />
           <MicrosoftClarity />

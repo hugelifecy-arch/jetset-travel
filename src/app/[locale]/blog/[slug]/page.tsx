@@ -284,7 +284,7 @@ export default async function BlogPostPage({
                   className="flex items-center gap-1 hover:text-brand-gold transition-colors"
                 >
                   <Home className="h-3.5 w-3.5 flex-shrink-0" aria-hidden="true" />
-                  <span className="hidden sm:inline">{getHomeName(locale)}</span>
+                  <span className="sr-only sm:not-sr-only">{getHomeName(locale)}</span>
                 </Link>
               </li>
               <li className="flex items-center"><ChevronRight className="h-3.5 w-3.5" aria-hidden="true" /></li>
@@ -356,7 +356,7 @@ export default async function BlogPostPage({
       <article className="py-16">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div
-            className="prose prose-lg max-w-none text-brand-navy/80 leading-relaxed prose-headings:text-brand-navy prose-headings:font-display prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-brand-gold prose-a:underline hover:prose-a:text-brand-gold/80 prose-strong:text-brand-navy prose-li:text-brand-navy/80 prose-table:text-sm prose-th:bg-brand-navy/5 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-brand-navy/10 prose-hr:border-brand-navy/10"
+            className="prose prose-lg max-w-none text-brand-navy/80 leading-relaxed prose-headings:text-brand-navy prose-headings:font-display prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-[#8A6D1F] prose-a:underline hover:prose-a:text-brand-navy prose-strong:text-brand-navy prose-li:text-brand-navy/80 prose-table:text-sm prose-table:block prose-table:overflow-x-auto prose-th:bg-brand-navy/5 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-brand-navy/10 prose-hr:border-brand-navy/10"
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           />
 

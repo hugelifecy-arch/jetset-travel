@@ -34,18 +34,83 @@ export function notificationEmail(heading: string, rowsHtml: string): string {
     </div>`;
 }
 
+export type EmailLocale = "en" | "ru";
+
+/** Normalise an untrusted `locale` value from a request body. */
+export function emailLocale(value: unknown): EmailLocale {
+  return value === "ru" ? "ru" : "en";
+}
+
 /**
  * Visitor auto-reply email. `intro` is the route-specific confirmation
  * sentence(s) as raw HTML; the greeting, WhatsApp CTA and footer are shared.
  */
-export function autoReplyEmail(name: string, intro: string): string {
+export function autoReplyEmail(name: string, intro: string, locale: EmailLocale = "en"): string {
+  const ru = locale === "ru";
   return `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto;color:#333">
-      <h2 style="color:#0b1d3a">Thank you, ${escapeHtml(name)}!</h2>
+      <h2 style="color:#0b1d3a">${ru ? "Спасибо" : "Thank you"}, ${escapeHtml(name)}!</h2>
       ${intro}
-      <p>For urgent enquiries you can reach us directly on WhatsApp:</p>
-      <p><a href="https://wa.me/${WHATSAPP_NUMBER}" style="display:inline-block;background:#25D366;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600">Chat on WhatsApp</a></p>
+      <p>${ru ? "По срочным вопросам пишите нам в WhatsApp:" : "For urgent enquiries you can reach us directly on WhatsApp:"}</p>
+      <p><a href="https://wa.me/${WHATSAPP_NUMBER}" style="display:inline-block;background:#25D366;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none;font-weight:600">${ru ? "Написать в WhatsApp" : "Chat on WhatsApp"}</a></p>
       <hr style="border:none;border-top:1px solid #e5e7eb;margin:24px 0"/>
-      <p style="font-size:12px;color:#888">JetSet Travel Cyprus &mdash; <a href="${SITE_URL}">${SITE_URL}</a></p>
+      <p style="font-size:12px;color:#888">JetSet Travel Cyprus &mdash; <a href="${SITE_URL}/${locale}">${SITE_URL}/${locale}</a></p>
     </div>`;
+}
+
+export type AutoReplyKind = "contact" | "quote" | "cruise" | "private";
+
+/**
+ * Subject + intro per form and language. English strings are unchanged from
+ * the pre-audit routes. Russian strings need a native-speaker review before
+ * release (project rule for RU copy). Response-time promises mirror the
+ * existing English text and must be confirmed by the office (audit F-12).
+ */
+const AUTO_REPLY_COPY: Record<AutoReplyKind, Record<EmailLocale, { subject: string; intro: string }>> = {
+  contact: {
+    en: {
+      subject: "JetSet Travel — Your message is received",
+      intro: "<p>We've received your message and will get back to you within <strong>1 hour</strong> during business hours.</p>",
+    },
+    ru: {
+      subject: "JetSet Travel — мы получили ваше сообщение",
+      intro: "<p>Мы получили ваше сообщение и ответим в течение <strong>1 часа</strong> в рабочее время.</p>",
+    },
+  },
+  quote: {
+    en: {
+      subject: "JetSet Travel — Your quote request is received",
+      intro: "<p>We've received your quote request and will get back to you within <strong>1 hour</strong> during business hours.</p>",
+    },
+    ru: {
+      subject: "JetSet Travel — мы получили ваш запрос",
+      intro: "<p>Мы получили ваш запрос и ответим в течение <strong>1 часа</strong> в рабочее время.</p>",
+    },
+  },
+  cruise: {
+    en: {
+      subject: "JetSet Travel — Your cruise enquiry is received",
+      intro: "<p>We've received your cruise enquiry and our cruise specialist will review your preferences and get back to you within <strong>24 hours</strong> with personalized options.</p>",
+    },
+    ru: {
+      subject: "JetSet Travel — мы получили ваш запрос на круиз",
+      intro: "<p>Мы получили ваш запрос на круиз. Наш специалист изучит ваши пожелания и в течение <strong>24 часов</strong> пришлёт персональные варианты.</p>",
+    },
+  },
+  private: {
+    en: {
+      subject: "JetSet Travel — Your introduction request is received",
+      intro: "<p>Thank you for your introduction request. You will hear from us personally, usually within the day.</p>",
+    },
+    ru: {
+      subject: "JetSet Travel — мы получили ваш запрос",
+      intro: "<p>Благодарим за запрос. Мы свяжемся с вами лично — как правило, в течение дня.</p>",
+    },
+  },
+};
+
+/** Localised visitor acknowledgement for one form. */
+export function visitorAutoReply(kind: AutoReplyKind, locale: EmailLocale, name: string) {
+  const copy = AUTO_REPLY_COPY[kind][locale];
+  return { subject: copy.subject, html: autoReplyEmail(name, copy.intro, locale) };
 }

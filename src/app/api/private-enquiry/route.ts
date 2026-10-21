@@ -4,7 +4,7 @@ import { readJsonObject } from "@/lib/json-body";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
 import { logLeadDeliveryFailure } from "@/lib/email/lead-log";
-import { emailRow, notificationEmail, autoReplyEmail } from "@/lib/email/templates";
+import { emailRow, notificationEmail, emailLocale, visitorAutoReply } from "@/lib/email/templates";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { getClientIp } from "@/lib/client-ip";
 import { ok, fail, rateLimitGuard, stripMetaFields } from "@/lib/api-response";
@@ -52,6 +52,8 @@ export async function POST(request: Request) {
   const input = await readJsonObject(request);
   if (!input.ok) return fail(input.error, input.status);
   const body = input.body;
+  // Language of the page the visitor submitted from (EN/RU auto-reply).
+  const locale = emailLocale(body.locale);
 
   /* Anti-spam checks */
   const spam = await runAntiSpamChecks(body, "private_enquiry");
@@ -92,14 +94,15 @@ export async function POST(request: Request) {
   }
 
   try {
+    const reply = visitorAutoReply("private", locale, data.name);
     await sendResendEmail(apiKey, {
       from: FROM_EMAIL,
       to: data.email,
-      subject: "JetSet Travel — Your introduction request is received",
-      html: autoReplyEmail(
-        data.name,
-        "<p>Thank you for your introduction request. You will hear from us personally, usually within the day.</p>",
-      ),
+      // Replies to the acknowledgement must reach the monitored office inbox,
+      // not the sending address (audit F-11).
+      reply_to: TO_EMAIL,
+      subject: reply.subject,
+      html: reply.html,
     });
   } catch (err) {
     logLeadDeliveryFailure("private-enquiry-auto-reply", err);

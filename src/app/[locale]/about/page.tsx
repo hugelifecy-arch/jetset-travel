@@ -93,9 +93,12 @@ export default async function AboutPage({
 
   const orgSchema = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "JetSet K&K Travel Ltd",
-    alternateName: ["JetSet Travel Cyprus", "ДжетСет Трэвел Кипр"],
+    // Same entity as the homepage TravelAgency (shared @id, type and name) so
+    // search engines see one business, not two with different names (F-10).
+    "@type": "TravelAgency",
+    "@id": "https://www.jetset-travel.com/#organization",
+    name: "JetSet Travel Cyprus",
+    alternateName: ["JetSet K&K Travel Ltd", "ДжетСет Трэвел Кипр"],
     url: "https://www.jetset-travel.com",
     logo: "https://www.jetset-travel.com/images/jetset-logo.svg",
     description: isRussian

@@ -13,6 +13,7 @@ import {
 } from "@/components/forms/schemas";
 import { useFormMessages } from "@/components/forms/useFormMessages";
 import { getRecaptchaToken } from "@/lib/recaptcha";
+import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import { cn } from "@/lib/utils/cn";
 
 /* ------------------------------------------------------------------ */
@@ -203,11 +204,16 @@ export default function ExitIntentPopup() {
         website: honeypotRef.current?.value || "",
         _formLoadedAt: formLoadedAt.current,
         _recaptchaToken: recaptchaToken,
+        locale: document.documentElement.lang,
       }),
     });
 
-    if (!res.ok) throw new Error("Submission failed");
+    if (!res.ok) {
+      trackFormError("exit_intent_form", `http_${res.status}`);
+      throw new Error("Submission failed");
+    }
 
+    trackFormSuccess("exit_intent_form", { travel_type: data.travelType });
     setSubmitted(true);
     setSessionCookie(COOKIE_SUBMITTED);
 

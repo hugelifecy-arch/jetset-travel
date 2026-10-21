@@ -56,7 +56,7 @@ If your journey involves a connection — Larnaca is usually the right starting 
 
 Paphos is leaner — around 17 airlines serving 50+ airports as of mid-2026 — but what it does, it does very well. It is a Ryanair focus city with the airline's largest Cyprus route map, and the UK coverage is outstanding: Jet2 flies year-round from Birmingham, London Gatwick, London Stansted, Manchester, Leeds Bradford, Newcastle and Nottingham, while easyJet runs year-round from Bristol, Edinburgh, Gatwick and Manchester. British Airways adds seasonal London flights, TUI covers the package market, and Ryanair fills in an ever-rotating map of UK, Irish, central European and Scandinavian routes.
 
-The catch is seasonality. UK routes hold up well through winter, but many continental routes thin out or pause entirely between November and March. If you need a specific city pair in January, check whether it actually operates that month before you plan around it — or [ask us](/en/contact/) and we will check for you.
+The catch is seasonality. UK routes hold up well through winter, but many continental routes thin out or pause entirely between November and March. If you need a specific city pair in January, check whether it actually operates that month before you plan around it — or [ask us](/en/contact) and we will check for you.
 
 ## Drive Times That Actually Decide It
 
@@ -76,7 +76,7 @@ For most travellers the deciding factor is not the airline — it is the transfe
 
 Two things stand out. First, **Limassol and the Troodos are the only genuine toss-ups** — everywhere else, one airport wins clearly. Second, a €25 fare saving stops being a saving when it comes with an extra 90 minutes each way and a longer taxi bill: a taxi from Larnaca airport to Paphos typically costs several times more than the short hop from Paphos airport.
 
-Both airports have shuttle and intercity bus links (including regular Limassol and Nicosia services), and local buses connect Paphos airport with the town and harbour. For families and groups, a pre-booked private transfer usually beats both on total cost per person — something we arrange as standard with [flight bookings](/en/flight-tickets-cyprus/).
+Both airports have shuttle and intercity bus links (including regular Limassol and Nicosia services), and local buses connect Paphos airport with the town and harbour. For families and groups, a pre-booked private transfer usually beats both on total cost per person — something we arrange as standard with [flight bookings](/en/flight-tickets-cyprus).
 
 ## Fares, Baggage and Disruption
 
@@ -86,11 +86,11 @@ Headline fares out of Paphos are often lower — that is the Ryanair/Jet2/easyJe
 - **Add the transfer.** Use the drive-time table above and price the taxi or car hire difference honestly.
 - **Think about disruption.** Larnaca's denser schedule means more re-routing options when a flight cancels. From Paphos, the "next available flight" on the same route may be two or three days away in shoulder season.
 
-This is exactly the comparison we run when clients [request a quote](/en/quote/) — both airports, total journey cost, total journey time.
+This is exactly the comparison we run when clients [request a quote](/en/quote) — both airports, total journey cost, total journey time.
 
 ## For Business Travellers
 
-For corporate itineraries the answer is almost always Larnaca: early-morning departures, multiple daily Athens rotations for same-day meetings, the Heathrow service, and one-stop Gulf connections eastbound. If your company is based in Limassol or even western Cyprus, the frequency advantage usually outweighs the marginally longer drive. Our [corporate travel team](/en/corporate-travel/) builds airport choice into travel policies for exactly this reason — and with Cyprus expected to complete [Schengen accession](/en/blog/cyprus-schengen-2026-business-travel/), departure formalities at both airports are changing too: the EU Entry/Exit System is already deployed at Larnaca and Paphos, and intra-Schengen flights will eventually move to a domestic-style flow.
+For corporate itineraries the answer is almost always Larnaca: early-morning departures, multiple daily Athens rotations for same-day meetings, the Heathrow service, and one-stop Gulf connections eastbound. If your company is based in Limassol or even western Cyprus, the frequency advantage usually outweighs the marginally longer drive. Our [corporate travel team](/en/corporate-travel) builds airport choice into travel policies for exactly this reason — and with Cyprus expected to complete [Schengen accession](/en/blog/cyprus-schengen-2026-business-travel), departure formalities at both airports are changing too: the EU Entry/Exit System is already deployed at Larnaca and Paphos, and intra-Schengen flights will eventually move to a domestic-style flow.
 
 ## Flying Into One, Out of the Other
 
@@ -98,14 +98,14 @@ Open-jaw itineraries — into Larnaca, home from Paphos, or vice versa — are p
 
 ## How We Choose for Our Clients
 
-Our booking rule of thumb, refined over two decades in [Paphos](/en/paphos-travel-agency/):
+Our booking rule of thumb, refined over two decades in [Paphos](/en/paphos-travel-agency):
 
 1. **Geography first.** West of Limassol, default to Paphos; east of Limassol, default to Larnaca.
 2. **Then the route.** If only one airport serves your city nonstop in your travel month, that usually settles it.
 3. **Then total cost and time** — fare + bags + transfer, door to door, both directions.
 4. **Then resilience.** Tight connection, cruise departure or a wedding you cannot miss? Weight Larnaca's frequency, or build in a buffer day.
 
-If that sounds like work, it is — and it is work we do daily. Check our [month-by-month Cyprus guide](/en/blog/best-time-visit-cyprus-monthly-guide/) for when to travel, and let us handle the how.
+If that sounds like work, it is — and it is work we do daily. Check our [month-by-month Cyprus guide](/en/blog/best-time-visit-cyprus-monthly-guide) for when to travel, and let us handle the how.
 
 ## FAQ
 
@@ -115,7 +115,7 @@ Usually Paphos for low-cost point-to-point fares from the UK, Ireland and centra
 
 ### Which airport should I use for Limassol?
 
-Either — Limassol sits almost exactly between them, around 45 minutes from each. Pick whichever has the better fare and flight time for your dates. Cruise passengers sailing from Limassol port should also check both airports when booking [cruise packages](/en/cruises/).
+Either — Limassol sits almost exactly between them, around 45 minutes from each. Pick whichever has the better fare and flight time for your dates. Cruise passengers sailing from Limassol port should also check both airports when booking [cruise packages](/en/cruises).
 
 ### Can I fly into Larnaca and out of Paphos?
 
@@ -131,6 +131,6 @@ Larnaca. Neither airport has direct North America or Asia flights, but Larnaca's
 
 ---
 
-**Booking flights from Cyprus this year?** We compare both airports, every airline and the true door-to-door cost — then handle the booking, transfers and any disruption on the day. [Get a free quote](/en/quote/) or [talk to our flights team](/en/flight-tickets-cyprus/).
+**Booking flights from Cyprus this year?** We compare both airports, every airline and the true door-to-door cost — then handle the booking, transfers and any disruption on the day. [Get a free quote](/en/quote) or [talk to our flights team](/en/flight-tickets-cyprus).
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)

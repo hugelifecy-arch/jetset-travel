@@ -84,7 +84,7 @@ The honest answer: it depends on group size, duration, and how much of the trip 
 - It is a first visit to a destination — the hotel's concierge is worth more than a villa's kitchen.
 - You want to move between two or three places on one trip.
 
-See our dedicated villa guide covering [Mykonos, Santorini and Crete villa holidays](/en/blog/private-villa-holidays-mykonos-santorini-crete/) for a like-for-like comparison.
+See our dedicated villa guide covering [Mykonos, Santorini and Crete villa holidays](/en/blog/private-villa-holidays-mykonos-santorini-crete) for a like-for-like comparison.
 
 ## Jet and First-Class Access from Cyprus
 
@@ -137,7 +137,7 @@ For casual trips to well-known destinations, online booking is fine. For luxury 
 3. **Sequencing and logistics** — the transfers, the private guide in Kyoto, the yacht charter the day before check-in, the restaurant table at Da Vittorio. All of it aligned without the client managing it.
 4. **Honest editing** — talking a client out of the wrong hotel for their group, the wrong date for the weather, the wrong island for what they actually want to do.
 
-See our [luxury travel service page](/en/luxury-travel/) for how we structure engagements, and our [Mediterranean destination guide](/en/blog/luxury-mediterranean-destinations-2026/) for the deeper city-by-city picture.
+See our [luxury travel service page](/en/luxury-travel) for how we structure engagements, and our [Mediterranean destination guide](/en/blog/luxury-mediterranean-destinations-2026) for the deeper city-by-city picture.
 
 ## FAQ
 
@@ -165,4 +165,4 @@ Yes, including empty-leg positioning, midsize and super-midsize jets, and group 
 
 **Ready to plan your 2026 luxury trip?** Start with a free initial consultation — no obligation, no template itinerary. Tell us the dates, the group, and the feel of what you want; we come back with a shortlist within three business days.
 
-[Plan your luxury trip](/en/quote/) · [WhatsApp us](https://wa.me/35799478073) · [Call: +357 99 478 073](tel:+35799478073)
+[Plan your luxury trip](/en/quote) · [WhatsApp us](https://wa.me/35799478073) · [Call: +357 99 478 073](tel:+35799478073)

@@ -61,5 +61,6 @@ export function stripMetaFields(
   delete rest.website;
   delete rest._formLoadedAt;
   delete rest._recaptchaToken;
+  delete rest.locale;
   return rest;
 }

@@ -65,7 +65,10 @@ export type FormName =
   | "cta_lead_form"
   | "exit_intent_form"
   | "contact_form"
-  | "cruise_enquiry";
+  | "cruise_enquiry"
+  | "corporate_quote"
+  | "luxury_quote"
+  | "private_enquiry";
 
 export function trackFormStart(form_name: FormName): void {
   pushEvent("form_start", { form_name });
@@ -89,4 +92,18 @@ export function trackFormSuccess(
 
 export function trackFormError(form_name: FormName, reason: string): void {
   pushEvent("form_error", { form_name, reason });
+}
+
+/**
+ * Contact-intent clicks (audit F-07 event spec). These are expressions of
+ * intent, NOT completed enquiries — never mark them as GA4 key events
+ * alongside generate_lead. Parameters must not carry the number or address.
+ */
+export type ContactClickEvent = "click_phone" | "click_whatsapp" | "click_email";
+
+export function trackContactClick(
+  event: ContactClickEvent,
+  params: { link_region: string },
+): void {
+  pushEvent(event, params);
 }

@@ -1,4 +1,6 @@
 // Only loaded by the local production-build smoke runner, never by the app.
+import { appendFileSync } from "node:fs";
+
 if (process.env.JETSET_HTTP_SMOKE !== "1") throw new Error("Smoke adapter requires an isolated test process");
 
 globalThis.fetch = async (input, init) => {
@@ -14,6 +16,8 @@ globalThis.fetch = async (input, init) => {
   }
   if (url === "https://api.resend.com/emails") {
     const body = JSON.parse(init.body);
+    // Synthetic payloads only; lets the smoke runner assert on what would be sent.
+    if (process.env.JETSET_SMOKE_RECORD) appendFileSync(process.env.JETSET_SMOKE_RECORD, `${JSON.stringify(body)}\n`);
     if (body.html.includes("Delivery Failure") || body.to === "reply-fails@example.invalid") {
       return new Response("Simulated email outage", { status: 503 });
     }

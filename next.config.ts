@@ -25,8 +25,11 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: blob: https:",
       "font-src 'self' data: https://fonts.gstatic.com",
-      "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://mc.yandex.ru https://connect.facebook.net https://*.clarity.ms https://vitals.vercel-insights.com https://vercel.live",
-      "frame-src 'self' https://www.google.com https://www.youtube.com",
+      // reCAPTCHA v3 fetches https://www.google.com/recaptcha/api2/clr from the
+      // page itself; without it every page logged a CSP violation (audit F-08).
+      // Sources per https://developers.google.com/recaptcha/docs/faq (CSP).
+      "connect-src 'self' https://www.google.com/recaptcha/ https://www.google-analytics.com https://*.google-analytics.com https://mc.yandex.ru https://connect.facebook.net https://*.clarity.ms https://vitals.vercel-insights.com https://vercel.live",
+      "frame-src 'self' https://www.google.com https://recaptcha.google.com/recaptcha/ https://www.youtube.com",
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",

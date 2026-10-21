@@ -17,7 +17,9 @@ export default function TrustSection() {
   ] as const;
 
   return (
-    <section className="bg-brand-light py-20 sm:py-24">
+    // overflow-x-clip: the ±20px framer-motion entrance offsets widened the
+    // page at 320px (horizontal scroll, WCAG 1.4.10; audit F-17).
+    <section className="bg-brand-light py-20 sm:py-24 overflow-x-clip">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:gap-12 lg:grid-cols-2 lg:items-center">
           {/* Left: Why corporates choose us */}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, NOINDEX_LOCALE_PATHS } from "@/lib/seo";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import CookieSettingsButton from "@/components/cookies/CookieSettingsButton";
@@ -25,7 +25,7 @@ export async function generateMetadata({
 
   // The RU page is still a translation-pending stub — keep it reachable for
   // users but out of the index until the full Russian policy text ships.
-  if (locale === "ru") {
+  if (NOINDEX_LOCALE_PATHS.has(`/${locale}/privacy`)) {
     metadata.robots = { index: false, follow: true };
   }
 

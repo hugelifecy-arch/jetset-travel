@@ -1,4 +1,5 @@
 import Link from "next/link";
+import "./globals.css";
 import { Home, Briefcase, Palmtree, FileText, Phone, MessageSquare } from "lucide-react";
 
 const links = [
@@ -10,8 +11,13 @@ const links = [
   { href: "/en/quote", label: "Get a Quote", icon: MessageSquare },
 ];
 
+// Non-locale paths (/ads.txt, /xmlrpc.php, ...) render here. The root layout
+// renders no <html>/<body> (the [locale] layout does), so this page must
+// provide its own document shell and stylesheet (audit F-06).
 export default function NotFound() {
   return (
+    <html lang="en">
+      <body className="antialiased">
     <div className="min-h-screen bg-brand-light flex items-center justify-center px-4">
       <div className="max-w-2xl w-full text-center py-20">
         <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
@@ -56,5 +62,7 @@ export default function NotFound() {
         </div>
       </div>
     </div>
+      </body>
+    </html>
   );
 }

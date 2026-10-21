@@ -33,7 +33,7 @@ One thing to be clear about up front: **we are a travel agency, not an insurance
 
 If you need a visa to visit Cyprus, insurance stops being a recommendation. Consulates require a travel medical insurance certificate covering the full period of stay, with minimum cover of €30,000 for emergency treatment, hospitalisation and repatriation — mirroring [Article 15 of the Schengen Visa Code](https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/visa-policy_en). An application without a compliant certificate will simply be refused.
 
-This matters more in 2026 than ever, because Cyprus is in the final stretch of [joining the Schengen Area](/en/blog/cyprus-schengen-2026-business-travel/). Once accession completes, Cyprus visas become Schengen visas, and the €30,000 insurance requirement applies formally under the Visa Code rather than as national practice. Our [visa services team](/en/visa-services/) checks insurance certificates as part of every application we prepare — it is one of the most common reasons applications bounce.
+This matters more in 2026 than ever, because Cyprus is in the final stretch of [joining the Schengen Area](/en/blog/cyprus-schengen-2026-business-travel). Once accession completes, Cyprus visas become Schengen visas, and the €30,000 insurance requirement applies formally under the Visa Code rather than as national practice. Our [visa services team](/en/visa-services) checks insurance certificates as part of every application we prepare — it is one of the most common reasons applications bounce.
 
 ## What EHIC and GHIC Actually Cover in Cyprus
 
@@ -62,13 +62,13 @@ What does going uninsured actually risk in Cyprus? Based on what we have seen cl
 The checklist we suggest clients take to a comparison site or their broker:
 
 - **Emergency medical cover of at least €2 million, including repatriation** — the repatriation wording is the part that matters.
-- **Cancellation cover equal to the full non-refundable cost of your trip** — count flights, hotels and prepaid extras honestly, especially for [luxury itineraries](/en/luxury-travel/) where the number is bigger than people assume.
+- **Cancellation cover equal to the full non-refundable cost of your trip** — count flights, hotels and prepaid extras honestly, especially for [luxury itineraries](/en/luxury-travel) where the number is bigger than people assume.
 - **Travel delay and missed departure** cover.
 - **Baggage and valuables** limits that reflect what you actually carry.
 - **Personal liability** cover.
 - **An excess you would genuinely be comfortable paying** — the cheapest policies hide €150+ excesses per claim, per person.
 - **Any activity add-ons you need** — quads, scooters, diving, boat charter.
-- **A cruise add-on if you are sailing.** Policies increasingly treat cruising as a separate risk: missed port, cabin confinement and medical evacuation at sea are often only covered with a cruise extension. If you are joining one of the [cruises from Limassol](/en/blog/cruises-from-limassol-2026/), this is not optional fine print — see our [cruise booking service](/en/cruises/) and we will flag it on your itinerary.
+- **A cruise add-on if you are sailing.** Policies increasingly treat cruising as a separate risk: missed port, cabin confinement and medical evacuation at sea are often only covered with a cruise extension. If you are joining one of the [cruises from Limassol](/en/blog/cruises-from-limassol-2026), this is not optional fine print — see our [cruise booking service](/en/cruises) and we will flag it on your itinerary.
 
 For a basic single-trip policy from the UK or EU, comprehensive cover for Cyprus starts at well under €15 per person — it is consistently one of the cheapest European destinations to insure.
 
@@ -76,12 +76,12 @@ For a basic single-trip policy from the UK or EU, comprehensive cover for Cyprus
 
 - **Families:** many insurers cover children free on family policies — price a family policy against two adult singles before buying.
 - **Over-65s and pre-existing conditions:** declare everything. An undeclared condition is the most common reason legitimate claims fail. Specialist insurers exist for exactly this market and are worth the modest premium.
-- **Long stays and remote workers:** standard single-trip policies cap trip length (often 31–45 days). If you are wintering in Paphos or working remotely — see our [digital nomad guide](/en/blog/digital-nomads-cyprus-guide/) — you need a long-stay or nomad policy, not a stretched holiday one.
-- **Business travellers:** if your employees travel, insurance belongs in the travel policy, not left to each traveller's judgement. Group business travel cover is a duty-of-care item our [corporate travel team](/en/corporate-travel/) raises with every managed-travel client.
+- **Long stays and remote workers:** standard single-trip policies cap trip length (often 31–45 days). If you are wintering in Paphos or working remotely — see our [digital nomad guide](/en/blog/digital-nomads-cyprus-guide) — you need a long-stay or nomad policy, not a stretched holiday one.
+- **Business travellers:** if your employees travel, insurance belongs in the travel policy, not left to each traveller's judgement. Group business travel cover is a duty-of-care item our [corporate travel team](/en/corporate-travel) raises with every managed-travel client.
 
 ## For Cyprus Residents Travelling Abroad
 
-The same logic runs in reverse. GeSY beneficiaries receive a Cypriot-issued EHIC that covers state care across the EU/EEA, Switzerland and the UK — and it has exactly the same gaps: no repatriation, no private hospitals, no trip protection. If you take more than two trips a year, an annual multi-trip policy usually beats single-trip pricing. And if you are a non-EU resident of Cyprus applying for a Schengen visa, the €30,000 insurance certificate requirement applies to you too — something [our visa team](/en/visa-services/) handles daily.
+The same logic runs in reverse. GeSY beneficiaries receive a Cypriot-issued EHIC that covers state care across the EU/EEA, Switzerland and the UK — and it has exactly the same gaps: no repatriation, no private hospitals, no trip protection. If you take more than two trips a year, an annual multi-trip policy usually beats single-trip pricing. And if you are a non-EU resident of Cyprus applying for a Schengen visa, the €30,000 insurance certificate requirement applies to you too — something [our visa team](/en/visa-services) handles daily.
 
 ## Where JetSet Fits In
 
@@ -111,6 +111,6 @@ Usually yes. Standard policies often exclude cruise-specific risks — missed po
 
 ---
 
-**Planning a trip to or from Cyprus?** We will build the itinerary, flag exactly what your insurance needs to cover, and handle visas, flights and hotels end to end. [Get a free quote](/en/quote/) or [contact our team](/en/contact/).
+**Planning a trip to or from Cyprus?** We will build the itinerary, flag exactly what your insurance needs to cover, and handle visas, flights and hotels end to end. [Get a free quote](/en/quote) or [contact our team](/en/contact).
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)

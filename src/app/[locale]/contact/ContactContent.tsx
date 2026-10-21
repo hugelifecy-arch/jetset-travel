@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { trackContact, trackLead } from "@/lib/analytics/fbpixel";
+import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import {
   MapPin,
   Phone,
@@ -33,6 +34,10 @@ function createContactSchema(t: (key: string) => string) {
 }
 
 type ContactFormData = z.infer<ReturnType<typeof createContactSchema>>;
+
+/** Set NEXT_PUBLIC_SCHEDULING_URL (e.g. a live Calendly link) to show the
+ *  "schedule a call" block; unset hides it rather than linking to a 404. */
+const SCHEDULING_URL = process.env.NEXT_PUBLIC_SCHEDULING_URL?.trim() || "";
 
 const inputClass =
   "w-full rounded-xl border border-brand-navy/20 px-4 py-3 text-sm text-brand-navy placeholder:text-brand-navy/40 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors";
@@ -71,13 +76,16 @@ export default function ContactContent() {
           website: honeypotRef.current?.value || "",
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
+          locale: document.documentElement.lang,
         }),
       });
       if (!res.ok) throw new Error("Failed to send message");
+      trackFormSuccess("contact_form", { travel_type: data.travelType });
       trackContact();
       trackLead({ content_name: "Contact Form", content_category: "contact" });
       setSubmitted(true);
     } catch {
+      trackFormError("contact_form", "network_or_server");
       setSubmitError(t("submitError"));
     }
   };
@@ -430,7 +438,10 @@ export default function ContactContent() {
         </div>
       </section>
 
-      {/* Calendly Scheduling Section */}
+      {/* Scheduling section — rendered only when a real booking URL is
+          configured. The hard-coded placeholder (calendly.com/jetset-travel/15min)
+          returned HTTP 404 in production (audit 2026-10-21, F-03). */}
+      {SCHEDULING_URL && (
       <section className="bg-brand-light py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
@@ -441,9 +452,8 @@ export default function ContactContent() {
             <p className="text-brand-navy/60 mb-8">
               {t("calendlySubtitle")}
             </p>
-            {/* TODO: Replace with actual Calendly URL once set up by the business owner */}
             <a
-              href="https://calendly.com/jetset-travel/15min"
+              href={SCHEDULING_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-sm font-semibold text-white hover:bg-brand-navy/90 transition-colors"
@@ -454,6 +464,7 @@ export default function ContactContent() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Google Maps */}
       <section className="bg-brand-light">

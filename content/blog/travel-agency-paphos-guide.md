@@ -95,4 +95,4 @@ Look for IATA accreditation, verified licensing, years of proven experience, and
 
 **Ready to experience the difference a professional travel agency makes?** [Contact us](/en/contact) for a free consultation, or [request a quote](/en/quote) to get started. We are here to help — whether you are planning your next business trip or the holiday of a lifetime.
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)
