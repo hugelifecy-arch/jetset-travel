@@ -67,7 +67,7 @@ export default async function ServicesCrossLinks({
           <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
             {t("exploreMore")}
           </h2>
-          <p className="text-brand-navy/60 max-w-2xl mx-auto">
+          <p className="text-brand-navy/70 max-w-2xl mx-auto">
             {t("exploreMoreSubtitle")}
           </p>
         </div>
@@ -86,10 +86,10 @@ export default async function ServicesCrossLinks({
               <h3 className="text-xl font-bold text-brand-navy mb-3">
                 {t(`${service.key}.title`)}
               </h3>
-              <p className="text-brand-navy/60 text-sm leading-relaxed mb-4">
+              <p className="text-brand-navy/70 text-sm leading-relaxed mb-4">
                 {t(`${service.key}.description`)}
               </p>
-              <span className="inline-flex items-center text-sm font-semibold text-brand-gold group-hover:gap-2 transition-all">
+              <span className="inline-flex items-center text-sm font-semibold text-brand-gold-ink group-hover:gap-2 transition-all">
                 {t(`${service.key}.cta`)}
                 <ArrowRight className="ml-1 h-4 w-4" />
               </span>

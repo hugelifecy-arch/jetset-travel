@@ -51,7 +51,7 @@ export default function FeaturedBlogPost({
             )}
           </div>
           <div className="md:col-span-3 p-6 sm:p-8 flex flex-col justify-center">
-            <p className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand-gold mb-3">
+            <p className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brand-gold-ink mb-3">
               <BookOpen className="h-3.5 w-3.5" aria-hidden="true" />
               {label}
             </p>
@@ -61,7 +61,7 @@ export default function FeaturedBlogPost({
             <p className="text-sm sm:text-base text-brand-navy/70 leading-relaxed mb-4 line-clamp-3">
               {post.frontmatter.description}
             </p>
-            <span className="inline-flex items-center text-sm font-semibold text-brand-gold">
+            <span className="inline-flex items-center text-sm font-semibold text-brand-gold-ink">
               {readLabel}
               <ArrowRight className="ml-1.5 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </span>

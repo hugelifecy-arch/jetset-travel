@@ -92,10 +92,10 @@ export default function ServicesGrid() {
                   <h3 className="font-display text-lg font-bold text-brand-navy">
                     {t(`${service.titleKey}.title`)}
                   </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-navy/65">
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-navy/70">
                     {t(`${service.titleKey}.description`)}
                   </p>
-                  <span className="mt-4 text-sm font-semibold text-brand-gold group-hover:underline">
+                  <span className="mt-4 text-sm font-semibold text-brand-gold-ink group-hover:underline">
                     {t(`${service.titleKey}.cta`)} &rarr;
                   </span>
                 </div>

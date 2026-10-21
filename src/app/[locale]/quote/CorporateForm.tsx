@@ -249,7 +249,7 @@ export default function CorporateForm({
         />
       </div>
 
-      {submitError && <p className="text-sm text-red-500">{submitError}</p>}
+      {submitError && <p className="text-sm text-red-700">{submitError}</p>}
 
       <button
         type="submit"

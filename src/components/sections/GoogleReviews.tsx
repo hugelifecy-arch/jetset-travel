@@ -62,7 +62,7 @@ export default function GoogleReviews() {
                   <p className="text-sm font-semibold text-brand-navy">
                     {t(`${key}.name`)}
                   </p>
-                  <p className="text-xs text-brand-navy/60">
+                  <p className="text-xs text-brand-navy/70">
                     {t(`${key}.role`)} — {t(`${key}.company`)}
                   </p>
                 </div>
@@ -100,7 +100,7 @@ export default function GoogleReviews() {
             href="https://www.google.com/search?q=JetSet+Travel+Agency+-+Paphos#lrd=0x14e706ec2d62587f:0x4161901d9b64e1b4,1"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-brand-gold transition-colors hover:text-brand-gold/80"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-brand-gold-ink transition-colors hover:text-brand-navy"
           >
             {t("viewAllReviews")} &rarr;
           </a>

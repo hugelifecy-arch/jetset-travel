@@ -173,7 +173,7 @@ export default async function ServicesPage({
               <p className="mt-4">
                 <Link
                   href={`/${locale}/hotel-booking-cyprus`}
-                  className="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-gold/80 transition-colors"
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy transition-colors"
                 >
                   {t("hotelsCyprusLink")}
                   <ArrowRight className="ml-1.5 h-4 w-4" />
@@ -230,7 +230,7 @@ export default async function ServicesPage({
               <p className="mt-4">
                 <Link
                   href={`/${locale}/visa-services-cyprus`}
-                  className="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-gold/80 transition-colors"
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy transition-colors"
                 >
                   {t("visasCyprusLink")}
                   <ArrowRight className="ml-1.5 h-4 w-4" />
@@ -287,7 +287,7 @@ export default async function ServicesPage({
               <p className="mt-4">
                 <Link
                   href={`/${locale}/luxury-travel-cyprus`}
-                  className="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-gold/80 transition-colors"
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy transition-colors"
                 >
                   {t("luxuryCyprusLink")}
                   <ArrowRight className="ml-1.5 h-4 w-4" />
@@ -344,7 +344,7 @@ export default async function ServicesPage({
               <p className="mt-4">
                 <Link
                   href={`/${locale}/corporate-travel-cyprus`}
-                  className="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-gold/80 transition-colors"
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy transition-colors"
                 >
                   {t("corporateCyprusLink")}
                   <ArrowRight className="ml-1.5 h-4 w-4" />

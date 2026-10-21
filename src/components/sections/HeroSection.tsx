@@ -211,13 +211,13 @@ export default function HeroSection() {
               }
               className="group inline-flex flex-col items-center justify-center rounded-2xl bg-brand-gold px-6 py-3 text-brand-navy shadow-luxury transition-opacity hover:opacity-90 sm:items-start sm:px-8 sm:py-4"
             >
-              <span className="text-xs font-semibold uppercase tracking-wider text-brand-navy/70">
+              <span className="text-xs font-semibold uppercase tracking-wider text-brand-navy">
                 {t("pathCorporateLabel")}
               </span>
               <span className="mt-1 text-base font-semibold">
                 {t("ctaCorporate")}
               </span>
-              <span className="mt-0.5 text-xs text-brand-navy/70">
+              <span className="mt-0.5 text-xs text-brand-navy">
                 {t("pathCorporateHint")}
               </span>
             </Link>

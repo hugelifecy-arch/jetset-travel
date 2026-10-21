@@ -19,7 +19,7 @@ export default async function AboutBlurb() {
   return (
     <section className="bg-white py-16 sm:py-20">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
+        <p className="text-brand-gold-ink font-semibold text-sm uppercase tracking-wider mb-4">
           {t("label")}
         </p>
         <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-6">
@@ -37,7 +37,7 @@ export default async function AboutBlurb() {
               key={fact.label}
               className="rounded-xl border border-brand-navy/10 bg-brand-light/50 p-4"
             >
-              <dt className="text-xs font-semibold uppercase tracking-wider text-brand-gold mb-1">
+              <dt className="text-xs font-semibold uppercase tracking-wider text-brand-gold-ink mb-1">
                 {fact.label}
               </dt>
               <dd className="text-sm text-brand-navy/80">{fact.value}</dd>

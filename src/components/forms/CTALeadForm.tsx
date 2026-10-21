@@ -103,7 +103,7 @@ export default function CTALeadForm() {
   }
 
   const inputClass =
-    "bg-white border-white/20 text-brand-navy placeholder:text-brand-navy/50 focus:border-brand-gold focus:ring-brand-gold";
+    "bg-white border-white/20 text-brand-navy placeholder:text-brand-navy/70 focus:border-brand-gold focus:ring-brand-gold";
 
   const selectClass =
     "w-full rounded-xl border border-white/20 bg-white px-4 py-3 text-sm text-brand-navy outline-none transition-colors focus:border-brand-gold focus:ring-1 focus:ring-brand-gold";

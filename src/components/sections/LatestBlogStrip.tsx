@@ -15,7 +15,7 @@ export default async function LatestBlogStrip({ locale }: { locale: string }) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 flex items-end justify-between">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-wider text-brand-gold">
+            <p className="text-sm font-semibold uppercase tracking-wider text-brand-gold-ink">
               {t("label")}
             </p>
             <h2 className="mt-2 font-display text-3xl font-bold text-brand-navy md:text-4xl">
@@ -24,7 +24,7 @@ export default async function LatestBlogStrip({ locale }: { locale: string }) {
           </div>
           <Link
             href={`/${locale}/blog`}
-            className="hidden items-center gap-1 text-sm font-semibold text-brand-gold hover:underline sm:inline-flex"
+            className="hidden items-center gap-1 text-sm font-semibold text-brand-gold-ink hover:underline sm:inline-flex"
           >
             {t("viewAll")}
             <ArrowRight className="h-4 w-4" />
@@ -53,7 +53,7 @@ export default async function LatestBlogStrip({ locale }: { locale: string }) {
                   )}
                 </div>
                 <div className="p-6">
-                  <div className="mb-3 flex items-center gap-3 text-xs text-brand-navy/50">
+                  <div className="mb-3 flex items-center gap-3 text-xs text-brand-navy/70">
                     <span className="flex items-center gap-1">
                       <Calendar className="h-3.5 w-3.5" />
                       {new Date(post.frontmatter.date).toLocaleDateString(
@@ -69,10 +69,10 @@ export default async function LatestBlogStrip({ locale }: { locale: string }) {
                   <h3 className="mb-2 text-lg font-bold text-brand-navy transition-colors group-hover:text-brand-gold line-clamp-2">
                     {post.frontmatter.title}
                   </h3>
-                  <p className="text-sm leading-relaxed text-brand-navy/60 line-clamp-2">
+                  <p className="text-sm leading-relaxed text-brand-navy/70 line-clamp-2">
                     {post.frontmatter.description}
                   </p>
-                  <span className="mt-4 inline-flex items-center text-sm font-semibold text-brand-gold">
+                  <span className="mt-4 inline-flex items-center text-sm font-semibold text-brand-gold-ink">
                     {t("readMore")}
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </span>
@@ -85,7 +85,7 @@ export default async function LatestBlogStrip({ locale }: { locale: string }) {
         <div className="mt-8 text-center sm:hidden">
           <Link
             href={`/${locale}/blog`}
-            className="inline-flex items-center gap-1 text-sm font-semibold text-brand-gold hover:underline"
+            className="inline-flex items-center gap-1 text-sm font-semibold text-brand-gold-ink hover:underline"
           >
             {t("viewAll")}
             <ArrowRight className="h-4 w-4" />

@@ -363,7 +363,7 @@ export default async function BlogPostPage({
           {/* Related Services — interlink blog topics to service pages */}
           {relatedServices.length > 0 && (
             <div className="mt-12 rounded-2xl border border-brand-gold/30 bg-brand-gold/5 p-6 sm:p-8">
-              <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold mb-2">
+              <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold-ink mb-2">
                 {locale === "ru" ? "Связанные услуги" : "Related services"}
               </p>
               <h3 className="text-lg font-bold text-brand-navy mb-4">
@@ -391,7 +391,7 @@ export default async function BlogPostPage({
           <aside className="mt-12 rounded-2xl border border-brand-navy/10 bg-brand-light p-6 sm:p-8">
             <div className="flex items-start gap-4">
               <div className="flex-1">
-                <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold mb-2">
+                <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold-ink mb-2">
                   {locale === "ru" ? "Об авторе" : "About the author"}
                 </p>
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
@@ -404,7 +404,7 @@ export default async function BlogPostPage({
                 </p>
                 <Link
                   href={`/${locale}/about`}
-                  className="inline-flex items-center text-sm font-semibold text-brand-gold hover:text-brand-gold/80"
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy"
                 >
                   {locale === "ru" ? "Больше о команде" : "More about our team"}
                   <ArrowRight className="ml-1 h-4 w-4" />
@@ -455,7 +455,7 @@ export default async function BlogPostPage({
                       <h3 className="text-base font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors">
                         {relatedPost.frontmatter.title}
                       </h3>
-                      <p className="text-sm text-brand-navy/60 line-clamp-2">
+                      <p className="text-sm text-brand-navy/70 line-clamp-2">
                         {relatedPost.frontmatter.description}
                       </p>
                     </div>

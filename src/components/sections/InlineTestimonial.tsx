@@ -42,14 +42,14 @@ export default function InlineTestimonial({
       <figcaption className="mt-4 flex items-center justify-between">
         <div>
           <p className="text-sm font-semibold text-brand-navy">{author}</p>
-          <p className="text-xs text-brand-navy/60">{role}</p>
+          <p className="text-xs text-brand-navy/70">{role}</p>
         </div>
         <div className="text-right">
           <div className="flex items-center gap-1">
             <span className="text-brand-gold text-xs" aria-hidden="true">
               ★★★★★
             </span>
-            <span className="text-xs text-brand-navy/50">
+            <span className="text-xs text-brand-navy/70">
               {viaLabel}{" "}
               <a
                 href={GOOGLE_MAPS_URL}
@@ -62,7 +62,7 @@ export default function InlineTestimonial({
             </span>
           </div>
           {date && (
-            <p className="text-xs text-brand-navy/30 mt-0.5">
+            <p className="text-xs text-brand-navy/70 mt-0.5">
               {postedLabel} {date}
             </p>
           )}

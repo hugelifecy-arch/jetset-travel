@@ -257,7 +257,7 @@ export default async function SchengenCyprus2026Hub({
           <h2 className="font-display text-2xl md:text-3xl font-bold text-brand-navy mb-3 text-center">
             {isRu ? "Подробные гиды" : "In-depth guides"}
           </h2>
-          <p className="text-brand-navy/60 text-center mb-10 max-w-2xl mx-auto">
+          <p className="text-brand-navy/70 text-center mb-10 max-w-2xl mx-auto">
             {isRu
               ? "Подробные материалы по каждому аспекту вступления Кипра в Шенген — обновляются по мере появления новой информации."
               : "Deep-dives on every angle of Cyprus's Schengen accession — kept up to date as new information emerges."}
@@ -270,14 +270,14 @@ export default async function SchengenCyprus2026Hub({
                 className="group flex flex-col p-6 rounded-2xl bg-white border border-brand-navy/10 hover:border-brand-gold/40 hover:shadow-luxury transition-all"
               >
                 {p.badge && (
-                  <span className="inline-block self-start text-xs uppercase tracking-wider font-semibold text-brand-gold bg-brand-gold/10 px-2.5 py-1 rounded-full mb-3">
+                  <span className="inline-block self-start text-xs uppercase tracking-wider font-semibold text-brand-gold-ink bg-brand-gold/10 px-2.5 py-1 rounded-full mb-3">
                     {p.badge}
                   </span>
                 )}
                 <h3 className="font-display text-lg font-bold text-brand-navy leading-snug">
                   {p.title}
                 </h3>
-                <p className="text-sm text-brand-navy/60 mt-2 leading-relaxed">
+                <p className="text-sm text-brand-navy/70 mt-2 leading-relaxed">
                   {p.description}
                 </p>
                 <span className="mt-4 inline-flex items-center text-sm font-semibold text-brand-navy group-hover:text-brand-gold transition-colors">
@@ -296,7 +296,7 @@ export default async function SchengenCyprus2026Hub({
           <h2 className="font-display text-2xl md:text-3xl font-bold text-brand-navy mb-3 text-center">
             {isRu ? "Связанные услуги JetSet" : "Related JetSet services"}
           </h2>
-          <p className="text-brand-navy/60 text-center mb-10 max-w-2xl mx-auto">
+          <p className="text-brand-navy/70 text-center mb-10 max-w-2xl mx-auto">
             {isRu
               ? "Если вы готовитесь к Шенгену 2026, эти услуги помогут вам подготовиться сейчас."
               : "If you're preparing for Schengen 2026, these services help you get ahead now."}
@@ -319,7 +319,7 @@ export default async function SchengenCyprus2026Hub({
                   <h3 className="font-display text-lg font-bold text-brand-navy">
                     {s.title}
                   </h3>
-                  <p className="text-sm text-brand-navy/60 mt-1.5 leading-relaxed">
+                  <p className="text-sm text-brand-navy/70 mt-1.5 leading-relaxed">
                     {s.description}
                   </p>
                 </div>

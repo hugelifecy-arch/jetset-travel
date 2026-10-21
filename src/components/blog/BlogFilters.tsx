@@ -110,13 +110,13 @@ export function BlogFiltersView({
       <div className="mb-10 space-y-6">
         {/* Search */}
         <div className="relative max-w-md mx-auto">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-brand-navy/40" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4.5 w-4.5 text-brand-navy/70" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
             placeholder={t("searchPlaceholder")}
-            className="w-full pl-10 pr-4 py-3 rounded-xl border border-brand-navy/10 bg-white text-sm text-brand-navy placeholder:text-brand-navy/40 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors"
+            className="w-full pl-10 pr-4 py-3 rounded-xl border border-brand-navy/10 bg-white text-sm text-brand-navy placeholder:text-brand-navy/70 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors"
           />
         </div>
 
@@ -129,7 +129,7 @@ export function BlogFiltersView({
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                 activeCategory === category
                   ? "bg-brand-gold text-brand-navy"
-                  : "bg-brand-navy/5 text-brand-navy/60 hover:bg-brand-navy/10 hover:text-brand-navy"
+                  : "bg-brand-navy/5 text-brand-navy/70 hover:bg-brand-navy/10 hover:text-brand-navy"
               }`}
             >
               {t(CATEGORY_KEYS[category])}
@@ -162,7 +162,7 @@ export function BlogFiltersView({
                   )}
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center gap-3 text-xs text-brand-navy/50 mb-3">
+                  <div className="flex items-center gap-3 text-xs text-brand-navy/70 mb-3">
                     <span className="flex items-center gap-1">
                       <Calendar className="h-3.5 w-3.5" />
                       {new Date(post.frontmatter.date).toLocaleDateString(
@@ -178,20 +178,20 @@ export function BlogFiltersView({
                   <h2 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-gold transition-colors line-clamp-2">
                     {post.frontmatter.title}
                   </h2>
-                  <p className="text-sm text-brand-navy/60 leading-relaxed line-clamp-3">
+                  <p className="text-sm text-brand-navy/70 leading-relaxed line-clamp-3">
                     {post.frontmatter.description}
                   </p>
                   <div className="flex flex-wrap gap-1.5 mt-3">
                     {post.frontmatter.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs px-2 py-0.5 rounded-full bg-brand-navy/5 text-brand-navy/50"
+                        className="text-xs px-2 py-0.5 rounded-full bg-brand-navy/5 text-brand-navy/70"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <span className="inline-flex items-center mt-4 text-sm font-semibold text-brand-gold">
+                  <span className="inline-flex items-center mt-4 text-sm font-semibold text-brand-gold-ink">
                     {t("readMore")}
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </span>
@@ -202,7 +202,7 @@ export function BlogFiltersView({
         </div>
       ) : (
         <div className="text-center py-16">
-          <p className="text-brand-navy/50 text-lg">{t("noResults")}</p>
+          <p className="text-brand-navy/70 text-lg">{t("noResults")}</p>
         </div>
       )}
 
@@ -212,7 +212,7 @@ export function BlogFiltersView({
           <button
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="px-4 py-2 rounded-lg text-sm font-medium text-brand-navy/60 hover:text-brand-navy hover:bg-brand-navy/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="px-4 py-2 rounded-lg text-sm font-medium text-brand-navy/70 hover:text-brand-navy hover:bg-brand-navy/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             {t("prev")}
           </button>
@@ -223,7 +223,7 @@ export function BlogFiltersView({
               className={`w-10 h-10 rounded-lg text-sm font-medium transition-colors ${
                 currentPage === page
                   ? "bg-brand-gold text-brand-navy"
-                  : "text-brand-navy/60 hover:bg-brand-navy/5"
+                  : "text-brand-navy/70 hover:bg-brand-navy/5"
               }`}
             >
               {page}
@@ -232,7 +232,7 @@ export function BlogFiltersView({
           <button
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="px-4 py-2 rounded-lg text-sm font-medium text-brand-navy/60 hover:text-brand-navy hover:bg-brand-navy/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+            className="px-4 py-2 rounded-lg text-sm font-medium text-brand-navy/70 hover:text-brand-navy hover:bg-brand-navy/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
           >
             {t("next")}
           </button>

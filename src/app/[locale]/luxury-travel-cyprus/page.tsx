@@ -153,7 +153,7 @@ export default async function LuxuryTravelCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("overviewTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("overviewSubtitle")}
             </p>
           </div>
@@ -181,7 +181,7 @@ export default async function LuxuryTravelCyprusPage({
                   <h3 className="text-lg font-bold text-brand-navy mb-2">
                     {t(item.titleKey)}
                   </h3>
-                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
                     {t(item.descKey)}
                   </p>
                 </div>
@@ -198,7 +198,7 @@ export default async function LuxuryTravelCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("destTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("destSubtitle")}
             </p>
           </div>
@@ -211,13 +211,13 @@ export default async function LuxuryTravelCyprusPage({
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 group-hover:bg-brand-gold group-hover:text-white transition-colors">
                   <dest.icon className="h-7 w-7" />
                 </div>
-                <p className="text-brand-gold text-xs font-semibold uppercase tracking-wider mb-2">
+                <p className="text-brand-gold-ink text-xs font-semibold uppercase tracking-wider mb-2">
                   {t(dest.tagKey)}
                 </p>
                 <h3 className="text-xl font-bold text-brand-navy mb-3">
                   {t(dest.nameKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(dest.descKey)}
                 </p>
               </div>
@@ -233,7 +233,7 @@ export default async function LuxuryTravelCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("includedTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("includedSubtitle")}
             </p>
           </div>
@@ -248,7 +248,7 @@ export default async function LuxuryTravelCyprusPage({
                   <h3 className="text-base font-semibold text-brand-navy mb-1">
                     {t(`${key}Title`)}
                   </h3>
-                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
                     {t(`${key}Desc`)}
                   </p>
                 </div>
@@ -269,10 +269,10 @@ export default async function LuxuryTravelCyprusPage({
               <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
                 {t("honeymoonTitle")}
               </h2>
-              <p className="text-brand-navy/60 leading-relaxed mb-6">
+              <p className="text-brand-navy/70 leading-relaxed mb-6">
                 {t("honeymoonP1")}
               </p>
-              <p className="text-brand-navy/60 leading-relaxed mb-8">
+              <p className="text-brand-navy/70 leading-relaxed mb-8">
                 {t("honeymoonP2")}
               </p>
               <Link
@@ -291,7 +291,7 @@ export default async function LuxuryTravelCyprusPage({
                     {t("honeymoonFeature1Title")}
                   </h3>
                 </div>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t("honeymoonFeature1Desc")}
                 </p>
               </div>
@@ -302,7 +302,7 @@ export default async function LuxuryTravelCyprusPage({
                     {t("honeymoonFeature2Title")}
                   </h3>
                 </div>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t("honeymoonFeature2Desc")}
                 </p>
               </div>
@@ -313,7 +313,7 @@ export default async function LuxuryTravelCyprusPage({
                     {t("honeymoonFeature3Title")}
                   </h3>
                 </div>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t("honeymoonFeature3Desc")}
                 </p>
               </div>

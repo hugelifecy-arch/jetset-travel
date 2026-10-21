@@ -28,14 +28,14 @@ function SuccessScreen({ t }: { t: QuoteTFunction }) {
       <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
         {t("successTitle")}
       </h2>
-      <p className="text-brand-navy/60 text-lg max-w-md mb-8">
+      <p className="text-brand-navy/70 text-lg max-w-md mb-8">
         {t("successMessage")}
       </p>
       <a
         href={`https://wa.me/35799478073?text=${encodeURIComponent(whatsAppText)}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-sm font-semibold text-white hover:bg-[#22c35e] transition-colors"
+        className="inline-flex items-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-sm font-semibold text-brand-dark hover:bg-[#22c35e] transition-colors"
       >
         <MessageCircle className="h-5 w-5" />
         {t("successWhatsApp")}
@@ -86,7 +86,7 @@ export function QuoteFlow({ initialBranch }: { initialBranch: QuoteBranch }) {
                 <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-3">
                   {t("typeTitle")}
                 </h2>
-                <p className="text-brand-navy/60">
+                <p className="text-brand-navy/70">
                   {t("typeSubtitle")}
                 </p>
               </div>
@@ -101,7 +101,7 @@ export function QuoteFlow({ initialBranch }: { initialBranch: QuoteBranch }) {
                   <h3 className="text-xl font-bold text-brand-navy mb-2">
                     {t("corporateTitle")}
                   </h3>
-                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
                     {t("corporateDesc")}
                   </p>
                 </button>
@@ -116,7 +116,7 @@ export function QuoteFlow({ initialBranch }: { initialBranch: QuoteBranch }) {
                   <h3 className="text-xl font-bold text-brand-navy mb-2">
                     {t("luxuryTitle")}
                   </h3>
-                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
                     {t("luxuryDesc")}
                   </p>
                 </button>
@@ -127,7 +127,7 @@ export function QuoteFlow({ initialBranch }: { initialBranch: QuoteBranch }) {
             <div>
               <button
                 onClick={() => setBranch(null)}
-                className="inline-flex items-center gap-2 text-sm text-brand-navy/60 hover:text-brand-gold transition-colors mb-8"
+                className="inline-flex items-center gap-2 text-sm text-brand-navy/70 hover:text-brand-gold transition-colors mb-8"
               >
                 <ArrowLeft className="h-4 w-4" />
                 {t("backToSelection")}
@@ -149,7 +149,7 @@ export function QuoteFlow({ initialBranch }: { initialBranch: QuoteBranch }) {
                     ? t("corporateEnquiry")
                     : t("luxuryEnquiry")}
                 </h2>
-                <p className="text-brand-navy/60 text-sm">
+                <p className="text-brand-navy/70 text-sm">
                   {t("formSubtitle")}
                 </p>
               </div>

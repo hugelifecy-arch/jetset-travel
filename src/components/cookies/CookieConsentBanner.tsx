@@ -100,7 +100,7 @@ export default function CookieConsentBanner() {
               {t("banner")}{" "}
               <a
                 href={`/${locale}/privacy`}
-                className="font-medium text-brand-gold underline underline-offset-2 transition-colors hover:text-brand-gold/80"
+                className="font-medium text-brand-gold-ink underline underline-offset-2 transition-colors hover:text-brand-navy"
               >
                 {t("privacyLink")}
               </a>
@@ -206,12 +206,12 @@ function CookieCategory({
             {label}
           </span>
           {badge && (
-            <span className="rounded-full bg-brand-light px-2 py-0.5 text-xs font-medium text-brand-navy/60">
+            <span className="rounded-full bg-brand-light px-2 py-0.5 text-xs font-medium text-brand-navy/70">
               {badge}
             </span>
           )}
         </div>
-        <p className="mt-1 text-xs leading-relaxed text-brand-navy/60 sm:text-sm">
+        <p className="mt-1 text-xs leading-relaxed text-brand-navy/70 sm:text-sm">
           {description}
         </p>
       </div>

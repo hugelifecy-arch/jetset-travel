@@ -20,13 +20,13 @@ export default function NotFound() {
       <body className="antialiased">
     <div className="min-h-screen bg-brand-light flex items-center justify-center px-4">
       <div className="max-w-2xl w-full text-center py-20">
-        <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
+        <p className="text-brand-gold-ink font-semibold text-sm uppercase tracking-wider mb-4">
           404
         </p>
         <h1 className="text-4xl md:text-5xl font-bold text-brand-navy mb-4">
           Page Not Found
         </h1>
-        <p className="text-brand-navy/60 text-lg mb-10 max-w-lg mx-auto">
+        <p className="text-brand-navy/70 text-lg mb-10 max-w-lg mx-auto">
           Sorry, the page you&apos;re looking for doesn&apos;t exist or has been
           moved. Try one of the links below or contact us directly.
         </p>

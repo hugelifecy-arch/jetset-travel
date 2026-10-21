@@ -39,5 +39,9 @@ export async function markdownToHtml(markdown: string): Promise<string> {
     .use(remarkGfm)
     .use(remarkHtml, { sanitize: schema })
     .process(markdown);
-  return result.toString();
+  // Wide tables scroll sideways on phones (prose-table:block overflow-x-auto),
+  // so keyboard users must be able to focus them to scroll (WCAG 2.1.1).
+  // Added after sanitizing; the sanitizer's output never carries attributes
+  // on <table>.
+  return result.toString().replace(/<table>/g, '<table tabindex="0">');
 }

@@ -62,7 +62,7 @@ export default async function NotFound() {
       {/* Hero */}
       <section className="bg-brand-navy text-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          <p className="font-display text-8xl md:text-9xl font-bold text-brand-gold/20 select-none mb-4">
+          <p aria-hidden="true" className="font-display text-8xl md:text-9xl font-bold text-brand-gold/20 select-none mb-4">
             {t("errorCode")}
           </p>
           <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
@@ -97,7 +97,7 @@ export default async function NotFound() {
                   <h3 className="font-semibold text-brand-navy group-hover:text-brand-gold transition-colors">
                     {link.title}
                   </h3>
-                  <p className="text-sm text-brand-navy/60 mt-1">
+                  <p className="text-sm text-brand-navy/70 mt-1">
                     {link.description}
                   </p>
                 </div>
@@ -118,7 +118,7 @@ export default async function NotFound() {
             href={`https://wa.me/35799478073?text=${whatsappText}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center rounded-full bg-[#25D366] px-8 py-3.5 text-sm font-semibold text-white hover:bg-[#20BD5A] transition-colors"
+            className="inline-flex items-center rounded-full bg-[#25D366] px-8 py-3.5 text-sm font-semibold text-brand-dark hover:bg-[#20BD5A] transition-colors"
           >
             {t("whatsappButton")}
             <ArrowRight className="ml-2 h-4 w-4" />

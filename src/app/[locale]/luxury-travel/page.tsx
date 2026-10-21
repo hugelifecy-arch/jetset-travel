@@ -188,7 +188,7 @@ export default async function LuxuryTravelPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("categoriesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("categoriesSubtitle")}
             </p>
           </div>
@@ -204,7 +204,7 @@ export default async function LuxuryTravelPage({
                 <h3 className="text-xl font-bold text-brand-navy mb-3">
                   {cat.title}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {cat.description}
                 </p>
               </div>
@@ -240,7 +240,7 @@ export default async function LuxuryTravelPage({
                 <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6">
                   {item.title}
                 </h2>
-                <p className="text-brand-navy/60 leading-relaxed text-lg">
+                <p className="text-brand-navy/70 leading-relaxed text-lg">
                   {item.description}
                 </p>
               </div>
@@ -256,7 +256,7 @@ export default async function LuxuryTravelPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("destTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("destSubtitle")}
             </p>
           </div>
@@ -282,13 +282,13 @@ export default async function LuxuryTravelPage({
                   </div>
                 </div>
                 <div className="p-6">
-                  <p className="text-brand-gold text-xs font-semibold uppercase tracking-wider mb-1">
+                  <p className="text-brand-gold-ink text-xs font-semibold uppercase tracking-wider mb-1">
                     {dest.tagline}
                   </p>
                   <h3 className="text-xl font-bold text-brand-navy mb-2">
                     {dest.name}
                   </h3>
-                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
                     {dest.description}
                   </p>
                 </div>
@@ -311,13 +311,13 @@ export default async function LuxuryTravelPage({
           </div>
           <div className="mt-6 flex items-center justify-center gap-2">
             <span className="text-brand-gold text-sm" aria-hidden="true">★★★★★</span>
-            <span className="text-white/40 text-xs">
+            <span className="text-white/70 text-xs">
               5/5{" "}
               <a
                 href="https://www.google.com/search?q=JetSet+Travel+Agency+-+Paphos#lrd=0x14e706ec2d62587f:0x4161901d9b64e1b4,1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline underline-offset-2 hover:text-white/60 transition-colors"
+                className="underline underline-offset-2 hover:text-white transition-colors"
               >
                 via Google Reviews
               </a>
@@ -348,7 +348,7 @@ export default async function LuxuryTravelPage({
           <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
             {t("ctaTitle")}
           </h2>
-          <p className="text-brand-navy/60 max-w-2xl mx-auto mb-8">
+          <p className="text-brand-navy/70 max-w-2xl mx-auto mb-8">
             {t("ctaSubtitle")}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

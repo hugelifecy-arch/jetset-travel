@@ -234,7 +234,7 @@ export default function LuxuryForm({
         />
       </div>
 
-      {submitError && <p className="text-sm text-red-500">{submitError}</p>}
+      {submitError && <p className="text-sm text-red-700">{submitError}</p>}
 
       <button
         type="submit"

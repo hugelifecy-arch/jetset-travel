@@ -62,14 +62,14 @@ export default function TrustSection() {
                 key={stat.labelKey}
                 className="rounded-2xl border border-brand-navy/10 bg-white p-4 sm:p-6 text-center shadow-card"
               >
-                <p className="font-display text-3xl font-bold text-brand-gold sm:text-4xl">
+                <p className="font-display text-3xl font-bold text-brand-gold-ink sm:text-4xl">
                   {t(stat.valueKey)}
                 </p>
                 <p className="mt-2 text-sm font-medium text-brand-navy/70">
                   {t(stat.labelKey)}
                 </p>
                 {"contextKey" in stat && stat.contextKey && (
-                  <p className="mt-1 text-xs text-brand-navy/40">
+                  <p className="mt-1 text-xs text-brand-navy/70">
                     {t(stat.contextKey)}
                   </p>
                 )}

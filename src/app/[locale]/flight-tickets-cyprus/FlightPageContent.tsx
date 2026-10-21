@@ -118,7 +118,7 @@ export default async function FlightPageContent({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("iataTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("iataSubtitle")}
             </p>
           </div>
@@ -143,7 +143,7 @@ export default async function FlightPageContent({
                   <h3 className="text-lg font-bold text-brand-navy mb-2">
                     {t(item.titleKey)}
                   </h3>
-                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
                     {t(item.descKey)}
                   </p>
                 </div>
@@ -164,10 +164,10 @@ export default async function FlightPageContent({
               <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
                 {t("pfoTitle")}
               </h2>
-              <p className="text-brand-navy/60 leading-relaxed mb-6">
+              <p className="text-brand-navy/70 leading-relaxed mb-6">
                 {t("pfoP1")}
               </p>
-              <p className="text-brand-navy/60 leading-relaxed">
+              <p className="text-brand-navy/70 leading-relaxed">
                 {t("pfoP2")}
               </p>
             </div>
@@ -216,10 +216,10 @@ export default async function FlightPageContent({
               <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
                 {t("lcaTitle")}
               </h2>
-              <p className="text-brand-navy/60 leading-relaxed mb-6">
+              <p className="text-brand-navy/70 leading-relaxed mb-6">
                 {t("lcaP1")}
               </p>
-              <p className="text-brand-navy/60 leading-relaxed">
+              <p className="text-brand-navy/70 leading-relaxed">
                 {t("lcaP2")}
               </p>
             </div>
@@ -234,7 +234,7 @@ export default async function FlightPageContent({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("bizTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("bizSubtitle")}
             </p>
           </div>
@@ -258,7 +258,7 @@ export default async function FlightPageContent({
                     <h3 className="text-base font-semibold text-brand-navy mb-1">
                       {t(`${key}Title`)}
                     </h3>
-                    <p className="text-brand-navy/60 text-sm leading-relaxed">
+                    <p className="text-brand-navy/70 text-sm leading-relaxed">
                       {t(`${key}Desc`)}
                     </p>
                   </div>
@@ -280,10 +280,10 @@ export default async function FlightPageContent({
               <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
                 {t("groupTitle")}
               </h2>
-              <p className="text-brand-navy/60 leading-relaxed mb-6">
+              <p className="text-brand-navy/70 leading-relaxed mb-6">
                 {t("groupP1")}
               </p>
-              <p className="text-brand-navy/60 leading-relaxed mb-8">
+              <p className="text-brand-navy/70 leading-relaxed mb-8">
                 {t("groupP2")}
               </p>
               <Link
@@ -305,7 +305,7 @@ export default async function FlightPageContent({
                     <h3 className="text-base font-semibold text-brand-navy mb-1">
                       {t(`${key}Title`)}
                     </h3>
-                    <p className="text-brand-navy/60 text-sm leading-relaxed">
+                    <p className="text-brand-navy/70 text-sm leading-relaxed">
                       {t(`${key}Desc`)}
                     </p>
                   </div>

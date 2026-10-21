@@ -250,7 +250,7 @@ export default function ExitIntentPopup() {
         {/* Close button */}
         <button
           onClick={close}
-          className="absolute right-4 top-4 text-brand-navy/50 transition-colors hover:text-brand-navy"
+          className="absolute right-4 top-4 text-brand-navy/70 transition-colors hover:text-brand-navy"
           aria-label={t("close")}
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -335,7 +335,7 @@ export default function ExitIntentPopup() {
                   <span
                     id="exit-intent-name-error"
                     role="alert"
-                    className="text-xs text-red-500"
+                    className="text-xs text-red-700"
                   >
                     {errors.name.message}
                   </span>
@@ -356,7 +356,7 @@ export default function ExitIntentPopup() {
                   <span
                     id="exit-intent-email-error"
                     role="alert"
-                    className="text-xs text-red-500"
+                    className="text-xs text-red-700"
                   >
                     {errors.email.message}
                   </span>
@@ -385,7 +385,7 @@ export default function ExitIntentPopup() {
                         "rounded-full border px-3 py-1.5 text-xs font-medium transition-colors",
                         selectedTravelType === type
                           ? "border-brand-gold bg-brand-gold/10 text-brand-navy"
-                          : "border-brand-navy/20 text-brand-navy/60 hover:border-brand-gold hover:text-brand-navy",
+                          : "border-brand-navy/20 text-brand-navy/70 hover:border-brand-gold hover:text-brand-navy",
                       )}
                     >
                       {t(
@@ -412,7 +412,7 @@ export default function ExitIntentPopup() {
               </Button>
             </form>
 
-            <p className="mt-3 text-center text-xs text-brand-navy/50">
+            <p className="mt-3 text-center text-xs text-brand-navy/70">
               {t("disclaimer")}
             </p>
           </>
