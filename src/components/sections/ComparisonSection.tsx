@@ -25,7 +25,8 @@ export default function ComparisonSection() {
   ];
 
   return (
-    <section className="bg-white py-20 sm:py-24">
+    // overflow-x-clip: see TrustSection (audit F-17).
+    <section className="bg-white py-20 sm:py-24 overflow-x-clip">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <motion.h2

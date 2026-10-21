@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useTranslations } from "next-intl";
@@ -56,11 +56,17 @@ export default function CorporateForm({
   const {
     register,
     handleSubmit,
+    setValue,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<CorporateFormData>({
     resolver: zodResolver(schema),
     defaultValues: { invoiceRequired: false },
   });
+  // Single source of truth for the VAT switch: the form value. The previous
+  // version flipped aria-checked by hand, so clicking the label toggled the
+  // checkbox without updating the switch (audit F-15).
+  const invoiceRequired = useWatch({ control, name: "invoiceRequired" });
 
   const onSubmit = async (data: CorporateFormData) => {
     setSubmitError(null);
@@ -204,29 +210,25 @@ export default function CorporateForm({
         <button
           type="button"
           role="switch"
-          aria-checked={false}
-          onClick={(e) => {
-            const input = document.getElementById(
-              "invoiceRequired"
-            ) as HTMLInputElement;
-            if (input) {
-              input.click();
-            }
-            const btn = e.currentTarget;
-            const isChecked = btn.getAttribute("aria-checked") === "true";
-            btn.setAttribute("aria-checked", String(!isChecked));
-          }}
-          className="relative inline-flex h-6 w-11 items-center rounded-full bg-brand-navy/20 transition-colors aria-[checked=true]:bg-brand-gold"
+          aria-checked={Boolean(invoiceRequired)}
+          aria-labelledby="invoiceRequired-label"
+          onClick={() =>
+            setValue("invoiceRequired", !invoiceRequired, { shouldDirty: true })
+          }
+          className="group relative inline-flex h-6 w-11 items-center rounded-full bg-brand-navy/20 transition-colors aria-[checked=true]:bg-brand-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
         >
-          <span className="inline-block h-4 w-4 rounded-full bg-white transition-transform translate-x-1 aria-checked:translate-x-6" />
+          <span className="inline-block h-4 w-4 rounded-full bg-white transition-transform translate-x-1 group-aria-[checked=true]:translate-x-6" />
         </button>
         <input
           id="invoiceRequired"
           type="checkbox"
+          tabIndex={-1}
+          aria-hidden="true"
           {...register("invoiceRequired")}
           className="sr-only"
         />
         <label
+          id="invoiceRequired-label"
           htmlFor="invoiceRequired"
           className="text-sm text-brand-navy cursor-pointer"
         >

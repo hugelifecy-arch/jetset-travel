@@ -43,7 +43,12 @@ export default function Breadcrumbs() {
             const isLast = index === crumbs.length - 1;
             const isHome = index === 0;
             return (
-              <li key={crumb.href} className="flex items-center gap-1.5 min-w-0">
+              <li
+                key={crumb.href}
+                // Middle crumbs are hidden on mobile as a whole item: a visible-less
+                // link would stay focusable but unnamed (audit F-16, WCAG 2.4.4).
+                className={`${!isHome && !isLast ? "hidden sm:flex" : "flex"} items-center gap-1.5 min-w-0`}
+              >
                 {index > 0 && (
                   <ChevronRight className="h-3.5 w-3.5 flex-shrink-0" aria-hidden="true" />
                 )}
@@ -63,7 +68,8 @@ export default function Breadcrumbs() {
                     {isHome && (
                       <Home className="h-3.5 w-3.5 flex-shrink-0" aria-hidden="true" />
                     )}
-                    <span className="hidden sm:inline">{crumb.name}</span>
+                    {/* sr-only (not display:none) keeps the Home link named on mobile */}
+                    <span className={isHome ? "sr-only sm:not-sr-only" : undefined}>{crumb.name}</span>
                   </Link>
                 )}
               </li>

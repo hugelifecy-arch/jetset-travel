@@ -284,7 +284,7 @@ export default async function BlogPostPage({
                   className="flex items-center gap-1 hover:text-brand-gold transition-colors"
                 >
                   <Home className="h-3.5 w-3.5 flex-shrink-0" aria-hidden="true" />
-                  <span className="hidden sm:inline">{getHomeName(locale)}</span>
+                  <span className="sr-only sm:not-sr-only">{getHomeName(locale)}</span>
                 </Link>
               </li>
               <li className="flex items-center"><ChevronRight className="h-3.5 w-3.5" aria-hidden="true" /></li>

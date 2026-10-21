@@ -184,9 +184,9 @@ export default function HeaderClient() {
             <a
               href="tel:+35799478073"
               className="flex items-center gap-1.5 text-xs text-white/60 hover:text-brand-gold transition-colors"
-              aria-label="Call JetSet Travel"
+              title="Call JetSet Travel"
             >
-              <Phone className="h-3.5 w-3.5" />
+              <Phone className="h-3.5 w-3.5" aria-hidden="true" />
               <span>+357 99 478 073</span>
             </a>
             <span className="text-white/20">|</span>
@@ -202,7 +202,7 @@ export default function HeaderClient() {
                       : "font-normal text-white/50 hover:text-white"
                   }`}
                   aria-current={locale === "en" ? "page" : undefined}
-                  aria-label="English"
+                  aria-label="EN – English"
                   title="English"
                 >
                   EN
@@ -219,7 +219,7 @@ export default function HeaderClient() {
                       : "font-normal text-white/50 hover:text-white"
                   }`}
                   aria-current={locale === "ru" ? "page" : undefined}
-                  aria-label="Русский"
+                  aria-label="RU – Русский"
                   title="Русский"
                 >
                   RU
@@ -241,6 +241,8 @@ export default function HeaderClient() {
               onClick={() => setMobileOpen(!mobileOpen)}
               className="p-2 text-white min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileOpen ? (
                 <X className="h-6 w-6" />
@@ -254,7 +256,7 @@ export default function HeaderClient() {
 
       {/* Mobile slide-down nav */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-white/10 bg-brand-navy">
+        <div id="mobile-navigation" className="md:hidden border-t border-white/10 bg-brand-navy">
           <nav className="px-4 py-4 pb-16 sm:pb-24 space-y-1">
             {/* Home link */}
             <Link
