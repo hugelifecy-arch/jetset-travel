@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata } from "@/lib/seo";
 import HeroSection from "@/components/sections/HeroSection";
 import TrustCredentialsBar from "@/components/sections/TrustCredentialsBar";
@@ -69,13 +69,10 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const t = await getTranslations({ locale, namespace: "reviews" });
-
-  const reviews = [
-    { author: "Maria K.", reviewBody: t("review1.text"), ratingValue: 5 },
-    { author: "Andreas P.", reviewBody: t("review2.text"), ratingValue: 5 },
-    { author: "Dmitry S.", reviewBody: t("review3.text"), ratingValue: 5 },
-  ];
+  // Review structured data removed (audit F-02): the three homepage quotes
+  // cannot be traced to published Google reviews — repository history shows
+  // the names and "Google review" labels were added to generic marketing copy.
+  // Re-add Review markup only for quotes matched to a verifiable source.
 
   return (
     <>
@@ -91,7 +88,7 @@ export default async function HomePage({
       <ClientLogos />
       <LatestBlogStrip locale={locale} />
       <CTABanner />
-      <LocalBusinessSchema reviews={reviews} />
+      <LocalBusinessSchema />
       <WebSiteSchema />
     </>
   );

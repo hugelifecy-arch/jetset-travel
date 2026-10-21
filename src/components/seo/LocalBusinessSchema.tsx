@@ -55,8 +55,10 @@ export default async function LocalBusinessSchema({
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 34.7604,
-      longitude: 32.4224,
+      // Matches the Google Business Profile pin and the contact-page map embed
+      // (was 34.7604, 32.4224 — about 0.85 km away). Owner to confirm (F-10).
+      latitude: 34.7675,
+      longitude: 32.419,
     },
     contactPoint: [
       {
