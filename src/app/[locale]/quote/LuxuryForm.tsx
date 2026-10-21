@@ -9,6 +9,7 @@ import { ArrowRight } from "lucide-react";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { useFormMessages } from "@/components/forms/useFormMessages";
 import { trackLead } from "@/lib/analytics/fbpixel";
+import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import FormTrustElements from "@/components/forms/FormTrustElements";
 import {
   inputClasses,
@@ -72,12 +73,15 @@ export default function LuxuryForm({
           website: honeypotRef.current?.value || "",
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
+          locale: document.documentElement.lang,
         }),
       });
       if (!res.ok) throw new Error("Failed to submit");
+      trackFormSuccess("luxury_quote");
       trackLead({ content_name: "Luxury Quote", content_category: "luxury" });
       onSuccess();
     } catch {
+      trackFormError("luxury_quote", "network_or_server");
       setSubmitError(t("submitError"));
     }
   };

@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { trackContact, trackLead } from "@/lib/analytics/fbpixel";
+import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import {
   MapPin,
   Phone,
@@ -75,13 +76,16 @@ export default function ContactContent() {
           website: honeypotRef.current?.value || "",
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
+          locale: document.documentElement.lang,
         }),
       });
       if (!res.ok) throw new Error("Failed to send message");
+      trackFormSuccess("contact_form", { travel_type: data.travelType });
       trackContact();
       trackLead({ content_name: "Contact Form", content_category: "contact" });
       setSubmitted(true);
     } catch {
+      trackFormError("contact_form", "network_or_server");
       setSubmitError(t("submitError"));
     }
   };

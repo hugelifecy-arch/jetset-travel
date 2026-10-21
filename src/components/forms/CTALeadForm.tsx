@@ -61,6 +61,7 @@ export default function CTALeadForm() {
           ...data,
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
+          locale: document.documentElement.lang,
         }),
       });
       if (!res.ok) throw new Error();

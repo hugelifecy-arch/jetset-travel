@@ -9,6 +9,7 @@ import { ArrowRight } from "lucide-react";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { useFormMessages } from "@/components/forms/useFormMessages";
 import { trackLead } from "@/lib/analytics/fbpixel";
+import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import FormTrustElements from "@/components/forms/FormTrustElements";
 import {
   inputClasses,
@@ -74,12 +75,15 @@ export default function CorporateForm({
           website: honeypotRef.current?.value || "",
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
+          locale: document.documentElement.lang,
         }),
       });
       if (!res.ok) throw new Error("Failed to submit");
+      trackFormSuccess("corporate_quote");
       trackLead({ content_name: "Corporate Quote", content_category: "corporate" });
       onSuccess();
     } catch {
+      trackFormError("corporate_quote", "network_or_server");
       setSubmitError(t("submitError"));
     }
   };

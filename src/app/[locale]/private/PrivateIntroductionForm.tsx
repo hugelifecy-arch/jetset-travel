@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { createPrivateEnquirySchema } from "@/lib/private-enquiry-schema";
 import { getRecaptchaToken } from "@/lib/recaptcha";
+import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 
 /*
  * Deliberately stripped-down enquiry form for the Private & Family Office
@@ -76,11 +77,14 @@ export default function PrivateIntroductionForm({
           website: honeypotRef.current?.value || "",
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
+          locale: document.documentElement.lang,
         }),
       });
       if (!res.ok) throw new Error("Failed to send enquiry");
+      trackFormSuccess("private_enquiry");
       setSubmitted(true);
     } catch {
+      trackFormError("private_enquiry", "network_or_server");
       setSubmitError(labels.error);
     }
   };

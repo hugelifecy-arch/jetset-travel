@@ -3,7 +3,7 @@ import { readJsonObject } from "@/lib/json-body";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
 import { logLeadDeliveryFailure } from "@/lib/email/lead-log";
-import { emailRow, notificationEmail, autoReplyEmail } from "@/lib/email/templates";
+import { emailRow, notificationEmail, emailLocale, visitorAutoReply } from "@/lib/email/templates";
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { getClientIp } from "@/lib/client-ip";
 import { ok, fail, rateLimitGuard, stripMetaFields } from "@/lib/api-response";
@@ -64,6 +64,8 @@ export async function POST(request: Request) {
   const input = await readJsonObject(request);
   if (!input.ok) return fail(input.error, input.status);
   const body = input.body;
+  // Language of the page the visitor submitted from (EN/RU auto-reply).
+  const locale = emailLocale(body.locale);
 
   /* ---- Anti-spam checks (honeypot, timestamp, reCAPTCHA, gibberish) ---- */
   const spam = await runAntiSpamChecks(body, "contact");
@@ -108,14 +110,15 @@ export async function POST(request: Request) {
 
   // A failed visitor acknowledgement must not duplicate a delivered staff notification.
   try {
+    const reply = visitorAutoReply("contact", locale, data.name);
     await sendResendEmail(apiKey, {
       from: FROM_EMAIL,
       to: data.email,
-      subject: "JetSet Travel — Your message is received",
-      html: autoReplyEmail(
-        data.name,
-        "<p>We've received your message and will get back to you within <strong>1 hour</strong> during business hours.</p>",
-      ),
+      // Replies to the acknowledgement must reach the monitored office inbox,
+      // not the sending address (audit F-11).
+      reply_to: TO_EMAIL,
+      subject: reply.subject,
+      html: reply.html,
     });
   } catch (err) {
     logLeadDeliveryFailure("contact-auto-reply", err);

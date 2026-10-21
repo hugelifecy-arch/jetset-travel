@@ -17,6 +17,7 @@ import { pickClientMessages } from "@/lib/client-messages";
 import BreadcrumbSchema from "@/components/seo/BreadcrumbSchema";
 import VercelAnalytics from "@/components/analytics/VercelAnalytics";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import ContactClickTracker from "@/components/analytics/ContactClickTracker";
 import YandexMetrica from "@/components/analytics/YandexMetrica";
 import FacebookPixel from "@/components/analytics/FacebookPixel";
 import MicrosoftClarity from "@/components/analytics/MicrosoftClarity";
@@ -224,6 +225,7 @@ export default async function LocaleLayout({
           <ExitIntentPopup />
           <VercelAnalytics />
           <GoogleAnalytics />
+          <ContactClickTracker />
           <YandexMetrica />
           <FacebookPixel />
           <MicrosoftClarity />
