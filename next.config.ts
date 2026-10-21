@@ -28,7 +28,13 @@ const securityHeaders = [
       // reCAPTCHA v3 fetches https://www.google.com/recaptcha/api2/clr from the
       // page itself; without it every page logged a CSP violation (audit F-08).
       // Sources per https://developers.google.com/recaptcha/docs/faq (CSP).
-      "connect-src 'self' https://www.google.com/recaptcha/ https://www.google-analytics.com https://*.google-analytics.com https://mc.yandex.ru https://connect.facebook.net https://*.clarity.ms https://vitals.vercel-insights.com https://vercel.live",
+      // GA4 sends hits to analytics.google.com / www.google.com /g/collect and
+      // www.googletagmanager.com; without these every hit was blocked and GA
+      // never received data. Hosts per Google's "Analytics without any Ads
+      // features" list: https://developers.google.com/tag-platform/tag-manager/csp
+      // (*.google.com also covers the reCAPTCHA path above). Ads endpoints
+      // (*.g.doubleclick.net) stay blocked: no advertising consent is asked.
+      "connect-src 'self' https://www.google.com/recaptcha/ https://www.googletagmanager.com https://*.google.com https://www.google-analytics.com https://*.google-analytics.com https://mc.yandex.ru https://connect.facebook.net https://*.clarity.ms https://vitals.vercel-insights.com https://vercel.live",
       "frame-src 'self' https://www.google.com https://recaptcha.google.com/recaptcha/ https://www.youtube.com",
       "object-src 'none'",
       "base-uri 'self'",
