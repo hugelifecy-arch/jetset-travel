@@ -98,7 +98,7 @@ A sizeable portion of the best villa inventory on all three islands never appear
 
 We work with three kinds of sources: primary villa management companies (The Thinking Traveller, Villa Plus Collection, and specialist local operators on each island), direct-owner relationships built up over years, and sister-property networks where a villa not listed this week is offered privately when a client we trust asks. Each villa we put forward is either visited by our team or vetted by an operator we have worked with long enough to hold accountable.
 
-This is also where a travel agent earns the fee in the villa market: filtering out the villas that look right online and are wrong in person, checking staff availability for peak dates, and handling the deposit and cancellation terms before they become a problem. See our [Mediterranean luxury guide](/en/blog/luxury-mediterranean-destinations-2026/) and the broader [2026 luxury travel overview](/en/blog/luxury-travel-cyprus-2026-guide/) for related context.
+This is also where a travel agent earns the fee in the villa market: filtering out the villas that look right online and are wrong in person, checking staff availability for peak dates, and handling the deposit and cancellation terms before they become a problem. See our [Mediterranean luxury guide](/en/blog/luxury-mediterranean-destinations-2026) and the broader [2026 luxury travel overview](/en/blog/luxury-travel-cyprus-2026-guide) for related context.
 
 ## When to Book for 2026
 
@@ -148,4 +148,4 @@ Greek island summer weather is highly reliable — rain days are rare between Ju
 
 **Ready to compare specific villas?** Tell us group size, dates, and budget, and we come back with a shortlist of 4–6 villas that actually fit — with real photos, availability, and all-in pricing.
 
-[Browse curated villas](/en/quote/?service=luxury&destination=greece) · [WhatsApp us](https://wa.me/35799478073) · [Call: +357 99 478 073](tel:+35799478073)
+[Browse curated villas](/en/quote?service=luxury&destination=greece) · [WhatsApp us](https://wa.me/35799478073) · [Call: +357 99 478 073](tel:+35799478073)

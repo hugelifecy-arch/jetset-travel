@@ -1,4 +1,7 @@
 @import "tailwindcss";
+/* Blog posts and legal pages use `prose` classes; without this plugin they were
+   no-ops and articles rendered unstyled (audit F-14). */
+@plugin "@tailwindcss/typography";
 @config "../../tailwind.config.ts";
 
 :root {

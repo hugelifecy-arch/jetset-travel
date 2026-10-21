@@ -152,4 +152,4 @@ At JetSet Travel, we specialise in designing bespoke luxury itineraries that com
 
 **Ready to plan your luxury Mediterranean escape for 2026?** [Contact JetSet Travel](/en/contact) for a complimentary consultation, or [send us your wishlist](/en/quote) and we will design a personalised itinerary tailored to you.
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)

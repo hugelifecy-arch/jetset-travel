@@ -135,14 +135,14 @@ The common failure mode is rolling out a policy without switching the booking ch
 
 A Cyprus-specific corporate travel policy DOCX template, customisable for tech and financial services firms, is being finalised. It includes all twelve sections above, editable class-of-travel tables, pre-loaded per-diem ranges, and VAT clause language. Join the waitlist and we will email you the download link the day it is released — no commitment, no mailing list add.
 
-[Join the template waitlist](/en/corporate-travel/#contact) · Or [request a policy review](/en/quote/) with a JetSet account manager if you want us to write it with you.
+[Join the template waitlist](/en/corporate-travel#contact) · Or [request a policy review](/en/quote) with a JetSet account manager if you want us to write it with you.
 
 ## Related Reading
 
-- [Corporate travel management in Cyprus: what it actually costs in 2026](/en/blog/corporate-travel-management-cyprus-cost-2026/)
-- [Corporate travel tips for Cyprus businesses](/en/blog/corporate-travel-tips-cyprus/)
-- [Business travellers' guide to Limassol](/en/blog/business-travelers-guide-limassol/)
-- [Corporate travel service page](/en/corporate-travel/)
+- [Corporate travel management in Cyprus: what it actually costs in 2026](/en/blog/corporate-travel-management-cyprus-cost-2026)
+- [Corporate travel tips for Cyprus businesses](/en/blog/corporate-travel-tips-cyprus)
+- [Business travellers' guide to Limassol](/en/blog/business-travelers-guide-limassol)
+- [Corporate travel service page](/en/corporate-travel)
 
 ## FAQ
 
@@ -166,4 +166,4 @@ Annual review is the standard. The per-diem numbers, preferred supplier list, an
 
 **Need the policy written for you?** JetSet offers a fixed-fee policy review and drafting service for Cyprus firms. Typical turnaround: two weeks, including a stakeholder interview and two revision rounds.
 
-[Book a policy review](/en/corporate-travel/#contact) · [WhatsApp us](https://wa.me/35799478073) · [Call: +357 99 478 073](tel:+35799478073)
+[Book a policy review](/en/corporate-travel#contact) · [WhatsApp us](https://wa.me/35799478073) · [Call: +357 99 478 073](tel:+35799478073)

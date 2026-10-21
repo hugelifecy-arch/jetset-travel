@@ -202,6 +202,6 @@ Once you receive your Schengen visa:
 
 [Contact us](/en/contact) for visa support, or [request a quote](/en/quote) for your next trip to Europe.
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)
 
 *Disclaimer: Visa approval decisions are made solely by the respective embassy or consulate. JetSet Travel assists with application preparation and travel bookings but does not guarantee visa approval. Processing times are estimates and may vary.*

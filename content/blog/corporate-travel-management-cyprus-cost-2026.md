@@ -172,7 +172,7 @@ If you are moving from self-booking or switching agencies, keep the RFP tight. F
 
 A 30-day transition is realistic for most Cyprus firms — profile migration, traveller onboarding, policy upload, and a first-month parallel-running period.
 
-See our [corporate travel service page](/en/corporate-travel/) for scope, and our [Limassol business travel guide](/en/blog/business-travelers-guide-limassol/) for city-specific context.
+See our [corporate travel service page](/en/corporate-travel) for scope, and our [Limassol business travel guide](/en/blog/business-travelers-guide-limassol) for city-specific context.
 
 ## FAQ
 
@@ -200,4 +200,4 @@ One-year initial terms are standard, with a 60-day notice period after that. We 
 
 **Thinking about moving to managed corporate travel?** Request a proposal and we come back within three business hours with a scoped quote, not a template. No commitment, no onboarding until you sign.
 
-[Request a corporate proposal](/en/corporate-travel/#contact) · [WhatsApp us](https://wa.me/35799478073) · [Call: +357 99 478 073](tel:+35799478073)
+[Request a corporate proposal](/en/corporate-travel#contact) · [WhatsApp us](https://wa.me/35799478073) · [Call: +357 99 478 073](tel:+35799478073)

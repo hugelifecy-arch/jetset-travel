@@ -125,4 +125,4 @@ The companies that prepare now will transition smoothly. Those that wait may fin
 
 **Ready to prepare your corporate travel programme for the Schengen transition?** Our team at JetSet Travel has been advising Cyprus businesses on cross-border travel compliance for nearly 20 years. [Contact us](/en/contact) for a free consultation, or [request a quote](/en/quote) to set up a managed corporate travel account.
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)

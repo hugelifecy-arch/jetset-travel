@@ -183,4 +183,4 @@ Limassol enjoys a Mediterranean climate with mild winters and hot, dry summers:
 
 **Travelling to Limassol for business?** JetSet Travel handles every detail — from airport transfers and hotel bookings to restaurant reservations and meeting space arrangements. [Contact us](/en/contact) for a seamless business travel experience, or [request a quote](/en/quote) for your next trip.
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)

@@ -207,4 +207,4 @@ If you are considering Cyprus as your next digital nomad destination, here is a 
 
 **Planning to work remotely from Cyprus?** JetSet Travel helps digital nomads with flight bookings, airport transfers, and onward travel planning across the Mediterranean. [Contact us](/en/contact) for personalised travel advice, or [request a quote](/en/quote) for your flights to Cyprus.
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)

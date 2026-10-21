@@ -161,4 +161,4 @@ One of the advantages of cruising from your home port is the ability to extend y
 
 **Ready to book your 2026 cruise from Limassol?** JetSet Travel offers expert cruise planning, cabin selection advice, and complete pre- and post-cruise arrangements. [Contact us](/en/contact) for a personalised cruise consultation, or [request a quote](/en/quote) with your preferred dates and destinations.
 
-**Call us:** +357 99 478 073 | **Visit:** [www.jetset-travel.com](https://www.jetset-travel.com)
+**Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)
