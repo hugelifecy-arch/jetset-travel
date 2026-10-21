@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { SERVICE_LAST_UPDATED } from "../lib/seo.ts";
+import { NOINDEX_LOCALE_PATHS, SERVICE_LAST_UPDATED } from "../lib/seo.ts";
 import {
   CANONICAL_ORIGIN,
   LOCALE_ALTERNATES,
@@ -112,7 +112,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
           priority: page.priority,
           alternates: alternatesFor(localePath),
         };
-      }),
+      })
+      // A sitemap must list only indexable URLs; noindexed stubs stay out.
+      .filter((entry) => !NOINDEX_LOCALE_PATHS.has(new URL(entry.url).pathname)),
   );
 
   const crossLocalePages = crossLocalePageDefs
