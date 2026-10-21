@@ -52,7 +52,7 @@ export default function QuoteContent() {
   return <QuoteFlow key={initialBranch ?? "selection"} initialBranch={initialBranch} />;
 }
 
-function QuoteFlow({ initialBranch }: { initialBranch: QuoteBranch }) {
+export function QuoteFlow({ initialBranch }: { initialBranch: QuoteBranch }) {
   const t = useTranslations("quotePage");
   const [branch, setBranch] = useState<QuoteBranch>(initialBranch);
   const [success, setSuccess] = useState(false);

@@ -35,12 +35,26 @@ const CATEGORY_KEYS: Record<BlogCategory, string> = {
   cruises: "categoryCruises",
 };
 
+/**
+ * Reads `?q=` (the WebSite SearchAction seed) and renders the grid. Must sit in
+ * a Suspense boundary; pair it with `<BlogFiltersView initialQuery="" />` as the
+ * fallback so the full post grid and its links are in the prerendered HTML
+ * (audit F-18: the server HTML of /en/blog had zero links to posts).
+ */
 export default function BlogFilters({ posts }: { posts: BlogPost[] }) {
+  const initialQuery = useSearchParams().get("q") ?? "";
+  return <BlogFiltersView key={initialQuery} posts={posts} initialQuery={initialQuery} />;
+}
+
+export function BlogFiltersView({
+  posts,
+  initialQuery,
+}: {
+  posts: BlogPost[];
+  initialQuery: string;
+}) {
   const locale = useLocale();
   const t = useTranslations("blogPage");
-  // Seed from `?q=` so the WebSite SearchAction (sitelinks search box)
-  // actually lands users on filtered results instead of the full archive.
-  const initialQuery = useSearchParams().get("q") ?? "";
   const [activeCategory, setActiveCategory] = useState<BlogCategory>("all");
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const [currentPage, setCurrentPage] = useState(1);

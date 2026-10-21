@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
-import QuoteContent from "./QuoteContent";
+import QuoteContent, { QuoteFlow } from "./QuoteContent";
 export async function generateMetadata({
   params,
 }: {
@@ -69,7 +69,11 @@ export default async function QuotePage({
   return (
     <>
       <JsonLd data={quotePageSchema} />
-      <Suspense>
+      {/* The fallback is prerendered into the HTML: the selection view (H1,
+          both quote options). Without it, useSearchParams() bailed the whole
+          page out to client rendering and the server HTML had no H1 or
+          content (audit F-18). */}
+      <Suspense fallback={<QuoteFlow initialBranch={null} />}>
         <QuoteContent />
       </Suspense>
     </>
