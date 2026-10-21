@@ -112,9 +112,11 @@ export default function HeaderClient() {
           {/* Logo */}
           <Link href={`/${locale}`} className="flex-shrink-0">
             <Image
-              src="/images/jetset-logo.svg"
+              src="/images/jetset-logo.png"
               alt={tCommon("logoAlt")}
-              width={140}
+              // 600×180 raster served through next/image (AVIF/WebP, resized). The old
+              // SVG was a 207 KB wrapper around a base64 PNG, preloaded on every page (F-13).
+              width={133}
               height={40}
               className="h-10 w-auto"
               priority
