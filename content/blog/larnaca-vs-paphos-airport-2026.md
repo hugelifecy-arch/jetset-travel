@@ -41,7 +41,7 @@ Both airports are operated by [Hermes Airports](https://www.hermesairports.com/)
 | 2025 passengers | 9.91 million (+14%) | 3.84 million (+5%) |
 | Role | Main international gateway | Low-cost and leisure gateway |
 | Network character | Full-service + low-cost, Middle East links, year-round frequency | Strongly UK- and Europe-focused, low-cost led, seasonal peaks |
-| Typical carriers | Aegean, Cyprus Airways, Wizz Air (base), TUS Airways, British Airways, Lufthansa Group, Emirates, flydubai | Ryanair (focus city), Jet2, easyJet, TUI, Wizz Air, British Airways (seasonal) |
+| Typical carriers | Aegean, Cyprus Airways, Wizz Air (base), TUS Airways, British Airways, Lufthansa Group, Emirates, Qatar Airways | Ryanair (focus city), Jet2, easyJet, TUI, Wizz Air, British Airways (seasonal) |
 | Terminal feel | Larger, busier, more shops and lounges | Compact — fast kerb-to-gate times |
 
 ## Where Each Airport Flies
