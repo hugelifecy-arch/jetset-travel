@@ -227,15 +227,6 @@ export default async function ServicesPage({
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
-              <p className="mt-4">
-                <Link
-                  href={`/${locale}/visa-services-cyprus`}
-                  className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy transition-colors"
-                >
-                  {t("visasCyprusLink")}
-                  <ArrowRight className="ml-1.5 h-4 w-4" />
-                </Link>
-              </p>
             </div>
             <div className="flex-1 w-full hidden md:block">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">

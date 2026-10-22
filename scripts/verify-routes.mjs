@@ -156,7 +156,8 @@ const REDIRECT_CASES = [
   { from: "/?lang=ru", to: "/ru", label: "?lang= on root" },
   { from: "/?lang=en", to: "/en", label: "?lang= on root (en)" },
   { from: "/luxury", to: "/en/luxury-travel", label: "bare-path special" },
-  { from: "/en/vizovye-uslugi-kipr", to: "/en/visa-services-cyprus", label: "retired *-cyprus slug" },
+  { from: "/en/vizovye-uslugi-kipr", to: "/en/visa-services", label: "retired *-cyprus slug" },
+  { from: "/en/visa-services-cyprus", to: "/en/visa-services", label: "merged visa landing page" },
   { from: "/ru/korporativnye-poezdki-kipr", to: "/ru/corporate-travel-cyprus", label: "retired *-cyprus slug (ru)" },
   {
     from: "/ru/blog/cyprus-schengen-2026-business-travel",

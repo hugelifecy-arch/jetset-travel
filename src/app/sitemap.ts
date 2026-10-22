@@ -15,6 +15,8 @@ type StaticPage = {
   path: string;
   priority: number;
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+  /** Set when this page changed after SERVICE_LAST_UPDATED (YYYY-MM-DD). */
+  lastModified?: string;
 };
 
 /**
@@ -42,20 +44,19 @@ const pages: StaticPage[] = [
   // Private & Family Office Travel — discovery is deliberately quiet
   // (nav/footer/direct URL only), hence the lower priority.
   { path: "/private", priority: 0.7, changeFrequency: "monthly" },
-  // The four "*-cyprus" SEO landing pages share one Latin slug across both
+  // The "*-cyprus" SEO landing pages share one Latin slug across both
   // locales (their transliterated Russian counterparts were retired — see
   // canonical.ts and next.config.ts). The two genuinely-bilingual cross-locale
   // pairs (paphos / flight-tickets) live in `crossLocalePageDefs` below.
   { path: "/corporate-travel-cyprus", priority: 0.8, changeFrequency: "monthly" },
   { path: "/luxury-travel-cyprus", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/visa-services-cyprus", priority: 0.8, changeFrequency: "monthly" },
   { path: "/hotel-booking-cyprus", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/privacy", priority: 0.4, changeFrequency: "yearly" },
+  { path: "/privacy", priority: 0.4, changeFrequency: "yearly", lastModified: "2026-10-22" },
   { path: "/terms", priority: 0.4, changeFrequency: "yearly" },
   // Phase 7 — Schengen 2026 topic hub. Higher priority than the service
   // pages because it consolidates the cluster the GSC data shows is
   // currently winning impressions (+143% on the Schengen guide post).
-  { path: "/schengen-cyprus-2026", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/schengen-cyprus-2026", priority: 0.9, changeFrequency: "monthly", lastModified: "2026-10-22" },
 ];
 
 /**
@@ -107,7 +108,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         const localePath = new URL(url).pathname;
         return {
           url,
-          lastModified: staticLastMod,
+          lastModified: page.lastModified ?? staticLastMod,
           changeFrequency: page.changeFrequency,
           priority: page.priority,
           alternates: alternatesFor(localePath),
@@ -147,7 +148,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     });
 
   // Add published blog posts to sitemap. Each post uses its own
-  // frontmatter `date` as the lastmod (no blanket today-for-everything).
+  // frontmatter `dateModified` (falling back to `date`) as the lastmod, so
+  // a corrected post tells Google it changed (no blanket today-for-everything).
   const publishedPosts = getPublishedPosts();
   const blogPages = publishedPosts.map((post) => {
     const { locale: postLocale, slug, translationSlug } = post.frontmatter;
@@ -175,7 +177,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return {
       url,
-      lastModified: post.frontmatter.date,
+      lastModified: post.frontmatter.dateModified ?? post.frontmatter.date,
       changeFrequency: "monthly" as const,
       priority: 0.6,
       alternates: { languages },

@@ -140,12 +140,27 @@ const nextConfig: NextConfig = {
       // Latin slug as English (mirrors /ru/visa-services, /ru/about, etc.).
       {
         source: "/en/vizovye-uslugi-kipr",
-        destination: "/en/visa-services-cyprus",
+        destination: "/en/visa-services",
         permanent: true,
       },
       {
         source: "/ru/vizovye-uslugi-kipr",
-        destination: "/ru/visa-services-cyprus",
+        destination: "/ru/visa-services",
+        permanent: true,
+      },
+      // 22 Oct 2026: /visa-services-cyprus merged into /visa-services. It
+      // targeted the same searches ("visa services Cyprus") with the same
+      // service; the Russian titles were identical. Google never crawled it
+      // (Search Console: "Discovered – currently not indexed"), so the
+      // redirect loses no traffic and stops the two pages competing.
+      {
+        source: "/en/visa-services-cyprus",
+        destination: "/en/visa-services",
+        permanent: true,
+      },
+      {
+        source: "/ru/visa-services-cyprus",
+        destination: "/ru/visa-services",
         permanent: true,
       },
       {

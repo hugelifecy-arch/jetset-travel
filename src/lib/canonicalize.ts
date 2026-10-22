@@ -19,6 +19,8 @@ export type Locale = (typeof LOCALES)[number];
 
 const LOCALE_PREFIX_RE = new RegExp(`^/(${LOCALES.join("|")})(/|$)`);
 const LOCALE_PREFIX_CI_RE = new RegExp(`^/(${LOCALES.join("|")})(/|$)`, "i");
+// Encoded or literal spaces/tabs at the end of the path.
+const TRAILING_SPACE_RE = /(?:%20|%09|\s)+$/i;
 
 // Paths on the apex that must stay reachable (search engine verification).
 const APEX_BYPASS =
@@ -117,6 +119,11 @@ export function canonicalize(
 
   let pathname = originalPathname;
 
+  // 0a. Drop trailing whitespace (/en/contact%20, /x/%20%20%20). It comes
+  //     from inbound links pasted with spaces and is never part of a real
+  //     path; without this the request 404s.
+  pathname = pathname.replace(TRAILING_SPACE_RE, "") || "/";
+
   // 0. Lower-case a locale prefix typed in the wrong case (/EN/contact,
   //    /Ru). Without this, step 4 treats "/EN/..." as a bare path and
   //    redirects to /en/EN/... (a 404). Only the locale segment changes.
@@ -175,6 +182,12 @@ export function canonicalize(
   const newSearch = searchParams.toString()
     ? `?${searchParams.toString()}`
     : "";
+  // 6. Apex root → locale home in the same hop (apex / → www/en, not
+  //    apex / → www/ → www/en).
+  if (hostChanged && pathname === "/") {
+    pathname = `/${preferredLocale}`;
+  }
+
   const pathChanged = pathname !== originalPathname;
   const searchStringChanged = queryChanged && newSearch !== originalSearch;
 

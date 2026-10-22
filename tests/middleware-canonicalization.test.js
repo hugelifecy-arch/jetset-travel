@@ -26,16 +26,19 @@ describe("middleware: GSC 'Page with redirect' failing URLs", () => {
     assert.equal(result.url, "https://www.jetset-travel.com/en");
   });
 
-  it("http://jetset-travel.com/ (after HTTPS upgrade) → single 301 to canonical", () => {
+  // Apex root goes straight to the locale home (one hop instead of
+  // apex → www/ → www/en). Search Console listed the two-hop chain under
+  // "Page with redirect" (22 Oct 2026).
+  it("http://jetset-travel.com/ (after HTTPS upgrade) → single 301 to /en", () => {
     const result = canonicalize("https://jetset-travel.com/");
     assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/");
+    assert.equal(result.url, CANONICAL_ROOT);
   });
 
-  it("https://jetset-travel.com/ → single 301 to canonical www", () => {
-    const result = canonicalize("https://jetset-travel.com/");
+  it("https://jetset-travel.com/ with RU Accept-Language → single 301 to /ru", () => {
+    const result = canonicalize("https://jetset-travel.com/", { preferredLocale: "ru" });
     assert.equal(result.action, "redirect");
-    assert.equal(result.url, "https://www.jetset-travel.com/");
+    assert.equal(result.url, "https://www.jetset-travel.com/ru");
   });
 
   it("https://www.jetset-travel.com/en/en/ → single 301 to /en", () => {
@@ -173,14 +176,13 @@ describe("middleware: no-trailing-slash canonicalization", () => {
     assert.equal(result.action, "passthrough");
   });
 
-  // The four "*-cyprus" landing pages used to have transliterated Russian
+  // The "*-cyprus" landing pages used to have transliterated Russian
   // counterparts that bounced back to the EN-slug page (creating an infinite
   // redirect loop visible in GSC). The retired slugs are now 308-redirected
   // to the consolidated Latin slug at the edge in next.config.ts; middleware
   // sees the same Latin slug for both locales and just strips any trailing
   // slash. These cases lock the post-edge behaviour in place.
   for (const slug of [
-    "visa-services-cyprus",
     "luxury-travel-cyprus",
     "corporate-travel-cyprus",
     "hotel-booking-cyprus",
@@ -259,5 +261,30 @@ describe("middleware: locale prefix in the wrong case", () => {
   it("paths that merely start with the letters en/ru are not locale prefixes", () => {
     const result = canonicalize("https://www.jetset-travel.com/ENQUIRY");
     assert.equal(result.url, "https://www.jetset-travel.com/en/ENQUIRY");
+  });
+});
+
+// ---- Trailing encoded spaces (audit 22 Oct 2026) ----
+// Google found /en/flight-tickets-cyprus/%20%20%20 (an inbound link with
+// trailing spaces) and got a 404. Trailing whitespace is never part of a
+// real path, so strip it in the same single hop.
+
+describe("middleware: trailing whitespace in the path", () => {
+  for (const [input, expected] of [
+    ["https://www.jetset-travel.com/en/flight-tickets-cyprus/%20%20%20", "https://www.jetset-travel.com/en/flight-tickets-cyprus"],
+    ["https://www.jetset-travel.com/en/contact%20", "https://www.jetset-travel.com/en/contact"],
+    ["https://www.jetset-travel.com/ru/blog%09", "https://www.jetset-travel.com/ru/blog"],
+  ]) {
+    it(`${input} → single 301 to ${expected}`, () => {
+      const result = canonicalize(input);
+      assert.equal(result.action, "redirect");
+      assert.equal(result.url, expected);
+      assert.equal(canonicalize(result.url).action, "passthrough");
+    });
+  }
+
+  it("encoded spaces inside a path are left alone", () => {
+    const result = canonicalize("https://www.jetset-travel.com/en/blog?q=paphos%20hotels");
+    assert.equal(result.action, "passthrough");
   });
 });
