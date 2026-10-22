@@ -21,6 +21,7 @@ import {
 } from "../src/lib/canonical.ts";
 import { canonicalize } from "../src/lib/canonicalize.ts";
 import { resolveAlternateUrls } from "../src/lib/i18n-route-resolver.ts";
+import { getPublishedPosts } from "../src/lib/blog.ts";
 
 /**
  * The static redirects from next.config.ts plus the bare-path special-cases
@@ -39,6 +40,9 @@ const RETIRED_PATHS = new Set([
   "/en/aviabilety-kipr",
   "/en/vizovye-uslugi-kipr",
   "/ru/vizovye-uslugi-kipr",
+  // Merged into /visa-services (22 Oct 2026).
+  "/en/visa-services-cyprus",
+  "/ru/visa-services-cyprus",
   "/en/luxusnyy-otdykh-kipr",
   "/ru/luxusnyy-otdykh-kipr",
   "/en/korporativnye-poezdki-kipr",
@@ -315,6 +319,29 @@ describe("seo: language switcher resolver", () => {
       for (const [loc, url] of Object.entries(alt)) {
         if (url) assertCanonical(url, `resolveAlternateUrls(${path}).${loc}`);
       }
+    }
+  });
+});
+
+describe("seo: sitemap lastmod follows real edits", () => {
+  const entries = sitemap();
+  const byUrl = new Map(entries.map((e) => [e.url, e]));
+
+  it("a blog post with dateModified reports it as lastmod (not its publish date)", () => {
+    const posts = getPublishedPosts().filter((p) => p.frontmatter.dateModified);
+    assert.ok(posts.length > 0, "expected at least one post with dateModified");
+    for (const post of posts) {
+      const { slug, locale } = post.frontmatter;
+      const entry = byUrl.get(`${CANONICAL_ORIGIN}/${locale}/blog/${slug}`);
+      assert.ok(entry, `missing sitemap entry for ${locale}/${slug}`);
+      assert.equal(entry.lastModified, post.frontmatter.dateModified, `${locale}/${slug}`);
+    }
+  });
+
+  it("the merged /visa-services-cyprus page is not in the sitemap", () => {
+    for (const loc of ["en", "ru"]) {
+      assert.ok(!byUrl.has(`${CANONICAL_ORIGIN}/${loc}/visa-services-cyprus`));
+      assert.ok(byUrl.has(`${CANONICAL_ORIGIN}/${loc}/visa-services`));
     }
   });
 });

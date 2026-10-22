@@ -16,7 +16,6 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     private: "Private & Family Office Travel",
     "paphos-travel-agency": "Travel Agency in Paphos",
     "corporate-travel-cyprus": "Corporate Travel Cyprus",
-    "visa-services-cyprus": "Visa Services Cyprus",
     "luxury-travel-cyprus": "Luxury Travel Cyprus",
     "flight-tickets-cyprus": "Flight Tickets Cyprus",
     "hotel-booking-cyprus": "Hotel Booking Cyprus",
@@ -43,7 +42,6 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     // locales (the transliterated Russian counterparts were retired). Russian
     // breadcrumb labels for them live below under their Latin slug keys.
     "corporate-travel-cyprus": "Корпоративные поездки Кипр",
-    "visa-services-cyprus": "Визовые услуги Кипр",
     "luxury-travel-cyprus": "Люкс отдых Кипр",
     "hotel-booking-cyprus": "Бронирование отелей Кипр",
     "schengen-cyprus-2026": "Кипр в Шенгене?",
