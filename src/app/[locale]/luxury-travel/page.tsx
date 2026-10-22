@@ -181,6 +181,28 @@ export default async function LuxuryTravelPage({
         </div>
       </section>
 
+      {/* VIP services: a short, factual summary that people (and AI
+          assistants) can quote. Only services the owner confirmed. */}
+      <section className="py-16 bg-brand-light" aria-labelledby="vip-services">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <h2 id="vip-services" className="text-3xl md:text-4xl font-bold text-brand-navy mb-4 text-center">
+            {t("vipTitle")}
+          </h2>
+          <p className="text-brand-navy/80 leading-relaxed mb-6" data-speakable>
+            {t("vipIntro")}
+          </p>
+          <ul className="grid gap-3 sm:grid-cols-2 list-none p-0">
+            {(["vipAirport", "vipJet", "vipYacht", "vipVillas", "vipResorts", "vipCruises"] as const).map((key) => (
+              <li key={key} className="flex items-start gap-3 rounded-xl bg-white p-4 text-brand-navy/80 shadow-card">
+                <ArrowRight className="mt-1 h-4 w-4 flex-none text-brand-gold-ink" aria-hidden="true" />
+                <span>{t(key)}</span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-brand-navy/80 leading-relaxed">{t("vipLanguages")}</p>
+        </div>
+      </section>
+
       {/* Experience Category Cards */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -335,6 +357,8 @@ export default async function LuxuryTravelPage({
           { question: t("faq3Q"), answer: t("faq3A") },
           { question: t("faq4Q"), answer: t("faq4A") },
           { question: t("faq5Q"), answer: t("faq5A") },
+          { question: t("faq6Q"), answer: t("faq6A") },
+          { question: t("faq7Q"), answer: t("faq7A") },
         ]}
       />
 

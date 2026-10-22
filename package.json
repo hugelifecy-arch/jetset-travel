@@ -14,7 +14,8 @@
     "check:serp-snippets": "node scripts/check-serp-snippets.mjs",
     "serp-audit": "node scripts/serp-audit.mjs",
     "gsc:weekly-delta": "node scripts/gsc-weekly-delta.mjs",
-    "verify:routes": "node scripts/verify-routes.mjs"
+    "verify:routes": "node scripts/verify-routes.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "engines": {
     "node": ">=22.6.0"
