@@ -9,6 +9,7 @@
  * `autoReplyEmail` is raw HTML and must NOT contain untrusted input.
  */
 import { escapeHtml } from "./escape";
+import { attributionRows } from "@/lib/attribution-fields";
 
 export const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "35799478073";
@@ -23,13 +24,23 @@ export function emailRow(label: string, value: string): string {
   return `<tr><td ${TH}>${label}</td><td ${TD}>${escapeHtml(value)}</td></tr>`;
 }
 
-/** Staff-notification email wrapping a pre-joined string of `emailRow`s. */
-export function notificationEmail(heading: string, rowsHtml: string): string {
+/**
+ * Staff-notification email wrapping a pre-joined string of `emailRow`s.
+ * `attribution` is the untrusted `_attribution` object from the request body;
+ * when it holds anything usable, a "How they found us" block is appended
+ * (page, first page of the visit, referrer, campaign tags). Staff email only.
+ */
+export function notificationEmail(heading: string, rowsHtml: string, attribution?: unknown): string {
+  const sourceRows = attributionRows(attribution);
+  const sourceHtml = sourceRows.length
+    ? `<tr><td colspan="2" style="padding:12px 12px 6px;font-weight:700;color:#0b1d3a;border:1px solid #e5e7eb;background:#f8fafc">How they found us</td></tr>` +
+      sourceRows.map(([label, value]) => emailRow(label, value)).join("")
+    : "";
   return `
     <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
       <h2 style="color:#0b1d3a">${heading}</h2>
       <table style="border-collapse:collapse;width:100%;font-size:14px">
-        ${rowsHtml}
+        ${rowsHtml}${sourceHtml}
       </table>
     </div>`;
 }

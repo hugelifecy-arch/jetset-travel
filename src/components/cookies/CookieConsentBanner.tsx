@@ -17,8 +17,17 @@ function getConsentSnapshot() {
   return getConsentPreferences() !== null;
 }
 
+/* The server renders the banner for every visitor, so first-time visitors see
+   it at first paint instead of after hydration (it was the LCP element on
+   slow phones). Returning visitors never see it: the inline script in the
+   locale layout marks <html data-consent> before paint and globals.css hides
+   the server-rendered copy; after hydration the client snapshot unmounts it. */
 function getConsentServerSnapshot() {
-  return true;
+  return false;
+}
+
+function subscribeNothing() {
+  return () => {};
 }
 
 export default function CookieConsentBanner() {
@@ -38,6 +47,9 @@ export default function CookieConsentBanner() {
     useState<CookiePreferences>(DEFAULT_PREFERENCES);
 
   const visible = !hasExistingConsent || forcedVisible;
+  // "ssr" until hydrated, so the pre-paint CSS rule only ever hides the
+  // server-rendered copy, never a banner reopened from "Manage cookies".
+  const hydrated = useSyncExternalStore(subscribeNothing, () => true, () => false);
 
   useEffect(() => {
     const handleReopen = () => {
@@ -91,7 +103,11 @@ export default function CookieConsentBanner() {
   if (!visible) return null;
 
   return (
-    <div ref={bannerRef} className="fixed inset-x-0 bottom-0 z-[60] p-4">
+    <div
+      ref={bannerRef}
+      data-cookie-banner={hydrated ? "client" : "ssr"}
+      className="fixed inset-x-0 bottom-0 z-[60] p-4"
+    >
       <div className="mx-auto max-w-4xl rounded-xl border border-brand-navy/10 bg-white shadow-luxury">
         {/* Main banner */}
         {!showSettings && (
@@ -100,7 +116,7 @@ export default function CookieConsentBanner() {
               {t("banner")}{" "}
               <a
                 href={`/${locale}/privacy`}
-                className="font-medium text-brand-gold underline underline-offset-2 transition-colors hover:text-brand-gold/80"
+                className="font-medium text-brand-gold-ink underline underline-offset-2 transition-colors hover:text-brand-navy"
               >
                 {t("privacyLink")}
               </a>
@@ -206,12 +222,12 @@ function CookieCategory({
             {label}
           </span>
           {badge && (
-            <span className="rounded-full bg-brand-light px-2 py-0.5 text-xs font-medium text-brand-navy/60">
+            <span className="rounded-full bg-brand-light px-2 py-0.5 text-xs font-medium text-brand-navy/70">
               {badge}
             </span>
           )}
         </div>
-        <p className="mt-1 text-xs leading-relaxed text-brand-navy/60 sm:text-sm">
+        <p className="mt-1 text-xs leading-relaxed text-brand-navy/70 sm:text-sm">
           {description}
         </p>
       </div>

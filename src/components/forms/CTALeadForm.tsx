@@ -15,24 +15,19 @@ import { getRecaptchaToken } from "@/lib/recaptcha";
 import FormTrustElements from "@/components/forms/FormTrustElements";
 import {
   trackFormError,
-  trackFormStart,
   trackFormSubmit,
   trackFormSuccess,
 } from "@/lib/analytics/gtag";
+import { enquiryAttribution } from "@/lib/attribution";
+import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
 
 export default function CTALeadForm() {
+  const markEnquiryStart = useEnquiryStart("cta_lead_form");
   const t = useTranslations("cta");
   const tCommon = useTranslations("common");
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [formStarted, setFormStarted] = useState(false);
   const formLoadedAt = useRef(Date.now());
-
-  const handleFormStart = () => {
-    if (formStarted) return;
-    setFormStarted(true);
-    trackFormStart("cta_lead_form");
-  };
 
   const formMessages = useFormMessages();
   const schema = useMemo(
@@ -62,6 +57,7 @@ export default function CTALeadForm() {
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
           locale: document.documentElement.lang,
+          _attribution: enquiryAttribution(),
         }),
       });
       if (!res.ok) throw new Error();
@@ -103,7 +99,7 @@ export default function CTALeadForm() {
   }
 
   const inputClass =
-    "bg-white border-white/20 text-brand-navy placeholder:text-brand-navy/50 focus:border-brand-gold focus:ring-brand-gold";
+    "bg-white border-white/20 text-brand-navy placeholder:text-brand-navy/70 focus:border-brand-gold focus:ring-brand-gold";
 
   const selectClass =
     "w-full rounded-xl border border-white/20 bg-white px-4 py-3 text-sm text-brand-navy outline-none transition-colors focus:border-brand-gold focus:ring-1 focus:ring-brand-gold";
@@ -111,7 +107,7 @@ export default function CTALeadForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      onFocus={handleFormStart}
+      onFocus={markEnquiryStart}
       className="mx-auto max-w-3xl rounded-2xl bg-white/5 p-4 backdrop-blur-sm sm:p-6 md:p-8"
     >
       {/* Honeypot */}

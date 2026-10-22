@@ -8,8 +8,8 @@ import AboutBlurb from "@/components/sections/AboutBlurb";
 import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 import WebSiteSchema from "@/components/seo/WebSiteSchema";
 
-// Below-the-fold sections are code-split so their client JS chunks
-// (including framer-motion) are not bundled with the initial page load.
+// Below-the-fold sections are code-split so any client JS chunks they
+// contain are not bundled with the initial page load.
 // SSR remains enabled (default) so the HTML is still crawlable.
 const ServicesGrid = dynamic(
   () => import("@/components/sections/ServicesGrid"),

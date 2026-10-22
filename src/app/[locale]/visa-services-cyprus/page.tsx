@@ -246,7 +246,7 @@ export default async function VisaServicesCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("visaTypesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("visaTypesSubtitle")}
             </p>
           </div>
@@ -262,7 +262,7 @@ export default async function VisaServicesCyprusPage({
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t(visa.titleKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(visa.descKey)}
                 </p>
               </div>
@@ -278,7 +278,7 @@ export default async function VisaServicesCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("howTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("howSubtitle")}
             </p>
           </div>
@@ -288,13 +288,13 @@ export default async function VisaServicesCyprusPage({
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold mb-4">
                   <step.icon className="h-6 w-6" />
                 </div>
-                <span className="block text-xs font-bold text-brand-gold uppercase tracking-wider mb-1">
+                <span className="block text-xs font-bold text-brand-gold-ink uppercase tracking-wider mb-1">
                   {t("step")} {step.number}
                 </span>
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t(step.titleKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(step.descKey)}
                 </p>
               </div>
@@ -345,7 +345,7 @@ export default async function VisaServicesCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("whyAgentTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("whyAgentSubtitle")}
             </p>
           </div>
@@ -361,7 +361,7 @@ export default async function VisaServicesCyprusPage({
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t(benefit.titleKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(benefit.descKey)}
                 </p>
               </div>
@@ -377,7 +377,7 @@ export default async function VisaServicesCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("faqTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("faqSubtitle")}
             </p>
           </div>
@@ -394,9 +394,9 @@ export default async function VisaServicesCyprusPage({
       <section className="py-12 bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-start gap-3 p-6 rounded-xl bg-brand-light border border-brand-navy/10">
-            <ShieldAlert className="h-5 w-5 text-brand-navy/40 flex-shrink-0 mt-0.5" />
+            <ShieldAlert className="h-5 w-5 text-brand-navy/70 flex-shrink-0 mt-0.5" />
             <div>
-              <p className="text-sm text-brand-navy/60 leading-relaxed">
+              <p className="text-sm text-brand-navy/70 leading-relaxed">
                 <strong className="text-brand-navy">
                   {t("disclaimerLabel")}
                 </strong>{" "}

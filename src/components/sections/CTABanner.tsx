@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
-import CTALeadForm from "@/components/forms/CTALeadForm";
+import LazyCTALeadForm from "@/components/forms/LazyCTALeadForm";
 import { trackCTAClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
 
 const WHATSAPP_NUMBER =
@@ -15,13 +14,7 @@ export default function CTABanner() {
   return (
     <section className="bg-brand-navy py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="reveal-up text-center">
           <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
             {t("title")}
           </h2>
@@ -30,7 +23,7 @@ export default function CTABanner() {
           </p>
 
           <div className="mt-10">
-            <CTALeadForm />
+            <LazyCTALeadForm />
           </div>
 
           <div className="mt-8 text-sm text-white/50">
@@ -61,7 +54,7 @@ export default function CTABanner() {
               </a>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

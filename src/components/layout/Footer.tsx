@@ -182,14 +182,14 @@ export default function Footer() {
             <span className="hidden sm:inline" aria-hidden="true">|</span>
             <Link
               href={`/${locale}/privacy`}
-              className="hover:text-brand-gold transition-colors"
+              className="inline-flex min-h-6 items-center hover:text-brand-gold transition-colors"
             >
               {t("privacyPolicy")}
             </Link>
             <span className="hidden sm:inline" aria-hidden="true">|</span>
             <Link
               href={`/${locale}/terms`}
-              className="hover:text-brand-gold transition-colors"
+              className="inline-flex min-h-6 items-center hover:text-brand-gold transition-colors"
             >
               {t("termsOfService")}
             </Link>
@@ -199,7 +199,7 @@ export default function Footer() {
               onClick={() =>
                 window.dispatchEvent(new Event("open-cookie-settings"))
               }
-              className="hover:text-brand-gold transition-colors"
+              className="inline-flex min-h-6 items-center hover:text-brand-gold transition-colors"
             >
               {tCookies("reopenSettings")}
             </button>

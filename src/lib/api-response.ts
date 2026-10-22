@@ -50,9 +50,9 @@ export async function rateLimitGuard(
 }
 
 /**
- * Remove the client-injected anti-spam meta fields (honeypot + timing +
- * reCAPTCHA token) before schema validation, so they don't trip strict
- * schemas or land in the email payload.
+ * Remove the client-injected meta fields (honeypot, timing, reCAPTCHA token,
+ * page locale, enquiry attribution) before schema validation, so they don't
+ * trip strict schemas or land in the enquiry fields.
  */
 export function stripMetaFields(
   body: Record<string, unknown>,
@@ -62,5 +62,6 @@ export function stripMetaFields(
   delete rest._formLoadedAt;
   delete rest._recaptchaToken;
   delete rest.locale;
+  delete rest._attribution;
   return rest;
 }

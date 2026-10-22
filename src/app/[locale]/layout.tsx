@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import localFont from "next/font/local";
-import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import HeaderClient from "@/components/layout/HeaderClient";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
@@ -10,6 +9,8 @@ import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import MobileActionBar from "@/components/layout/MobileActionBar";
 import CookieConsentBanner from "@/components/cookies/CookieConsentBanner";
 import ExitIntentPopup from "@/components/layout/ExitIntentPopup";
+import RecaptchaOnFormFocus from "@/components/forms/RecaptchaOnFormFocus";
+import VisitStartTracker from "@/components/analytics/VisitStartTracker";
 import { notFound } from "next/navigation";
 import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
 import { LOCALES } from "@/lib/canonical";
@@ -23,21 +24,32 @@ import FacebookPixel from "@/components/analytics/FacebookPixel";
 import MicrosoftClarity from "@/components/analytics/MicrosoftClarity";
 import "../globals.css";
 
-const recaptchaSiteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
+/* Upright faces are preloaded; italics are separate families that load only
+   when italic text renders (quotes, legal pages, emphasis in articles). They
+   were ~80 KB of preloaded font on every page, competing with the hero image
+   on slow connections. globals.css routes em/i/cite/.italic to them. */
 const dmSans = localFont({
   src: [
     {
       path: "../../fonts/dm-sans-latin-wght-normal.woff2",
       style: "normal",
     },
+  ],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const dmSansItalic = localFont({
+  src: [
     {
       path: "../../fonts/dm-sans-latin-wght-italic.woff2",
       style: "italic",
     },
   ],
-  variable: "--font-dm-sans",
+  variable: "--font-dm-sans-italic",
   display: "swap",
+  preload: false,
 });
 
 const playfair = localFont({
@@ -46,13 +58,21 @@ const playfair = localFont({
       path: "../../fonts/playfair-display-latin-wght-normal.woff2",
       style: "normal",
     },
+  ],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const playfairItalic = localFont({
+  src: [
     {
       path: "../../fonts/playfair-display-latin-wght-italic.woff2",
       style: "italic",
     },
   ],
-  variable: "--font-playfair",
+  variable: "--font-playfair-italic",
   display: "swap",
+  preload: false,
 });
 
 /* Cyrillic coverage for /ru. The latin-subset files above contain zero
@@ -178,6 +198,15 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        {/* Before first paint: flag visitors who already chose cookie settings
+            so the server-rendered consent banner stays hidden for them (see
+            CookieConsentBanner). Reads only whether the cookie exists. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              'try{if(/(?:^|; )cookie_consent=/.test(document.cookie))document.documentElement.setAttribute("data-consent","")}catch(e){}',
+          }}
+        />
         {/* Analytics connection hints live inside the consent-gated analytics
             components (GoogleAnalytics, YandexMetrica, FacebookPixel,
             MicrosoftClarity) so we don't open connections to trackers before
@@ -205,7 +234,7 @@ export default async function LocaleLayout({
         <link rel="ai-policy" href="/ai.txt" />
       </head>
       <body
-        className={`${dmSans.variable} ${playfair.variable} ${interCyrillic.variable} ${playfairCyrillic.variable} antialiased`}
+        className={`${dmSans.variable} ${dmSansItalic.variable} ${playfair.variable} ${playfairItalic.variable} ${interCyrillic.variable} ${playfairCyrillic.variable} antialiased`}
       >
         <NextIntlClientProvider locale={locale} messages={clientMessages}>
           <a
@@ -226,16 +255,12 @@ export default async function LocaleLayout({
           <VercelAnalytics />
           <GoogleAnalytics />
           <ContactClickTracker />
+          <VisitStartTracker />
           <YandexMetrica />
           <FacebookPixel />
           <MicrosoftClarity />
-          {recaptchaSiteKey &&
-            recaptchaSiteKey !== "your_recaptcha_site_key" && (
-              <Script
-                src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
-                strategy="lazyOnload"
-              />
-            )}
+          {/* reCAPTCHA loads on first form focus (or at submit), not on every page. */}
+          <RecaptchaOnFormFocus />
         </NextIntlClientProvider>
       </body>
     </html>

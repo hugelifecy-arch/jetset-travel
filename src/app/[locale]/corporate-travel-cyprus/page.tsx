@@ -178,7 +178,7 @@ export default async function CorporateTravelCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("servicesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("servicesSubtitle")}
             </p>
           </div>
@@ -199,7 +199,7 @@ export default async function CorporateTravelCyprusPage({
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t("serviceFlightsTitle")}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t("serviceFlightsDesc")}
                 </p>
               </div>
@@ -210,7 +210,7 @@ export default async function CorporateTravelCyprusPage({
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t("serviceHotelsTitle")}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t("serviceHotelsDesc")}
                 </p>
               </div>
@@ -221,7 +221,7 @@ export default async function CorporateTravelCyprusPage({
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t("serviceTransportTitle")}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t("serviceTransportDesc")}
                 </p>
               </div>
@@ -232,7 +232,7 @@ export default async function CorporateTravelCyprusPage({
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t("serviceVisaTitle")}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t("serviceVisaDesc")}
                 </p>
               </div>
@@ -248,7 +248,7 @@ export default async function CorporateTravelCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("citiesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("citiesSubtitle")}
             </p>
           </div>
@@ -261,13 +261,13 @@ export default async function CorporateTravelCyprusPage({
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold mb-4">
                   <city.icon className="h-6 w-6" />
                 </div>
-                <span className="inline-block text-xs font-semibold text-brand-gold uppercase tracking-wider mb-2">
+                <span className="inline-block text-xs font-semibold text-brand-gold-ink uppercase tracking-wider mb-2">
                   {t(city.tagKey)}
                 </span>
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t(city.titleKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(city.descKey)}
                 </p>
               </div>
@@ -283,7 +283,7 @@ export default async function CorporateTravelCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("processTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("processSubtitle")}
             </p>
           </div>
@@ -299,7 +299,7 @@ export default async function CorporateTravelCyprusPage({
                 <h3 className="text-base font-bold text-brand-navy mb-2">
                   {t(step.titleKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(step.descKey)}
                 </p>
               </div>
@@ -315,7 +315,7 @@ export default async function CorporateTravelCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("industriesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("industriesSubtitle")}
             </p>
           </div>
@@ -344,7 +344,7 @@ export default async function CorporateTravelCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("faqTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("faqSubtitle")}
             </p>
           </div>
@@ -358,10 +358,10 @@ export default async function CorporateTravelCyprusPage({
                   <span className="text-base font-semibold text-brand-navy pr-4">
                     {faq.q}
                   </span>
-                  <ChevronDown className="h-5 w-5 text-brand-navy/40 flex-shrink-0 transition-transform group-open:rotate-180" />
+                  <ChevronDown className="h-5 w-5 text-brand-navy/70 flex-shrink-0 transition-transform group-open:rotate-180" />
                 </summary>
                 <div className="px-6 pb-6 pt-0">
-                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
                     {faq.a}
                   </p>
                 </div>

@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -9,7 +7,6 @@ import {
   FileCheck,
   Building2,
 } from "lucide-react";
-import { motion } from "framer-motion";
 import { useLocale, useTranslations } from "next-intl";
 
 const serviceItems = [
@@ -62,14 +59,10 @@ export default function ServicesGrid() {
         </div>
 
         <div className="mt-10 grid gap-4 sm:mt-14 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          {serviceItems.map((service, i) => (
-            <motion.div
+          {serviceItems.map((service) => (
+            <div
               key={service.titleKey}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.1, duration: 0.5 }}
-            >
+             className="reveal-up">
               <Link
                 href={`/${locale}${service.href[locale as "en" | "ru"] ?? service.href.en}`}
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-brand-navy/10 bg-brand-light/40 shadow-card transition-all hover:-translate-y-1 hover:shadow-luxury"
@@ -92,15 +85,15 @@ export default function ServicesGrid() {
                   <h3 className="font-display text-lg font-bold text-brand-navy">
                     {t(`${service.titleKey}.title`)}
                   </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-navy/65">
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-navy/70">
                     {t(`${service.titleKey}.description`)}
                   </p>
-                  <span className="mt-4 text-sm font-semibold text-brand-gold group-hover:underline">
+                  <span className="mt-4 text-sm font-semibold text-brand-gold-ink group-hover:underline">
                     {t(`${service.titleKey}.cta`)} &rarr;
                   </span>
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

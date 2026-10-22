@@ -175,7 +175,7 @@ export default async function HotelBookingCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("whyTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("whySubtitle")}
             </p>
           </div>
@@ -200,7 +200,7 @@ export default async function HotelBookingCyprusPage({
                   <h3 className="text-lg font-bold text-brand-navy mb-2">
                     {t(item.titleKey)}
                   </h3>
-                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
                     {t(item.descKey)}
                   </p>
                 </div>
@@ -220,7 +220,7 @@ export default async function HotelBookingCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("paphosTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("paphosSubtitle")}
             </p>
           </div>
@@ -233,13 +233,13 @@ export default async function HotelBookingCyprusPage({
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 group-hover:bg-brand-gold group-hover:text-white transition-colors">
                   <hotel.icon className="h-7 w-7" />
                 </div>
-                <p className="text-brand-gold text-xs font-semibold uppercase tracking-wider mb-2">
+                <p className="text-brand-gold-ink text-xs font-semibold uppercase tracking-wider mb-2">
                   {t(hotel.tagKey)}
                 </p>
                 <h3 className="text-xl font-bold text-brand-navy mb-3">
                   {t(hotel.titleKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(hotel.descKey)}
                 </p>
               </div>
@@ -258,7 +258,7 @@ export default async function HotelBookingCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("limassolTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("limassolSubtitle")}
             </p>
           </div>
@@ -271,13 +271,13 @@ export default async function HotelBookingCyprusPage({
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 group-hover:bg-brand-gold group-hover:text-white transition-colors">
                   <hotel.icon className="h-7 w-7" />
                 </div>
-                <p className="text-brand-gold text-xs font-semibold uppercase tracking-wider mb-2">
+                <p className="text-brand-gold-ink text-xs font-semibold uppercase tracking-wider mb-2">
                   {t(hotel.tagKey)}
                 </p>
                 <h3 className="text-xl font-bold text-brand-navy mb-3">
                   {t(hotel.titleKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(hotel.descKey)}
                 </p>
               </div>
@@ -293,7 +293,7 @@ export default async function HotelBookingCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("corpTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("corpSubtitle")}
             </p>
           </div>
@@ -324,7 +324,7 @@ export default async function HotelBookingCyprusPage({
                     <h3 className="text-base font-semibold text-brand-navy mb-1">
                       {t(`${key}Title`)}
                     </h3>
-                    <p className="text-brand-navy/60 text-sm leading-relaxed">
+                    <p className="text-brand-navy/70 text-sm leading-relaxed">
                       {t(`${key}Desc`)}
                     </p>
                   </div>
@@ -342,7 +342,7 @@ export default async function HotelBookingCyprusPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("luxTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("luxSubtitle")}
             </p>
           </div>
@@ -358,7 +358,7 @@ export default async function HotelBookingCyprusPage({
                 <h3 className="text-xl font-bold text-brand-navy mb-3">
                   {t(partner.titleKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(partner.descKey)}
                 </p>
               </div>

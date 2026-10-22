@@ -159,7 +159,7 @@ export default async function PaphosTravelAgencyPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("whyTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("whySubtitle")}
             </p>
           </div>
@@ -175,7 +175,7 @@ export default async function PaphosTravelAgencyPage({
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t(benefit.titleKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(benefit.descKey)}
                 </p>
               </div>
@@ -191,7 +191,7 @@ export default async function PaphosTravelAgencyPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("servicesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("servicesSubtitle")}
             </p>
           </div>
@@ -208,10 +208,10 @@ export default async function PaphosTravelAgencyPage({
                 <h3 className="text-xl font-bold text-brand-navy mb-3">
                   {t(service.titleKey)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed mb-4">
+                <p className="text-brand-navy/70 text-sm leading-relaxed mb-4">
                   {t(service.descKey)}
                 </p>
-                <span className="inline-flex items-center text-sm font-semibold text-brand-gold group-hover:gap-2 transition-all">
+                <span className="inline-flex items-center text-sm font-semibold text-brand-gold-ink group-hover:gap-2 transition-all">
                   {t("viewService")}
                   <ArrowRight className="ml-1 h-4 w-4" />
                 </span>
@@ -228,7 +228,7 @@ export default async function PaphosTravelAgencyPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("findTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("findSubtitle")}
             </p>
           </div>
@@ -272,12 +272,12 @@ export default async function PaphosTravelAgencyPage({
                     {t("phoneLabel")}
                   </p>
                   <p className="text-brand-navy/70 text-sm">
-                    <a href="tel:+35799478073" className="hover:text-brand-gold transition-colors">
+                    <a href="tel:+35799478073" className="inline-block py-1 hover:text-brand-gold transition-colors">
                       {t("phone1")}
                     </a>
                   </p>
                   <p className="text-brand-navy/70 text-sm">
-                    <a href="tel:+35799310993" className="hover:text-brand-gold transition-colors">
+                    <a href="tel:+35799310993" className="inline-block py-1 hover:text-brand-gold transition-colors">
                       {t("phone2")}
                     </a>
                   </p>
@@ -293,7 +293,7 @@ export default async function PaphosTravelAgencyPage({
                     {t("emailLabel")}
                   </p>
                   <p className="text-brand-navy/70 text-sm">
-                    <a href="mailto:info@jetset.com.cy" className="hover:text-brand-gold transition-colors">
+                    <a href="mailto:info@jetset.com.cy" className="inline-block py-1 hover:text-brand-gold transition-colors">
                       {t("email")}
                     </a>
                   </p>

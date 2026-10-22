@@ -226,7 +226,7 @@ export default async function AboutPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="flex-1">
-              <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-4">
+              <p className="text-brand-gold-ink font-semibold text-sm uppercase tracking-wider mb-4">
                 {t("storyLabel")}
               </p>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-6">
@@ -267,7 +267,7 @@ export default async function AboutPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("accreditationsTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("accreditationsSubtitle")}
             </p>
           </div>
@@ -286,7 +286,7 @@ export default async function AboutPage({
               <h3 className="text-lg font-bold text-brand-navy mb-2">
                 {t("iataTitle")}
               </h3>
-              <p className="text-brand-navy/60 text-sm leading-relaxed">
+              <p className="text-brand-navy/70 text-sm leading-relaxed">
                 {t("iataDescription")}
               </p>
             </div>
@@ -305,7 +305,7 @@ export default async function AboutPage({
               <h3 className="text-lg font-bold text-brand-navy mb-2">
                 {t("ctoTitle")}
               </h3>
-              <p className="text-brand-navy/60 text-sm leading-relaxed">
+              <p className="text-brand-navy/70 text-sm leading-relaxed">
                 {t("ctoDescription")}
               </p>
             </div>
@@ -313,14 +313,14 @@ export default async function AboutPage({
             {/* 20 Years Badge */}
             <div className="flex flex-col items-center text-center p-5 sm:p-6 md:p-8 rounded-2xl bg-white border border-brand-navy/10 hover:shadow-luxury transition-shadow">
               <div className="w-24 h-24 rounded-full bg-brand-gold/10 flex items-center justify-center mb-6">
-                <span className="text-brand-gold font-display text-3xl font-bold">
+                <span className="text-brand-gold-ink font-display text-3xl font-bold">
                   20+
                 </span>
               </div>
               <h3 className="text-lg font-bold text-brand-navy mb-2">
                 {t("yearsTitle")}
               </h3>
-              <p className="text-brand-navy/60 text-sm leading-relaxed">
+              <p className="text-brand-navy/70 text-sm leading-relaxed">
                 {t("yearsDescription")}
               </p>
             </div>
@@ -335,7 +335,7 @@ export default async function AboutPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("valuesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("valuesSubtitle")}
             </p>
           </div>
@@ -351,7 +351,7 @@ export default async function AboutPage({
                 <h3 className="text-xl font-bold text-brand-navy mb-3">
                   {value.title}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -367,7 +367,7 @@ export default async function AboutPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("teamTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("teamSubtitle")}
             </p>
           </div>
@@ -392,10 +392,10 @@ export default async function AboutPage({
                   <h3 className="text-lg font-bold text-brand-navy mb-1">
                     {member.name}
                   </h3>
-                  <p className="text-brand-gold text-sm font-semibold mb-3">
+                  <p className="text-brand-gold-ink text-sm font-semibold mb-3">
                     {member.role}
                   </p>
-                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
                     {member.bio}
                   </p>
                 </div>
@@ -412,7 +412,7 @@ export default async function AboutPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("milestonesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("milestonesSubtitle")}
             </p>
           </div>
@@ -440,13 +440,13 @@ export default async function AboutPage({
                 <div className={`ml-12 sm:ml-14 md:ml-0 md:w-[calc(50%-2rem)] ${
                   index % 2 === 0 ? "md:pr-8 md:text-right" : "md:pl-8 md:ml-auto"
                 }`}>
-                  <span className="text-brand-gold font-display text-2xl font-bold">
+                  <span className="text-brand-gold-ink font-display text-2xl font-bold">
                     {milestone.year}
                   </span>
                   <h3 className="text-lg font-bold text-brand-navy mt-1 mb-2">
                     {milestone.title}
                   </h3>
-                  <p className="text-brand-navy/60 text-sm leading-relaxed">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
                     {milestone.desc}
                   </p>
                 </div>
@@ -463,7 +463,7 @@ export default async function AboutPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("officeTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("officeSubtitle")}
             </p>
           </div>
@@ -483,7 +483,7 @@ export default async function AboutPage({
                 </div>
                 <div>
                   <p className="text-brand-navy">{t("officePhone1")}</p>
-                  <p className="text-brand-navy/60">{t("officePhone2")}</p>
+                  <p className="text-brand-navy/70">{t("officePhone2")}</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -507,7 +507,7 @@ export default async function AboutPage({
                     <p>{t("officeScheduleWed")}</p>
                     <p>{t("officeScheduleSat")}</p>
                     <p>{t("officeScheduleSun")}</p>
-                    <p className="text-brand-gold font-medium mt-2">{t("officeWhatsApp")}</p>
+                    <p className="text-brand-gold-ink font-medium mt-2">{t("officeWhatsApp")}</p>
                   </div>
                 </div>
               </div>

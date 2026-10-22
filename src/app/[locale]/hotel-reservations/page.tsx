@@ -163,7 +163,7 @@ export default async function HotelReservationsPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("typesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("typesSubtitle")}
             </p>
           </div>
@@ -179,7 +179,7 @@ export default async function HotelReservationsPage({
                 <h3 className="text-xl font-bold text-brand-navy mb-3">
                   {service.title}
                 </h3>
-                <p className="text-brand-navy/60 leading-relaxed">
+                <p className="text-brand-navy/70 leading-relaxed">
                   {service.description}
                 </p>
               </div>
@@ -195,7 +195,7 @@ export default async function HotelReservationsPage({
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("whyTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("whySubtitle")}
             </p>
           </div>
@@ -211,7 +211,7 @@ export default async function HotelReservationsPage({
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {benefit.title}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {benefit.description}
                 </p>
               </div>
@@ -227,7 +227,7 @@ export default async function HotelReservationsPage({
             <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-2">
               {t("destTitle")}
             </h2>
-            <p className="text-brand-navy/60 text-sm">
+            <p className="text-brand-navy/70 text-sm">
               {t("destSubtitle")}
             </p>
           </div>

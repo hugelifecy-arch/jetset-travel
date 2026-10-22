@@ -20,6 +20,8 @@ import {
   Calendar,
 } from "lucide-react";
 import FormTrustElements from "@/components/forms/FormTrustElements";
+import { enquiryAttribution } from "@/lib/attribution";
+import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
 
 function createContactSchema(t: (key: string) => string) {
   return z.object({
@@ -40,9 +42,10 @@ type ContactFormData = z.infer<ReturnType<typeof createContactSchema>>;
 const SCHEDULING_URL = process.env.NEXT_PUBLIC_SCHEDULING_URL?.trim() || "";
 
 const inputClass =
-  "w-full rounded-xl border border-brand-navy/20 px-4 py-3 text-sm text-brand-navy placeholder:text-brand-navy/40 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors";
+  "w-full rounded-xl border border-brand-navy/20 px-4 py-3 text-sm text-brand-navy placeholder:text-brand-navy/70 focus:border-brand-gold focus:ring-1 focus:ring-brand-gold outline-none transition-colors";
 
 export default function ContactContent() {
+  const markEnquiryStart = useEnquiryStart("contact_form");
   const locale = useLocale();
   const t = useTranslations("contactPage");
   const tCommon = useTranslations("common");
@@ -77,6 +80,7 @@ export default function ContactContent() {
           _formLoadedAt: formLoadedAt.current,
           _recaptchaToken: recaptchaToken,
           locale: document.documentElement.lang,
+          _attribution: enquiryAttribution(),
         }),
       });
       if (!res.ok) throw new Error("Failed to send message");
@@ -133,13 +137,13 @@ export default function ContactContent() {
                       <p className="font-semibold mb-1">{t("telephone")}</p>
                       <a
                         href="tel:+35799478073"
-                        className="block text-white/70 text-sm hover:text-brand-gold transition-colors"
+                        className="block py-1 text-white/70 text-sm hover:text-brand-gold transition-colors"
                       >
                         +357 99 478 073
                       </a>
                       <a
                         href="tel:+35799310993"
-                        className="block text-white/70 text-sm hover:text-brand-gold transition-colors"
+                        className="block py-1 text-white/70 text-sm hover:text-brand-gold transition-colors"
                       >
                         +357 99 310 993
                       </a>
@@ -178,7 +182,7 @@ export default function ContactContent() {
                 href={`https://wa.me/35799478073?text=${locale === "ru" ? encodeURIComponent("Здравствуйте, я хотел бы обсудить мои планы на поездку.") : encodeURIComponent("Hi, I'd like to discuss my travel plans.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-10 flex items-center justify-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-sm font-semibold text-white hover:bg-[#22c35e] transition-colors"
+                className="mt-10 flex items-center justify-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-sm font-semibold text-brand-dark hover:bg-[#22c35e] transition-colors"
               >
                 <MessageCircle className="h-5 w-5" />
                 {t("chatWhatsApp")}
@@ -195,12 +199,12 @@ export default function ContactContent() {
                   <h3 className="text-2xl font-bold text-brand-navy mb-3">
                     {t("successTitle")}
                   </h3>
-                  <p className="text-brand-navy/60 max-w-sm">
+                  <p className="text-brand-navy/70 max-w-sm">
                     {t("successMessage")}
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <form onFocus={markEnquiryStart} onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                   {/* Honeypot — hidden from real users */}
                   <div className="absolute -left-[9999px]" aria-hidden="true">
                     <input
@@ -216,7 +220,7 @@ export default function ContactContent() {
                     <h2 className="text-2xl font-bold text-brand-navy mb-2">
                       {t("formTitle")}
                     </h2>
-                    <p className="text-brand-navy/60 text-sm">
+                    <p className="text-brand-navy/70 text-sm">
                       {t("formSubtitle")}
                     </p>
                   </div>
@@ -237,7 +241,7 @@ export default function ContactContent() {
                       placeholder={t("namePlaceholder")}
                     />
                     {errors.name && (
-                      <p className="mt-1.5 text-sm text-red-500">
+                      <p className="mt-1.5 text-sm text-red-700">
                         {errors.name.message}
                       </p>
                     )}
@@ -259,7 +263,7 @@ export default function ContactContent() {
                       placeholder={t("emailPlaceholder")}
                     />
                     {errors.email && (
-                      <p className="mt-1.5 text-sm text-red-500">
+                      <p className="mt-1.5 text-sm text-red-700">
                         {errors.email.message}
                       </p>
                     )}
@@ -281,7 +285,7 @@ export default function ContactContent() {
                       placeholder={t("phonePlaceholder")}
                     />
                     {errors.phone && (
-                      <p className="mt-1.5 text-sm text-red-500">
+                      <p className="mt-1.5 text-sm text-red-700">
                         {errors.phone.message}
                       </p>
                     )}
@@ -380,7 +384,7 @@ export default function ContactContent() {
                   </div>
 
                   {submitError && (
-                    <p className="text-sm text-red-500">{submitError}</p>
+                    <p className="text-sm text-red-700">{submitError}</p>
                   )}
 
                   <button
@@ -411,20 +415,20 @@ export default function ContactContent() {
 
                   {/* How It Works */}
                   <div className="border-t border-brand-navy/10 pt-5 mt-2">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-brand-navy/50 mb-3">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-brand-navy/70 mb-3">
                       {t("howItWorks")}
                     </p>
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 text-sm text-brand-navy/60">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 text-sm text-brand-navy/70">
                       <span className="flex items-center gap-1.5">
                         <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">1</span>
                         {t("howStep1")}
                       </span>
-                      <span className="hidden sm:inline text-brand-navy/30">&rarr;</span>
+                      <span className="hidden sm:inline text-brand-navy/70">&rarr;</span>
                       <span className="flex items-center gap-1.5">
                         <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">2</span>
                         {t("howStep2")}
                       </span>
-                      <span className="hidden sm:inline text-brand-navy/30">&rarr;</span>
+                      <span className="hidden sm:inline text-brand-navy/70">&rarr;</span>
                       <span className="flex items-center gap-1.5">
                         <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">3</span>
                         {t("howStep3")}
@@ -449,7 +453,7 @@ export default function ContactContent() {
             <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-3">
               {t("calendlyTitle")}
             </h2>
-            <p className="text-brand-navy/60 mb-8">
+            <p className="text-brand-navy/70 mb-8">
               {t("calendlySubtitle")}
             </p>
             <a
@@ -473,7 +477,7 @@ export default function ContactContent() {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("findUs")}
             </h2>
-            <p className="text-brand-navy/60">
+            <p className="text-brand-navy/70">
               {t("findUsSubtitle")}
             </p>
           </div>
@@ -496,21 +500,21 @@ export default function ContactContent() {
               <MapPin className="h-5 w-5 text-brand-gold flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-semibold text-brand-navy">{t("officeAddress")}</p>
-                <p className="text-sm text-brand-navy/60">{t("mapAddress")}</p>
+                <p className="text-sm text-brand-navy/70">{t("mapAddress")}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Phone className="h-5 w-5 text-brand-gold flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-semibold text-brand-navy">{t("telephone")}</p>
-                <p className="text-sm text-brand-navy/60">{t("mapPhone")}</p>
+                <p className="text-sm text-brand-navy/70">{t("mapPhone")}</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <Mail className="h-5 w-5 text-brand-gold flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-semibold text-brand-navy">{t("email")}</p>
-                <a href="mailto:info@jetset.com.cy" className="text-sm text-brand-navy/60 hover:text-brand-gold transition-colors">
+                <a href="mailto:info@jetset.com.cy" className="text-sm text-brand-navy/70 hover:text-brand-gold transition-colors">
                   {t("mapEmail")}
                 </a>
               </div>
@@ -519,7 +523,7 @@ export default function ContactContent() {
               <Clock className="h-5 w-5 text-brand-gold flex-shrink-0 mt-0.5" />
               <div>
                 <p className="text-sm font-semibold text-brand-navy">{t("officeHours")}</p>
-                <p className="text-sm text-brand-navy/60 leading-relaxed">
+                <p className="text-sm text-brand-navy/70 leading-relaxed">
                   {t("mapHoursLine1")}<br />
                   {t("mapHoursLine2")}<br />
                   {t("mapHoursLine3")}
@@ -560,7 +564,7 @@ export default function ContactContent() {
                 <p className="text-sm font-semibold text-brand-navy">
                   {t("iataAccredited")}
                 </p>
-                <p className="text-xs text-brand-navy/50">
+                <p className="text-xs text-brand-navy/70">
                   {t("iataOrg")}
                 </p>
               </div>
@@ -580,7 +584,7 @@ export default function ContactContent() {
                 <p className="text-sm font-semibold text-brand-navy">
                   {t("ctoLicensed")}
                 </p>
-                <p className="text-xs text-brand-navy/50">
+                <p className="text-xs text-brand-navy/70">
                   {t("ctoOrg")}
                 </p>
               </div>

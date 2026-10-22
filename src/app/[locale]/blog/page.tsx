@@ -95,7 +95,7 @@ export default async function BlogPage({
       <section className="py-16 bg-brand-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-2">
+            <p className="text-brand-gold-ink font-semibold text-sm uppercase tracking-wider mb-2">
               {locale === "ru" ? "Наши услуги" : "Our services"}
             </p>
             <h2 className="font-display text-2xl md:text-3xl font-bold text-brand-navy">

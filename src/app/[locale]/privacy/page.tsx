@@ -58,7 +58,7 @@ export default async function PrivacyPolicyPage({
         <section className="py-20 bg-white">
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <div className="prose prose-lg max-w-none text-brand-navy/80">
-              <p className="text-xl text-brand-navy/60 italic">
+              <p className="text-xl text-brand-navy/70 italic">
                 {t("translationPending")}
               </p>
               <p className="mt-6">
@@ -105,7 +105,7 @@ export default async function PrivacyPolicyPage({
       {/* Policy Content */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg max-w-none text-brand-navy/80 [&_h2]:text-brand-navy [&_h2]:font-display [&_h2]:text-2xl [&_h2]:md:text-3xl [&_h2]:font-bold [&_h2]:mt-12 [&_h2]:mb-4 [&_h3]:text-brand-navy [&_h3]:font-semibold [&_h3]:text-xl [&_h3]:mt-8 [&_h3]:mb-3 [&_a]:text-brand-gold [&_a]:hover:underline [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2">
+          <div className="prose prose-lg max-w-none text-brand-navy/80 [&_h2]:text-brand-navy [&_h2]:font-display [&_h2]:text-2xl [&_h2]:md:text-3xl [&_h2]:font-bold [&_h2]:mt-12 [&_h2]:mb-4 [&_h3]:text-brand-navy [&_h3]:font-semibold [&_h3]:text-xl [&_h3]:mt-8 [&_h3]:mb-3 [&_a]:text-brand-gold-ink [&_a]:hover:underline [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2">
             {/* 1. Data Controller */}
             <h2>1. Data Controller</h2>
             <p>

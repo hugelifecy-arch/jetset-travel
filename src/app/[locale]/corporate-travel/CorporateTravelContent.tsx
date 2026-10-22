@@ -161,7 +161,7 @@ export default function CorporateTravelContent() {
       <section className="py-6 bg-brand-light border-b border-brand-navy/10">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <p className="text-sm sm:text-base text-brand-navy/80 leading-relaxed">
-            <span className="inline-block text-xs uppercase tracking-wider font-semibold text-brand-gold bg-brand-gold/10 px-2.5 py-1 rounded-full mr-2 align-middle">
+            <span className="inline-block text-xs uppercase tracking-wider font-semibold text-brand-gold-ink bg-brand-gold/10 px-2.5 py-1 rounded-full mr-2 align-middle">
               {locale === "ru" ? "Шенген 2026" : "Schengen 2026"}
             </span>
             {locale === "ru" ? (
@@ -200,7 +200,7 @@ export default function CorporateTravelContent() {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("whyTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("whySubtitle")}
             </p>
           </div>
@@ -216,7 +216,7 @@ export default function CorporateTravelContent() {
                 <h3 className="text-xl font-bold text-brand-navy mb-3">
                   {pillar.title}
                 </h3>
-                <p className="text-brand-navy/60 leading-relaxed">
+                <p className="text-brand-navy/70 leading-relaxed">
                   {pillar.description}
                 </p>
               </div>
@@ -232,20 +232,20 @@ export default function CorporateTravelContent() {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("howTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("howSubtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {steps.map((step) => (
               <div key={step.number} className="relative">
-                <span className="text-5xl font-bold text-brand-gold/20 font-display">
+                <span className="text-5xl font-bold text-brand-gold-ink font-display">
                   {step.number}
                 </span>
                 <h3 className="text-lg font-bold text-brand-navy mt-2 mb-2">
                   {step.title}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {step.description}
                 </p>
               </div>
@@ -261,7 +261,7 @@ export default function CorporateTravelContent() {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("coverTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("coverSubtitle")}
             </p>
           </div>

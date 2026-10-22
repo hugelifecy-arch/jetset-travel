@@ -106,6 +106,24 @@ try {
   assert.equal(ack.reply_to, "office@example.invalid");
   assert.match(ack.subject, /получили/);
   checks++;
+  // Enquiry attribution: shown to staff only, cleaned server-side (no query
+  // strings, no unknown keys, ad click id reduced to yes/no).
+  writeFileSync(recordFile, "");
+  await check(server, "contact", payload("contact", { _attribution: {
+    page: "/en/contact?email=leak@example.invalid", landing: "/en/blog/visa-guide",
+    referrer: "www.google.com", utm_source: "google", utm_campaign: "spring-offer",
+    adClick: true, gclid: "Cj0leak", email: "leak@example.invalid",
+  } }), 200);
+  const mails = recorded();
+  const staffMail = mails.find((mail) => mail.to === "office@example.invalid");
+  const visitorMail = mails.find((mail) => mail.to === "visitor@example.invalid");
+  assert.match(staffMail?.html ?? "", /How they found us/);
+  for (const expected of [">/en/contact<", ">/en/blog/visa-guide<", ">www.google.com<", ">google<", ">spring-offer<", "Google Ads click"]) {
+    assert.ok(staffMail.html.includes(expected), `staff email missing ${expected}`);
+  }
+  assert.ok(!staffMail.html.includes("leak"), "attribution leaked a query string or unknown key");
+  assert.ok(!visitorMail?.html.includes("How they found us"), "attribution must not reach the visitor");
+  checks++;
   // Audit F-01/F-06: unknown paths return 404 (previously 500 for /ads.txt etc.)
   // with an HTML document. Localized rendering is checked in a browser (report §9).
   for (const path of ["/ads.txt", "/xmlrpc.php", "/apple-touch-icon-precomposed.png", "/en/no-such-page", "/ru/no-such-page"]) {

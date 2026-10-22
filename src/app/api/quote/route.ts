@@ -52,7 +52,7 @@ type QuoteData = z.infer<typeof QuoteSchema>;
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
-function buildNotification(data: QuoteData): string {
+function buildNotification(data: QuoteData, attribution: unknown): string {
   let heading: string;
   let rows: string;
 
@@ -86,7 +86,7 @@ function buildNotification(data: QuoteData): string {
       emailRow("Route / Details", data.route);
   }
 
-  return notificationEmail(heading, rows);
+  return notificationEmail(heading, rows, attribution);
 }
 
 function getContactName(data: QuoteData): string {
@@ -150,7 +150,7 @@ export async function POST(req: Request) {
       to: TO_EMAIL,
       reply_to: email,
       subject: `New ${quoteType} Quote Request — ${contactName}`,
-      html: buildNotification(data),
+      html: buildNotification(data, rawBody._attribution),
     });
   } catch (err) {
     logLeadDeliveryFailure("quote", err);

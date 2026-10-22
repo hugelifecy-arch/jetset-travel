@@ -62,13 +62,13 @@ export default async function RelatedArticles({
     <section className="py-16 sm:py-20 bg-brand-light">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-12">
-          <p className="text-brand-gold font-semibold text-sm uppercase tracking-wider mb-2">
+          <p className="text-brand-gold-ink font-semibold text-sm uppercase tracking-wider mb-2">
             {locale === "ru" ? "Блог" : "From the blog"}
           </p>
           <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy">
             {heading}
           </h2>
-          <p className="mt-3 text-brand-navy/60 max-w-2xl mx-auto">
+          <p className="mt-3 text-brand-navy/70 max-w-2xl mx-auto">
             {subtitle}
           </p>
         </div>
@@ -94,7 +94,7 @@ export default async function RelatedArticles({
                   )}
                 </div>
                 <div className="p-6">
-                  <div className="flex items-center gap-3 text-xs text-brand-navy/60 mb-3">
+                  <div className="flex items-center gap-3 text-xs text-brand-navy/70 mb-3">
                     <span className="inline-flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       {post.readTime} {readLabel}
@@ -106,7 +106,7 @@ export default async function RelatedArticles({
                   <p className="text-sm text-brand-navy/70 line-clamp-2 mb-4">
                     {post.frontmatter.description}
                   </p>
-                  <span className="inline-flex items-center text-sm font-semibold text-brand-gold">
+                  <span className="inline-flex items-center text-sm font-semibold text-brand-gold-ink">
                     {readMoreLabel}
                     <ArrowRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </span>

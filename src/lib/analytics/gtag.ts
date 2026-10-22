@@ -70,8 +70,13 @@ export type FormName =
   | "luxury_quote"
   | "private_enquiry";
 
-export function trackFormStart(form_name: FormName): void {
-  pushEvent("form_start", { form_name });
+/**
+ * First interaction with an enquiry form (once per form per page view).
+ * Named enquiry_start, not form_start, so it is not mixed up with GA4's
+ * automatic "form interactions" events. Carries the form name only.
+ */
+export function trackEnquiryStart(form_name: FormName): void {
+  pushEvent("enquiry_start", { form_name });
 }
 
 export function trackFormSubmit(form_name: FormName): void {

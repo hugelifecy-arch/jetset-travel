@@ -41,7 +41,6 @@ export default function MobileActionBar() {
       <div className="flex bg-brand-navy/90 backdrop-blur-sm border-t border-white/10">
         <a
           href="tel:+35799478073"
-          aria-label="Call JetSet Travel"
           onClick={() =>
             trackCTAClick({
               location: "mobile_action_bar",
@@ -61,13 +60,12 @@ export default function MobileActionBar() {
           href={`https://wa.me/35799478073?text=${whatsappText}`}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Contact via WhatsApp"
           onClick={() => trackWhatsAppClick("mobile_action_bar", "generic")}
           className="flex flex-1 items-center justify-center gap-2 py-3 text-white active:bg-white/10 transition-colors min-h-[44px]"
         >
           <Image
             src="/images/icons/whatsapp.svg"
-            alt="WhatsApp"
+            alt=""
             width={20}
             height={20}
             className="brightness-0 invert h-5 w-5"

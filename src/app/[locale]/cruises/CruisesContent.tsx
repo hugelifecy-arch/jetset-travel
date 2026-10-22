@@ -27,6 +27,8 @@ import {
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import Accordion from "@/components/ui/Accordion";
+import { enquiryAttribution } from "@/lib/attribution";
+import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -154,6 +156,7 @@ function AnimatedCounter({ target, suffix = "" }: { target: string; suffix?: str
 /* ------------------------------------------------------------------ */
 
 export default function CruisesContent({ locale }: { locale: string }) {
+  const markEnquiryStart = useEnquiryStart("cruise_enquiry");
   const t = useTranslations("cruisesPage");
   const shipContainerRef = useRef<HTMLDivElement>(null);
 
@@ -203,7 +206,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
       const res = await fetch("/api/cruise-enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, _formLoadedAt: formLoadedAt.current, _recaptchaToken: recaptchaToken, locale: document.documentElement.lang }),
+        body: JSON.stringify({ ...formData, _formLoadedAt: formLoadedAt.current, _recaptchaToken: recaptchaToken, locale: document.documentElement.lang, _attribution: enquiryAttribution() }),
       });
       if (res.ok) {
         trackFormSuccess("cruise_enquiry");
@@ -269,7 +272,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
               </a>
             </div>
             {/* Stats ticker */}
-            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/50">
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/70">
               <span>{t("statPassengers")}</span>
               <span className="hidden sm:inline" aria-hidden="true">|</span>
               <span>{t("statLines")}</span>
@@ -291,7 +294,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("whyTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("whySubtitle")}
             </p>
           </div>
@@ -307,7 +310,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t(`${card.key}Title`)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(`${card.key}Desc`)}
                 </p>
               </div>
@@ -325,7 +328,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("cruiseLinesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("cruiseLinesSubtitle")}
             </p>
           </div>
@@ -378,7 +381,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
 
           {/* Tier 3 — "We also book" grid */}
           <div>
-            <p className="text-sm font-semibold text-brand-navy/50 uppercase tracking-wider mb-4 text-center">
+            <p className="text-sm font-semibold text-brand-navy/70 uppercase tracking-wider mb-4 text-center">
               {t("alsoBook")}
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -415,7 +418,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("destinationsTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("destinationsSubtitle")}
             </p>
           </div>
@@ -443,10 +446,10 @@ export default function CruisesContent({ locale }: { locale: string }) {
                   <h3 className="text-lg font-bold text-brand-navy mb-2">
                     {t(`${dest}Title`)}
                   </h3>
-                  <p className="text-brand-navy/60 text-sm leading-relaxed mb-4">
+                  <p className="text-brand-navy/70 text-sm leading-relaxed mb-4">
                     {t(`${dest}Desc`)}
                   </p>
-                  <div className="flex flex-col gap-1.5 text-xs text-brand-navy/50">
+                  <div className="flex flex-col gap-1.5 text-xs text-brand-navy/70">
                     <span className="inline-flex items-center gap-1.5">
                       <Calendar className="h-3.5 w-3.5 text-brand-gold" />
                       {t("bestSeason")}: {t(`${dest}Season`)}
@@ -498,6 +501,9 @@ export default function CruisesContent({ locale }: { locale: string }) {
           {/* Horizontal scrollable cards */}
           <div
             ref={shipContainerRef}
+            tabIndex={0}
+            role="region"
+            aria-label={t("newShipsTitle")}
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
             style={{ scrollbarWidth: "none" }}
           >
@@ -510,13 +516,13 @@ export default function CruisesContent({ locale }: { locale: string }) {
                   {ship.line}
                 </p>
                 <h3 className="text-xl font-bold mb-1">{ship.ship}</h3>
-                <p className="text-white/50 text-xs mb-4">
+                <p className="text-white/70 text-xs mb-4">
                   {ship.pax} {t("passengers")} &middot; {ship.cls}
                 </p>
                 <p className="text-white/70 text-sm leading-relaxed mb-4">
                   {ship.detail}
                 </p>
-                <div className="flex flex-col gap-1.5 text-xs text-white/50">
+                <div className="flex flex-col gap-1.5 text-xs text-white/70">
                   <span className="inline-flex items-center gap-1.5">
                     <Calendar className="h-3.5 w-3.5 text-brand-gold" />
                     {t("scheduledDebut")}: {ship.when}
@@ -541,7 +547,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("cruiseTypesTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("cruiseTypesSubtitle")}
             </p>
           </div>
@@ -558,7 +564,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
                 <h3 className="text-lg font-bold text-brand-navy mb-2">
                   {t(`${type.key}Title`)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(`${type.key}Desc`)}
                 </p>
               </a>
@@ -576,7 +582,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("howItWorksTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("howItWorksSubtitle")}
             </p>
           </div>
@@ -589,7 +595,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
                 <h3 className="text-lg font-bold text-brand-navy mb-3">
                   {t(`step${step}Title`)}
                 </h3>
-                <p className="text-brand-navy/60 text-sm leading-relaxed">
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
                   {t(`step${step}Desc`)}
                 </p>
               </div>
@@ -607,7 +613,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("formTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("formSubtitle")}
             </p>
           </div>
@@ -618,10 +624,10 @@ export default function CruisesContent({ locale }: { locale: string }) {
                 <Check className="h-8 w-8" />
               </div>
               <p className="text-lg font-semibold text-brand-navy mb-2">{t("formSuccess")}</p>
-              <p className="text-brand-navy/60 text-sm">{t("formPreferCall")}</p>
+              <p className="text-brand-navy/70 text-sm">{t("formPreferCall")}</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onFocus={markEnquiryStart} onSubmit={handleSubmit} className="space-y-6">
               {/* Honeypot */}
               <div className="hidden" aria-hidden="true">
                 <input
@@ -868,7 +874,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
                 {formStatus === "error" && (
                   <p className="mt-4 text-red-600 text-sm">{t("formError")}</p>
                 )}
-                <p className="mt-4 text-brand-navy/50 text-sm">{t("formPreferCall")}</p>
+                <p className="mt-4 text-brand-navy/70 text-sm">{t("formPreferCall")}</p>
               </div>
             </form>
           )}
@@ -907,7 +913,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
             <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
               {t("faqTitle")}
             </h2>
-            <p className="text-brand-navy/60 max-w-2xl mx-auto">
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
               {t("faqSubtitle")}
             </p>
           </div>
@@ -925,7 +931,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
       {/* ============================================================ */}
       <section className="py-4 bg-white border-t border-brand-navy/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="text-xs text-brand-navy/40 text-center leading-relaxed">
+          <p className="text-xs text-brand-navy/70 text-center leading-relaxed">
             {t("disclaimer")}
           </p>
         </div>

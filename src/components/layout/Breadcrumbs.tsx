@@ -38,7 +38,7 @@ export default function Breadcrumbs() {
   return (
     <nav aria-label="Breadcrumb" className="bg-brand-light/60 border-b border-brand-navy/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <ol className="flex items-center gap-1.5 py-3 text-sm text-brand-navy/60">
+        <ol className="flex items-center gap-1.5 py-3 text-sm text-brand-navy/70">
           {crumbs.map((crumb, index) => {
             const isLast = index === crumbs.length - 1;
             const isHome = index === 0;

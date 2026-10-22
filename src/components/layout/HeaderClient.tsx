@@ -101,10 +101,10 @@ export default function HeaderClient() {
 
   return (
     <header
-      className={`sticky top-0 z-50 border-b-2 border-brand-gold transition-[background-color,box-shadow,backdrop-filter] duration-300 ${
+      className={`sticky top-0 z-50 border-b-2 border-brand-gold transition-shadow duration-300 ${
         scrolled || mobileOpen
           ? "bg-brand-navy shadow-lg"
-          : "bg-brand-navy/70 backdrop-blur-md"
+          : "bg-brand-navy"
       }`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -201,7 +201,7 @@ export default function HeaderClient() {
                   className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
                     locale === "en"
                       ? "font-bold text-brand-gold underline underline-offset-4"
-                      : "font-normal text-white/50 hover:text-white"
+                      : "font-normal text-white/70 hover:text-white"
                   }`}
                   aria-current={locale === "en" ? "page" : undefined}
                   aria-label="EN – English"
@@ -218,7 +218,7 @@ export default function HeaderClient() {
                   className={`px-1.5 py-0.5 rounded text-xs transition-colors ${
                     locale === "ru"
                       ? "font-bold text-brand-gold underline underline-offset-4"
-                      : "font-normal text-white/50 hover:text-white"
+                      : "font-normal text-white/70 hover:text-white"
                   }`}
                   aria-current={locale === "ru" ? "page" : undefined}
                   aria-label="RU – Русский"
@@ -331,7 +331,7 @@ export default function HeaderClient() {
                     className={`px-2 py-2 rounded text-sm transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
                       locale === "en"
                         ? "font-bold text-brand-gold underline underline-offset-4"
-                        : "font-normal text-white/50 hover:text-white"
+                        : "font-normal text-white/70 hover:text-white"
                     }`}
                     aria-current={locale === "en" ? "page" : undefined}
                     aria-label="English"
@@ -348,7 +348,7 @@ export default function HeaderClient() {
                     className={`px-2 py-2 rounded text-sm transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
                       locale === "ru"
                         ? "font-bold text-brand-gold underline underline-offset-4"
-                        : "font-normal text-white/50 hover:text-white"
+                        : "font-normal text-white/70 hover:text-white"
                     }`}
                     aria-current={locale === "ru" ? "page" : undefined}
                     aria-label="Русский"

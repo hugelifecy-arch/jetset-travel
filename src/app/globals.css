@@ -33,6 +33,24 @@ h1, h2, h3, h4 {
   font-family: var(--font-playfair), var(--font-playfair-cyrillic), "Playfair Display", serif;
 }
 
+/* Italic Latin faces are their own (non-preloaded) families; see the font
+   setup in the locale layout. Cyrillic italics stay in the Cyrillic stacks. */
+em, i, cite, .italic {
+  font-family: var(--font-dm-sans-italic), var(--font-inter-cyrillic), "DM Sans", sans-serif;
+}
+
+:is(h1, h2, h3, h4, .font-display) :is(em, i, cite, .italic),
+:is(h1, h2, h3, h4, .font-display).italic {
+  font-family: var(--font-playfair-italic), var(--font-playfair-cyrillic), "Playfair Display", serif;
+}
+
+/* Visitors who already chose cookie settings: hide the server-rendered banner
+   before first paint (the flag is set by an inline script in the locale
+   layout). The hydrated banner uses data-cookie-banner="client". */
+html[data-consent] [data-cookie-banner="ssr"] {
+  display: none;
+}
+
 /* Global focus-visible style for keyboard navigation */
 *:focus-visible {
   outline: 2px solid #2E86C1;
@@ -52,6 +70,104 @@ h1, h2, h3, h4 {
 
 .animate-modal-in {
   animation: modal-fade-in 200ms ease-out;
+}
+
+/* Entrance and scroll-reveal motion in plain CSS (replaces framer-motion,
+   which cost ~115 KB of JS on every page and kept the hero invisible until
+   hydration on slow phones). Hero items animate from first paint; staggered
+   with --enter-step. Scroll reveals use scroll-driven animations where the
+   browser supports them; elsewhere content is simply shown. */
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enter-up {
+    animation: enter-up 600ms ease-out both;
+    animation-delay: calc(var(--enter-step, 0) * 150ms);
+  }
+
+  .soft-pulse {
+    animation: soft-pulse 2s ease-in-out infinite;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-up,
+    .reveal-left,
+    .reveal-right {
+      animation-duration: auto;
+      animation-timing-function: ease-out;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      /* Fully shown after 160px of scrolling, whatever the element's height,
+         so tall blocks never sit half-faded while being read. */
+      animation-range: entry 0px entry 160px;
+    }
+
+    .reveal-up {
+      animation-name: reveal-up;
+    }
+
+    .reveal-left {
+      animation-name: reveal-left;
+    }
+
+    .reveal-right {
+      animation-name: reveal-right;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

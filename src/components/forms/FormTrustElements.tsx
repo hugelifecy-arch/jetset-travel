@@ -26,7 +26,7 @@ export default function FormTrustElements({
       <div
         className={cn(
           "flex flex-col items-center gap-1 text-center text-xs sm:flex-row sm:justify-center sm:gap-3",
-          isLight ? "text-white/60" : "text-brand-navy/50"
+          isLight ? "text-white/60" : "text-brand-navy/70"
         )}
       >
         <span>{responseTime}</span>
@@ -40,7 +40,7 @@ export default function FormTrustElements({
       <div
         className={cn(
           "flex flex-wrap items-center justify-center gap-4 text-[11px] font-medium",
-          isLight ? "text-white/50" : "text-brand-navy/45"
+          isLight ? "text-white/60" : "text-brand-navy/70"
         )}
       >
         <span className="flex items-center gap-1.5">

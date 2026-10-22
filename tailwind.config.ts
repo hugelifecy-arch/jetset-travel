@@ -7,6 +7,10 @@ const config: Config = {
       colors: {
         "brand-navy": "#1B2A4A",
         "brand-gold": "#C9A84C",
+        // Gold for TEXT on white / light backgrounds. brand-gold text on white
+        // is 2.3:1; this darker gold is 5.7:1 on white and 5.1:1 on
+        // brand-light (WCAG AA 4.5:1). On navy, keep brand-gold (6.2:1).
+        "brand-gold-ink": "#7D6319",
         "brand-light": "#EBF2FA",
         "brand-dark": "#0F1A2E",
       },
