@@ -54,7 +54,7 @@ This is where most of Limassol's five-star hotels are located — along a 5km st
 
 **Best for:** Corporate events, client entertainment, luxury stays, long-term business visits.
 
-- **Amara (Nobu Hotel):** Limassol's most design-forward luxury hotel. Stunning architecture, Nobu restaurant, beachfront location. Ideal for executive stays where impression matters.
+- **Amara:** Limassol's most design-forward luxury hotel. Stunning architecture, Matsuhisa Limassol restaurant, beachfront location. Ideal for executive stays where impression matters.
 - **Four Seasons:** The classic luxury resort. Extensive facilities, established business services, and a spacious setting with gardens and pools.
 - **Parklane, a Luxury Collection Resort:** Modern luxury with a large spa, multiple dining options, and good conference facilities.
 - **City of Dreams Mediterranean:** The newest large-scale resort. 500 rooms, full conference centre, multiple restaurants, and a casino. Best for larger corporate groups or events.
@@ -87,7 +87,7 @@ Lunch meetings in Limassol are common, and the city offers excellent options:
 - **Artima Bistronomy:** Modern Mediterranean cuisine in an elegant setting. Popular with the business community for client lunches. Reservations recommended.
 - **Noma Sushi Bar:** High-quality Japanese cuisine in a contemporary setting. Good for focused, time-efficient business lunches.
 - **Columbia Steak House:** A Limassol institution for meat lovers. Generous portions, reliable quality, and a professional atmosphere.
-- **Nobu (Amara Hotel):** Japanese-Peruvian fine dining on the beachfront. Excellent for impressing clients or celebrating a deal.
+- **Matsuhisa Limassol (Amara hotel):** chef Nobu Matsuhisa's Japanese-Peruvian fine dining on the beachfront. Excellent for impressing clients or celebrating a deal.
 
 ### Working Lunch / Quick Bites
 
