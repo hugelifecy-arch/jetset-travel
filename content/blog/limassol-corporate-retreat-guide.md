@@ -50,7 +50,7 @@ For large-scale corporate events, City of Dreams offers a single-venue solution 
 
 ### Amara Hotel
 
-The **Amara** is Limassol's most architecturally striking luxury hotel — a Nobu-branded property on the beachfront with minimalist design, exceptional dining (including the renowned Nobu restaurant), and intimate meeting facilities. It is ideal for executive retreats and board-level gatherings of up to 50 people, where the setting and dining experience are as important as the meeting agenda.
+The **Amara** is Limassol's most architecturally striking luxury hotel — a beachfront property with minimalist design, exceptional dining (including Matsuhisa Limassol, chef Nobu Matsuhisa's restaurant), and intimate meeting facilities. It is ideal for executive retreats and board-level gatherings of up to 50 people, where the setting and dining experience are as important as the meeting agenda.
 
 ### Four Seasons Limassol
 
@@ -119,7 +119,7 @@ For international groups flying in from multiple cities, we coordinate all arriv
 
 Limassol's dining scene has matured enormously in recent years, offering corporate groups a genuine range of options:
 
-- **Nobu Limassol** (at the Amara Hotel) — Japanese-Peruvian cuisine in an elegant beachfront setting. Excellent for executive dinners and client entertainment.
+- **Matsuhisa Limassol** (at the Amara hotel) — chef Nobu Matsuhisa's Japanese-Peruvian cuisine in an elegant beachfront setting. Excellent for executive dinners and client entertainment.
 - **Pyxida Fish Tavern** — A Limassol institution on the old port. Fresh seafood meze for groups in a convivial, atmospheric setting. Perfect for team dinners.
 - **Artima Bistronomy** — Modern Mediterranean cuisine with a creative edge. Private dining available for groups of up to 30.
 - **Meze by the Sea** — Traditional Cypriot meze on the coastal promenade. Ideal for relaxed group dinners where conversation flows naturally.

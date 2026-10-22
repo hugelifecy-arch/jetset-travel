@@ -67,8 +67,8 @@ export default async function CruisesPage({
         }
         description={
           locale === "ru"
-            ? "Круизы по Средиземному морю из порта Лимассол. Греческие острова, Италия, Святая Земля. Бронирование Royal Caribbean, MSC, Celestyal через JetSet Travel."
-            : "Mediterranean cruises departing from Limassol Port. Greek Islands, Italy, Holy Land routes booked on Royal Caribbean, MSC, Celestyal via JetSet Travel Cyprus."
+            ? "Круизы по Средиземному морю из Лимассола и круизы с перелётом из Афин, Венеции и других портов: греческие острова, Эгейское побережье Турции, Италия. Royal Caribbean, MSC, Celestyal и другие линии через JetSet Travel."
+            : "Mediterranean cruises from Limassol and fly-cruises from Athens, Venice and other ports: Greek Islands, Turkey's Aegean coast and Italy. Royal Caribbean, MSC, Celestyal and other lines via JetSet Travel Cyprus."
         }
         url={`https://www.jetset-travel.com/${locale}/cruises`}
         image="https://www.jetset-travel.com/images/destinations/med.jpg"
@@ -77,7 +77,7 @@ export default async function CruisesPage({
           { name: locale === "ru" ? "Лимассол, Кипр" : "Limassol, Cyprus" },
           { name: locale === "ru" ? "Греческие острова" : "Greek Islands" },
           { name: locale === "ru" ? "Италия" : "Italy" },
-          { name: locale === "ru" ? "Святая Земля" : "Holy Land" },
+          { name: locale === "ru" ? "Эгейское побережье Турции" : "Turkish Aegean coast" },
         ]}
         validFrom="2026-01-01"
         validThrough="2026-12-31"
