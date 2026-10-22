@@ -170,6 +170,15 @@ export default async function PrivacyPolicyPage({
                 <strong>Communication data:</strong> records of correspondence
                 via email, phone, WhatsApp, or contact forms
               </li>
+              <li>
+                <strong>Enquiry source:</strong> when you send an enquiry
+                through our website, the page you sent it from and the website
+                that referred you. If you have accepted analytics cookies, also
+                the first page of your visit and any campaign tags in the link
+                you followed (for example, utm_source). We use this only to
+                understand how clients find us. It reaches our staff together
+                with your enquiry and is not shared with analytics providers.
+              </li>
             </ul>
 
             {/* 3. Why We Collect Your Data */}
@@ -426,7 +435,11 @@ export default async function PrivacyPolicyPage({
               <li>
                 <strong>Analytics cookies:</strong> help us understand how
                 visitors interact with our website, so we can improve its
-                performance and content
+                performance and content. If you accept them, we also keep the
+                first page of your visit in your browser for that visit only
+                (session storage), so that an enquiry shows how your visit
+                started. It is deleted when you close the tab or withdraw your
+                consent.
               </li>
               <li>
                 <strong>Preference cookies:</strong> remember your settings and
