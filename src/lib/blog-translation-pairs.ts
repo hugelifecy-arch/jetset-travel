@@ -23,11 +23,14 @@ export const BLOG_SLUG_PAIRS_EN_TO_RU: Record<string, string> = {
   "cyprus-schengen-2026-business-travel": "kipr-v-shengene-2026-delovye-poezdki",
   "digital-nomads-cyprus-guide": "digital-nomady-kipr-gid",
   "limassol-corporate-retreat-guide": "korporativnyj-retrit-v-limassole",
+  "luxury-cruises-from-cyprus-2027": "lyuks-kruizy-s-kipra-2027",
   "luxury-mediterranean-destinations-2026": "premialnyj-otdykh-sredizemnomorye-2026",
   "luxury-travel-cyprus-2026-guide": "lyuks-puteshestviya-s-kipra-2026-gid",
+  "private-jet-yacht-charter-cyprus": "chastnyj-samolet-i-yakhta-s-kipra",
   "private-villa-holidays-mykonos-santorini-crete": "villy-mikonos-santorini-krit-s-kipra",
   "schengen-visa-guide-cyprus-residents": "shengenskaya-viza-dlya-zhitelej-kipra",
   "travel-agency-paphos-guide": "kak-vybrat-turagenstvo-pafos",
+  "vip-airport-service-larnaca-paphos": "vip-obsluzhivanie-aeroport-larnaka-pafos",
 };
 
 const RU_TO_EN: Record<string, string> = Object.fromEntries(

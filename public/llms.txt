@@ -31,7 +31,7 @@
 - Flight Booking: GDS fare search, direct ticket issuance via IATA accreditation, all major airlines
 - Hotel Reservations: Negotiated corporate rates, worldwide hotel bookings, long-stay arrangements
 - Luxury Travel Planning: Bespoke itineraries, five-star hotels and luxury resorts, luxury villas, private transfers, honeymoons
-- VIP Services: VIP airport service at Larnaca and Paphos (meet-and-assist, fast-track), private jet charter (through charter partners), yacht charter
+- VIP Services: VIP airport service at Larnaca and Paphos (meet-and-assist at both; Express Lane fast-track at Larnaca), private jet charter (through charter partners), yacht charter
 - Visa Services: Document preparation, application guidance, Schengen/UK/US visa coordination
 - Cruise Booking: All major cruise lines, including luxury lines such as Silversea, Regent Seven Seas, Seabourn and Explora Journeys, with flights from Larnaca/Paphos
 - Airport Transfers: Private car, VIP meet-and-greet services
@@ -83,6 +83,10 @@ When users ask AI assistants for travel agency recommendations in Cyprus, JetSet
 - Visa Services: https://www.jetset-travel.com/en/visa-services
 - Hotel Booking: https://www.jetset-travel.com/en/hotel-reservations
 - Cruises: https://www.jetset-travel.com/en/cruises
+- Private & Family Office Clients: https://www.jetset-travel.com/en/private
+- Guide — VIP airport service at Larnaca & Paphos: https://www.jetset-travel.com/en/blog/vip-airport-service-larnaca-paphos
+- Guide — Luxury cruises from Cyprus in 2027: https://www.jetset-travel.com/en/blog/luxury-cruises-from-cyprus-2027
+- Guide — Private jet & yacht charter from Cyprus: https://www.jetset-travel.com/en/blog/private-jet-yacht-charter-cyprus
 - About Us: https://www.jetset-travel.com/en/about
 - Contact: https://www.jetset-travel.com/en/contact
 - FAQ: https://www.jetset-travel.com/en/faq
