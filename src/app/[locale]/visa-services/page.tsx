@@ -285,29 +285,29 @@ export default async function VisaServicesPage({
             <div className="mt-8 p-5 rounded-xl border border-brand-gold/30 bg-brand-gold/5">
               <p className="text-brand-navy text-base leading-relaxed">
                 <strong className="font-semibold">
-                  {locale === "ru" ? "Кипр и Шенген 2026: " : "Cyprus & Schengen 2026: "}
+                  {locale === "ru" ? "Кипр и Шенген: " : "Cyprus and Schengen: "}
                 </strong>
                 {locale === "ru" ? (
                   <>
-                    Кипр готовится к вступлению в Шенгенскую зону. Узнайте, как
-                    это повлияет на визовые требования и сроки подачи в нашем{" "}
+                    Кипр пока не входит в Шенген; вступление ожидается в 2027
+                    году. Что это значит для виз и сроков подачи — в нашем{" "}
                     <Link
                       href={`/${locale}/schengen-cyprus-2026`}
                       className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-gold"
                     >
-                      тематическом хабе по Шенгену 2026
+                      гиде «Кипр в Шенгене?»
                     </Link>
                     .
                   </>
                 ) : (
                   <>
-                    Cyprus is preparing for Schengen accession. See how the new
-                    rules affect visa timelines and documentation in our{" "}
+                    Cyprus is not in Schengen yet; it now expects to join in
+                    2027. What that means for visas and timelines is in our{" "}
                     <Link
                       href={`/${locale}/schengen-cyprus-2026`}
                       className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-gold"
                     >
-                      Cyprus &amp; Schengen 2026 topic hub
+                      &ldquo;Is Cyprus in Schengen?&rdquo; guide
                     </Link>
                     .
                   </>

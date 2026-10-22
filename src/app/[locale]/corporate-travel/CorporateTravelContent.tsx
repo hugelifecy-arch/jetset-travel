@@ -162,29 +162,29 @@ export default function CorporateTravelContent() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <p className="text-sm sm:text-base text-brand-navy/80 leading-relaxed">
             <span className="inline-block text-xs uppercase tracking-wider font-semibold text-brand-gold-ink bg-brand-gold/10 px-2.5 py-1 rounded-full mr-2 align-middle">
-              {locale === "ru" ? "Шенген 2026" : "Schengen 2026"}
+              {locale === "ru" ? "Шенген: статус" : "Schengen update"}
             </span>
             {locale === "ru" ? (
               <>
-                Вступление Кипра в Шенгенскую зону потребует обновления
-                корпоративных тревел-политик. Полный гид —{" "}
+                Вступление Кипра в Шенген (ожидается в 2027 году) потребует
+                обновления корпоративных тревел-политик. Полный гид —{" "}
                 <Link
                   href={`/${locale}/schengen-cyprus-2026`}
                   className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-gold"
                 >
-                  тематический хаб Кипр и Шенген 2026
+                  гид «Кипр в Шенгене?»
                 </Link>
                 .
               </>
             ) : (
               <>
-                Cyprus&rsquo;s Schengen accession will require corporate travel
-                policies to be updated. Full briefing in our{" "}
+                Cyprus&rsquo;s Schengen accession, now expected in 2027, will
+                require corporate travel policies to be updated. Full briefing in our{" "}
                 <Link
                   href={`/${locale}/schengen-cyprus-2026`}
                   className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-gold"
                 >
-                  Cyprus &amp; Schengen 2026 topic hub
+                  &ldquo;Is Cyprus in Schengen?&rdquo; guide
                 </Link>
                 .
               </>
