@@ -175,14 +175,6 @@ export const LOCALE_ALTERNATES: Record<
     en: "/en/corporate-travel-cyprus",
     ru: "/ru/corporate-travel-cyprus",
   },
-  "/en/visa-services-cyprus": {
-    en: "/en/visa-services-cyprus",
-    ru: "/ru/visa-services-cyprus",
-  },
-  "/ru/visa-services-cyprus": {
-    en: "/en/visa-services-cyprus",
-    ru: "/ru/visa-services-cyprus",
-  },
   "/en/luxury-travel-cyprus": {
     en: "/en/luxury-travel-cyprus",
     ru: "/ru/luxury-travel-cyprus",
