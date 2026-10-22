@@ -286,7 +286,7 @@ export default function Footer() {
               />
             </a>
             <a
-              href="viber://chat?number=35799478073"
+              href="viber://chat?number=%2B35799478073"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contact us on Viber"

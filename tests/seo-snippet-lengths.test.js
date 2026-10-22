@@ -82,6 +82,18 @@ const STATIC_PAGE_METADATA = [
     description:
       "Конфиденциальное управление поездками для частных клиентов, семей и семейных офисов на Кипре. Частная авиация, яхты, VIP-услуги. Лимассол и Пафос.",
   },
+  {
+    page: "/en/schengen-cyprus-2026",
+    title: "Is Cyprus in Schengen? EU Vote & 2027 Timeline (Oct 2026)",
+    description:
+      "Not yet. In October 2026 Cyprus is still outside Schengen and now expects to join in 2027. What it means for the 90/180-day rule, visas, EES and ETIAS.",
+  },
+  {
+    page: "/ru/schengen-cyprus-2026",
+    title: "Кипр в Шенгене? Статус на октябрь 2026 и сроки (2027)",
+    description:
+      "Пока нет. На октябрь 2026 года Кипр вне Шенгенской зоны, вступление ожидается в 2027 году. Что это значит для правила 90/180, виз, EES и ETIAS.",
+  },
 ];
 
 function isWithin(value, min, max) {

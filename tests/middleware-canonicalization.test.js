@@ -229,3 +229,35 @@ describe("middleware: no-trailing-slash canonicalization", () => {
     assert.equal(result.url, "https://www.jetset-travel.com/ru");
   });
 });
+
+// ---- Upper/mixed-case locale prefix (audit 22 Oct 2026) ----
+// /EN/contact used to 301 to /en/EN/contact (a 404): the prefix test is
+// case-sensitive, so "EN" was treated as a bare path and got /en prepended.
+
+describe("middleware: locale prefix in the wrong case", () => {
+  for (const [input, expected] of [
+    ["https://www.jetset-travel.com/EN/contact", "https://www.jetset-travel.com/en/contact"],
+    ["https://www.jetset-travel.com/En", "https://www.jetset-travel.com/en"],
+    ["https://www.jetset-travel.com/RU/blog/", "https://www.jetset-travel.com/ru/blog"],
+    ["https://jetset-travel.com/Ru/faq", "https://www.jetset-travel.com/ru/faq"],
+    ["https://www.jetset-travel.com/EN/en/about", "https://www.jetset-travel.com/en/about"],
+  ]) {
+    it(`${input} → single 301 to ${expected}`, () => {
+      const result = canonicalize(input);
+      assert.equal(result.action, "redirect");
+      assert.equal(result.url, expected);
+      // One hop: the target itself is canonical.
+      assert.equal(canonicalize(result.url).action, "passthrough");
+    });
+  }
+
+  it("only the locale segment is lower-cased; the rest of the path keeps its case", () => {
+    const result = canonicalize("https://www.jetset-travel.com/EN/blog/Some-Slug");
+    assert.equal(result.url, "https://www.jetset-travel.com/en/blog/Some-Slug");
+  });
+
+  it("paths that merely start with the letters en/ru are not locale prefixes", () => {
+    const result = canonicalize("https://www.jetset-travel.com/ENQUIRY");
+    assert.equal(result.url, "https://www.jetset-travel.com/en/ENQUIRY");
+  });
+});
