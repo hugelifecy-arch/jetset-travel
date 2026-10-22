@@ -7,7 +7,12 @@ import { trackCTAClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
 const WHATSAPP_NUMBER =
   process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? "35799478073";
 
-export default function CTABanner() {
+/** Optional title/subtitle let a page replace the default (corporate)
+ *  wording, e.g. luxury and hotel pages. */
+export default function CTABanner({
+  title,
+  subtitle,
+}: { title?: string; subtitle?: string } = {}) {
   const locale = useLocale();
   const t = useTranslations("cta");
 
@@ -16,10 +21,10 @@ export default function CTABanner() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="reveal-up text-center">
           <h2 className="font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            {t("title")}
+            {title ?? t("title")}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">
-            {t("subtitle")}
+            {subtitle ?? t("subtitle")}
           </p>
 
           <div className="mt-10">

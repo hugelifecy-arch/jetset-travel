@@ -32,7 +32,7 @@ export const NOINDEX_LOCALE_PATHS: ReadonlySet<string> = new Set([
  */
 export const REVIEW_AGGREGATE = {
   ratingValue: "4.9",
-  reviewCount: "65",
+  reviewCount: "66", // Google Business Profile, checked 22 Oct 2026
 } as const;
 
 /**

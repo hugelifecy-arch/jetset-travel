@@ -918,7 +918,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
             </p>
           </div>
           <Accordion
-            items={Array.from({ length: 12 }, (_, i) => ({
+            items={Array.from({ length: 13 }, (_, i) => ({
               question: t(`faq${i + 1}Q`),
               answer: t(`faq${i + 1}A`),
             }))}
@@ -972,7 +972,7 @@ export default function CruisesContent({ locale }: { locale: string }) {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "FAQPage",
-            mainEntity: Array.from({ length: 12 }, (_, i) => ({
+            mainEntity: Array.from({ length: 13 }, (_, i) => ({
               "@type": "Question",
               name: t(`faq${i + 1}Q`),
               acceptedAnswer: {

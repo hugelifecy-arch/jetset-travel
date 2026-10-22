@@ -335,7 +335,7 @@ export default async function LuxuryTravelCyprusPage({
       />
 
       {/* CTA Banner */}
-      <CTABanner />
+      <CTABanner title={t("ctaTitle")} subtitle={t("ctaSubtitle")} />
 
       {/* Cross-links */}
       <ServicesCrossLinks locale={locale} include={["hotels", "cruises"]} />

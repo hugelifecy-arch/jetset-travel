@@ -209,9 +209,21 @@ export default async function LocalBusinessSchema({
             name: isRussian ? "Трансферы из аэропорта" : "Airport Transfers",
           },
         },
+        // VIP services confirmed by the owner (22 Oct 2026).
+        ...[
+          ["VIP-обслуживание в аэропортах Ларнаки и Пафоса", "VIP Airport Service (Larnaca and Paphos)"],
+          ["Аренда частных самолётов", "Private Jet Charter"],
+          ["Аренда яхт", "Yacht Charter"],
+          ["Люксовые виллы", "Luxury Villa Rentals"],
+          ["Отели 5* и люксовые курорты", "Five-Star Hotels and Luxury Resorts"],
+        ].map(([ru, en]) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: isRussian ? ru : en },
+        })),
       ],
     },
     sameAs: [
+      "https://www.google.com/maps/place/?q=place_id:ChIJf1hiLewG5xQRtOFkmx2QYUE",
       "https://www.facebook.com/JETSETCYPRUS/",
       "https://www.instagram.com/jetsetcyprus",
       "https://www.linkedin.com/company/jetsetcyprus",

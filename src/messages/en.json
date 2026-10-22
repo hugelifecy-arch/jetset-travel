@@ -683,7 +683,7 @@
     "listenTitle": "We Listen Before We Book",
     "listenDesc": "Every luxury trip starts with a conversation — not a search engine. We learn how you travel, what excites you, and what you avoid. Then we design an itinerary that feels personal, not templated. Whether it's a quiet retreat or a celebration, we shape every detail around you.",
     "accessTitle": "Access Others Cannot Offer",
-    "accessDesc": "Through our preferred partnerships with leading hotel groups, private villa networks, and concierge services, we unlock room upgrades, late checkouts, resort credits, and exclusive experiences that aren't available to the public. Our IATA accreditation and industry relationships mean you get more for the same price.",
+    "accessDesc": "We book leading hotels, resorts, private villas and concierge services directly for you, and we ask on your behalf for the extras that make a stay special, such as room upgrades, late check-out or a welcome touch, whenever the property can offer them. As an IATA-accredited agency we also issue your airline tickets ourselves, so one team handles the whole trip.",
     "destTitle": "Featured Destinations",
     "destSubtitle": "A glimpse of where we can take you — each trip fully bespoke.",
     "maldivesName": "Maldives",
@@ -721,13 +721,26 @@
     "faq1Q": "How far in advance should I book a luxury trip?",
     "faq1A": "We recommend booking 2–4 months ahead for the best availability at top properties, especially during peak seasons. However, we can also arrange last-minute luxury getaways thanks to our direct hotel and villa partnerships.",
     "faq2Q": "What makes JetSet different from booking luxury travel online?",
-    "faq2A": "We provide personal service, insider access, and curated itineraries you won't find on any website. Our preferred partnerships unlock complimentary upgrades, resort credits, late checkouts, and exclusive experiences. Every trip is designed around you — not a template.",
+    "faq2A": "You get one person who knows your preferences and plans the whole trip: flights, hotels or villas, transfers, VIP airport service and experiences. We compare options for you, ask hotels for the extras that make a stay special, and stay with you if plans change. Every trip is designed around you, not a template.",
     "faq3Q": "Can you arrange private transfers and VIP airport services?",
     "faq3A": "Yes. We arrange private car transfers, helicopter transfers, yacht charters, and VIP meet-and-greet services at airports worldwide. Every detail of your journey is handled seamlessly from door to door.",
     "faq4Q": "Do you plan honeymoons and celebration trips?",
     "faq4A": "Absolutely. Honeymoons, anniversaries, milestone birthdays — we specialise in creating unforgettable moments. From sunset dinners on private beaches to spa rituals and surprise excursions, we design every element to make your celebration extraordinary.",
     "faq5Q": "What destinations do you specialise in for luxury travel?",
-    "faq5A": "Our most popular luxury destinations include the Maldives, Santorini, Dubai, the Swiss Alps, Seychelles, and Tuscany — but we plan bespoke trips worldwide. If you have a dream destination, we can make it happen."
+    "faq5A": "Our most popular luxury destinations include the Maldives, Santorini, Dubai, the Swiss Alps, Seychelles, and Tuscany — but we plan bespoke trips worldwide. If you have a dream destination, we can make it happen.",
+    "vipTitle": "VIP services we arrange",
+    "vipIntro": "JetSet Travel is an IATA-accredited travel agency (IATA 14200130) licensed in Cyprus (licence 7775), based in Paphos since 2006. For VIP and luxury clients we arrange:",
+    "vipAirport": "VIP airport service at Larnaca and Paphos: meet-and-assist and fast-track",
+    "vipJet": "Private jet charter, through our charter partners",
+    "vipYacht": "Yacht charter, for a day or a week, in Cyprus and the Mediterranean",
+    "vipVillas": "Luxury villas, in Cyprus and abroad",
+    "vipResorts": "Five-star hotels and luxury resorts worldwide",
+    "vipCruises": "Ocean and luxury cruises with the major cruise lines",
+    "vipLanguages": "One team in Paphos handles everything, in English, Russian and Greek.",
+    "faq6Q": "Can JetSet arrange private jet and yacht charters?",
+    "faq6A": "Yes. We arrange private jet charters through our charter partners and yacht charters for a day or a week, in Cyprus and around the Mediterranean, together with your hotel or villa, transfers and VIP airport service at Larnaca or Paphos.",
+    "faq7Q": "Which cruise lines can you book?",
+    "faq7A": "We book cruises with the major cruise lines, from ocean lines such as MSC, Royal Caribbean and Celebrity to luxury lines such as Silversea, Regent Seven Seas, Seabourn and Explora Journeys, and we add flights from Larnaca or Paphos and hotel stays before or after the cruise."
   },
   "quotePage": {
     "heroLabel": "Get a Quote",
@@ -1161,7 +1174,9 @@
     "ctaTitle": "Ready to Set Sail?",
     "ctaSubtitle": "You dream it, we book it — from Cyprus to anywhere in the world.",
     "ctaQuote": "Get a Cruise Quote",
-    "ctaWhatsApp": "WhatsApp Us"
+    "ctaWhatsApp": "WhatsApp Us",
+    "faq13Q": "Which cruise lines can JetSet book?",
+    "faq13A": "We book cruises with the major cruise lines, from ocean lines such as MSC, Royal Caribbean and Celebrity to luxury lines such as Silversea, Regent Seven Seas, Seabourn and Explora Journeys, and we add flights from Larnaca or Paphos and hotel stays before or after the cruise."
   },
   "paphosPage": {
     "heroLabel": "Local SEO — Paphos, Cyprus",
@@ -1376,11 +1391,11 @@
     "overviewSubtitle": "More than booking — we design experiences that match your lifestyle.",
     "overviewP1": "JetSet Travel's luxury division creates bespoke travel experiences for discerning travellers from Cyprus. Every itinerary is personally designed by our senior travel consultants who understand that luxury means different things to different people.",
     "overviewP2": "Whether it's an overwater villa in the Maldives, a cultural tour through Tuscany, or a once-in-a-lifetime safari — we handle every detail from private airport transfers to restaurant reservations.",
-    "overviewP3": "As an IATA-accredited agency, we access exclusive airline fares and hotel rates not available through consumer booking platforms, ensuring exceptional value for premium experiences.",
+    "overviewP3": "As an IATA-accredited agency we issue airline tickets ourselves, and we book hotels, resorts, villas and VIP services for you, so one team handles the whole trip.",
     "why1Title": "Curated, Not Generic",
     "why1Desc": "Every itinerary is designed from scratch based on your preferences, not pulled from a template.",
-    "why2Title": "Exclusive Access",
-    "why2Desc": "IATA-accredited rates, suite upgrades, early check-in, and VIP experiences at partner properties.",
+    "why2Title": "VIP Extras",
+    "why2Desc": "VIP airport service at Larnaca and Paphos, private jet and yacht charters, and the extras we request from hotels on your behalf.",
     "why3Title": "Personal Concierge",
     "why3Desc": "A dedicated consultant manages every detail — from dining reservations to spa appointments.",
     "why4Title": "24/7 Support",
@@ -1436,7 +1451,9 @@
     "faq4Q": "What makes JetSet different from online luxury travel agencies?",
     "faq4A": "We're a boutique, IATA-accredited agency — not a faceless platform. You work directly with a senior consultant who knows the destinations personally and handles every detail. Plus, our negotiated rates often beat online prices.",
     "faq5Q": "Do you offer group luxury travel?",
-    "faq5A": "Yes. We organise luxury group trips for special occasions, corporate retreats, and milestone celebrations with negotiated group rates and coordinated logistics."
+    "faq5A": "Yes. We organise luxury group trips for special occasions, corporate retreats, and milestone celebrations with negotiated group rates and coordinated logistics.",
+    "ctaTitle": "Planning a luxury trip?",
+    "ctaSubtitle": "Tell us where, when and who is travelling. We'll come back with hand-picked hotels, villas and the VIP extras to match."
   },
   "flightsCyprusPage": {
     "heroLabel": "Flights from Cyprus",
@@ -1589,7 +1606,9 @@
     "faq4Q": "How do corporate hotel rates work?",
     "faq4A": "Once we set up your company profile, your travellers get access to our negotiated rates at partner hotels. These rates are typically 10-30% below published prices and include flexible cancellation and clean invoicing.",
     "faq5Q": "Can you book room blocks for events?",
-    "faq5A": "Absolutely. We negotiate group rates and manage room blocks for conferences, weddings, and corporate events. We handle individual rooming lists, special requests, and coordinate directly with the hotel's events team."
+    "faq5A": "Absolutely. We negotiate group rates and manage room blocks for conferences, weddings, and corporate events. We handle individual rooming lists, special requests, and coordinate directly with the hotel's events team.",
+    "ctaTitle": "Looking for the right hotel?",
+    "ctaSubtitle": "Send us your destination, dates and budget. We'll come back with hand-picked hotels and resorts, from city stays to five-star beach resorts."
   },
   "privatePage": {
     "heroEyebrow": "Private & Family Office Travel",

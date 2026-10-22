@@ -371,7 +371,7 @@ export default async function HotelBookingCyprusPage({
       <FAQSection title={t("faqTitle")} items={faqItems} background="light" />
 
       {/* CTA Banner */}
-      <CTABanner />
+      <CTABanner title={t("ctaTitle")} subtitle={t("ctaSubtitle")} />
 
       {/* Cross-links */}
       <ServicesCrossLinks
