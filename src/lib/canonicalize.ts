@@ -18,6 +18,7 @@ export const LOCALES = ["en", "ru"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 const LOCALE_PREFIX_RE = new RegExp(`^/(${LOCALES.join("|")})(/|$)`);
+const LOCALE_PREFIX_CI_RE = new RegExp(`^/(${LOCALES.join("|")})(/|$)`, "i");
 
 // Paths on the apex that must stay reachable (search engine verification).
 const APEX_BYPASS =
@@ -115,6 +116,13 @@ export function canonicalize(
   }
 
   let pathname = originalPathname;
+
+  // 0. Lower-case a locale prefix typed in the wrong case (/EN/contact,
+  //    /Ru). Without this, step 4 treats "/EN/..." as a bare path and
+  //    redirects to /en/EN/... (a 404). Only the locale segment changes.
+  pathname = pathname.replace(LOCALE_PREFIX_CI_RE, (_m, loc: string, end: string) =>
+    `/${loc.toLowerCase()}${end}`,
+  );
 
   // 1. Collapse /en/en/... → /en/... (runs before trailing-slash normalization
   //    so "/en/en/" and "/en/en" reduce to the same intermediate form).
