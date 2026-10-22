@@ -23,12 +23,12 @@ status: "published"
 
 *Checked October 2026.* At Larnaca and Paphos there is no single "VIP ticket" for scheduled flights. A VIP airport service is put together from a few parts:
 
-- **Meet & assist:** an executive team from the airport's ground handler meets you and escorts you through check-in, security and passport control, using priority lanes where they are allowed. Swissport Executive Aviation offers this at both Larnaca and Paphos.
+- **Meet & assist:** an executive team from the airport's ground handler meets you and escorts you through check-in, security and passport control, using priority lanes where they are allowed. Swissport Executive Aviation lists meet & assist at both Larnaca and Paphos; we confirm availability for your flight.
 - **The Express Lane:** Hermes Airports' paid lane through security at Larnaca, which can be booked online.
 - **A lounge:** the Skala Lounge or the Aegean Business Lounge at Larnaca, and the Premium Lounge at Paphos.
 - **A private transfer** between the airport and your home, hotel or villa.
 
-Flying private is different: at Larnaca, private flights use an executive terminal with passport control and customs inside.
+Flying private is different: at Larnaca, private flights use an executive terminal, run by Skylink Services, with passport control and customs inside.
 
 One thing no VIP service can do is skip passport control or security. Cyprus is not yet in the Schengen area, so every arriving passenger, including on flights from Athens, Paris or Frankfurt, goes through a border check.
 
@@ -38,7 +38,7 @@ JetSet Travel is an IATA-accredited travel agency in Paphos (IATA 14200130, Tour
 
 ### Meet & assist
 
-Hermes Airports, which runs both airports, does not sell a "VIP" or meet & assist product itself. The service is provided by ground handlers' executive teams. Swissport lists Meet & Assist and help with customs and immigration under its Executive Aviation service at both Larnaca and Paphos.
+Hermes Airports, which runs both airports, does not sell a "VIP" or meet & assist product itself. The service is provided by ground handlers' executive teams. Swissport lists Meet & Assist and help with customs and immigration under its Executive Aviation service at both Larnaca and Paphos. Its pages present this mainly for business aviation, so for an airline flight we confirm availability before we book.
 
 In practice, a member of staff meets you and guides you through the formalities, using priority lanes where permitted. It does not let you bypass security or immigration; it makes them smoother and quicker.
 
@@ -51,7 +51,7 @@ The Express Lane is Hermes Airports' name for its fast-track lane:
 - The charge is per passenger, and children and infants pay the same as adults. Tickets are single-use and non-refundable.
 - Hermes is clear that the Express Lane does not guarantee you will not queue at busy times.
 
-At Paphos, Hermes does not sell the Express Lane online, and the sources we found disagree on whether a paid lane operates there. If speed matters at Paphos, meet & assist is the reliable option, and we check the current position for your flight.
+At Paphos, Hermes does not sell the Express Lane, and its own passenger guide (October 2025) lists no Express Lane there. If speed matters at Paphos, meet & assist is the best option we can arrange.
 
 ### Lounges
 
@@ -75,8 +75,8 @@ A driver meets you outside arrivals, or collects you from home for a departure. 
 
 | | Larnaca (LCA) | Paphos (PFO) |
 |---|---|---|
-| Meet & assist | Yes, through Swissport Executive Aviation | Yes, through Swissport Executive Aviation |
-| Express Lane (security) | Yes; online or at the airport | Not sold online; check before you fly |
+| Meet & assist | Yes, e.g. Swissport Executive Aviation; confirmed per flight | Yes, e.g. Swissport Executive Aviation; confirmed per flight |
+| Express Lane (security) | Yes; online or at the airport | Not offered, according to Hermes |
 | Lounges | Skala Lounge, Aegean Business Lounge | Premium Lounge |
 | Porter service | Yes, €10 per trolley | No |
 | Private flights | Executive terminal with passport control and customs inside | Handled by ground handlers; no dedicated private-jet terminal found |
@@ -88,14 +88,14 @@ For a wider comparison of the two airports, see our [Larnaca vs Paphos airport g
 As of October 2026, Cyprus is an EU member but not yet part of the Schengen area. It expects to join in 2027, subject to a decision of the EU Council. Until then:
 
 - Every arriving passenger goes through a border check, including on flights from Schengen countries.
-- Both airports have BorderXpress self-service kiosks, with officer-staffed desks as a fallback.
+- Both airports have BorderXpress self-service kiosks for eligible passengers (mainly on flights from the EU, UK and EEA); other passengers use officer-staffed desks.
 - The EU Entry/Exit System (EES) is not used in Cyprus.
 
 A VIP service makes this faster and calmer; it does not remove it. Our [Cyprus Schengen guide](/en/schengen-cyprus-2026) tracks the latest on accession.
 
 ## Flying Private from Larnaca or Paphos
 
-At Larnaca, private flights are handled at an executive terminal with its own lounge, open 24 hours, with passport control and customs inside the building.
+At Larnaca, private flights are handled at an executive terminal run by Skylink Services, with its own lounge and with passport control and customs inside the building. We confirm the handling arrangements for each flight.
 
 At Paphos, we found no dedicated private-jet terminal. Ground handlers meet private flights and help passengers through customs and immigration.
 
@@ -125,7 +125,7 @@ It works for a single arrival, a family, or a group of guests for a wedding or c
 
 ### Is there a VIP terminal at Larnaca airport?
 
-For private flights, yes: Larnaca has an executive terminal with passport control and customs inside. For scheduled flights, VIP service means meet & assist, the Express Lane through security and a lounge.
+For private flights, yes: Larnaca has an executive terminal, run by Skylink Services, with passport control and customs inside. For scheduled flights, VIP service means meet & assist, the Express Lane through security and a lounge.
 
 ### Can VIP service skip passport control in Cyprus?
 
@@ -133,7 +133,7 @@ No. Cyprus is not yet in the Schengen area, so every arriving passenger goes thr
 
 ### Is there fast track at Paphos airport?
 
-Hermes Airports sells Express Lane tickets online for Larnaca only. At Paphos, meet & assist is available through Swissport Executive Aviation, and we check what else is available for your flight.
+Hermes Airports sells Express Lane tickets for Larnaca only, and its 2025 passenger guide lists no Express Lane at Paphos. At Paphos the best option is meet & assist, which we confirm for your flight.
 
 ### Which lounge can I use at Paphos airport?
 

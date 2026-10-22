@@ -22,7 +22,7 @@ status: "published"
 
 *Checked October 2026.*
 
-- **Private jets:** Larnaca and Paphos are the Republic of Cyprus's two international airports, and both handle private flights around the clock. Larnaca has an executive terminal with passport control and customs inside. In Europe a charter flight must be run by an operator holding an Air Operator Certificate (AOC), and that is worth checking before you pay.
+- **Private jets:** Larnaca and Paphos are the Republic of Cyprus's two international airports, and both handle private flights. Larnaca has an executive terminal with passport control and customs inside. In Europe a charter flight must be run by an operator holding an Air Operator Certificate (AOC), and that is worth checking before you pay.
 - **Yachts:** Limassol Marina and Ayia Napa Marina both take yachts over 100 metres. The classic day trips are the Akamas coast and Blue Lagoon from Latchi, the Limassol coast, and the sea caves of Cape Greco. For a week on board, most people fly to Greece, Croatia, Montenegro, Italy or the French Riviera, because the nearest Greek island of any size, Rhodes, is 255 nautical miles from Limassol.
 
 JetSet Travel is an IATA-accredited travel agency in Paphos (IATA 14200130, Tourism Licence 7775). We arrange private jet charter through charter partners and yacht charter for a day or a week, together with [VIP airport service](/en/blog/vip-airport-service-larnaca-paphos), transfers, villas and hotels.
@@ -31,8 +31,8 @@ JetSet Travel is an IATA-accredited travel agency in Paphos (IATA 14200130, Tour
 
 ### Which airports
 
-- **Larnaca and Paphos** are the only legal points of entry to the Republic of Cyprus by air. Both are run by Hermes Airports and are listed as 24-hour airports of entry with customs.
-- **Larnaca** has an executive terminal for private flights, open 24 hours, with a passenger lounge and with customs, immigration and security inside the building.
+- **Larnaca and Paphos** are the only legal points of entry to the Republic of Cyprus by air. Both are run by Hermes Airports and operate 24 hours.
+- **Larnaca** has an executive terminal for private flights, run by Skylink Services, with a passenger lounge and with customs, immigration and security inside the building. We confirm the handling arrangements for each flight.
 - **Paphos** handles private flights too. We found no dedicated private-jet terminal there; ground handlers meet the aircraft and help passengers through customs and immigration.
 - **Airports in the north of the island** are not legal entry points to the Republic; arriving that way counts as illegal entry. Private aircraft, like airlines, do not fly directly between the Republic of Cyprus and Turkey.
 
@@ -76,7 +76,7 @@ When we arrange a charter, we tell you which operator will fly you, so you can c
 - **Akamas and the Blue Lagoon, from Latchi:** the Blue Lagoon lies west of Latchi on the Akamas peninsula, about 30–45 minutes by boat. Akamas is a protected Natura 2000 area, so boats should keep their anchors off the seagrass.
 - **Lara Bay is off-limits in summer:** from 1 May to 31 October boats may not sail or anchor in waters up to 20 metres deep at Lara–Toxeftra, to protect nesting turtles. Any Akamas itinerary we plan in those months leaves Lara out.
 - **The Limassol coast, from Limassol Marina:** Amathus is 5 nautical miles away, Governor's Beach 12, Kourion 18, Pissouri Bay 22 and Aphrodite's Rock 28.
-- **Cape Greco and Ayia Napa:** sea caves that can only be reached from the water, and Konnos Bay, which is sheltered from the prevailing wind by the Cape Greco peninsula.
+- **Cape Greco and Ayia Napa:** sea caves that are best seen from the water, and Konnos Bay, which is sheltered from the prevailing wind by the Cape Greco peninsula.
 
 ### When to go
 

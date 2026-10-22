@@ -22,7 +22,7 @@ status: "published"
 
 *Checked October 2026.* The luxury cruise lines do not start their voyages in Cyprus. In 2027, Silversea, Regent Seven Seas Cruises, Seabourn and Explora Journeys start and end their Eastern Mediterranean voyages mainly in **Athens (Piraeus), Venice (Fusina), Istanbul, Trieste and Rome (Civitavecchia)**. If you live in Cyprus, you fly to the departure port, ideally the day before, and join the ship there.
 
-Two luxury ships do call at Limassol in 2027, both from Regent: Seven Seas Navigator stays overnight on 21–22 January, and Seven Seas Mariner calls on 3 October. Both are stops on voyages between Istanbul and Athens, so you still board in Istanbul or Athens.
+On the cruise lines' own websites we could confirm two luxury calls at Limassol in 2027, both Regent: Seven Seas Navigator stays overnight on 21–22 January, and Seven Seas Mariner calls on 3 October. Both are stops on voyages between Istanbul and Athens, so you still board in Istanbul or Athens.
 
 JetSet Travel is an IATA-accredited travel agency in Paphos (IATA 14200130, Tourism Licence 7775). We book cruises with all the major lines and add the parts the cruise line leaves to you: flights from Larnaca or Paphos, a hotel the night before, transfers to the port and, if you like, [VIP airport service in Cyprus](/en/blog/vip-airport-service-larnaca-paphos). This guide uses the cruise lines' own websites wherever possible; where a fact comes from somewhere else, we say so.
 
@@ -32,12 +32,12 @@ JetSet Travel is an IATA-accredited travel agency in Paphos (IATA 14200130, Tour
 |---|---|---|---|---|
 | Silversea | Silver Nova, Silver Dawn | Athens (Piraeus), Venice (Fusina) | No (an "All-Inclusive Plus" fare adds a shore-excursion credit) | No, optional add-on |
 | Regent Seven Seas | Seven Seas Navigator (winter), Grandeur, Prestige, Mariner | Athens (Piraeus), Istanbul, Venice (Fusina), Trieste, Rome (Civitavecchia) | Yes, unlimited | Through Regent's air programme; offers differ by market |
-| Seabourn | Seabourn Ovation | Athens (Piraeus), Venice (Fusina), Monte Carlo | No, optional extras | No, sold separately |
+| Seabourn | Seabourn Ovation | Athens (Piraeus), Rome (Civitavecchia), Venice (Fusina), Istanbul, Dubrovnik | No, optional extras | No, sold separately |
 | Explora Journeys | EXPLORA II; EXPLORA V from December 2027 | Athens (Piraeus), Istanbul, Venice (Fusina), Rome (Civitavecchia) | No | Only with the "Sky & Sea" fare |
 
 ## Example 2027 Voyages
 
-These are real 2027 voyages listed on the cruise lines' websites in October 2026. They show the kind of routes on offer; availability changes daily.
+These are 2027 voyages published by the cruise lines and their agents in October 2026. They show the kind of routes on offer; availability changes daily, and we confirm every date with the line before you book.
 
 ### Silversea
 
@@ -63,7 +63,7 @@ Seabourn's 2027 Mediterranean season is on Seabourn Ovation, with 22 itineraries
 - **EXPLORA II, 28 June – 5 July 2027:** round trip from Athens (Piraeus), via Skiathos, Kusadasi, Mytilene, Istanbul and Mykonos.
 - **EXPLORA V, 4–11 December 2027:** Rome (Civitavecchia) to Istanbul, via Naples, Messina, Athens (Piraeus) and Volos.
 
-Some 2027 Explora journeys already show a waiting list.
+When we checked, some 2027 Explora journeys already showed a waiting list.
 
 ## Which Luxury Ships Call at Limassol in 2027?
 
@@ -94,7 +94,7 @@ Direct flights as of October 2026. Many routes are seasonal and schedules change
 | Athens (Piraeus) | Direct from Larnaca with Aegean, Cyprus Airways, Sky Express and Wizz Air. Direct from Paphos with Ryanair and with Aegean, which will keep flying from Paphos in 2027. |
 | Venice (Fusina) | Direct from Larnaca with Wizz Air, and with Cyprus Airways in summer. |
 | Rome (Civitavecchia) | Direct from Larnaca with Cyprus Airways, twice a week, year-round from 11 December 2026. Direct from Paphos with Ryanair. |
-| Barcelona | Direct from Larnaca with Wizz Air year-round, and with Cyprus Airways in season. |
+| Barcelona | Direct from Larnaca with Wizz Air, and with Cyprus Airways in season. |
 | Istanbul | No direct flights: there are no flights between the Republic of Cyprus and Turkey. Fly via Athens or another hub. |
 | Trieste | No direct flight from Cyprus; one connection needed. |
 | Monte Carlo | No direct flight to Nice from Cyprus; one connection needed. Nice airport is about 30 km from Monaco, or about 7 minutes by helicopter. |
@@ -105,7 +105,6 @@ The lines' advice differs:
 
 - **Regent** strongly recommends arriving at least one night before the cruise.
 - **Explora** accepts arrival on embarkation day for flights within Europe, if you allow at least 4 hours between landing and sailing (5 hours in Athens, Istanbul and Rome).
-- **Seabourn** recommends allowing 3–5 hours at the start and end of the cruise.
 
 Our advice from Cyprus: fly in the day before. A delayed flight should not cost you the cruise, and for Istanbul, Trieste and Monte Carlo you need a connection anyway. We book the hotel near the port or in the city centre, whichever suits the embarkation time.
 
