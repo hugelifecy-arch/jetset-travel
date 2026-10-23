@@ -24,8 +24,8 @@ export async function generateMetadata({
         : "Cruise Booking Cyprus | Mediterranean & World Cruises — JetSet Travel",
     description:
       locale === "ru"
-        ? "Круизы с Кипра: летние круизы из Лимассола или круизы с перелётом из Афин, Рима и Барселоны с вылетом из Ларнаки или Пафоса. Аккредитация IATA."
-        : "Book cruises from Cyprus: summer round trips from Limassol, or fly-cruises from Athens, Rome and Barcelona with flights from Larnaca or Paphos.",
+        ? "Круизы с Кипра: круизы с перелётом из Афин, Венеции, Рима и Барселоны с вылетом из Ларнаки или Пафоса и лайнеры с заходом в Лимассол. Аккредитация IATA."
+        : "Book cruises from Cyprus: fly-cruises from Athens, Venice, Rome and Barcelona with flights from Larnaca or Paphos, and ships that call at Limassol.",
     keywords:
       locale === "ru"
         ? ["круизы из Кипра", "средиземноморские круизы", "бронирование круизов Лимассол", "морские круизы Кипр", "круизы из Лимассола 2026"]
@@ -62,25 +62,28 @@ export default async function CruisesPage({
       <TouristTripSchema
         name={
           locale === "ru"
-            ? "Средиземноморский круиз из Лимассола"
-            : "Mediterranean Cruise from Limassol"
+            ? "Круиз по греческим островам с перелётом с Кипра"
+            : "Greek Islands Fly-Cruise from Cyprus"
         }
         description={
           locale === "ru"
-            ? "Летние круизы из Лимассола (в 2026 году — Marella Discovery II, апрель–ноябрь) к греческим островам, в Афины (Пирей) и Кушадасы (Турция), а также круизы с перелётом из Афин и других портов Средиземноморья — через JetSet Travel."
-            : "Summer round-trip cruises from Limassol (in 2026 on Marella Discovery II, April–November) to the Greek islands, Athens (Piraeus) and Kusadasi in Turkey, plus fly-cruises from Athens and other Mediterranean ports, booked through JetSet Travel."
+            ? "Перелёт из Ларнаки или Пафоса в Афины и круиз по греческим островам из Пирея (например, 3- и 4-ночные круизы Celestyal, март–ноябрь) — через JetSet Travel. В 2026 году Marella Discovery также выполняла круизы из Лимассола (апрель — начало ноября); на 2027 год такие круизы пока не объявлены."
+            : "Flights from Larnaca or Paphos to Athens with a Greek islands cruise from Piraeus (for example Celestyal's 3- and 4-night cruises, March–November), booked through JetSet Travel. In 2026 Marella Discovery also ran round trips from Limassol (April to early November); none have been announced for 2027 yet."
         }
         url={`https://www.jetset-travel.com/${locale}/cruises`}
         image="https://www.jetset-travel.com/images/destinations/med.jpg"
         touristType={["Mediterranean", "Greek Islands", "Cyprus"]}
         itinerary={[
-          { name: locale === "ru" ? "Лимассол, Кипр" : "Limassol, Cyprus" },
           {
-            name: locale === "ru" ? "Греческие острова" : "Greek Islands",
-            description: locale === "ru" ? "Родос, Крит, Миконос" : "Rhodes, Crete, Mykonos",
+            name: locale === "ru" ? "Ларнака или Пафос, Кипр" : "Larnaca or Paphos, Cyprus",
+            description: locale === "ru" ? "Перелёт в Афины" : "Flight to Athens",
           },
           { name: locale === "ru" ? "Афины (Пирей)" : "Athens (Piraeus)" },
-          { name: locale === "ru" ? "Кушадасы, Турция" : "Kusadasi, Turkey" },
+          {
+            name: locale === "ru" ? "Греческие острова" : "Greek Islands",
+            description: locale === "ru" ? "Например, Миконос, Санторини, Крит" : "For example Mykonos, Santorini, Crete",
+          },
+          { name: locale === "ru" ? "Афины (Пирей)" : "Athens (Piraeus)" },
         ]}
       />
     </>
