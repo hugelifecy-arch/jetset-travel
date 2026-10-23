@@ -323,8 +323,8 @@ export default function CorporateTravelContent() {
         </div>
       </section>
 
-      {/* Quote CTA */}
-      <section className="py-20 bg-brand-navy text-white">
+      {/* Quote CTA — target of /<locale>/corporate-travel#contact links in blog posts */}
+      <section id="contact" className="py-20 bg-brand-navy text-white scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-gold/10 text-brand-gold mb-6">
             <PlaneTakeoff className="h-8 w-8" />
