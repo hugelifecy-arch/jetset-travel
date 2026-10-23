@@ -80,17 +80,18 @@ const destinationImages: Record<(typeof destinations)[number], string> = {
   worldCruises: "/images/destinations/world-cruises.jpg",
 };
 
+// Checked 23 Oct 2026 against the lines' own announcements and trade press
+// (Cruise Industry News, Seatrade, Cruise Hive). Celebrity Xcel and Windstar
+// Star Seeker were removed: both debuted in late 2025, not 2026.
 const newShips = [
-  { line: "Royal Caribbean", ship: "Legend of the Seas", pax: "7,600", cls: "Icon Class", when: "July 2026", detail: "World's largest ship. 28 restaurants, Category 6 waterpark, Crown's Edge skywalk.", sails: "Barcelona, Rome, Fort Lauderdale" },
-  { line: "Norwegian", ship: "Norwegian Luna", pax: "3,571", cls: "Prima Plus Class", when: "March 2026", detail: "The Haven (123 suites), Aqua Slidecoaster, 10-story Drop slide.", sails: "Caribbean, Mediterranean" },
-  { line: "MSC", ship: "MSC World Asia", pax: "6,758", cls: "World Class", when: "2026", detail: "Asia-focused mega-ship for the Pacific region.", sails: "Asia-Pacific" },
-  { line: "Viking", ship: "Viking Libra", pax: "998", cls: "First hydrogen-powered cruise ship", when: "December 2026", detail: "Zero-emission capable. Industry-leading sustainability.", sails: "Mediterranean, Northern Europe" },
-  { line: "Disney", ship: "Disney Adventure", pax: "6,700", cls: "Homeporting Singapore", when: "2026", detail: "Largest international Disney ship. 7 themed zones.", sails: "Year-round Asia" },
-  { line: "Regent", ship: "Seven Seas Prestige", pax: "850", cls: "First Prestige Class", when: "December 2026", detail: "40% more space per guest. All-inclusive ultra-luxury.", sails: "Caribbean, Mediterranean" },
-  { line: "Explora Journeys", ship: "Explora III", pax: "~1,000", cls: "Wellness-focused luxury", when: "2026", detail: "Mediterranean, Northern Europe, Iceland, Greenland.", sails: "Mediterranean, Northern Europe" },
-  { line: "Four Seasons", ship: "Four Seasons I", pax: "190", cls: "Ultra-luxury yacht", when: "Spring 2026", detail: "The most exclusive new ship at sea.", sails: "Mediterranean, Greek Islands" },
-  { line: "Celebrity", ship: "Celebrity Xcel", pax: "3,276", cls: "Edge Class", when: "2026", detail: "Caribbean debut, European summer. 110-day Grand Voyage option.", sails: "Caribbean, Europe" },
-  { line: "Windstar", ship: "Star Seeker", pax: "224", cls: "First new-build in history", when: "2026", detail: "All-suite yacht for intimate voyages.", sails: "Caribbean, Alaska, Japan, SE Asia" },
+  { line: "Royal Caribbean", ship: "Legend of the Seas", pax: "7,600", cls: "Icon Class", when: "July 2026", detail: "Joint-largest cruise ship in the world, with her Icon Class sisters. 28 restaurants, Category 6 waterpark, Crown's Edge.", sails: "Barcelona, Rome, Fort Lauderdale" },
+  { line: "Norwegian", ship: "Norwegian Luna", pax: "3,571", cls: "Prima Plus Class", when: "March 2026", detail: "The Haven suite complex, Aqua Slidecoaster and The Drop 10-storey slide.", sails: "Bahamas & Caribbean from Miami" },
+  { line: "MSC", ship: "MSC World Asia", pax: "6,764", cls: "World Class", when: "December 2026", detail: "Fourth World Class ship, with Asian-inspired design. Mediterranean from Barcelona until November 2027, then the Caribbean.", sails: "Mediterranean, then Caribbean" },
+  { line: "Viking", ship: "Viking Libra", pax: "998", cls: "Hydrogen-powered", when: "Late 2026", detail: "Viking describes it as the first hydrogen-powered cruise ship able to operate with zero emissions.", sails: "Mediterranean, Northern Europe" },
+  { line: "Disney", ship: "Disney Adventure", pax: "6,700", cls: "Homeporting Singapore", when: "March 2026", detail: "Largest Disney ship. 7 themed areas.", sails: "Year-round Asia" },
+  { line: "Regent", ship: "Seven Seas Prestige", pax: "822", cls: "First Prestige Class", when: "December 2026", detail: "Regent's largest ship: about 40% bigger than its predecessors with only about 10% more guests. All-inclusive ultra-luxury.", sails: "Caribbean, Panama Canal, Europe" },
+  { line: "Explora Journeys", ship: "Explora III", pax: "~925", cls: "First LNG-powered Explora ship", when: "August 2026", detail: "Northern Europe, Iceland, Greenland and North America in its first season.", sails: "Northern Europe, Iceland, Greenland, North America" },
+  { line: "Four Seasons", ship: "Four Seasons I", pax: "190", cls: "Ultra-luxury yacht", when: "March 2026", detail: "95 suites and about one crew member per guest.", sails: "Mediterranean & Greek Islands (summer), Caribbean (winter)" },
 ];
 
 const cruiseTypes = [

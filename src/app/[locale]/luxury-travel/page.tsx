@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
+import { buildPageMetadata, REVIEW_AGGREGATE, SERVICE_LAST_UPDATED } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -8,7 +8,7 @@ import {
   Mountain,
   Building2,
   Heart,
-  Quote,
+  Star,
   ArrowRight,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
@@ -48,6 +48,7 @@ export default async function LuxuryTravelPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: "luxuryPage" });
+  const tReviews = await getTranslations({ locale, namespace: "reviews" });
 
   const categories = [
     {
@@ -94,7 +95,6 @@ export default async function LuxuryTravelPage({
       name: t("maldivesName"),
       tagline: t("maldivesTagline"),
       description: t("maldivesDesc"),
-      price: t("maldivesPrice"),
       image: "/images/luxury/maldives.jpg",
       imageAlt: t("maldivesImageAlt"),
       slug: "maldives",
@@ -103,7 +103,6 @@ export default async function LuxuryTravelPage({
       name: t("santoriniName"),
       tagline: t("santoriniTagline"),
       description: t("santoriniDesc"),
-      price: t("santoriniPrice"),
       image: "/images/luxury/santorini.jpg",
       imageAlt: t("santoriniImageAlt"),
       slug: "santorini",
@@ -112,7 +111,6 @@ export default async function LuxuryTravelPage({
       name: t("dubaiName"),
       tagline: t("dubaiTagline"),
       description: t("dubaiDesc"),
-      price: t("dubaiPrice"),
       image: "/images/luxury/dubai.jpg",
       imageAlt: t("dubaiImageAlt"),
       slug: "dubai",
@@ -121,7 +119,6 @@ export default async function LuxuryTravelPage({
       name: t("swissAlpsName"),
       tagline: t("swissAlpsTagline"),
       description: t("swissAlpsDesc"),
-      price: t("swissAlpsPrice"),
       image: "/images/luxury/swiss-alps.jpg",
       imageAlt: t("swissAlpsImageAlt"),
       slug: "swiss-alps",
@@ -130,7 +127,6 @@ export default async function LuxuryTravelPage({
       name: t("seychellesName"),
       tagline: t("seychellesTagline"),
       description: t("seychellesDesc"),
-      price: t("seychellesPrice"),
       image: "/images/luxury/seychelles.jpg",
       imageAlt: t("seychellesImageAlt"),
       slug: "seychelles",
@@ -139,7 +135,6 @@ export default async function LuxuryTravelPage({
       name: t("tuscanyName"),
       tagline: t("tuscanyTagline"),
       description: t("tuscanyDesc"),
-      price: t("tuscanyPrice"),
       image: "/images/luxury/tuscany.jpg",
       imageAlt: t("tuscanyImageAlt"),
       slug: "tuscany",
@@ -300,7 +295,7 @@ export default async function LuxuryTravelPage({
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   <div className="absolute bottom-3 right-3 bg-brand-navy/80 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1.5 rounded-full">
-                    {dest.price}
+                    {t("priceOnRequest")}
                   </div>
                 </div>
                 <div className="p-6">
@@ -320,31 +315,30 @@ export default async function LuxuryTravelPage({
         </div>
       </section>
 
-      {/* Pull-quote Testimonial */}
-      <section className="py-20 bg-brand-navy text-white">
+      {/* Google rating — the verifiable aggregate only (REVIEW_AGGREGATE in
+          lib/seo.ts); the earlier pull-quote could not be traced to a
+          published review. */}
+      <section className="py-16 bg-brand-navy text-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-          <Quote className="h-12 w-12 text-brand-gold/40 mx-auto mb-8" />
-          <blockquote className="font-display text-2xl md:text-3xl lg:text-4xl leading-relaxed mb-8">
-            &ldquo;{t("testimonial")}&rdquo;
-          </blockquote>
-          <div>
-            <p className="text-brand-gold font-semibold">{t("testimonialAuthor")}</p>
-            <p className="text-white/50 text-sm">{t("testimonialLocation")}</p>
+          <div className="flex items-center justify-center gap-1" aria-hidden="true">
+            {Array.from({ length: 5 }).map((_, s) => (
+              <Star key={s} className="h-5 w-5 fill-brand-gold text-brand-gold" />
+            ))}
           </div>
-          <div className="mt-6 flex items-center justify-center gap-2">
-            <span className="text-brand-gold text-sm" aria-hidden="true">★★★★★</span>
-            <span className="text-white/70 text-xs">
-              5/5{" "}
-              <a
-                href="https://www.google.com/search?q=JetSet+Travel+Agency+-+Paphos#lrd=0x14e706ec2d62587f:0x4161901d9b64e1b4,1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-2 hover:text-white transition-colors"
-              >
-                via Google Reviews
-              </a>
-            </span>
-          </div>
+          <p className="mt-4 font-display text-2xl md:text-3xl">
+            {tReviews("aggregateLine", {
+              rating: REVIEW_AGGREGATE.ratingValue,
+              count: REVIEW_AGGREGATE.reviewCount,
+            })}
+          </p>
+          <a
+            href="https://www.google.com/search?q=JetSet+Travel+Agency+-+Paphos#lrd=0x14e706ec2d62587f:0x4161901d9b64e1b4,1"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-block text-sm text-white/70 underline underline-offset-2 hover:text-white transition-colors"
+          >
+            {tReviews("viewAllReviews")}
+          </a>
         </div>
       </section>
 

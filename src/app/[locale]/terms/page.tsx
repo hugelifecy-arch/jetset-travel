@@ -121,7 +121,7 @@ export default async function TermsOfServicePage({
             <p>
               JetSet K&amp;K Travel Ltd is a licensed travel agency registered
               in Cyprus (Company Registration: HE 181550), holding Cyprus
-              Tourism Organisation Licence No.&nbsp;7775 and IATA Accreditation
+              tourism licence No.&nbsp;7775 (Deputy Ministry of Tourism) and IATA Accreditation
               No.&nbsp;14200130.
             </p>
 
@@ -407,7 +407,7 @@ export default async function TermsOfServicePage({
               <br />
               26A Agapinoros Street, 8049 Paphos, Cyprus
               <br />
-              Cyprus Tourism Organisation Licence: 7775
+              Cyprus Tourism Licence (Deputy Ministry of Tourism): 7775
               <br />
               IATA Accreditation: 14200130
               <br />

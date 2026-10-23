@@ -14,7 +14,6 @@ import {
   Check,
   ArrowRight,
 } from "lucide-react";
-import InlineTestimonial from "@/components/sections/InlineTestimonial";
 import Accordion from "@/components/ui/Accordion";
 
 export default function CorporateTravelContent() {
@@ -166,8 +165,9 @@ export default function CorporateTravelContent() {
             </span>
             {locale === "ru" ? (
               <>
-                Вступление Кипра в Шенген (ожидается в 2027 году) потребует
-                обновления корпоративных тревел-политик. Полный гид —{" "}
+                Кипр рассчитывает войти в Шенген в 2027 году — при условии
+                решения Совета ЕС; это может изменить паспортный контроль и
+                корпоративные тревел-политики. Полный гид —{" "}
                 <Link
                   href={`/${locale}/schengen-cyprus-2026`}
                   className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-gold"
@@ -178,8 +178,9 @@ export default function CorporateTravelContent() {
               </>
             ) : (
               <>
-                Cyprus&rsquo;s Schengen accession, now expected in 2027, will
-                require corporate travel policies to be updated. Full briefing in our{" "}
+                Cyprus expects to join Schengen in 2027, subject to an EU
+                Council decision, which may affect passport checks and
+                corporate travel policies. Full briefing in our{" "}
                 <Link
                   href={`/${locale}/schengen-cyprus-2026`}
                   className="font-semibold text-brand-navy underline decoration-brand-gold underline-offset-2 hover:text-brand-gold"
@@ -282,29 +283,6 @@ export default function CorporateTravelContent() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* Client Testimonials */}
-      <section className="py-20 bg-brand-light">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-8 text-center">
-            {t("testimonialTitle")}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <InlineTestimonial
-              quote={t("testimonial1Quote")}
-              author={t("testimonial1Author")}
-              role={t("testimonial1Role")}
-              date="2025-09"
-            />
-            <InlineTestimonial
-              quote={t("testimonial2Quote")}
-              author={t("testimonial2Author")}
-              role={t("testimonial2Role")}
-              date="2025-03"
-            />
           </div>
         </div>
       </section>

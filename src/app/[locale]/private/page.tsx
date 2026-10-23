@@ -45,8 +45,8 @@ export async function generateMetadata({
         : "Private & Family Office Travel Services in Cyprus | JetSet Travel",
     description:
       locale === "ru"
-        ? "Конфиденциальное управление поездками для частных клиентов, семей и семейных офисов на Кипре. Частная авиация, яхты, VIP-услуги. Лимассол и Пафос."
-        : "Discreet, principal-led travel management for private clients, families and family offices in Cyprus. Private aviation, yacht charter, VIP airport services, consolidated billing. Limassol & Paphos.",
+        ? "Конфиденциальное управление поездками для частных клиентов, семей и семейных офисов на Кипре. Частная авиация, яхты, VIP-услуги. Пафос, по всему Кипру."
+        : "Discreet, principal-led travel management for private clients, families and family offices in Cyprus. Private aviation, yacht charter, VIP airport services, consolidated billing. Paphos, serving all of Cyprus.",
   });
 }
 
@@ -74,8 +74,6 @@ export default async function PrivateClientsPage({
     title: t(`office${i}Title`),
     description: t(`office${i}Desc`),
   }));
-
-  const cases = [1, 2, 3].map((i) => t(`case${i}`));
 
   const steps = [1, 2, 3, 4].map((i) => ({
     title: t(`step${i}Title`),
@@ -264,28 +262,6 @@ export default async function PrivateClientsPage({
         <div className="absolute inset-0 bg-gradient-to-b from-brand-dark/60 via-transparent to-brand-dark/60" />
       </div>
 
-      {/* Selected situations */}
-      <section className="border-t border-white/10">
-        <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
-          <h2 className="font-display text-3xl sm:text-4xl">
-            {t("casesTitle")}
-          </h2>
-          <p className="mt-6 max-w-3xl text-lg leading-relaxed text-white/60">
-            {t("casesIntro")}
-          </p>
-          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {cases.map((body, index) => (
-              <div
-                key={index}
-                className="rounded-2xl border border-white/10 bg-white/5 p-8"
-              >
-                <p className="text-sm leading-relaxed text-white/70">{body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Professional intermediaries */}
       <section className="border-t border-white/10 bg-brand-navy/40">
         <div className="mx-auto max-w-5xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
@@ -325,15 +301,6 @@ export default async function PrivateClientsPage({
               </li>
             ))}
           </ol>
-        </div>
-      </section>
-
-      {/* References note */}
-      <section className="border-t border-white/10">
-        <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-          <p className="text-center text-sm leading-relaxed text-white/50">
-            {t("referencesNote")}
-          </p>
         </div>
       </section>
 

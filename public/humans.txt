@@ -20,5 +20,5 @@ Components: Next.js, React, TypeScript, Tailwind CSS, next-intl
 Hosting: Vercel
 Operator: JetSet K&K Travel Ltd
 Registration: Cyprus HE 181550
-Tourism Licence: Cyprus Tourism Organisation #7775
+Tourism Licence: Deputy Ministry of Tourism, Republic of Cyprus #7775
 Accreditation: IATA #14200130

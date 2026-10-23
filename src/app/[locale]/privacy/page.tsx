@@ -126,8 +126,8 @@ export default async function PrivacyPolicyPage({
             </p>
             <p>
               JetSet K&amp;K Travel Ltd is an IATA-accredited travel agency
-              (IATA code: 14200130), licensed by the Cyprus Tourism Organisation
-              (Licence No. 7775).
+              (IATA code: 14200130), licensed by the Deputy Ministry of Tourism of the
+              Republic of Cyprus (Licence No. 7775).
             </p>
 
             {/* 2. What Data We Collect */}

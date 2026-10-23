@@ -11,7 +11,7 @@ export const VERCEL_HOST = "jetset-travel.vercel.app";
 export const OG_IMAGE = `${CANONICAL_ORIGIN}/images/jetset-og-image.jpg`;
 
 /** Last-reviewed date for static service pages. Bump when service content is materially updated. */
-export const SERVICE_LAST_UPDATED = "2026-04-14";
+export const SERVICE_LAST_UPDATED = "2026-10-23";
 
 /**
  * Locale-prefixed paths that render with `robots: noindex` (translation-pending

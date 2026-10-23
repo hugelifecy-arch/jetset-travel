@@ -38,12 +38,12 @@ export async function generateMetadata({
     routePath: "/hotel-booking-cyprus",
     title:
       locale === "ru"
-        ? "Бронирование Отелей Кипр | Лучшие Тарифы — JetSet"
-        : "Hotel Booking Cyprus | Best Rates — JetSet Travel",
+        ? "Бронирование Отелей Кипр | Корпоративные и Люкс — JetSet"
+        : "Hotel Booking Cyprus | Corporate & Leisure Hotels — JetSet",
     description:
       locale === "ru"
-        ? "Бронирование отелей на Кипре и по всему миру. Корпоративные тарифы, партнёрские люксовые отели. Чистые счета. JetSet Travel Пафос."
-        : "Hotel reservations in Cyprus and worldwide. Negotiated corporate rates, luxury hotel partners. Clean invoicing. JetSet Travel Paphos.",
+        ? "Бронирование отелей на Кипре и по всему миру. Корпоративные тарифы там, где они есть, люксовые отели, понятные счета. JetSet Travel Пафос."
+        : "Hotel reservations in Cyprus and worldwide. Corporate rates where available, luxury hotels and resorts, clean invoicing. JetSet Travel Paphos.",
     keywords:
       locale === "ru"
         ? ["бронирование отелей Кипр", "лучшие тарифы отели", "корпоративное бронирование отелей", "отели Пафос"]
@@ -383,7 +383,7 @@ export default async function HotelBookingCyprusPage({
       <ServiceSchema
         locale={locale}
         name="Hotel Booking Cyprus"
-        description="Hotel reservations in Cyprus and worldwide. Negotiated corporate rates, luxury hotel partners, clean invoicing, and 24/7 support. JetSet Travel Paphos, IATA-accredited agency."
+        description="Hotel reservations in Cyprus and worldwide: corporate rates where available, luxury hotels and resorts, clean invoicing, and 24/7 support. JetSet Travel Paphos, IATA-accredited agency."
         url={`https://www.jetset-travel.com/${locale}/hotel-booking-cyprus`}
         serviceType="Hotel Reservation Service"
         dateModified={SERVICE_LAST_UPDATED}
