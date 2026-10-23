@@ -46,7 +46,7 @@ These are the destinations our luxury clients ask about most, with the hotels wo
 
 ### 1. Greek Islands — Mykonos, Santorini, Crete, Paros
 
-The classic summer choice. Mykonos for the social scene, Santorini for the caldera views, Crete for families who want space, beaches and a villa, and Paros for a quieter island with good food. In summer, Cyprus Airways flies direct from Larnaca to Santorini; for the other islands, and for Santorini out of season, you fly via Athens.
+The classic summer choice. Mykonos for the social scene, Santorini for the caldera views, Crete for families who want space, beaches and a villa, and Paros for a quieter island with good food. From Larnaca, Cyprus Airways flies direct to Heraklion in Crete all year and to Santorini in summer; for Mykonos and Paros, and for Santorini out of season, you fly via Athens.
 
 ### 2. Dubai and the UAE
 
