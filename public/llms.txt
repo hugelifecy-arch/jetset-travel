@@ -28,7 +28,7 @@
 ## Services
 
 - Corporate Travel Management: Policy-compliant bookings, clean invoicing, 24/7 disruption support, dedicated account managers
-- Flight Booking: GDS fare search, direct ticket issuance via IATA accreditation, most scheduled airlines
+- Flight Booking: fare search in the Sabre and Galileo (Travelport) GDSs plus Farelogix for airlines' NDC offers, direct ticket issuance via IATA accreditation, most scheduled airlines
 - Hotel Reservations: Worldwide hotel bookings, corporate rates where available, long-stay arrangements
 - Luxury Travel Planning: Bespoke itineraries, five-star hotels and luxury resorts, luxury villas, private transfers, honeymoons
 - VIP Services: VIP airport service at Larnaca and Paphos (meet-and-assist at both; Express Lane fast-track at Larnaca), private jet charter (through charter partners), yacht charter

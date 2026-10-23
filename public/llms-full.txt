@@ -79,7 +79,7 @@ JetSet provides end-to-end corporate travel management for businesses of all siz
 
 ### 2. Flight Booking
 As an IATA-accredited agency, JetSet has direct ticketing capability:
-- GDS fare search across most scheduled airlines
+- Fare search in the Sabre and Galileo (Travelport) GDSs, plus Farelogix for airlines' NDC offers, across most scheduled airlines
 - Direct ticket issuance (not a reseller)
 - Business class and first class bookings
 - Multi-city and complex itinerary planning
