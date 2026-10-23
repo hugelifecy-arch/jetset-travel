@@ -123,7 +123,13 @@ export default async function AboutPage({
     telephone: "+357-99-478-073",
     email: "info@jetset.com.cy",
     legalName: "JetSet K&K Travel Ltd",
-    taxID: "HE 181550",
+    // HE 181550 is the Registrar of Companies number, not a tax ID; add
+    // taxID / vatID only with the real TIC / VAT numbers.
+    identifier: {
+      "@type": "PropertyValue",
+      propertyID: "Cyprus Registrar of Companies number",
+      value: "HE 181550",
+    },
     sameAs: [
       "https://www.facebook.com/JETSETCYPRUS/",
       "https://www.instagram.com/jetsetcyprus",

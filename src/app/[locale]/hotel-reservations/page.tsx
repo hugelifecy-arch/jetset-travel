@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import RelatedArticles from "@/components/sections/RelatedArticles";
-import InlineTestimonial from "@/components/sections/InlineTestimonial";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FAQSection from "@/components/sections/FAQSection";
 export async function generateMetadata({
@@ -35,8 +34,8 @@ export async function generateMetadata({
         : "Hotel Booking Cyprus | Corporate Rates — JetSet Travel",
     description:
       locale === "ru"
-        ? "Бронирование отелей по всему миру с корпоративными скидками. Качественные отели под ваш бюджет и стандарты. JetSet Travel, Пафос, Кипр."
-        : "Hotel reservations worldwide with negotiated corporate rates. Quality hotels matched to your budget and standards. Book through JetSet Travel, Paphos, Cyprus.",
+        ? "Бронирование отелей по всему миру, с корпоративными тарифами там, где они есть. Отели под ваш бюджет и стандарты. JetSet Travel, Пафос, Кипр."
+        : "Hotel reservations worldwide, with corporate rates where available. Quality hotels matched to your budget and standards. Book with JetSet Travel, Paphos.",
     keywords:
       locale === "ru"
         ? ["бронирование отелей Кипр", "корпоративные тарифы отели", "отели по всему миру", "гостиницы Кипр", "бронирование гостиниц"]
@@ -245,21 +244,6 @@ export default async function HotelReservationsPage({
         </div>
       </section>
 
-      {/* Client Testimonial */}
-      <section className="py-16 bg-brand-light">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-8 text-center">
-            {t("testimonialTitle")}
-          </h2>
-          <InlineTestimonial
-            quote={t("testimonial1Quote")}
-            author={t("testimonial1Author")}
-            role={t("testimonial1Role")}
-            date="2025-06"
-          />
-        </div>
-      </section>
-
       {/* Group Bookings Callout */}
       <section className="py-20 bg-brand-navy text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -328,7 +312,7 @@ export default async function HotelReservationsPage({
       <ServiceSchema
         locale={locale}
         name="Hotel Reservations"
-        description="Negotiated hotel rates worldwide for corporate and leisure travelers. Quality accommodations matched to your budget, standards, and location needs. Group bookings and extended stays."
+        description="Hotel reservations worldwide for corporate and leisure travelers, with corporate rates where available. Quality accommodations matched to your budget, standards, and location needs. Group bookings and extended stays."
         url={`https://www.jetset-travel.com/${locale}/hotel-reservations`}
         serviceType="Hotel Reservation Service"
         dateModified={SERVICE_LAST_UPDATED}

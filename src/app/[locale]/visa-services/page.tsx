@@ -21,7 +21,6 @@ import {
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import RelatedArticles from "@/components/sections/RelatedArticles";
 import FeaturedBlogPost from "@/components/sections/FeaturedBlogPost";
-import InlineTestimonial from "@/components/sections/InlineTestimonial";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import JsonLd from "@/components/seo/JsonLd";
 import CTABanner from "@/components/sections/CTABanner";
@@ -66,64 +65,46 @@ export default async function VisaServicesPage({
       flag: "🇬🇧",
       country: t("uk"),
       processing: t("ukTime"),
-      difficulty: t("medium"),
-      difficultyColor: "bg-yellow-100 text-yellow-800",
     },
     {
       flag: "🇺🇸",
       country: t("us"),
       processing: t("usTime"),
-      difficulty: t("hard"),
-      difficultyColor: "bg-red-100 text-red-800",
     },
     {
       flag: "🇨🇦",
       country: t("canada"),
       processing: t("canadaTime"),
-      difficulty: t("hard"),
-      difficultyColor: "bg-red-100 text-red-800",
     },
     {
       flag: "🇦🇪",
       country: t("uae"),
       processing: t("uaeTime"),
-      difficulty: t("easy"),
-      difficultyColor: "bg-green-100 text-green-800",
     },
     {
       flag: "🇦🇺",
       country: t("australia"),
       processing: t("australiaTime"),
-      difficulty: t("hard"),
-      difficultyColor: "bg-red-100 text-red-800",
     },
     {
       flag: "🇨🇳",
       country: t("china"),
       processing: t("chinaTime"),
-      difficulty: t("medium"),
-      difficultyColor: "bg-yellow-100 text-yellow-800",
     },
     {
       flag: "🇪🇺",
       country: t("schengen"),
       processing: t("schengenTime"),
-      difficulty: t("medium"),
-      difficultyColor: "bg-yellow-100 text-yellow-800",
     },
     {
       flag: "🇷🇺",
       country: t("russia"),
       processing: t("russiaTime"),
-      difficulty: t("medium"),
-      difficultyColor: "bg-yellow-100 text-yellow-800",
     },
     {
       flag: "🇯🇵",
       country: t("japan"),
       processing: t("japanTime"),
-      difficulty: t("medium"),
-      difficultyColor: "bg-yellow-100 text-yellow-800",
     },
   ];
 
@@ -371,18 +352,14 @@ export default async function VisaServicesPage({
                 key={visa.country}
                 className="p-6 rounded-2xl border border-brand-navy/10 hover:shadow-luxury transition-shadow"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-3xl">{visa.flag}</span>
-                    <h3 className="text-lg font-bold text-brand-navy">
-                      {visa.country}
-                    </h3>
-                  </div>
-                  <span
-                    className={`text-xs font-semibold px-2.5 py-1 rounded-full ${visa.difficultyColor}`}
-                  >
-                    {visa.difficulty}
-                  </span>
+                {/* Difficulty badges removed: requirements depend on the
+                    traveller's nationality, so a single Easy/Hard label was
+                    misleading (e.g. EU citizens need only an ETA for the UK). */}
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">{visa.flag}</span>
+                  <h3 className="text-lg font-bold text-brand-navy">
+                    {visa.country}
+                  </h3>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-brand-navy/70">
                   <Clock className="h-4 w-4 text-brand-gold" />
@@ -494,21 +471,6 @@ export default async function VisaServicesPage({
               </p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Client Testimonial */}
-      <section className="py-16 bg-brand-light">
-        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-brand-navy mb-8 text-center">
-            {t("testimonialTitle")}
-          </h2>
-          <InlineTestimonial
-            quote={t("testimonial1Quote")}
-            author={t("testimonial1Author")}
-            role={t("testimonial1Role")}
-            date="2025-03"
-          />
         </div>
       </section>
 

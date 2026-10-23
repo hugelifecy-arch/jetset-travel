@@ -124,8 +124,7 @@ export default async function LocalBusinessSchema({
     paymentAccepted: isRussian
       ? "Банковский перевод, Кредитная карта, Дебетовая карта"
       : "Bank Transfer, Credit Card, Debit Card",
-    currenciesAccepted: "EUR, USD, GBP, RUB",
-    numberOfEmployees: { "@type": "QuantitativeValue", minValue: 10 },
+    currenciesAccepted: "EUR",
     knowsLanguage: ["en", "ru", "el"],
     areaServed: [
       { "@type": "City", name: isRussian ? "Пафос" : "Paphos" },
@@ -149,9 +148,11 @@ export default async function LocalBusinessSchema({
         credentialCategory: isRussian ? "Туристическая лицензия Кипра" : "Cyprus Tourism Licence",
         recognizedBy: {
           "@type": "Organization",
+          // The Deputy Ministry of Tourism replaced the Cyprus Tourism
+          // Organisation as the licensing body on 2 January 2019.
           name: isRussian
-            ? "Кипрская организация по туризму"
-            : "Cyprus Tourism Organisation",
+            ? "Заместительное министерство туризма Республики Кипр"
+            : "Deputy Ministry of Tourism of the Republic of Cyprus",
         },
         identifier: "7775",
       },

@@ -51,7 +51,7 @@ const pages: StaticPage[] = [
   { path: "/corporate-travel-cyprus", priority: 0.8, changeFrequency: "monthly" },
   { path: "/luxury-travel-cyprus", priority: 0.8, changeFrequency: "monthly" },
   { path: "/hotel-booking-cyprus", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/privacy", priority: 0.4, changeFrequency: "yearly", lastModified: "2026-10-22" },
+  { path: "/privacy", priority: 0.4, changeFrequency: "yearly", lastModified: "2026-10-23" },
   { path: "/terms", priority: 0.4, changeFrequency: "yearly" },
   // Phase 7 — Schengen 2026 topic hub. Higher priority than the service
   // pages because it consolidates the cluster the GSC data shows is

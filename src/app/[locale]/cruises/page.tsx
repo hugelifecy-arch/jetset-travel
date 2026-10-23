@@ -20,12 +20,12 @@ export async function generateMetadata({
     routePath: "/cruises",
     title:
       locale === "ru"
-        ? "Бронирование Круизов Кипр | Средиземноморские Круизы из Пафоса — JetSet Travel"
-        : "Cruise Booking Cyprus | Mediterranean Cruises from Paphos — JetSet Travel",
+        ? "Бронирование Круизов Кипр | Средиземноморские и Мировые Круизы — JetSet Travel"
+        : "Cruise Booking Cyprus | Mediterranean & World Cruises — JetSet Travel",
     description:
       locale === "ru"
-        ? "Бронируйте средиземноморские круизы с Кипра. Эксклюзивные предложения на люкс и семейные круизы из Лимассола и региональных портов. Аккредитация IATA."
-        : "Book Mediterranean cruises from Cyprus. Exclusive deals on luxury and family cruises departing from Limassol and regional ports. IATA-accredited agency.",
+        ? "Круизы с Кипра: летние круизы из Лимассола или круизы с перелётом из Афин, Рима и Барселоны с вылетом из Ларнаки или Пафоса. Аккредитация IATA."
+        : "Book cruises from Cyprus: summer round trips from Limassol, or fly-cruises from Athens, Rome and Barcelona with flights from Larnaca or Paphos.",
     keywords:
       locale === "ru"
         ? ["круизы из Кипра", "средиземноморские круизы", "бронирование круизов Лимассол", "морские круизы Кипр", "круизы из Лимассола 2026"]
@@ -54,7 +54,7 @@ export default async function CruisesPage({
       <ServiceSchema
         locale={locale}
         name="Cruise Booking"
-        description="Book worldwide cruises on Royal Caribbean, MSC, Norwegian, Celebrity, Disney and 50+ cruise lines. Caribbean, Mediterranean, Alaska, Asia and beyond. IATA-accredited cruise specialists."
+        description="Cruise bookings with major lines including Royal Caribbean, MSC, Norwegian, Celebrity and Disney, with flights from Larnaca or Paphos and hotels arranged by JetSet Travel, an IATA-accredited travel agency in Paphos."
         url={`https://www.jetset-travel.com/${locale}/cruises`}
         serviceType="Cruise Booking Service"
         dateModified={SERVICE_LAST_UPDATED}
@@ -67,20 +67,21 @@ export default async function CruisesPage({
         }
         description={
           locale === "ru"
-            ? "Круизы по Средиземному морю из Лимассола и круизы с перелётом из Афин, Венеции и других портов: греческие острова, Эгейское побережье Турции, Италия. Royal Caribbean, MSC, Celestyal и другие линии через JetSet Travel."
-            : "Mediterranean cruises from Limassol and fly-cruises from Athens, Venice and other ports: Greek Islands, Turkey's Aegean coast and Italy. Royal Caribbean, MSC, Celestyal and other lines via JetSet Travel Cyprus."
+            ? "Летние круизы из Лимассола (в 2026 году — Marella Discovery II, апрель–ноябрь) к греческим островам, в Афины (Пирей) и Кушадасы (Турция), а также круизы с перелётом из Афин и других портов Средиземноморья — через JetSet Travel."
+            : "Summer round-trip cruises from Limassol (in 2026 on Marella Discovery II, April–November) to the Greek islands, Athens (Piraeus) and Kusadasi in Turkey, plus fly-cruises from Athens and other Mediterranean ports, booked through JetSet Travel."
         }
         url={`https://www.jetset-travel.com/${locale}/cruises`}
         image="https://www.jetset-travel.com/images/destinations/med.jpg"
-        touristType={["Mediterranean", "Greek Islands", "Italy", "Cyprus"]}
+        touristType={["Mediterranean", "Greek Islands", "Cyprus"]}
         itinerary={[
           { name: locale === "ru" ? "Лимассол, Кипр" : "Limassol, Cyprus" },
-          { name: locale === "ru" ? "Греческие острова" : "Greek Islands" },
-          { name: locale === "ru" ? "Италия" : "Italy" },
-          { name: locale === "ru" ? "Эгейское побережье Турции" : "Turkish Aegean coast" },
+          {
+            name: locale === "ru" ? "Греческие острова" : "Greek Islands",
+            description: locale === "ru" ? "Родос, Крит, Миконос" : "Rhodes, Crete, Mykonos",
+          },
+          { name: locale === "ru" ? "Афины (Пирей)" : "Athens (Piraeus)" },
+          { name: locale === "ru" ? "Кушадасы, Турция" : "Kusadasi, Turkey" },
         ]}
-        validFrom="2026-01-01"
-        validThrough="2026-12-31"
       />
     </>
   );

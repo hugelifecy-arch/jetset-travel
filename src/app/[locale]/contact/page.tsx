@@ -3,6 +3,30 @@ import { setRequestLocale } from "next-intl/server";
 import { buildPageMetadata, CANONICAL_ORIGIN, REVIEW_AGGREGATE } from "@/lib/seo";
 import JsonLd from "@/components/seo/JsonLd";
 import ContactContent from "./ContactContent";
+
+// Google Business Profile hours: Mon, Tue, Thu, Fri 09:00–13:00 & 15:00–18:30;
+// Wed & Sat 09:00–13:00; Sun closed.
+const OFFICE_HOURS = [
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "13:00",
+  },
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Thursday", "Friday"],
+    opens: "15:00",
+    closes: "18:30",
+  },
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Wednesday", "Saturday"],
+    opens: "09:00",
+    closes: "13:00",
+  },
+];
+
 export async function generateMetadata({
   params,
 }: {
@@ -64,34 +88,19 @@ export default async function ContactPage({
           contactType: "customer service",
           areaServed: ["CY", "GR", "RU", "AE", "GB"],
           availableLanguage: ["English", "Russian", "Greek"],
-          hoursAvailable: {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            opens: "09:00",
-            closes: "18:00",
-          },
+          // Office hours as on the Google Business Profile (same as
+          // LocalBusinessSchema and the hours shown on this page).
+          hoursAvailable: OFFICE_HOURS,
         },
         {
           "@type": "ContactPoint",
           telephone: "+357-99-478-073",
           contactType: "emergency",
-          contactOption: "TollFree",
           description: "24/7 WhatsApp support for travel disruptions",
           availableLanguage: ["English", "Russian"],
         },
       ],
-      openingHoursSpecification: {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-        ],
-        opens: "09:00",
-        closes: "18:00",
-      },
+      openingHoursSpecification: OFFICE_HOURS,
       // Phase 6 Step 50: aggregateRating on /contact so the page becomes
       // eligible for Review-snippet rich results on its own URL. Sourced
       // from the same Google Business Profile total as LocalBusinessSchema.

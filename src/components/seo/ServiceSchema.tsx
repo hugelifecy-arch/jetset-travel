@@ -44,6 +44,7 @@ export default function ServiceSchema({
       availableLanguage: [
         { "@type": "Language", name: "English" },
         { "@type": "Language", name: "Russian" },
+        { "@type": "Language", name: "Greek" },
       ],
     },
     offers: {

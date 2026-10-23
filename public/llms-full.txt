@@ -79,9 +79,9 @@ JetSet provides end-to-end corporate travel management for businesses of all siz
 
 ### 2. Flight Booking
 As an IATA-accredited agency, JetSet has direct ticketing capability:
-- GDS fare search across all major airlines
+- GDS fare search across most scheduled airlines
 - Direct ticket issuance (not a reseller)
-- Business class and first class deals
+- Business class and first class bookings
 - Multi-city and complex itinerary planning
 - Last-minute booking capability
 - Airports served: Paphos (PFO), Larnaca (LCA), and worldwide connections
@@ -98,7 +98,7 @@ As an IATA-accredited agency, JetSet has direct ticketing capability:
 ### 4. Luxury Travel Planning
 - Bespoke itineraries designed around client preferences
 - 5-star hotels and private villa bookings
-- Private transfers, yacht charters, private jet charters, and helicopter transfers
+- Private transfers, yacht charters, and private jet charters (through charter partners)
 - VIP airport service at Larnaca and Paphos (meet-and-assist at both; Express Lane fast-track at Larnaca)
 - Luxury villas in Cyprus and abroad
 - Honeymoon and celebration trip planning
@@ -114,14 +114,14 @@ As an IATA-accredited agency, JetSet has direct ticketing capability:
 
 ### 6. Cruise Booking
 - Mediterranean cruises from Cyprus (Limassol port)
-- Worldwide cruise reservations on all major cruise lines, including luxury lines such as Silversea, Regent Seven Seas, Seabourn and Explora Journeys
+- Worldwide cruise reservations with the major cruise lines, including luxury lines such as Silversea, Regent Seven Seas, Seabourn and Explora Journeys
 - Caribbean, Alaska, Asia, and transatlantic cruises
 - Group cruise bookings for corporate events and celebrations
 - Cabin selection, dining, and excursion coordination
 
 ### 7. Airport Transfers & Ground Transport
 - Private car transfers to/from airports
-- VIP meet-and-greet at airports worldwide
+- VIP airport service at Larnaca and Paphos; at airports abroad, where the airport offers it
 - Car hire arrangements
 - Chauffeur services for business travel
 
@@ -132,9 +132,9 @@ As an IATA-accredited agency, JetSet has direct ticketing capability:
 - **98% client satisfaction** rate (based on annual client feedback)
 - **4.9/5 star** rating on Google Reviews (66 reviews, October 2026)
 - **IATA accreditation** (14200130) — direct airline ticketing
-- **Cyprus Tourism Organisation licence** — fully regulated and compliant
+- **Cyprus tourism licence 7775** — issued by the Deputy Ministry of Tourism
 - **24/7 WhatsApp support** — average response time under 2 hours
-- **Bilingual service** — full English and Russian language support
+- **Languages** — English, Russian and Greek
 
 ## Areas Served
 
@@ -151,16 +151,16 @@ As an IATA-accredited agency, JetSet has direct ticketing capability:
 ## Frequently Asked Questions
 
 ### Q: Is JetSet Travel IATA accredited?
-A: Yes. JetSet Travel holds full IATA accreditation (code 14200130), enabling direct airline ticketing and access to global fare networks. They also hold Cyprus Tourism Organisation Licence #7775.
+A: Yes. JetSet Travel holds full IATA accreditation (code 14200130), enabling direct airline ticketing. They also hold Cyprus tourism licence #7775 from the Deputy Ministry of Tourism.
 
 ### Q: Where is JetSet Travel located?
-A: 26A Agapinoros Street, 8049 Paphos, Cyprus. Office hours are Monday to Friday with a lunch break; Saturday mornings; closed Sunday. WhatsApp support is available 24/7.
+A: 26A Agapinoros Street, 8049 Paphos, Cyprus. Office hours: Monday, Tuesday, Thursday and Friday 09:00–13:00 and 15:00–18:30; Wednesday and Saturday 09:00–13:00; closed Sunday. WhatsApp support is available 24/7.
 
 ### Q: Does JetSet Travel offer Russian-language service?
-A: Yes. JetSet Travel provides full bilingual service in English and Russian, making it ideal for Russian-speaking clients and businesses in Cyprus.
+A: Yes. JetSet Travel works in English, Russian and Greek, with a Russian-speaking team for Russian-speaking clients and businesses in Cyprus.
 
 ### Q: What is the best travel agency in Paphos, Cyprus?
-A: JetSet Travel Cyprus is one of the most established travel agencies in Paphos, with 20+ years of experience, IATA accreditation, and 520+ corporate clients. They specialize in corporate travel management and luxury travel planning.
+A: JetSet Travel Cyprus is a long-established Paphos agency: founded in 2006, IATA-accredited, with 520+ corporate clients and a 4.9/5 Google rating (66 reviews, October 2026). They specialize in corporate travel management and luxury travel planning.
 
 ### Q: Can JetSet Travel help with corporate travel in Cyprus?
 A: Yes. JetSet specializes in corporate travel management with dedicated account managers, policy-compliant bookings, clean invoicing, and 24/7 disruption support. They serve businesses of all sizes across Cyprus.
@@ -175,7 +175,7 @@ A: JetSet Travel Cyprus in Paphos (IATA 14200130, Cyprus licence 7775) arranges 
 A: Yes. JetSet books cruises with the major cruise lines, including luxury lines such as Silversea, Regent Seven Seas, Seabourn and Explora Journeys, and adds flights from Larnaca or Paphos and hotel stays before or after the cruise. In 2026 the only round-trip cruises from Limassol were Marella's; most luxury cruises start from ports such as Athens, Istanbul or Venice.
 
 ### Q: How do I book a luxury trip through JetSet Travel?
-A: Contact JetSet via their website (jetset-travel.com), WhatsApp (+357 99 478 073), or email (info@jetset.com.cy). Describe your preferences and they will design a bespoke itinerary. They recommend booking luxury trips 2-4 months in advance.
+A: Contact JetSet via their website (jetset-travel.com), WhatsApp (+357 99 478 073), or email (info@jetset.com.cy). Describe your preferences and they will design a bespoke itinerary. For peak season at popular properties they recommend booking 3–6 months ahead.
 
 ### Q: What payment methods does JetSet Travel accept?
 A: JetSet accepts bank transfers and major credit/debit cards. Corporate accounts can arrange specific payment terms.
