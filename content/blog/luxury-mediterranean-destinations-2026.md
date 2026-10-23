@@ -2,7 +2,7 @@
 title: "Luxury Mediterranean Trips from Cyprus: How to Get There"
 description: "Six luxury Mediterranean escapes from Cyprus: Santorini, Amalfi, Montenegro, Sardinia, Dubrovnik and Bodrum, with flight routes from Larnaca and Paphos checked."
 date: "2026-03-16"
-dateModified: "2026-10-22"
+dateModified: "2026-10-23"
 author: "Maro Kokkinou"
 slug: "luxury-mediterranean-destinations-2026"
 translationSlug: "premialnyj-otdykh-sredizemnomorye-2026"
@@ -19,7 +19,7 @@ status: "published"
 
 ## Six Luxury Mediterranean Escapes, and How to Reach Them from Cyprus
 
-*Updated October 2026.* The Mediterranean has always been synonymous with luxury travel, and some of its finest places are close to Cyprus. Santorini is a direct summer flight from Larnaca; the others need one connection, and for each one we show you the simplest route.
+*Updated October 2026.* The Mediterranean has always been synonymous with luxury travel, and some of its finest places are close to Cyprus. In summer, Santorini is a direct flight from Larnaca and Naples (for the Amalfi Coast) a direct flight from Paphos; the others need at least one connection, and for each one we show you the simplest route.
 
 JetSet Travel is an IATA-accredited travel agency based in Paphos (Tourism Licence 7775). We plan tailor-made trips from Cyprus, and for every destination below we explain how to actually get there from Larnaca or Paphos, because that is the part most travel guides leave out. Route information was checked in October 2026; schedules change, so we confirm current flights when you book.
 
@@ -33,7 +33,7 @@ Santorini needs no introduction. The island's caldera views, white-washed cave h
 
 ### Getting There from Cyprus
 
-In summer, Cyprus Airways flies direct from Larnaca to Santorini (Thira, JTR), roughly twice a week, with a flight time of about 1 hour 30 minutes. Outside that season there is no direct flight: fly Larnaca–Athens (about 1h35–2h, many daily flights with Aegean, Cyprus Airways, Sky Express and Wizz Air) and connect to Santorini (about 50 minutes).
+In summer, Cyprus Airways flies direct from Larnaca to Santorini (Thira, JTR), roughly twice a week, with a flight time of about 1 hour 30 minutes; in 2026 the last direct flight of the season was on 31 August, so for a September or October stay plan on connecting via Athens. Outside that season there is no direct flight: fly Larnaca–Athens (about 1h35–2h, many daily flights with Aegean, Cyprus Airways, Sky Express and Wizz Air) and connect to Santorini (about 50 minutes).
 
 ### Where to Stay
 
@@ -53,7 +53,7 @@ The [Amalfi Coast](https://www.italia.it/en/campania/amalfi-coast) remains the g
 
 ### Getting There from Cyprus
 
-There is no flight from Larnaca to Naples. In season, Ryanair has flown direct from Paphos to Naples (about 2h55). Year-round, the simplest option is Larnaca–Rome Fiumicino (about 3h15–3h30; Wizz Air, Aegean in season, and Cyprus Airways from December 2026), then the high-speed train from Rome to Naples (about 1h10). From Naples, a private transfer to Positano takes around 1.5 hours, longer in summer traffic, or you can arrive by private boat.
+There is no flight from Larnaca to Naples. In summer, Ryanair flies direct from Paphos to Naples (about 2h55). Year-round, the simplest option is Rome Fiumicino (about 3h15–3h30): from Larnaca with Wizz Air, and with Cyprus Airways from 11 December 2026, or from Paphos with Ryanair. Then take the high-speed train from Rome to Naples (about 1h10). From Naples, a private transfer to Positano takes around 1.5 hours, longer in summer traffic, or you can arrive by private boat.
 
 ### Where to Stay
 
@@ -61,7 +61,7 @@ There is no flight from Larnaca to Naples. In season, Ryanair has flown direct f
 
 ### Good to Know
 
-From spring to October, non-resident cars face odd/even number-plate restrictions on set days on the SS163 coast road. Taxis, licensed chauffeur cars and guests with a hotel booking are exempt, so a driver, taxi or boat is the easiest way to move between villages.
+From spring until 31 October, odd/even number-plate restrictions apply on set days (10:00–18:00; in October, weekends and public holidays) on the SS163 between Vietri sul Mare and Positano. Residents, taxis and licensed chauffeur cars are exempt; hotel guests with a booking are exempt only on their arrival and departure days. A driver, taxi or boat is the easiest way to move between villages.
 
 ## 3. Montenegro — The Adriatic's Best-Kept Luxury Secret
 
@@ -89,7 +89,7 @@ Sardinia's Costa Smeralda has been synonymous with elite Mediterranean travel si
 
 ### Best Time to Visit
 
-**June and September** for the best combination of warm seas, sunshine, and relative tranquility. July and August are the peak months — Porto Cervo and the Costa Smeralda buzzes with yachts and high-profile visitors, which is either a draw or a deterrent depending on your preferences.
+**June and September** for the best combination of warm seas, sunshine, and relative tranquility. July and August are the peak months — Porto Cervo and the Costa Smeralda buzz with yachts and high-profile visitors, which is either a draw or a deterrent depending on your preferences.
 
 ### Getting There from Cyprus
 
@@ -97,7 +97,7 @@ There are no direct flights from Cyprus to Sardinia. Fly Larnaca–Rome Fiumicin
 
 ### Where to Stay
 
-**Hotel Cala di Volpe** (a Marriott Luxury Collection property) is the iconic Costa Smeralda address — a Moorish-inspired resort on its own bay with an Olympic-size saltwater pool. **Hotel Pitrizza**, its more intimate sister in Liscia di Vacca, has 66 rooms, suites and villas, a saltwater pool cut into the granite and a private beach.
+**Hotel Cala di Volpe** (a Marriott Luxury Collection property) is the iconic Costa Smeralda address — a village-style resort designed by Jacques Couëlle, on its own bay with an Olympic-size saltwater pool. **Hotel Pitrizza**, its more intimate sister in Liscia di Vacca, has 66 rooms, suites and villas, a saltwater pool cut into the granite and a private beach.
 
 ### Good to Know
 
@@ -113,7 +113,7 @@ Croatia's Dalmatian coast combines UNESCO World Heritage architecture with cryst
 
 ### Getting There from Cyprus
 
-There are no direct flights from Cyprus. Two simple options: Paphos–Zagreb with Ryanair (about 3 hours), then Croatia Airlines to Dubrovnik (about 55 minutes), or, from spring to autumn, Larnaca–Athens and Aegean's seasonal Athens–Dubrovnik flight (about 1h35). From Dubrovnik, catamarans run to Hvar between April and October (about 3.5 hours); there is no winter sea connection, and a private boat is an option.
+There are no direct flights from Cyprus to Dubrovnik or Hvar. Two simple options: Paphos–Zagreb with Ryanair (about 3 hours), then Croatia Airlines to Dubrovnik (about 55 minutes), or, from spring to autumn, Larnaca–Athens and Aegean's seasonal Athens–Dubrovnik flight (about 1h35). From Dubrovnik, catamarans run to Hvar between April and October (about 3.5 hours); there is no winter sea connection, and a private boat is an option.
 
 ### Where to Stay
 
@@ -133,7 +133,7 @@ Bodrum has evolved from a backpacker favourite into one of the Mediterranean's m
 
 ### Getting There from Cyprus
 
-There are no flights between the Republic of Cyprus and Turkey, so Bodrum takes a little planning. The usual route from Cyprus is Larnaca–Athens (about 1h35–2h), then Athens–Kos (about 1 hour, Sky Express or Aegean), then the ferry from Kos to Bodrum (about 20–45 minutes; several sailings a day in summer, fewer in winter). You leave the Schengen area at Kos, so check Turkish entry requirements for your nationality before you travel.
+There are no flights between the Republic of Cyprus and Turkey, so Bodrum takes a little planning. The usual route from Cyprus is Larnaca–Athens (about 1h35–2h), then Athens–Kos (about 1 hour, Sky Express or Aegean), then the ferry from Kos to Bodrum (about 30–45 minutes; several sailings a day in summer, roughly every other day in winter). You leave the Schengen area at Kos, so check Turkish entry requirements for your nationality before you travel.
 
 ### Where to Stay
 
@@ -145,16 +145,16 @@ Bodrum's high season runs from June to September, and the sea is warm enough for
 
 ## From Cyprus at a Glance
 
-Routes checked 22 October 2026.
+Routes checked 23 October 2026.
 
 | Destination | Best months | Direct from Cyprus? | Simplest routing | Flying time* |
 |---|---|---|---|---|
 | Santorini | May–Jun, Sep–Oct | Summer only: Larnaca, Cyprus Airways | Off-season via Athens | ~1h30 direct; ~2h35 via Athens |
-| Amalfi Coast | Late Apr–Jun, Sep | Summer only: Paphos–Naples, Ryanair | Larnaca–Rome, then train to Naples (1h10) | ~2h55 direct; ~3h20 plus train |
+| Amalfi Coast | Late Apr–Jun, Sep | Summer only: Paphos–Naples, Ryanair | Larnaca or Paphos–Rome, then train to Naples (1h10) | ~2h55 direct; ~3h20 plus train |
 | Montenegro | Jun, Sep | No | Larnaca–Belgrade–Tivat | ~3h50 |
 | Sardinia | Jun, Sep | No | Larnaca–Rome–Olbia | ~4h20 |
 | Dubrovnik and Hvar | May–Jun, Sep | No | Paphos–Zagreb–Dubrovnik, or Larnaca–Athens–Dubrovnik (seasonal); catamaran to Hvar Apr–Oct (~3h30) | ~3h20–4h |
-| Bodrum | Jun, Sep | No (no Cyprus–Turkey flights) | Larnaca–Athens–Kos, then ferry (20–45 min) | ~2h45 plus ferry |
+| Bodrum | Jun, Sep | No (no Cyprus–Turkey flights) | Larnaca–Athens–Kos, then ferry (30–45 min) | ~2h45 plus ferry |
 
 \*Flight time only. Add connection time, transfers and border formalities. Schedules change, so we confirm live options when you book.
 
