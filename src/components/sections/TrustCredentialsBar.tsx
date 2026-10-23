@@ -51,7 +51,7 @@ export default function TrustCredentialsBar() {
             </span>
           </div>
 
-          {/* 520+ Corporate Clients */}
+          {/* 520+ Clients */}
           <div className="flex items-center gap-2.5">
             <Users className="h-6 w-6 flex-none text-brand-gold" />
             <span className="text-sm font-medium text-brand-navy/80">

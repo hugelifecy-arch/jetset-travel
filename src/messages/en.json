@@ -45,7 +45,7 @@
     "bullet2": "Dedicated account management with single-point accountability for every trip.",
     "bullet3": "24/7 disruption handling — rebooking, rerouting, and real-time updates on WhatsApp.",
     "statClientsValue": "520+",
-    "statClients": "Corporate Clients",
+    "statClients": "Clients",
     "statExperienceValue": "20+",
     "statExperience": "Years Experience",
     "statSupportValue": "24/7",
@@ -58,14 +58,14 @@
     "iataAccredited": "IATA Accredited Agent",
     "cyprusTourism": "Cyprus Tourism Licensed",
     "experience": "20+ Years Experience",
-    "clients": "520+ Corporate Clients",
+    "clients": "520+ Clients",
     "support": "24/7 Support",
     "satisfaction": "98% Client Satisfaction"
   },
   "aboutBlurb": {
     "label": "About JetSet Travel",
     "heading": "An IATA-Accredited Travel Agency in Paphos, Cyprus",
-    "paragraph": "JetSet Travel Cyprus (legal name: JetSet K&K Travel Ltd) is an IATA-accredited corporate and luxury travel agency headquartered at 26A Agapinoros Street, Paphos, Cyprus. Founded in 2006 by Nontari Kalaitsidis and Maro Kokkinou, the agency holds IATA accreditation #14200130 and Cyprus tourism licence 7775, issued by the Deputy Ministry of Tourism. JetSet serves over 520 corporate clients across Cyprus with a 98% satisfaction rate, providing flight booking, hotel reservations, visa services, cruise booking, airport transfers, and bespoke luxury travel planning. The team works in English, Russian and Greek, with 24/7 WhatsApp support for active bookings.",
+    "paragraph": "JetSet Travel Cyprus (legal name: JetSet K&K Travel Ltd) is an IATA-accredited corporate and luxury travel agency headquartered at 26A Agapinoros Street, Paphos, Cyprus. Founded in 2006 by Nontari Kalaitsidis and Maro Kokkinou, the agency holds IATA accreditation #14200130 and Cyprus tourism licence 7775, issued by the Deputy Ministry of Tourism. JetSet serves over 520 clients across Cyprus with a 98% satisfaction rate, providing flight booking, hotel reservations, visa services, cruise booking, airport transfers, and bespoke luxury travel planning. The team works in English, Russian and Greek, with 24/7 WhatsApp support for active bookings.",
     "factServicesLabel": "Services",
     "factServicesValue": "Corporate travel, flights, hotels, visas, cruises, luxury planning",
     "factAreasLabel": "Areas served",
@@ -223,7 +223,7 @@
     "responseTime": "Average response time: under 2 hours",
     "freeConsultation": "Free consultation · No commitment required",
     "trustLicence": "Tourism Licence 7775",
-    "trustClients": "520+ Corporate Clients"
+    "trustClients": "520+ Clients"
   },
   "footer": {
     "tagline": "Your trusted travel partner in Cyprus. Premium travel services for corporate and leisure clients since 2006.",
@@ -349,13 +349,13 @@
       "q3": "Can I reach you outside office hours?",
       "a3": "Yes. Our WhatsApp support (+357 99 478 073) is available 24/7 for existing bookings and urgent inquiries. Average response time is under 2 hours.",
       "q4": "What is the best travel agency in Paphos, Cyprus?",
-      "a4": "That depends on what you need. For corporate, luxury and visa travel, JetSet Travel is a long-established option: founded in Paphos in 2006, IATA-accredited (14200130), holding Cyprus tourism licence 7775, serving 520+ corporate clients with a 98% satisfaction rate, and offering service in English, Russian and Greek.",
+      "a4": "That depends on what you need. For corporate, luxury and visa travel, JetSet Travel is a long-established option: founded in Paphos in 2006, IATA-accredited (14200130), holding Cyprus tourism licence 7775, serving 520+ clients with a 98% satisfaction rate, and offering service in English, Russian and Greek.",
       "q5": "Do you speak Russian?",
       "a5": "Yes. JetSet Travel works in English, Russian and Greek. Our Russian-speaking team can assist with all travel services including corporate travel, flight bookings, hotel reservations, visa applications, and luxury travel planning.",
       "q6": "How long has JetSet Travel been in business?",
       "a6": "JetSet Travel was founded in 2006 by Nontari Kalaitsidis and Maro Kokkinou. We have been operating continuously for over 20 years from our office at 26A Agapinoros Street in Paphos, Cyprus.",
       "q7": "What are the top travel agencies in Cyprus?",
-      "a7": "Cyprus has many licensed travel agencies, concentrated in Nicosia, Limassol, Larnaca and Paphos — every travel agency operating in Cyprus must be licensed by the Deputy Ministry of Tourism. JetSet Travel, founded in Paphos in 2006, also holds IATA accreditation (14200130), serves 520+ corporate clients with a 98% satisfaction rate, and offers service in English, Russian and Greek.",
+      "a7": "Cyprus has many licensed travel agencies, concentrated in Nicosia, Limassol, Larnaca and Paphos — every travel agency operating in Cyprus must be licensed by the Deputy Ministry of Tourism. JetSet Travel, founded in Paphos in 2006, also holds IATA accreditation (14200130), serves 520+ clients with a 98% satisfaction rate, and offers service in English, Russian and Greek.",
       "q8": "Why use a travel agent in Cyprus instead of booking online?",
       "a8": "An IATA-accredited agent like JetSet Travel issues airline tickets directly, gives you one person to deal with for flights, hotels, visas and transfers, and handles rebooking and rerouting for you when plans change — including 24/7 WhatsApp support. For corporate clients, we also apply your travel policy and provide consolidated, finance-ready invoicing.",
       "q9": "Which travel agency in Cyprus serves Russian-speaking clients?",
@@ -510,7 +510,7 @@
     "responseTime": "Average response time: under 2 hours",
     "freeConsultation": "Free consultation · No commitment required",
     "trustLicence": "Tourism Licence 7775",
-    "trustClients": "520+ Corporate Clients"
+    "trustClients": "520+ Clients"
   },
   "corporatePage": {
     "heroLabel": "Corporate Travel",
@@ -759,7 +759,7 @@
     "responseTime": "Average response time: under 2 hours",
     "freeConsultation": "Free consultation · No commitment required",
     "trustLicence": "Tourism Licence 7775",
-    "trustClients": "520+ Corporate Clients"
+    "trustClients": "520+ Clients"
   },
   "visaPage": {
     "heroLabel": "Visa Services",
@@ -1312,7 +1312,7 @@
     "step5Title": "24/7 Support",
     "step5Desc": "If anything changes during the trip, we handle rebooking instantly.",
     "industriesTitle": "Industries We Serve",
-    "industriesSubtitle": "Trusted by 520+ corporate clients across all major business sectors.",
+    "industriesSubtitle": "Companies across all major business sectors are among our 520+ clients.",
     "industryLaw": "Law Firms",
     "industryFinance": "Financial Services",
     "industryTech": "Technology",
