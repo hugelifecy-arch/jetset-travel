@@ -85,7 +85,7 @@ Crete is the choice for groups of eight or more, for families who want three gen
 
 ### Four Regions, Four Different Trips
 
-- **Chania (west):** the Venetian harbour town, famous beaches such as Elafonissi and Balos, and the Akrotiri peninsula for villas. The most picturesque region; from Cyprus it needs a connection via Athens.
+- **Chania (west):** the Venetian harbour town, famous beaches such as Elafonissi and Balos, and the Akrotiri peninsula for villas. The most picturesque region; in summer 2026 Ryanair flew direct from Paphos to Chania, otherwise it needs a connection via Athens.
 - **Rethymno (central west):** quieter and more rural, a good base for a trip that covers more of the island.
 - **Heraklion (central):** the island's capital and main airport, with a direct flight from Larnaca, close to Knossos and the wine regions.
 - **Agios Nikolaos and Elounda (east):** the traditional luxury corner, home to Rosewood Blue Palace and Domes of Elounda, and to villa estates nearby. The closest Crete comes to the hotel-centred luxury of other Mediterranean coasts.
