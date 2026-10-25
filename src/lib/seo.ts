@@ -8,7 +8,10 @@ import {
 
 export { CANONICAL_ORIGIN };
 export const VERCEL_HOST = "jetset-travel.vercel.app";
-export const OG_IMAGE = `${CANONICAL_ORIGIN}/images/jetset-og-image.jpg`;
+// v2 (25 Oct 2026): header logo on brand navy, kept inside the centre square
+// so WhatsApp's square thumbnail crop shows the whole logo. New file name so
+// apps that cache preview images by URL fetch the new one.
+export const OG_IMAGE = `${CANONICAL_ORIGIN}/images/jetset-og-image-v2.jpg`;
 
 /** Last-reviewed date for static service pages. Bump when service content is materially updated. */
 export const SERVICE_LAST_UPDATED = "2026-10-23";
