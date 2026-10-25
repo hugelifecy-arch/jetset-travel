@@ -8,11 +8,12 @@ import {
 
 export { CANONICAL_ORIGIN };
 export const VERCEL_HOST = "jetset-travel.vercel.app";
-// v3 (25 Oct 2026): the owner-supplied logo (navy JetSet, gold TRAVEL), traced
-// to vector for sharp edges, alone on white and sized to fill the centre
-// 630x630 square so WhatsApp's small square thumbnail shows it clearly.
+// v4 (25 Oct 2026): the owner-supplied logo (navy JetSet, gold TRAVEL), traced
+// to vector, stacked (JetSet over TRAVEL, thin rules dropped) on white so it
+// fills the centre 630x630 square. WhatsApp desktop crops that square and
+// shrinks it to ~96px; the one-line logo (4:1) left the letters ~10px tall.
 // New file name so apps that cache preview images by URL fetch the new one.
-export const OG_IMAGE = `${CANONICAL_ORIGIN}/images/jetset-og-image-v3.jpg`;
+export const OG_IMAGE = `${CANONICAL_ORIGIN}/images/jetset-og-image-v4.jpg`;
 
 /** Last-reviewed date for static service pages. Bump when service content is materially updated. */
 export const SERVICE_LAST_UPDATED = "2026-10-23";
