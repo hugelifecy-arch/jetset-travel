@@ -2,7 +2,7 @@
 title: "Cyprus Schengen Update (October 2026): Business Travel Guide"
 description: "Cyprus Schengen update, October 2026: Cyprus, Larnaca and Paphos airports included, is not in Schengen yet and expects to join in 2027. What applies now and how to prepare."
 date: "2026-03-02"
-dateModified: "2026-10-22"
+dateModified: "2026-10-26"
 author: "Nontari Kalaitsidis"
 slug: "cyprus-schengen-2026-business-travel"
 translationSlug: "kipr-v-shengene-2026-delovye-poezdki"
@@ -18,7 +18,7 @@ locale: "en"
 status: "published"
 ---
 
-> **Status on 22 October 2026:** Cyprus is **not yet** in the Schengen Area. On 10 October 2026 Deputy Migration Minister Nicholas Ioannides said Cyprus expects to join in full during 2027, once six outstanding actions are finished (planned for early November 2026) and Cyprus has told the European Commission it is technically ready. The final decision is taken by the Council of the EU and needs the unanimous agreement of the EU countries already in Schengen; no date has been set. Sources: [Cyprus Mail, 10 October 2026](https://cyprus-mail.com/2026/10/10/cyprus-to-be-fully-integrated-into-schengen-area-by-next-year), [EU Entry/Exit System](https://travel-europe.europa.eu/ees/what-is-the-ees), [EU ETIAS](https://travel-europe.europa.eu/etias/about-etias/who-should-apply). We update this article when the status changes.
+> **Status on 26 October 2026:** Cyprus is **not yet** in the Schengen Area. On 10 October 2026 Deputy Migration Minister Nicholas Ioannides said Cyprus expects to join in full during 2027, once six outstanding actions are finished (planned for early November 2026) and Cyprus has told the European Commission it is technically ready. The final decision is taken by the Council of the EU and needs the unanimous agreement of the EU countries already in Schengen; no date has been set. Sources: [Cyprus Mail, 10 October 2026](https://cyprus-mail.com/2026/10/10/cyprus-to-be-fully-integrated-into-schengen-area-by-next-year), [EU Entry/Exit System](https://travel-europe.europa.eu/ees/what-is-the-ees), [EU ETIAS](https://travel-europe.europa.eu/etias/about-etias/who-should-apply). We update this article when the status changes.
 
 ## Cyprus and the Schengen Area: Where Things Stand
 
@@ -26,13 +26,13 @@ Cyprus joined the EU in 2004 but still checks passports on flights to and from t
 
 Until the Council decides, the current rules apply. Below we set out what applies today and what will change once Cyprus joins, from the date the Council decision sets.
 
-At JetSet Travel, we have been closely monitoring Cyprus's Schengen accession process because we understand how profoundly it will affect the way our corporate clients manage their travel programmes. As an IATA-accredited travel agency (Tourism Licence 7775), we have been advising companies across Cyprus on how to prepare — and in this article, we break down everything business travellers and corporate travel managers need to know.
+At JetSet Travel, we follow Cyprus's Schengen accession closely because it will change how our corporate clients plan their travel. As an IATA-accredited travel agency (Tourism Licence 7775), we set out below what business travellers and corporate travel managers need to know.
 
 ## What Is the Schengen Area?
 
 The [Schengen Area](https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa_en) is a zone of 29 European countries that have abolished passport and border controls at their mutual borders. For travellers, this means you can move freely between member states — from Portugal to Finland, from Greece to Iceland — without stopping at border checkpoints. The Schengen Agreement was first signed in 1985, and today it encompasses most EU member states plus four associated countries (Iceland, Liechtenstein, Norway, and Switzerland).
 
-For business travellers, Schengen membership simplifies short-stay travel enormously. Instead of applying for individual visas for each country, a single Schengen visa grants access to all 29 member states. For EU citizens travelling within the zone, there are no immigration formalities at all — just board your flight and go.
+For business travellers, Schengen membership simplifies short-stay travel enormously. Instead of applying for individual visas for each country, a single Schengen visa grants access to all 29 member states. EU citizens travelling within the zone normally face no passport checks, although they still need a valid passport or ID card, and several countries, France and the Netherlands among them, have temporarily reintroduced checks at some internal borders in 2026.
 
 Cyprus and Ireland are the only EU member states outside the Schengen zone. Ireland has chosen to stay out; Cyprus is working towards joining.
 
@@ -93,9 +93,9 @@ While the visa process becomes more streamlined, non-EU nationals will still be 
 
 ### EES and ETIAS
 
-The EU's [Entry/Exit System (EES)](https://travel-europe.europa.eu/ees/what-is-the-ees) has been in use since October 2025 in 29 European countries, but **not in Cyprus** (or Ireland). At Larnaca and Paphos, passports are still stamped by hand.
+The EU's [Entry/Exit System (EES)](https://travel-europe.europa.eu/ees/what-is-the-ees) started in October 2025 and has been fully operational since 10 April 2026 in 29 European countries, but **not in Cyprus** (or Ireland). At Larnaca and Paphos, passports are still stamped by hand. Non-EU staff based in Cyprus are still registered in the EES when they enter a Schengen country: according to the [European Commission](https://www.cbn.com.cy/article/132149/commission-which-traveller-categories-are-exempt-from-the-entry-exit-system), holders of residence permits and long-stay visas issued by Cyprus are not exempt.
 
-[ETIAS](https://travel-europe.europa.eu/etias/about-etias/who-should-apply) is a pre-travel authorisation (not a visa) for visa-exempt non-EU travellers, such as citizens of the United States, Canada, Australia and the United Kingdom. It is expected to start in the last quarter of 2026, will cost €20 and will apply to 30 European countries, **including Cyprus**. The EU says it will announce the start date several months in advance. One point matters for many Cyprus-based teams: according to the EU's ETIAS website, holders of a Cyprus residence permit (including UK nationals with a Withdrawal Agreement residence document issued by Cyprus) will need ETIAS to visit the other ETIAS countries if their nationality is visa-exempt. They will not need it to travel to Cyprus itself. Holders of residence permits from the other ETIAS countries are exempt.
+[ETIAS](https://travel-europe.europa.eu/etias/about-etias/who-should-apply) is a pre-travel authorisation (not a visa) for visa-exempt non-EU travellers, such as citizens of the United States, Canada, Australia and the United Kingdom. It will cost €20 and will apply to 30 European countries, **including Cyprus**. **No start date has been set:** the EU's ETIAS website says the system is not yet in operation and no longer gives its earlier "last quarter of 2026" target, and the Financial Times reported in July 2026 that the launch is expected in 2027. The EU says it will announce the start date several months in advance. One point matters for many Cyprus-based teams: according to the EU's ETIAS website, holders of a Cyprus residence permit (including UK nationals with a Withdrawal Agreement residence document issued by Cyprus) will need ETIAS to visit the other ETIAS countries if their nationality is visa-exempt. They will not need it to travel to Cyprus itself. Holders of residence permits from the other ETIAS countries are exempt.
 
 ## How to Prepare Your Corporate Travel Programme
 
@@ -119,7 +119,7 @@ Manual tracking of days spent across Schengen states is error-prone and unreliab
 
 ### 5. Work With an IATA-Accredited Travel Agent
 
-This is not the time for ad hoc booking. An experienced, IATA-accredited travel agent with deep knowledge of Cyprus and the Schengen framework can help you plan for the transition, keep travel spend under control and stay within the rules. At JetSet Travel (Tourism Licence 7775), we have been managing corporate travel across Europe for nearly two decades — and we are ready to help your company through this change.
+This is not the time for ad hoc booking. An experienced, IATA-accredited travel agent with deep knowledge of Cyprus and the Schengen framework can help you plan for the transition, keep travel spend under control and stay within the rules. At JetSet Travel (Tourism Licence 7775), we have been arranging travel from our Paphos office since 2006 and work with more than 250 corporate clients. We can help your company plan for this change.
 
 ## The Bottom Line
 
@@ -129,6 +129,6 @@ The date is not fixed yet, but the preparation is the same whenever it comes. Co
 
 ---
 
-**Ready to prepare your corporate travel programme for the Schengen transition?** Our team at JetSet Travel has been advising Cyprus businesses on cross-border travel compliance for nearly 20 years. [Contact us](/en/contact) for a free consultation, or [request a quote](/en/quote) to set up a managed corporate travel account.
+**Ready to prepare your corporate travel programme for the Schengen transition?** Our team at JetSet Travel has been arranging business travel for companies in Cyprus since 2006. [Contact us](/en/contact) for a free consultation, or [request a quote](/en/quote) to set up a managed corporate travel account.
 
 **Call us:** [+357 99 478 073](tel:+35799478073) | **Visit:** [www.jetset-travel.com](/en)

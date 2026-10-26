@@ -56,7 +56,7 @@ const pages: StaticPage[] = [
   // Phase 7 — Schengen 2026 topic hub. Higher priority than the service
   // pages because it consolidates the cluster the GSC data shows is
   // currently winning impressions (+143% on the Schengen guide post).
-  { path: "/schengen-cyprus-2026", priority: 0.9, changeFrequency: "monthly", lastModified: "2026-10-22" },
+  { path: "/schengen-cyprus-2026", priority: 0.9, changeFrequency: "monthly", lastModified: "2026-10-26" },
 ];
 
 /**
