@@ -4,9 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
-/* The dialog (form, validation, reCAPTCHA call) is fetched only when the exit
-   intent fires. Until then this component is a few listeners, which keeps
-   react-hook-form and zod out of every page's initial JavaScript. */
+/* The dialog (form, reCAPTCHA call) is fetched only when the exit intent
+   fires, and its zod validation only when the form is used. Until then this
+   component is a timer and one listener on desktop, nothing on phones. */
 const ExitIntentDialog = dynamic(() => import("./ExitIntentDialog"), {
   ssr: false,
 });

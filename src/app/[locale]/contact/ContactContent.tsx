@@ -1,9 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { getRecaptchaToken } from "@/lib/recaptcha";
@@ -22,21 +20,9 @@ import {
 import FormTrustElements from "@/components/forms/FormTrustElements";
 import { enquiryAttribution } from "@/lib/attribution";
 import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
+import { createLazyResolver } from "@/components/forms/lazyResolver";
 import OfficeMap, { MAP_LINK_URL } from "./OfficeMap";
-
-function createContactSchema(t: (key: string) => string) {
-  return z.object({
-    name: z.string().min(2, t("nameMinLength")),
-    email: z.string().email(t("invalidEmail")),
-    phone: z.string().min(8, t("phoneRequired")),
-    companyName: z.string().optional(),
-    travelType: z.string().optional(),
-    contactMethod: z.string().optional(),
-    message: z.string().optional(),
-  });
-}
-
-type ContactFormData = z.infer<ReturnType<typeof createContactSchema>>;
+import type { ContactFormData } from "./validation";
 
 /** Set NEXT_PUBLIC_SCHEDULING_URL (e.g. a live Calendly link) to show the
  *  "schedule a call" block; unset hides it rather than linking to a 404. */
@@ -55,14 +41,21 @@ export default function ContactContent() {
   const formLoadedAt = useRef(Date.now());
   const honeypotRef = useRef<HTMLInputElement>(null);
 
-  const contactSchema = createContactSchema(t);
+  // zod (in ./validation) is fetched on first focus/submit, not with the page.
+  const validation = useMemo(
+    () =>
+      createLazyResolver<ContactFormData>(() =>
+        import("./validation").then((m) => m.contactResolver(t)),
+      ),
+    [t],
+  );
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
+    resolver: validation.resolver,
     defaultValues: {
       phone: "+357 ",
     },
@@ -205,7 +198,14 @@ export default function ContactContent() {
                   </p>
                 </div>
               ) : (
-                <form onFocus={markEnquiryStart} onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <form
+                  onFocus={() => {
+                    markEnquiryStart();
+                    validation.preload();
+                  }}
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="space-y-5"
+                >
                   {/* Honeypot — hidden from real users */}
                   <div className="absolute -left-[9999px]" aria-hidden="true">
                     <input

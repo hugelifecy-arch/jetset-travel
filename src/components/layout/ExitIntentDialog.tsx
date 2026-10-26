@@ -2,14 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import {
-  buildExitIntentSchema,
-  type ExitIntentFormValues,
-} from "@/components/forms/schemas";
+import type { ExitIntentFormValues } from "@/components/forms/schemas";
+import { createLazyResolver } from "@/components/forms/lazyResolver";
 import { useFormMessages } from "@/components/forms/useFormMessages";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
@@ -22,8 +19,8 @@ const FOCUSABLE_SELECTOR =
 
 /* ------------------------------------------------------------------ */
 /*  Dialog: loaded on demand by ExitIntentPopup when the exit intent   */
-/*  fires, so react-hook-form, zod and the form schema stay out of    */
-/*  every page's initial JavaScript.                                   */
+/*  fires, so react-hook-form stays out of every page's initial        */
+/*  JavaScript; zod follows only when the form is used.                */
 /* ------------------------------------------------------------------ */
 
 export default function ExitIntentDialog({
@@ -49,8 +46,14 @@ export default function ExitIntentDialog({
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   const formMessages = useFormMessages();
-  const schema = useMemo(
-    () => buildExitIntentSchema(formMessages),
+  // zod is fetched on first focus/validation, not with the dialog.
+  const validation = useMemo(
+    () =>
+      createLazyResolver<ExitIntentFormValues>(() =>
+        import("@/components/forms/validation").then((m) =>
+          m.exitIntentResolver(formMessages),
+        ),
+      ),
     [formMessages],
   );
 
@@ -61,7 +64,7 @@ export default function ExitIntentDialog({
     control,
     formState: { errors, isSubmitting },
   } = useForm<ExitIntentFormValues>({
-    resolver: zodResolver(schema),
+    resolver: validation.resolver,
     defaultValues: {},
   });
 
@@ -219,7 +222,10 @@ export default function ExitIntentDialog({
             </p>
 
             <form
-              onFocus={markEnquiryStart}
+              onFocus={() => {
+                markEnquiryStart();
+                validation.preload();
+              }}
               onSubmit={(e) => {
                 void handleSubmit(async (data) => {
                   try {

@@ -2,8 +2,6 @@
 
 import { useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { getRecaptchaToken } from "@/lib/recaptcha";
@@ -19,23 +17,8 @@ import {
 } from "./shared";
 import { enquiryAttribution } from "@/lib/attribution";
 import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
-
-/* Validation messages come from the `forms` namespace so they localize;
-   errors render directly under their field, so the generic strings stay
-   unambiguous. */
-const buildLuxurySchema = (m: { required: string; invalidEmail: string }) =>
-  z.object({
-    name: z.string().min(2, m.required),
-    email: z.string().email(m.invalidEmail),
-    phone: z.string().min(5, m.required),
-    destinations: z.string().min(2, m.required),
-    dates: z.string().min(1, m.required),
-    groupSize: z.string().min(1, m.required),
-    budget: z.string().min(1, m.required),
-    specialRequirements: z.string().optional(),
-  });
-
-type LuxuryFormData = z.infer<ReturnType<typeof buildLuxurySchema>>;
+import { createLazyResolver } from "@/components/forms/lazyResolver";
+import type { LuxuryFormData } from "./validation";
 
 export default function LuxuryForm({
   onSuccess,
@@ -51,8 +34,12 @@ export default function LuxuryForm({
   const honeypotRef = useRef<HTMLInputElement>(null);
 
   const formMessages = useFormMessages();
-  const schema = useMemo(
-    () => buildLuxurySchema(formMessages),
+  // zod (in ./validation) is fetched on first focus/submit, not with the page.
+  const validation = useMemo(
+    () =>
+      createLazyResolver<LuxuryFormData>(() =>
+        import("./validation").then((m) => m.luxuryResolver(formMessages)),
+      ),
     [formMessages],
   );
   const {
@@ -60,7 +47,7 @@ export default function LuxuryForm({
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LuxuryFormData>({
-    resolver: zodResolver(schema),
+    resolver: validation.resolver,
   });
 
   const onSubmit = async (data: LuxuryFormData) => {
@@ -91,7 +78,14 @@ export default function LuxuryForm({
   };
 
   return (
-    <form onFocus={markEnquiryStart} onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form
+      onFocus={() => {
+        markEnquiryStart();
+        validation.preload();
+      }}
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-5"
+    >
       {/* Honeypot — hidden from real users */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <input

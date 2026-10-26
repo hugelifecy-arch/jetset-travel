@@ -2,12 +2,9 @@
 
 import { useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import {
-  buildCtaLeadFormSchema,
-  type CTALeadFormValues,
-} from "@/components/forms/schemas";
+import type { CTALeadFormValues } from "@/components/forms/schemas";
+import { createLazyResolver } from "@/components/forms/lazyResolver";
 import { useFormMessages } from "@/components/forms/useFormMessages";
 import { Input, Textarea } from "@/components/ui/Input";
 import { cn } from "@/lib/utils/cn";
@@ -30,8 +27,14 @@ export default function CTALeadForm() {
   const formLoadedAt = useRef(Date.now());
 
   const formMessages = useFormMessages();
-  const schema = useMemo(
-    () => buildCtaLeadFormSchema(formMessages),
+  // zod is fetched on first focus/submit, not with the page.
+  const validation = useMemo(
+    () =>
+      createLazyResolver<CTALeadFormValues>(() =>
+        import("@/components/forms/validation").then((m) =>
+          m.ctaLeadFormResolver(formMessages),
+        ),
+      ),
     [formMessages],
   );
 
@@ -41,7 +44,7 @@ export default function CTALeadForm() {
     reset,
     formState: { errors, isSubmitting },
   } = useForm<CTALeadFormValues>({
-    resolver: zodResolver(schema),
+    resolver: validation.resolver,
   });
 
   const onSubmit = async (data: CTALeadFormValues) => {
@@ -110,7 +113,10 @@ export default function CTALeadForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      onFocus={markEnquiryStart}
+      onFocus={() => {
+        markEnquiryStart();
+        validation.preload();
+      }}
       className="mx-auto max-w-3xl rounded-2xl bg-white/5 p-4 backdrop-blur-sm sm:p-6 md:p-8"
     >
       {/* Honeypot */}
