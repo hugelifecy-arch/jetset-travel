@@ -802,7 +802,7 @@
     "flightNumber": "Flight number",
     "flightNumberPlaceholder": "e.g. A3 612",
     "flightNumberHelp": "We confirm availability for your flight before anything is booked.",
-    "flightNumberInvalid": "Use letters, digits and spaces only (e.g. A3 612).",
+    "flightNumberInvalid": "Use letters, digits, spaces or hyphens only (e.g. A3 612).",
     "passengers": "Passengers",
     "passengersPlaceholder": "e.g. 3 (incl. 1 child)",
     "notes": "Anything else we should know?",

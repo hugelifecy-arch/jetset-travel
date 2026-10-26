@@ -57,7 +57,7 @@ describe("QuoteSchema union", () => {
       { airport: "ATH" },
       { airport: undefined },
       { service: "transfer" },
-      { flightNumber: "A3-612" },
+      { flightNumber: "A3_612" },
       { flightNumber: "A3612<script>" },
       { flightNumber: "ABCDEFGHIJKLM" },
       { passengers: "" },
@@ -75,6 +75,7 @@ describe("QuoteSchema union", () => {
   it("treats the flight number as optional", () => {
     assert.equal(VipSchema.safeParse({ ...vip, flightNumber: undefined }).success, true);
     assert.equal(VipSchema.safeParse({ ...vip, flightNumber: "" }).success, true);
+    assert.equal(VipSchema.safeParse({ ...vip, flightNumber: "A3-612" }).success, true);
     assert.equal(VipSchema.safeParse({ ...vip, service: "both", airport: "PFO" }).success, true);
   });
 });

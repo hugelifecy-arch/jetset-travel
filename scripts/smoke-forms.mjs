@@ -143,7 +143,7 @@ try {
   assert.equal(vipAck.reply_to, "office@example.invalid");
   assert.match(vipAck.subject, /получили/);
   checks++;
-  for (const invalid of [{ airport: "ATH" }, { service: "lounge" }, { flightNumber: "A3-612" }, { passengers: "" }]) {
+  for (const invalid of [{ airport: "ATH" }, { service: "lounge" }, { flightNumber: "A3_612" }, { passengers: "" }]) {
     await check(server, "quote", { ...vip, ...invalid }, 400);
   }
   await check(server, "quote", { ...vip, name: "Delivery Failure" }, 503);

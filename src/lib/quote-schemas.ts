@@ -25,7 +25,7 @@ export const VIP_SERVICES = ["arrival", "departure", "both"] as const;
 export type VipService = (typeof VIP_SERVICES)[number];
 
 /** Letters, digits and spaces only (e.g. "A3 612", "W6 4271"). */
-export const FLIGHT_NUMBER_PATTERN = /^[A-Za-z0-9 ]*$/;
+export const FLIGHT_NUMBER_PATTERN = /^[A-Za-z0-9 -]*$/;
 
 export const CorporateSchema = z.object({
   type: z.literal("corporate"),
