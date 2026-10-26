@@ -1222,7 +1222,8 @@
   "exitIntent": {
     "heading": "Before You Go...",
     "subheading": "Get a free travel quote in under 2 hours",
-    "namePlaceholder": "Your name",
+    "nameLabel": "Your name",
+    "emailLabel": "Email",
     "emailPlaceholder": "your@email.com",
     "travelTypeLabel": "Travel type",
     "travelTypeCorporate": "Corporate",

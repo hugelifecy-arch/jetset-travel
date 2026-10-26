@@ -1222,7 +1222,8 @@
   "exitIntent": {
     "heading": "Прежде Чем Уйти...",
     "subheading": "Получите бесплатную консультацию за 2 часа",
-    "namePlaceholder": "Ваше имя",
+    "nameLabel": "Ваше имя",
+    "emailLabel": "Электронная почта",
     "emailPlaceholder": "ваш@email.com",
     "travelTypeLabel": "Тип поездки",
     "travelTypeCorporate": "Корпоративная",
