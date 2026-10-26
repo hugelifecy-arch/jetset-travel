@@ -32,12 +32,19 @@ export default function GoogleAnalytics() {
         src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
         strategy="afterInteractive"
       />
+      {/* Google Signals and ad personalisation are off: the site asks for
+          analytics consent only, and with Signals on, gtag calls
+          stats.g.doubleclick.net, which the CSP blocks on purpose (one
+          console error per page). See tests/csp-analytics.test.js. */}
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${measurementId}');
+          gtag('config', '${measurementId}', {
+            allow_google_signals: false,
+            allow_ad_personalization_signals: false
+          });
         `}
       </Script>
     </>

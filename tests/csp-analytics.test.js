@@ -70,3 +70,24 @@ describe("CSP lets GA4 collect hits through (connect-src)", () => {
     assert.ok(!allows(connect, "https://stats.g.doubleclick.net/g/collect?v=2"));
   });
 });
+
+describe("GA config does not call Ads endpoints (no console error after consent)", () => {
+  // With Google Signals on, gtag sends a request to stats.g.doubleclick.net,
+  // which connect-src blocks on purpose: one console error on every page
+  // (Lighthouse Best Practices 93 instead of 100, UX audit 2026-10-26).
+  const ga = readFileSync(
+    join(repoRoot, "src/components/analytics/GoogleAnalytics.tsx"),
+    "utf8",
+  );
+  const configCall = ga.match(/gtag\('config',[\s\S]*?\);/);
+
+  it("has a single gtag config call", () => {
+    assert.ok(configCall, "gtag('config', …) not found in GoogleAnalytics.tsx");
+    assert.equal(ga.match(/gtag\('config'/g).length, 1);
+  });
+
+  it("turns off Google Signals and ad personalisation", () => {
+    assert.match(configCall[0], /allow_google_signals:\s*false/);
+    assert.match(configCall[0], /allow_ad_personalization_signals:\s*false/);
+  });
+});
