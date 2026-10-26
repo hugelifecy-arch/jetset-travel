@@ -2,14 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import {
-  buildExitIntentSchema,
-  type ExitIntentFormValues,
-} from "@/components/forms/schemas";
+import type { ExitIntentFormValues } from "@/components/forms/schemas";
+import { createLazyResolver } from "@/components/forms/lazyResolver";
 import { useFormMessages } from "@/components/forms/useFormMessages";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
@@ -22,8 +19,8 @@ const FOCUSABLE_SELECTOR =
 
 /* ------------------------------------------------------------------ */
 /*  Dialog: loaded on demand by ExitIntentPopup when the exit intent   */
-/*  fires, so react-hook-form, zod and the form schema stay out of    */
-/*  every page's initial JavaScript.                                   */
+/*  fires, so react-hook-form stays out of every page's initial        */
+/*  JavaScript; zod follows only when the form is used.                */
 /* ------------------------------------------------------------------ */
 
 export default function ExitIntentDialog({
@@ -49,8 +46,14 @@ export default function ExitIntentDialog({
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   const formMessages = useFormMessages();
-  const schema = useMemo(
-    () => buildExitIntentSchema(formMessages),
+  // zod is fetched on first focus/validation, not with the dialog.
+  const validation = useMemo(
+    () =>
+      createLazyResolver<ExitIntentFormValues>(() =>
+        import("@/components/forms/validation").then((m) =>
+          m.exitIntentResolver(formMessages),
+        ),
+      ),
     [formMessages],
   );
 
@@ -61,7 +64,7 @@ export default function ExitIntentDialog({
     control,
     formState: { errors, isSubmitting },
   } = useForm<ExitIntentFormValues>({
-    resolver: zodResolver(schema),
+    resolver: validation.resolver,
     defaultValues: {},
   });
 
@@ -169,10 +172,11 @@ export default function ExitIntentDialog({
         ref={dialogRef}
         className="relative mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-luxury sm:p-8"
       >
-        {/* Close button */}
+        {/* Close button (44×44 px target) */}
         <button
+          type="button"
           onClick={close}
-          className="absolute right-4 top-4 text-brand-navy/70 transition-colors hover:text-brand-navy"
+          className="absolute right-2 top-2 flex h-11 w-11 items-center justify-center rounded-full text-brand-navy/70 transition-colors hover:bg-brand-light hover:text-brand-navy"
           aria-label={t("close")}
         >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -210,7 +214,7 @@ export default function ExitIntentDialog({
         ) : (
           /* ---- Form state ---- */
           <>
-            <h2 className="font-display text-2xl font-bold text-brand-navy">
+            <h2 className="pr-10 font-display text-2xl font-bold text-brand-navy">
               {t("heading")}
             </h2>
             <p className="mt-1 text-sm text-brand-navy/70">
@@ -218,7 +222,10 @@ export default function ExitIntentDialog({
             </p>
 
             <form
-              onFocus={markEnquiryStart}
+              onFocus={() => {
+                markEnquiryStart();
+                validation.preload();
+              }}
               onSubmit={(e) => {
                 void handleSubmit(async (data) => {
                   try {
@@ -247,10 +254,16 @@ export default function ExitIntentDialog({
 
               {/* Name */}
               <div className="space-y-1">
+                <label
+                  htmlFor="exit-intent-name"
+                  className="block text-xs font-medium text-brand-navy"
+                >
+                  {t("nameLabel")}
+                </label>
                 <Input
+                  id="exit-intent-name"
                   {...register("name")}
-                  placeholder={t("namePlaceholder")}
-                  aria-label={t("namePlaceholder")}
+                  autoComplete="name"
                   aria-invalid={Boolean(errors.name)}
                   aria-describedby={errors.name ? "exit-intent-name-error" : undefined}
                 />
@@ -267,11 +280,18 @@ export default function ExitIntentDialog({
 
               {/* Email */}
               <div className="space-y-1">
+                <label
+                  htmlFor="exit-intent-email"
+                  className="block text-xs font-medium text-brand-navy"
+                >
+                  {t("emailLabel")}
+                </label>
                 <Input
+                  id="exit-intent-email"
                   {...register("email")}
                   type="email"
+                  autoComplete="email"
                   placeholder={t("emailPlaceholder")}
-                  aria-label={t("emailPlaceholder")}
                   aria-invalid={Boolean(errors.email)}
                   aria-describedby={errors.email ? "exit-intent-email-error" : undefined}
                 />
@@ -288,10 +308,17 @@ export default function ExitIntentDialog({
 
               {/* Travel type pills */}
               <div className="space-y-1">
-                <p className="text-xs font-medium text-brand-navy/70">
+                <p
+                  id="exit-intent-travel-type"
+                  className="text-xs font-medium text-brand-navy"
+                >
                   {t("travelTypeLabel")}
                 </p>
-                <div className="flex gap-2">
+                <div
+                  role="group"
+                  aria-labelledby="exit-intent-travel-type"
+                  className="flex gap-2"
+                >
                   {(["Corporate", "Leisure", "Visa"] as const).map((type) => (
                     <button
                       key={type}

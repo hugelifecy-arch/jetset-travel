@@ -4,6 +4,7 @@
     "services": "Услуги",
     "corporate": "Корпоративные поездки",
     "luxury": "Премиальный отдых",
+    "flights": "Авиабилеты",
     "visas": "Визовые услуги",
     "hotels": "Бронирование отелей",
     "cruises": "Круизы",
@@ -32,11 +33,9 @@
     "badgeIATA": "Аккредитация IATA",
     "badgeWhatsApp": "WhatsApp 24/7",
     "badgeLicense": "Туристическая лицензия 7775",
-    "heroImageAlt": "Вид с воздуха на средиземноморское побережье Кипра с бирюзовой водой",
+    "heroImageAlt": "Яхты в Голубой лагуне на полуострове Акамас, Пафос, Кипр",
     "iataAlt": "Аккредитованный агент IATA",
-    "tourismAlt": "Лицензия Заместительного министерства туризма Республики Кипр (№7775)",
-    "playVideo": "Воспроизвести фоновое видео",
-    "pauseVideo": "Приостановить фоновое видео"
+    "tourismAlt": "Лицензия Заместительного министерства туризма Республики Кипр (№7775)"
   },
   "trust": {
     "title": "Почему корпоративные клиенты выбирают нас",
@@ -176,6 +175,7 @@
     "fullName": "Полное имя",
     "email": "Электронная почта",
     "phonePlaceholder": "+357...",
+    "phoneLabel": "Телефон",
     "travelType": "Тип поездки",
     "selectTravelType": "Выберите тип поездки",
     "travelTypeOptions": {
@@ -186,7 +186,9 @@
       "other": "Другое"
     },
     "datesPlaceholder": "напр., 15–22 марта 2026",
+    "datesLabel": "Примерные даты",
     "messagePlaceholder": "Расскажите о вашей поездке",
+    "messageLabel": "Сообщение",
     "travelers": "Количество путешественников",
     "selectTravelers": "Путешественники",
     "travelersOptions": {
@@ -490,6 +492,10 @@
     "submitError": "Не удалось подтвердить отправку. Попробуйте ещё раз или свяжитесь с нами: WhatsApp / +357 99 478 073.",
     "findUs": "Как нас найти",
     "findUsSubtitle": "Посетите наш офис: 26A Agapinoros, 8049 Пафос, Кипр.",
+    "mapTitle": "Офис JetSet Travel в Пафосе на Google Картах",
+    "mapNotice": "Карта загружается с Google, только если вы решите её показать.",
+    "showMap": "Показать карту",
+    "openInGoogleMaps": "Открыть в Google Картах",
     "openInMaps": "Открыть в Google Maps",
     "getDirections": "Построить маршрут",
     "mapAddress": "Агапинорос 26А, 8049 Пафос, Кипр",
@@ -1279,7 +1285,8 @@
   "exitIntent": {
     "heading": "Прежде Чем Уйти...",
     "subheading": "Получите бесплатную консультацию за 2 часа",
-    "namePlaceholder": "Ваше имя",
+    "nameLabel": "Ваше имя",
+    "emailLabel": "Электронная почта",
     "emailPlaceholder": "ваш@email.com",
     "travelTypeLabel": "Тип поездки",
     "travelTypeCorporate": "Корпоративная",

@@ -106,13 +106,17 @@ export default function CookieConsentBanner() {
     <div
       ref={bannerRef}
       data-cookie-banner={hydrated ? "client" : "ssr"}
-      className="fixed inset-x-0 bottom-0 z-[60] p-4"
+      className="fixed inset-x-0 bottom-0 z-[60] p-2 sm:p-4"
     >
-      <div className="mx-auto max-w-4xl rounded-xl border border-brand-navy/10 bg-white shadow-luxury">
+      {/* Phones: a compact bottom sheet (smaller text, the two main choices
+          side by side, less padding) so it covers far less of the screen.
+          Same three choices and behaviour; sm and up as before. The panel
+          scrolls if the settings view is taller than the screen. */}
+      <div className="mx-auto max-h-[calc(100dvh-1rem)] max-w-4xl overflow-y-auto rounded-xl border border-brand-navy/10 bg-white shadow-luxury">
         {/* Main banner */}
         {!showSettings && (
-          <div className="p-5 sm:p-6">
-            <p className="text-sm leading-relaxed text-brand-navy/80 sm:text-base">
+          <div className="p-3 sm:p-6">
+            <p className="text-xs leading-snug text-brand-navy/80 sm:text-base sm:leading-relaxed">
               {t("banner")}{" "}
               <a
                 href={`/${locale}/privacy`}
@@ -121,22 +125,22 @@ export default function CookieConsentBanner() {
                 {t("privacyLink")}
               </a>
             </p>
-            <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+            <div className="mt-2.5 grid grid-cols-2 gap-2 sm:mt-4 sm:flex sm:flex-row sm:items-center sm:gap-3">
               <button
                 onClick={handleAcceptAll}
-                className="inline-flex items-center justify-center rounded-full bg-brand-gold px-5 py-2.5 text-sm font-semibold text-brand-navy transition-colors hover:bg-brand-gold/90"
+                className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-brand-gold px-3 py-2 text-[13px] font-semibold leading-tight text-brand-navy transition-colors hover:bg-brand-gold/90 sm:px-5 sm:py-2.5 sm:text-sm"
               >
                 {t("acceptAll")}
               </button>
               <button
                 onClick={handleRejectNonEssential}
-                className="inline-flex items-center justify-center rounded-full border border-brand-navy/20 bg-white px-5 py-2.5 text-sm font-semibold text-brand-navy transition-colors hover:bg-brand-light"
+                className="inline-flex min-h-[44px] items-center justify-center rounded-full border border-brand-navy/20 bg-white px-3 py-2 text-[13px] font-semibold leading-tight text-brand-navy transition-colors hover:bg-brand-light sm:px-5 sm:py-2.5 sm:text-sm"
               >
                 {t("rejectNonEssential")}
               </button>
               <button
                 onClick={() => setShowSettings(true)}
-                className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold text-brand-navy/70 underline underline-offset-2 transition-colors hover:text-brand-navy"
+                className="col-span-2 inline-flex min-h-[36px] items-center justify-center rounded-full px-3 py-1 text-[13px] font-semibold text-brand-navy/70 underline underline-offset-2 transition-colors hover:text-brand-navy sm:min-h-0 sm:px-5 sm:py-2.5 sm:text-sm"
               >
                 {t("managePreferences")}
               </button>
@@ -146,7 +150,7 @@ export default function CookieConsentBanner() {
 
         {/* Settings panel */}
         {showSettings && (
-          <div className="p-5 sm:p-6">
+          <div className="p-4 sm:p-6">
             <h3 className="font-display text-lg font-semibold text-brand-navy">
               {t("settingsTitle")}
             </h3>

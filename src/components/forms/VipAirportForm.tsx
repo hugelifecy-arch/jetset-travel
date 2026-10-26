@@ -2,8 +2,6 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useForm, type FieldErrors } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { getRecaptchaToken } from "@/lib/recaptcha";
@@ -12,7 +10,9 @@ import { trackLead } from "@/lib/analytics/fbpixel";
 import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import { enquiryAttribution } from "@/lib/attribution";
 import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
-import { FLIGHT_NUMBER_PATTERN, VIP_AIRPORTS, VIP_SERVICES } from "@/lib/quote-schemas";
+import { createLazyResolver } from "@/components/forms/lazyResolver";
+import type { VipFormData } from "./vip-validation";
+import { VIP_AIRPORTS, VIP_SERVICES } from "@/lib/quote-constants";
 import { focusAndReveal } from "@/lib/focus-reveal";
 
 /*
@@ -33,21 +33,6 @@ const choiceClasses =
   "flex min-h-[44px] cursor-pointer items-center gap-3 rounded-xl border border-brand-navy/20 px-4 py-2.5 text-sm font-medium text-brand-navy transition-colors hover:border-brand-gold has-[:checked]:border-brand-gold has-[:checked]:bg-brand-gold/10 has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[#2E86C1]";
 const radioClasses = "h-4 w-4 shrink-0 accent-brand-gold-ink";
 
-const buildVipSchema = (m: { required: string; invalidEmail: string; flightNumberInvalid: string }) =>
-  z.object({
-    name: z.string().trim().min(2, m.required).max(80),
-    email: z.string().trim().email(m.invalidEmail).max(120),
-    phone: z.string().trim().min(5, m.required).max(30),
-    airport: z.enum(VIP_AIRPORTS, { message: m.required }),
-    service: z.enum(VIP_SERVICES, { message: m.required }),
-    date: z.string().trim().min(1, m.required).max(80),
-    flightNumber: z.string().trim().max(12, m.flightNumberInvalid)
-      .regex(FLIGHT_NUMBER_PATTERN, m.flightNumberInvalid).optional(),
-    passengers: z.string().trim().min(1, m.required).max(20),
-    notes: z.string().trim().max(2000).optional(),
-  });
-
-type VipFormData = z.infer<ReturnType<typeof buildVipSchema>>;
 
 /** Visual (DOM) order, used to focus the first field with an error. */
 const FIELD_ORDER: ReadonlyArray<keyof VipFormData> = [
@@ -67,8 +52,14 @@ export default function VipAirportForm({ onSuccess }: { onSuccess?: () => void }
   const sentRef = useRef<HTMLDivElement>(null);
 
   const formMessages = useFormMessages();
-  const schema = useMemo(
-    () => buildVipSchema({ ...formMessages, flightNumberInvalid: t("flightNumberInvalid") }),
+  // zod (in ./vip-validation) is fetched on first focus/submit, not with the page.
+  const validation = useMemo(
+    () =>
+      createLazyResolver<VipFormData>(() =>
+        import("./vip-validation").then((m) =>
+          m.vipResolver({ ...formMessages, flightNumberInvalid: t("flightNumberInvalid") }),
+        ),
+      ),
     [formMessages, t],
   );
   const {
@@ -76,7 +67,7 @@ export default function VipAirportForm({ onSuccess }: { onSuccess?: () => void }
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<VipFormData>({
-    resolver: zodResolver(schema),
+    resolver: validation.resolver,
     // onInvalid moves focus so the field isn't left under the sticky header.
     shouldFocusError: false,
   });
@@ -158,7 +149,10 @@ export default function VipAirportForm({ onSuccess }: { onSuccess?: () => void }
   return (
     <form
       ref={formRef}
-      onFocus={markEnquiryStart}
+      onFocus={() => {
+        markEnquiryStart();
+        validation.preload();
+      }}
       onSubmit={handleSubmit(onSubmit, onInvalid)}
       noValidate
       className="space-y-5"

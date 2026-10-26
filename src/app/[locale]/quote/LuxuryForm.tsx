@@ -2,8 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
 import { Controller, useForm, type FieldErrors } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useTranslations } from "next-intl";
 import {
   ArrowLeft,
@@ -31,7 +29,9 @@ import {
 } from "./shared";
 import { enquiryAttribution } from "@/lib/attribution";
 import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
-import { TRIP_TYPES, type TripType } from "@/lib/quote-schemas";
+import { TRIP_TYPES, type TripType } from "@/lib/quote-constants";
+import { createLazyResolver } from "@/components/forms/lazyResolver";
+import type { LuxuryFormData } from "./validation";
 import { focusAndReveal } from "@/lib/focus-reveal";
 
 /*
@@ -53,23 +53,6 @@ const TRIP_OPTIONS: ReadonlyArray<{ value: TripType; labelKey: string; Icon: Luc
   { value: "other", labelKey: "tripOther", Icon: Sparkles },
 ];
 
-/* Validation messages come from the `forms` namespace so they localize;
-   errors render directly under their field, so the generic strings stay
-   unambiguous. */
-const buildLuxurySchema = (m: { required: string; invalidEmail: string; tripTypes: string }) =>
-  z.object({
-    tripTypes: z.array(z.enum(TRIP_TYPES)).min(1, m.tripTypes).max(TRIP_TYPES.length),
-    destinations: z.string().trim().min(2, m.required).max(200),
-    dates: z.string().trim().min(1, m.required).max(80),
-    groupSize: z.string().trim().min(1, m.required).max(50),
-    budget: z.string().min(1, m.required),
-    name: z.string().trim().min(2, m.required).max(80),
-    email: z.string().trim().email(m.invalidEmail).max(120),
-    phone: z.string().trim().min(5, m.required).max(30),
-    specialRequirements: z.string().trim().max(2000).optional(),
-  });
-
-type LuxuryFormData = z.infer<ReturnType<typeof buildLuxurySchema>>;
 
 const STEP_FIELDS: ReadonlyArray<ReadonlyArray<keyof LuxuryFormData>> = [
   ["tripTypes"],
@@ -104,8 +87,14 @@ export default function LuxuryForm({
   const stepChanged = useRef(false);
 
   const formMessages = useFormMessages();
-  const schema = useMemo(
-    () => buildLuxurySchema({ ...formMessages, tripTypes: t("tripTypesError") }),
+  // zod (in ./validation) is fetched on first focus/submit, not with the page.
+  const validation = useMemo(
+    () =>
+      createLazyResolver<LuxuryFormData>(() =>
+        import("./validation").then((m) =>
+          m.luxuryResolver({ ...formMessages, tripTypes: t("tripTypesError") }),
+        ),
+      ),
     [formMessages, t],
   );
   const {
@@ -116,7 +105,7 @@ export default function LuxuryForm({
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<LuxuryFormData>({
-    resolver: zodResolver(schema),
+    resolver: validation.resolver,
     // Focus is moved by revealFirstError so the field isn't left under the sticky header.
     shouldFocusError: false,
     defaultValues: {
@@ -229,7 +218,16 @@ export default function LuxuryForm({
   const stepHint = step === 0 ? t("step1Hint") : step === 1 ? t("step2Hint") : null;
 
   return (
-    <form ref={formRef} onFocus={markEnquiryStart} onSubmit={onFormSubmit} noValidate className="space-y-6">
+    <form
+      ref={formRef}
+      onFocus={() => {
+        markEnquiryStart();
+        validation.preload();
+      }}
+      onSubmit={onFormSubmit}
+      noValidate
+      className="space-y-6"
+    >
       {/* Honeypot — hidden from real users */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <input

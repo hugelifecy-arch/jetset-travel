@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useCookieBannerOffset } from "@/hooks/useCookieBannerOffset";
+import { useMobileMenuOpen } from "@/hooks/useMobileMenuOpen";
 import { trackCTAClick, trackTelegramClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
 import { whatsAppHref } from "@/lib/whatsapp-message";
 import { TELEGRAM_URL } from "@/lib/telegram";
@@ -16,6 +17,7 @@ export default function MobileActionBar() {
   const pathname = usePathname();
   const t = useTranslations("mobileBar");
   const cookieOffset = useCookieBannerOffset();
+  const menuOpen = useMobileMenuOpen();
 
   useEffect(() => {
     const footer = document.querySelector("footer");
@@ -30,7 +32,8 @@ export default function MobileActionBar() {
     return () => observer.disconnect();
   }, []);
 
-  if (footerVisible) return null;
+  // Hidden while the mobile menu is open so it cannot cover menu items.
+  if (footerVisible || menuOpen) return null;
 
   return (
     <div

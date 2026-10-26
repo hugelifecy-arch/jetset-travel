@@ -1,162 +1,48 @@
 "use client";
 
-import { useState, useCallback, useRef, useSyncExternalStore, type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, MessageCircle, Pause, Play } from "lucide-react";
+import { Clock, MessageCircle } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { trackCTAClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
 
 const WHATSAPP_NUMBER = "35799478073";
 
-const DESKTOP_MQ = "(min-width: 768px)";
-const REDUCED_MOTION_MQ = "(prefers-reduced-motion: reduce)";
-
-function subscribeDesktop(callback: () => void) {
-  const mql = window.matchMedia(DESKTOP_MQ);
-  mql.addEventListener("change", callback);
-  return () => mql.removeEventListener("change", callback);
-}
-
-function getIsDesktop() {
-  return window.matchMedia(DESKTOP_MQ).matches;
-}
-
-function getIsDesktopServer() {
-  return false;
-}
-
-function subscribeReducedMotion(callback: () => void) {
-  const mql = window.matchMedia(REDUCED_MOTION_MQ);
-  mql.addEventListener("change", callback);
-  return () => mql.removeEventListener("change", callback);
-}
-
-function getPrefersReducedMotion() {
-  return window.matchMedia(REDUCED_MOTION_MQ).matches;
-}
-
-function getPrefersReducedMotionServer() {
-  return false;
-}
-
 export default function HeroSection() {
   const locale = useLocale();
   const t = useTranslations("hero");
-  const isDesktop = useSyncExternalStore(subscribeDesktop, getIsDesktop, getIsDesktopServer);
-  const prefersReducedMotion = useSyncExternalStore(subscribeReducedMotion, getPrefersReducedMotion, getPrefersReducedMotionServer);
-  const [mobileVideoPlaying, setMobileVideoPlaying] = useState(false);
-  const [videoAvailable, setVideoAvailable] = useState(true);
-  const [videoPaused, setVideoPaused] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handlePlayMobile = useCallback(() => {
-    setMobileVideoPlaying(true);
-  }, []);
-
-  const handleVideoError = useCallback(() => {
-    setVideoAvailable(false);
-  }, []);
-
-  /* WCAG 2.2.2 — auto-playing content longer than 5s needs a pause control */
-  const toggleVideoPaused = useCallback(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      void video.play();
-      setVideoPaused(false);
-    } else {
-      video.pause();
-      setVideoPaused(true);
-    }
-  }, []);
 
   return (
-    <section className="relative isolate flex min-h-screen items-center overflow-hidden bg-brand-navy">
-      {/* Background image — always visible, acts as poster on mobile */}
+    /* Full first screen below the 80 px header on desktop only; on phones and
+       tablets the hero is as tall as its content, so the headline sits right
+       under the header instead of below an empty band. */
+    <section className="relative isolate flex items-center overflow-hidden bg-brand-navy lg:min-h-[calc(100svh-5rem)]">
+      {/* Background photo: the Blue Lagoon on the Akamas peninsula (Paphos
+          district), free Unsplash License. Replaces the gradient placeholder
+          and the ~2 MB cliff video. next/image serves AVIF/WebP. */}
       <div className="absolute inset-0 -z-20">
         <Image
-          src="/images/hero-bg.jpg"
+          src="/images/hero-cyprus.jpg"
           alt={t("heroImageAlt")}
           fill
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-[62%_center] md:object-center"
           priority
           fetchPriority="high"
-          quality={85}
         />
       </div>
 
-      {/* Video background — desktop only, hidden when user prefers reduced motion */}
-      {isDesktop && videoAvailable && !prefersReducedMotion && (
-        <video
-          ref={videoRef}
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          poster="/images/hero-bg.jpg"
-          aria-hidden="true"
-          onError={handleVideoError}
-        >
-          {/* mp4 first: it is the smaller encode (2.0MB vs 2.9MB webm), and
-              browsers take the first playable source. */}
-          <source src="/videos/hero.mp4" type="video/mp4" />
-          <source src="/videos/hero.webm" type="video/webm" />
-        </video>
-      )}
+      {/* Navy gradient: dark behind the text, clear where there is none so
+          the photo shows. Phones/tablets: top to bottom, ending in a clear
+          strip of the lagoon below the badges (the extra bottom padding).
+          Desktop: left to right, the right half of the photo stays clear.
+          Measured against the brightest photo pixel behind each line (EN
+          and RU, 390 px and 1440 px): white text at least 4.5:1, the gold
+          headline (large text) at least 3:1. */}
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgb(27_42_74/0.92)_0%,rgb(27_42_74/0.84)_calc(100%_-_10rem),rgb(27_42_74/0)_100%)] lg:bg-[linear-gradient(to_right,rgb(27_42_74/0.94)_0%,rgb(27_42_74/0.86)_52%,rgb(27_42_74/0.35)_75%,rgb(27_42_74/0)_100%)]" />
 
-      {/* Desktop: pause/resume control for the auto-playing video (WCAG 2.2.2) */}
-      {isDesktop && videoAvailable && !prefersReducedMotion && (
-        <button
-          onClick={toggleVideoPaused}
-          className="absolute bottom-4 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors hover:bg-white/30 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8"
-          aria-label={videoPaused ? t("playVideo") : t("pauseVideo")}
-          aria-pressed={videoPaused}
-        >
-          {videoPaused ? (
-            <Play className="h-5 w-5 text-white" aria-hidden="true" />
-          ) : (
-            <Pause className="h-5 w-5 text-white" aria-hidden="true" />
-          )}
-        </button>
-      )}
-
-      {/* Mobile: play button overlay to load video on demand (hidden if reduced motion) */}
-      {!isDesktop && !mobileVideoPlaying && videoAvailable && !prefersReducedMotion && (
-        <button
-          onClick={handlePlayMobile}
-          className="absolute bottom-4 right-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm transition-colors hover:bg-white/30 sm:bottom-6 sm:right-6 md:bottom-8 md:right-8"
-          aria-label={t("playVideo")}
-        >
-          <Play className="h-5 w-5 text-white" aria-hidden="true" />
-        </button>
-      )}
-
-      {/* Mobile video — only rendered after user taps play */}
-      {!isDesktop && mobileVideoPlaying && videoAvailable && (
-        <video
-          className="absolute inset-0 -z-20 h-full w-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="metadata"
-          poster="/images/hero-bg.jpg"
-          aria-hidden="true"
-          onError={handleVideoError}
-        >
-          <source src="/videos/hero.mp4" type="video/mp4" />
-          <source src="/videos/hero.webm" type="video/webm" />
-        </video>
-      )}
-
-      {/* Navy gradient overlay */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-brand-navy/90 via-brand-navy/70 to-brand-dark/90" />
-
-      <div className="mx-auto w-full max-w-7xl px-4 py-32 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-7xl px-4 pb-40 pt-8 sm:px-6 sm:pt-12 lg:px-8 lg:py-24">
         <div className="max-w-3xl">
           {/* Headline */}
           <h1
@@ -219,7 +105,7 @@ export default function HeroSection() {
               <span className="mt-1 text-base font-semibold">
                 {t("ctaLuxury")}
               </span>
-              <span className="mt-0.5 text-xs text-white/70">
+              <span className="mt-0.5 text-xs text-white/80">
                 {t("pathLuxuryHint")}
               </span>
             </Link>
@@ -249,7 +135,7 @@ export default function HeroSection() {
               <span>{t("ctaWhatsApp")}</span>
             </a>
             <span className="hidden text-white/30 sm:inline" aria-hidden="true">•</span>
-            <span className="inline-flex items-center gap-2 text-xs text-white/70 sm:text-sm">
+            <span className="inline-flex items-center gap-2 text-xs text-white/80 sm:text-sm">
               <Clock className="h-4 w-4" aria-hidden="true" />
               {t("slaLine")}
             </span>
@@ -260,27 +146,29 @@ export default function HeroSection() {
             className="enter-up mt-8 flex flex-wrap items-center gap-3 sm:mt-12 sm:gap-4 md:gap-6"
             style={{ "--enter-step": 4 } as CSSProperties}
           >
-            <div className="flex items-center gap-2 text-sm text-white/80">
+            {/* The logos are dark artwork on transparent backgrounds: show
+                them on small white tiles, as the footer does. */}
+            <div className="flex items-center gap-2 text-sm text-white/90">
               <Image
                 src="/images/iata-logo.png"
                 alt={t("iataAlt")}
-                width={28}
-                height={28}
-                className="h-7 w-7 rounded object-contain"
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-md bg-white object-contain p-1"
               />
               <span className="font-medium">{t("badgeIATA")}</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-white/80">
-              <MessageCircle className="h-5 w-5 text-brand-gold" />
+            <div className="flex items-center gap-2 text-sm text-white/90">
+              <MessageCircle className="h-5 w-5 text-brand-gold" aria-hidden="true" />
               <span className="font-medium">{t("badgeWhatsApp")}</span>
             </div>
-            <div className="flex items-center gap-2 text-sm text-white/80">
+            <div className="flex items-center gap-2 text-sm text-white/90">
               <Image
                 src="/images/tourism-logo.png"
                 alt={t("tourismAlt")}
-                width={28}
-                height={28}
-                className="h-7 w-7 rounded object-contain"
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-md bg-white object-contain p-1"
               />
               <span className="font-medium">{t("badgeLicense")}</span>
             </div>

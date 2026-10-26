@@ -1,9 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { getRecaptchaToken } from "@/lib/recaptcha";
@@ -22,20 +20,9 @@ import {
 import FormTrustElements from "@/components/forms/FormTrustElements";
 import { enquiryAttribution } from "@/lib/attribution";
 import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
-
-function createContactSchema(t: (key: string) => string) {
-  return z.object({
-    name: z.string().min(2, t("nameMinLength")),
-    email: z.string().email(t("invalidEmail")),
-    phone: z.string().min(8, t("phoneRequired")),
-    companyName: z.string().optional(),
-    travelType: z.string().optional(),
-    contactMethod: z.string().optional(),
-    message: z.string().optional(),
-  });
-}
-
-type ContactFormData = z.infer<ReturnType<typeof createContactSchema>>;
+import { createLazyResolver } from "@/components/forms/lazyResolver";
+import OfficeMap, { MAP_LINK_URL } from "./OfficeMap";
+import type { ContactFormData } from "./validation";
 
 /** Set NEXT_PUBLIC_SCHEDULING_URL (e.g. a live Calendly link) to show the
  *  "schedule a call" block; unset hides it rather than linking to a 404. */
@@ -54,14 +41,21 @@ export default function ContactContent() {
   const formLoadedAt = useRef(Date.now());
   const honeypotRef = useRef<HTMLInputElement>(null);
 
-  const contactSchema = createContactSchema(t);
+  // zod (in ./validation) is fetched on first focus/submit, not with the page.
+  const validation = useMemo(
+    () =>
+      createLazyResolver<ContactFormData>(() =>
+        import("./validation").then((m) => m.contactResolver(t)),
+      ),
+    [t],
+  );
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
+    resolver: validation.resolver,
     defaultValues: {
       phone: "+357 ",
     },
@@ -204,7 +198,14 @@ export default function ContactContent() {
                   </p>
                 </div>
               ) : (
-                <form onFocus={markEnquiryStart} onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                <form
+                  onFocus={() => {
+                    markEnquiryStart();
+                    validation.preload();
+                  }}
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="space-y-5"
+                >
                   {/* Honeypot — hidden from real users */}
                   <div className="absolute -left-[9999px]" aria-hidden="true">
                     <input
@@ -420,17 +421,17 @@ export default function ContactContent() {
                     </p>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 text-sm text-brand-navy/70">
                       <span className="flex items-center gap-1.5">
-                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">1</span>
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[11px] font-bold text-brand-gold-ink">1</span>
                         {t("howStep1")}
                       </span>
                       <span className="hidden sm:inline text-brand-navy/70">&rarr;</span>
                       <span className="flex items-center gap-1.5">
-                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">2</span>
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[11px] font-bold text-brand-gold-ink">2</span>
                         {t("howStep2")}
                       </span>
                       <span className="hidden sm:inline text-brand-navy/70">&rarr;</span>
                       <span className="flex items-center gap-1.5">
-                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">3</span>
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[11px] font-bold text-brand-gold-ink">3</span>
                         {t("howStep3")}
                       </span>
                     </div>
@@ -481,18 +482,8 @@ export default function ContactContent() {
               {t("findUsSubtitle")}
             </p>
           </div>
-          <div className="overflow-hidden rounded-2xl border border-brand-navy/10 shadow-sm">
-            <iframe
-              title="JetSet Travel Paphos Office Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d550.9363089741603!2d32.41889941969174!3d34.76763619960539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e706ec2d62587f%3A0x4161901d9b64e1b4!2sJetSet%20Travel%20Agency%20-%20Paphos!5e1!3m2!1sen!2s!4v1774692196854!5m2!1sen!2s"
-              width="100%"
-              height="400"
-              style={{ border: 0, borderRadius: "12px" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+          {/* Click-to-load: no request to Google before the visitor asks. */}
+          <OfficeMap />
 
           {/* Contact details below map */}
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
@@ -534,7 +525,7 @@ export default function ContactContent() {
 
           <div className="mt-8 text-center">
             <a
-              href="https://maps.app.goo.gl/nA8De9MqgLmUphZ49"
+              href={MAP_LINK_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3 text-sm font-semibold text-white hover:bg-brand-navy/90 transition-colors"

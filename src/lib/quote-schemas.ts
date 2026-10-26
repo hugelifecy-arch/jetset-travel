@@ -6,26 +6,25 @@ import { z } from "zod";
 /*  exercise them without a Next server (relative imports only).       */
 /* ------------------------------------------------------------------ */
 
-/** What a luxury enquiry can ask us to arrange (step 1 of the wizard). */
-export const TRIP_TYPES = [
-  "cruise",
-  "villa",
-  "vip-airport",
-  "private-jet",
-  "yacht",
-  "hotel",
-  "other",
-] as const;
-export type TripType = (typeof TRIP_TYPES)[number];
+import {
+  TRIP_TYPES,
+  VIP_AIRPORTS,
+  VIP_SERVICES,
+  FLIGHT_NUMBER_PATTERN,
+  type TripType,
+  type VipAirport,
+  type VipService,
+} from "./quote-constants.ts";
 
-export const VIP_AIRPORTS = ["LCA", "PFO"] as const;
-export type VipAirport = (typeof VIP_AIRPORTS)[number];
-
-export const VIP_SERVICES = ["arrival", "departure", "both"] as const;
-export type VipService = (typeof VIP_SERVICES)[number];
-
-/** Letters, digits and spaces only (e.g. "A3 612", "W6 4271"). */
-export const FLIGHT_NUMBER_PATTERN = /^[A-Za-z0-9 -]*$/;
+export {
+  TRIP_TYPES,
+  VIP_AIRPORTS,
+  VIP_SERVICES,
+  FLIGHT_NUMBER_PATTERN,
+  type TripType,
+  type VipAirport,
+  type VipService,
+};
 
 export const CorporateSchema = z.object({
   type: z.literal("corporate"),

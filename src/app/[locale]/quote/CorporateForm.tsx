@@ -2,8 +2,6 @@
 
 import { useMemo, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useTranslations } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { getRecaptchaToken } from "@/lib/recaptcha";
@@ -19,23 +17,8 @@ import {
 } from "./shared";
 import { enquiryAttribution } from "@/lib/attribution";
 import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
-
-/* Validation messages come from the `forms` namespace so they localize;
-   errors render directly under their field, so the generic strings stay
-   unambiguous. */
-const buildCorporateSchema = (m: { required: string; invalidEmail: string }) =>
-  z.object({
-    companyName: z.string().min(2, m.required),
-    email: z.string().email(m.invalidEmail),
-    phone: z.string().min(5, m.required),
-    travellers: z.string().min(1, m.required),
-    travelDates: z.string().min(1, m.required),
-    destinations: z.string().min(2, m.required),
-    invoiceRequired: z.boolean(),
-    notes: z.string().optional(),
-  });
-
-type CorporateFormData = z.infer<ReturnType<typeof buildCorporateSchema>>;
+import { createLazyResolver } from "@/components/forms/lazyResolver";
+import type { CorporateFormData } from "./validation";
 
 export default function CorporateForm({
   onSuccess,
@@ -51,8 +34,12 @@ export default function CorporateForm({
   const honeypotRef = useRef<HTMLInputElement>(null);
 
   const formMessages = useFormMessages();
-  const schema = useMemo(
-    () => buildCorporateSchema(formMessages),
+  // zod (in ./validation) is fetched on first focus/submit, not with the page.
+  const validation = useMemo(
+    () =>
+      createLazyResolver<CorporateFormData>(() =>
+        import("./validation").then((m) => m.corporateResolver(formMessages)),
+      ),
     [formMessages],
   );
 
@@ -63,7 +50,7 @@ export default function CorporateForm({
     control,
     formState: { errors, isSubmitting },
   } = useForm<CorporateFormData>({
-    resolver: zodResolver(schema),
+    resolver: validation.resolver,
     defaultValues: { invoiceRequired: false },
   });
   // Single source of truth for the VAT switch: the form value. The previous
@@ -99,7 +86,14 @@ export default function CorporateForm({
   };
 
   return (
-    <form onFocus={markEnquiryStart} onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form
+      onFocus={() => {
+        markEnquiryStart();
+        validation.preload();
+      }}
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-5"
+    >
       {/* Honeypot — hidden from real users */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <input
