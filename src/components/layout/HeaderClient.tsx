@@ -16,6 +16,7 @@ import { MOBILE_MENU_EVENT } from "@/hooks/useMobileMenuOpen";
 const serviceLinks = [
   { href: "/corporate-travel", key: "corporate" },
   { href: "/luxury-travel", key: "luxury" },
+  { href: "/vip-services", key: "vip" },
   { href: { en: "/flight-tickets-cyprus", ru: "/aviabilety-kipr" }, key: "flights" },
   { href: "/cruises", key: "cruises" },
   { href: "/visa-services", key: "visas" },
@@ -173,9 +174,21 @@ export default function HeaderClient() {
   }, []);
 
   // Desktop hover handlers with a small delay to prevent flicker
+  // When a mouse user hovers the button and then clicks it, the hover has
+  // already opened the menu; a plain toggle would close it again. A click
+  // that follows a hover-open within a moment keeps the menu open.
+  const hoverOpenedAtRef = useRef(0);
   const handleMouseEnter = () => {
     if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+    hoverOpenedAtRef.current = Date.now();
     setServicesOpen(true);
+  };
+  const handleServicesClick = () => {
+    if (Date.now() - hoverOpenedAtRef.current < 800) {
+      setServicesOpen(true);
+      return;
+    }
+    setServicesOpen((prev) => !prev);
   };
   const handleMouseLeave = () => {
     dropdownTimeoutRef.current = setTimeout(() => setServicesOpen(false), 150);
@@ -218,7 +231,7 @@ export default function HeaderClient() {
               <button
                 ref={servicesButtonRef}
                 type="button"
-                onClick={() => setServicesOpen((prev) => !prev)}
+                onClick={handleServicesClick}
                 className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-white/80 hover:text-brand-gold transition-colors"
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"

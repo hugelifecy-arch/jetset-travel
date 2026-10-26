@@ -36,14 +36,13 @@ export interface BlogCtaTopicConfig {
 }
 
 const QUOTE = { en: "/quote", ru: "/quote" };
-// VIP airport service, jet and yacht charter and villas have no page of their
-// own yet; the luxury page's "VIP services we arrange" section covers them.
-const LUXURY_VIP = { en: "/luxury-travel#vip-services", ru: "/luxury-travel#vip-services" };
+// VIP airport service, jet and yacht charter and villas → the VIP services page.
+const VIP_SERVICES_PAGE = { en: "/vip-services", ru: "/vip-services" };
 
 export const BLOG_CTA_CONFIG: Record<BlogCtaTopic, BlogCtaTopicConfig> = {
-  "vip-airport": { messageKey: "vipAirport", servicePath: LUXURY_VIP },
-  "private-jet-yacht": { messageKey: "privateJetYacht", servicePath: LUXURY_VIP },
-  villas: { messageKey: "villas", servicePath: LUXURY_VIP },
+  "vip-airport": { messageKey: "vipAirport", servicePath: VIP_SERVICES_PAGE },
+  "private-jet-yacht": { messageKey: "privateJetYacht", servicePath: VIP_SERVICES_PAGE },
+  villas: { messageKey: "villas", servicePath: VIP_SERVICES_PAGE },
   insurance: { messageKey: "insurance", servicePath: QUOTE },
   cruises: { messageKey: "cruises", servicePath: { en: "/cruises", ru: "/cruises" } },
   "digital-nomads": {
