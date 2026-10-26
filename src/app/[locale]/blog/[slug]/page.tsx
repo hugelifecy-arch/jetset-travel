@@ -324,7 +324,9 @@ export default async function BlogPostPage({
     // Speakable: identifies content suitable for voice assistants (Google Assistant, Alexa)
     speakable: {
       "@type": "SpeakableSpecification",
-      cssSelector: ["h1", "h2", ".prose p:first-of-type"],
+      // The body renders in two .prose blocks around the topic CTA; target
+      // only the first block so speakable keeps a single lead paragraph.
+      cssSelector: ["h1", "h2", "[data-article-lead] p:first-of-type"],
     },
   };
 
@@ -410,6 +412,7 @@ export default async function BlogPostPage({
 
             <div
               className={PROSE_CLASSES}
+              data-article-lead
               dangerouslySetInnerHTML={{ __html: htmlBeforeCta }}
             />
             {topicCta}
