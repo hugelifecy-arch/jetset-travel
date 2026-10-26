@@ -19,6 +19,7 @@ import ServiceSchema from "@/components/seo/ServiceSchema";
 import FAQSection from "@/components/sections/FAQSection";
 import RelatedArticles from "@/components/sections/RelatedArticles";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
+import VipAirportForm from "@/components/forms/VipAirportForm";
 
 /*
  * VIP services hub (Oct 2026 UX audit, item 15). Before this page the VIP
@@ -197,14 +198,8 @@ export default async function VipServicesPage({
             {t("formTitle")}
           </h2>
           <p className="mt-3 leading-relaxed text-brand-navy/75">{t("formSubtitle")}</p>
-          <div className="mt-8">
-            <Link
-              href={`/${locale}/quote?type=vip`}
-              className="inline-flex min-h-[44px] items-center rounded-full bg-brand-navy px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-brand-navy/90"
-            >
-              {t("formLinkCta")}
-              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-            </Link>
+          <div className="mt-8 rounded-2xl bg-white p-6 shadow-card sm:p-8">
+            <VipAirportForm />
           </div>
         </div>
       </section>

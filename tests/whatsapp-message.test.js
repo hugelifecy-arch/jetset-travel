@@ -15,6 +15,8 @@ import {
 describe("whatsAppTopic", () => {
   const pages = {
     "/en/luxury-travel": "luxury",
+    "/en/vip-services": "vip",
+    "/ru/vip-services": "vip",
     "/ru/luxury-travel-cyprus": "luxury",
     "/en/cruises": "cruise",
     "/ru/private": "private",

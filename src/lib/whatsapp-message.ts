@@ -37,6 +37,7 @@ export type WhatsAppTopic =
 /** First path segment after the locale → topic (EN and RU slugs). */
 const PAGE_TOPICS: Record<string, WhatsAppTopic> = {
   "luxury-travel": "luxury",
+  "vip-services": "vip",
   "luxury-travel-cyprus": "luxury",
   cruises: "cruise",
   private: "private",
