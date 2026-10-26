@@ -6,7 +6,7 @@ dateModified: "2026-10-22"
 author: "Maro Kokkinou"
 slug: "vip-obsluzhivanie-aeroport-larnaka-pafos"
 translationSlug: "vip-airport-service-larnaca-paphos"
-image: "/images/blog/larnaca-vs-paphos-airport-2026.jpg"
+image: "/images/blog/vip-airport-lounge.jpg"
 category: "luxury"
 tags:
   - "люкс"

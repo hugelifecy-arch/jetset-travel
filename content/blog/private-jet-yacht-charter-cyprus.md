@@ -6,7 +6,7 @@ dateModified: "2026-10-22"
 author: "Maro Kokkinou"
 slug: "private-jet-yacht-charter-cyprus"
 translationSlug: "chastnyj-samolet-i-yakhta-s-kipra"
-image: "/images/blog/luxury-travel-cyprus-2026.jpg"
+image: "/images/blog/private-jet-charter-cyprus.jpg"
 category: "luxury"
 tags:
   - "luxury"

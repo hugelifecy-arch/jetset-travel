@@ -6,7 +6,7 @@ dateModified: "2026-10-22"
 author: "Maro Kokkinou"
 slug: "lyuks-kruizy-s-kipra-2027"
 translationSlug: "luxury-cruises-from-cyprus-2027"
-image: "/images/blog/cruises-limassol-2026.jpg"
+image: "/images/blog/luxury-cruises-2027.jpg"
 category: "cruises"
 tags:
   - "люкс"

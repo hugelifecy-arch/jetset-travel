@@ -6,7 +6,7 @@ dateModified: "2026-10-26"
 author: "Maro Kokkinou"
 slug: "best-time-visit-cyprus-monthly-guide"
 translationSlug: "luchshee-vremya-dlya-poseshcheniya-kipra"
-image: "/images/blog/best-time-cyprus.jpg"
+image: "/images/blog/best-time-cyprus-paphos-coast.jpg"
 category: "cyprus"
 tags:
   - cyprus
