@@ -38,7 +38,7 @@ Now the detail behind those rules.
 
 Both airports are operated by [Hermes Airports](https://www.hermesairports.com/), and 2025 was a record year for them: 13.75 million passengers combined, with 60 airlines flying 160 routes to 41 markets, according to Hermes. Traffic in 2026 has run slightly behind that record (January–August was about 3% lower, which Hermes puts down to geopolitical disruption in the region), with 54 airlines serving 165 destinations in 42 countries as of September 2026.
 
-| | Larnaca (LCA) | Paphos (PFO) |
+| Feature | Larnaca (LCA) | Paphos (PFO) |
 | --- | --- | --- |
 | 2025 passengers (Hermes Airports) | 9.91 million (+14%) | 3.84 million (+5%) |
 | Role | Main international gateway | Low-cost and leisure gateway |

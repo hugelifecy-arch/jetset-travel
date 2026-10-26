@@ -73,7 +73,7 @@ A driver meets you outside arrivals, or collects you from home for a departure. 
 
 ## Larnaca vs Paphos at a Glance
 
-| | Larnaca (LCA) | Paphos (PFO) |
+| Service | Larnaca (LCA) | Paphos (PFO) |
 |---|---|---|
 | Meet & assist | Yes, e.g. Swissport Executive Aviation; confirmed per flight | Yes, e.g. Swissport Executive Aviation; confirmed per flight |
 | Express Lane (security) | Yes; online or at the airport | Not offered, according to Hermes |
