@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { CANONICAL_ORIGIN } from "@/lib/seo";
 import JsonLd from "./JsonLd";
 import { PATH_DISPLAY_NAMES, getHomeName, slugToTitle } from "./breadcrumb-names";
+import { breadcrumbListSchema, isBlogPostSegments, type BreadcrumbCrumb } from "./breadcrumb-list";
 
 export default function BreadcrumbSchema() {
   const pathname = usePathname();
@@ -12,42 +13,19 @@ export default function BreadcrumbSchema() {
   const locale = parts[0] || "en";
   const segments = parts.slice(1);
 
-  const names = PATH_DISPLAY_NAMES[locale] ?? PATH_DISPLAY_NAMES.en;
-  const homeName = getHomeName(locale);
+  // Don't render breadcrumbs on the homepage (only one item).
+  if (segments.length === 0) return null;
+  // Blog posts output their own BreadcrumbList with the post title.
+  if (isBlogPostSegments(segments)) return null;
 
-  const items: Array<{
-    "@type": string;
-    position: number;
-    name: string;
-    item: string;
-  }> = [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: homeName,
-      item: `${CANONICAL_ORIGIN}/${locale}`,
-    },
-  ];
+  const names = PATH_DISPLAY_NAMES[locale] ?? PATH_DISPLAY_NAMES.en;
+  const crumbs: BreadcrumbCrumb[] = [{ name: getHomeName(locale), href: `/${locale}` }];
 
   let cumulativePath = `/${locale}`;
-  for (let i = 0; i < segments.length; i++) {
-    cumulativePath += `/${segments[i]}`;
-    items.push({
-      "@type": "ListItem",
-      position: i + 2,
-      name: names[segments[i]] ?? slugToTitle(segments[i]),
-      item: `${CANONICAL_ORIGIN}${cumulativePath}`,
-    });
+  for (const segment of segments) {
+    cumulativePath += `/${segment}`;
+    crumbs.push({ name: names[segment] ?? slugToTitle(segment), href: cumulativePath });
   }
 
-  // Don't render breadcrumbs if we're on the homepage (only one item)
-  if (items.length < 2) return null;
-
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items,
-  };
-
-  return <JsonLd data={schema} />;
+  return <JsonLd data={breadcrumbListSchema(crumbs, CANONICAL_ORIGIN)} />;
 }
