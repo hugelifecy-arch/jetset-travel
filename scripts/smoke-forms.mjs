@@ -124,6 +124,43 @@ try {
   assert.ok(!staffMail.html.includes("leak"), "attribution leaked a query string or unknown key");
   assert.ok(!visitorMail?.html.includes("How they found us"), "attribution must not reach the visitor");
   checks++;
+  // VIP airport quick request (type "vip") on /api/quote: staff notification
+  // lists every field, the visitor gets the localized quote acknowledgement.
+  writeFileSync(recordFile, "");
+  const vip = payload("quote", {
+    type: "vip", airport: "PFO", service: "both", date: "14 June 2027",
+    flightNumber: "A3 612", passengers: "2 adults", notes: "Wheelchair assistance", locale: "ru",
+  });
+  await check(server, "quote", vip, 200);
+  const [vipStaff, vipAck] = recorded();
+  assert.equal(vipStaff?.to, "office@example.invalid");
+  assert.equal(vipStaff.subject, "New VIP Quote Request — Smoke Example");
+  for (const expected of ["New VIP Airport Service Request", "Paphos (PFO)", "Arrival and departure",
+    "14 June 2027", "A3 612", "2 adults", "Wheelchair assistance", "visitor@example.invalid", "+35799000000"]) {
+    assert.ok(vipStaff.html.includes(expected), `VIP staff email missing ${expected}`);
+  }
+  assert.equal(vipAck?.to, "visitor@example.invalid");
+  assert.equal(vipAck.reply_to, "office@example.invalid");
+  assert.match(vipAck.subject, /получили/);
+  checks++;
+  for (const invalid of [{ airport: "ATH" }, { service: "lounge" }, { flightNumber: "A3-612" }, { passengers: "" }]) {
+    await check(server, "quote", { ...vip, ...invalid }, 400);
+  }
+  await check(server, "quote", { ...vip, name: "Delivery Failure" }, 503);
+  await check(server, "quote", { ...vip, _recaptchaToken: "smoke-private_enquiry" }, 400);
+  // Luxury wizard: trip types are optional (older payloads still accepted) and
+  // listed in the staff email when present.
+  writeFileSync(recordFile, "");
+  const luxury = payload("quote", {
+    type: "luxury", destinations: "Santorini", dates: "June 2027", groupSize: "2 adults", budget: "5k-10k",
+  });
+  await check(server, "quote", luxury, 200);
+  await check(server, "quote", { ...luxury, tripTypes: ["yacht", "villa"] }, 200);
+  const [plainLuxury, typedLuxury] = recorded().filter((mail) => mail.to === "office@example.invalid");
+  assert.ok(!plainLuxury?.html.includes("Trip Types"), "trip types row shown without a selection");
+  assert.ok(typedLuxury?.html.includes("Villa, Yacht charter"), "luxury staff email missing trip types");
+  checks++;
+  await check(server, "quote", { ...luxury, tripTypes: ["spaceflight"] }, 400);
   // Audit F-01/F-06: unknown paths return 404 (previously 500 for /ads.txt etc.)
   // with an HTML document. Localized rendering is checked in a browser (report §9).
   for (const path of ["/ads.txt", "/xmlrpc.php", "/apple-touch-icon-precomposed.png", "/en/no-such-page", "/ru/no-such-page"]) {
@@ -146,6 +183,9 @@ try {
   for (const [route, action, extras] of routes) {
     await check(unconfigured, route, payload(action, extras), 503);
   }
+  await check(unconfigured, "quote", payload("quote", {
+    type: "vip", airport: "LCA", service: "arrival", date: "14 June 2027", passengers: "1",
+  }), 503);
 } finally {
   await unconfigured.stop();
 }

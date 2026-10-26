@@ -29,6 +29,7 @@ export const CLIENT_NAMESPACES = [
   "mobileBar",
   "nav",
   "quotePage",
+  "vipForm",
 ] as const;
 
 type Messages = Record<string, unknown>;
