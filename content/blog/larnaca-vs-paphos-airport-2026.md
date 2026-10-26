@@ -5,6 +5,7 @@ date: "2026-07-06"
 dateModified: "2026-10-26"
 author: "Maro Kokkinou"
 slug: "larnaca-vs-paphos-airport-2026"
+translationSlug: "larnaka-ili-pafos-aeroport-2026"
 image: "/images/blog/larnaca-vs-paphos-airport-2026.jpg"
 category: "cyprus"
 tags:
