@@ -5,6 +5,7 @@ date: "2026-07-06"
 dateModified: "2026-10-23"
 author: "Nontari Kalaitsidis"
 slug: "travel-insurance-cyprus-visitors-guide"
+translationSlug: "strakhovka-dlya-poezdki-na-kipr-2026"
 image: "/images/blog/travel-insurance-cyprus-2026.jpg"
 category: "visas-guides"
 tags:

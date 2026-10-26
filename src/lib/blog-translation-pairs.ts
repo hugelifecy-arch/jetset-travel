@@ -22,6 +22,7 @@ export const BLOG_SLUG_PAIRS_EN_TO_RU: Record<string, string> = {
   "cruises-from-limassol-2026": "luchshie-kruizy-iz-limassola-2026",
   "cyprus-schengen-2026-business-travel": "kipr-v-shengene-2026-delovye-poezdki",
   "digital-nomads-cyprus-guide": "digital-nomady-kipr-gid",
+  "larnaca-vs-paphos-airport-2026": "larnaka-ili-pafos-aeroport-2026",
   "limassol-corporate-retreat-guide": "korporativnyj-retrit-v-limassole",
   "luxury-cruises-from-cyprus-2027": "lyuks-kruizy-s-kipra-2027",
   "luxury-mediterranean-destinations-2026": "premialnyj-otdykh-sredizemnomorye-2026",
@@ -30,6 +31,7 @@ export const BLOG_SLUG_PAIRS_EN_TO_RU: Record<string, string> = {
   "private-villa-holidays-mykonos-santorini-crete": "villy-mikonos-santorini-krit-s-kipra",
   "schengen-visa-guide-cyprus-residents": "shengenskaya-viza-dlya-zhitelej-kipra",
   "travel-agency-paphos-guide": "kak-vybrat-turagenstvo-pafos",
+  "travel-insurance-cyprus-visitors-guide": "strakhovka-dlya-poezdki-na-kipr-2026",
   "vip-airport-service-larnaca-paphos": "vip-obsluzhivanie-aeroport-larnaka-pafos",
 };
 
