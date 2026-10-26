@@ -30,6 +30,7 @@ export default function Footer() {
     { href: `/${locale}/cruises`, label: t("cruises") },
     { href: `/${locale}/visa-services`, label: t("visaAssistance") },
     { href: `/${locale}/luxury-travel`, label: t("luxuryTravel") },
+    { href: `/${locale}/vip-services`, label: t("vipServices") },
     { href: `/${locale}/private`, label: t("privateClients") },
     { href: `/${locale}/${paphosSlug}`, label: t("travelAgencyPaphos") },
   ];

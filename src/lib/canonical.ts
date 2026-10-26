@@ -120,6 +120,8 @@ export const LOCALE_ALTERNATES: Record<
     en: "/en/hotel-reservations",
     ru: "/ru/hotel-reservations",
   },
+  "/en/vip-services": { en: "/en/vip-services", ru: "/ru/vip-services" },
+  "/ru/vip-services": { en: "/en/vip-services", ru: "/ru/vip-services" },
   "/en/services": { en: "/en/services", ru: "/ru/services" },
   "/ru/services": { en: "/en/services", ru: "/ru/services" },
   "/en/cruises": { en: "/en/cruises", ru: "/ru/cruises" },
