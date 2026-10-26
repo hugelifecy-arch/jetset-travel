@@ -5,7 +5,7 @@ date: "2026-04-01"
 dateModified: "2026-10-26"
 author: "Maro Kokkinou"
 slug: "luchshee-vremya-dlya-poseshcheniya-kipra"
-image: "/images/blog/best-time-cyprus.jpg"
+image: "/images/blog/best-time-cyprus-paphos-coast.jpg"
 category: "cyprus"
 tags:
   - кипр
