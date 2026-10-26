@@ -30,7 +30,7 @@ export default function LazyCTALeadForm() {
   }, []);
 
   return (
-    <div ref={ref} className={near ? undefined : "min-h-[900px] sm:min-h-[670px]"}>
+    <div ref={ref} className={near ? undefined : "min-h-[1100px] sm:min-h-[810px]"}>
       {near && <CTALeadForm />}
     </div>
   );

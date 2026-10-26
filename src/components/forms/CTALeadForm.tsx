@@ -101,6 +101,9 @@ export default function CTALeadForm() {
   const inputClass =
     "bg-white border-white/20 text-brand-navy placeholder:text-brand-navy/70 focus:border-brand-gold focus:ring-brand-gold";
 
+  // Visible labels for every field; placeholders are only hints.
+  const labelClass = "block text-sm font-medium text-white/90";
+
   const selectClass =
     "w-full rounded-xl border border-white/20 bg-white px-4 py-3 text-sm text-brand-navy outline-none transition-colors focus:border-brand-gold focus:ring-1 focus:ring-brand-gold";
 
@@ -123,10 +126,13 @@ export default function CTALeadForm() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {/* Full Name */}
         <div className="space-y-1 text-left">
+          <label htmlFor="cta-name" className={labelClass}>
+            {t("fullName")}
+          </label>
           <Input
+            id="cta-name"
             {...register("name")}
-            placeholder={t("fullName")}
-            aria-label={t("fullName")}
+            autoComplete="name"
             className={inputClass}
             aria-invalid={Boolean(errors.name)}
             aria-describedby={errors.name ? "cta-name-error" : undefined}
@@ -138,11 +144,14 @@ export default function CTALeadForm() {
 
         {/* Email */}
         <div className="space-y-1 text-left">
+          <label htmlFor="cta-email" className={labelClass}>
+            {t("email")}
+          </label>
           <Input
+            id="cta-email"
             type="email"
             {...register("email")}
-            placeholder={t("email")}
-            aria-label={t("email")}
+            autoComplete="email"
             className={inputClass}
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? "cta-email-error" : undefined}
@@ -156,20 +165,27 @@ export default function CTALeadForm() {
 
         {/* Phone */}
         <div className="space-y-1 text-left">
+          <label htmlFor="cta-phone" className={labelClass}>
+            {t("phoneLabel")}
+          </label>
           <Input
+            id="cta-phone"
             type="tel"
             {...register("phone")}
+            autoComplete="tel"
             placeholder={t("phonePlaceholder")}
-            aria-label={t("phonePlaceholder")}
             className={inputClass}
           />
         </div>
 
         {/* Travel Type */}
         <div className="space-y-1 text-left">
+          <label htmlFor="cta-travel-type" className={labelClass}>
+            {t("travelType")}
+          </label>
           <select
+            id="cta-travel-type"
             {...register("travelType")}
-            aria-label={t("travelType")}
             className={cn(selectClass)}
           >
             <option value="">{t("selectTravelType")}</option>
@@ -185,9 +201,12 @@ export default function CTALeadForm() {
 
         {/* Travelers */}
         <div className="space-y-1 text-left">
+          <label htmlFor="cta-travelers" className={labelClass}>
+            {t("travelers")}
+          </label>
           <select
+            id="cta-travelers"
             {...register("travelers")}
-            aria-label={t("travelers")}
             className={cn(selectClass)}
           >
             <option value="">{t("selectTravelers")}</option>
@@ -201,9 +220,12 @@ export default function CTALeadForm() {
 
         {/* Urgency */}
         <div className="space-y-1 text-left">
+          <label htmlFor="cta-urgency" className={labelClass}>
+            {t("urgency")}
+          </label>
           <select
+            id="cta-urgency"
             {...register("urgency")}
-            aria-label={t("urgency")}
             className={cn(selectClass)}
           >
             <option value="">{t("selectUrgency")}</option>
@@ -216,9 +238,12 @@ export default function CTALeadForm() {
 
         {/* Budget Band */}
         <div className="space-y-1 text-left">
+          <label htmlFor="cta-budget" className={labelClass}>
+            {t("budget")}
+          </label>
           <select
+            id="cta-budget"
             {...register("budget")}
-            aria-label={t("budget")}
             className={cn(selectClass)}
           >
             <option value="">{t("selectBudget")}</option>
@@ -232,21 +257,27 @@ export default function CTALeadForm() {
 
         {/* Approximate Dates */}
         <div className="space-y-1 text-left sm:col-span-2">
+          <label htmlFor="cta-dates" className={labelClass}>
+            {t("datesLabel")}
+          </label>
           <Input
+            id="cta-dates"
             {...register("dates")}
             placeholder={t("datesPlaceholder")}
-            aria-label={t("datesPlaceholder")}
             className={inputClass}
           />
         </div>
 
         {/* Message */}
         <div className="space-y-1 text-left sm:col-span-2">
+          <label htmlFor="cta-message" className={labelClass}>
+            {t("messageLabel")}
+          </label>
           <Textarea
+            id="cta-message"
             {...register("message")}
             rows={3}
             placeholder={t("messagePlaceholder")}
-            aria-label={t("messagePlaceholder")}
             className={inputClass}
           />
         </div>

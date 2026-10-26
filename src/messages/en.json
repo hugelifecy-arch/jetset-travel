@@ -175,6 +175,7 @@
     "fullName": "Full Name",
     "email": "Email",
     "phonePlaceholder": "+357...",
+    "phoneLabel": "Phone",
     "travelType": "Travel Type",
     "selectTravelType": "Select travel type",
     "travelTypeOptions": {
@@ -185,7 +186,9 @@
       "other": "Other"
     },
     "datesPlaceholder": "e.g., March 15–22, 2026",
+    "datesLabel": "Approximate dates",
     "messagePlaceholder": "Tell us about your trip needs...",
+    "messageLabel": "Message",
     "travelers": "Number of Travelers",
     "selectTravelers": "Travelers",
     "travelersOptions": {

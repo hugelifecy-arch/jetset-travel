@@ -175,6 +175,7 @@
     "fullName": "Полное имя",
     "email": "Электронная почта",
     "phonePlaceholder": "+357...",
+    "phoneLabel": "Телефон",
     "travelType": "Тип поездки",
     "selectTravelType": "Выберите тип поездки",
     "travelTypeOptions": {
@@ -185,7 +186,9 @@
       "other": "Другое"
     },
     "datesPlaceholder": "напр., 15–22 марта 2026",
+    "datesLabel": "Примерные даты",
     "messagePlaceholder": "Расскажите о вашей поездке",
+    "messageLabel": "Сообщение",
     "travelers": "Количество путешественников",
     "selectTravelers": "Путешественники",
     "travelersOptions": {
