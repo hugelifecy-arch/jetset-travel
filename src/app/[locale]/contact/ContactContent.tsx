@@ -420,17 +420,17 @@ export default function ContactContent() {
                     </p>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 text-sm text-brand-navy/70">
                       <span className="flex items-center gap-1.5">
-                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">1</span>
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[11px] font-bold text-brand-gold-ink">1</span>
                         {t("howStep1")}
                       </span>
                       <span className="hidden sm:inline text-brand-navy/70">&rarr;</span>
                       <span className="flex items-center gap-1.5">
-                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">2</span>
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[11px] font-bold text-brand-gold-ink">2</span>
                         {t("howStep2")}
                       </span>
                       <span className="hidden sm:inline text-brand-navy/70">&rarr;</span>
                       <span className="flex items-center gap-1.5">
-                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[10px] font-bold text-brand-gold">3</span>
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-gold/15 text-[11px] font-bold text-brand-gold-ink">3</span>
                         {t("howStep3")}
                       </span>
                     </div>

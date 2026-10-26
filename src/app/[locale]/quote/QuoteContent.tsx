@@ -134,7 +134,7 @@ export function QuoteFlow({ initialBranch }: { initialBranch: QuoteBranch }) {
               </button>
 
               <div className="mb-8">
-                <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-brand-gold mb-3">
+                <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-brand-gold-ink mb-3">
                   {branch === "corporate" ? (
                     <Building2 className="h-4 w-4" />
                   ) : (
