@@ -5,6 +5,7 @@ import { Phone } from "lucide-react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useCookieBannerOffset } from "@/hooks/useCookieBannerOffset";
+import { useMobileMenuOpen } from "@/hooks/useMobileMenuOpen";
 import { trackCTAClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
 
 export default function MobileActionBar() {
@@ -12,6 +13,7 @@ export default function MobileActionBar() {
   const locale = useLocale();
   const t = useTranslations("mobileBar");
   const cookieOffset = useCookieBannerOffset();
+  const menuOpen = useMobileMenuOpen();
 
   useEffect(() => {
     const footer = document.querySelector("footer");
@@ -26,7 +28,8 @@ export default function MobileActionBar() {
     return () => observer.disconnect();
   }, []);
 
-  if (footerVisible) return null;
+  // Hidden while the mobile menu is open so it cannot cover menu items.
+  if (footerVisible || menuOpen) return null;
 
   const whatsappText =
     locale === "ru"
