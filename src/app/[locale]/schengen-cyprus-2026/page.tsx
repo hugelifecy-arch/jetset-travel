@@ -8,7 +8,7 @@ import CTABanner from "@/components/sections/CTABanner";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 
 /**
- * Cyprus + Schengen topic hub (Phase 7 — Step 56). Status facts re-verified 22 Oct 2026.
+ * Cyprus + Schengen topic hub (Phase 7 — Step 56). Status facts re-verified 26 Oct 2026.
  *
  * Pillar page for the Schengen-accession cluster surfaced by GSC: the
  * +143% impressions surge on /en/blog/schengen-visa-guide-cyprus-residents,
@@ -109,7 +109,7 @@ export default async function SchengenCyprus2026Hub({
           href: `/${locale}/blog/schengen-visa-guide-cyprus-residents`,
           title: "Complete Schengen Visa Guide for Cyprus Residents",
           description:
-            "Documents, processing timelines, consulate requirements and how IATA agents streamline approval for non-EU residents.",
+            "Documents, processing times, where to apply in Nicosia and common refusal reasons for non-EU residents.",
           badge: "Visa",
         },
       ];
@@ -144,7 +144,7 @@ export default async function SchengenCyprus2026Hub({
         },
       ];
 
-  /* Verified 22 Oct 2026 against the sources listed under "Short answer".
+  /* Verified 26 Oct 2026 against the sources listed under "Short answer".
      Update STATUS_DATE and these entries together when the status changes. */
   const milestones = isRu
     ? [
@@ -161,8 +161,8 @@ export default async function SchengenCyprus2026Hub({
           what: "Заместитель министра по вопросам миграции: Кипр рассчитывает полностью вступить в Шенген в течение 2027 года; оставшиеся шесть мер планируется завершить к началу ноября 2026.",
         },
         {
-          when: "IV квартал 2026 (ожидается)",
-          what: "Запуск ETIAS — электронного разрешения на въезд для безвизовых путешественников в 30 европейских стран, включая Кипр (20 евро). Точную дату ЕС объявит заранее.",
+          when: "Дата не назначена",
+          what: "Запуск ETIAS — электронного разрешения на въезд для безвизовых путешественников в 30 европейских стран, включая Кипр (20 евро). В июле 2026 года ЕС перестал называть срок «IV квартал 2026»; по данным прессы, запуск ожидается в 2027 году. Точную дату ЕС объявит заранее.",
         },
         {
           when: "Далее",
@@ -187,8 +187,8 @@ export default async function SchengenCyprus2026Hub({
           what: "Deputy Migration Minister: Cyprus expects to join Schengen in full during 2027, after completing six remaining actions by early November 2026.",
         },
         {
-          when: "Q4 2026 (expected)",
-          what: "ETIAS travel authorisation starts for visa-exempt visitors to 30 European countries, Cyprus included (EUR 20). The EU will announce the exact date in advance.",
+          when: "No date set",
+          what: "ETIAS travel authorisation for visa-exempt visitors to 30 European countries, Cyprus included (EUR 20). In July 2026 the EU stopped giving a Q4 2026 start; press reports expect 2027. The EU will announce the exact date in advance.",
         },
         {
           when: "Next",
@@ -200,7 +200,7 @@ export default async function SchengenCyprus2026Hub({
         },
       ];
 
-  const STATUS_DATE = isRu ? "22 октября 2026" : "22 October 2026";
+  const STATUS_DATE = isRu ? "26 октября 2026" : "26 October 2026";
   const sources = [
     {
       href: "https://cyprus-mail.com/2026/10/10/cyprus-to-be-fully-integrated-into-schengen-area-by-next-year",
@@ -213,6 +213,10 @@ export default async function SchengenCyprus2026Hub({
     {
       href: "https://travel-europe.europa.eu/etias/about-etias/who-should-apply",
       label: isRu ? "ЕС: кому нужен ETIAS" : "EU: who needs ETIAS",
+    },
+    {
+      href: "https://www.afar.com/magazine/europe-delays-etias-travel-authorization-until-2027",
+      label: isRu ? "AFAR, 13.07.2026 — запуск ETIAS перенесён (по данным FT)" : "AFAR, 13 Jul 2026 — ETIAS start delayed (FT report)",
     },
     {
       href: "https://cyprusinuk.com/visa-information/",
@@ -228,7 +232,7 @@ export default async function SchengenCyprus2026Hub({
       ? "Кипр и Шенген — статус и сроки вступления"
       : "Cyprus and Schengen — status and timeline",
     url: hubUrl,
-    dateModified: "2026-10-22",
+    dateModified: "2026-10-26",
     inLanguage: isRu ? "ru-RU" : "en-GB",
     isPartOf: { "@id": `${CANONICAL_ORIGIN}#website` },
     about: [
@@ -288,7 +292,7 @@ export default async function SchengenCyprus2026Hub({
                     "С действующей двукратной или многократной шенгенской визой можно въехать на Кипр без кипрской визы — до 90 дней в любые 180 дней (кроме граждан Турции и Азербайджана).",
                     "Система EES на Кипре не используется: паспорта штампуются вручную.",
                     "Кипрский вид на жительство не заменяет шенгенскую визу: если вашему гражданству нужна виза в Шенген, она нужна и сейчас.",
-                    "ETIAS (ожидается в IV квартале 2026, 20 евро) будет распространяться и на Кипр. Владельцам кипрского ВНЖ из безвизовых стран (включая граждан Великобритании, живущих на Кипре по Соглашению о выходе) ETIAS понадобится для поездок в другие страны, но не для возвращения на Кипр.",
+                    "ETIAS (дата запуска пока не назначена, 20 евро) будет распространяться и на Кипр. Владельцам кипрского ВНЖ из безвизовых стран (включая граждан Великобритании, живущих на Кипре по Соглашению о выходе) ETIAS понадобится для поездок в другие страны, но не для возвращения на Кипр.",
                   ]
                 : [
                     "Flights between Cyprus and Schengen countries still have passport checks.",
@@ -296,7 +300,7 @@ export default async function SchengenCyprus2026Hub({
                     "With a valid double- or multiple-entry Schengen visa you can enter Cyprus without a Cyprus visa, for up to 90 days in any 180 (not for citizens of Turkey and Azerbaijan).",
                     "The EES is not used in Cyprus: passports are stamped by hand.",
                     "A Cyprus residence permit does not replace a Schengen visa: if your nationality needs one for Schengen, you still need it today.",
-                    "ETIAS (expected in Q4 2026, EUR 20) will also cover Cyprus. Visa-exempt holders of a Cyprus residence permit, UK nationals living here under the Withdrawal Agreement included, will need ETIAS for trips to other European countries, but not to return to Cyprus.",
+                    "ETIAS (start date not yet set, EUR 20) will also cover Cyprus. Visa-exempt holders of a Cyprus residence permit, UK nationals living here under the Withdrawal Agreement included, will need ETIAS for trips to other European countries, but not to return to Cyprus.",
                   ]
               ).map((item) => (
                 <li key={item}>{item}</li>
