@@ -3,14 +3,18 @@
 import { useState, useEffect } from "react";
 import { Phone } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useCookieBannerOffset } from "@/hooks/useCookieBannerOffset";
 import { useMobileMenuOpen } from "@/hooks/useMobileMenuOpen";
-import { trackCTAClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
+import { trackCTAClick, trackTelegramClick, trackWhatsAppClick } from "@/lib/analytics/gtag";
+import { whatsAppHref } from "@/lib/whatsapp-message";
+import { TELEGRAM_URL } from "@/lib/telegram";
 
 export default function MobileActionBar() {
   const [footerVisible, setFooterVisible] = useState(false);
   const locale = useLocale();
+  const pathname = usePathname();
   const t = useTranslations("mobileBar");
   const cookieOffset = useCookieBannerOffset();
   const menuOpen = useMobileMenuOpen();
@@ -30,11 +34,6 @@ export default function MobileActionBar() {
 
   // Hidden while the mobile menu is open so it cannot cover menu items.
   if (footerVisible || menuOpen) return null;
-
-  const whatsappText =
-    locale === "ru"
-      ? encodeURIComponent("Здравствуйте JetSet, мне нужна помощь с...")
-      : encodeURIComponent("Hi JetSet, I'd like help with...");
 
   return (
     <div
@@ -60,7 +59,7 @@ export default function MobileActionBar() {
         <div className="w-px bg-white/10" />
 
         <a
-          href={`https://wa.me/35799478073?text=${whatsappText}`}
+          href={whatsAppHref(pathname, locale)}
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => trackWhatsAppClick("mobile_action_bar", "generic")}
@@ -75,6 +74,29 @@ export default function MobileActionBar() {
           />
           <span className="text-sm font-medium">{t("whatsapp")}</span>
         </a>
+
+        {/* Telegram for Russian-speaking visitors (/ru pages only). */}
+        {locale === "ru" && (
+          <>
+            <div className="w-px bg-white/10" />
+            <a
+              href={TELEGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackTelegramClick("mobile_action_bar")}
+              className="flex flex-1 items-center justify-center gap-2 py-3 text-white active:bg-white/10 transition-colors min-h-[44px]"
+            >
+              <Image
+                src="/images/icons/telegram.svg"
+                alt=""
+                width={20}
+                height={20}
+                className="brightness-0 invert h-5 w-5"
+              />
+              <span className="text-sm font-medium">{t("telegram")}</span>
+            </a>
+          </>
+        )}
       </div>
     </div>
   );

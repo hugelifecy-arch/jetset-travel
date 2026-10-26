@@ -1,4 +1,3 @@
-import { z } from "zod";
 import { readJsonObject } from "@/lib/json-body";
 import { sendResendEmail } from "@/lib/email/resend";
 import { FROM_EMAIL, TO_EMAIL } from "@/lib/email/config";
@@ -7,46 +6,16 @@ import { emailRow, notificationEmail, emailLocale, visitorAutoReply } from "@/li
 import { runAntiSpamChecks } from "@/lib/anti-spam";
 import { getClientIp } from "@/lib/client-ip";
 import { ok, fail, rateLimitGuard, stripMetaFields } from "@/lib/api-response";
+import {
+  QuoteSchema,
+  formatTripTypes,
+  quoteTypeLabel,
+  VIP_AIRPORT_LABELS,
+  VIP_SERVICE_LABELS,
+  type QuoteData,
+} from "@/lib/quote-schemas";
 
 export const runtime = "nodejs";
-
-/* ------------------------------------------------------------------ */
-/*  Schemas — one per form that POSTs to /api/quote                    */
-/* ------------------------------------------------------------------ */
-
-const CorporateSchema = z.object({
-  type: z.literal("corporate"),
-  companyName: z.string().min(2).max(120),
-  email: z.string().email().max(120),
-  phone: z.string().min(5).max(30),
-  travellers: z.string().min(1).max(50),
-  travelDates: z.string().min(1).max(200),
-  destinations: z.string().min(2).max(200),
-  invoiceRequired: z.boolean(),
-  notes: z.string().max(2000).optional().or(z.literal("")),
-});
-
-const LuxurySchema = z.object({
-  type: z.literal("luxury"),
-  name: z.string().min(2).max(80),
-  email: z.string().email().max(120),
-  phone: z.string().min(5).max(30),
-  destinations: z.string().min(2).max(200),
-  dates: z.string().min(1).max(80),
-  groupSize: z.string().min(1).max(50),
-  budget: z.string().min(1).max(50),
-  specialRequirements: z.string().max(2000).optional().or(z.literal("")),
-});
-
-const LeadSchema = z.object({
-  name: z.string().min(2).max(80),
-  phone: z.string().min(5).max(30),
-  route: z.string().min(3).max(200),
-});
-
-const QuoteSchema = z.union([CorporateSchema, LuxurySchema, LeadSchema]);
-
-type QuoteData = z.infer<typeof QuoteSchema>;
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -73,11 +42,24 @@ function buildNotification(data: QuoteData, attribution: unknown): string {
       emailRow("Name", data.name) +
       emailRow("Email", data.email) +
       emailRow("Phone", data.phone) +
+      (data.tripTypes?.length ? emailRow("Trip Types", formatTripTypes(data.tripTypes)) : "") +
       emailRow("Destinations", data.destinations) +
       emailRow("Dates", data.dates) +
       emailRow("Group Size", data.groupSize) +
       emailRow("Budget", data.budget) +
       (data.specialRequirements ? emailRow("Special Requirements", data.specialRequirements) : "");
+  } else if ("type" in data && data.type === "vip") {
+    heading = "New VIP Airport Service Request";
+    rows =
+      emailRow("Name", data.name) +
+      emailRow("Email", data.email) +
+      emailRow("Phone", data.phone) +
+      emailRow("Airport", VIP_AIRPORT_LABELS[data.airport]) +
+      emailRow("Service", VIP_SERVICE_LABELS[data.service]) +
+      emailRow("Date", data.date) +
+      (data.flightNumber ? emailRow("Flight Number", data.flightNumber) : "") +
+      emailRow("Passengers", data.passengers) +
+      (data.notes ? emailRow("Notes", data.notes) : "");
   } else {
     heading = "New Quick Quote Request";
     rows =
@@ -133,8 +115,7 @@ export async function POST(req: Request) {
   const data = parsed.data;
   const contactName = getContactName(data);
   const email = getEmail(data);
-  const quoteType =
-    "type" in data ? (data.type === "corporate" ? "Corporate" : "Luxury") : "Quick";
+  const quoteType = quoteTypeLabel(data);
 
   const apiKey = process.env.RESEND_API_KEY?.trim();
 

@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { Resolver } from "react-hook-form";
 import { z } from "zod";
+import { TRIP_TYPES } from "@/lib/quote-constants";
 
 /* Schemas for the two quote forms. Imported at runtime only through
    createLazyResolver (dynamic import), so zod is not part of the /quote
@@ -8,6 +9,7 @@ import { z } from "zod";
    the data types with `import type` (erased at build time). */
 
 type Messages = { required: string; invalidEmail: string };
+type LuxuryMessages = Messages & { tripTypes: string };
 
 /* Validation messages come from the `forms` namespace so they localize;
    errors render directly under their field, so the generic strings stay
@@ -26,16 +28,19 @@ const buildCorporateSchema = (m: Messages) =>
 
 export type CorporateFormData = z.infer<ReturnType<typeof buildCorporateSchema>>;
 
-const buildLuxurySchema = (m: Messages) =>
+/* Luxury trip request (3-step wizard). tripTypes is step 1; the wizard
+   validates one step's fields at a time with trigger(). */
+const buildLuxurySchema = (m: LuxuryMessages) =>
   z.object({
-    name: z.string().min(2, m.required),
-    email: z.string().email(m.invalidEmail),
-    phone: z.string().min(5, m.required),
-    destinations: z.string().min(2, m.required),
-    dates: z.string().min(1, m.required),
-    groupSize: z.string().min(1, m.required),
+    tripTypes: z.array(z.enum(TRIP_TYPES)).min(1, m.tripTypes).max(TRIP_TYPES.length),
+    destinations: z.string().trim().min(2, m.required).max(200),
+    dates: z.string().trim().min(1, m.required).max(80),
+    groupSize: z.string().trim().min(1, m.required).max(50),
     budget: z.string().min(1, m.required),
-    specialRequirements: z.string().optional(),
+    name: z.string().trim().min(2, m.required).max(80),
+    email: z.string().trim().email(m.invalidEmail).max(120),
+    phone: z.string().trim().min(5, m.required).max(30),
+    specialRequirements: z.string().trim().max(2000).optional(),
   });
 
 export type LuxuryFormData = z.infer<ReturnType<typeof buildLuxurySchema>>;
@@ -43,5 +48,5 @@ export type LuxuryFormData = z.infer<ReturnType<typeof buildLuxurySchema>>;
 export const corporateResolver = (m: Messages): Resolver<CorporateFormData> =>
   zodResolver(buildCorporateSchema(m));
 
-export const luxuryResolver = (m: Messages): Resolver<LuxuryFormData> =>
+export const luxuryResolver = (m: LuxuryMessages): Resolver<LuxuryFormData> =>
   zodResolver(buildLuxurySchema(m));
