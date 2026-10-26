@@ -22,6 +22,7 @@ import {
 import FormTrustElements from "@/components/forms/FormTrustElements";
 import { enquiryAttribution } from "@/lib/attribution";
 import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
+import OfficeMap, { MAP_LINK_URL } from "./OfficeMap";
 
 function createContactSchema(t: (key: string) => string) {
   return z.object({
@@ -481,18 +482,8 @@ export default function ContactContent() {
               {t("findUsSubtitle")}
             </p>
           </div>
-          <div className="overflow-hidden rounded-2xl border border-brand-navy/10 shadow-sm">
-            <iframe
-              title="JetSet Travel Paphos Office Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d550.9363089741603!2d32.41889941969174!3d34.76763619960539!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14e706ec2d62587f%3A0x4161901d9b64e1b4!2sJetSet%20Travel%20Agency%20-%20Paphos!5e1!3m2!1sen!2s!4v1774692196854!5m2!1sen!2s"
-              width="100%"
-              height="400"
-              style={{ border: 0, borderRadius: "12px" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+          {/* Click-to-load: no request to Google before the visitor asks. */}
+          <OfficeMap />
 
           {/* Contact details below map */}
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
@@ -534,7 +525,7 @@ export default function ContactContent() {
 
           <div className="mt-8 text-center">
             <a
-              href="https://maps.app.goo.gl/nA8De9MqgLmUphZ49"
+              href={MAP_LINK_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3 text-sm font-semibold text-white hover:bg-brand-navy/90 transition-colors"
