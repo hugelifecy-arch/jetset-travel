@@ -49,6 +49,9 @@ export function trackCTAClick(params: {
   cta_type: CTAType;
   cta_label?: string;
   destination?: string;
+  /** Blog topic CTA: topic id (e.g. "vip-airport") and placement ("inline" | "end"). Never personal data. */
+  topic?: string;
+  placement?: string;
 }): void {
   pushEvent("cta_click", params);
 }
