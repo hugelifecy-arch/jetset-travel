@@ -63,6 +63,16 @@ export function trackWhatsAppClick(location: CTALocation, intent?: string): void
   });
 }
 
+export type TelegramPlacement = "mobile_action_bar" | "floating_button";
+
+/**
+ * Telegram chat link click (shown on /ru pages). Intent only, like the
+ * WhatsApp event: carries where the link sat, never the handle or any text.
+ */
+export function trackTelegramClick(placement: TelegramPlacement): void {
+  pushEvent("telegram_click", { placement });
+}
+
 export type FormName =
   | "hero_lead_form"
   | "cta_lead_form"
@@ -71,6 +81,7 @@ export type FormName =
   | "cruise_enquiry"
   | "corporate_quote"
   | "luxury_quote"
+  | "vip_airport_request"
   | "private_enquiry";
 
 /**

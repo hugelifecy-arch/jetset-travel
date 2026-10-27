@@ -14,6 +14,9 @@ import WebSiteSchema from "@/components/seo/WebSiteSchema";
 const ServicesGrid = dynamic(
   () => import("@/components/sections/ServicesGrid"),
 );
+const VipLuxurySection = dynamic(
+  () => import("@/components/sections/VipLuxurySection"),
+);
 const TrustSection = dynamic(
   () => import("@/components/sections/TrustSection"),
 );
@@ -82,6 +85,7 @@ export default async function HomePage({
       <TrustCredentialsBar />
       <AboutBlurb />
       <ServicesGrid />
+      <VipLuxurySection />
       <TrustSection />
       <ComparisonSection />
       <GoogleReviews />

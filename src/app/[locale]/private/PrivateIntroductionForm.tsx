@@ -1,14 +1,13 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { createPrivateEnquirySchema } from "@/lib/private-enquiry-schema";
 import { getRecaptchaToken } from "@/lib/recaptcha";
 import { trackFormError, trackFormSuccess } from "@/lib/analytics/gtag";
 import { enquiryAttribution } from "@/lib/attribution";
 import { useEnquiryStart } from "@/lib/analytics/useEnquiryStart";
+import { createLazyResolver } from "@/components/forms/lazyResolver";
+import type { PrivateFormData } from "./validation";
 
 /*
  * Deliberately stripped-down enquiry form for the Private & Family Office
@@ -40,8 +39,6 @@ export interface PrivateFormLabels {
   invalidPhone: string;
 }
 
-type PrivateFormData = z.infer<ReturnType<typeof createPrivateEnquirySchema>>;
-
 const inputClass =
   "w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors focus:border-brand-gold focus:ring-1 focus:ring-brand-gold";
 
@@ -56,13 +53,22 @@ export default function PrivateIntroductionForm({
   const formLoadedAt = useRef(Date.now());
   const honeypotRef = useRef<HTMLInputElement>(null);
 
+  // zod (in ./validation) is fetched on first focus/submit, not with the page.
+  const validation = useMemo(
+    () =>
+      createLazyResolver<PrivateFormData>(() =>
+        import("./validation").then((m) => m.privateEnquiryResolver(labels)),
+      ),
+    [labels],
+  );
+
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
   } = useForm<PrivateFormData>({
-    resolver: zodResolver(createPrivateEnquirySchema(labels)),
+    resolver: validation.resolver,
   });
 
   const method = useWatch({ control, name: "contactMethod" });
@@ -111,7 +117,15 @@ export default function PrivateIntroductionForm({
   ] as const;
 
   return (
-    <form onFocus={markEnquiryStart} onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
+    <form
+      onFocus={() => {
+        markEnquiryStart();
+        validation.preload();
+      }}
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-6"
+      noValidate
+    >
       {/* Honeypot — hidden from real users */}
       <div className="absolute -left-[9999px]" aria-hidden="true">
         <input

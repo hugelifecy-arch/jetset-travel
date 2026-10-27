@@ -32,6 +32,7 @@ const pages: StaticPage[] = [
   { path: "", priority: 1.0, changeFrequency: "weekly" },
   { path: "/corporate-travel", priority: 0.8, changeFrequency: "monthly" },
   { path: "/luxury-travel", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/vip-services", priority: 0.8, changeFrequency: "monthly", lastModified: "2026-10-26" },
   { path: "/visa-services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/hotel-reservations", priority: 0.8, changeFrequency: "monthly" },

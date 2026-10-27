@@ -1,23 +1,40 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo, type FocusEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Menu, X, Globe, Phone, ChevronDown } from "lucide-react";
 import { resolveAlternateUrls } from "@/lib/i18n-route-resolver";
+import { useCookieBannerOffset } from "@/hooks/useCookieBannerOffset";
+import { MOBILE_MENU_EVENT } from "@/hooks/useMobileMenuOpen";
 
-/** Service sub-links for the "Services" dropdown */
+/** Service sub-links for the "Services" dropdown. Flights has a different
+    slug per locale (see LOCALE_ALTERNATES in lib/canonical.ts). FAQ stays
+    last: it is help, not a service. */
 const serviceLinks = [
   { href: "/corporate-travel", key: "corporate" },
   { href: "/luxury-travel", key: "luxury" },
+  { href: "/vip-services", key: "vip" },
+  { href: { en: "/flight-tickets-cyprus", ru: "/aviabilety-kipr" }, key: "flights" },
   { href: "/cruises", key: "cruises" },
   { href: "/visa-services", key: "visas" },
   { href: "/hotel-reservations", key: "hotels" },
-  { href: "/faq", key: "faq" },
   { href: "/services", key: "allServices" },
+  { href: "/faq", key: "faq" },
 ] as const;
+
+function serviceHref(
+  href: (typeof serviceLinks)[number]["href"],
+  locale: string,
+): string {
+  const path = typeof href === "string" ? href : locale === "ru" ? href.ru : href.en;
+  return `/${locale}${path}`;
+}
+
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 /** Top-level nav items (excluding Services dropdown and FAQ) */
 const topLevelLinks = [
@@ -36,6 +53,12 @@ export default function HeaderClient() {
   const pathname = usePathname();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dropdownTimeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
+  const servicesButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  // Height of the cookie banner while it is showing (0 otherwise): the open
+  // mobile menu ends above it so no item can sit hidden behind it.
+  const cookieBannerOffset = useCookieBannerOffset();
 
   // The language-switcher URLs are resolved from the canonical alternates
   // map (LOCALE_ALTERNATES + the checked-in blog slug-pair map), so they're
@@ -80,6 +103,66 @@ export default function HeaderClient() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [mobileOpen]);
 
+  // Escape closes the open menu and returns focus to the button that opened
+  // it. Tab is kept inside the open mobile menu (its toggle included).
+  useEffect(() => {
+    if (!mobileOpen && !servicesOpen) return;
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        if (mobileOpen) {
+          setMobileOpen(false);
+          setServicesOpen(false);
+          mobileToggleRef.current?.focus();
+        } else {
+          const focusWasInside = dropdownRef.current?.contains(document.activeElement);
+          setServicesOpen(false);
+          if (focusWasInside) servicesButtonRef.current?.focus();
+        }
+        return;
+      }
+
+      if (e.key !== "Tab" || !mobileOpen) return;
+      const toggle = mobileToggleRef.current;
+      const panel = mobileMenuRef.current;
+      if (!toggle || !panel) return;
+      const focusables = [
+        toggle,
+        ...panel.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR),
+      ];
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+      if (!active || !focusables.includes(active)) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileOpen, servicesOpen]);
+
+  // Tell the mobile Call/WhatsApp bar to step aside while the menu is open.
+  useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent(MOBILE_MENU_EVENT, { detail: { open: mobileOpen } }),
+    );
+  }, [mobileOpen]);
+
+  // Desktop dropdown: close when keyboard focus moves out of it.
+  const handleDropdownBlur = (e: FocusEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+      setServicesOpen(false);
+    }
+  };
+
   // Scroll detection: transparent on hero → solid background on scroll
   useEffect(() => {
     function handleScroll() {
@@ -91,9 +174,21 @@ export default function HeaderClient() {
   }, []);
 
   // Desktop hover handlers with a small delay to prevent flicker
+  // When a mouse user hovers the button and then clicks it, the hover has
+  // already opened the menu; a plain toggle would close it again. A click
+  // that follows a hover-open within a moment keeps the menu open.
+  const hoverOpenedAtRef = useRef(0);
   const handleMouseEnter = () => {
     if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+    hoverOpenedAtRef.current = Date.now();
     setServicesOpen(true);
+  };
+  const handleServicesClick = () => {
+    if (Date.now() - hoverOpenedAtRef.current < 800) {
+      setServicesOpen(true);
+      return;
+    }
+    setServicesOpen((prev) => !prev);
   };
   const handleMouseLeave = () => {
     dropdownTimeoutRef.current = setTimeout(() => setServicesOpen(false), 150);
@@ -131,10 +226,12 @@ export default function HeaderClient() {
               className="relative"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
+              onBlur={handleDropdownBlur}
             >
               <button
+                ref={servicesButtonRef}
                 type="button"
-                onClick={() => setServicesOpen((prev) => !prev)}
+                onClick={handleServicesClick}
                 className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-white/80 hover:text-brand-gold transition-colors"
                 aria-expanded={servicesOpen}
                 aria-haspopup="true"
@@ -149,8 +246,8 @@ export default function HeaderClient() {
                 <div className="absolute left-0 top-full mt-1 w-56 rounded-lg bg-brand-navy border border-white/10 shadow-xl py-2">
                   {serviceLinks.map((link) => (
                     <Link
-                      key={link.href}
-                      href={`/${locale}${link.href}`}
+                      key={link.key}
+                      href={serviceHref(link.href, locale)}
                       className="block px-4 py-2.5 text-sm text-white/80 hover:text-brand-gold hover:bg-white/5 transition-colors"
                     >
                       {t(link.key)}
@@ -171,11 +268,12 @@ export default function HeaderClient() {
               </Link>
             ))}
 
-            {/* Private Clients — deliberately muted; last position before
-                the CTA (PRIVATE_OFFICE_PAGE_SPEC §1.2) */}
+            {/* Private Clients — last position before the CTA, same nav
+                style with no highlight (PRIVATE_OFFICE_PAGE_SPEC §1.2). The
+                former white/60 made it look disabled. */}
             <Link
               href={`/${locale}/private`}
-              className="px-3 py-2 text-sm font-medium text-white/60 hover:text-brand-gold transition-colors"
+              className="px-3 py-2 text-sm font-medium text-white/80 hover:text-brand-gold transition-colors"
             >
               {t("privateClients")}
             </Link>
@@ -240,6 +338,8 @@ export default function HeaderClient() {
           {/* Mobile: hamburger only (language switcher moved inside menu) */}
           <div className="md:hidden flex items-center gap-2">
             <button
+              ref={mobileToggleRef}
+              type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
               className="p-2 text-white min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Toggle menu"
@@ -257,9 +357,17 @@ export default function HeaderClient() {
       </div>
 
       {/* Mobile slide-down nav */}
+      {/* Scrolls on its own and ends above the cookie banner (the Call /
+          WhatsApp bar is hidden while it is open), so every item can be
+          reached and no focused item is covered. */}
       {mobileOpen && (
-        <div id="mobile-navigation" className="md:hidden border-t border-white/10 bg-brand-navy">
-          <nav className="px-4 py-4 pb-16 sm:pb-24 space-y-1">
+        <div
+          ref={mobileMenuRef}
+          id="mobile-navigation"
+          className="md:hidden overflow-y-auto overscroll-contain border-t border-white/10 bg-brand-navy"
+          style={{ maxHeight: `calc(100dvh - 4rem - 2px - ${cookieBannerOffset}px)` }}
+        >
+          <nav className="px-4 py-4 space-y-1">
             {/* Home link */}
             <Link
               href={`/${locale}`}
@@ -286,8 +394,8 @@ export default function HeaderClient() {
                 <div className="ml-4 border-l border-white/10 pl-3 space-y-0.5">
                   {serviceLinks.map((link) => (
                     <Link
-                      key={link.href}
-                      href={`/${locale}${link.href}`}
+                      key={link.key}
+                      href={serviceHref(link.href, locale)}
                       className="flex items-center px-3 py-3 text-sm font-medium text-white/60 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px]"
                       onClick={() => setMobileOpen(false)}
                     >
@@ -310,11 +418,11 @@ export default function HeaderClient() {
               </Link>
             ))}
 
-            {/* Private Clients — deliberately muted; last position before
-                the CTA (PRIVATE_OFFICE_PAGE_SPEC §1.2) */}
+            {/* Private Clients — last position before the CTA, same nav
+                style with no highlight (PRIVATE_OFFICE_PAGE_SPEC §1.2) */}
             <Link
               href={`/${locale}/private`}
-              className="flex items-center px-3 py-3 text-base font-medium text-white/60 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px]"
+              className="flex items-center px-3 py-3 text-base font-medium text-white/80 hover:text-brand-gold hover:bg-white/5 rounded-lg transition-colors min-h-[44px]"
               onClick={() => setMobileOpen(false)}
             >
               {t("privateClients")}
