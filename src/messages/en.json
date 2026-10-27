@@ -34,9 +34,11 @@
     "badgeIATA": "IATA Accredited",
     "badgeWhatsApp": "24/7 WhatsApp",
     "badgeLicense": "Tourism License 7775",
-    "heroImageAlt": "Yachts in the Blue Lagoon on the Akamas peninsula, Paphos, Cyprus",
+    "heroImageAlt": "Aerial view of the Mediterranean coastline in Cyprus with turquoise waters",
     "iataAlt": "IATA Accredited Travel Agent",
-    "tourismAlt": "Licensed by the Deputy Ministry of Tourism, Republic of Cyprus (licence 7775)"
+    "tourismAlt": "Licensed by the Deputy Ministry of Tourism, Republic of Cyprus (licence 7775)",
+    "playVideo": "Play background video",
+    "pauseVideo": "Pause background video"
   },
   "trust": {
     "title": "Why Corporates Choose Us",
