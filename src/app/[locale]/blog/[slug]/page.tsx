@@ -4,12 +4,31 @@ import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
 import { getCanonicalUrl, type Locale } from "@/lib/canonical";
 import { getAllPosts, getPostBySlug, getPostTranslationSlug } from "@/lib/blog";
 import { markdownToHtml } from "@/lib/markdown";
+import { addHeadingIds, buildToc, ctaInsertOffset } from "@/lib/article-headings";
+import {
+  BLOG_CTA_CONFIG,
+  blogCtaServiceHref,
+  resolveBlogCtaTopic,
+  whatsappChatHref,
+} from "@/lib/blog-topic-cta";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
-import { Calendar, Clock, User, ArrowRight, ChevronRight, Home } from "lucide-react";
+import { Calendar, Clock, User, ArrowRight } from "lucide-react";
 import { PATH_DISPLAY_NAMES, getHomeName } from "@/components/seo/breadcrumb-names";
+import { breadcrumbListSchema, type BreadcrumbCrumb } from "@/components/seo/breadcrumb-list";
+import BreadcrumbBar from "@/components/layout/BreadcrumbBar";
+import JsonLd from "@/components/seo/JsonLd";
 import SocialShare from "@/components/blog/SocialShare";
+import BlogTopicCta from "@/components/blog/BlogTopicCta";
+import TopicCtaLink from "@/components/blog/TopicCtaLink";
+import { TocDisclosure, TocSidebar } from "@/components/blog/ArticleToc";
+
+// Ids the layout already uses on every page; article headings never take them.
+const RESERVED_ARTICLE_IDS = ["main-content", "mobile-navigation"];
+
+const PROSE_CLASSES =
+  "prose prose-lg max-w-none text-brand-navy/80 leading-relaxed prose-headings:text-brand-navy prose-headings:font-display prose-headings:scroll-mt-24 md:prose-headings:scroll-mt-28 prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-[#8A6D1F] prose-a:underline hover:prose-a:text-brand-navy prose-strong:text-brand-navy prose-li:text-brand-navy/80 prose-table:text-sm prose-table:block prose-table:overflow-x-auto prose-th:bg-brand-navy/5 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-brand-navy/10 prose-hr:border-brand-navy/10";
 
 export async function generateStaticParams() {
   // Only pre-render published posts. Drafts must not emit a public URL Google
@@ -135,8 +154,53 @@ export default async function BlogPostPage({
     );
   }
 
-  const htmlContent = await markdownToHtml(post.content);
+  // Headings get slug ids (anchors + contents list); the topic CTA is
+  // spliced in between two H2 sections, so the body renders in two parts.
+  const { html: articleHtml, headings } = addHeadingIds(
+    await markdownToHtml(post.content),
+    RESERVED_ARTICLE_IDS,
+  );
+  const tocItems = buildToc(headings);
+  const ctaOffset = ctaInsertOffset(headings);
+  const [htmlBeforeCta, htmlAfterCta] =
+    ctaOffset === null
+      ? [articleHtml, ""]
+      : [articleHtml.slice(0, ctaOffset), articleHtml.slice(ctaOffset)];
   const wordCount = post.content.trim().split(/\s+/).length;
+
+  const tocLabels = { title: t("tocTitle"), navLabel: t("tocNavLabel") };
+
+  const ctaTopic = resolveBlogCtaTopic({
+    slug: post.frontmatter.slug,
+    tags: post.frontmatter.tags,
+    category: post.frontmatter.category,
+  });
+  const tCta = await getTranslations({ locale, namespace: "blogTopicCta" });
+  const ctaKey = `topics.${BLOG_CTA_CONFIG[ctaTopic].messageKey}`;
+  const ctaCopy = {
+    eyebrow: tCta("eyebrow"),
+    title: tCta(`${ctaKey}.title`),
+    text: tCta(`${ctaKey}.text`),
+    button: tCta(`${ctaKey}.button`),
+    whatsappLabel: tCta("whatsappLabel"),
+    newTabHint: tCta("newTabHint"),
+  };
+  const topicCta = (
+    <BlogTopicCta
+      topic={ctaTopic}
+      copy={ctaCopy}
+      serviceHref={blogCtaServiceHref(ctaTopic, locale)}
+      whatsappHref={whatsappChatHref(tCta(`${ctaKey}.whatsapp`))}
+    />
+  );
+
+  // One visible trail and one BreadcrumbList for posts, both with the real
+  // title. The layout-level Breadcrumbs/BreadcrumbSchema skip blog posts.
+  const breadcrumbs: BreadcrumbCrumb[] = [
+    { name: getHomeName(locale), href: `/${locale}` },
+    { name: (PATH_DISPLAY_NAMES[locale] ?? PATH_DISPLAY_NAMES.en).blog, href: `/${locale}/blog` },
+    { name: post.frontmatter.title, href: `/${locale}/blog/${slug}` },
+  ];
 
   // Map blog tags -> relevant service pages for inline interlinking (E-E-A-T + SEO)
   const TAG_TO_SERVICES: Record<string, Array<{ slug: string; labelEn: string; labelRu: string }>> = {
@@ -260,49 +324,26 @@ export default async function BlogPostPage({
     // Speakable: identifies content suitable for voice assistants (Google Assistant, Alexa)
     speakable: {
       "@type": "SpeakableSpecification",
-      cssSelector: ["h1", "h2", ".prose p:first-of-type"],
+      // The body renders in two .prose blocks around the topic CTA; target
+      // only the first block so speakable keeps a single lead paragraph.
+      cssSelector: ["h1", "h2", "[data-article-lead] p:first-of-type"],
     },
   };
 
   return (
     <>
-      {/* JSON-LD Schema (breadcrumb schema handled by layout BreadcrumbSchema) */}
+      {/* JSON-LD Schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      <JsonLd data={breadcrumbListSchema(breadcrumbs, CANONICAL_ORIGIN)} />
+
+      <BreadcrumbBar crumbs={breadcrumbs} />
 
       {/* Hero / Banner */}
       <section className="bg-brand-navy text-white py-20 lg:py-28">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumbs */}
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center gap-1.5 text-sm text-white/50">
-              <li>
-                <Link
-                  href={`/${locale}`}
-                  className="flex items-center gap-1 hover:text-brand-gold transition-colors"
-                >
-                  <Home className="h-3.5 w-3.5 flex-shrink-0" aria-hidden="true" />
-                  <span className="sr-only sm:not-sr-only">{getHomeName(locale)}</span>
-                </Link>
-              </li>
-              <li className="flex items-center"><ChevronRight className="h-3.5 w-3.5" aria-hidden="true" /></li>
-              <li>
-                <Link
-                  href={`/${locale}/blog`}
-                  className="hover:text-brand-gold transition-colors"
-                >
-                  {(PATH_DISPLAY_NAMES[locale] ?? PATH_DISPLAY_NAMES.en).blog}
-                </Link>
-              </li>
-              <li className="flex items-center"><ChevronRight className="h-3.5 w-3.5" aria-hidden="true" /></li>
-              <li className="text-white/70 truncate max-w-[180px] sm:max-w-[300px] md:max-w-none" title={post.frontmatter.title}>
-                {post.frontmatter.title}
-              </li>
-            </ol>
-          </nav>
-
           <div className="flex flex-wrap gap-2 mb-4">
             {post.frontmatter.tags.map((tag) => (
               <span
@@ -354,71 +395,95 @@ export default async function BlogPostPage({
 
       {/* Post Body */}
       <article className="py-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div
-            className="prose prose-lg max-w-none text-brand-navy/80 leading-relaxed prose-headings:text-brand-navy prose-headings:font-display prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-a:text-[#8A6D1F] prose-a:underline hover:prose-a:text-brand-navy prose-strong:text-brand-navy prose-li:text-brand-navy/80 prose-table:text-sm prose-table:block prose-table:overflow-x-auto prose-th:bg-brand-navy/5 prose-th:px-4 prose-th:py-2 prose-td:px-4 prose-td:py-2 prose-td:border-brand-navy/10 prose-hr:border-brand-navy/10"
-            dangerouslySetInnerHTML={{ __html: htmlContent }}
-          />
-
-          {/* Related Services — interlink blog topics to service pages */}
-          {relatedServices.length > 0 && (
-            <div className="mt-12 rounded-2xl border border-brand-gold/30 bg-brand-gold/5 p-6 sm:p-8">
-              <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold-ink mb-2">
-                {locale === "ru" ? "Связанные услуги" : "Related services"}
-              </p>
-              <h3 className="text-lg font-bold text-brand-navy mb-4">
-                {locale === "ru"
-                  ? "Планируете подобное путешествие? Мы поможем."
-                  : "Planning a trip like this? We can help."}
-              </h3>
-              <ul className="flex flex-wrap gap-3">
-                {relatedServices.map((svc) => (
-                  <li key={svc.slug}>
-                    <Link
-                      href={`/${locale}/${svc.slug}`}
-                      className="inline-flex items-center rounded-full border border-brand-navy/10 bg-white px-4 py-2 text-sm font-semibold text-brand-navy hover:border-brand-gold hover:text-brand-gold transition-colors"
-                    >
-                      {locale === "ru" ? svc.labelRu : svc.labelEn}
-                      <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+        {/* Below 1280 px: one centred column as before. From 1280 px: the same
+            column stays centred and the contents list sits in the right gutter. */}
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 xl:grid xl:max-w-[90rem] xl:grid-cols-[minmax(0,1fr)_44rem_minmax(0,1fr)] xl:gap-x-10">
+          {tocItems && (
+            <div className="hidden xl:col-start-3 xl:row-start-1 xl:block xl:max-w-[18rem]">
+              <TocSidebar items={tocItems} labels={tocLabels} />
             </div>
           )}
+          <div className="min-w-0 xl:col-start-2 xl:row-start-1">
+            {tocItems && (
+              <div className="xl:hidden">
+                <TocDisclosure items={tocItems} labels={tocLabels} />
+              </div>
+            )}
 
-          {/* Author Bio */}
-          <aside className="mt-12 rounded-2xl border border-brand-navy/10 bg-brand-light p-6 sm:p-8">
-            <div className="flex items-start gap-4">
-              <div className="flex-1">
+            <div
+              className={PROSE_CLASSES}
+              data-article-lead
+              dangerouslySetInnerHTML={{ __html: htmlBeforeCta }}
+            />
+            {topicCta}
+            {htmlAfterCta && (
+              <div
+                className={PROSE_CLASSES}
+                dangerouslySetInnerHTML={{ __html: htmlAfterCta }}
+              />
+            )}
+
+            {/* Related Services — interlink blog topics to service pages */}
+            {relatedServices.length > 0 && (
+              <div className="mt-12 rounded-2xl border border-brand-gold/30 bg-brand-gold/5 p-6 sm:p-8">
                 <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold-ink mb-2">
-                  {locale === "ru" ? "Об авторе" : "About the author"}
+                  {locale === "ru" ? "Связанные услуги" : "Related services"}
                 </p>
-                <h3 className="text-lg font-bold text-brand-navy mb-2">
-                  {post.frontmatter.author}
-                </h3>
-                <p className="text-sm text-brand-navy/70 mb-3">
+                <h3 className="text-lg font-bold text-brand-navy mb-4">
                   {locale === "ru"
-                    ? "Часть команды JetSet Travel Cyprus — аккредитованного IATA турагентства в Пафосе (лицензия 7775, IATA 14200130). Более 20 лет опыта в корпоративных и премиальных путешествиях."
-                    : "Part of the JetSet Travel Cyprus team — an IATA-accredited travel agency in Paphos (License 7775, IATA 14200130) with 20+ years of corporate and luxury travel experience."}
-                </p>
-                <Link
-                  href={`/${locale}/about`}
-                  className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy"
-                >
-                  {locale === "ru" ? "Больше о команде" : "More about our team"}
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
+                    ? "Планируете подобное путешествие? Мы поможем."
+                    : "Planning a trip like this? We can help."}
+                </h3>
+                <ul className="flex flex-wrap gap-3">
+                  {relatedServices.map((svc) => (
+                    <li key={svc.slug}>
+                      <Link
+                        href={`/${locale}/${svc.slug}`}
+                        className="inline-flex items-center rounded-full border border-brand-navy/10 bg-white px-4 py-2 text-sm font-semibold text-brand-navy hover:border-brand-gold hover:text-brand-gold transition-colors"
+                      >
+                        {locale === "ru" ? svc.labelRu : svc.labelEn}
+                        <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Author Bio (a div: an <aside> nested in <article> trips axe
+                landmark-complementary-is-top-level) */}
+            <div className="mt-12 rounded-2xl border border-brand-navy/10 bg-brand-light p-6 sm:p-8">
+              <div className="flex items-start gap-4">
+                <div className="flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold-ink mb-2">
+                    {locale === "ru" ? "Об авторе" : "About the author"}
+                  </p>
+                  <h3 className="text-lg font-bold text-brand-navy mb-2">
+                    {post.frontmatter.author}
+                  </h3>
+                  <p className="text-sm text-brand-navy/70 mb-3">
+                    {locale === "ru"
+                      ? "Часть команды JetSet Travel Cyprus — аккредитованного IATA турагентства в Пафосе (лицензия 7775, IATA 14200130). Более 20 лет опыта в корпоративных и премиальных путешествиях."
+                      : "Part of the JetSet Travel Cyprus team — an IATA-accredited travel agency in Paphos (License 7775, IATA 14200130) with 20+ years of corporate and luxury travel experience."}
+                  </p>
+                  <Link
+                    href={`/${locale}/about`}
+                    className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy"
+                  >
+                    {locale === "ru" ? "Больше о команде" : "More about our team"}
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </div>
               </div>
             </div>
-          </aside>
 
-          {/* Social Sharing */}
-          <div className="mt-12 pt-8 border-t border-brand-navy/10">
-            <SocialShare
-              url={articleUrl}
-              title={post.frontmatter.title}
-            />
+            {/* Social Sharing */}
+            <div className="mt-12 pt-8 border-t border-brand-navy/10">
+              <SocialShare
+                url={articleUrl}
+                title={post.frontmatter.title}
+              />
+            </div>
           </div>
         </div>
       </article>
@@ -467,22 +532,25 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      {/* CTA Banner */}
-      <section className="py-20 bg-brand-navy text-white">
+      {/* CTA Banner — heading and text follow the post's topic */}
+      <section className="py-20 bg-brand-navy text-white" data-track-region="blog_end_cta">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            {t("ctaTitle")}
+            {tCta(`${ctaKey}.endTitle`)}
           </h2>
           <p className="text-white/70 max-w-2xl mx-auto mb-8">
-            {t("ctaSubtitle")}
+            {tCta(`${ctaKey}.endText`)}
           </p>
-          <Link
+          <TopicCtaLink
             href={`/${locale}/contact`}
+            ctaType="generic"
+            topic={ctaTopic}
+            placement="end"
             className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
           >
             {t("ctaContact")}
             <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
+          </TopicCtaLink>
         </div>
       </section>
     </>
