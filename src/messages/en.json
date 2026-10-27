@@ -996,7 +996,112 @@
     "newsletterPlaceholder": "your@email.com",
     "newsletterButton": "Subscribe",
     "newsletterSuccess": "Thank you for subscribing!",
-    "newsletterGdpr": "We respect your privacy. Unsubscribe at any time."
+    "newsletterGdpr": "We respect your privacy. Unsubscribe at any time.",
+    "tocTitle": "Contents",
+    "tocNavLabel": "Table of contents"
+  },
+  "blogTopicCta": {
+    "eyebrow": "How we can help",
+    "whatsappLabel": "Ask on WhatsApp",
+    "newTabHint": "(opens in a new tab)",
+    "topics": {
+      "vipAirport": {
+        "title": "Flying through Larnaca or Paphos?",
+        "text": "We arrange meet & assist at both airports and the Express Lane at Larnaca. Send us your flight details and we will check what can be arranged.",
+        "button": "See our VIP services",
+        "whatsapp": "Hi JetSet, I read your VIP airport guide and would like help with meet & assist at Larnaca or Paphos airport.",
+        "endTitle": "Let us plan your arrival in Cyprus",
+        "endText": "From VIP meet & assist to a private transfer to your hotel or villa, our team can arrange the whole journey."
+      },
+      "privateJetYacht": {
+        "title": "Planning a private jet or yacht charter?",
+        "text": "Tell us your route, dates and group size, and we will source charter options for you to compare.",
+        "button": "See our VIP services",
+        "whatsapp": "Hi JetSet, I read your private jet and yacht charter guide and would like help planning a charter.",
+        "endTitle": "Let us plan your charter",
+        "endText": "Private jet, yacht, villa and transfers: tell us what you have in mind and we will put the options together."
+      },
+      "villas": {
+        "title": "Looking for a private villa?",
+        "text": "Tell us where, when and how many guests, and we will look for villas that match your brief.",
+        "button": "See villas & VIP services",
+        "whatsapp": "Hi JetSet, I read your villa holidays guide and would like help finding a private villa.",
+        "endTitle": "Let us find your villa",
+        "endText": "Tell us your destination, dates and group, and we will shortlist villas and arrange flights and transfers around them."
+      },
+      "insurance": {
+        "title": "Planning a trip to or from Cyprus?",
+        "text": "Tell us your dates and we will put together flights, hotels and transfers, and tell you what your travel insurance should cover.",
+        "button": "Request a quote",
+        "whatsapp": "Hi JetSet, I read your travel insurance guide and would like help planning my trip.",
+        "endTitle": "Plan your trip with us",
+        "endText": "Tell us where you are going and we will handle flights, hotels, transfers and visa support, and flag what your insurance should cover."
+      },
+      "cruises": {
+        "title": "Thinking about a cruise?",
+        "text": "Tell us your dates and the kind of route you like, and we will compare sailings and cabins for you.",
+        "button": "Explore cruises",
+        "whatsapp": "Hi JetSet, I read your cruise guide and would like help choosing a cruise.",
+        "endTitle": "Find your next cruise with us",
+        "endText": "We compare cruise lines, routes and cabins, and can add flights, hotels and transfers before and after you sail."
+      },
+      "digitalNomads": {
+        "title": "Moving to Cyprus to work remotely?",
+        "text": "We can help you prepare your visa or permit paperwork and arrange your travel. The decision always rests with the authorities.",
+        "button": "See visa services",
+        "whatsapp": "Hi JetSet, I read your digital nomad guide and would like help with my move to Cyprus.",
+        "endTitle": "Make your move to Cyprus easier",
+        "endText": "Visa support, flights and a hotel for your first weeks: tell us your plans and we will help you prepare."
+      },
+      "visaSchengen": {
+        "title": "Need help with a visa application?",
+        "text": "We help you prepare the documents and the application. The decision always rests with the consulate.",
+        "button": "See visa services",
+        "whatsapp": "Hi JetSet, I read your visa guide and would like help with a visa application.",
+        "endTitle": "Get your visa paperwork right",
+        "endText": "We check your documents, prepare the application and book travel that matches it. The consulate makes the final decision."
+      },
+      "corporate": {
+        "title": "Managing business travel for your team?",
+        "text": "We arrange flights, hotels, visas and group travel for companies in Cyprus. Tell us how your team travels and we will suggest how we can help.",
+        "button": "See corporate travel",
+        "whatsapp": "Hi JetSet, I read your business travel guide and would like to discuss corporate travel for my company.",
+        "endTitle": "Let us manage your company's travel",
+        "endText": "Flights, hotels, visas and group travel, handled by one IATA-accredited team in Paphos."
+      },
+      "flightsAirports": {
+        "title": "Need flights to or from Cyprus?",
+        "text": "Tell us your route and dates, and we will compare options from Larnaca and Paphos for you.",
+        "button": "See flight booking",
+        "whatsapp": "Hi JetSet, I read your Cyprus airports guide and would like help booking flights.",
+        "endTitle": "Let us book your flights",
+        "endText": "We compare airlines and airports, and can add hotels, transfers and VIP airport service to your trip."
+      },
+      "luxury": {
+        "title": "Planning a luxury trip?",
+        "text": "Five-star hotels, villas, private transfers and VIP airport service. Tell us what you have in mind and we will put a proposal together.",
+        "button": "Explore luxury travel",
+        "whatsapp": "Hi JetSet, I read your luxury travel guide and would like help planning a trip.",
+        "endTitle": "Let us plan your next luxury trip",
+        "endText": "Tell us your dates, destination and style of travel, and we will tailor the trip around you."
+      },
+      "bestTime": {
+        "title": "Picked your month?",
+        "text": "Tell us your dates and we will put together flights, hotels and transfers for your trip to Cyprus.",
+        "button": "Request a quote",
+        "whatsapp": "Hi JetSet, I read your guide to the best time to visit Cyprus and would like help planning my trip.",
+        "endTitle": "Ready to plan your Cyprus trip?",
+        "endText": "Tell us when you want to travel and we will take care of flights, hotels and transfers."
+      },
+      "general": {
+        "title": "Planning a trip?",
+        "text": "Tell us where and when, and we will put together flights, hotels and transfers for you.",
+        "button": "Request a quote",
+        "whatsapp": "Hi JetSet, I read a guide on your blog and would like help planning a trip.",
+        "endTitle": "Need help planning your trip?",
+        "endText": "Our team is ready to help you plan the perfect journey — corporate or leisure."
+      }
+    }
   },
   "cruisesPage": {
     "heroLabel": "Worldwide Cruise Services",
