@@ -41,7 +41,7 @@ export async function generateMetadata({
     routePath: "/private",
     title:
       locale === "ru"
-        ? "Тревел-услуги для частных клиентов и семейных офисов на Кипре | JetSet Travel"
+        ? "Тревел-услуги для частных клиентов и семейных офисов на Кипре"
         : "Private & Family Office Travel Services in Cyprus | JetSet Travel",
     description:
       locale === "ru"

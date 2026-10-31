@@ -16,9 +16,12 @@
  *   canonical  <link rel="canonical"> equals the <loc> exactly
  *   indexable  no "noindex" in <meta name="robots"> or the X-Robots-Tag header
  *   title      <title> exists and no other sitemap URL has the same title
- *   hreflang   the page lists itself under its own language; every alternate
- *              it lists links back to it (reciprocal); the page's alternates
- *              match the sitemap's <xhtml:link> alternates for that <loc>
+ *   hreflang   the page lists itself under its own language; each language
+ *              code appears once; every alternate is a real page in that
+ *              language (200, no redirect, indexable, self-canonical, /ru/
+ *              for ru*, /en/ for en*; x-default = the en URL) and links
+ *              back (reciprocal); the page's alternates match the sitemap's
+ *              <xhtml:link> alternates for that <loc>
  * Plus robots.txt: has a Sitemap: line, no obsolete Host: / Crawl-delay:.
  */
 
@@ -51,10 +54,9 @@ function parsePage(html) {
   const head = html.split(/<\/head>/i)[0];
   const links = [...head.matchAll(/<link\b[^>]*>/gi)].map((m) => attrs(m[0]));
   const canonical = links.filter((l) => l.rel === "canonical").map((l) => l.href);
-  const alternates = {};
-  for (const l of links) {
-    if (l.rel === "alternate" && l.hreflang && l.href) alternates[l.hreflang] = l.href;
-  }
+  const alternateList = links
+    .filter((l) => l.rel === "alternate" && l.hreflang && l.href)
+    .map((l) => [l.hreflang, l.href]);
   const robots = [...head.matchAll(/<meta\b[^>]*>/gi)]
     .map((m) => attrs(m[0]))
     .filter((m) => ["robots", "googlebot", "yandex"].includes((m.name || "").toLowerCase()))
@@ -62,22 +64,37 @@ function parsePage(html) {
   const titleMatch = head.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
   return {
     canonical,
-    alternates,
+    ...indexAlternates(alternateList),
     robots,
     title: titleMatch ? decode(titleMatch[1]).trim() : "",
   };
+}
+
+/**
+ * hreflang pairs -> { alternates: {code: href}, conflicts: [codes listed
+ * twice with different hrefs] }. A plain object would silently keep only
+ * the last of two conflicting tags.
+ */
+function indexAlternates(list) {
+  const alternates = {};
+  const conflicts = new Set();
+  for (const [lang, href] of list) {
+    if (lang in alternates && alternates[lang] !== href) conflicts.add(lang);
+    else alternates[lang] = href;
+  }
+  return { alternates, alternateHrefs: list.map(([, href]) => href), conflicts: [...conflicts] };
 }
 
 function parseSitemap(xml) {
   return [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((m) => {
     const block = m[1];
     const loc = decode(block.match(/<loc>([^<]+)<\/loc>/)[1].trim());
-    const alternates = {};
-    for (const a of block.matchAll(/<xhtml:link\b[^>]*>/g)) {
-      const at = attrs(a[0]);
-      if (at.hreflang && at.href) alternates[at.hreflang] = at.href;
-    }
-    return { loc, alternates };
+    const list = [...block.matchAll(/<xhtml:link\b[^>]*>/g)]
+      .map((a) => attrs(a[0]))
+      .filter((at) => at.hreflang && at.href)
+      .map((at) => [at.hreflang, at.href]);
+    const { alternates, alternateHrefs, conflicts } = indexAlternates(list);
+    return { loc, alternates, alternateHrefs, conflicts };
   });
 }
 
@@ -109,20 +126,54 @@ async function mapLimit(items, limit, fn) {
 /** The hreflang code a URL represents on its own page (ru for /ru/..., else en). */
 const ownLang = (url) => (new URL(url).pathname.startsWith("/ru") ? "ru" : "en");
 
+const isIndexable = (p) => !/noindex|none/i.test([...p.robots, p.xRobots].join(" "));
+
+/**
+ * Problems with one hreflang target, or [] if it is a real, indexable page in
+ * the declared language that links back to `loc`.
+ */
+function hreflangTargetProblems(lang, href, loc, alternates) {
+  const path = new URL(href).pathname;
+  const out = [];
+  if (lang === "x-default") {
+    if (alternates.en && href !== alternates.en) out.push(`x-default -> ${path} is not the en URL`);
+  } else {
+    const want = lang.toLowerCase().startsWith("ru") ? "/ru" : "/en";
+    if (path !== want && !path.startsWith(`${want}/`)) out.push(`hreflang=${lang} -> ${path} is not a ${want}/ page`);
+  }
+  if (href === loc) return out;
+  const t = pages.get(href);
+  if (!t || t.status !== 200) out.push(`hreflang=${lang} -> ${path} is HTTP ${t?.status}${t?.location ? ` (-> ${t.location})` : ""}`);
+  else {
+    if (!isIndexable(t)) out.push(`hreflang=${lang} -> ${path} is noindex`);
+    if (!(t.canonical.length === 1 && t.canonical[0] === href)) out.push(`hreflang=${lang} -> ${path} canonicalises to ${t.canonical.join(" , ") || "nothing"}`);
+    if (!Object.values(t.alternates).includes(loc)) out.push(`hreflang=${lang} -> ${path} does not link back`);
+  }
+  return out;
+}
+
 const sitemapRes = await fetch(`${BASE}/sitemap.xml`);
 if (sitemapRes.status !== 200) {
   console.error(`sitemap.xml returned HTTP ${sitemapRes.status}`);
   process.exit(1);
 }
 const entries = parseSitemap(await sitemapRes.text());
+if (entries.length === 0) {
+  console.error("sitemap.xml has no <url> entries (a <sitemapindex> or an empty <urlset>): nothing verified.");
+  process.exit(1);
+}
 const pages = new Map();
 const results = await mapLimit(entries, CONCURRENCY, (e) => fetchPage(e.loc));
 entries.forEach((e, i) => pages.set(e.loc, results[i]));
 
-// Alternates that are not themselves in the sitemap still need fetching
-// for the reciprocity check.
+// Alternates (from the pages and from the sitemap) that are not themselves
+// in the sitemap still need fetching for the hreflang checks.
 const extra = [
-  ...new Set(results.flatMap((p) => Object.values(p.alternates)).filter((u) => !pages.has(u))),
+  ...new Set(
+    [...results.flatMap((p) => p.alternateHrefs), ...entries.flatMap((e) => e.alternateHrefs)].filter(
+      (u) => !pages.has(u),
+    ),
+  ),
 ];
 const extraResults = await mapLimit(extra, CONCURRENCY, (u) => fetchPage(u));
 extra.forEach((u, i) => pages.set(u, extraResults[i]));
@@ -133,7 +184,7 @@ for (const e of entries) {
   if (t) titleCount.set(t, (titleCount.get(t) || 0) + 1);
 }
 
-const rows = entries.map(({ loc, alternates: smAlts }) => {
+const rows = entries.map(({ loc, alternates: smAlts, conflicts: smConflicts }) => {
   const p = pages.get(loc);
   const problems = [];
   const ok200 = p.status === 200;
@@ -142,9 +193,8 @@ const rows = entries.map(({ loc, alternates: smAlts }) => {
   if (!noRedir) problems.push(`redirects to ${p.location}`);
   const canonical = p.canonical.length === 1 && p.canonical[0] === loc;
   if (ok200 && !canonical) problems.push(`canonical=${p.canonical.join(" , ") || "missing"}`);
-  const robots = [...p.robots, p.xRobots].join(" ");
-  const indexable = ok200 && !/noindex|none/i.test(robots);
-  if (ok200 && !indexable) problems.push(`robots="${robots.trim()}"`);
+  const indexable = ok200 && isIndexable(p);
+  if (ok200 && !indexable) problems.push(`robots="${[...p.robots, p.xRobots].join(" ").trim()}"`);
   const titleOk = !!p.title && titleCount.get(p.title) === 1;
   if (ok200 && !p.title) problems.push("no <title>");
   else if (ok200 && !titleOk) problems.push(`duplicate title "${p.title}"`);
@@ -156,15 +206,19 @@ const rows = entries.map(({ loc, alternates: smAlts }) => {
       hreflangOk = false;
       problems.push(`no self hreflang=${own}`);
     }
+    for (const lang of p.conflicts) {
+      hreflangOk = false;
+      problems.push(`page lists hreflang=${lang} more than once with different URLs`);
+    }
+    for (const lang of smConflicts) {
+      hreflangOk = false;
+      problems.push(`sitemap lists hreflang=${lang} more than once with different URLs`);
+    }
     for (const [lang, href] of Object.entries(p.alternates)) {
-      if (href === loc) continue;
-      const target = pages.get(href);
-      if (!target || target.status !== 200) {
+      const targetProblems = hreflangTargetProblems(lang, href, loc, p.alternates);
+      if (targetProblems.length) {
         hreflangOk = false;
-        problems.push(`hreflang=${lang} -> ${href} is HTTP ${target?.status}`);
-      } else if (!Object.values(target.alternates).includes(loc)) {
-        hreflangOk = false;
-        problems.push(`hreflang=${lang} -> ${new URL(href).pathname} does not link back`);
+        problems.push(...targetProblems);
       }
     }
     const pageKeys = Object.keys(p.alternates).sort().join(",");

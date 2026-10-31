@@ -1,5 +1,6 @@
 import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
+import { wrongLocaleBlogRedirects } from "./src/lib/blog-translation-pairs.ts";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n.ts");
 
@@ -77,19 +78,13 @@ const nextConfig: NextConfig = {
     // redirect chain and re-trigger Google Search Console's "Page with
     // redirect" validation failure.
     return [
-      // Phase 3 — wrong-folder critical fix (5 clicks, 1,865 impressions).
-      // The RU folder was serving an EN-only slug. Originally bridged to the
-      // EN post because no translation existed; the RU translation now does
-      // (kipr-v-shengene-2026-delovye-poezdki, paired via translationSlug),
-      // so send Russian-folder traffic to the Russian article. Cross-language
-      // redirects are also a GSC "Page with redirect" validation irritant —
-      // Google re-crawls the RU URL, lands on an EN page, and keeps the URL
-      // in limbo instead of consolidating onto the hreflang pair.
-      {
-        source: "/ru/blog/cyprus-schengen-2026-business-travel",
-        destination: "/ru/blog/kipr-v-shengene-2026-delovye-poezdki",
-        permanent: true,
-      },
+      // Wrong-locale blog slugs (/en/blog/<ru-slug>, /ru/blog/<en-slug>) →
+      // the translated article in the requested locale, 301, one hop. Built
+      // from the EN↔RU slug-pair map, so every translated post is covered
+      // (Bing Webmaster indexed 13 of these, Oct 2026). This includes the
+      // Phase 3 wrong-folder fix /ru/blog/cyprus-schengen-2026-business-travel
+      // → /ru/blog/kipr-v-shengene-2026-delovye-poezdki, previously a 308.
+      ...wrongLocaleBlogRedirects(),
       // Bare-path bridges (legacy inbound links from before the locale split).
       {
         source: "/luxury",

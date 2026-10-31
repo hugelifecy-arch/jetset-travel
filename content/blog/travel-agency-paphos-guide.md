@@ -1,5 +1,6 @@
 ---
 title: "How to Choose the Best Travel Agency in Paphos, Cyprus (2026 Guide)"
+seoTitle: "Travel Agency in Paphos: How to Choose the Best (2026 Guide)"
 description: "Complete guide to choosing the right travel agency in Paphos. What to look for, key questions to ask, and why IATA accreditation matters for your bookings."
 date: "2026-03-03"
 dateModified: "2026-10-26"

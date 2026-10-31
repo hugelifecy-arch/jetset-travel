@@ -1,5 +1,6 @@
 ---
 title: "Private Villa Holidays from Cyprus: Mykonos, Santorini & Crete Compared"
+seoTitle: "Private Villa Holidays from Cyprus: Mykonos, Santorini, Crete"
 description: "Mykonos, Santorini or Crete for a villa holiday from Cyprus: character, privacy, villa size, flights from Larnaca, staff and when to book. Updated October 2026."
 date: "2026-05-19"
 dateModified: "2026-10-23"

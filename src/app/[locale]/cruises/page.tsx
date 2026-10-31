@@ -20,8 +20,8 @@ export async function generateMetadata({
     routePath: "/cruises",
     title:
       locale === "ru"
-        ? "Бронирование Круизов Кипр | Средиземноморские и Мировые Круизы — JetSet Travel"
-        : "Cruise Booking Cyprus | Mediterranean & World Cruises — JetSet Travel",
+        ? "Бронирование круизов на Кипре: Средиземноморье и мир | JetSet"
+        : "Cruise Booking Cyprus | Mediterranean & World Cruises | JetSet",
     description:
       locale === "ru"
         ? "Круизы с Кипра: круизы с перелётом из Афин, Венеции, Рима и Барселоны с вылетом из Ларнаки или Пафоса и лайнеры с заходом в Лимассол. Аккредитация IATA."

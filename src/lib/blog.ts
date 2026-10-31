@@ -19,9 +19,10 @@ export interface BlogPostFrontmatter {
   /** Article headline: the H1, BlogPosting headline and breadcrumb label. */
   title: string;
   /**
-   * Optional complete <title> (and og/twitter title) when the search title
-   * should differ from the H1. Used as-is: no " | JetSet Travel Cyprus"
-   * suffix is appended, so keep it within ~60 characters.
+   * Optional complete <title> when the search title should differ from the
+   * H1 (e.g. the H1 is too long for search results). Used as written, with
+   * no suffix added; must be at most 65 characters (tests/seo-titles.test.js).
+   * og:title and twitter:title keep `title`.
    */
   seoTitle?: string;
   description: string;

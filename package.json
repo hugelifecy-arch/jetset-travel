@@ -16,7 +16,9 @@
     "gsc:weekly-delta": "node scripts/gsc-weekly-delta.mjs",
     "verify:routes": "node scripts/verify-routes.mjs",
     "verify:sitemap": "node scripts/verify-sitemap.mjs",
-    "indexnow": "node scripts/indexnow.mjs"
+    "check:titles": "node scripts/check-titles.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
+    "indexnow:priority": "node scripts/indexnow.mjs --preset priority"
   },
   "engines": {
     "node": ">=22.6.0"

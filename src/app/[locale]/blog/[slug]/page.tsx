@@ -4,6 +4,7 @@ import { CANONICAL_ORIGIN, OG_IMAGE, localizedAlternates } from "@/lib/seo";
 import { getCanonicalUrl, type Locale } from "@/lib/canonical";
 import { getAllPosts, getPostBySlug, getPostTranslationSlug } from "@/lib/blog";
 import { markdownToHtml } from "@/lib/markdown";
+import { blogDocumentTitle } from "@/lib/seo-title";
 import { addHeadingIds, buildToc, ctaInsertOffset } from "@/lib/article-headings";
 import {
   BLOG_CTA_CONFIG,
@@ -71,12 +72,12 @@ export async function generateMetadata({
   const ogImage = post.frontmatter.image
     ? `${CANONICAL_ORIGIN}${post.frontmatter.image}`
     : OG_IMAGE;
-  const seoTitle = post.frontmatter.seoTitle ?? post.frontmatter.title;
 
   return {
-    title: {
-      absolute: post.frontmatter.seoTitle ?? `${post.frontmatter.title} | JetSet Travel Cyprus`,
-    },
+    // <title> only: frontmatter seoTitle, else title + " | JetSet" within
+    // 65 characters (lib/seo-title.ts). og:title / twitter:title keep the
+    // full post title, like the H1.
+    title: { absolute: blogDocumentTitle(post.frontmatter) },
     description: post.frontmatter.description,
     robots: { index: true, follow: true },
     alternates: (() => {
@@ -105,7 +106,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       siteName: "JetSet Travel Cyprus",
-      title: seoTitle,
+      title: post.frontmatter.title,
       description: post.frontmatter.description,
       url: getCanonicalUrl(`/blog/${slug}`, (locale === "ru" ? "ru" : "en") as Locale),
       locale: isRussian ? "ru_RU" : "en_CY",
@@ -117,7 +118,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: seoTitle,
+      title: post.frontmatter.title,
       description: post.frontmatter.description,
       images: [ogImage],
     },

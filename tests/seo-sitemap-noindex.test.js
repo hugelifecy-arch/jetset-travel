@@ -27,3 +27,35 @@ describe("seo: sitemap excludes noindexed pages", () => {
     assert.ok(paths.includes("/en/terms"));
   });
 });
+
+describe("seo: hreflang never points at a noindexed page", async () => {
+  const { localizedAlternates } = await import("../src/lib/seo.ts");
+
+  it("no sitemap entry lists a noindexed path as an alternate", () => {
+    for (const entry of sitemap()) {
+      for (const [lang, url] of Object.entries(entry.alternates?.languages ?? {})) {
+        assert.ok(
+          !NOINDEX_LOCALE_PATHS.has(new URL(url).pathname),
+          `${entry.url}: hreflang=${lang} points at noindexed ${url}`,
+        );
+      }
+    }
+  });
+
+  it("page metadata for /en/privacy and /en/terms omits the noindexed RU stubs", () => {
+    for (const route of ["/privacy", "/terms"]) {
+      const { languages, canonical } = localizedAlternates("en", route);
+      assert.equal(canonical, `https://www.jetset-travel.com/en${route}`);
+      assert.equal(languages.en, canonical);
+      assert.equal(languages["x-default"], canonical);
+      assert.equal(languages.ru, undefined);
+      assert.equal(languages["ru-RU"], undefined);
+    }
+  });
+
+  it("indexable pairs keep both languages", () => {
+    const { languages } = localizedAlternates("en", "/about");
+    assert.equal(languages.ru, "https://www.jetset-travel.com/ru/about");
+    assert.equal(languages["ru-RU"], "https://www.jetset-travel.com/ru/about");
+  });
+});

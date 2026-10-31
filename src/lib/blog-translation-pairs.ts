@@ -56,3 +56,22 @@ export function getPairedBlogSlug(
   if (slug in BLOG_SLUG_PAIRS_EN_TO_RU) return slug; // already an EN slug
   return RU_TO_EN[slug] ?? null;
 }
+
+/**
+ * Edge redirects for blog slugs requested under the wrong locale
+ * (/en/blog/<ru-slug>, /ru/blog/<en-slug>). Search engines indexed some of
+ * these (Bing Webmaster, Oct 2026). Each goes straight to the translated
+ * article in the requested locale (never the blog index) with a 301.
+ * Consumed by next.config.ts `redirects()`, which runs before the page, so
+ * the blog page's own `permanentRedirect()` (308) is only a fallback.
+ */
+export function wrongLocaleBlogRedirects(): Array<{
+  source: string;
+  destination: string;
+  statusCode: 301;
+}> {
+  return Object.entries(BLOG_SLUG_PAIRS_EN_TO_RU).flatMap(([en, ru]) => [
+    { source: `/en/blog/${ru}`, destination: `/en/blog/${en}`, statusCode: 301 as const },
+    { source: `/ru/blog/${en}`, destination: `/ru/blog/${ru}`, statusCode: 301 as const },
+  ]);
+}

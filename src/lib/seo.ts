@@ -66,16 +66,19 @@ export function localizedAlternates(
   const canonical = getCanonicalUrl(loc === "en" ? enPath : ruPath, loc);
   const enUrl = getCanonicalUrl(enPath, "en");
   const ruUrl = getCanonicalUrl(ruPath, "ru");
+  // A noindexed locale version (translation-pending stub) is not a valid
+  // hreflang target: Google and Bing ignore or flag hreflang that points at
+  // noindex. Leave it out until the real translation ships.
+  const enListed = !NOINDEX_LOCALE_PATHS.has(new URL(enUrl).pathname);
+  const ruListed = !NOINDEX_LOCALE_PATHS.has(new URL(ruUrl).pathname);
 
   return {
     canonical,
     languages: {
-      en: enUrl,
       // Phase 5: explicit en-GB / ru-RU regional codes alongside language-only
       // ones so UK and Russian SERPs get an unambiguous targeting signal.
-      "en-GB": enUrl,
-      ru: ruUrl,
-      "ru-RU": ruUrl,
+      ...(enListed && { en: enUrl, "en-GB": enUrl }),
+      ...(ruListed && { ru: ruUrl, "ru-RU": ruUrl }),
       "x-default": enUrl,
     },
   };

@@ -1,5 +1,6 @@
 ---
 title: "Larnaca vs Paphos Airport: Which Should You Fly From in 2026?"
+seoTitle: "Larnaca vs Paphos Airport 2026: Which to Fly From? | JetSet"
 description: "Larnaca or Paphos airport? Compare airlines, routes, drive times and fares for every Cyprus resort in 2026 — and pick the right airport for your trip."
 date: "2026-07-06"
 dateModified: "2026-10-26"
