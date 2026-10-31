@@ -71,9 +71,12 @@ export async function generateMetadata({
   const ogImage = post.frontmatter.image
     ? `${CANONICAL_ORIGIN}${post.frontmatter.image}`
     : OG_IMAGE;
+  const seoTitle = post.frontmatter.seoTitle ?? post.frontmatter.title;
 
   return {
-    title: { absolute: `${post.frontmatter.title} | JetSet Travel Cyprus` },
+    title: {
+      absolute: post.frontmatter.seoTitle ?? `${post.frontmatter.title} | JetSet Travel Cyprus`,
+    },
     description: post.frontmatter.description,
     robots: { index: true, follow: true },
     alternates: (() => {
@@ -102,7 +105,7 @@ export async function generateMetadata({
     openGraph: {
       type: "article",
       siteName: "JetSet Travel Cyprus",
-      title: post.frontmatter.title,
+      title: seoTitle,
       description: post.frontmatter.description,
       url: getCanonicalUrl(`/blog/${slug}`, (locale === "ru" ? "ru" : "en") as Locale),
       locale: isRussian ? "ru_RU" : "en_CY",
@@ -114,7 +117,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: post.frontmatter.title,
+      title: seoTitle,
       description: post.frontmatter.description,
       images: [ogImage],
     },
@@ -227,6 +230,12 @@ export default async function BlogPostPage({
     ],
     paphos: [
       { slug: locale === "en" ? "paphos-travel-agency" : "turisticheskoe-agentstvo-pafos", labelEn: "Paphos Travel Agency", labelRu: "Турагентство в Пафосе" },
+    ],
+    "labour-vfr": [
+      { slug: "labour-vfr-flights-cyprus", labelEn: "Labour & VFR Flights", labelRu: "Тарифы Labour и VFR" },
+    ],
+    "seasonal-staff": [
+      { slug: "seasonal-staff-travel-cyprus", labelEn: "Seasonal Staff Flights", labelRu: "Перелёты сезонного персонала" },
     ],
   };
   const relatedServices = Array.from(

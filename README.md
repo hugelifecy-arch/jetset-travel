@@ -75,6 +75,7 @@ Audits, playbooks, and SEO strategy live under [`docs/`](./docs):
 - `jetset-claudecode-master-playbook.md` — master Claude Code playbook
 - `jetset-seo-fix-playbook.md` — concrete SEO remediation steps
 - `jetset-travel-indexing-fix-plan.md` — indexing remediation plan
+- `labour-vfr-campaign.md` — Labour & VFR flights campaign: pages, airline verification, Google Business Profile posts, 90-day measurement plan
 
 The day-to-day correction playbook used by the Claude Code agent lives in
 [`CLAUDE.md`](./CLAUDE.md) at the repo root.

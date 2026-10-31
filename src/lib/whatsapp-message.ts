@@ -30,6 +30,8 @@ export type WhatsAppTopic =
   | "hotel"
   | "flights"
   | "paphos"
+  | "labour-vfr"
+  | "seasonal-staff"
   | "quote"
   | "contact"
   | "generic";
@@ -51,6 +53,8 @@ const PAGE_TOPICS: Record<string, WhatsAppTopic> = {
   "paphos-travel-agency": "paphos",
   "turisticheskoe-agentstvo-pafos": "paphos",
   "schengen-cyprus-2026": "schengen",
+  "labour-vfr-flights-cyprus": "labour-vfr",
+  "seasonal-staff-travel-cyprus": "seasonal-staff",
   quote: "quote",
   contact: "contact",
 };
@@ -61,6 +65,7 @@ const PAGE_TOPICS: Record<string, WhatsAppTopic> = {
  * "cyprus-schengen-2026-business-travel" is a visa question.
  */
 const BLOG_KEYWORDS: ReadonlyArray<readonly [WhatsAppTopic, readonly string[]]> = [
+  ["labour-vfr", ["labour", "vfr", "winter-staff-flights", "aviabilety-domoj"]],
   ["vip", ["vip-airport", "vip-obsluzhivanie"]],
   ["jet-yacht", ["private-jet", "chastnyj-samolet"]],
   ["cruise", ["cruise", "kruiz"]],
@@ -85,6 +90,10 @@ const MESSAGES: Record<"en" | "ru", Record<WhatsAppTopic, string>> = {
     hotel: "Hi JetSet, I'd like help booking a hotel. Destination and dates: ",
     flights: "Hi JetSet, I'd like a quote for flights. Route and dates: ",
     paphos: "Hi JetSet, I'd like help planning a trip with your Paphos office. Details: ",
+    "labour-vfr":
+      "Hello JetSet Travel, I would like a special Labour/VFR flight quotation from Cyprus. Destination and dates: ",
+    "seasonal-staff":
+      "Hello JetSet Travel, I manage employees in Cyprus and would like a quotation for seasonal staff flights and return travel.",
     quote: "Hi JetSet, I'd like a travel quote. Details: ",
     contact: "Hi JetSet, I have a question: ",
     generic: "Hi JetSet, I'd like help with...",
@@ -102,6 +111,10 @@ const MESSAGES: Record<"en" | "ru", Record<WhatsAppTopic, string>> = {
     hotel: "Здравствуйте, JetSet! Нужна помощь с бронированием отеля. Направление и даты: ",
     flights: "Здравствуйте, JetSet! Нужны авиабилеты. Маршрут и даты: ",
     paphos: "Здравствуйте, JetSet! Обращаюсь в ваш офис в Пафосе: нужна помощь с поездкой. Детали: ",
+    "labour-vfr":
+      "Здравствуйте, JetSet Travel! Прошу рассчитать специальный тариф Labour/VFR на перелёт с Кипра. Направление и даты: ",
+    "seasonal-staff":
+      "Здравствуйте, JetSet Travel! У нас работают сотрудники на Кипре. Прошу рассчитать перелёты сезонного персонала домой и обратно на Кипр.",
     quote: "Здравствуйте, JetSet! Хочу получить предложение по поездке. Детали: ",
     contact: "Здравствуйте, JetSet! У меня вопрос: ",
     generic: "Здравствуйте JetSet, мне нужна помощь с...",
@@ -123,6 +136,11 @@ export function whatsAppTopic(pathname: string | null | undefined): WhatsAppTopi
     return "generic";
   }
   return PAGE_TOPICS[page] ?? "generic";
+}
+
+/** Prefilled chat text for a topic, in English or Russian. */
+export function whatsAppTopicMessage(topic: WhatsAppTopic, locale: string): string {
+  return MESSAGES[locale === "ru" ? "ru" : "en"][topic];
 }
 
 /** Prefilled chat text for the page and language the visitor is viewing. */

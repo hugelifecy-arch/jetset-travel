@@ -11,6 +11,7 @@
  */
 
 export const BLOG_CTA_TOPICS = [
+  "labour-vfr",
   "vip-airport",
   "private-jet-yacht",
   "villas",
@@ -40,6 +41,10 @@ const QUOTE = { en: "/quote", ru: "/quote" };
 const VIP_SERVICES_PAGE = { en: "/vip-services", ru: "/vip-services" };
 
 export const BLOG_CTA_CONFIG: Record<BlogCtaTopic, BlogCtaTopicConfig> = {
+  "labour-vfr": {
+    messageKey: "labourVfr",
+    servicePath: { en: "/labour-vfr-flights-cyprus", ru: "/labour-vfr-flights-cyprus" },
+  },
   "vip-airport": { messageKey: "vipAirport", servicePath: VIP_SERVICES_PAGE },
   "private-jet-yacht": { messageKey: "privateJetYacht", servicePath: VIP_SERVICES_PAGE },
   villas: { messageKey: "villas", servicePath: VIP_SERVICES_PAGE },
@@ -78,6 +83,13 @@ interface TopicRule {
 }
 
 const RULES: readonly TopicRule[] = [
+  // Before flights/corporate: the winter staff-flights posts are tagged
+  // "flights" and "seasonal-staff" but belong to the Labour/VFR service.
+  {
+    topic: "labour-vfr",
+    tags: ["labour-vfr", "vfr", "labour fares", "тарифы labour/vfr"],
+    slug: ["labour", "vfr", "winter-staff-flights", "aviabilety-domoj"],
+  },
   {
     topic: "vip-airport",
     slug: ["vip-airport", "vip-obsluzhivanie"],

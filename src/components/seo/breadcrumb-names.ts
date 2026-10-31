@@ -21,6 +21,8 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     "flight-tickets-cyprus": "Flight Tickets Cyprus",
     "hotel-booking-cyprus": "Hotel Booking Cyprus",
     "schengen-cyprus-2026": "Is Cyprus in Schengen?",
+    "labour-vfr-flights-cyprus": "Labour & VFR Flights",
+    "seasonal-staff-travel-cyprus": "Seasonal Staff Flights",
   },
   ru: {
     about: "О нас",
@@ -47,6 +49,8 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     "luxury-travel-cyprus": "Люкс отдых Кипр",
     "hotel-booking-cyprus": "Бронирование отелей Кипр",
     "schengen-cyprus-2026": "Кипр в Шенгене?",
+    "labour-vfr-flights-cyprus": "Тарифы Labour и VFR",
+    "seasonal-staff-travel-cyprus": "Перелёты сезонного персонала",
   },
 };
 

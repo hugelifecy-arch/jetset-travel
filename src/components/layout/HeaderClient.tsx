@@ -18,6 +18,7 @@ const serviceLinks = [
   { href: "/luxury-travel", key: "luxury" },
   { href: "/vip-services", key: "vip" },
   { href: { en: "/flight-tickets-cyprus", ru: "/aviabilety-kipr" }, key: "flights" },
+  { href: "/labour-vfr-flights-cyprus", key: "labourVfr" },
   { href: "/cruises", key: "cruises" },
   { href: "/visa-services", key: "visas" },
   { href: "/hotel-reservations", key: "hotels" },

@@ -315,6 +315,36 @@ export default async function FlightPageContent({
         </div>
       </section>
 
+      {/* Special Labour & VFR fares (Oct 2026 campaign) */}
+      <section className="py-16 bg-brand-light" aria-labelledby="flights-labour-vfr">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl border border-brand-gold/30 bg-white p-6 sm:p-10">
+            <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold-ink mb-2">
+              {t("labourLabel")}
+            </p>
+            <h2 id="flights-labour-vfr" className="text-2xl md:text-3xl font-bold text-brand-navy">
+              {t("labourTitle")}
+            </h2>
+            <p className="mt-3 text-brand-navy/75 leading-relaxed">{t("labourText")}</p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href={`/${locale}/labour-vfr-flights-cyprus`}
+                className="inline-flex min-h-11 items-center justify-center rounded-full bg-brand-gold px-6 py-3 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
+              >
+                {t("labourCta")}
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link
+                href={`/${locale}/seasonal-staff-travel-cyprus`}
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-brand-navy/20 px-6 py-3 text-sm font-semibold text-brand-navy hover:bg-brand-navy/5 transition-colors"
+              >
+                {t("labourEmployerCta")}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <FAQSection title={t("faqTitle")} items={faqItems} background="light" />
 

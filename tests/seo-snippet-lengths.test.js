@@ -28,7 +28,20 @@
 
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import { getPublishedPosts } from "../src/lib/blog.ts";
+
+// Pages whose metadata comes from the message catalogues: read the real
+// strings so this list can't drift from what the pages render.
+const MESSAGES = {
+  en: JSON.parse(readFileSync(new URL("../src/messages/en.json", import.meta.url), "utf-8")),
+  ru: JSON.parse(readFileSync(new URL("../src/messages/ru.json", import.meta.url), "utf-8")),
+};
+const fromMessages = (locale, namespace, route) => ({
+  page: `/${locale}${route}`,
+  title: MESSAGES[locale][namespace].metaTitle,
+  description: MESSAGES[locale][namespace].metaDescription,
+});
 
 // Regression-band bounds (enforced). The aspirational mobile-safe targets
 // are stricter (title 30-60, description 120-160) but a large portion of
@@ -46,6 +59,11 @@ const DESC_MAX = 200;
  * (someone shortening a title to "JetSet") fails CI.
  */
 const STATIC_PAGE_METADATA = [
+  // Labour & VFR flights campaign (Oct 2026)
+  fromMessages("en", "labourVfrPage", "/labour-vfr-flights-cyprus"),
+  fromMessages("ru", "labourVfrPage", "/labour-vfr-flights-cyprus"),
+  fromMessages("en", "seasonalStaffPage", "/seasonal-staff-travel-cyprus"),
+  fromMessages("ru", "seasonalStaffPage", "/seasonal-staff-travel-cyprus"),
   {
     page: "/en (homepage)",
     title: "Travel Agency in Cyprus — Paphos & Limassol | JetSet Travel",

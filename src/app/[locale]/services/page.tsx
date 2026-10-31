@@ -122,6 +122,15 @@ export default async function ServicesPage({
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </div>
+              <p className="mt-4">
+                <Link
+                  href={`/${locale}/labour-vfr-flights-cyprus`}
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy transition-colors"
+                >
+                  {t("flightsLabourLink")}
+                  <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
+              </p>
             </div>
             <div className="flex-1 w-full hidden md:block">
               <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
@@ -338,6 +347,15 @@ export default async function ServicesPage({
                   className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy transition-colors"
                 >
                   {t("corporateCyprusLink")}
+                  <ArrowRight className="ml-1.5 h-4 w-4" />
+                </Link>
+              </p>
+              <p className="mt-2">
+                <Link
+                  href={`/${locale}/seasonal-staff-travel-cyprus`}
+                  className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy transition-colors"
+                >
+                  {t("corporateSeasonalLink")}
                   <ArrowRight className="ml-1.5 h-4 w-4" />
                 </Link>
               </p>

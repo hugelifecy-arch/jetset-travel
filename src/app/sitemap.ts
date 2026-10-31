@@ -58,6 +58,10 @@ const pages: StaticPage[] = [
   // pages because it consolidates the cluster the GSC data shows is
   // currently winning impressions (+143% on the Schengen guide post).
   { path: "/schengen-cyprus-2026", priority: 0.9, changeFrequency: "monthly", lastModified: "2026-10-26" },
+  // Labour & VFR flights campaign (Oct 2026): the main service page and the
+  // employer page for hotels/restaurants arranging seasonal staff flights.
+  { path: "/labour-vfr-flights-cyprus", priority: 0.9, changeFrequency: "monthly", lastModified: "2026-10-31" },
+  { path: "/seasonal-staff-travel-cyprus", priority: 0.8, changeFrequency: "monthly", lastModified: "2026-10-31" },
 ];
 
 /**

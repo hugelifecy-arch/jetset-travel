@@ -30,6 +30,10 @@ describe("whatsAppTopic", () => {
     "/en/paphos-travel-agency": "paphos",
     "/ru/turisticheskoe-agentstvo-pafos": "paphos",
     "/en/schengen-cyprus-2026": "schengen",
+    "/en/labour-vfr-flights-cyprus": "labour-vfr",
+    "/ru/labour-vfr-flights-cyprus": "labour-vfr",
+    "/en/seasonal-staff-travel-cyprus": "seasonal-staff",
+    "/ru/seasonal-staff-travel-cyprus": "seasonal-staff",
     "/en/quote": "quote",
     "/ru/quote?type=vip": "quote",
     "/en/contact": "contact",
@@ -65,6 +69,8 @@ describe("whatsAppTopic", () => {
     "korporativnyj-retrit-v-limassole": "corporate",
     "business-travelers-guide-limassol": "corporate",
     "larnaca-vs-paphos-airport-2026": "generic",
+    "winter-staff-flights-cyprus-2026-2027": "labour-vfr",
+    "aviabilety-domoj-s-kipra-zima-2026-2027": "labour-vfr",
   };
   for (const [slug, topic] of Object.entries(posts)) {
     for (const locale of ["en", "ru"]) {

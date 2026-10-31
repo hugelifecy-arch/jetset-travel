@@ -11,6 +11,8 @@ import {
   Info,
   MapPin,
   ArrowRight,
+  PlaneTakeoff,
+  Users,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -23,7 +25,9 @@ type ServiceKey =
   | "cruises"
   | "contact"
   | "about"
-  | "paphos";
+  | "paphos"
+  | "labourVfr"
+  | "seasonalStaff";
 
 interface ServiceLink {
   key: ServiceKey;
@@ -41,6 +45,9 @@ const allServices: ServiceLink[] = [
   { key: "contact", href: "/contact", icon: Phone },
   { key: "about", href: "/about", icon: Info },
   { key: "paphos", href: (locale: string) => locale === "ru" ? "/turisticheskoe-agentstvo-pafos" : "/paphos-travel-agency", icon: MapPin },
+  // Only rendered when a page asks for them via `include` (not in the default top-3).
+  { key: "labourVfr", href: "/labour-vfr-flights-cyprus", icon: PlaneTakeoff },
+  { key: "seasonalStaff", href: "/seasonal-staff-travel-cyprus", icon: Users },
 ];
 
 const servicesByKey = new Map(allServices.map((s) => [s.key, s]));
@@ -58,7 +65,9 @@ export default async function ServicesCrossLinks({
 
   const services = include
     ? include.map((k) => servicesByKey.get(k)).filter(Boolean) as ServiceLink[]
-    : allServices.filter((s) => s.key !== exclude).slice(0, 3);
+    : allServices
+        .filter((s) => s.key !== exclude && s.key !== "labourVfr" && s.key !== "seasonalStaff")
+        .slice(0, 3);
 
   return (
     <section className="py-20 bg-white">

@@ -155,6 +155,25 @@ export const LOCALE_ALTERNATES: Record<
     ru: "/ru/schengen-cyprus-2026",
   },
 
+  // Labour & VFR flights campaign (Oct 2026). Same Latin slug in both
+  // locales, like the other "*-cyprus" landing pages.
+  "/en/labour-vfr-flights-cyprus": {
+    en: "/en/labour-vfr-flights-cyprus",
+    ru: "/ru/labour-vfr-flights-cyprus",
+  },
+  "/ru/labour-vfr-flights-cyprus": {
+    en: "/en/labour-vfr-flights-cyprus",
+    ru: "/ru/labour-vfr-flights-cyprus",
+  },
+  "/en/seasonal-staff-travel-cyprus": {
+    en: "/en/seasonal-staff-travel-cyprus",
+    ru: "/ru/seasonal-staff-travel-cyprus",
+  },
+  "/ru/seasonal-staff-travel-cyprus": {
+    en: "/en/seasonal-staff-travel-cyprus",
+    ru: "/ru/seasonal-staff-travel-cyprus",
+  },
+
   // --- Cross-locale pages with localised slugs ---
   "/en/paphos-travel-agency": {
     en: "/en/paphos-travel-agency",

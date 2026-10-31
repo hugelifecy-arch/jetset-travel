@@ -7,6 +7,8 @@ interface ServiceSchemaProps {
   locale?: string;
   serviceType?: string;
   dateModified?: string;
+  /** schema.org Audience (e.g. BusinessAudience for employer services). */
+  audience?: Record<string, unknown>;
 }
 
 export default function ServiceSchema({
@@ -16,6 +18,7 @@ export default function ServiceSchema({
   locale = "en",
   serviceType,
   dateModified,
+  audience,
 }: ServiceSchemaProps) {
   const isRussian = locale === "ru";
 
@@ -27,6 +30,7 @@ export default function ServiceSchema({
     url,
     ...(serviceType && { serviceType }),
     ...(dateModified && { dateModified }),
+    ...(audience && { audience }),
     provider: {
       "@id": "https://www.jetset-travel.com/#organization",
     },
