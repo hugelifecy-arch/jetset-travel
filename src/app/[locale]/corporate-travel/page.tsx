@@ -16,14 +16,16 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     routePath: "/corporate-travel",
+    // Must differ from /corporate-travel-cyprus (Yandex flagged the shared
+    // title, Oct 2026). This page owns "corporate travel management".
     title:
       locale === "ru"
-        ? "Корпоративные Поездки Кипр | Деловой Туризм — JetSet"
-        : "Corporate Travel Cyprus | Business Travel — JetSet",
+        ? "Управление корпоративными командировками на Кипре | JetSet"
+        : "Corporate Travel Management Cyprus | IATA Agency — JetSet",
     description:
       locale === "ru"
-        ? "Корпоративные поездки на Кипре. Прозрачная отчётность, бесплатная консультация, поддержка 24/7 при сбоях. Аккредитация IATA."
-        : "Corporate travel management in Cyprus. Free consultation, clean invoicing, 24/7 disruption support. IATA accredited, dedicated account manager for your business.",
+        ? "JetSet — агентство на Кипре с аккредитацией IATA: командировки по вашей тревел-политике, корректные счета для бухгалтерии, ежемесячные отчёты, поддержка 24/7."
+        : "IATA-accredited JetSet manages corporate travel for Cyprus businesses: travel policy control, VAT-compliant invoices, monthly spend reports and 24/7 support.",
     keywords:
       locale === "ru"
         ? ["корпоративные командировки Кипр", "деловой туризм Пафос", "бизнес поездки Кипр", "корпоративное турагентство", "IATA агентство Кипр", "корпоративные путешествия Кипр", "корпоративное турагентство Кипр", "корпоративное обслуживание в Пафосе"]

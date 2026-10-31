@@ -38,14 +38,16 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     routePath: "/corporate-travel-cyprus",
+    // Must differ from /corporate-travel (Yandex flagged the shared title,
+    // Oct 2026). This page owns "business travel" + the four cities.
     title:
       locale === "ru"
-        ? "Корпоративные Поездки Кипр | Деловой Туризм — JetSet"
-        : "Corporate Travel Cyprus | Business Travel — JetSet",
+        ? "Деловые поездки по Кипру: Пафос, Лимассол, Никосия | JetSet"
+        : "Business Travel Cyprus: Paphos, Limassol, Nicosia | JetSet",
     description:
       locale === "ru"
-        ? "Управление корпоративными поездками на Кипре. Бронирование, чистые счета, поддержка 24/7. IATA. Пафос, Лимассол, Никосия, Ларнака."
-        : "Corporate travel management across Cyprus. Policy-compliant bookings, 24/7 disruption support, clean invoicing. IATA accredited. Serving Paphos, Limassol, Nicosia & Larnaca.",
+        ? "Деловые поездки по Кипру с JetSet: аккредитация IATA, головной офис в Пафосе, работаем в Лимассоле, Никосии и Ларнаке. Консолидированные счета, поддержка 24/7."
+        : "Business travel across Cyprus from JetSet's Paphos HQ: one IATA-accredited team for Limassol, Nicosia and Larnaca firms. Consolidated invoicing, 24/7 support.",
     keywords:
       locale === "ru"
         ? ["корпоративные поездки Кипр", "деловой туризм Пафос Лимассол", "бизнес командировки Кипр", "IATA корпоративное агентство", "корпоративные путешествия Кипр", "корпоративное турагентство Кипр", "корпоративное обслуживание в Пафосе"]
