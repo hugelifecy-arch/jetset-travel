@@ -14,6 +14,7 @@ export default function Footer() {
     { href: `/${locale}/about`, label: t("aboutUs") },
     { href: `/${locale}/services`, label: t("ourServices") },
     { href: `/${locale}/corporate-travel`, label: t("corporateTravel") },
+    { href: `/${locale}/seasonal-staff-travel-cyprus`, label: t("seasonalStaffFlights") },
     { href: `/${locale}/faq`, label: t("faq") },
     { href: `/${locale}/blog`, label: t("blog") },
     { href: `/${locale}/contact`, label: t("contact") },
@@ -26,6 +27,7 @@ export default function Footer() {
 
   const serviceLinks = [
     { href: `/${locale}/${flightsSlug}`, label: t("flightBooking") },
+    { href: `/${locale}/labour-vfr-flights-cyprus`, label: t("labourVfrFlights") },
     { href: `/${locale}/hotel-reservations`, label: t("hotelReservations") },
     { href: `/${locale}/cruises`, label: t("cruises") },
     { href: `/${locale}/visa-services`, label: t("visaAssistance") },

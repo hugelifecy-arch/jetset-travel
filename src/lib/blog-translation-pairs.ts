@@ -33,6 +33,7 @@ export const BLOG_SLUG_PAIRS_EN_TO_RU: Record<string, string> = {
   "travel-agency-paphos-guide": "kak-vybrat-turagenstvo-pafos",
   "travel-insurance-cyprus-visitors-guide": "strakhovka-dlya-poezdki-na-kipr-2026",
   "vip-airport-service-larnaca-paphos": "vip-obsluzhivanie-aeroport-larnaka-pafos",
+  "winter-staff-flights-cyprus-2026-2027": "aviabilety-domoj-s-kipra-zima-2026-2027",
 };
 
 const RU_TO_EN: Record<string, string> = Object.fromEntries(

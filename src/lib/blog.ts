@@ -16,7 +16,14 @@ export const BLOG_CATEGORIES = [
 export type BlogCategory = (typeof BLOG_CATEGORIES)[number];
 
 export interface BlogPostFrontmatter {
+  /** Article headline: the H1, BlogPosting headline and breadcrumb label. */
   title: string;
+  /**
+   * Optional complete <title> (and og/twitter title) when the search title
+   * should differ from the H1. Used as-is: no " | JetSet Travel Cyprus"
+   * suffix is appended, so keep it within ~60 characters.
+   */
+  seoTitle?: string;
   description: string;
   date: string;
   /** Optional — when the article was last materially updated. Falls back to `date`. */

@@ -13,6 +13,7 @@ import {
   PlaneTakeoff,
   Check,
   ArrowRight,
+  Users,
 } from "lucide-react";
 import Accordion from "@/components/ui/Accordion";
 
@@ -284,6 +285,28 @@ export default function CorporateTravelContent() {
               ))}
             </ul>
           </div>
+        </div>
+      </section>
+
+      {/* Seasonal staff flights for hospitality employers (Labour/VFR campaign) */}
+      <section className="py-16 bg-brand-light" aria-labelledby="corp-seasonal">
+        <div className="mx-auto flex max-w-5xl flex-col items-start gap-6 px-4 sm:flex-row sm:items-center sm:px-6 lg:px-8">
+          <div className="inline-flex h-14 w-14 flex-none items-center justify-center rounded-xl bg-brand-gold/10 text-brand-gold-ink">
+            <Users className="h-7 w-7" aria-hidden="true" />
+          </div>
+          <div className="flex-1">
+            <h2 id="corp-seasonal" className="text-2xl md:text-3xl font-bold text-brand-navy">
+              {t("seasonalTitle")}
+            </h2>
+            <p className="mt-2 text-brand-navy/75 leading-relaxed">{t("seasonalText")}</p>
+          </div>
+          <Link
+            href={`/${locale}/seasonal-staff-travel-cyprus`}
+            className="inline-flex min-h-11 items-center rounded-full bg-brand-gold px-6 py-3 text-sm font-semibold text-brand-navy transition-colors hover:bg-brand-gold/90"
+          >
+            {t("seasonalCta")}
+            <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
       </section>
 

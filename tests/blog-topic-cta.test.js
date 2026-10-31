@@ -64,6 +64,8 @@ const EXPECTED = {
   "best-time-visit-cyprus-monthly-guide": "best-time",
   "luchshee-vremya-dlya-poseshcheniya-kipra": "best-time",
   "travel-agency-paphos-guide": "general",
+  "winter-staff-flights-cyprus-2026-2027": "labour-vfr",
+  "aviabilety-domoj-s-kipra-zima-2026-2027": "labour-vfr",
   "kak-vybrat-turagenstvo-pafos": "general",
 };
 

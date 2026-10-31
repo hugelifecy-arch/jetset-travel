@@ -96,6 +96,28 @@ export default function ServicesGrid() {
             </div>
           ))}
         </div>
+
+        {/* Labour & VFR fares (Oct 2026 campaign): text links, so the
+            five-card grid above keeps its layout. */}
+        <div className="mt-8 flex flex-col items-start gap-3 rounded-2xl border border-brand-gold/30 bg-brand-gold/5 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <p className="text-sm leading-relaxed text-brand-navy/80 sm:text-base">
+            {t("labourStrip")}
+          </p>
+          <div className="flex flex-shrink-0 flex-wrap gap-x-5 gap-y-2">
+            <Link
+              href={`/${locale}/labour-vfr-flights-cyprus`}
+              className="text-sm font-semibold text-brand-gold-ink hover:underline"
+            >
+              {t("labourVfr.cta")} &rarr;
+            </Link>
+            <Link
+              href={`/${locale}/seasonal-staff-travel-cyprus`}
+              className="text-sm font-semibold text-brand-gold-ink hover:underline"
+            >
+              {t("seasonalStaff.cta")} &rarr;
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

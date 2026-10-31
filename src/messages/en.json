@@ -16,7 +16,8 @@
     "faq": "FAQ",
     "blog": "Blog",
     "privateClients": "Private Clients",
-    "vip": "VIP Services"
+    "vip": "VIP Services",
+    "labourVfr": "Labour & VFR Fares"
   },
   "hero": {
     "title": "Travel Agency in Paphos, Cyprus —",
@@ -133,7 +134,18 @@
       "title": "Travel Agency in Paphos",
       "description": "Visit our Paphos office for face-to-face travel planning, bookings, and visa consultation.",
       "cta": "Visit Paphos office"
-    }
+    },
+    "labourVfr": {
+      "title": "Labour & VFR Flights",
+      "description": "Special Labour and VFR fare checks with Qatar Airways, Emirates and Gulf Air to Manila, Kathmandu, Dhaka and Delhi.",
+      "cta": "Check special fares"
+    },
+    "seasonalStaff": {
+      "title": "Seasonal Staff Flights",
+      "description": "Flights home and back to Cyprus for hotel and restaurant teams, arranged and invoiced for the employer.",
+      "cta": "Arrange staff flights"
+    },
+    "labourStrip": "Working in Cyprus and flying home to Manila, Kathmandu, Dhaka or Delhi? Ask us about special Labour & VFR fares."
   },
   "reviews": {
     "title": "What Our Clients Say",
@@ -256,7 +268,9 @@
     "companyLegal": "JetSet K&K Travel Ltd | Reg. No. HE 181550 | Tourism Licence: 7775 | IATA: 14200130",
     "travelAgencyPaphos": "Travel Agency Paphos",
     "privateClients": "Private Clients",
-    "vipServices": "VIP Services"
+    "vipServices": "VIP Services",
+    "labourVfrFlights": "Labour & VFR Flights",
+    "seasonalStaffFlights": "Seasonal Staff Flights"
   },
   "forms": {
     "invalidPhone": "Please enter a valid phone number",
@@ -577,7 +591,10 @@
     "ctaTitle": "Ready to Streamline Your Corporate Travel?",
     "ctaSubtitle": "Join law firms, tech companies, and enterprises across Cyprus who trust JetSet for reliable, cost-effective business travel.",
     "ctaQuote": "Get a Free Quote",
-    "ctaAccount": "Set Up an Account"
+    "ctaAccount": "Set Up an Account",
+    "seasonalTitle": "Seasonal staff flights for hotels and restaurants",
+    "seasonalText": "Sending international employees home after the season, or bringing them back to Cyprus for the next one? We arrange group staff flights, check Labour/VFR fares where they apply and invoice the company.",
+    "seasonalCta": "Seasonal staff flights"
   },
   "hotelPage": {
     "heroLabel": "Hotel Reservations",
@@ -958,7 +975,9 @@
     "ctaContact": "Contact Us",
     "privateCardTitle": "Private & Family Office Travel",
     "privateCardDesc": "Discreet, principal-led travel management for private clients and family offices.",
-    "privateCardLink": "Private Clients"
+    "privateCardLink": "Private Clients",
+    "flightsLabourLink": "Special Labour & VFR fares to Manila, Kathmandu, Dhaka and Delhi",
+    "corporateSeasonalLink": "Seasonal staff flights for hotels and restaurants"
   },
   "mobileBar": {
     "call": "Call",
@@ -1009,6 +1028,14 @@
     "whatsappLabel": "Ask on WhatsApp",
     "newTabHint": "(opens in a new tab)",
     "topics": {
+      "labourVfr": {
+        "title": "Travelling home from Cyprus this winter?",
+        "text": "We check special Labour and VFR fares with Qatar Airways, Emirates and Gulf Air to Manila, Kathmandu, Dhaka and Delhi, and plan your return to Cyprus.",
+        "button": "See Labour & VFR fares",
+        "whatsapp": "Hello JetSet Travel, I read your winter flights guide and would like a special Labour/VFR flight quotation from Cyprus. Destination and dates: ",
+        "endTitle": "Ask us to check your special fare",
+        "endText": "Send us your destination, dates and passport nationality on WhatsApp. We compare the available fares, baggage and conditions before you decide."
+      },
       "vipAirport": {
         "title": "Flying through Larnaca or Paphos?",
         "text": "We arrange meet & assist at both airports and the Express Lane at Larnaca. Send us your flight details and we will check what can be arranged.",
@@ -1651,7 +1678,12 @@
     "faq4Q": "Do you offer corporate flight accounts?",
     "faq4A": "Yes. Corporate clients receive a dedicated account manager, monthly consolidated invoicing, corporate fares where airlines offer them, and priority rebooking during disruptions.",
     "faq5Q": "How far in advance should I book flights from Cyprus?",
-    "faq5A": "For the best fares, we recommend booking 2-3 months ahead for European routes and 3-6 months for long-haul destinations. However, we often find last-minute deals for flexible travellers."
+    "faq5A": "For the best fares, we recommend booking 2-3 months ahead for European routes and 3-6 months for long-haul destinations. However, we often find last-minute deals for flexible travellers.",
+    "labourLabel": "Labour & VFR fares",
+    "labourTitle": "Special Labour & VFR fares to Manila, Kathmandu, Dhaka and Delhi",
+    "labourText": "Working in Cyprus and travelling home on leave? We check special Labour and VFR fares with Qatar Airways, Emirates and Gulf Air and compare them with the published fares, including baggage and change conditions, before you book.",
+    "labourCta": "See Labour & VFR flights",
+    "labourEmployerCta": "Booking for your staff?"
   },
   "hotelCyprusPage": {
     "heroLabel": "Hotel Booking Cyprus",
@@ -1891,5 +1923,283 @@
     "item6": "Luxury cruises with flights to the ship",
     "cta": "Explore VIP services",
     "ctaSecondary": "Plan a luxury trip"
+  },
+  "labourVfrPage": {
+    "metaTitle": "Special Labour & VFR Flights from Cyprus | JetSet Travel",
+    "metaDescription": "Labour & VFR fares from Cyprus to Manila, Kathmandu, Dhaka and Delhi with Qatar Airways, Emirates and Gulf Air. IATA agency in Paphos. Ask on WhatsApp.",
+    "heroLabel": "Labour & VFR fares · Qatar Airways · Emirates · Gulf Air",
+    "heroTitle": "Special Labour & VFR Flight Fares from Cyprus",
+    "heroSubtitle": "Working in Cyprus and flying home on leave? JetSet Travel, an IATA-accredited travel agency in Paphos, checks special Labour and VFR fares with Qatar Airways, Emirates and Gulf Air to Manila, Kathmandu, Dhaka and Delhi, and plans your return flight to Cyprus.",
+    "heroCta": "Request Labour/VFR Fare",
+    "heroSecondary": "Choose your destination",
+    "heroNote": "IATA accredited (14200130) · Cyprus Tourism Licence 7775 · Office in Paphos since 2006",
+    "destNavLabel": "Destinations",
+    "newTabHint": "(opens WhatsApp in a new tab)",
+    "summaryTitle": "In short",
+    "summaryText": "JetSet Travel (JetSet K&K Travel Ltd), an IATA-accredited travel agency at 26A Agapinoros Street, Paphos, books special Labour and VFR (Visiting Friends and Relatives) airfares from Cyprus for overseas employees and their employers. We have commercial access to these fares with Qatar Airways, Emirates and Gulf Air, and check them for Manila (MNL), Kathmandu (KTM), Dhaka (DAC) and Delhi (DEL), together with the return flight to Cyprus. Whether a special fare applies, and on which dates, depends on each airline's fare rules, so we confirm the fare, baggage and conditions before you pay. Requests go through WhatsApp on +357 99 478 073.",
+    "faresTitle": "What are Labour and VFR fares?",
+    "faresIntro": "Airlines sell the same seat under different fare types. Special fares are set aside for particular groups of passengers and come with their own rules. These are the terms you will hear from us:",
+    "fareTypes": {
+      "labour": {
+        "name": "Labour fares",
+        "text": "Special fares that airlines file for passengers travelling for work, typically people employed abroad who fly between their home country and the country where they work. In booking systems they use the \"labourer/worker\" passenger type, and the airline can ask for proof of employment or residence."
+      },
+      "vfr": {
+        "name": "VFR fares (Visiting Friends and Relatives)",
+        "text": "Fares for passengers travelling to visit family or friends, for example a Cyprus resident flying home to see relatives. Where an airline offers them, the fare rules set who is eligible and what the ticket allows."
+      },
+      "ethnic": {
+        "name": "Ethnic fares",
+        "text": "A trade term rather than an official fare type: discounted fares for passengers travelling to or from their home country, often linked to the passport nationality. They can overlap with Labour and VFR fares and are usually restricted."
+      },
+      "published": {
+        "name": "Published fares",
+        "text": "The ordinary fares that anyone can buy through an airline or a travel agent. We always compare a special fare with the best published fare, because a special fare is not automatically the cheaper one."
+      },
+      "promo": {
+        "name": "Promotional fares",
+        "text": "Sale fares that an airline opens to everyone for set booking and travel dates. They can be good value, but often come with stricter change and refund rules and a limited number of seats."
+      },
+      "private": {
+        "name": "Private and negotiated fares",
+        "text": "Fares that an airline distributes only through authorised agencies or for particular customers, and that do not appear on public websites. Labour and VFR fares are usually sold this way, which is why you ask an agency instead of searching online."
+      }
+    },
+    "faresNote": "Special fares are not available on every date, flight or route, and they are not always the cheapest option. Each fare's conditions (eligibility documents, baggage, changes, refunds and validity) are set by the airline and are not published on airline websites. We check them for your exact journey and tell you before you pay.",
+    "qualifyTitle": "Who may qualify?",
+    "qualifyIntro": "Eligibility is decided by each airline's fare rules, not by us. These are the travellers who usually ask us about special fares:",
+    "qualify1": "Employees working in Cyprus, for example in hotels, restaurants, households, care or agriculture, flying home on annual leave",
+    "qualify2": "Seasonal staff travelling home after the summer season and coming back to Cyprus for the next one",
+    "qualify3": "Cyprus residents visiting family in the Philippines, Nepal, Bangladesh or India",
+    "qualify4": "Workers joining or returning to an employer in Cyprus, including journeys that start in Manila, Kathmandu, Dhaka or Delhi (where the airline's rules allow the fare to be sold that way)",
+    "qualify5": "Employers booking flights for several members of staff at once",
+    "qualifyDocs": "Labour fares typically ask for proof that you travel for work, such as a valid Cyprus residence or work permit and, for some fares, an employment contract or a letter from your employer. VFR and ethnic fares can have their own requirements, such as your passport nationality. We tell you exactly which documents a fare needs before you book; keep them with you, because the airline can ask to see them at check-in.",
+    "airlinesTitle": "Qatar Airways, Emirates and Gulf Air from Larnaca",
+    "airlinesIntro": "We have commercial access to special Labour and VFR fare arrangements with these three airlines. Each flies from Larnaca to its own hub, so for most trips we can compare three routings.",
+    "airlines": {
+      "qatar": {
+        "name": "Qatar Airways",
+        "hub": "Larnaca → Doha (DOH)",
+        "text": "Connects in Doha to all four cities: Manila, Kathmandu, Dhaka and Delhi."
+      },
+      "emirates": {
+        "name": "Emirates",
+        "hub": "Larnaca → Dubai (DXB)",
+        "text": "Connects in Dubai to Manila, Dhaka and Delhi. Dubai–Kathmandu flights carry Emirates flight numbers but are operated by its partner flydubai."
+      },
+      "gulfair": {
+        "name": "Gulf Air",
+        "hub": "Larnaca → Bahrain (BAH)",
+        "text": "Connects in Bahrain to Manila, Dhaka and Delhi. Gulf Air does not currently fly to Kathmandu, so for Nepal we compare Qatar Airways and Emirates."
+      }
+    },
+    "airlinesNote": "None of the three airlines flies from Paphos, so these journeys start at Larnaca. Gulf flights were disrupted by the regional conflict in spring 2026 and schedules still change, so we check which airline actually operates your dates before we quote.",
+    "destTitle": "Special fares to Manila, Kathmandu, Dhaka and Delhi",
+    "destIntro": "There are no direct flights from Cyprus to these cities. Journeys connect through a hub such as Doha, Dubai or Bahrain. Choose your destination to send us a ready-made WhatsApp request.",
+    "routingLabel": "Typical routing",
+    "returnLabel": "Coming back to Cyprus",
+    "destinations": {
+      "manila": {
+        "title": "Flights from Cyprus to Manila (MNL)",
+        "text": "Filipino employees in Cyprus, many of them working in households, hotels and care, fly home to Manila for annual leave, Christmas or the end of a contract. We check special Labour and VFR fares from Cyprus to Manila with Qatar Airways, Emirates and Gulf Air, compare them with the best published fare, and show you the baggage allowance on each option.",
+        "routing": "Larnaca (LCA) → Doha, Dubai or Bahrain → Manila (MNL), with Qatar Airways, Emirates or Gulf Air. One connection.",
+        "return": "Book the Manila–Cyprus return together with the outbound if you know your dates. If your contract dates may move, ask us about the change fee before you buy.",
+        "cta": "Check Special Fare to Manila"
+      },
+      "kathmandu": {
+        "title": "Flights from Cyprus to Kathmandu (KTM)",
+        "text": "Nepali workers in Cyprus travelling home to Kathmandu can ask us to check special Labour and VFR fares with Qatar Airways and Emirates. We compare both routings, the connection times and the baggage allowance, and can price the return to Cyprus at the same time.",
+        "routing": "Larnaca (LCA) → Doha or Dubai → Kathmandu (KTM). Qatar Airways via Doha, or Emirates via Dubai with the Dubai–Kathmandu flight operated by flydubai. Gulf Air does not fly to Kathmandu.",
+        "return": "Coming back for the next season? We can price a Kathmandu–Cyprus return now, or book a ticket to Cyprus that starts in Kathmandu once your new dates are confirmed.",
+        "cta": "Check Special Fare to Kathmandu"
+      },
+      "dhaka": {
+        "title": "Flights from Cyprus to Dhaka (DAC)",
+        "text": "For Bangladeshi employees in Cyprus we check special Labour and VFR fares from Larnaca to Dhaka with Qatar Airways, Emirates and Gulf Air, and compare them with the published fares. Tell us your dates and whether you need the return to Cyprus.",
+        "routing": "Larnaca (LCA) → Doha, Dubai or Bahrain → Dhaka (DAC), with Qatar Airways, Emirates or Gulf Air. One connection.",
+        "return": "Need to be back in Cyprus by a fixed start date? Tell us the latest day you must arrive and we plan the Dhaka–Cyprus return flight around it.",
+        "cta": "Check Special Fare to Dhaka"
+      },
+      "delhi": {
+        "title": "Flights from Cyprus to Delhi (DEL)",
+        "text": "Indian workers and residents in Cyprus flying home to Delhi can choose between three routings. We check special Labour and VFR fares with Qatar Airways, Emirates and Gulf Air, and compare the baggage allowance and change rules on each.",
+        "routing": "Larnaca (LCA) → Doha, Dubai or Bahrain → Delhi (DEL), with Qatar Airways, Emirates or Gulf Air. One connection.",
+        "return": "Delhi–Cyprus return flights can be booked together with the outbound or separately. We tell you which works out better value and more flexible for your dates.",
+        "cta": "Check Special Fare to Delhi"
+      }
+    },
+    "returnTitle": "Planning your return flight to Cyprus",
+    "returnP1": "Most people who work in Cyprus need to come back, so we plan both directions together. Depending on the fare, a return ticket can be cheaper or more flexible than two one-way tickets; we check both and explain the difference.",
+    "returnP2": "Your documents for Cyprus matter as much as the ticket. Make sure your residence or work permit is valid on the day you fly back, or that your renewal is accepted for re-entry; airlines can refuse boarding when the documents for the destination are not in order. If you are unsure, ask your employer or the Civil Registry and Migration Department before you travel.",
+    "returnPoint1": "Return dates that match your contract start or your employer's reopening date",
+    "returnPoint2": "Ticket validity: how long you can stay before the return flight must be used",
+    "returnPoint3": "Whether the fare allows date changes, and the fee if it does",
+    "returnPoint4": "Tickets to Cyprus that start in Manila, Kathmandu, Dhaka or Delhi if you are already at home",
+    "checksTitle": "Baggage and fare conditions we check for you",
+    "checksIntro": "Going home often means heavy bags. Special fares can have different baggage allowances and rules from ordinary tickets, so we check every option against the same list before you decide:",
+    "check1": "Checked baggage allowance (pieces or total weight) on every flight of the journey",
+    "check2": "Cabin baggage size and weight",
+    "check3": "The cost of extra baggage if you need more than the fare includes",
+    "check4": "Whether dates can be changed, and the fee",
+    "check5": "Refund and no-show rules",
+    "check6": "Ticket validity and any minimum or maximum stay",
+    "check7": "Connection time in Doha, Dubai or Bahrain, and the transit rules for your passport",
+    "check8": "Names and passport details, which must match your passport exactly",
+    "whyTitle": "Why book through a local travel agency?",
+    "why1Title": "IATA-accredited since 2006",
+    "why1Text": "We issue airline tickets ourselves as an IATA agent (14200130), licensed by the Cyprus Deputy Ministry of Tourism (licence 7775).",
+    "why2Title": "An office you can visit",
+    "why2Text": "Our office is at 26A Agapinoros Street in Paphos. Talk to us in person, by phone or on WhatsApp.",
+    "why3Title": "Help when plans change",
+    "why3Text": "If the airline changes your flight or you need to move your return date, contact us and we deal with the airline for you.",
+    "why4Title": "Three airlines, one request",
+    "why4Text": "One WhatsApp message gets you a comparison of special and published fares with Qatar Airways, Emirates and Gulf Air.",
+    "stepsTitle": "How to request a special fare",
+    "step1Title": "Send a WhatsApp",
+    "step1Text": "Tap your destination. Add your travel dates, the number of passengers and your passport nationality.",
+    "step2Title": "We check the fares",
+    "step2Text": "We search special Labour/VFR fares and published fares with Qatar Airways, Emirates and Gulf Air for your dates.",
+    "step3Title": "Compare and decide",
+    "step3Text": "You get the options with price, baggage, connection times and change rules, plus the documents each fare needs.",
+    "step4Title": "Ticket issued",
+    "step4Text": "When you confirm, we issue your e-ticket and stay your contact if anything changes.",
+    "stepsCta": "Get Flight Quotation",
+    "employerTitle": "Booking for your staff?",
+    "employerText": "Hotels, restaurants and HR teams can ask us to arrange flights for several employees at once, invoiced to the company.",
+    "employerCta": "Seasonal staff flights",
+    "faqTitle": "Labour & VFR flights from Cyprus: questions",
+    "faq1Q": "Which travel agency in Cyprus offers special Labour fares to Manila?",
+    "faq1A": "JetSet Travel, an IATA-accredited travel agency in Paphos, checks special Labour and VFR fares from Cyprus to Manila with Qatar Airways, Emirates and Gulf Air. Send your dates on WhatsApp (+357 99 478 073) and we compare the special fare with the published fares, including baggage and change conditions.",
+    "faq2Q": "Where can Nepalese workers in Cyprus find flights to Kathmandu?",
+    "faq2A": "JetSet Travel in Paphos checks special Labour and VFR fares from Larnaca to Kathmandu with Qatar Airways (via Doha) and Emirates (via Dubai, with the Dubai–Kathmandu flight operated by flydubai). Gulf Air does not currently fly to Kathmandu. Message us on WhatsApp with your dates and we send you the options.",
+    "faq3Q": "Can Bangladeshi employees book special fares from Cyprus to Dhaka?",
+    "faq3A": "Yes, where the airline's fare rules allow it. Labour fares usually require proof of employment, such as a valid Cyprus residence or work permit. JetSet Travel checks Labour and VFR fares to Dhaka with Qatar Airways, Emirates and Gulf Air and tells you which documents each fare needs before you book.",
+    "faq4Q": "Which agency in Paphos arranges Labour fares to Delhi?",
+    "faq4A": "JetSet Travel, at 26A Agapinoros Street in Paphos, arranges special Labour and VFR fares from Cyprus to Delhi with Qatar Airways, Emirates and Gulf Air, connecting in Doha, Dubai or Bahrain. We also plan the return flight to Cyprus.",
+    "faq5Q": "Does JetSet Travel offer special VFR fares with Qatar Airways, Emirates and Gulf Air?",
+    "faq5A": "Yes. JetSet Travel has commercial access to special Labour and VFR fare arrangements with all three airlines. Availability depends on the route, the dates and the passenger's eligibility, so we check each request individually and compare it with the published fares.",
+    "faq6Q": "Is a Labour or VFR fare always cheaper than a normal ticket?",
+    "faq6A": "No. A special fare can include more baggage or different conditions, but on some dates a published or promotional fare is cheaper. We compare them side by side so you can choose on price, baggage and flexibility.",
+    "faq7Q": "Are there direct flights from Cyprus to Manila, Kathmandu, Dhaka or Delhi?",
+    "faq7A": "No. There are no direct flights from Cyprus to these cities. Journeys connect through a hub such as Doha (Qatar Airways), Dubai (Emirates) or Bahrain (Gulf Air), and all three airlines fly from Larnaca, not Paphos.",
+    "faq8Q": "What documents do I need for a Labour fare?",
+    "faq8A": "It depends on the airline and the fare. Typically you need your passport and a valid Cyprus residence or work permit, and some fares also ask for an employment contract or an employer letter. We confirm the exact requirements for your fare before booking.",
+    "faq9Q": "Can my employer in Cyprus book and pay for my ticket?",
+    "faq9A": "Yes. Employers can ask JetSet Travel to book flights for one or many employees and receive the invoice in the company's name. See our seasonal staff flights page for how it works.",
+    "ctaTitle": "Ask us to check your special fare",
+    "ctaText": "Tell us where you are going, your dates and how many people are travelling. We reply on WhatsApp with the options we find.",
+    "ctaWhatsApp": "Check Special Fare",
+    "schemaName": "Labour & VFR Flights from Cyprus",
+    "schemaDescription": "Special Labour and VFR airfare checks and ticketing from Cyprus (Larnaca) to Manila, Kathmandu, Dhaka and Delhi with Qatar Airways, Emirates and Gulf Air, by IATA-accredited JetSet Travel in Paphos.",
+    "schemaServiceType": "Airline ticketing: Labour and VFR fares",
+    "schemaAudience": "Overseas employees working in Cyprus and their families"
+  },
+  "seasonalStaffPage": {
+    "metaTitle": "Seasonal Staff Flight Bookings for Cyprus Hotels | JetSet Travel",
+    "metaDescription": "Cyprus hotels and restaurants: seasonal staff flights to Manila, Kathmandu, Dhaka and Delhi and back, with Labour/VFR fare checks. IATA agency in Paphos.",
+    "heroLabel": "For hotels, restaurants and HR teams",
+    "heroTitle": "Seasonal Staff Flight Bookings for Hotels and Restaurants in Cyprus",
+    "heroSubtitle": "When the season ends, your international team needs to get home, and back to Cyprus in time for the next one. JetSet Travel, an IATA-accredited agency in Paphos, arranges staff flights to the Philippines, Nepal, Bangladesh and India, checks Labour/VFR fares where they apply and invoices your company.",
+    "heroCta": "Arrange Staff Flights via WhatsApp",
+    "heroSecondary": "What to send us",
+    "heroNote": "IATA accredited (14200130) · Cyprus Tourism Licence 7775 · Office in Paphos since 2006 · English and Russian",
+    "newTabHint": "(opens WhatsApp in a new tab)",
+    "summaryTitle": "In short",
+    "summaryText": "Yes, a Cyprus hotel or restaurant can arrange flights home and return flights for its international employees through a travel agency. JetSet Travel books flights home after the summer season and back to Cyprus before the next one, for one employee or a whole team. Where staff are eligible, we check special Labour and VFR fares with Qatar Airways, Emirates and Gulf Air, compare baggage and change conditions, coordinate departure and arrival dates, and invoice the employer. Requests go through WhatsApp on +357 99 478 073.",
+    "servicesTitle": "What we arrange for employers",
+    "servicesIntro": "One contact for every staff flight, from the end of one season to the start of the next.",
+    "svcHomeTitle": "Flights home after the season",
+    "svcHomeText": "Departures timed to your closing date or each employee's last shift, including staggered departures over several weeks.",
+    "svcReturnTitle": "Return flights to Cyprus",
+    "svcReturnText": "Flights back before the new season, timed so that staff arrive before their start date.",
+    "svcGroupTitle": "Multiple employee bookings",
+    "svcGroupText": "Several employees, destinations and dates handled as one request, with a booking list you can check.",
+    "svcFaresTitle": "Labour/VFR fare checks",
+    "svcFaresText": "Where an employee qualifies, we check special Labour and VFR fares with Qatar Airways, Emirates and Gulf Air against the published fares.",
+    "svcBaggageTitle": "Baggage and ticket conditions",
+    "svcBaggageText": "We compare baggage allowances, change fees and refund rules, so you know what each ticket allows before you approve it.",
+    "svcItineraryTitle": "Itinerary coordination",
+    "svcItineraryText": "Connections and arrival times planned around your dates, and help when an airline changes a schedule.",
+    "svcInvoiceTitle": "Employer invoicing",
+    "svcInvoiceText": "Bookings approved by the employer and invoiced to the company, with the booking details your accounts team needs.",
+    "routesTitle": "Typical staff routes from Cyprus",
+    "routesIntro": "Many hospitality employees in Cyprus come from the Philippines, Nepal, Bangladesh and India. There are no direct flights to these countries: journeys start at Larnaca and connect through a hub such as Doha, Dubai or Bahrain.",
+    "routes": {
+      "manila": {
+        "title": "Philippines: Manila",
+        "text": "Housekeeping, front-office and care staff flying home to Manila for the winter. We compare Qatar Airways, Emirates and Gulf Air."
+      },
+      "kathmandu": {
+        "title": "Nepal: Kathmandu",
+        "text": "Kitchen, service and housekeeping teams travelling to Kathmandu. We compare Qatar Airways via Doha and Emirates via Dubai; Gulf Air does not fly to Kathmandu."
+      },
+      "dhaka": {
+        "title": "Bangladesh: Dhaka",
+        "text": "Restaurant and hotel staff flying to Dhaka at the end of the season. We compare Qatar Airways, Emirates and Gulf Air."
+      },
+      "delhi": {
+        "title": "India: Delhi",
+        "text": "Chefs and hotel staff travelling to Delhi, with onward domestic connections if needed. We compare Qatar Airways, Emirates and Gulf Air."
+      }
+    },
+    "routeLink": "Fares to {city}",
+    "routesNote": "Whether a special fare applies depends on each employee's nationality and documents and on the airline's rules on the day of booking. We tell you which employees qualify before you approve.",
+    "exampleTitle": "Example: planning a hotel's end-of-season flights",
+    "exampleP1": "A hotel in Paphos closes for the winter in early November. Fourteen employees are travelling home: eight to Manila, four to Kathmandu and two to Delhi. Their last working days are spread over a week, and most will come back in March.",
+    "exampleP2": "We would group the departures by date and destination, check Labour/VFR and published fares for each traveller, show the baggage allowance and change fee of each option, and price the March return at the same time. The hotel approves one plan and receives one invoice. If the reopening date moves, return dates can be changed under each fare's rules.",
+    "exampleNote": "Illustrative example, not a real booking.",
+    "sendTitle": "What to send us",
+    "sendIntro": "Start with the basics on WhatsApp. A short list is enough for the first quote:",
+    "send1": "Number of employees and their destinations (Manila, Kathmandu, Dhaka, Delhi or elsewhere)",
+    "send2": "Earliest and latest departure dates from Cyprus",
+    "send3": "Expected return dates, or the date the new season starts",
+    "send4": "Each employee's passport nationality and type of Cyprus permit (no copies at this stage)",
+    "send5": "Whether the company or the employee pays, and the invoicing details",
+    "send6": "Baggage needs, such as extra checked bags",
+    "sendPrivacy": "Please don't send passport copies in your first message. We ask for passenger details only when you confirm the bookings, and handle them under our privacy policy.",
+    "sendCta": "Arrange Employee Flights",
+    "stepsTitle": "How it works",
+    "step1Title": "Send the staff list",
+    "step1Text": "Message us on WhatsApp with destinations, dates and the number of employees.",
+    "step2Title": "We check the fares",
+    "step2Text": "We compare special Labour/VFR fares and published fares with Qatar Airways, Emirates and Gulf Air for each traveller.",
+    "step3Title": "You approve",
+    "step3Text": "You get one overview with price, baggage and conditions for each employee, and approve what suits you.",
+    "step4Title": "Tickets and invoice",
+    "step4Text": "We issue the e-tickets, send them to you or the employees, and invoice the company.",
+    "whyTitle": "Why employers use a local IATA agency",
+    "why1Title": "One contact",
+    "why1Text": "Our Paphos office handles your staff bookings from departure to return.",
+    "why2Title": "Tickets issued in-house",
+    "why2Text": "As an IATA agent (14200130) we issue tickets ourselves and handle changes with the airline.",
+    "why3Title": "Clear paperwork",
+    "why3Text": "Booking lists and invoices in the company's name for your accounts team.",
+    "why4Title": "English and Russian",
+    "why4Text": "Our team works in English and Russian with management and HR.",
+    "individualTitle": "Travelling on your own?",
+    "individualText": "Employees booking their own trip home can request a Labour/VFR fare directly.",
+    "individualCta": "Labour & VFR fares",
+    "faqTitle": "Seasonal staff flights: questions from employers",
+    "faq1Q": "Can a Cyprus hotel arrange return flights for international employees?",
+    "faq1A": "Yes. JetSet Travel, an IATA-accredited agency in Paphos, books flights home and return flights to Cyprus for hotel and restaurant staff, for one employee or a whole team, and invoices the employer. Send the destinations and dates on WhatsApp (+357 99 478 073).",
+    "faq2Q": "Can you book many employees on different dates and routes?",
+    "faq2A": "Yes. We handle staff lists with different destinations and departure dates as one request and send you one overview to approve. Typical routes are Manila, Kathmandu, Dhaka and Delhi via Doha, Dubai or Bahrain.",
+    "faq3Q": "Do our employees qualify for Labour fares?",
+    "faq3A": "Many do, but it depends on the airline's fare rules. Labour fares typically require proof of employment, such as a valid Cyprus residence or work permit, and some ask for an employment contract or employer letter. We check each employee's eligibility before you approve the bookings.",
+    "faq4Q": "Can the tickets be invoiced to the company?",
+    "faq4A": "Yes. Bookings you approve are invoiced to the company. Tell us in your first message whether the company or the employee pays, and we prepare the bookings accordingly.",
+    "faq5Q": "How early should we book end-of-season staff flights?",
+    "faq5A": "As soon as the departure dates are known. Booking early usually gives more choice of flights and fares, especially around Christmas and other holiday peaks, and special fares have a limited number of seats on each flight.",
+    "faq6Q": "What happens if an employee's dates change?",
+    "faq6A": "Contact us and we change the booking with the airline. Whether a change is possible, and the fee, depends on the fare, which is why we show the change rules of every option before you approve it.",
+    "faq7Q": "Do you also book staff flights to Cyprus at the start of the season?",
+    "faq7A": "Yes. We book flights to Cyprus for returning or new employees, including tickets that start in Manila, Kathmandu, Dhaka or Delhi, subject to the airline's rules for selling the fare.",
+    "ctaTitle": "Plan this season's staff flights",
+    "ctaText": "Send us the destinations, dates and number of employees. We come back on WhatsApp with the options.",
+    "ctaWhatsApp": "Arrange Staff Flights via WhatsApp",
+    "schemaName": "Seasonal Staff Flight Bookings for Cyprus Employers",
+    "schemaDescription": "Flights home and return flights to Cyprus for hotel and restaurant staff, with Labour/VFR fare checks (Qatar Airways, Emirates, Gulf Air), group coordination and employer invoicing, by IATA-accredited JetSet Travel in Paphos.",
+    "schemaServiceType": "Group airline ticketing for employers",
+    "schemaAudience": "Hotels, restaurants and hospitality employers in Cyprus"
   }
 }
