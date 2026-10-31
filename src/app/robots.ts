@@ -37,15 +37,15 @@ export default function robots(): MetadataRoute.Robots {
         allow: COMMON_ALLOW,
         disallow: COMMON_DISALLOW,
       },
-      // Russian-market crawlers with a polite crawl delay.
+      // Russian-market crawlers. No Crawl-delay and no Host: Yandex ignores
+      // both (crawl rate is set in Yandex Webmaster; the main mirror comes
+      // from the 301/308 redirects), and Webmaster flags them as obsolete.
       {
         userAgent: ["Yandex", "YandexBot", "Mail.RU_Bot"],
         allow: COMMON_ALLOW,
         disallow: COMMON_DISALLOW,
-        crawlDelay: 2,
       },
     ],
     sitemap: `${CANONICAL_ORIGIN}/sitemap.xml`,
-    host: CANONICAL_ORIGIN,
   };
 }

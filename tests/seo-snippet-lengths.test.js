@@ -64,6 +64,33 @@ const STATIC_PAGE_METADATA = [
   fromMessages("ru", "labourVfrPage", "/labour-vfr-flights-cyprus"),
   fromMessages("en", "seasonalStaffPage", "/seasonal-staff-travel-cyprus"),
   fromMessages("ru", "seasonalStaffPage", "/seasonal-staff-travel-cyprus"),
+  // Yandex audit (Oct 2026): these two pairs shared one title per locale.
+  // Mirror the strings in corporate-travel/page.tsx and
+  // corporate-travel-cyprus/page.tsx; the uniqueness test below guards them.
+  {
+    page: "/en/corporate-travel",
+    title: "Corporate Travel Management Cyprus | IATA Agency — JetSet",
+    description:
+      "IATA-accredited JetSet manages corporate travel for Cyprus businesses: travel policy control, VAT-compliant invoices, monthly spend reports and 24/7 support.",
+  },
+  {
+    page: "/en/corporate-travel-cyprus",
+    title: "Business Travel Cyprus: Paphos, Limassol, Nicosia | JetSet",
+    description:
+      "Business travel across Cyprus from JetSet's Paphos HQ: one IATA-accredited team for Limassol, Nicosia and Larnaca firms. Consolidated invoicing, 24/7 support.",
+  },
+  {
+    page: "/ru/corporate-travel",
+    title: "Управление корпоративными командировками на Кипре | JetSet",
+    description:
+      "JetSet — агентство на Кипре с аккредитацией IATA: командировки по вашей тревел-политике, корректные счета для бухгалтерии, ежемесячные отчёты, поддержка 24/7.",
+  },
+  {
+    page: "/ru/corporate-travel-cyprus",
+    title: "Деловые поездки по Кипру: Пафос, Лимассол, Никосия | JetSet",
+    description:
+      "Деловые поездки по Кипру с JetSet: аккредитация IATA, головной офис в Пафосе, работаем в Лимассоле, Никосии и Ларнаке. Консолидированные счета, поддержка 24/7.",
+  },
   {
     page: "/en (homepage)",
     title: "Travel Agency in Cyprus — Paphos & Limassol | JetSet Travel",
@@ -149,6 +176,19 @@ describe("seo: blog post frontmatter snippet lengths", () => {
       );
     });
   }
+});
+
+describe("seo: static page titles are unique", () => {
+  it("no two pages in STATIC_PAGE_METADATA share a <title> or description", () => {
+    for (const field of ["title", "description"]) {
+      const seen = new Map();
+      for (const entry of STATIC_PAGE_METADATA) {
+        const other = seen.get(entry[field]);
+        assert.ok(!other, `${entry.page} and ${other} share the same ${field}: "${entry[field]}"`);
+        seen.set(entry[field], entry.page);
+      }
+    }
+  });
 });
 
 describe("seo: static page snippet lengths", () => {
