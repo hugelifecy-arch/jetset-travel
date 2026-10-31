@@ -1,5 +1,6 @@
 ---
 title: "Luxury Cruises from Cyprus in 2027: Silversea, Regent, Seabourn, Explora"
+seoTitle: "Luxury Cruises from Cyprus 2027: Silversea, Regent, Seabourn"
 description: "Where 2027 luxury cruises start, which ships call at Limassol, what each fare includes and how to fly to the ship from Larnaca or Paphos. Checked October 2026."
 date: "2026-10-22"
 dateModified: "2026-10-22"

@@ -1,5 +1,6 @@
 ---
 title: "VIP Airport Service at Larnaca & Paphos: Meet & Assist, Express Lane, Lounges"
+seoTitle: "VIP Airport Service Larnaca & Paphos: Meet & Assist | JetSet"
 description: "How VIP airport service works at Larnaca and Paphos in 2026: meet & assist, the Express Lane, lounges, private-jet terminals and passport control. Checked October 2026."
 date: "2026-10-22"
 dateModified: "2026-10-22"

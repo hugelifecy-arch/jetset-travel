@@ -1,5 +1,6 @@
 ---
 title: "Corporate Travel Management in Cyprus: How Agency Fees Work in 2026"
+seoTitle: "Corporate Travel Management Cyprus: Agency Fees 2026 | JetSet"
 description: "How corporate travel agencies in Cyprus charge in 2026: transaction fees, percentage and retainer models, what is included, EU VAT points and what to ask before you sign."
 date: "2026-05-12"
 dateModified: "2026-10-23"
