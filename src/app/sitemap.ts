@@ -88,8 +88,10 @@ function alternatesFor(localePath: string) {
       : localePath;
   const entry = LOCALE_ALTERNATES[key];
   const languages: Record<string, string> = {};
-  if (entry?.en) languages.en = `${CANONICAL_ORIGIN}${entry.en}`;
-  if (entry?.ru) languages.ru = `${CANONICAL_ORIGIN}${entry.ru}`;
+  // Noindexed locale versions are not valid hreflang targets (see
+  // localizedAlternates in lib/seo.ts), so they are left out here too.
+  if (entry?.en && !NOINDEX_LOCALE_PATHS.has(entry.en)) languages.en = `${CANONICAL_ORIGIN}${entry.en}`;
+  if (entry?.ru && !NOINDEX_LOCALE_PATHS.has(entry.ru)) languages.ru = `${CANONICAL_ORIGIN}${entry.ru}`;
   // Phase 5: emit explicit regional codes alongside the bare language codes.
   if (languages.en) languages["en-GB"] = languages.en;
   if (languages.ru) languages["ru-RU"] = languages.ru;
