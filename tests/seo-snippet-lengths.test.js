@@ -116,15 +116,15 @@ const STATIC_PAGE_METADATA = [
   },
   {
     page: "/en/schengen-cyprus-2026",
-    title: "Is Cyprus in Schengen? EU Vote & 2027 Timeline (Oct 2026)",
+    title: "When Will Cyprus Join Schengen? 2027 Timeline & Status",
     description:
-      "Not yet. In October 2026 Cyprus is still outside Schengen and now expects to join in 2027. What it means for the 90/180-day rule, visas, EES and ETIAS.",
+      "Cyprus is not in Schengen yet: it expects to join in 2027, pending a unanimous EU Council vote. What it means for the 90/180 rule, visas, EES and ETIAS.",
   },
   {
     page: "/ru/schengen-cyprus-2026",
-    title: "Кипр в Шенгене? Статус на октябрь 2026 и сроки (2027)",
+    title: "Когда Кипр войдёт в Шенген? Статус и сроки (2027)",
     description:
-      "Пока нет. На октябрь 2026 года Кипр вне Шенгенской зоны, вступление ожидается в 2027 году. Что это значит для правила 90/180, виз, EES и ETIAS.",
+      "Кипр пока не в Шенгене: вступление ожидается в 2027 году, решение за Советом ЕС. Что это значит сейчас для правила 90/180, виз, EES и ETIAS.",
   },
 ];
 

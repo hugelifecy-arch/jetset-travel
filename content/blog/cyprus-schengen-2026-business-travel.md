@@ -1,8 +1,8 @@
 ---
-title: "Cyprus Schengen Update (October 2026): Business Travel Guide"
-description: "Cyprus Schengen update, October 2026: Cyprus, Larnaca and Paphos airports included, is not in Schengen yet and expects to join in 2027. What applies now and how to prepare."
+title: "Cyprus Joining Schengen: What It Means for Business Travel"
+description: "How Cyprus joining Schengen affects company travel: the 90/180-day count for rotating staff, visas for non-EU employees and the policy steps to take now."
 date: "2026-03-02"
-dateModified: "2026-10-26"
+dateModified: "2026-11-01"
 author: "Nontari Kalaitsidis"
 slug: "cyprus-schengen-2026-business-travel"
 translationSlug: "kipr-v-shengene-2026-delovye-poezdki"
@@ -18,15 +18,11 @@ locale: "en"
 status: "published"
 ---
 
-> **Status on 26 October 2026:** Cyprus is **not yet** in the Schengen Area. On 10 October 2026 Deputy Migration Minister Nicholas Ioannides said Cyprus expects to join in full during 2027, once six outstanding actions are finished (planned for early November 2026) and Cyprus has told the European Commission it is technically ready. The final decision is taken by the Council of the EU and needs the unanimous agreement of the EU countries already in Schengen; no date has been set. Sources: [Cyprus Mail, 10 October 2026](https://cyprus-mail.com/2026/10/10/cyprus-to-be-fully-integrated-into-schengen-area-by-next-year), [EU Entry/Exit System](https://travel-europe.europa.eu/ees/what-is-the-ees), [EU ETIAS](https://travel-europe.europa.eu/etias/about-etias/who-should-apply). We update this article when the status changes.
-
-## Cyprus and the Schengen Area: Where Things Stand
-
-Cyprus joined the EU in 2004 but still checks passports on flights to and from the rest of Europe. That includes **Larnaca and Paphos airports: they are not Schengen airports**, so passengers on flights to and from Schengen countries go through passport control in both directions. Since 2023 it has used the Schengen Information System (SIS), and the government now expects full membership in 2027. The main open question is how checks will work at the Green Line crossing points: Cyprus has said it will not run the EU's new digital entry/exit checks there, because it does not recognise the line as a border, and possible compromises are still being discussed.
-
-Until the Council decides, the current rules apply. Below we set out what applies today and what will change once Cyprus joins, from the date the Council decision sets.
-
 At JetSet Travel, we follow Cyprus's Schengen accession closely because it will change how our corporate clients plan their travel. As an IATA-accredited travel agency (Tourism Licence 7775), we set out below what business travellers and corporate travel managers need to know.
+
+## Where Things Stand for Business Travellers
+
+As of 26 October 2026, Cyprus is **not yet** in the Schengen Area, so flights between Larnaca or Paphos and Schengen countries still have passport checks and today's rules apply to every business trip. [On 10 October 2026](https://cyprus-mail.com/2026/10/10/cyprus-to-be-fully-integrated-into-schengen-area-by-next-year) the Deputy Migration Minister said Cyprus expects to join in full during 2027, but the decision rests with the Council of the EU, which decides by unanimity and has not set a date. For the full timeline and the latest status, see our [guide to when Cyprus will join Schengen](/en/schengen-cyprus-2026); this article covers what accession means for companies and the people they send on business trips.
 
 ## What Is the Schengen Area?
 
@@ -73,7 +69,7 @@ Cyprus-based employees who are EU/EEA citizens will no longer go through passpor
 
 Many Cyprus-based companies employ third-country nationals — particularly from Russia, Ukraine, India, Lebanon, and other non-EU countries. Currently, these employees need to apply for Schengen visas through the embassy of their destination country, with Cyprus treated as a separate jurisdiction.
 
-After accession, a valid Cyprus residence permit will work like any other Schengen residence permit: holders will be able to make short trips (up to 90 days in any 180) to other Schengen countries without a visa. Until then, non-EU staff who need a Schengen visa because of their nationality still need one, even if they live in Cyprus.
+After accession, a valid Cyprus residence permit will work like any other Schengen residence permit: holders will be able to make short trips (up to 90 days in any 180) to other Schengen countries without a visa. Until then, non-EU staff who need a Schengen visa because of their nationality still need one, even if they live in Cyprus. Our [step-by-step guide to applying for a Schengen visa from Cyprus](/en/blog/schengen-visa-guide-cyprus-residents) covers the documents, the fee and which embassy to use.
 
 ## What Does NOT Change
 
@@ -111,7 +107,7 @@ Your travel policy should explicitly address the 90/180-day rule and establish i
 
 ### 3. Review Employee Visa and Residence Permit Status
 
-For non-EU employees, review their current visa and residence permit status. Work with your immigration advisors to understand how Schengen accession changes their travel rights and obligations.
+For non-EU employees, review their current visa and residence permit status. Work with your immigration advisors to understand how Schengen accession changes their travel rights and obligations. For staff who still need a Schengen visa, our [visa services](/en/visa-services) team can help prepare the applications.
 
 ### 4. Invest in Travel Tracking Tools
 
@@ -119,7 +115,7 @@ Manual tracking of days spent across Schengen states is error-prone and unreliab
 
 ### 5. Work With an IATA-Accredited Travel Agent
 
-This is not the time for ad hoc booking. An experienced, IATA-accredited travel agent with deep knowledge of Cyprus and the Schengen framework can help you plan for the transition, keep travel spend under control and stay within the rules. At JetSet Travel (Tourism Licence 7775), we have been arranging travel from our Paphos office since 2006 and work with more than 250 corporate clients. We can help your company plan for this change.
+This is not the time for ad hoc booking. An experienced, IATA-accredited travel agent with deep knowledge of Cyprus and the Schengen framework can help you plan for the transition, keep travel spend under control and stay within the rules. At JetSet Travel (Tourism Licence 7775), we have been arranging travel from our Paphos office since 2006 and work with more than 250 corporate clients. Our [corporate travel management](/en/corporate-travel) team can help your company plan for this change.
 
 ## The Bottom Line
 

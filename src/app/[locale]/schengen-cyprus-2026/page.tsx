@@ -37,26 +37,31 @@ export async function generateMetadata({
     routePath: "/schengen-cyprus-2026",
     title:
       locale === "ru"
-        ? "Кипр в Шенгене? Статус на октябрь 2026 и сроки (2027)"
-        : "Is Cyprus in Schengen? EU Vote & 2027 Timeline (Oct 2026)",
+        ? "Когда Кипр войдёт в Шенген? Статус и сроки (2027)"
+        : "When Will Cyprus Join Schengen? 2027 Timeline & Status",
     description:
       locale === "ru"
-        ? "Пока нет. На октябрь 2026 года Кипр вне Шенгенской зоны, вступление ожидается в 2027 году. Что это значит для правила 90/180, виз, EES и ETIAS."
-        : "Not yet. In October 2026 Cyprus is still outside Schengen and now expects to join in 2027. What it means for the 90/180-day rule, visas, EES and ETIAS.",
+        ? "Кипр пока не в Шенгене: вступление ожидается в 2027 году, решение за Советом ЕС. Что это значит сейчас для правила 90/180, виз, EES и ETIAS."
+        : "Cyprus is not in Schengen yet: it expects to join in 2027, pending a unanimous EU Council vote. What it means for the 90/180 rule, visas, EES and ETIAS.",
     keywords:
       locale === "ru"
         ? [
-            "Кипр Шенген 2026",
+            "когда Кипр войдёт в Шенген",
             "когда Кипр войдет в Шенген",
+            "когда Кипр вступит в Шенген",
+            "Кипр Шенген 2027",
+            "Кипр Шенген 2026",
             "вступление Кипра в Шенген",
             "шенген Кипр",
             "Cyprus Schengen 2026",
           ]
         : [
+            "when will Cyprus join Schengen",
+            "when does Cyprus join Schengen",
+            "Cyprus Schengen 2027",
             "Cyprus Schengen 2026",
             "is Cyprus in Schengen",
             "Cyprus Schengen accession",
-            "Schengen Cyprus business travel",
             "Cyprus joining Schengen",
           ],
   });
@@ -84,9 +89,9 @@ export default async function SchengenCyprus2026Hub({
     ? [
         {
           href: `/${locale}/blog/kipr-v-shengene-2026-delovye-poezdki`,
-          title: "Кипр и Шенген: статус на октябрь 2026 — гид для деловых поездок",
+          title: "Шенген и командировки: что изменится для компаний Кипра",
           description:
-            "Гид для корпоративных тревел-менеджеров: что действует сейчас, что изменится после вступления, правило 90/180 и политика командировок.",
+            "Для компаний и тревел-менеджеров: подсчёт дней 90/180 для ротационного персонала, визы сотрудников из третьих стран и что поменять в тревел-политике уже сейчас.",
           badge: "Гид",
         },
         {
@@ -100,9 +105,9 @@ export default async function SchengenCyprus2026Hub({
     : [
         {
           href: `/${locale}/blog/cyprus-schengen-2026-business-travel`,
-          title: "Cyprus Schengen Status (October 2026): Business Travel Guide",
+          title: "Cyprus Joining Schengen: What It Means for Business Travel",
           description:
-            "What applies now, what changes after accession, the 90/180-day rule, and how corporate travel managers should prepare.",
+            "For companies and travel managers: the 90/180-day count for rotating staff, visas for non-EU employees and the travel-policy steps to take now.",
           badge: "Business",
         },
         {
@@ -306,6 +311,31 @@ export default async function SchengenCyprus2026Hub({
                 <li key={item}>{item}</li>
               ))}
             </ul>
+            <p className="mt-3 text-brand-navy/80 leading-relaxed">
+              {isRu ? (
+                <>
+                  Если шенгенская виза нужна вам до вступления Кипра, наша{" "}
+                  <Link
+                    href={`/${locale}/visa-services`}
+                    className="text-brand-navy font-semibold underline hover:text-brand-gold"
+                  >
+                    визовая служба
+                  </Link>{" "}
+                  поможет подготовить документы для подачи.
+                </>
+              ) : (
+                <>
+                  If you need a Schengen visa before Cyprus joins, our{" "}
+                  <Link
+                    href={`/${locale}/visa-services`}
+                    className="text-brand-navy font-semibold underline hover:text-brand-gold"
+                  >
+                    visa services
+                  </Link>{" "}
+                  team can help you prepare the application.
+                </>
+              )}
+            </p>
             <p className="mt-6 text-sm text-brand-navy/70">
               {isRu ? "Проверено " + STATUS_DATE + ". Источники: " : "Checked " + STATUS_DATE + ". Sources: "}
               {sources.map((src, i) => (
