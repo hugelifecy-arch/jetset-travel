@@ -78,17 +78,33 @@ const STATIC_PAGE_METADATA = [
     description:
       "JetSet — агентство на Кипре с аккредитацией IATA: командировки по вашей тревел-политике, корректные счета для бухгалтерии, ежемесячные отчёты, поддержка 24/7.",
   },
+  // Nov 2026: the homepage owns "Cyprus travel agency"; the Paphos pages own
+  // the local "travel agent in Paphos / visit our office" angle. Mirror the
+  // strings in [locale]/page.tsx, paphos-travel-agency/page.tsx and
+  // turisticheskoe-agentstvo-pafos/page.tsx.
   {
     page: "/en (homepage)",
-    title: "Travel Agency in Cyprus — Paphos & Limassol | JetSet Travel",
+    title: "Cyprus Travel Agency in Paphos | IATA-Accredited | JetSet",
     description:
-      "IATA-accredited Cyprus travel agency in Paphos (Licence 7775). Corporate trips, luxury holidays, visa & flights for UK, EU and local travellers in 2026.",
+      "IATA-accredited Cyprus travel agency in Paphos since 2006 (Licence 7775): corporate travel, luxury holidays, flights and visas. Free quote, 24/7 WhatsApp.",
   },
   {
     page: "/ru (homepage)",
-    title: "Турагентство в Пафосе, Кипр 2026 | JetSet — Аккредитация IATA",
+    title: "Турагентство на Кипре с аккредитацией IATA | JetSet Travel",
     description:
-      "JetSet Travel — аккредитованное IATA турагентство в Пафосе, Кипр (лицензия 7775). Корпоративные поездки, премиальный отдых, визы, авиабилеты. Поддержка 24/7.",
+      "JetSet Travel — турагентство на Кипре с аккредитацией IATA, офис в Пафосе с 2006 года (лицензия 7775). Командировки, премиум-отдых, визы и авиабилеты.",
+  },
+  {
+    page: "/en/paphos-travel-agency",
+    title: "Paphos Travel Agent: Visit Our Office on Agapinoros St",
+    description:
+      "Visit JetSet Travel at 26A Agapinoros, Paphos: face-to-face help with flights, holidays and visas in English, Russian and Greek. No appointment needed.",
+  },
+  {
+    page: "/ru/turisticheskoe-agentstvo-pafos",
+    title: "Турагент в Пафосе: офис на ул. Агапинорос 26А | JetSet",
+    description:
+      "Приходите в офис JetSet Travel на ул. Агапинорос 26А в Пафосе: авиабилеты, отдых и визы — лично, на русском, английском и греческом. Без записи.",
   },
   {
     page: "/en/contact",

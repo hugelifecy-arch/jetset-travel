@@ -1,6 +1,7 @@
 ---
 title: "Is Travel Insurance Worth It for Cyprus? 2026 Guide (EHIC, GHIC)"
-description: "Cyprus is in the EU, so EHIC and the UK GHIC work here, but not for private clinics, repatriation or cancellations. When travel insurance is worth it and what cover to buy."
+seoTitle: "Is Travel Insurance Worth It in 2026? Yes — Cyprus Guide"
+description: "Usually, yes. Cyprus counts as Europe for travel insurance, but EHIC and GHIC cover state care only — not private clinics, repatriation or cancellation."
 date: "2026-07-06"
 dateModified: "2026-10-23"
 author: "Nontari Kalaitsidis"

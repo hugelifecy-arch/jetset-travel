@@ -34,11 +34,11 @@ export async function generateMetadata({
     title:
       locale === "ru"
         ? "Турагентство в Пафосе | JetSet Travel — IATA Кипр"
-        : "Travel Agency Paphos | JetSet Travel — IATA Agent",
+        : "Paphos Travel Agent: Visit Our Office on Agapinoros St",
     description:
       locale === "ru"
         ? "Ищете надёжное туристическое агентство в Пафосе? JetSet Travel — аккредитация IATA, 20+ лет опыта. Корпоративные поездки, авиабилеты, отели, визовые услуги. Посетите нас: Агапинорос 26А."
-        : "Trusted IATA-accredited travel agency in Paphos. 20+ years experience in corporate travel, flights, hotels & visa services. Visit us or get a free quote.",
+        : "Visit JetSet Travel at 26A Agapinoros, Paphos: face-to-face help with flights, holidays and visas in English, Russian and Greek. No appointment needed.",
     keywords:
       locale === "ru"
         ? ["турагентство Пафос", "туристическое агентство Пафос Кипр", "лучшее турагентство Пафос", "IATA турагент Пафос", "турагентство с IATA Пафос", "лучшее турагентство в Пафосе для бизнеса"]

@@ -42,22 +42,25 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
 
-  // Phase 5 — Step 35/37: rewrite EN title + meta description to lead with
-  // the licensing/credibility signal UK B2B searchers expect and to
-  // disambiguate the homepage from a generic "JetSet Travel" brand match.
-  // Targets: "cyprus travel agency" (UK, pos 29.9, 0 CTR) and
-  // "travel agency paphos" (UK, pos 2.3, 0 CTR). Mobile brand CTR (25.6%)
-  // must not regress, so RU title kept close to the previous version.
+  // 1 Nov 2026 snippet rewrite. GSC: 3,369 impressions at an average
+  // position of 13.7, and the homepage and the Paphos page both targeted
+  // "travel agency in Paphos". Split the intent: the homepage owns
+  // "Cyprus travel agency" (clients across Cyprus, corporate and luxury
+  // private travel) and keeps "Paphos" in the title; /en/paphos-travel-agency
+  // and /ru/turisticheskoe-agentstvo-pafos own the local "travel agent in
+  // Paphos / visit our office" angle. The H1 (messages hero.title) follows
+  // the same split. Every claim here (since 2006, Licence 7775, free quote,
+  // 24/7 WhatsApp) is already stated elsewhere on the site.
   return buildPageMetadata({
     locale,
     title:
       locale === "ru"
-        ? "Турагентство в Пафосе, Кипр 2026 | JetSet — Аккредитация IATA"
-        : "Travel Agency in Cyprus — Paphos | JetSet Travel",
+        ? "Турагентство на Кипре с аккредитацией IATA | JetSet Travel"
+        : "Cyprus Travel Agency in Paphos | IATA-Accredited | JetSet",
     description:
       locale === "ru"
-        ? "JetSet Travel — аккредитованное IATA турагентство в Пафосе, Кипр (лицензия 7775). Корпоративные поездки, премиальный отдых, визы, авиабилеты. Поддержка 24/7."
-        : "IATA-accredited Cyprus travel agency in Paphos (Licence 7775). Corporate trips, luxury holidays, visa & flights for UK, EU and local travellers in 2026.",
+        ? "JetSet Travel — турагентство на Кипре с аккредитацией IATA, офис в Пафосе с 2006 года (лицензия 7775). Командировки, премиум-отдых, визы и авиабилеты."
+        : "IATA-accredited Cyprus travel agency in Paphos since 2006 (Licence 7775): corporate travel, luxury holidays, flights and visas. Free quote, 24/7 WhatsApp.",
     keywords:
       locale === "ru"
         ? ["туристическое агентство Кипр", "IATA турагентство Пафос", "авиабилеты Пафос", "туры из Кипра", "бронирование отелей Кипр", "корпоративные поездки Кипр", "JetSet Travel", "турагентство с IATA Пафос", "лучшее турагентство в Пафосе для бизнеса", "корпоративное турагентство Кипр"]
