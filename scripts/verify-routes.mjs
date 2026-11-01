@@ -158,6 +158,13 @@ const REDIRECT_CASES = [
   { from: "/luxury", to: "/en/luxury-travel", label: "bare-path special" },
   { from: "/en/vizovye-uslugi-kipr", to: "/en/visa-services", label: "retired *-cyprus slug" },
   { from: "/en/visa-services-cyprus", to: "/en/visa-services", label: "merged visa landing page" },
+  { from: "/ru/visa-services-cyprus", to: "/ru/visa-services", label: "merged visa landing page (ru)" },
+  // Slashed / mixed-case variants of retired URLs used to take two hops
+  // (Next's built-in 308 slash strip, then the redirect). Now one 301.
+  { from: "/en/visa-services-cyprus/", to: "/en/visa-services", label: "merged page + trailing slash" },
+  { from: "/EN/visa-services-cyprus", to: "/en/visa-services", label: "merged page + upper-case locale" },
+  { from: "/visa-services-cyprus", to: "/en/visa-services", label: "merged page, no locale" },
+  { from: "/en/vizovye-uslugi-kipr/", to: "/en/visa-services", label: "retired slug + trailing slash" },
   { from: "/ru/korporativnye-poezdki-kipr", to: "/ru/corporate-travel-cyprus", label: "retired *-cyprus slug (ru)" },
   {
     from: "/ru/blog/cyprus-schengen-2026-business-travel",
@@ -167,7 +174,7 @@ const REDIRECT_CASES = [
 ];
 
 async function checkRedirects() {
-  console.log(`\n${C.bold}Redirect classes (expect ≤1 hop to the canonical target, 200)${C.reset}`);
+  console.log(`\n${C.bold}Redirect classes (expect one 301 hop to the canonical target, 200)${C.reset}`);
   for (const tc of REDIRECT_CASES) {
     let r;
     try {
@@ -182,6 +189,7 @@ async function checkRedirects() {
     if (r.status !== 200) problems.push(`status=${r.status}`);
     if (r.hops > 1) problems.push(`hops=${r.hops} (${r.chain.map((c) => c.status).join("→")}) — redirect chain!`);
     if (r.hops < 1) problems.push(`hops=0 — no redirect happened`);
+    if (r.chain[0] && r.chain[0].status !== 301) problems.push(`status ${r.chain[0].status} (expected 301)`);
     record("redirect", `${tc.from}  →  ${tc.to}  (${tc.label})`,
       problems.length === 0, problems.length ? problems.join("; ") : `${r.hops} hop, ${finalPath}`);
   }

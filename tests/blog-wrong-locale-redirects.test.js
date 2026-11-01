@@ -7,12 +7,14 @@ import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { getPublishedPosts } from "../src/lib/blog.ts";
-import {
-  BLOG_SLUG_PAIRS_EN_TO_RU,
-  wrongLocaleBlogRedirects,
-} from "../src/lib/blog-translation-pairs.ts";
+import { BLOG_SLUG_PAIRS_EN_TO_RU } from "../src/lib/blog-translation-pairs.ts";
+import { PATH_REDIRECTS } from "../src/lib/redirects.ts";
+import { canonicalize } from "../src/lib/canonicalize.ts";
 
-const redirects = wrongLocaleBlogRedirects();
+const ORIGIN = "https://www.jetset-travel.com";
+const redirects = Object.entries(PATH_REDIRECTS)
+  .filter(([source]) => /^\/(en|ru)\/blog\//.test(source))
+  .map(([source, destination]) => ({ source, destination }));
 const bySource = new Map(redirects.map((r) => [r.source, r]));
 const published = new Map(getPublishedPosts().map((p) => [`/${p.frontmatter.locale}/blog/${p.frontmatter.slug}`, p]));
 
@@ -39,7 +41,12 @@ describe("blog: wrong-locale slugs 301 to the translated article", () => {
       const r = bySource.get(source);
       assert.ok(r, `no redirect for ${source}`);
       assert.equal(r.destination, destination);
-      assert.equal(r.statusCode, 301);
+      // The proxy answers with 301, in one hop, with or without a slash.
+      for (const variant of [source, `${source}/`]) {
+        const result = canonicalize(`${ORIGIN}${variant}`);
+        assert.equal(result.action, "redirect", variant);
+        assert.equal(result.url, `${ORIGIN}${destination}`, variant);
+      }
     });
   }
 
@@ -62,9 +69,9 @@ describe("blog: wrong-locale slugs 301 to the translated article", () => {
     for (const r of redirects) assert.ok(!published.has(r.source), `${r.source} is a real post URL`);
   });
 
-  it("next.config.ts uses the generated list and no longer has a 308 copy of the Schengen rule", () => {
+  it("next.config.ts has no redirects() of its own (they ran before the proxy, as 308s)", () => {
     const config = readFileSync(new URL("../next.config.ts", import.meta.url), "utf-8");
-    assert.match(config, /\.\.\.wrongLocaleBlogRedirects\(\)/);
-    assert.doesNotMatch(config, /source:\s*"\/ru\/blog\/cyprus-schengen-2026-business-travel"/);
+    assert.doesNotMatch(config, /async redirects\(/);
+    assert.match(config, /skipTrailingSlashRedirect:\s*true/);
   });
 });

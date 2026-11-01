@@ -20,38 +20,16 @@ import {
   LOCALE_ALTERNATES,
 } from "../src/lib/canonical.ts";
 import { canonicalize } from "../src/lib/canonicalize.ts";
+import { PATH_REDIRECTS } from "../src/lib/redirects.ts";
 import { resolveAlternateUrls } from "../src/lib/i18n-route-resolver.ts";
 import { getPublishedPosts } from "../src/lib/blog.ts";
 
 /**
- * The static redirects from next.config.ts plus the bare-path special-cases
- * in canonicalize.ts. None of these source paths may ever appear as a
- * sitemap <loc> — they would each cost Google a 308 hop on fetch.
- *
- * Phase 3: stored in the no-slash canonical form to match LOCALE_ALTERNATES.
+ * Every redirect source (src/lib/redirects.ts) plus the bare-path
+ * special-cases in canonicalize.ts. None of these may ever appear as a
+ * sitemap <loc> — each would cost Google a 301 hop on fetch.
  */
-const RETIRED_PATHS = new Set([
-  "/luxury",
-  "/en/luxury",
-  "/ru/luxury",
-  "/ru/paphos-travel-agency",
-  "/en/turisticheskoe-agentstvo-pafos",
-  "/ru/flight-tickets-cyprus",
-  "/en/aviabilety-kipr",
-  "/en/vizovye-uslugi-kipr",
-  "/ru/vizovye-uslugi-kipr",
-  // Merged into /visa-services (22 Oct 2026).
-  "/en/visa-services-cyprus",
-  "/ru/visa-services-cyprus",
-  "/en/luxusnyy-otdykh-kipr",
-  "/ru/luxusnyy-otdykh-kipr",
-  "/en/korporativnye-poezdki-kipr",
-  "/ru/korporativnye-poezdki-kipr",
-  "/en/bronirovanie-otelej-kipr",
-  "/ru/bronirovanie-otelej-kipr",
-  // Phase 3 wrong-folder fix: RU folder was serving an EN-only slug.
-  "/ru/blog/cyprus-schengen-2026-business-travel",
-]);
+const RETIRED_PATHS = new Set(["/luxury", ...Object.keys(PATH_REDIRECTS)]);
 
 function assertCanonical(url, context) {
   const result = canonicalize(url);
@@ -105,7 +83,7 @@ describe("seo: every sitemap URL is canonical", () => {
       const { pathname } = new URL(entry.url);
       assert.ok(
         !RETIRED_PATHS.has(pathname),
-        `sitemap <loc> points at a path that ${pathname} is 308-redirected: ` +
+        `sitemap <loc> points at a path that ${pathname} is 301-redirected: ` +
           `${entry.url}`,
       );
     }

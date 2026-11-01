@@ -30,12 +30,11 @@ export default function proxy(req: NextRequest) {
   const isRootLocaleRedirect =
     req.nextUrl.pathname === "/" && target.pathname === `/${preferredLocale}`;
 
-  const redirectUrl = req.nextUrl.clone();
-  redirectUrl.hostname = target.hostname;
-  redirectUrl.pathname = target.pathname;
-  redirectUrl.search = target.search;
-
-  const res = NextResponse.redirect(redirectUrl, 301);
+  // Redirect to the plain absolute URL. Do NOT clone `req.nextUrl`: a
+  // NextURL remembers that the incoming path ended in "/" and re-appends it
+  // when formatted, so /en/about/ would 301 back to /en/about/ forever (Next's
+  // own slash redirect, which used to hide this, is off — see next.config.ts).
+  const res = NextResponse.redirect(target, 301);
   if (isRootLocaleRedirect) {
     res.headers.set("Vary", "Accept-Language");
   }

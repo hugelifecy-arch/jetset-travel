@@ -9,8 +9,10 @@
  * (NO trailing slash — Phase 3, locked in by GSC Performance data showing
  * Google selects the no-slash variant for nearly every ranking URL). Every
  * variant — apex host, missing/duplicate locale prefix, `?lang=`, bare paths,
- * any trailing slash — resolves to that form in a single redirect hop.
+ * any trailing slash, retired/merged URLs (src/lib/redirects.ts) — resolves
+ * to that form in a single redirect hop.
  */
+import { resolvePathRedirect } from "./redirects.ts";
 
 export const CANONICAL_HOST = "www.jetset-travel.com";
 export const APEX_HOST = "jetset-travel.com";
@@ -178,6 +180,11 @@ export function canonicalize(
 
   // 5. Canonical form has NO trailing slash.
   pathname = stripTrailingSlash(pathname);
+
+  // 5b. Retired, merged and wrong-locale URLs → their live page. Runs after
+  //     every normalisation above, so /en/visa-services-cyprus/,
+  //     /EN/visa-services-cyprus and apex variants also land in one hop.
+  pathname = resolvePathRedirect(pathname) ?? pathname;
 
   const newSearch = searchParams.toString()
     ? `?${searchParams.toString()}`

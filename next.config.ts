@@ -1,6 +1,5 @@
 import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
-import { wrongLocaleBlogRedirects } from "./src/lib/blog-translation-pairs.ts";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n.ts");
 
@@ -48,17 +47,14 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
-  // Phase 3: canonical URL form has NO trailing slash across the site
-  // (see src/lib/canonical.ts). GSC Performance data confirmed Google
-  // currently selects the no-slash form for nearly every ranking URL
-  // (homepage /en beats /en/ 24:12, /en/blog/cruises-from-limassol-2026
-  // beats its slashed twin 21:6, /en/blog/cyprus-schengen-2026-business-
-  // travel beats its slashed twin 11:6). Next.js automatically issues a
-  // single 308 from /path/ → /path for any page route that arrives with
-  // a trailing slash, so the redirects below only need to handle
-  // destination-specific bridges (locale slug swaps, retired stubs, the
-  // wrong-folder fix).
+  // Canonical URL form has NO trailing slash (src/lib/canonical.ts).
+  // `skipTrailingSlashRedirect` turns off Next's built-in /path/ → /path
+  // 308, which ran BEFORE the proxy and so turned every slashed retired URL
+  // into a two-hop chain (308 strip, then the redirect). The proxy
+  // (src/proxy.ts → src/lib/canonicalize.ts) now strips the slash itself,
+  // together with host, locale and retired-URL fixes, in one 301.
   trailingSlash: false,
+  skipTrailingSlashRedirect: true,
   images: {
     localPatterns: [
       {
@@ -68,128 +64,11 @@ const nextConfig: NextConfig = {
     ],
     formats: ["image/avif", "image/webp"],
   },
-  async redirects() {
-    // Host canonicalization (apex → www), `/en/en → /en`, trailing-slash,
-    // and `?lang=` stripping all live in `src/proxy.ts` so they happen
-    // in a single 301 hop. Keep only destination-specific redirects here.
-    //
-    // Order matters: `next.config.ts` redirects run BEFORE the proxy. Any
-    // rule added here that the middleware would also match will create a
-    // redirect chain and re-trigger Google Search Console's "Page with
-    // redirect" validation failure.
-    return [
-      // Wrong-locale blog slugs (/en/blog/<ru-slug>, /ru/blog/<en-slug>) →
-      // the translated article in the requested locale, 301, one hop. Built
-      // from the EN↔RU slug-pair map, so every translated post is covered
-      // (Bing Webmaster indexed 13 of these, Oct 2026). This includes the
-      // Phase 3 wrong-folder fix /ru/blog/cyprus-schengen-2026-business-travel
-      // → /ru/blog/kipr-v-shengene-2026-delovye-poezdki, previously a 308.
-      ...wrongLocaleBlogRedirects(),
-      // Bare-path bridges (legacy inbound links from before the locale split).
-      {
-        source: "/luxury",
-        destination: "/en/luxury-travel",
-        permanent: true,
-      },
-      {
-        source: "/en/luxury",
-        destination: "/en/luxury-travel",
-        permanent: true,
-      },
-      {
-        source: "/ru/luxury",
-        destination: "/ru/luxury-travel",
-        permanent: true,
-      },
-      // Cross-locale SEO slug bridges. Each service page has a localised
-      // slug; off-locale visits used to be handled by a server-component
-      // `redirect()` call on every request, which forces Next to build and
-      // render a stub page just to emit a 307. Catching them here collapses
-      // each off-locale hit into a single 308 at the edge.
-      {
-        source: "/ru/paphos-travel-agency",
-        destination: "/ru/turisticheskoe-agentstvo-pafos",
-        permanent: true,
-      },
-      {
-        source: "/en/turisticheskoe-agentstvo-pafos",
-        destination: "/en/paphos-travel-agency",
-        permanent: true,
-      },
-      {
-        source: "/ru/flight-tickets-cyprus",
-        destination: "/ru/aviabilety-kipr",
-        permanent: true,
-      },
-      {
-        source: "/en/aviabilety-kipr",
-        destination: "/en/flight-tickets-cyprus",
-        permanent: true,
-      },
-      // Consolidate the four cross-locale "cyprus" landing pages onto the
-      // Latin slug in BOTH locales. The transliterated Russian slugs were
-      // duplicate landing pages with no content (pure redirect stubs); they
-      // looped against the EN-slug page's `redirect("/ru/<ru-slug>")` and
-      // showed up in GSC as "Redirect error" / "Discovered — not indexed".
-      // After this consolidation the canonical Russian URL is the same
-      // Latin slug as English (mirrors /ru/visa-services, /ru/about, etc.).
-      {
-        source: "/en/vizovye-uslugi-kipr",
-        destination: "/en/visa-services",
-        permanent: true,
-      },
-      {
-        source: "/ru/vizovye-uslugi-kipr",
-        destination: "/ru/visa-services",
-        permanent: true,
-      },
-      // 22 Oct 2026: /visa-services-cyprus merged into /visa-services. It
-      // targeted the same searches ("visa services Cyprus") with the same
-      // service; the Russian titles were identical. Google never crawled it
-      // (Search Console: "Discovered – currently not indexed"), so the
-      // redirect loses no traffic and stops the two pages competing.
-      {
-        source: "/en/visa-services-cyprus",
-        destination: "/en/visa-services",
-        permanent: true,
-      },
-      {
-        source: "/ru/visa-services-cyprus",
-        destination: "/ru/visa-services",
-        permanent: true,
-      },
-      {
-        source: "/en/luxusnyy-otdykh-kipr",
-        destination: "/en/luxury-travel-cyprus",
-        permanent: true,
-      },
-      {
-        source: "/ru/luxusnyy-otdykh-kipr",
-        destination: "/ru/luxury-travel-cyprus",
-        permanent: true,
-      },
-      {
-        source: "/en/korporativnye-poezdki-kipr",
-        destination: "/en/corporate-travel-cyprus",
-        permanent: true,
-      },
-      {
-        source: "/ru/korporativnye-poezdki-kipr",
-        destination: "/ru/corporate-travel-cyprus",
-        permanent: true,
-      },
-      {
-        source: "/en/bronirovanie-otelej-kipr",
-        destination: "/en/hotel-booking-cyprus",
-        permanent: true,
-      },
-      {
-        source: "/ru/bronirovanie-otelej-kipr",
-        destination: "/ru/hotel-booking-cyprus",
-        permanent: true,
-      },
-    ];
-  },
+  // No `redirects()` here on purpose. Every redirect (apex → www, trailing
+  // slash, /en/en, ?lang=, bare paths, retired and merged URLs, wrong-locale
+  // blog slugs) is resolved by the proxy in a single 301 hop; the
+  // destination table lives in src/lib/redirects.ts. Config redirects run
+  // before the proxy, answer 308 and would re-create redirect chains.
   async headers() {
     return [
       {
