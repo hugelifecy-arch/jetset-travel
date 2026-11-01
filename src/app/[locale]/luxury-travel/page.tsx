@@ -10,6 +10,10 @@ import {
   Heart,
   Star,
   ArrowRight,
+  CheckCircle2,
+  Gem,
+  Plane,
+  Hotel,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import RelatedArticles from "@/components/sections/RelatedArticles";
@@ -89,6 +93,15 @@ export default async function LuxuryTravelPage({
       imageAlt: t("accessImageAlt"),
     },
   ];
+
+  const arrange = [
+    "arrange1",
+    "arrange2",
+    "arrange3",
+    "arrange4",
+    "arrange5",
+    "arrange6",
+  ] as const;
 
   const destinations = [
     {
@@ -266,6 +279,105 @@ export default async function LuxuryTravelPage({
         </div>
       </section>
 
+      {/* What We Can Arrange and Honeymoon & Celebration Travel: merged in
+          from the former Cyprus luxury landing page (same markup). They sit
+          between the light editorial and white destination sections so the
+          backgrounds keep alternating. */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              {t("arrangeTitle")}
+            </h2>
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
+              {t("arrangeSubtitle")}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {arrange.map((key) => (
+              <div
+                key={key}
+                className="flex items-start gap-4 p-6 rounded-2xl border border-brand-navy/10"
+              >
+                <CheckCircle2 className="h-6 w-6 text-brand-gold flex-shrink-0 mt-0.5" />
+                <div>
+                  <h3 className="text-base font-semibold text-brand-navy mb-1">
+                    {t(`${key}Title`)}
+                  </h3>
+                  <p className="text-brand-navy/70 text-sm leading-relaxed">
+                    {t(`${key}Desc`)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Honeymoon & Celebration Travel */}
+      <section className="py-20 bg-brand-light">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6">
+                <Heart className="h-7 w-7" />
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+                {t("celebrationTitle")}
+              </h2>
+              <p className="text-brand-navy/70 leading-relaxed mb-6">
+                {t("celebrationP1")}
+              </p>
+              <p className="text-brand-navy/70 leading-relaxed mb-8">
+                {t("celebrationP2")}
+              </p>
+              <Link
+                href={`/${locale}/contact?type=honeymoon`}
+                className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
+              >
+                {t("celebrationCta")}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </div>
+            <div className="space-y-6">
+              <div className="p-6 rounded-2xl border border-brand-navy/10 bg-white">
+                <div className="flex items-center gap-3 mb-3">
+                  <Gem className="h-5 w-5 text-brand-gold" />
+                  <h3 className="text-lg font-bold text-brand-navy">
+                    {t("celebrationFeature1Title")}
+                  </h3>
+                </div>
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
+                  {t("celebrationFeature1Desc")}
+                </p>
+              </div>
+              <div className="p-6 rounded-2xl border border-brand-navy/10 bg-white">
+                <div className="flex items-center gap-3 mb-3">
+                  <Plane className="h-5 w-5 text-brand-gold" />
+                  <h3 className="text-lg font-bold text-brand-navy">
+                    {t("celebrationFeature2Title")}
+                  </h3>
+                </div>
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
+                  {t("celebrationFeature2Desc")}
+                </p>
+              </div>
+              <div className="p-6 rounded-2xl border border-brand-navy/10 bg-white">
+                <div className="flex items-center gap-3 mb-3">
+                  <Hotel className="h-5 w-5 text-brand-gold" />
+                  <h3 className="text-lg font-bold text-brand-navy">
+                    {t("celebrationFeature3Title")}
+                  </h3>
+                </div>
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
+                  {t("celebrationFeature3Desc")}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Destination Cards */}
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -353,6 +465,8 @@ export default async function LuxuryTravelPage({
           { question: t("faq5Q"), answer: t("faq5A") },
           { question: t("faq6Q"), answer: t("faq6A") },
           { question: t("faq7Q"), answer: t("faq7A") },
+          { question: t("faq8Q"), answer: t("faq8A") },
+          { question: t("faq9Q"), answer: t("faq9A") },
         ]}
       />
 

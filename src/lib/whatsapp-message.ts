@@ -40,7 +40,6 @@ export type WhatsAppTopic =
 const PAGE_TOPICS: Record<string, WhatsAppTopic> = {
   "luxury-travel": "luxury",
   "vip-services": "vip",
-  "luxury-travel-cyprus": "luxury",
   cruises: "cruise",
   private: "private",
   "visa-services": "visa",

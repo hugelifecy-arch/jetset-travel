@@ -13,11 +13,11 @@ const sitemapPaths = new Set(sitemap().map((e) => new URL(e.url).pathname));
 describe("indexnow presets", () => {
   // Bing's Oct 2026 list had 27 URLs; the merged "*-cyprus" pages were
   // dropped from it when they started to 301 (1 Nov 2026).
-  it("has the 26-URL priority preset (7 EN + 19 RU)", () => {
+  it("has the 25-URL priority preset (7 EN + 18 RU)", () => {
     const p = INDEXNOW_PRESETS.priority;
-    assert.equal(p.length, 26);
+    assert.equal(p.length, 25);
     assert.equal(p.filter((u) => u.startsWith("/en/")).length, 7);
-    assert.equal(p.filter((u) => u.startsWith("/ru/")).length, 19);
+    assert.equal(p.filter((u) => u.startsWith("/ru/")).length, 18);
     assert.equal(new Set(p).size, p.length, "duplicate path in preset");
   });
 

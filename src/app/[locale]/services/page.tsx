@@ -286,7 +286,7 @@ export default async function ServicesPage({
               </div>
               <p className="mt-4">
                 <Link
-                  href={`/${locale}/luxury-travel-cyprus`}
+                  href={`/${locale}/luxury-travel`}
                   className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy transition-colors"
                 >
                   {t("luxuryCyprusLink")}

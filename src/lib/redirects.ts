@@ -39,7 +39,7 @@ const STATIC_REDIRECTS: Pair[] = [
 
   // Retired transliterated slugs (redirect-only stubs, retired May 2026).
   ...bothLocales("vizovye-uslugi-kipr", "visa-services"),
-  ...bothLocales("luxusnyy-otdykh-kipr", "luxury-travel-cyprus"),
+  ...bothLocales("luxusnyy-otdykh-kipr", "luxury-travel"),
   ...bothLocales("korporativnye-poezdki-kipr", "corporate-travel"),
   ...bothLocales("bronirovanie-otelej-kipr", "hotel-booking-cyprus"),
 
@@ -50,6 +50,7 @@ const STATIC_REDIRECTS: Pair[] = [
   // 1 Nov 2026: the "*-cyprus" duplicates were merged into the main
   // service pages (Search Console cannibalisation); their unique sections
   // moved over. The main pages carry the nav, footer, blog and backlinks.
+  ...bothLocales("luxury-travel-cyprus", "luxury-travel"),
   ...bothLocales("corporate-travel-cyprus", "corporate-travel"),
 ];
 

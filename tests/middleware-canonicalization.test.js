@@ -183,7 +183,6 @@ describe("middleware: no-trailing-slash canonicalization", () => {
   // Latin slug is the same in both locales, so a trailing slash is the only
   // thing left to strip. These cases lock that behaviour in place.
   for (const slug of [
-    "luxury-travel-cyprus",
     "hotel-booking-cyprus",
   ]) {
     it(`/ru/${slug}/ (trailing slash) → 301 to /ru/${slug} (no loop)`, () => {

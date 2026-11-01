@@ -49,7 +49,6 @@ const pages: StaticPage[] = [
   // locales (their transliterated Russian counterparts were retired — see
   // canonical.ts and next.config.ts). The two genuinely-bilingual cross-locale
   // pairs (paphos / flight-tickets) live in `crossLocalePageDefs` below.
-  { path: "/luxury-travel-cyprus", priority: 0.8, changeFrequency: "monthly" },
   { path: "/hotel-booking-cyprus", priority: 0.8, changeFrequency: "monthly" },
   { path: "/privacy", priority: 0.4, changeFrequency: "yearly", lastModified: "2026-10-23" },
   { path: "/terms", priority: 0.4, changeFrequency: "yearly" },

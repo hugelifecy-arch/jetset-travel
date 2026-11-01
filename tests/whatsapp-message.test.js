@@ -17,7 +17,7 @@ describe("whatsAppTopic", () => {
     "/en/luxury-travel": "luxury",
     "/en/vip-services": "vip",
     "/ru/vip-services": "vip",
-    "/ru/luxury-travel-cyprus": "luxury",
+    "/ru/luxury-travel": "luxury",
     "/en/cruises": "cruise",
     "/ru/private": "private",
     "/en/visa-services": "visa",
