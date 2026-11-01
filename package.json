@@ -16,6 +16,9 @@
     "gsc:weekly-delta": "node scripts/gsc-weekly-delta.mjs",
     "verify:routes": "node scripts/verify-routes.mjs",
     "verify:sitemap": "node scripts/verify-sitemap.mjs",
+    "verify:redirects": "node scripts/verify-redirects.mjs",
+    "verify:links": "node scripts/verify-internal-links.mjs",
+    "suggest:lastmod": "node scripts/suggest-lastmod.mjs",
     "check:titles": "node scripts/check-titles.mjs",
     "indexnow": "node scripts/indexnow.mjs",
     "indexnow:priority": "node scripts/indexnow.mjs --preset priority"
