@@ -101,6 +101,30 @@ describe("redirects: Search Console audit (1 Nov 2026)", () => {
     assertOneHop(`${APEX}/ru/about/`, `${WWW}/ru/about`);
   });
 
+  it("/corporate-travel-cyprus (merged 1 Nov 2026) → /corporate-travel, with or without a slash", () => {
+    for (const loc of ["en", "ru"]) {
+      assertOneHop(`${WWW}/${loc}/corporate-travel-cyprus`, `${WWW}/${loc}/corporate-travel`);
+      assertOneHop(`${WWW}/${loc}/corporate-travel-cyprus/`, `${WWW}/${loc}/corporate-travel`);
+      assertOneHop(`${WWW}/${loc}/korporativnye-poezdki-kipr`, `${WWW}/${loc}/corporate-travel`);
+    }
+  });
+
+  it("/luxury-travel-cyprus (merged 1 Nov 2026) → /luxury-travel, with or without a slash", () => {
+    for (const loc of ["en", "ru"]) {
+      assertOneHop(`${WWW}/${loc}/luxury-travel-cyprus`, `${WWW}/${loc}/luxury-travel`);
+      assertOneHop(`${WWW}/${loc}/luxury-travel-cyprus/`, `${WWW}/${loc}/luxury-travel`);
+      assertOneHop(`${WWW}/${loc}/luxusnyy-otdykh-kipr`, `${WWW}/${loc}/luxury-travel`);
+    }
+  });
+
+  it("/hotel-booking-cyprus (merged 1 Nov 2026) → /hotel-reservations, with or without a slash", () => {
+    for (const loc of ["en", "ru"]) {
+      assertOneHop(`${WWW}/${loc}/hotel-booking-cyprus`, `${WWW}/${loc}/hotel-reservations`);
+      assertOneHop(`${WWW}/${loc}/hotel-booking-cyprus/`, `${WWW}/${loc}/hotel-reservations`);
+      assertOneHop(`${WWW}/${loc}/bronirovanie-otelej-kipr`, `${WWW}/${loc}/hotel-reservations`);
+    }
+  });
+
   it("the proxy answers 301 (not 307/308)", () => {
     const proxy = readFileSync(new URL("../src/proxy.ts", import.meta.url), "utf-8");
     assert.match(proxy, /NextResponse\.redirect\([^)]*,\s*301\)/);

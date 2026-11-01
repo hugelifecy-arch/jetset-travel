@@ -1,8 +1,9 @@
 ---
 title: "Best Time to Visit Cyprus: Month-by-Month Guide for 2026–2027"
-description: "When to visit Cyprus, month by month: weather, sea temperature, crowds, prices and festivals, with 2027 Easter and Carnival dates, for Paphos, Limassol and Larnaca."
+seoTitle: "Best Time to Visit Cyprus: April–June & Sept–Oct (2026–27)"
+description: "The best time to visit Cyprus is April–June or September–October: 21–31°C on the coast, fewer crowds, lower prices than July–August. Month-by-month guide."
 date: "2026-04-01"
-dateModified: "2026-10-26"
+dateModified: "2026-11-01"
 author: "Maro Kokkinou"
 slug: "best-time-visit-cyprus-monthly-guide"
 translationSlug: "luchshee-vremya-dlya-poseshcheniya-kipra"
@@ -16,6 +17,8 @@ tags:
 locale: "en"
 status: "published"
 ---
+
+> **Short answer:** the best time to visit Cyprus is the shoulder season — April to June and September to October — when coastal highs are 21–31°C, crowds are moderate and prices are good value. The sea is around 20°C in May and 26–28°C in July–September. July and August are the hottest (30–33°C on the coast), busiest and most expensive months; November to March is mild, the quietest and the best value.
 
 ## When Should You Visit Cyprus?
 

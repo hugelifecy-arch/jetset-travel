@@ -240,7 +240,7 @@ describe("Phase 7 — trailing-slash variants don't coexist in the link graph", 
         // "}" = end of a `${…}` interpolation, then the suffix, then "/" and
         // a closing quote/backtick. Requiring the leading "}" avoids matching
         // child routes (`/blog/${slug}`) and sibling slugs
-        // (`/corporate-travel-cyprus`).
+        // (`/flight-tickets-cyprus`).
         const re = new RegExp(
           "\\}" + suffix.replace(/\//g, "\\/") + "\\/(?=[\"'`])",
           "g",

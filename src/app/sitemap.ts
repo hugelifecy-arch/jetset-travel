@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { NOINDEX_LOCALE_PATHS, SERVICE_LAST_UPDATED } from "../lib/seo.ts";
+import { NOINDEX_LOCALE_PATHS } from "../lib/seo.ts";
 import {
   CANONICAL_ORIGIN,
   LOCALE_ALTERNATES,
@@ -7,32 +7,33 @@ import {
   type Locale,
 } from "../lib/canonical.ts";
 import { getPublishedPosts } from "../lib/blog.ts";
+import { pageLastModified } from "../lib/page-dates.ts";
 
 const locales = ["en", "ru"] as const satisfies readonly Locale[];
 
+/**
+ * <lastmod> = each page's last real content change, from
+ * src/lib/page-dates.ts (shared with the pages' structured-data
+ * dateModified). Never one date for every URL; never bumped for a
+ * title/description-only edit. Blog posts use their frontmatter.
+ */
 type StaticPage = {
   /** route path AFTER the locale (e.g. "" for locale root, "/about") */
   path: string;
   priority: number;
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
-  /** Set when this page changed after SERVICE_LAST_UPDATED (YYYY-MM-DD). */
-  lastModified?: string;
+  /**
+   * The page lists blog posts, so a new or edited post changes it too:
+   * the homepage strip shows the newest 3 posts, /blog shows all of them.
+   */
+  listsPosts?: number | "all";
 };
 
-/**
- * Bare paths the middleware 301-redirects to a different canonical URL.
- * Keep this in sync with `BARE_PATH_SPECIALS` in `src/lib/canonicalize.ts`.
- * Anything matching is rejected before it can be emitted as a <loc>.
- */
-const REDIRECTED_ROUTE_PATHS: ReadonlySet<string> = new Set([
-  "/luxury",
-]);
-
 const pages: StaticPage[] = [
-  { path: "", priority: 1.0, changeFrequency: "weekly" },
+  { path: "", priority: 1.0, changeFrequency: "weekly", listsPosts: 3 },
   { path: "/corporate-travel", priority: 0.8, changeFrequency: "monthly" },
   { path: "/luxury-travel", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/vip-services", priority: 0.8, changeFrequency: "monthly", lastModified: "2026-10-26" },
+  { path: "/vip-services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/visa-services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/services", priority: 0.8, changeFrequency: "monthly" },
   { path: "/hotel-reservations", priority: 0.8, changeFrequency: "monthly" },
@@ -41,38 +42,45 @@ const pages: StaticPage[] = [
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
   { path: "/quote", priority: 0.8, changeFrequency: "monthly" },
   { path: "/faq", priority: 0.6, changeFrequency: "monthly" },
-  { path: "/blog", priority: 0.6, changeFrequency: "weekly" },
+  { path: "/blog", priority: 0.6, changeFrequency: "weekly", listsPosts: "all" },
   // Private & Family Office Travel — discovery is deliberately quiet
   // (nav/footer/direct URL only), hence the lower priority.
   { path: "/private", priority: 0.7, changeFrequency: "monthly" },
-  // The "*-cyprus" SEO landing pages share one Latin slug across both
-  // locales (their transliterated Russian counterparts were retired — see
-  // canonical.ts and next.config.ts). The two genuinely-bilingual cross-locale
-  // pairs (paphos / flight-tickets) live in `crossLocalePageDefs` below.
-  { path: "/corporate-travel-cyprus", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/luxury-travel-cyprus", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/hotel-booking-cyprus", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/privacy", priority: 0.4, changeFrequency: "yearly", lastModified: "2026-10-23" },
+  // The two cross-locale pairs with different slugs per locale (paphos /
+  // flight-tickets) live in `crossLocalePageDefs` below.
+  { path: "/privacy", priority: 0.4, changeFrequency: "yearly" },
   { path: "/terms", priority: 0.4, changeFrequency: "yearly" },
   // Phase 7 — Schengen 2026 topic hub. Higher priority than the service
   // pages because it consolidates the cluster the GSC data shows is
   // currently winning impressions (+143% on the Schengen guide post).
-  { path: "/schengen-cyprus-2026", priority: 0.9, changeFrequency: "monthly", lastModified: "2026-10-26" },
+  { path: "/schengen-cyprus-2026", priority: 0.9, changeFrequency: "monthly" },
   // Labour & VFR flights campaign (Oct 2026): the main service page and the
   // employer page for hotels/restaurants arranging seasonal staff flights.
-  { path: "/labour-vfr-flights-cyprus", priority: 0.9, changeFrequency: "monthly", lastModified: "2026-10-31" },
-  { path: "/seasonal-staff-travel-cyprus", priority: 0.8, changeFrequency: "monthly", lastModified: "2026-10-31" },
+  { path: "/labour-vfr-flights-cyprus", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/seasonal-staff-travel-cyprus", priority: 0.8, changeFrequency: "monthly" },
 ];
 
 /**
  * Cross-locale pages with different slugs per locale. Each entry emits
- * BOTH /en/<def.en>/ and /ru/<def.ru>/ and wires them together via
+ * BOTH /en/<def.en> and /ru/<def.ru> and wires them together via
  * `alternates.languages` (which Next.js renders as <xhtml:link>).
  */
 const crossLocalePageDefs: Array<{ en: string; ru: string }> = [
   { en: "paphos-travel-agency", ru: "turisticheskoe-agentstvo-pafos" },
   { en: "flight-tickets-cyprus", ru: "aviabilety-kipr" },
 ];
+
+const postDate = (post: ReturnType<typeof getPublishedPosts>[number]) =>
+  post.frontmatter.dateModified ?? post.frontmatter.date;
+
+/** The page's own date, or a newer date of a post it lists. */
+function pageDate(page: StaticPage, locale: Locale): string {
+  const own = pageLastModified(page.path, locale);
+  if (!page.listsPosts) return own;
+  const posts = getPublishedPosts(locale);
+  const listed = page.listsPosts === "all" ? posts : posts.slice(0, page.listsPosts);
+  return [own, ...listed.map(postDate)].sort().at(-1)!;
+}
 
 /**
  * Build the `alternates.languages` map for a canonical locale-prefixed path
@@ -101,21 +109,14 @@ function alternatesFor(localePath: string) {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // Use a STABLE lastmod for unchanged static pages so Google doesn't
-  // dismiss the signal (GSC flags sitemaps whose every URL always reports
-  // today's date). Bump SERVICE_LAST_UPDATED in lib/seo.ts when service
-  // content is materially edited.
-  const staticLastMod = SERVICE_LAST_UPDATED;
-
   const staticPages = locales.flatMap((locale) =>
     pages
-      .filter((page) => !REDIRECTED_ROUTE_PATHS.has(page.path))
       .map((page) => {
         const url = getCanonicalUrl(page.path, locale);
         const localePath = new URL(url).pathname;
         return {
           url,
-          lastModified: page.lastModified ?? staticLastMod,
+          lastModified: pageDate(page, locale),
           changeFrequency: page.changeFrequency,
           priority: page.priority,
           alternates: alternatesFor(localePath),
@@ -125,34 +126,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       .filter((entry) => !NOINDEX_LOCALE_PATHS.has(new URL(entry.url).pathname)),
   );
 
-  const crossLocalePages = crossLocalePageDefs
-    .filter(
-      (def) =>
-        !REDIRECTED_ROUTE_PATHS.has(`/${def.en}`) &&
-        !REDIRECTED_ROUTE_PATHS.has(`/${def.ru}`),
-    )
-    .flatMap((def) => {
-      const enUrl = getCanonicalUrl(`/${def.en}`, "en");
-      const ruUrl = getCanonicalUrl(`/${def.ru}`, "ru");
-      const enPath = new URL(enUrl).pathname;
-      const ruPath = new URL(ruUrl).pathname;
-      return [
-        {
-          url: enUrl,
-          lastModified: staticLastMod,
-          changeFrequency: "monthly" as const,
-          priority: 0.8,
-          alternates: alternatesFor(enPath),
-        },
-        {
-          url: ruUrl,
-          lastModified: staticLastMod,
-          changeFrequency: "monthly" as const,
-          priority: 0.8,
-          alternates: alternatesFor(ruPath),
-        },
-      ];
-    });
+  const crossLocalePages = crossLocalePageDefs.flatMap((def) =>
+    locales.map((locale) => {
+      const url = getCanonicalUrl(`/${def[locale]}`, locale);
+      return {
+        url,
+        lastModified: pageLastModified(`/${def[locale]}`, locale),
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+        alternates: alternatesFor(new URL(url).pathname),
+      };
+    }),
+  );
 
   // Add published blog posts to sitemap. Each post uses its own
   // frontmatter `dateModified` (falling back to `date`) as the lastmod, so
@@ -184,7 +169,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     return {
       url,
-      lastModified: post.frontmatter.dateModified ?? post.frontmatter.date,
+      lastModified: postDate(post),
       changeFrequency: "monthly" as const,
       priority: 0.6,
       alternates: { languages },

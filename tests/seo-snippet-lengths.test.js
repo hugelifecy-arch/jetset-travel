@@ -64,9 +64,8 @@ const STATIC_PAGE_METADATA = [
   fromMessages("ru", "labourVfrPage", "/labour-vfr-flights-cyprus"),
   fromMessages("en", "seasonalStaffPage", "/seasonal-staff-travel-cyprus"),
   fromMessages("ru", "seasonalStaffPage", "/seasonal-staff-travel-cyprus"),
-  // Yandex audit (Oct 2026): these two pairs shared one title per locale.
-  // Mirror the strings in corporate-travel/page.tsx and
-  // corporate-travel-cyprus/page.tsx; the uniqueness test below guards them.
+  // Mirror the strings in corporate-travel/page.tsx. (Its old twin
+  // /corporate-travel-cyprus was merged into it and 301s, 1 Nov 2026.)
   {
     page: "/en/corporate-travel",
     title: "Corporate Travel Management Cyprus | IATA Agency — JetSet",
@@ -74,34 +73,38 @@ const STATIC_PAGE_METADATA = [
       "IATA-accredited JetSet manages corporate travel for Cyprus businesses: travel policy control, VAT-compliant invoices, monthly spend reports and 24/7 support.",
   },
   {
-    page: "/en/corporate-travel-cyprus",
-    title: "Business Travel Cyprus: Paphos, Limassol, Nicosia | JetSet",
-    description:
-      "Business travel across Cyprus from JetSet's Paphos HQ: one IATA-accredited team for Limassol, Nicosia and Larnaca firms. Consolidated invoicing, 24/7 support.",
-  },
-  {
     page: "/ru/corporate-travel",
     title: "Управление корпоративными командировками на Кипре | JetSet",
     description:
       "JetSet — агентство на Кипре с аккредитацией IATA: командировки по вашей тревел-политике, корректные счета для бухгалтерии, ежемесячные отчёты, поддержка 24/7.",
   },
-  {
-    page: "/ru/corporate-travel-cyprus",
-    title: "Деловые поездки по Кипру: Пафос, Лимассол, Никосия | JetSet",
-    description:
-      "Деловые поездки по Кипру с JetSet: аккредитация IATA, головной офис в Пафосе, работаем в Лимассоле, Никосии и Ларнаке. Консолидированные счета, поддержка 24/7.",
-  },
+  // Nov 2026: the homepage owns "Cyprus travel agency"; the Paphos pages own
+  // the local "travel agent in Paphos / visit our office" angle. Mirror the
+  // strings in [locale]/page.tsx, paphos-travel-agency/page.tsx and
+  // turisticheskoe-agentstvo-pafos/page.tsx.
   {
     page: "/en (homepage)",
-    title: "Travel Agency in Cyprus — Paphos & Limassol | JetSet Travel",
+    title: "Cyprus Travel Agency in Paphos | IATA-Accredited | JetSet",
     description:
-      "IATA-accredited Cyprus travel agency in Paphos (Licence 7775). Corporate trips, luxury holidays, visa & flights for UK, EU and local travellers in 2026.",
+      "IATA-accredited Cyprus travel agency in Paphos since 2006 (Licence 7775): corporate travel, luxury holidays, flights and visas. Free quote, 24/7 WhatsApp.",
   },
   {
     page: "/ru (homepage)",
-    title: "Турагентство в Пафосе, Кипр 2026 | JetSet — Аккредитация IATA",
+    title: "Турагентство на Кипре с аккредитацией IATA | JetSet Travel",
     description:
-      "JetSet Travel — аккредитованное IATA турагентство в Пафосе, Кипр (лицензия 7775). Корпоративные поездки, премиальный отдых, визы, авиабилеты. Поддержка 24/7.",
+      "JetSet Travel — турагентство на Кипре с аккредитацией IATA, офис в Пафосе с 2006 года (лицензия 7775). Командировки, премиум-отдых, визы и авиабилеты.",
+  },
+  {
+    page: "/en/paphos-travel-agency",
+    title: "Paphos Travel Agent: Visit Our Office on Agapinoros St",
+    description:
+      "Visit JetSet Travel at 26A Agapinoros, Paphos: face-to-face help with flights, holidays and visas in English, Russian and Greek. No appointment needed.",
+  },
+  {
+    page: "/ru/turisticheskoe-agentstvo-pafos",
+    title: "Турагент в Пафосе: офис на ул. Агапинорос 26А | JetSet",
+    description:
+      "Приходите в офис JetSet Travel на ул. Агапинорос 26А в Пафосе: авиабилеты, отдых и визы — лично, на русском, английском и греческом. Без записи.",
   },
   {
     page: "/en/contact",
@@ -129,15 +132,15 @@ const STATIC_PAGE_METADATA = [
   },
   {
     page: "/en/schengen-cyprus-2026",
-    title: "Is Cyprus in Schengen? EU Vote & 2027 Timeline (Oct 2026)",
+    title: "When Will Cyprus Join Schengen? 2027 Timeline & Status",
     description:
-      "Not yet. In October 2026 Cyprus is still outside Schengen and now expects to join in 2027. What it means for the 90/180-day rule, visas, EES and ETIAS.",
+      "Cyprus is not in Schengen yet: it expects to join in 2027, pending a unanimous EU Council vote. What it means for the 90/180 rule, visas, EES and ETIAS.",
   },
   {
     page: "/ru/schengen-cyprus-2026",
-    title: "Кипр в Шенгене? Статус на октябрь 2026 и сроки (2027)",
+    title: "Когда Кипр войдёт в Шенген? Статус и сроки (2027)",
     description:
-      "Пока нет. На октябрь 2026 года Кипр вне Шенгенской зоны, вступление ожидается в 2027 году. Что это значит для правила 90/180, виз, EES и ETIAS.",
+      "Кипр пока не в Шенгене: вступление ожидается в 2027 году, решение за Советом ЕС. Что это значит сейчас для правила 90/180, виз, EES и ETIAS.",
   },
 ];
 

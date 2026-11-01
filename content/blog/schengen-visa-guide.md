@@ -2,7 +2,7 @@
 title: "How to Apply for a Schengen Visa from Cyprus (2026 Guide)"
 description: "How to apply for a Schengen visa from Cyprus: who needs one, the €90 fee, the document checklist, which embassy to use, the 15-day decision time and common refusal reasons."
 date: "2026-02-25"
-dateModified: "2026-10-26"
+dateModified: "2026-11-01"
 author: "Nontari Kalaitsidis"
 slug: "schengen-visa-guide-cyprus-residents"
 translationSlug: "shengenskaya-viza-dlya-zhitelej-kipra"
@@ -95,6 +95,8 @@ If your bank statements show a sudden large deposit just before the application,
 - **Self-employed applicants:** Business registration certificate, tax returns, and recent company bank statements
 - **Students:** Enrolment letter from your educational institution
 - **Retired applicants:** Pension statements or evidence of retirement income
+
+Employers that regularly send staff on business trips to Europe may also want our guide to [what Cyprus joining Schengen means for business travel](/en/blog/cyprus-schengen-2026-business-travel), from the 90/180-day count to visas for non-EU employees.
 
 ### 9. Cyprus Residence Permit
 

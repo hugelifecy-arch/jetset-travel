@@ -67,7 +67,10 @@ describe("seo-title: every blog post <title> fits", () => {
   it("uses the owner-specified titles", () => {
     const bySlug = new Map(posts.map((p) => [p.frontmatter.slug, blogDocumentTitle(p.frontmatter)]));
     assert.equal(bySlug.get("larnaca-vs-paphos-airport-2026"), "Larnaca vs Paphos Airport 2026: Which to Fly From? | JetSet");
-    assert.equal(bySlug.get("luchshee-vremya-dlya-poseshcheniya-kipra"), "Когда ехать на Кипр: погода и цены по месяцам 2026–27 | JetSet");
+    assert.equal(bySlug.get("luchshee-vremya-dlya-poseshcheniya-kipra"), "Когда лучше ехать на Кипр: апрель–июнь и сентябрь–октябрь");
+    assert.equal(bySlug.get("best-time-visit-cyprus-monthly-guide"), "Best Time to Visit Cyprus: April–June & Sept–Oct (2026–27)");
+    assert.equal(bySlug.get("travel-insurance-cyprus-visitors-guide"), "Is Travel Insurance Worth It in 2026? Yes — Cyprus Guide");
+    assert.equal(bySlug.get("strakhovka-dlya-poezdki-na-kipr-2026"), "Нужна ли страховка для поездки на Кипр в 2026? Коротко: да");
     assert.ok(bySlug.get("korporativnye-komandirovki-kipr-gid").startsWith("Корпоративные командировки на Кипр"));
   });
 
@@ -94,5 +97,24 @@ describe("seo-title: /en/cruises", () => {
   it("uses the owner-specified title", () => {
     const src = readFileSync(new URL("../src/app/[locale]/cruises/page.tsx", import.meta.url), "utf-8");
     assert.ok(src.includes('"Cruise Booking Cyprus | Mediterranean & World Cruises | JetSet"'));
+  });
+});
+
+describe("seo-title: homepage vs Paphos pages (Nov 2026)", () => {
+  const read = (path) => readFileSync(new URL(path, import.meta.url), "utf-8");
+
+  it("the homepage targets 'Cyprus travel agency'", () => {
+    const src = read("../src/app/[locale]/page.tsx");
+    assert.ok(src.includes('"Cyprus Travel Agency in Paphos | IATA-Accredited | JetSet"'));
+    assert.ok(src.includes('"Турагентство на Кипре с аккредитацией IATA | JetSet Travel"'));
+    assert.equal(`${messages.en.hero.title} ${messages.en.hero.titleHighlight}`, "Cyprus Travel Agency — Corporate & Luxury Travel");
+    assert.equal(messages.ru.hero.title, "Турагентство на Кипре —");
+  });
+
+  it("the Paphos pages target the local office angle", () => {
+    assert.ok(read("../src/app/[locale]/paphos-travel-agency/page.tsx").includes('"Paphos Travel Agent: Visit Our Office on Agapinoros St"'));
+    assert.ok(read("../src/app/[locale]/turisticheskoe-agentstvo-pafos/page.tsx").includes('"Турагент в Пафосе: офис на ул. Агапинорос 26А | JetSet"'));
+    assert.equal(messages.en.paphosPage.heroTitle, "Your Travel Agent in Paphos — Visit Us on Agapinoros Street");
+    assert.equal(messages.ru.turistAgentPage.heroTitle, "Ваш турагент в Пафосе — офис на улице Агапинорос");
   });
 });

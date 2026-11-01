@@ -16,9 +16,6 @@ import { WHATSAPP_PHONE, whatsAppTopicMessage } from "./whatsapp-message.ts";
 export const LABOUR_VFR_PATH = "/labour-vfr-flights-cyprus";
 export const SEASONAL_STAFF_PATH = "/seasonal-staff-travel-cyprus";
 
-/** Content review date for both pages (schema dateModified + sitemap lastmod). */
-export const LABOUR_VFR_LAST_UPDATED = "2026-10-31";
-
 export type LabourVfrLocale = "en" | "ru";
 
 export const LABOUR_VFR_DESTINATION_KEYS = ["manila", "kathmandu", "dhaka", "delhi"] as const;

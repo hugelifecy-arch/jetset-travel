@@ -15,9 +15,6 @@ export const VERCEL_HOST = "jetset-travel.vercel.app";
 // New file name so apps that cache preview images by URL fetch the new one.
 export const OG_IMAGE = `${CANONICAL_ORIGIN}/images/jetset-og-image-v4.jpg`;
 
-/** Last-reviewed date for static service pages. Bump when service content is materially updated. */
-export const SERVICE_LAST_UPDATED = "2026-10-23";
-
 /**
  * Locale-prefixed paths that render with `robots: noindex` (translation-pending
  * stubs). The pages read this set to decide their robots meta, and sitemap.ts
@@ -86,7 +83,7 @@ export function localizedAlternates(
 
 /**
  * Convenience: get the hreflang map for the canonical locale-prefixed path
- * (e.g. "/en/corporate-travel-cyprus"). Delegates to the LOCALE_ALTERNATES
+ * (e.g. "/en/corporate-travel"). Delegates to the LOCALE_ALTERNATES
  * source of truth so sitemap and pages can't drift.
  */
 export { getHreflangAlternates };

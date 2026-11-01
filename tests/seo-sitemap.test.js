@@ -14,6 +14,9 @@
 
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync, readdirSync, statSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import sitemap from "../src/app/sitemap.ts";
 import {
   CANONICAL_ORIGIN,
@@ -313,6 +316,53 @@ describe("seo: sitemap lastmod follows real edits", () => {
       const entry = byUrl.get(`${CANONICAL_ORIGIN}/${locale}/blog/${slug}`);
       assert.ok(entry, `missing sitemap entry for ${locale}/${slug}`);
       assert.equal(entry.lastModified, post.frontmatter.dateModified, `${locale}/${slug}`);
+    }
+  });
+
+  it("every static page has its own YYYY-MM-DD lastmod, none in the future", () => {
+    const today = new Date().toISOString().slice(0, 10);
+    for (const entry of entries.filter((e) => !e.url.includes("/blog/"))) {
+      assert.match(String(entry.lastModified), /^\d{4}-\d{2}-\d{2}$/, entry.url);
+      assert.ok(entry.lastModified <= today, `${entry.url} lastmod ${entry.lastModified} is in the future`);
+    }
+  });
+
+  it("static pages do not share one global lastmod (Google ignores that)", () => {
+    const dates = new Set(entries.filter((e) => !e.url.includes("/blog/")).map((e) => e.lastModified));
+    assert.ok(dates.size >= 3, `only ${dates.size} distinct static-page dates: ${[...dates].join(", ")}`);
+  });
+
+  it("sitemap.ts has no catch-all fallback date", () => {
+    const src = readFileSync(new URL("../src/app/sitemap.ts", import.meta.url), "utf-8");
+    assert.doesNotMatch(src, /SERVICE_LAST_UPDATED|staticLastMod/);
+  });
+
+  it("pages' structured-data dateModified comes from the same page dates", () => {
+    // A hard-coded or global date in a page's JSON-LD would disagree with
+    // the sitemap's lastmod for that page.
+    const offenders = [];
+    const walk = (dir) => {
+      for (const name of readdirSync(dir)) {
+        const p = join(dir, name);
+        if (statSync(p).isDirectory()) walk(p);
+        else if (/\.tsx?$/.test(name)) {
+          const src = readFileSync(p, "utf-8");
+          if (/dateModified(=\{|:)\s*("|SERVICE_LAST_UPDATED)/.test(src)) offenders.push(p);
+        }
+      }
+    };
+    walk(fileURLToPath(new URL("../src/app/[locale]", import.meta.url)));
+    assert.deepEqual(offenders, []);
+  });
+
+  it("/blog and the homepage move when the posts they list change", () => {
+    for (const loc of ["en", "ru"]) {
+      const posts = getPublishedPosts(loc);
+      const newest = (list) => list.map((p) => p.frontmatter.dateModified ?? p.frontmatter.date).sort().at(-1);
+      const blog = byUrl.get(`${CANONICAL_ORIGIN}/${loc}/blog`);
+      const home = byUrl.get(`${CANONICAL_ORIGIN}/${loc}`);
+      assert.ok(blog.lastModified >= newest(posts), `${loc}/blog`);
+      assert.ok(home.lastModified >= newest(posts.slice(0, 3)), `${loc} homepage`);
     }
   });
 

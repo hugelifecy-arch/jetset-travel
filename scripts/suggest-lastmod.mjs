@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Suggest a per-page, per-locale <lastmod> for the static pages in
- * src/app/sitemap.ts, from git history.
+ * Suggest a per-page, per-locale last content change for the static pages
+ * in src/app/sitemap.ts, from git history.
  *
  * A page "changed" when a commit changed its actual content:
  *   - the page's own copy in src/messages/<locale>.json (its namespaces), or
@@ -17,8 +17,9 @@
  * Usage:  node scripts/suggest-lastmod.mjs          # print a table
  *         node scripts/suggest-lastmod.mjs --json   # machine-readable
  * Needs full git history (in a shallow clone: git fetch --unshallow).
- * Copy the dates into the `lastModified` fields in src/app/sitemap.ts;
- * from then on, bump a page's date by hand when you change its content.
+ * Copy the dates into src/lib/page-dates.ts (used by the sitemap and by
+ * the pages' structured-data dateModified); from then on, bump a page's
+ * date by hand in the same commit as its content change.
  */
 import { execFileSync } from "node:child_process";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";

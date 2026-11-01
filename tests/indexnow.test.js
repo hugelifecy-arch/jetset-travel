@@ -5,17 +5,20 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 import sitemap from "../src/app/sitemap.ts";
 import { INDEXNOW_PRESETS } from "../scripts/indexnow-presets.mjs";
 
 const sitemapPaths = new Set(sitemap().map((e) => new URL(e.url).pathname));
 
 describe("indexnow presets", () => {
-  it("has the 27-URL priority preset (7 EN + 20 RU)", () => {
+  // Bing's Oct 2026 list had 27 URLs; the merged "*-cyprus" pages were
+  // dropped from it when they started to 301 (1 Nov 2026).
+  it("has the 24-URL priority preset (7 EN + 17 RU)", () => {
     const p = INDEXNOW_PRESETS.priority;
-    assert.equal(p.length, 27);
+    assert.equal(p.length, 24);
     assert.equal(p.filter((u) => u.startsWith("/en/")).length, 7);
-    assert.equal(p.filter((u) => u.startsWith("/ru/")).length, 20);
+    assert.equal(p.filter((u) => u.startsWith("/ru/")).length, 17);
     assert.equal(new Set(p).size, p.length, "duplicate path in preset");
   });
 
@@ -29,5 +32,13 @@ describe("indexnow presets", () => {
     const key = "4338cc8b3af74065bf84162fa446f406";
     assert.equal(readFileSync(new URL(`../public/${key}.txt`, import.meta.url), "utf-8").trim(), key);
     assert.match(readFileSync(new URL("../scripts/indexnow.mjs", import.meta.url), "utf-8"), new RegExp(`KEY = "${key}"`));
+  });
+
+  it("an unknown flag prints usage and submits nothing (never the whole sitemap)", () => {
+    const script = new URL("../scripts/indexnow.mjs", import.meta.url).pathname;
+    const r = spawnSync(process.execPath, [script, "--no-such-flag"], { encoding: "utf-8", timeout: 10000 });
+    assert.equal(r.status, 1);
+    assert.match(r.stdout, /--dry-run/);
+    assert.doesNotMatch(r.stdout, /IndexNow: \d+ URL/);
   });
 });

@@ -14,7 +14,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
+import { pageLastModified } from "@/lib/page-dates";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FAQSection from "@/components/sections/FAQSection";
 import RelatedArticles from "@/components/sections/RelatedArticles";
@@ -302,7 +303,7 @@ export default async function VipServicesPage({
         description={t("schemaDescription")}
         url={`https://www.jetset-travel.com/${locale}/vip-services`}
         serviceType="VIP Travel Services"
-        dateModified={SERVICE_LAST_UPDATED}
+        dateModified={pageLastModified("/vip-services", locale)}
       />
     </>
   );

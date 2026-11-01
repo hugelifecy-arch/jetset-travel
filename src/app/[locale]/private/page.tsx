@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
-import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
+import { pageLastModified } from "@/lib/page-dates";
 import JsonLd from "@/components/seo/JsonLd";
 import PrivateIntroductionForm from "./PrivateIntroductionForm";
 
@@ -425,7 +426,7 @@ export default async function PrivateClientsPage({
             "Discreet, principal-led travel management for private clients, families and family offices in Cyprus. Private aviation, yacht charter, VIP airport services, consolidated billing.",
           url: `https://www.jetset-travel.com/${locale}/private`,
           serviceType: "Private & Family Office Travel Management",
-          dateModified: SERVICE_LAST_UPDATED,
+          dateModified: pageLastModified("/private", locale),
           provider: {
             "@id": "https://www.jetset-travel.com/#organization",
           },
