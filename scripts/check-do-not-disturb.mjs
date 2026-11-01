@@ -11,9 +11,9 @@
  * Two modes:
  *   1. Static (default) — verifies each URL is reachable from the route
  *      tree (i.e. has a corresponding `src/app/[locale]/<slug>/page.tsx`,
- *      blog `content/blog/<slug>.md`, or explicit redirect in
- *      `next.config.ts`). Runs without a live server, suitable for CI
- *      pre-merge.
+ *      blog `content/blog/<slug>.md`, or a 301 in `src/lib/redirects.ts`
+ *      whose destination is itself a live page). Runs without a live
+ *      server, suitable for CI pre-merge.
  *   2. Live (`--live` flag, env URL) — fetches each URL from a running
  *      origin and verifies the HTTP response. Suitable for post-deploy
  *      smoke checks against production or a preview environment.
@@ -27,6 +27,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { PATH_REDIRECTS } from "../src/lib/redirects.ts";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(SCRIPT_DIR, "..");
@@ -34,7 +35,6 @@ const ROOT = join(SCRIPT_DIR, "..");
 const DATA_PATH = join(ROOT, "data", "do-not-disturb.json");
 const APP_DIR = join(ROOT, "src", "app", "[locale]");
 const BLOG_CONTENT_DIR = join(ROOT, "content", "blog");
-const NEXT_CONFIG = join(ROOT, "next.config.ts");
 
 const args = new Set(process.argv.slice(2));
 const isLive = args.has("--live");
@@ -75,18 +75,6 @@ function loadFrontmatterSlugs() {
   return slugs;
 }
 
-function loadRedirectSources() {
-  if (!existsSync(NEXT_CONFIG)) return new Set();
-  const raw = readFileSync(NEXT_CONFIG, "utf8");
-  const sources = new Set();
-  const re = /source:\s*["']([^"']+)["']/g;
-  let m;
-  while ((m = re.exec(raw)) !== null) {
-    sources.add(m[1]);
-  }
-  return sources;
-}
-
 function loadAppRoutes() {
   // Recursively collect every `page.tsx` under `src/app/[locale]/...` and
   // convert its directory path to a no-slash route relative to the locale.
@@ -113,7 +101,7 @@ function isLocaleRoot(url) {
   return url === "/en" || url === "/ru";
 }
 
-function classifyStatic(url, { appRoutes, blogSlugs, redirectSources }) {
+function classifyStatic(url, { appRoutes, blogSlugs }) {
   if (isLocaleRoot(url)) return { ok: true, reason: "locale root (page.tsx)" };
 
   // Strip the locale prefix.
@@ -136,9 +124,14 @@ function classifyStatic(url, { appRoutes, blogSlugs, redirectSources }) {
     return { ok: true, reason: `app route: src/app/[locale]${tail}/page.tsx` };
   }
 
-  // Allowed to resolve through an explicit redirect.
-  if (redirectSources.has(url)) {
-    return { ok: true, reason: `explicit redirect in next.config.ts` };
+  // Allowed to resolve through a single 301 (src/lib/redirects.ts, applied
+  // by the proxy) — but only to a page that is itself live.
+  const destination = PATH_REDIRECTS[url.toLowerCase()];
+  if (destination) {
+    const target = classifyStatic(destination, { appRoutes, blogSlugs });
+    return target.ok
+      ? { ok: true, reason: `301 -> ${destination} (src/lib/redirects.ts)` }
+      : { ok: false, reason: `301 -> ${destination}, which is not live: ${target.reason}` };
   }
 
   return {
@@ -195,14 +188,13 @@ async function main() {
     ...loadFrontmatterSlugs(),
   ]);
   const appRoutes = loadAppRoutes();
-  const redirectSources = loadRedirectSources();
 
   const failures = [];
 
   for (const url of urls) {
     const result = isLive
       ? await liveCheck(url)
-      : classifyStatic(url, { appRoutes, blogSlugs, redirectSources });
+      : classifyStatic(url, { appRoutes, blogSlugs });
     const mark = result.ok ? "ok  " : "FAIL";
     console.log(`  ${mark}  ${url}  — ${result.reason}`);
     if (!result.ok) failures.push({ url, reason: result.reason });
