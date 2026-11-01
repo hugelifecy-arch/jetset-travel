@@ -44,7 +44,6 @@ const PAGE_TOPICS: Record<string, WhatsAppTopic> = {
   private: "private",
   "visa-services": "visa",
   "hotel-reservations": "hotel",
-  "hotel-booking-cyprus": "hotel",
   "flight-tickets-cyprus": "flights",
   "aviabilety-kipr": "flights",
   "corporate-travel": "corporate",

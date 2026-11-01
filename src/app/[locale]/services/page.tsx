@@ -181,7 +181,7 @@ export default async function ServicesPage({
               </div>
               <p className="mt-4">
                 <Link
-                  href={`/${locale}/hotel-booking-cyprus`}
+                  href={`/${locale}/hotel-reservations`}
                   className="inline-flex items-center text-sm font-semibold text-brand-gold-ink hover:text-brand-navy transition-colors"
                 >
                   {t("hotelsCyprusLink")}

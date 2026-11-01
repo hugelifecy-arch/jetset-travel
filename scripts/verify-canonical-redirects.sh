@@ -39,14 +39,16 @@ RETIRED_PAIRS=(
   "https://www.jetset-travel.com/ru/corporate-travel-cyprus/|https://www.jetset-travel.com/ru/corporate-travel"
   "https://www.jetset-travel.com/en/luxury-travel-cyprus|https://www.jetset-travel.com/en/luxury-travel"
   "https://www.jetset-travel.com/ru/luxury-travel-cyprus/|https://www.jetset-travel.com/ru/luxury-travel"
+  "https://www.jetset-travel.com/en/hotel-booking-cyprus|https://www.jetset-travel.com/en/hotel-reservations"
+  "https://www.jetset-travel.com/ru/hotel-booking-cyprus/|https://www.jetset-travel.com/ru/hotel-reservations"
   "https://www.jetset-travel.com/ru/about/|https://www.jetset-travel.com/ru/about"
   "https://jetset-travel.com/en/about/|https://www.jetset-travel.com/en/about"
   "https://www.jetset-travel.com/en/luxusnyy-otdykh-kipr|https://www.jetset-travel.com/en/luxury-travel"
   "https://www.jetset-travel.com/ru/luxusnyy-otdykh-kipr|https://www.jetset-travel.com/ru/luxury-travel"
   "https://www.jetset-travel.com/en/korporativnye-poezdki-kipr|https://www.jetset-travel.com/en/corporate-travel"
   "https://www.jetset-travel.com/ru/korporativnye-poezdki-kipr|https://www.jetset-travel.com/ru/corporate-travel"
-  "https://www.jetset-travel.com/en/bronirovanie-otelej-kipr|https://www.jetset-travel.com/en/hotel-booking-cyprus"
-  "https://www.jetset-travel.com/ru/bronirovanie-otelej-kipr|https://www.jetset-travel.com/ru/hotel-booking-cyprus"
+  "https://www.jetset-travel.com/en/bronirovanie-otelej-kipr|https://www.jetset-travel.com/en/hotel-reservations"
+  "https://www.jetset-travel.com/ru/bronirovanie-otelej-kipr|https://www.jetset-travel.com/ru/hotel-reservations"
 )
 
 bold() { printf '\033[1m%s\033[0m\n' "$1"; }

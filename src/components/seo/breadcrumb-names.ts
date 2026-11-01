@@ -17,7 +17,6 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     private: "Private & Family Office Travel",
     "paphos-travel-agency": "Travel Agency in Paphos",
     "flight-tickets-cyprus": "Flight Tickets Cyprus",
-    "hotel-booking-cyprus": "Hotel Booking Cyprus",
     "schengen-cyprus-2026": "Is Cyprus in Schengen?",
     "labour-vfr-flights-cyprus": "Labour & VFR Flights",
     "seasonal-staff-travel-cyprus": "Seasonal Staff Flights",
@@ -43,7 +42,6 @@ export const PATH_DISPLAY_NAMES: Record<string, Record<string, string>> = {
     // The four "*-cyprus" landing pages share their Latin slug across both
     // locales (the transliterated Russian counterparts were retired). Russian
     // breadcrumb labels for them live below under their Latin slug keys.
-    "hotel-booking-cyprus": "Бронирование отелей Кипр",
     "schengen-cyprus-2026": "Кипр в Шенгене?",
     "labour-vfr-flights-cyprus": "Тарифы Labour и VFR",
     "seasonal-staff-travel-cyprus": "Перелёты сезонного персонала",

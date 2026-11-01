@@ -45,11 +45,8 @@ const pages: StaticPage[] = [
   // Private & Family Office Travel — discovery is deliberately quiet
   // (nav/footer/direct URL only), hence the lower priority.
   { path: "/private", priority: 0.7, changeFrequency: "monthly" },
-  // The "*-cyprus" SEO landing pages share one Latin slug across both
-  // locales (their transliterated Russian counterparts were retired — see
-  // canonical.ts and next.config.ts). The two genuinely-bilingual cross-locale
-  // pairs (paphos / flight-tickets) live in `crossLocalePageDefs` below.
-  { path: "/hotel-booking-cyprus", priority: 0.8, changeFrequency: "monthly" },
+  // The two cross-locale pairs with different slugs per locale (paphos /
+  // flight-tickets) live in `crossLocalePageDefs` below.
   { path: "/privacy", priority: 0.4, changeFrequency: "yearly", lastModified: "2026-10-23" },
   { path: "/terms", priority: 0.4, changeFrequency: "yearly" },
   // Phase 7 — Schengen 2026 topic hub. Higher priority than the service

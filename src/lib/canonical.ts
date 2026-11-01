@@ -183,22 +183,13 @@ export const LOCALE_ALTERNATES: Record<
     en: "/en/paphos-travel-agency",
     ru: "/ru/turisticheskoe-agentstvo-pafos",
   },
-  // The four "cyprus" landing pages below use the SAME Latin slug in both
-  // locales. Their transliterated Russian counterparts (vizovye-uslugi-kipr,
-  // luxusnyy-otdykh-kipr, korporativnye-poezdki-kipr, bronirovanie-otelej-kipr)
-  // were retired because they were redirect-only stubs that looped against
-  // the EN page's locale guard — see next.config.ts for the retiring 308s.
-  "/en/hotel-booking-cyprus": {
-    en: "/en/hotel-booking-cyprus",
-    ru: "/ru/hotel-booking-cyprus",
-  },
-  "/ru/hotel-booking-cyprus": {
-    en: "/en/hotel-booking-cyprus",
-    ru: "/ru/hotel-booking-cyprus",
-  },
+  // The old "*-cyprus" landing pages (and their transliterated Russian
+  // stubs) were merged into the main service pages above, which use the same
+  // Latin slug in both locales; they 301 via src/lib/redirects.ts.
   // flight-tickets-cyprus / aviabilety-kipr keeps the per-locale slug pair
   // because both locales have full standalone content pages (see
-  // src/app/[locale]/aviabilety-kipr/page.tsx) and edge 308s in next.config.ts.
+  // src/app/[locale]/aviabilety-kipr/page.tsx); off-locale slugs 301 via
+  // src/lib/redirects.ts.
   "/en/flight-tickets-cyprus": {
     en: "/en/flight-tickets-cyprus",
     ru: "/ru/aviabilety-kipr",

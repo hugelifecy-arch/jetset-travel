@@ -22,7 +22,7 @@ describe("whatsAppTopic", () => {
     "/ru/private": "private",
     "/en/visa-services": "visa",
     "/en/hotel-reservations": "hotel",
-    "/ru/hotel-booking-cyprus": "hotel",
+    "/ru/hotel-reservations": "hotel",
     "/en/flight-tickets-cyprus": "flights",
     "/ru/aviabilety-kipr": "flights",
     "/en/corporate-travel": "corporate",

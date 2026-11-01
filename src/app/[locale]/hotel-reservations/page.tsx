@@ -13,6 +13,8 @@ import {
   Users,
   ArrowRight,
   MapPin,
+  Building2,
+  CheckCircle,
 } from "lucide-react";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import RelatedArticles from "@/components/sections/RelatedArticles";
@@ -107,6 +109,57 @@ export default async function HotelReservationsPage({
     t("groupBenefit3"),
     t("groupBenefit4"),
   ];
+
+  const paphosHotels = [
+    {
+      icon: Star,
+      titleKey: "paphosHotel1Title",
+      descKey: "paphosHotel1Desc",
+      tagKey: "paphosHotel1Tag",
+    },
+    {
+      icon: Star,
+      titleKey: "paphosHotel2Title",
+      descKey: "paphosHotel2Desc",
+      tagKey: "paphosHotel2Tag",
+    },
+    {
+      icon: Star,
+      titleKey: "paphosHotel3Title",
+      descKey: "paphosHotel3Desc",
+      tagKey: "paphosHotel3Tag",
+    },
+  ] as const;
+
+  const limassolHotels = [
+    {
+      icon: Star,
+      titleKey: "limassolHotel1Title",
+      descKey: "limassolHotel1Desc",
+      tagKey: "limassolHotel1Tag",
+    },
+    {
+      icon: Star,
+      titleKey: "limassolHotel2Title",
+      descKey: "limassolHotel2Desc",
+      tagKey: "limassolHotel2Tag",
+    },
+    {
+      icon: Star,
+      titleKey: "limassolHotel3Title",
+      descKey: "limassolHotel3Desc",
+      tagKey: "limassolHotel3Tag",
+    },
+  ] as const;
+
+  const corporateFeatures = [
+    "corpProgramFeature1",
+    "corpProgramFeature2",
+    "corpProgramFeature3",
+    "corpProgramFeature4",
+    "corpProgramFeature5",
+    "corpProgramFeature6",
+  ] as const;
 
   return (
     <>
@@ -244,6 +297,131 @@ export default async function HotelReservationsPage({
         </div>
       </section>
 
+      {/* Hotels in Paphos */}
+      <section className="py-20 bg-brand-light">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 mx-auto">
+              <MapPin className="h-7 w-7" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              {t("paphosHotelsTitle")}
+            </h2>
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
+              {t("paphosHotelsSubtitle")}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {paphosHotels.map((hotel) => (
+              <div
+                key={hotel.titleKey}
+                className="group p-8 rounded-2xl border border-brand-navy/10 bg-white hover:shadow-luxury hover:border-brand-gold/30 transition-all"
+              >
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 group-hover:bg-brand-gold group-hover:text-white transition-colors">
+                  <hotel.icon className="h-7 w-7" />
+                </div>
+                <p className="text-brand-gold-ink text-xs font-semibold uppercase tracking-wider mb-2">
+                  {t(hotel.tagKey)}
+                </p>
+                <h3 className="text-xl font-bold text-brand-navy mb-3">
+                  {t(hotel.titleKey)}
+                </h3>
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
+                  {t(hotel.descKey)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Hotels in Limassol */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 mx-auto">
+              <Building2 className="h-7 w-7" />
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              {t("limassolHotelsTitle")}
+            </h2>
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
+              {t("limassolHotelsSubtitle")}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {limassolHotels.map((hotel) => (
+              <div
+                key={hotel.titleKey}
+                className="group p-8 rounded-2xl border border-brand-navy/10 hover:shadow-luxury hover:border-brand-gold/30 transition-all"
+              >
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-brand-gold/10 text-brand-gold mb-6 group-hover:bg-brand-gold group-hover:text-white transition-colors">
+                  <hotel.icon className="h-7 w-7" />
+                </div>
+                <p className="text-brand-gold-ink text-xs font-semibold uppercase tracking-wider mb-2">
+                  {t(hotel.tagKey)}
+                </p>
+                <h3 className="text-xl font-bold text-brand-navy mb-3">
+                  {t(hotel.titleKey)}
+                </h3>
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
+                  {t(hotel.descKey)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Corporate Hotel Programs */}
+      <section className="py-20 bg-brand-light">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              {t("corpProgramTitle")}
+            </h2>
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
+              {t("corpProgramSubtitle")}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-brand-navy/70 leading-relaxed mb-6">
+                {t("corpProgramP1")}
+              </p>
+              <p className="text-brand-navy/70 leading-relaxed mb-8">
+                {t("corpProgramP2")}
+              </p>
+              <Link
+                href={`/${locale}/contact`}
+                className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
+              >
+                {t("corpProgramCta")}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {corporateFeatures.map((key) => (
+                <div
+                  key={key}
+                  className="flex items-start gap-4 p-5 rounded-2xl border border-brand-navy/10 bg-white"
+                >
+                  <CheckCircle className="h-6 w-6 text-brand-gold flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h3 className="text-base font-semibold text-brand-navy mb-1">
+                      {t(`${key}Title`)}
+                    </h3>
+                    <p className="text-brand-navy/70 text-sm leading-relaxed">
+                      {t(`${key}Desc`)}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Group Bookings Callout */}
       <section className="py-20 bg-brand-navy text-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -302,6 +480,7 @@ export default async function HotelReservationsPage({
           { question: t("faq3Q"), answer: t("faq3A") },
           { question: t("faq4Q"), answer: t("faq4A") },
           { question: t("faq5Q"), answer: t("faq5A") },
+          { question: t("faq6Q"), answer: t("faq6A") },
         ]}
         background="light"
       />

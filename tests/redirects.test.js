@@ -117,6 +117,14 @@ describe("redirects: Search Console audit (1 Nov 2026)", () => {
     }
   });
 
+  it("/hotel-booking-cyprus (merged 1 Nov 2026) → /hotel-reservations, with or without a slash", () => {
+    for (const loc of ["en", "ru"]) {
+      assertOneHop(`${WWW}/${loc}/hotel-booking-cyprus`, `${WWW}/${loc}/hotel-reservations`);
+      assertOneHop(`${WWW}/${loc}/hotel-booking-cyprus/`, `${WWW}/${loc}/hotel-reservations`);
+      assertOneHop(`${WWW}/${loc}/bronirovanie-otelej-kipr`, `${WWW}/${loc}/hotel-reservations`);
+    }
+  });
+
   it("the proxy answers 301 (not 307/308)", () => {
     const proxy = readFileSync(new URL("../src/proxy.ts", import.meta.url), "utf-8");
     assert.match(proxy, /NextResponse\.redirect\([^)]*,\s*301\)/);

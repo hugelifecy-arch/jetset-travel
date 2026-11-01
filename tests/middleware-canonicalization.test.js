@@ -176,14 +176,16 @@ describe("middleware: no-trailing-slash canonicalization", () => {
     assert.equal(result.action, "passthrough");
   });
 
-  // The "*-cyprus" landing pages used to have transliterated Russian
-  // counterparts that bounced back to the EN-slug page (creating an infinite
-  // redirect loop visible in GSC). The retired slugs now 301 to the
-  // consolidated Latin slug from the table in src/lib/redirects.ts; the
-  // Latin slug is the same in both locales, so a trailing slash is the only
-  // thing left to strip. These cases lock that behaviour in place.
+  // The retired transliterated Russian slugs once bounced between locales
+  // (an infinite loop in GSC), and the "*-cyprus" duplicates they pointed at
+  // were merged into these pages on 1 Nov 2026. The pages use one Latin
+  // slug in both locales: a trailing slash is the only thing left to strip,
+  // and the canonical URL must pass straight through. Locked in here.
   for (const slug of [
-    "hotel-booking-cyprus",
+    "corporate-travel",
+    "luxury-travel",
+    "hotel-reservations",
+    "visa-services",
   ]) {
     it(`/ru/${slug}/ (trailing slash) → 301 to /ru/${slug} (no loop)`, () => {
       const result = canonicalize(`https://www.jetset-travel.com/ru/${slug}/`);
