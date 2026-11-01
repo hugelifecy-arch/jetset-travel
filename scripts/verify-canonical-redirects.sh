@@ -22,8 +22,8 @@ URLS=(
   "https://www.jetset-travel.com/en?lang=en"
 )
 
-# Retired transliterated Russian slugs for the four "*-cyprus" landing pages.
-# Each must 308 in a single hop to the canonical Latin slug for its locale.
+# Retired and merged URLs (src/lib/redirects.ts). Each must 301 in a single
+# hop to its live page — also with a trailing slash or on the apex host.
 # Until 2026-05 these URLs participated in an infinite redirect loop with
 # the EN-slug page's `redirect("/ru/<ru-slug>/")` guard — which is what
 # Google Search Console flagged as "Redirect error" / "Discovered — not
@@ -33,6 +33,10 @@ RETIRED_PAIRS=(
   "https://www.jetset-travel.com/ru/vizovye-uslugi-kipr|https://www.jetset-travel.com/ru/visa-services"
   "https://www.jetset-travel.com/en/visa-services-cyprus|https://www.jetset-travel.com/en/visa-services"
   "https://www.jetset-travel.com/ru/visa-services-cyprus|https://www.jetset-travel.com/ru/visa-services"
+  "https://www.jetset-travel.com/en/visa-services-cyprus/|https://www.jetset-travel.com/en/visa-services"
+  "https://jetset-travel.com/ru/visa-services-cyprus/|https://www.jetset-travel.com/ru/visa-services"
+  "https://www.jetset-travel.com/ru/about/|https://www.jetset-travel.com/ru/about"
+  "https://jetset-travel.com/en/about/|https://www.jetset-travel.com/en/about"
   "https://www.jetset-travel.com/en/luxusnyy-otdykh-kipr|https://www.jetset-travel.com/en/luxury-travel-cyprus"
   "https://www.jetset-travel.com/ru/luxusnyy-otdykh-kipr|https://www.jetset-travel.com/ru/luxury-travel-cyprus"
   "https://www.jetset-travel.com/en/korporativnye-poezdki-kipr|https://www.jetset-travel.com/en/corporate-travel-cyprus"
@@ -104,8 +108,8 @@ for pair in "${RETIRED_PAIRS[@]}"; do
   final=$(echo "$output" | grep -oE 'final_url=[^[:space:]]+' | tail -1 | cut -d= -f2)
   code=$(echo "$output"  | grep -oE 'http_code=[0-9]+'     | tail -1 | cut -d= -f2)
 
-  # Expected: a single edge 308 to the canonical Latin slug, ending in 200.
-  # Anything more than 1 hop means the loop has reappeared.
+  # Expected: a single 301 to the live page, ending in 200. More than one
+  # hop is a redirect chain (Search Console "Page with redirect").
   if [[ "$final" == "$expected" ]] && [[ "$code" == "200" ]] && [[ "$hops" -le 1 ]]; then
     printf '  \033[32mPASS\033[0m hops=%s final=%s\n' "$hops" "$final"
     pass_count=$((pass_count + 1))

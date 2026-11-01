@@ -34,6 +34,10 @@ Open http://localhost:3000.
 | `npm run lint` | Run ESLint |
 | `npm run audit-check` | Run the custom audit script in `scripts/audit-check.js` |
 | `node --test tests/*.test.js` | Run the Node test runner suite |
+| `npm run verify:sitemap -- --base <url>` | Every sitemap URL: 200, self-canonical, indexable, reciprocal hreflang |
+| `npm run verify:redirects -- --base <url>` | Every redirect in `src/lib/redirects.ts`: one 301 to a 200 page |
+| `npm run verify:links -- --base <url>` | Every internal link on every sitemap page answers 200 (no redirect, no 404) |
+| `npm run suggest:lastmod` | Per-page, per-locale last content change from git history (for `src/app/sitemap.ts`) |
 
 ---
 
@@ -82,28 +86,47 @@ The day-to-day correction playbook used by the Claude Code agent lives in
 
 ---
 
-## Domain canonicalization
+## Domain canonicalization and redirects
 
-Edge middleware enforces canonical host redirects in production:
+The proxy (`src/proxy.ts` → `src/lib/canonicalize.ts`) resolves every
+non-canonical URL to `https://www.jetset-travel.com/<locale>/<path>` (no
+trailing slash) in **one 301**: apex → www, trailing slash, `/en/en`,
+`?lang=`, wrong-case locale, bare paths, and retired/merged URLs from the
+table in `src/lib/redirects.ts` (e.g. `/en/visa-services-cyprus/` →
+`/en/visa-services`). `next.config.ts` deliberately has no `redirects()` and
+sets `skipTrailingSlashRedirect`, because both run before the proxy and
+would add a second hop.
 
-- `jetset-travel.com` (apex) permanently redirects to `www.jetset-travel.com` with HTTP **308**
-- Pathname and query string (including UTM parameters) are preserved
-- `*.vercel.app`, `*.vercel-preview.app`, and `localhost` are not redirected
+- Add a retired or merged URL to `src/lib/redirects.ts` (both locales);
+  `tests/redirects.test.js` rejects chains and redirects to non-sitemap pages.
+- `*.vercel.app`, `*.vercel-preview.app` and `localhost` are never host-redirected.
+- `http://` always gets Vercel's own HTTPS 308 first (platform behaviour; the
+  HSTS preload header means browsers skip it after the first visit).
+- For apex → www to be a single hop, the `jetset-travel.com` domain in Vercel
+  (Project → Settings → Domains) must be connected to the project **without**
+  a domain-level redirect, so the proxy handles it. A Vercel domain redirect
+  answers 308 and keeps the path as-is, so `https://jetset-travel.com/en/about/`
+  would take two hops.
 
-Quick verification:
+Verification:
 
 ```bash
-curl -I https://jetset-travel.com/en
-# Expect: HTTP/2 308 + Location: https://www.jetset-travel.com/en
-
-curl -I 'https://jetset-travel.com/?utm_source=test'
-# Expect: HTTP/2 308 + Location: https://www.jetset-travel.com/?utm_source=test
-
-curl -I https://www.jetset-travel.com/
-# Expect: no host-canonical redirect (locale handling is managed by i18n middleware)
+npm run build && npm start
 ```
 
-A scripted version is available at `scripts/verify-canonical-redirects.sh`.
+```bash
+npm run verify:redirects -- --base http://localhost:3000
+```
+
+```bash
+npm run verify:links -- --base http://localhost:3000
+```
+
+```bash
+./scripts/verify-canonical-redirects.sh
+```
+
+The last one checks the host/protocol hops against production.
 
 ---
 

@@ -178,10 +178,10 @@ describe("middleware: no-trailing-slash canonicalization", () => {
 
   // The "*-cyprus" landing pages used to have transliterated Russian
   // counterparts that bounced back to the EN-slug page (creating an infinite
-  // redirect loop visible in GSC). The retired slugs are now 308-redirected
-  // to the consolidated Latin slug at the edge in next.config.ts; middleware
-  // sees the same Latin slug for both locales and just strips any trailing
-  // slash. These cases lock the post-edge behaviour in place.
+  // redirect loop visible in GSC). The retired slugs now 301 to the
+  // consolidated Latin slug from the table in src/lib/redirects.ts; the
+  // Latin slug is the same in both locales, so a trailing slash is the only
+  // thing left to strip. These cases lock that behaviour in place.
   for (const slug of [
     "luxury-travel-cyprus",
     "corporate-travel-cyprus",
