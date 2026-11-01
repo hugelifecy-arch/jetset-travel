@@ -27,7 +27,6 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { PATH_REDIRECTS } from "../src/lib/redirects.ts";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(SCRIPT_DIR, "..");
@@ -38,6 +37,11 @@ const BLOG_CONTENT_DIR = join(ROOT, "content", "blog");
 
 const args = new Set(process.argv.slice(2));
 const isLive = args.has("--live");
+// Static mode reads the proxy's redirect table (TypeScript; needs Node's type
+// stripping). Live mode only makes HTTP requests, so it does not load it.
+const { PATH_REDIRECTS } = isLive
+  ? { PATH_REDIRECTS: {} }
+  : await import("../src/lib/redirects.ts");
 const origin = process.env.ORIGIN || "https://www.jetset-travel.com";
 
 function loadDoNotDisturbList() {
@@ -109,6 +113,16 @@ function classifyStatic(url, { appRoutes, blogSlugs }) {
   if (!localeMatch) return { ok: false, reason: "missing /en or /ru prefix" };
   const tail = localeMatch[2] ?? "";
 
+  // A single 301 from src/lib/redirects.ts — checked first, as the proxy
+  // applies it before routing — is fine if it lands on a live page or post.
+  const destination = PATH_REDIRECTS[url.toLowerCase()];
+  if (destination) {
+    const target = classifyStatic(destination, { appRoutes, blogSlugs });
+    return target.ok
+      ? { ok: true, reason: `301 -> ${destination} (src/lib/redirects.ts)` }
+      : { ok: false, reason: `301 -> ${destination}, which is not live: ${target.reason}` };
+  }
+
   // Blog post detail page: /en/blog/<slug>
   const blogMatch = tail.match(/^\/blog\/([^/]+)$/);
   if (blogMatch) {
@@ -124,15 +138,6 @@ function classifyStatic(url, { appRoutes, blogSlugs }) {
     return { ok: true, reason: `app route: src/app/[locale]${tail}/page.tsx` };
   }
 
-  // Allowed to resolve through a single 301 (src/lib/redirects.ts, applied
-  // by the proxy) — but only to a page that is itself live.
-  const destination = PATH_REDIRECTS[url.toLowerCase()];
-  if (destination) {
-    const target = classifyStatic(destination, { appRoutes, blogSlugs });
-    return target.ok
-      ? { ok: true, reason: `301 -> ${destination} (src/lib/redirects.ts)` }
-      : { ok: false, reason: `301 -> ${destination}, which is not live: ${target.reason}` };
-  }
 
   return {
     ok: false,

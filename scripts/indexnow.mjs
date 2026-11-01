@@ -10,9 +10,10 @@
  *   node scripts/indexnow.mjs --preset priority
  *   node scripts/indexnow.mjs --dry-run [...]  # print the list, submit nothing
  *   node scripts/indexnow.mjs --help           # this text; unknown flags never submit
+ *   npm run indexnow -- --dry-run              # through npm, flags go after --
  *
- * Arguments can be paths (/en/cruises) or full https://www.jetset-travel.com
- * URLs; other hosts are rejected, because IndexNow only accepts URLs on the
+ * Arguments can be paths starting with "/" (/en/cruises) or full
+ * https://www.jetset-travel.com URLs; bare words and other hosts are rejected, because IndexNow only accepts URLs on the
  * host that owns the key. Presets live in scripts/indexnow-presets.mjs.
  *
  * The key file is public by design (IndexNow protocol):
@@ -42,6 +43,14 @@ function toUrl(arg) {
 
 const argv = process.argv.slice(2);
 
+// `npm run indexnow --dry-run` (no `--`) makes npm keep the flag for itself
+// and run this script with NO arguments — which means "submit the whole
+// sitemap". npm leaves the flag in the environment instead; refuse.
+if (process.env.npm_config_dry_run === "true" || process.env.npm_config_preset !== undefined) {
+  console.error("npm kept the flag for itself. Put flags after --, e.g.: npm run indexnow -- --dry-run");
+  process.exit(1);
+}
+
 // Anything unrecognised must not fall through to "submit the whole live
 // sitemap": print usage and stop. (A stray `--help` used to submit 86 URLs.)
 const KNOWN_FLAGS = new Set(["--dry-run", "--preset"]);
@@ -60,6 +69,13 @@ const dryRun = argv.includes("--dry-run");
 const presetIndex = argv.indexOf("--preset");
 const presetName = presetIndex > -1 ? argv[presetIndex + 1] : null;
 const paths = argv.filter((a, i) => !a.startsWith("--") && (presetIndex === -1 || i !== presetIndex + 1));
+// A bare word (e.g. a preset name without --preset) is not a page: refuse
+// rather than submit https://www.jetset-travel.com/<word>, a 404.
+const notPaths = paths.filter((p) => !p.startsWith("/") && !p.startsWith("https://"));
+if (notPaths.length) {
+  console.error(`Not a path or URL: ${notPaths.join(", ")} (paths start with "/"; did you mean --preset ${notPaths[0]}?)`);
+  process.exit(1);
+}
 
 let urlList;
 if (presetName) {
