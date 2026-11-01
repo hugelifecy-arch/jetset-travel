@@ -188,14 +188,6 @@ export const LOCALE_ALTERNATES: Record<
   // luxusnyy-otdykh-kipr, korporativnye-poezdki-kipr, bronirovanie-otelej-kipr)
   // were retired because they were redirect-only stubs that looped against
   // the EN page's locale guard — see next.config.ts for the retiring 308s.
-  "/en/corporate-travel-cyprus": {
-    en: "/en/corporate-travel-cyprus",
-    ru: "/ru/corporate-travel-cyprus",
-  },
-  "/ru/corporate-travel-cyprus": {
-    en: "/en/corporate-travel-cyprus",
-    ru: "/ru/corporate-travel-cyprus",
-  },
   "/en/luxury-travel-cyprus": {
     en: "/en/luxury-travel-cyprus",
     ru: "/ru/luxury-travel-cyprus",

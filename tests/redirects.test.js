@@ -101,6 +101,14 @@ describe("redirects: Search Console audit (1 Nov 2026)", () => {
     assertOneHop(`${APEX}/ru/about/`, `${WWW}/ru/about`);
   });
 
+  it("/corporate-travel-cyprus (merged 1 Nov 2026) → /corporate-travel, with or without a slash", () => {
+    for (const loc of ["en", "ru"]) {
+      assertOneHop(`${WWW}/${loc}/corporate-travel-cyprus`, `${WWW}/${loc}/corporate-travel`);
+      assertOneHop(`${WWW}/${loc}/corporate-travel-cyprus/`, `${WWW}/${loc}/corporate-travel`);
+      assertOneHop(`${WWW}/${loc}/korporativnye-poezdki-kipr`, `${WWW}/${loc}/corporate-travel`);
+    }
+  });
+
   it("the proxy answers 301 (not 307/308)", () => {
     const proxy = readFileSync(new URL("../src/proxy.ts", import.meta.url), "utf-8");
     assert.match(proxy, /NextResponse\.redirect\([^)]*,\s*301\)/);

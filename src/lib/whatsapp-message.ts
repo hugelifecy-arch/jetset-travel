@@ -49,7 +49,6 @@ const PAGE_TOPICS: Record<string, WhatsAppTopic> = {
   "flight-tickets-cyprus": "flights",
   "aviabilety-kipr": "flights",
   "corporate-travel": "corporate",
-  "corporate-travel-cyprus": "corporate",
   "paphos-travel-agency": "paphos",
   "turisticheskoe-agentstvo-pafos": "paphos",
   "schengen-cyprus-2026": "schengen",

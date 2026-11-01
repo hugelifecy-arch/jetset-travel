@@ -22,7 +22,6 @@ export const INDEXNOW_PRESETS = {
     "/ru/hotel-reservations",
     "/ru/quote",
     "/ru/faq",
-    "/ru/corporate-travel-cyprus",
     "/ru/luxury-travel-cyprus",
     "/ru/hotel-booking-cyprus",
     "/ru/labour-vfr-flights-cyprus",

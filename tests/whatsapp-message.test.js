@@ -26,7 +26,7 @@ describe("whatsAppTopic", () => {
     "/en/flight-tickets-cyprus": "flights",
     "/ru/aviabilety-kipr": "flights",
     "/en/corporate-travel": "corporate",
-    "/en/corporate-travel-cyprus/": "corporate",
+    "/en/corporate-travel/": "corporate",
     "/en/paphos-travel-agency": "paphos",
     "/ru/turisticheskoe-agentstvo-pafos": "paphos",
     "/en/schengen-cyprus-2026": "schengen",

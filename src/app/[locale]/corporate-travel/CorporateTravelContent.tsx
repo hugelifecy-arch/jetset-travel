@@ -14,8 +14,57 @@ import {
   Check,
   ArrowRight,
   Users,
+  Building2,
+  Landmark,
+  Plane,
+  Scale,
+  Laptop,
+  HeartPulse,
+  Package,
+  Ship,
+  Handshake,
 } from "lucide-react";
 import Accordion from "@/components/ui/Accordion";
+
+// Cities + industries merged in from the retired /corporate-travel-cyprus
+// page (1 Nov 2026), same keys and icons.
+const cities = [
+  {
+    titleKey: "cityPaphosTitle",
+    descKey: "cityPaphosDesc",
+    tagKey: "cityPaphosTag",
+    icon: Building2,
+  },
+  {
+    titleKey: "cityLimassolTitle",
+    descKey: "cityLimassolDesc",
+    tagKey: "cityLimassolTag",
+    icon: Landmark,
+  },
+  {
+    titleKey: "cityNicosiaTitle",
+    descKey: "cityNicosiaDesc",
+    tagKey: "cityNicosiaTag",
+    icon: Building2,
+  },
+  {
+    titleKey: "cityLarnacaTitle",
+    descKey: "cityLarnacaDesc",
+    tagKey: "cityLarnacaTag",
+    icon: Plane,
+  },
+] as const;
+
+const industries = [
+  { titleKey: "industryLaw", icon: Scale },
+  { titleKey: "industryFinance", icon: Landmark },
+  { titleKey: "industryTech", icon: Laptop },
+  { titleKey: "industryHealthcare", icon: HeartPulse },
+  { titleKey: "industryRealEstate", icon: Building2 },
+  { titleKey: "industryImportExport", icon: Package },
+  { titleKey: "industryShipping", icon: Ship },
+  { titleKey: "industryProfessional", icon: Handshake },
+] as const;
 
 export default function CorporateTravelContent() {
   const locale = useLocale();
@@ -104,6 +153,22 @@ export default function CorporateTravelContent() {
     {
       question: t("faq6Q"),
       answer: t("faq6A"),
+    },
+    {
+      question: t("faq7Q"),
+      answer: t("faq7A"),
+    },
+    {
+      question: t("faq8Q"),
+      answer: t("faq8A"),
+    },
+    {
+      question: t("faq9Q"),
+      answer: t("faq9A"),
+    },
+    {
+      question: t("faq10Q"),
+      answer: t("faq10A"),
     },
   ];
 
@@ -284,6 +349,71 @@ export default function CorporateTravelContent() {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Cities We Serve Across Cyprus */}
+      <section className="py-20 bg-brand-light">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              {t("citiesTitle")}
+            </h2>
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
+              {t("citiesSubtitle")}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {cities.map((city) => (
+              <div
+                key={city.titleKey}
+                className="p-6 rounded-2xl border border-brand-navy/10 bg-white hover:shadow-luxury transition-shadow"
+              >
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold mb-4">
+                  <city.icon className="h-6 w-6" />
+                </div>
+                <span className="inline-block text-xs font-semibold text-brand-gold-ink uppercase tracking-wider mb-2">
+                  {t(city.tagKey)}
+                </span>
+                <h3 className="text-lg font-bold text-brand-navy mb-2">
+                  {t(city.titleKey)}
+                </h3>
+                <p className="text-brand-navy/70 text-sm leading-relaxed">
+                  {t(city.descKey)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Industries We Serve (white: sits between the light Cities and
+          Seasonal sections to keep the background alternation) */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
+              {t("industriesTitle")}
+            </h2>
+            <p className="text-brand-navy/70 max-w-2xl mx-auto">
+              {t("industriesSubtitle")}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+            {industries.map((industry) => (
+              <div
+                key={industry.titleKey}
+                className="flex flex-col items-center p-6 rounded-2xl border border-brand-navy/10 bg-white hover:shadow-luxury hover:border-brand-gold/30 transition-all"
+              >
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-brand-gold/10 text-brand-gold mb-4">
+                  <industry.icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-sm font-bold text-brand-navy text-center">
+                  {t(industry.titleKey)}
+                </h3>
+              </div>
+            ))}
           </div>
         </div>
       </section>

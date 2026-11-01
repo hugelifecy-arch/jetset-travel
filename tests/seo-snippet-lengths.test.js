@@ -64,9 +64,8 @@ const STATIC_PAGE_METADATA = [
   fromMessages("ru", "labourVfrPage", "/labour-vfr-flights-cyprus"),
   fromMessages("en", "seasonalStaffPage", "/seasonal-staff-travel-cyprus"),
   fromMessages("ru", "seasonalStaffPage", "/seasonal-staff-travel-cyprus"),
-  // Yandex audit (Oct 2026): these two pairs shared one title per locale.
-  // Mirror the strings in corporate-travel/page.tsx and
-  // corporate-travel-cyprus/page.tsx; the uniqueness test below guards them.
+  // Mirror the strings in corporate-travel/page.tsx. (Its old twin
+  // /corporate-travel-cyprus was merged into it and 301s, 1 Nov 2026.)
   {
     page: "/en/corporate-travel",
     title: "Corporate Travel Management Cyprus | IATA Agency — JetSet",
@@ -74,22 +73,10 @@ const STATIC_PAGE_METADATA = [
       "IATA-accredited JetSet manages corporate travel for Cyprus businesses: travel policy control, VAT-compliant invoices, monthly spend reports and 24/7 support.",
   },
   {
-    page: "/en/corporate-travel-cyprus",
-    title: "Business Travel Cyprus: Paphos, Limassol, Nicosia | JetSet",
-    description:
-      "Business travel across Cyprus from JetSet's Paphos HQ: one IATA-accredited team for Limassol, Nicosia and Larnaca firms. Consolidated invoicing, 24/7 support.",
-  },
-  {
     page: "/ru/corporate-travel",
     title: "Управление корпоративными командировками на Кипре | JetSet",
     description:
       "JetSet — агентство на Кипре с аккредитацией IATA: командировки по вашей тревел-политике, корректные счета для бухгалтерии, ежемесячные отчёты, поддержка 24/7.",
-  },
-  {
-    page: "/ru/corporate-travel-cyprus",
-    title: "Деловые поездки по Кипру: Пафос, Лимассол, Никосия | JetSet",
-    description:
-      "Деловые поездки по Кипру с JetSet: аккредитация IATA, головной офис в Пафосе, работаем в Лимассоле, Никосии и Ларнаке. Консолидированные счета, поддержка 24/7.",
   },
   {
     page: "/en (homepage)",

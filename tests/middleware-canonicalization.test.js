@@ -184,7 +184,6 @@ describe("middleware: no-trailing-slash canonicalization", () => {
   // thing left to strip. These cases lock that behaviour in place.
   for (const slug of [
     "luxury-travel-cyprus",
-    "corporate-travel-cyprus",
     "hotel-booking-cyprus",
   ]) {
     it(`/ru/${slug}/ (trailing slash) → 301 to /ru/${slug} (no loop)`, () => {

@@ -86,7 +86,7 @@ export function localizedAlternates(
 
 /**
  * Convenience: get the hreflang map for the canonical locale-prefixed path
- * (e.g. "/en/corporate-travel-cyprus"). Delegates to the LOCALE_ALTERNATES
+ * (e.g. "/en/corporate-travel"). Delegates to the LOCALE_ALTERNATES
  * source of truth so sitemap and pages can't drift.
  */
 export { getHreflangAlternates };

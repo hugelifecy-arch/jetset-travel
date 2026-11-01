@@ -165,7 +165,8 @@ const REDIRECT_CASES = [
   { from: "/EN/visa-services-cyprus", to: "/en/visa-services", label: "merged page + upper-case locale" },
   { from: "/visa-services-cyprus", to: "/en/visa-services", label: "merged page, no locale" },
   { from: "/en/vizovye-uslugi-kipr/", to: "/en/visa-services", label: "retired slug + trailing slash" },
-  { from: "/ru/korporativnye-poezdki-kipr", to: "/ru/corporate-travel-cyprus", label: "retired *-cyprus slug (ru)" },
+  { from: "/en/corporate-travel-cyprus/", to: "/en/corporate-travel", label: "merged into /corporate-travel (1 Nov 2026)" },
+  { from: "/ru/korporativnye-poezdki-kipr", to: "/ru/corporate-travel", label: "retired *-cyprus slug (ru)" },
   {
     from: "/ru/blog/cyprus-schengen-2026-business-travel",
     to: "/ru/blog/kipr-v-shengene-2026-delovye-poezdki",

@@ -11,11 +11,13 @@ import { INDEXNOW_PRESETS } from "../scripts/indexnow-presets.mjs";
 const sitemapPaths = new Set(sitemap().map((e) => new URL(e.url).pathname));
 
 describe("indexnow presets", () => {
-  it("has the 27-URL priority preset (7 EN + 20 RU)", () => {
+  // Bing's Oct 2026 list had 27 URLs; the merged "*-cyprus" pages were
+  // dropped from it when they started to 301 (1 Nov 2026).
+  it("has the 26-URL priority preset (7 EN + 19 RU)", () => {
     const p = INDEXNOW_PRESETS.priority;
-    assert.equal(p.length, 27);
+    assert.equal(p.length, 26);
     assert.equal(p.filter((u) => u.startsWith("/en/")).length, 7);
-    assert.equal(p.filter((u) => u.startsWith("/ru/")).length, 20);
+    assert.equal(p.filter((u) => u.startsWith("/ru/")).length, 19);
     assert.equal(new Set(p).size, p.length, "duplicate path in preset");
   });
 
