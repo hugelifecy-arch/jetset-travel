@@ -46,10 +46,14 @@ const argv = process.argv.slice(2);
 // sitemap": print usage and stop. (A stray `--help` used to submit 86 URLs.)
 const KNOWN_FLAGS = new Set(["--dry-run", "--preset"]);
 const unknown = argv.filter((a) => a.startsWith("-") && !KNOWN_FLAGS.has(a));
-if (unknown.length) {
+// `--preset` without a name is just as dangerous: it would fall through too.
+const presetAt = argv.indexOf("--preset");
+const presetMissing = presetAt > -1 && (!argv[presetAt + 1] || argv[presetAt + 1].startsWith("-"));
+if (unknown.length || presetMissing) {
   const usage = readFileSync(new URL(import.meta.url), "utf8").match(/\/\*\*([\s\S]*?)\*\//)[1];
   console.log(usage.replace(/^ \* ?/gm, "").trim());
-  process.exit(unknown.every((a) => a === "--help" || a === "-h") ? 0 : 1);
+  if (presetMissing) console.log(`\n--preset needs a name: ${Object.keys(INDEXNOW_PRESETS).join(", ")}`);
+  process.exit(!presetMissing && unknown.every((a) => a === "--help" || a === "-h") ? 0 : 1);
 }
 
 const dryRun = argv.includes("--dry-run");

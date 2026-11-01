@@ -37,7 +37,7 @@ Open http://localhost:3000.
 | `npm run verify:sitemap -- --base <url>` | Every sitemap URL: 200, self-canonical, indexable, reciprocal hreflang |
 | `npm run verify:redirects -- --base <url>` | Every redirect in `src/lib/redirects.ts`: one 301 to a 200 page |
 | `npm run verify:links -- --base <url>` | Every internal link on every sitemap page answers 200 (no redirect, no 404) |
-| `npm run suggest:lastmod` | Per-page, per-locale last content change from git history (for `src/app/sitemap.ts`) |
+| `npm run suggest:lastmod` | Per-page, per-locale last content change from git history (paste into `src/lib/page-dates.ts`, which feeds the sitemap and schema `dateModified`) |
 
 ---
 

@@ -34,11 +34,13 @@ describe("indexnow presets", () => {
     assert.match(readFileSync(new URL("../scripts/indexnow.mjs", import.meta.url), "utf-8"), new RegExp(`KEY = "${key}"`));
   });
 
-  it("an unknown flag prints usage and submits nothing (never the whole sitemap)", () => {
-    const script = new URL("../scripts/indexnow.mjs", import.meta.url).pathname;
-    const r = spawnSync(process.execPath, [script, "--no-such-flag"], { encoding: "utf-8", timeout: 10000 });
-    assert.equal(r.status, 1);
-    assert.match(r.stdout, /--dry-run/);
-    assert.doesNotMatch(r.stdout, /IndexNow: \d+ URL/);
-  });
+  for (const args of [["--no-such-flag"], ["--preset"], ["--preset", "--dry-run"]]) {
+    it(`"${args.join(" ")}" prints usage and submits nothing (never the whole sitemap)`, () => {
+      const script = new URL("../scripts/indexnow.mjs", import.meta.url).pathname;
+      const r = spawnSync(process.execPath, [script, ...args], { encoding: "utf-8", timeout: 10000 });
+      assert.equal(r.status, 1);
+      assert.match(r.stdout, /--dry-run/);
+      assert.doesNotMatch(r.stdout, /IndexNow: \d+ URL|dry run: \d+ URL/);
+    });
+  }
 });
