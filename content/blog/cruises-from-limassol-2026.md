@@ -24,7 +24,7 @@ status: "published"
 
 Limassol is Cyprus's main cruise port. Ships berth at the DP World Limassol cruise terminal in the New Port. In 2026 Marella ran round trips that start and end in Limassol (until early November), and other ships stop for the day on longer Eastern Mediterranean voyages. Traffic rises and falls with the situation in the region: DP World Limassol reported about 200,000 cruise passengers from 165 calls in 2022 ([Cyprus Mail, April 2023](https://cyprus-mail.com/2023/04/15/limassol-prepares-for-200-cruise-ships-and-300000-tourists)) and 109,000 passengers from 106 calls in 2024, and forecast about 160,000 for 2025 ([Cyprus Mail, April 2025](https://cyprus-mail.com/2025/04/10/limassol-port-expects-140-cruise-ships-160000-passengers)).
 
-JetSet Travel is an IATA-accredited travel agency in Paphos (Tourism Licence 7775). We help clients choose between a round trip from Limassol and a fly-cruise from ports such as Athens, Istanbul or Venice, and we arrange the flights, hotels and transfers around it. This guide covers what is sailing in 2026.
+JetSet Travel is an IATA-accredited travel agency in Paphos (Tourism Licence 7775). We help clients choose between a round trip from Limassol and a fly-cruise from ports such as Athens, Istanbul or Venice, and we arrange the flights, hotels and transfers around it. This guide covers what is sailing in 2026 and the ships already listed to call at Limassol in 2027.
 
 ## The Limassol Cruise Port
 
