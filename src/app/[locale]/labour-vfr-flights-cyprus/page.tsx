@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageLastModified } from "@/lib/page-dates";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Link from "next/link";
 import {
@@ -18,7 +19,6 @@ import type { LucideIcon } from "lucide-react";
 import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
 import {
   LABOUR_VFR_DESTINATIONS,
-  LABOUR_VFR_LAST_UPDATED,
   LABOUR_VFR_PATH,
   SEASONAL_STAFF_PATH,
   labourVfrWhatsAppHref,
@@ -455,7 +455,7 @@ export default async function LabourVfrFlightsPage({
         description={t("schemaDescription")}
         url={`${CANONICAL_ORIGIN}/${locale}${LABOUR_VFR_PATH}`}
         serviceType={t("schemaServiceType")}
-        dateModified={LABOUR_VFR_LAST_UPDATED}
+        dateModified={pageLastModified("/labour-vfr-flights-cyprus", locale)}
         audience={{ "@type": "PeopleAudience", audienceType: t("schemaAudience") }}
       />
     </>

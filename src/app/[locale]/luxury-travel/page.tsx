@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { buildPageMetadata, REVIEW_AGGREGATE, SERVICE_LAST_UPDATED } from "@/lib/seo";
+import { buildPageMetadata, REVIEW_AGGREGATE } from "@/lib/seo";
+import { pageLastModified } from "@/lib/page-dates";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -332,7 +333,7 @@ export default async function LuxuryTravelPage({
                 {t("celebrationP2")}
               </p>
               <Link
-                href={`/${locale}/contact?type=honeymoon`}
+                href={`/${locale}/quote?type=luxury`}
                 className="inline-flex items-center rounded-full bg-brand-gold px-8 py-3.5 text-sm font-semibold text-brand-navy hover:bg-brand-gold/90 transition-colors"
               >
                 {t("celebrationCta")}
@@ -509,7 +510,7 @@ export default async function LuxuryTravelPage({
         description="Curated luxury travel experiences from Cyprus. Suite-level hotels, private transfers, bespoke multi-city journeys, island getaways, and honeymoon planning."
         url={`https://www.jetset-travel.com/${locale}/luxury-travel`}
         serviceType="Luxury Travel Planning"
-        dateModified={SERVICE_LAST_UPDATED}
+        dateModified={pageLastModified("/luxury-travel", locale)}
       />
     </>
   );

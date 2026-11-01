@@ -319,7 +319,7 @@ Use only the tools the site already has: GA4 (consent-gated), Search Console and
   - Compare WhatsApp enquiries and bookings by destination and by page against the cost of
     handling them.
   - Decide the spring push: return-to-Cyprus flights in February and March.
-  - Update `LABOUR_VFR_LAST_UPDATED` in `src/lib/labour-vfr.ts` when the copy changes.
+  - Bump `/labour-vfr-flights-cyprus` and `/seasonal-staff-travel-cyprus` in `src/lib/page-dates.ts` when the copy changes (sitemap lastmod + schema dateModified).
 
 ---
 

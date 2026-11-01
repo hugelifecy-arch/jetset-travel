@@ -4,6 +4,7 @@ import Link from "next/link";
 import { buildPageMetadata, CANONICAL_ORIGIN } from "@/lib/seo";
 import { ArrowRight, FileText, Briefcase, Calendar, ShieldCheck, Plane, MapPin } from "lucide-react";
 import JsonLd from "@/components/seo/JsonLd";
+import { pageLastModified } from "@/lib/page-dates";
 import CTABanner from "@/components/sections/CTABanner";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 
@@ -237,7 +238,7 @@ export default async function SchengenCyprus2026Hub({
       ? "Кипр и Шенген — статус и сроки вступления"
       : "Cyprus and Schengen — status and timeline",
     url: hubUrl,
-    dateModified: "2026-10-26",
+    dateModified: pageLastModified("/schengen-cyprus-2026", locale),
     inLanguage: isRu ? "ru-RU" : "en-GB",
     isPartOf: { "@id": `${CANONICAL_ORIGIN}#website` },
     about: [

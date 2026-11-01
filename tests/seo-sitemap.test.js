@@ -14,7 +14,9 @@
 
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync, statSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import sitemap from "../src/app/sitemap.ts";
 import {
   CANONICAL_ORIGIN,
@@ -333,6 +335,24 @@ describe("seo: sitemap lastmod follows real edits", () => {
   it("sitemap.ts has no catch-all fallback date", () => {
     const src = readFileSync(new URL("../src/app/sitemap.ts", import.meta.url), "utf-8");
     assert.doesNotMatch(src, /SERVICE_LAST_UPDATED|staticLastMod/);
+  });
+
+  it("pages' structured-data dateModified comes from the same page dates", () => {
+    // A hard-coded or global date in a page's JSON-LD would disagree with
+    // the sitemap's lastmod for that page.
+    const offenders = [];
+    const walk = (dir) => {
+      for (const name of readdirSync(dir)) {
+        const p = join(dir, name);
+        if (statSync(p).isDirectory()) walk(p);
+        else if (/\.tsx?$/.test(name)) {
+          const src = readFileSync(p, "utf-8");
+          if (/dateModified(=\{|:)\s*("|SERVICE_LAST_UPDATED)/.test(src)) offenders.push(p);
+        }
+      }
+    };
+    walk(fileURLToPath(new URL("../src/app/[locale]", import.meta.url)));
+    assert.deepEqual(offenders, []);
   });
 
   it("/blog and the homepage move when the posts they list change", () => {

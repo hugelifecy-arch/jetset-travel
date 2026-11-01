@@ -13,7 +13,7 @@ import {
   TowerControl,
 } from "lucide-react";
 import CTABanner from "@/components/sections/CTABanner";
-import { SERVICE_LAST_UPDATED } from "@/lib/seo";
+import { pageLastModified } from "@/lib/page-dates";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import ServiceSchema from "@/components/seo/ServiceSchema";
 import FAQSection from "@/components/sections/FAQSection";
@@ -364,7 +364,7 @@ export default async function FlightPageContent({
         description="Flight booking from Cyprus with IATA-accredited JetSet Travel: flights from Paphos (PFO) and Larnaca (LCA), business class, group bookings and 24/7 support."
         url={`https://www.jetset-travel.com/${locale}/${slug}`}
         serviceType="Flight Booking Service"
-        dateModified={SERVICE_LAST_UPDATED}
+        dateModified={pageLastModified(locale === "ru" ? "/aviabilety-kipr" : "/flight-tickets-cyprus", locale)}
       />
     </>
   );

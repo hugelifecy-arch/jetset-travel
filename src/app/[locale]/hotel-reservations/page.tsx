@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
+import { pageLastModified } from "@/lib/page-dates";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -373,7 +374,7 @@ export default async function HotelReservationsPage({
         </div>
       </section>
 
-      {/* Corporate Hotel Programs */}
+      {/* Corporate Hotel Programmes */}
       <section className="py-20 bg-brand-light">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -494,7 +495,7 @@ export default async function HotelReservationsPage({
         description="Hotel reservations worldwide for corporate and leisure travelers, with corporate rates where available. Quality accommodations matched to your budget, standards, and location needs. Group bookings and extended stays."
         url={`https://www.jetset-travel.com/${locale}/hotel-reservations`}
         serviceType="Hotel Reservation Service"
-        dateModified={SERVICE_LAST_UPDATED}
+        dateModified={pageLastModified("/hotel-reservations", locale)}
       />
     </>
   );

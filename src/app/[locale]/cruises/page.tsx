@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
-import { buildPageMetadata, SERVICE_LAST_UPDATED } from "@/lib/seo";
+import { buildPageMetadata } from "@/lib/seo";
+import { pageLastModified } from "@/lib/page-dates";
 import CruisesContent from "./CruisesContent";
 import ServicesCrossLinks from "@/components/sections/ServicesCrossLinks";
 import RelatedArticles from "@/components/sections/RelatedArticles";
@@ -57,7 +58,7 @@ export default async function CruisesPage({
         description="Cruise bookings with major lines including Royal Caribbean, MSC, Norwegian, Celebrity and Disney, with flights from Larnaca or Paphos and hotels arranged by JetSet Travel, an IATA-accredited travel agency in Paphos."
         url={`https://www.jetset-travel.com/${locale}/cruises`}
         serviceType="Cruise Booking Service"
-        dateModified={SERVICE_LAST_UPDATED}
+        dateModified={pageLastModified("/cruises", locale)}
       />
       <TouristTripSchema
         name={
