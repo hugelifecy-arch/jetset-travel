@@ -5,6 +5,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { spawnSync } from "node:child_process";
 import sitemap from "../src/app/sitemap.ts";
 import { INDEXNOW_PRESETS } from "../scripts/indexnow-presets.mjs";
 
@@ -31,5 +32,13 @@ describe("indexnow presets", () => {
     const key = "4338cc8b3af74065bf84162fa446f406";
     assert.equal(readFileSync(new URL(`../public/${key}.txt`, import.meta.url), "utf-8").trim(), key);
     assert.match(readFileSync(new URL("../scripts/indexnow.mjs", import.meta.url), "utf-8"), new RegExp(`KEY = "${key}"`));
+  });
+
+  it("an unknown flag prints usage and submits nothing (never the whole sitemap)", () => {
+    const script = new URL("../scripts/indexnow.mjs", import.meta.url).pathname;
+    const r = spawnSync(process.execPath, [script, "--no-such-flag"], { encoding: "utf-8", timeout: 10000 });
+    assert.equal(r.status, 1);
+    assert.match(r.stdout, /--dry-run/);
+    assert.doesNotMatch(r.stdout, /IndexNow: \d+ URL/);
   });
 });

@@ -34,4 +34,36 @@ export const INDEXNOW_PRESETS = {
     "/ru/blog/villy-mikonos-santorini-krit-s-kipra",
     "/ru/blog/korporativnye-komandirovki-kipr-gid",
   ],
+  // Search Console fixes (1 Nov 2026): every live page whose content or
+  // snippet changed. Submit after the deploy:
+  //   node scripts/indexnow.mjs --preset gsc-nov-2026
+  // (the merged "*-cyprus" URLs now 301; their kept pages are listed here).
+  "gsc-nov-2026": [
+    // EN
+    "/en",
+    "/en/corporate-travel",
+    "/en/luxury-travel",
+    "/en/hotel-reservations",
+    "/en/services",
+    "/en/schengen-cyprus-2026",
+    "/en/paphos-travel-agency",
+    "/en/blog/cyprus-schengen-2026-business-travel",
+    "/en/blog/schengen-visa-guide-cyprus-residents",
+    "/en/blog/travel-insurance-cyprus-visitors-guide",
+    "/en/blog/best-time-visit-cyprus-monthly-guide",
+    "/en/blog/cruises-from-limassol-2026",
+    // RU
+    "/ru",
+    "/ru/corporate-travel",
+    "/ru/luxury-travel",
+    "/ru/hotel-reservations",
+    "/ru/services",
+    "/ru/schengen-cyprus-2026",
+    "/ru/turisticheskoe-agentstvo-pafos",
+    "/ru/blog/kipr-v-shengene-2026-delovye-poezdki",
+    "/ru/blog/shengenskaya-viza-dlya-zhitelej-kipra",
+    "/ru/blog/strakhovka-dlya-poezdki-na-kipr-2026",
+    "/ru/blog/luchshee-vremya-dlya-poseshcheniya-kipra",
+    "/ru/blog/luchshie-kruizy-iz-limassola-2026",
+  ],
 };

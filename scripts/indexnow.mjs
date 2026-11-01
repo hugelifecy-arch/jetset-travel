@@ -9,6 +9,7 @@
  *   node scripts/indexnow.mjs /en/cruises https://www.jetset-travel.com/ru/faq
  *   node scripts/indexnow.mjs --preset priority
  *   node scripts/indexnow.mjs --dry-run [...]  # print the list, submit nothing
+ *   node scripts/indexnow.mjs --help           # this text; unknown flags never submit
  *
  * Arguments can be paths (/en/cruises) or full https://www.jetset-travel.com
  * URLs; other hosts are rejected, because IndexNow only accepts URLs on the
@@ -17,6 +18,7 @@
  * The key file is public by design (IndexNow protocol):
  * public/4338cc8b3af74065bf84162fa446f406.txt
  */
+import { readFileSync } from "node:fs";
 import { INDEXNOW_PRESETS } from "./indexnow-presets.mjs";
 
 const HOST = "www.jetset-travel.com";
@@ -39,6 +41,17 @@ function toUrl(arg) {
 }
 
 const argv = process.argv.slice(2);
+
+// Anything unrecognised must not fall through to "submit the whole live
+// sitemap": print usage and stop. (A stray `--help` used to submit 86 URLs.)
+const KNOWN_FLAGS = new Set(["--dry-run", "--preset"]);
+const unknown = argv.filter((a) => a.startsWith("-") && !KNOWN_FLAGS.has(a));
+if (unknown.length) {
+  const usage = readFileSync(new URL(import.meta.url), "utf8").match(/\/\*\*([\s\S]*?)\*\//)[1];
+  console.log(usage.replace(/^ \* ?/gm, "").trim());
+  process.exit(unknown.every((a) => a === "--help" || a === "-h") ? 0 : 1);
+}
+
 const dryRun = argv.includes("--dry-run");
 const presetIndex = argv.indexOf("--preset");
 const presetName = presetIndex > -1 ? argv[presetIndex + 1] : null;
