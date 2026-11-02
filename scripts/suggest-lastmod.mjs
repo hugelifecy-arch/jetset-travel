@@ -109,6 +109,8 @@ const isNoise = (line) => {
     t.startsWith("*") ||
     t.startsWith("*/") ||
     /^}\s*from\s+"/.test(t) ||
+    // Where the date comes from is not content (page-dates.ts is the source).
+    /^dateModified[=:]\s*\{?(pageLastModified\(|SERVICE_LAST_UPDATED|LABOUR_VFR_LAST_UPDATED)/.test(t) ||
     /^[\w,\s{}]+,?$/.test(t) // lines inside a multi-line import list
   );
 };
