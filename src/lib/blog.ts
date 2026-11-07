@@ -120,8 +120,14 @@ export function getPostTranslationSlug(slug: string): { en?: string; ru?: string
 
   const locale = post.frontmatter.locale;
   const translationSlug = post.frontmatter.translationSlug;
+  // hreflang may only point at a live page: a draft translation 404s
+  // (generateStaticParams skips drafts), so treat it as untranslated.
+  const translation = translationSlug ? getPostBySlug(translationSlug) : null;
+  const translated =
+    translation?.frontmatter.status === "published" &&
+    translation.frontmatter.locale !== locale;
 
-  if (translationSlug) {
+  if (translationSlug && translated) {
     // Paired post exists in the other language
     if (locale === "en") {
       return { en: slug, ru: translationSlug };
